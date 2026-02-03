@@ -18,4 +18,14 @@ test:
 	PYTHONPATH=. pytest
 
 docs:
-	cd docs && make html
+	cd docs && sphinx-build -b html . _build/html
+
+gh-pages:
+	cd docs && sphinx-build -b html . _build/html
+	git worktree add /tmp/gh-pages gh-pages || git checkout --orphan gh-pages
+	rm -rf /tmp/gh-pages/*
+	cp -r docs/_build/html/* /tmp/gh-pages/
+	cd /tmp/gh-pages && git add . && git commit -m "Update docs" && git push origin gh-pages
+	git worktree remove /tmp/gh-pages
+	
+# End of Makefile
