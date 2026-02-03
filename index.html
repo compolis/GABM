@@ -44,8 +44,23 @@
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 </section>
-<section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h1>
+<section id="module-src.io.read_data">
+<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-src.io.read_data" title="Link to this heading">¶</a></h1>
+<p>Reads data from various sources.</p>
+<p>&#64;author: Andy Turner&lt;<a class="reference external" href="mailto:agdturner&#37;&#52;&#48;gmail&#46;com">agdturner<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+&#64;version: 0.1.0
+&#64;copyright: Copyright (c) 2026 GABM contributors, University of Leeds</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.io.read_data.read_api_keys">
+<span class="sig-prename descclassname"><span class="pre">src.io.read_data.</span></span><span class="sig-name descname"><span class="pre">read_api_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.io.read_data.read_api_keys" title="Link to this definition">¶</a></dt>
+<dd><p>Reads API keys from a CSV file into a dictionary.
+Assumes the CSV has two columns: ‘api’ and ‘key’, with a header row.
+&#64;param file_path: Path to the CSV file.
+&#64;return: Dictionary with API names as keys and their corresponding keys as values.
+&#64;raises ValueError: If file_path is not provided.
+&#64;raises FileNotFoundError: If the specified file does not exist.</p>
+</dd></dl>
+
 </section>
 
 
