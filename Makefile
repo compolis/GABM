@@ -15,7 +15,7 @@ sync:
 	git push origin main
 
 test:
-	pytest
+	PYTHONPATH=. pytest
 
 docs:
 	cd docs && make html
