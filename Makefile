@@ -18,7 +18,7 @@ test:
 	PYTHONPATH=. pytest
 
 docs:
-	cd docs && sphinx-build -b html . _build/html
+	PYTHONPATH=.. sphinx-build -b html docs docs/_build/html
 
 gh-pages:
 	cd docs && sphinx-build -b html . _build/html
