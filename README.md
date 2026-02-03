@@ -123,3 +123,26 @@ make docs    # Build documentation (requires Sphinx, in docs/)
 ```
 
 Make sure you have `make` installed (standard on Linux/macOS; for Windows, use WSL or install GNU Make).
+
+
+## Documentation Deployment
+
+Project documentation is built with Sphinx and deployed to GitHub Pages using the `gh-pages` branch.
+
+To build and deploy the docs:
+
+```bash
+make docs
+make gh-pages
+```
+
+After deployment, documentation will be available at:
+https://YOUR_USERNAME.github.io/gabm/
+
+To activate GitHub Pages:
+1. Go to your repository on GitHub.
+2. Click Settings > Pages.
+3. Set the source to the `gh-pages` branch (root).
+4. Save.
+
+**Note:** The `gh-pages` branch is for static site deployment and is updated automatically. Protect your `main` branch for code review and collaboration.
