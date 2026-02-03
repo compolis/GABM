@@ -18,7 +18,7 @@ author = 'Andy Turner'
 
 # -- General configuration ---------------------------------------------------
 
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.autosummary']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.autosummary', 'myst_parser']
 autosummary_generate = True
 
 templates_path = ['_templates']
