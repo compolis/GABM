@@ -1,5 +1,5 @@
-Welcome to GABM documentation!
-==============================
+Welcome to GABM documentation
+=============================
 
 .. toctree::
    :maxdepth: 2
