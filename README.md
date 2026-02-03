@@ -66,6 +66,7 @@ python3 run.py
 6. **Open a Pull Request** from your branch to the main branch of the upstream repository on GitHub.
 7. Wait for review and feedback. Update your branch as needed.
 
+
 ### Tips
 - Keep your fork up to date with the upstream repository:
   ```bash
@@ -73,3 +74,18 @@ python3 run.py
   git fetch upstream
   git merge upstream/main
   ```
+- For easier authentication, set up SSH keys with GitHub:
+  1. Generate an SSH key (if you don’t have one):
+	  ```bash
+	  ssh-keygen -t ed25519 -C "your_email@example.com"
+	  ```
+  2. Add your public key to GitHub (Settings > SSH and GPG keys).
+  3. Change your remotes to use SSH:
+	  ```bash
+	  git remote set-url origin git@github.com:YOUR_USERNAME/gabm.git
+	  git remote set-url upstream git@github.com:compolis/gabm.git
+	  ```
+  4. Test with:
+	  ```bash
+	  ssh -T git@github.com
+	  ```
