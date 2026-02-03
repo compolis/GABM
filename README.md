@@ -1,26 +1,3 @@
-## Documentation Deployment
-
-Project documentation is built with Sphinx and deployed to GitHub Pages using the `gh-pages` branch.
-
-The documentation includes an auto-generated API Reference and a module index (see `py-modindex.html` in the built docs) for easy navigation of the codebase. The Makefile and Sphinx are configured so that `make docs` works out of the box (no manual PYTHONPATH changes needed).
-
-To build and deploy the docs:
-
-```bash
-make docs
-make gh-pages
-```
-
-After deployment, documentation will be available at:
-https://YOUR_USERNAME.github.io/gabm/
-
-To activate GitHub Pages:
-1. Go to your repository on GitHub.
-2. Click Settings > Pages.
-3. Set the source to the `gh-pages` branch (root).
-4. Save.
-
-**Note:** The `gh-pages` branch is for static site deployment and is updated automatically. Protect your `main` branch for code review and collaboration.
 # GABM
 Generative Agent Based Model
 
@@ -137,6 +114,8 @@ Make sure you have `make` installed (standard on Linux/macOS; for Windows, use W
 ## Documentation Deployment
 
 Project documentation is built with Sphinx and deployed to GitHub Pages using the `gh-pages` branch.
+
+The documentation includes an auto-generated API Reference and a module index (see `py-modindex.html` in the built docs) for easy navigation of the codebase. The Makefile and Sphinx are configured so that `make docs` works out of the box (no manual PYTHONPATH changes needed).
 
 To build and deploy the docs:
 
