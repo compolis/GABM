@@ -43,7 +43,10 @@ From the project root, run:
 python3 run.py
 ```
 
+
 ## Contributing Workflow
+
+**Note:** The `main` branch is protected. All changes must be made through Pull Requests, which require at least one review and approval before merging. Direct pushes to `main` are not allowed. This ensures code quality and collaborative review.
 
 1. **Fork** the upstream repository to your own GitHub account.
 2. **Clone** your fork locally.
