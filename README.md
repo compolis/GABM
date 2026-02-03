@@ -115,14 +115,21 @@ python3 run.py
 
 ## Development Tasks with Makefile
 
-This project uses a Makefile to simplify common development tasks. You can use the following commands:
+
+This project uses a Makefile to simplify common development tasks. Run `make help` to see available commands. Key targets include:
 
 ```bash
-make help    # List available Makefile commands
-make sync    # Sync your main branch with upstream
-make test    # Run all tests (requires pytest)
-make docs    # Build documentation (requires Sphinx, in docs/)
+make help        # List available Makefile commands
+make sync        # Sync your main branch with upstream
+make test        # Run all tests (requires pytest)
+make docs        # Build documentation (requires Sphinx, in docs/)
+make clean       # Remove build/test artifacts (docs/_build, .pyc, __pycache__)
+make git-clean   # Safely delete merged local branches (except main/gh-pages) and prune deleted remote branches
 ```
+
+**Note:**
+- `make clean` is safe and only removes generated files and folders.
+- `make git-clean` is safe for most workflows, but always double-check you have pushed any important branches before running. It will not delete unmerged or protected branches.
 
 Make sure you have `make` installed (standard on Linux/macOS; for Windows, use WSL or install GNU Make).
 
