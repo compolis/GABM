@@ -1,5 +1,5 @@
 
-# gabm
+# GABM
 Generative Agent Based Model
 
 ## Getting Started
