@@ -1,4 +1,3 @@
-
 # GABM
 Generative Agent Based Model
 
@@ -89,3 +88,17 @@ python3 run.py
 	  ```bash
 	  ssh -T git@github.com
 	  ```
+
+
+## Development Tasks with Makefile
+
+This project uses a Makefile to simplify common development tasks. You can use the following commands:
+
+```bash
+make help    # List available Makefile commands
+make sync    # Sync your main branch with upstream
+make test    # Run all tests (requires pytest)
+make docs    # Build documentation (requires Sphinx, in docs/)
+```
+
+Make sure you have `make` installed (standard on Linux/macOS; for Windows, use WSL or install GNU Make).
