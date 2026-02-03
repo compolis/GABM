@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to GABM documentation &mdash; GABM  documentation</title>
+  <title>GABM &mdash; GABM  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -44,7 +44,22 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to GABM documentation</a></li>
+<li><a class="reference internal" href="#">GABM</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li><a class="reference internal" href="#clone-the-repository">1. Clone the Repository</a></li>
+<li><a class="reference internal" href="#set-up-your-environment">2. Set Up Your Environment</a></li>
+<li><a class="reference internal" href="#api-keys">3. API Keys</a></li>
+<li><a class="reference internal" href="#running-the-code">4. Running the Code</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#contributing-workflow">Contributing Workflow</a><ul>
+<li><a class="reference internal" href="#tips">Tips</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#development-tasks-with-makefile">Development Tasks with Makefile</a></li>
+<li><a class="reference internal" href="#documentation-deployment">Documentation Deployment</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#module-src.io.read_data">API Reference</a><ul>
 <li><a class="reference internal" href="#src.io.read_data.read_api_keys"><code class="docutils literal notranslate"><span class="pre">read_api_keys()</span></code></a></li>
@@ -66,7 +81,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Welcome to GABM documentation</li>
+      <li class="breadcrumb-item active">GABM</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -76,11 +91,131 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="welcome-to-gabm-documentation">
-<h1>Welcome to GABM documentation<a class="headerlink" href="#welcome-to-gabm-documentation" title="Link to this heading"></a></h1>
-<div class="toctree-wrapper compound">
+  <section id="gabm">
+<h1>GABM<a class="headerlink" href="#gabm" title="Link to this heading"></a></h1>
+<p>Generative Agent Based Model</p>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<section id="clone-the-repository">
+<h3>1. Clone the Repository<a class="headerlink" href="#clone-the-repository" title="Link to this heading"></a></h3>
+<p>First, fork the upstream repository on GitHub to your own account. Then, clone your fork:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/YOUR_USERNAME/gabm.git
+<span class="nb">cd</span><span class="w"> </span>gabm
+</pre></div>
 </div>
 </section>
+<section id="set-up-your-environment">
+<h3>2. Set Up Your Environment<a class="headerlink" href="#set-up-your-environment" title="Link to this heading"></a></h3>
+<p>Install Python 3.9+ and pip if you haven’t already. Then install dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+<section id="api-keys">
+<h3>3. API Keys<a class="headerlink" href="#api-keys" title="Link to this heading"></a></h3>
+<p>You need a <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> file with your API keys. This file is not included in the repository for security reasons.</p>
+<ul class="simple">
+<li><p>Ask the project maintainer for a template or example.</p></li>
+<li><p>Or, create it yourself with the following format (CSV with header):</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span><span class="p">,</span><span class="n">key</span>
+<span class="n">openai</span><span class="p">,</span><span class="n">sk</span><span class="o">-...</span>
+<span class="n">deepseek</span><span class="p">,</span><span class="n">sk</span><span class="o">-...</span>
+<span class="n">llama</span><span class="p">,</span><span class="n">YOUR_GROQ_KEY</span>
+<span class="n">claude</span><span class="p">,</span><span class="n">YOUR_ANTHROPIC_KEY</span>
+<span class="n">genai</span><span class="p">,</span><span class="n">YOUR_GOOGLE_KEY</span>
+</pre></div>
+</div>
+<p>Place this file in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory.</p>
+</section>
+<section id="running-the-code">
+<h3>4. Running the Code<a class="headerlink" href="#running-the-code" title="Link to this heading"></a></h3>
+<p>From the project root, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>run.py
+</pre></div>
+</div>
+</section>
+</section>
+<section id="contributing-workflow">
+<h2>Contributing Workflow<a class="headerlink" href="#contributing-workflow" title="Link to this heading"></a></h2>
+<p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">main</span></code> branch is protected. All changes must be made through Pull Requests, which require at least one review and approval before merging. Direct pushes to <code class="docutils literal notranslate"><span class="pre">main</span></code> are not allowed. This ensures code quality and collaborative review.</p>
+<ol class="arabic simple">
+<li><p><strong>Fork</strong> the upstream repository to your own GitHub account.</p></li>
+<li><p><strong>Clone</strong> your fork locally.</p></li>
+<li><p><strong>Create a new branch</strong> for your feature or fix:
+<code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">my-feature</span>&#160;&#160;&#160;&#160;&#160; </code></p></li>
+<li><p><strong>Make your changes</strong> and commit them:
+<code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;Describe</span> <span class="pre">your</span> <span class="pre">change&quot;</span>&#160;&#160;&#160;&#160;&#160; </code></p></li>
+<li><p><strong>Push</strong> your branch to your fork:
+<code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">my-feature</span>&#160;&#160;&#160;&#160;&#160; </code></p></li>
+<li><p><strong>Open a Pull Request</strong> from your branch to the main branch of the upstream repository on GitHub.</p></li>
+<li><p>Wait for review and feedback. Update your branch as needed.</p></li>
+</ol>
+<section id="tips">
+<h3>Tips<a class="headerlink" href="#tips" title="Link to this heading"></a></h3>
+<ul>
+<li><p>Keep your fork up to date with the upstream repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/UPSTREAM_USERNAME/gabm.git
+git<span class="w"> </span>fetch<span class="w"> </span>upstream
+git<span class="w"> </span>merge<span class="w"> </span>upstream/main
+</pre></div>
+</div>
+</li>
+<li><p>For easier authentication, set up SSH keys with GitHub:</p>
+<ol class="arabic simple">
+<li><p>Generate an SSH key (if you don’t have one):
+<code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">ssh-keygen</span> <span class="pre">-t</span> <span class="pre">ed25519</span> <span class="pre">-C</span> <span class="pre">&quot;your_email&#64;example.com&quot;</span>&#160;&#160;&#160;&#160;&#160; </code></p></li>
+<li><p>Add your public key to GitHub (Settings &gt; SSH and GPG keys).</p></li>
+<li><p>Change your remotes to use SSH:
+<code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">git</span> <span class="pre">remote</span> <span class="pre">set-url</span> <span class="pre">origin</span> <span class="pre">git&#64;github.com:YOUR_USERNAME/gabm.git</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">git</span> <span class="pre">remote</span> <span class="pre">set-url</span> <span class="pre">upstream</span> <span class="pre">git&#64;github.com:compolis/gabm.git</span>&#160;&#160;&#160;&#160;&#160; </code></p></li>
+<li><p>Test with:
+<code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">ssh</span> <span class="pre">-T</span> <span class="pre">git&#64;github.com</span>&#160;&#160;&#160;&#160;&#160; </code></p></li>
+</ol>
+</li>
+</ul>
+</section>
+</section>
+<section id="development-tasks-with-makefile">
+<h2>Development Tasks with Makefile<a class="headerlink" href="#development-tasks-with-makefile" title="Link to this heading"></a></h2>
+<p>This project uses a Makefile to simplify common development tasks. Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">help</span></code> to see available commands. Key targets include:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">help</span><span class="w">        </span><span class="c1"># List available Makefile commands</span>
+make<span class="w"> </span>sync<span class="w">        </span><span class="c1"># Sync your main branch with upstream</span>
+make<span class="w"> </span><span class="nb">test</span><span class="w">        </span><span class="c1"># Run all tests (requires pytest)</span>
+make<span class="w"> </span>docs<span class="w">        </span><span class="c1"># Build documentation (requires Sphinx, in docs/)</span>
+make<span class="w"> </span>clean<span class="w">       </span><span class="c1"># Remove build/test artifacts (docs/_build, .pyc, __pycache__)</span>
+make<span class="w"> </span>git-clean<span class="w">   </span><span class="c1"># Safely delete merged local branches (except main/gh-pages) and prune deleted remote branches</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> is safe and only removes generated files and folders.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">git-clean</span></code> is safe for most workflows, but always double-check you have pushed any important branches before running. It will not delete unmerged or protected branches.</p></li>
+</ul>
+<p>Make sure you have <code class="docutils literal notranslate"><span class="pre">make</span></code> installed (standard on Linux/macOS; for Windows, use WSL or install GNU Make).</p>
+</section>
+<section id="documentation-deployment">
+<h2>Documentation Deployment<a class="headerlink" href="#documentation-deployment" title="Link to this heading"></a></h2>
+<p>Project documentation is built with Sphinx and deployed to GitHub Pages using the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch.</p>
+<p>The documentation includes an auto-generated API Reference and a module index (see <code class="docutils literal notranslate"><span class="pre">py-modindex.html</span></code> in the built docs) for easy navigation of the codebase. The Makefile and Sphinx are configured so that <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code> works out of the box (no manual PYTHONPATH changes needed).</p>
+<p>To build and deploy the docs:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>docs
+make<span class="w"> </span>gh-pages
+</pre></div>
+</div>
+<p>After deployment, documentation will be available at:
+https://YOUR_USERNAME.github.io/gabm/</p>
+<p>To activate GitHub Pages:</p>
+<ol class="arabic simple">
+<li><p>Go to your repository on GitHub.</p></li>
+<li><p>Click Settings &gt; Pages.</p></li>
+<li><p>Set the source to the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch (root).</p></li>
+<li><p>Save.</p></li>
+</ol>
+<p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch is for static site deployment and is updated automatically. Protect your <code class="docutils literal notranslate"><span class="pre">main</span></code> branch for code review and collaboration.</p>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
 <ul class="simple">
