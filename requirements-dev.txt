@@ -1,3 +1,6 @@
 # Development requirements for GABM
 # Install with: pip install -r requirements-dev.txt
+
 pytest==9.0.2
+sphinx==7.2.6
+sphinx-rtd-theme==2.0.0
