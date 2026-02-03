@@ -2,6 +2,8 @@
 
 Project documentation is built with Sphinx and deployed to GitHub Pages using the `gh-pages` branch.
 
+The documentation includes an auto-generated API Reference and a module index (see `py-modindex.html` in the built docs) for easy navigation of the codebase. The Makefile and Sphinx are configured so that `make docs` works out of the box (no manual PYTHONPATH changes needed).
+
 To build and deploy the docs:
 
 ```bash
