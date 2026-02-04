@@ -47,7 +47,10 @@
               <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Utils Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#src.io.llm.utils.list_models_to_txt"><code class="docutils literal notranslate"><span class="pre">list_models_to_txt()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.io.llm.utils.load_models_from_json"><code class="docutils literal notranslate"><span class="pre">load_models_from_json()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#src.io.llm.utils.safe_api_call"><code class="docutils literal notranslate"><span class="pre">safe_api_call()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#src.io.llm.utils.write_models_json_and_txt"><code class="docutils literal notranslate"><span class="pre">write_models_json_and_txt()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="openai.html">OpenAI Module</a></li>
@@ -81,7 +84,38 @@
              
   <section id="module-src.io.llm.utils">
 <span id="utils-module"></span><h1>Utils Module<a class="headerlink" href="#module-src.io.llm.utils" title="Link to this heading"></a></h1>
-<p>Utility functions for LLM API error handling and logging.</p>
+<p>Utility functions for LLM API error handling, model listing, caching, and validation.</p>
+<ul class="simple">
+<li><p>Provides a decorator for safe API calls.</p></li>
+<li><p>Provides utilities to write model lists as both JSON and TXT for all LLMs.</p></li>
+<li><p>Provides a loader for model lists from JSON for validation and selection.</p></li>
+</ul>
+<p>This supports a unified workflow for model management across all LLM providers in the project.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.io.llm.utils.list_models_to_txt">
+<span class="sig-prename descclassname"><span class="pre">src.io.llm.utils.</span></span><span class="sig-name descname"><span class="pre">list_models_to_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">models_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.llm.utils.list_models_to_txt" title="Link to this definition"></a></dt>
+<dd><p>Write a list of models to a text file with a custom formatter.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>models (iterable): List of model objects.
+models_path (Path): Path to the output file.
+formatter (callable): Function that takes a model and returns a string.
+header (str, optional): Header string for the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.io.llm.utils.load_models_from_json">
+<span class="sig-prename descclassname"><span class="pre">src.io.llm.utils.</span></span><span class="sig-name descname"><span class="pre">load_models_from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models_json_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.llm.utils.load_models_from_json" title="Link to this definition"></a></dt>
+<dd><p>Load a list of models from a JSON file for validation and selection.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>models_json_path (Path): Path to the JSON file.</p>
+</dd>
+<dt>Returns:</dt><dd><p>list: List of model dicts.</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="src.io.llm.utils.safe_api_call">
 <span class="sig-prename descclassname"><span class="pre">src.io.llm.utils.</span></span><span class="sig-name descname"><span class="pre">safe_api_call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.llm.utils.safe_api_call" title="Link to this definition"></a></dt>
@@ -92,6 +126,21 @@
 <dt>Returns:</dt><dd><p>function: Decorator that wraps the target function, returning None on error.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.io.llm.utils.write_models_json_and_txt">
+<span class="sig-prename descclassname"><span class="pre">src.io.llm.utils.</span></span><span class="sig-name descname"><span class="pre">write_models_json_and_txt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">models_json_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">models_txt_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.llm.utils.write_models_json_and_txt" title="Link to this definition"></a></dt>
+<dd><p>Write a list of models to both JSON and TXT files for LLM model management.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>models (iterable): List of model objects or dicts.
+models_json_path (Path): Path to the output JSON file.
+models_txt_path (Path): Path to the output TXT file.
+formatter (callable): Function that takes a model and returns a string for TXT output.
+header (str, optional): Header string for the TXT file.</p>
+</dd>
+</dl>
+<p>This enables both human-readable and machine-readable model lists for all LLMs.</p>
 </dd></dl>
 
 </section>

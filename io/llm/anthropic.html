@@ -49,6 +49,7 @@
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="openai.html">OpenAI Module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Anthropic Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#src.io.llm.anthropic.list_available_models"><code class="docutils literal notranslate"><span class="pre">list_available_models()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#src.io.llm.anthropic.send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a></li>
 </ul>
 </li>
@@ -81,7 +82,22 @@
              
   <section id="module-src.io.llm.anthropic">
 <span id="anthropic-module"></span><h1>Anthropic Module<a class="headerlink" href="#module-src.io.llm.anthropic" title="Link to this heading"></a></h1>
-<p>For sending prompts to Anthropic Claude, receiving responses, and caching them.</p>
+<p>For sending prompts to Anthropic Claude, receiving responses, and managing model lists and cache.</p>
+<p>Features:
+- Send prompts to Anthropic and cache responses for reproducibility.
+- List available models from the Anthropic API and save as both JSON and TXT for validation and reference.
+- Validate selected model names against the cached JSON model list.
+- Unified workflow for model management, matching other LLM modules in the project.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.io.llm.anthropic.list_available_models">
+<span class="sig-prename descclassname"><span class="pre">src.io.llm.anthropic.</span></span><span class="sig-name descname"><span class="pre">list_available_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.llm.anthropic.list_available_models" title="Link to this definition"></a></dt>
+<dd><p>List available Anthropic models and save to data/llm/anthropic/models.txt.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>api_key (str): The Anthropic API key.</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="src.io.llm.anthropic.send">
 <span class="sig-prename descclassname"><span class="pre">src.io.llm.anthropic.</span></span><span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'claude-3-opus-20240229'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.llm.anthropic.send" title="Link to this definition"></a></dt>

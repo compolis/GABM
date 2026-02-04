@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Read Data Module" href="io/read_data.html" /> 
+    <link rel="next" title="Utils Module" href="io/llm/utils.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,7 +45,6 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="io/read_data.html">Read Data Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io/llm/utils.html">Utils Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io/llm/openai.html">OpenAI Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io/llm/anthropic.html">Anthropic Module</a></li>
@@ -238,27 +237,62 @@ https://YOUR_USERNAME.github.io/gabm/</p>
 </ol>
 <p>This structure keeps documentation organized and easy to extend as the codebase grows.</p>
 </section>
+<section id="llm-model-listing-caching-and-validation">
+<h2>LLM Model Listing, Caching, and Validation<a class="headerlink" href="#llm-model-listing-caching-and-validation" title="Link to this heading"></a></h2>
+<p>This project supports multiple LLM providers (OpenAI, GenAI, DeepSeek, Anthropic) with a unified workflow for model management:</p>
+<ul class="simple">
+<li><p><strong>Model Listing:</strong> Each LLM module provides a function to fetch and list available models from the provider’s API. The full model list is saved as both JSON (machine-readable) and TXT (human-readable) in the corresponding <code class="docutils literal notranslate"><span class="pre">data/llm/{provider}/</span></code> directory.</p></li>
+<li><p><strong>Caching:</strong> When a model list is fetched, it is cached locally. LLM responses are also cached for efficiency and reproducibility.</p></li>
+<li><p><strong>Validation:</strong> When running the main script, the selected model for each LLM is checked against the cached JSON model list. If the model is not found, a warning is shown and the available models can be listed automatically.</p></li>
+<li><p><strong>Extensibility:</strong> This workflow is consistent across all LLMs, making it easy to add new providers or update model selection logic.</p></li>
+</ul>
+<section id="model-selection-explicit-required">
+<h3>Model Selection (Explicit Required)<a class="headerlink" href="#model-selection-explicit-required" title="Link to this heading"></a></h3>
+<p>When running the main script, you must explicitly set the model name for each LLM provider in <code class="docutils literal notranslate"><span class="pre">run.py</span></code>. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.</p>
+<ul class="simple">
+<li><p>To select a model, set the variable (e.g., <code class="docutils literal notranslate"><span class="pre">openai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">genai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">deepseek_model</span></code>) at the top of the main function in <code class="docutils literal notranslate"><span class="pre">run.py</span></code>.</p></li>
+<li><p>If you do not set a model, the script will raise an error and prompt you to specify one.</p></li>
+<li><p>To see available models, run the model listing function for each provider or check the generated <code class="docutils literal notranslate"><span class="pre">models.json</span></code> file in <code class="docutils literal notranslate"><span class="pre">data/llm/{provider}/</span></code>.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">openai_model</span> <span class="o">=</span> <span class="s2">&quot;gpt-3.5-turbo&quot;</span>
+<span class="n">genai_model</span> <span class="o">=</span> <span class="s2">&quot;gemini-pro&quot;</span>
+<span class="n">deepseek_model</span> <span class="o">=</span> <span class="s2">&quot;deepseek-model-1&quot;</span>
+</pre></div>
+</div>
+<p>See the API documentation and module docstrings for more details on how model management is implemented and used in the codebase.</p>
+</section>
+</section>
+<section id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>This project was developed with significant assistance from GitHub Copilot for code generation, refactoring, and documentation improvements.</p></li>
+<li><p>Developers are encouraged to use Visual Studio Code for its rich Python and GitHub Copilot integration, but you are free to use any editor or IDE you prefer. Spyder is also a good choice for Python development, especially if you prefer a scientific workflow.</p></li>
+</ul>
+</section>
 </section>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="io/read_data.html">Read Data Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="io/read_data.html#src.io.read_data.read_api_keys"><code class="docutils literal notranslate"><span class="pre">read_api_keys()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="io/llm/utils.html">Utils Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="io/llm/utils.html#src.io.llm.utils.list_models_to_txt"><code class="docutils literal notranslate"><span class="pre">list_models_to_txt()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="io/llm/utils.html#src.io.llm.utils.load_models_from_json"><code class="docutils literal notranslate"><span class="pre">load_models_from_json()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="io/llm/utils.html#src.io.llm.utils.safe_api_call"><code class="docutils literal notranslate"><span class="pre">safe_api_call()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="io/llm/utils.html#src.io.llm.utils.write_models_json_and_txt"><code class="docutils literal notranslate"><span class="pre">write_models_json_and_txt()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="io/llm/openai.html">OpenAI Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="io/llm/openai.html#src.io.llm.openai.list_available_models"><code class="docutils literal notranslate"><span class="pre">list_available_models()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="io/llm/openai.html#src.io.llm.openai.send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="io/llm/anthropic.html">Anthropic Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="io/llm/anthropic.html#src.io.llm.anthropic.list_available_models"><code class="docutils literal notranslate"><span class="pre">list_available_models()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="io/llm/anthropic.html#src.io.llm.anthropic.send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="io/llm/genai.html">GenAI Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="io/llm/genai.html#src.io.llm.genai.list_available_models"><code class="docutils literal notranslate"><span class="pre">list_available_models()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="io/llm/genai.html#src.io.llm.genai.send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a></li>
 </ul>
 </li>
@@ -272,15 +306,32 @@ https://YOUR_USERNAME.github.io/gabm/</p>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 </section>
-<section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<section id="module-src.io.read_data">
+<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-src.io.read_data" title="Link to this heading"></a></h1>
+<p>Reads data from various sources.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.io.read_data.read_api_keys">
+<span class="sig-prename descclassname"><span class="pre">src.io.read_data.</span></span><span class="sig-name descname"><span class="pre">read_api_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.io.read_data.read_api_keys" title="Link to this definition"></a></dt>
+<dd><p>Reads API keys from a CSV file into a dictionary.
+Assumes the CSV has two columns: ‘api’ and ‘key’, with a header row.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>file_path (str or Path): Path to the CSV file.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict[str, str]: Dictionary with API names as keys and their corresponding keys as values.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If file_path is not provided.
+FileNotFoundError: If the specified file does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="io/read_data.html" class="btn btn-neutral float-right" title="Read Data Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="io/llm/utils.html" class="btn btn-neutral float-right" title="Utils Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
