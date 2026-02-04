@@ -2,9 +2,16 @@
 .. include:: ../README.md
    :parser: myst_parser.sphinx_ 
 
+
+
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: API Reference
+
+   io/llm/utils
+   io/llm/openai
+   io/llm/anthropic
+   io/llm/genai
 
 
 Indices and tables

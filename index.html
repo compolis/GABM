@@ -20,7 +20,8 @@
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Utils Module" href="io/llm/utils.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,31 +43,14 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">GABM</a><ul>
-<li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
-<li><a class="reference internal" href="#clone-the-repository">1. Clone the Repository</a></li>
-<li><a class="reference internal" href="#set-up-your-environment">2. Set Up Your Environment</a></li>
-<li><a class="reference internal" href="#api-keys">3. API Keys</a></li>
-<li><a class="reference internal" href="#running-the-code">4. Running the Code</a></li>
+              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/utils.html">Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/openai.html">OpenAI Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/anthropic.html">Anthropic Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/genai.html">GenAI Module</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#contributing-workflow">Contributing Workflow</a><ul>
-<li><a class="reference internal" href="#tips">Tips</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#development-tasks-with-makefile">Development Tasks with Makefile</a></li>
-<li><a class="reference internal" href="#documentation-deployment">Documentation Deployment</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
-<li><a class="reference internal" href="#module-src.io.read_data">API Reference</a><ul>
-<li><a class="reference internal" href="#src.io.read_data.read_api_keys"><code class="docutils literal notranslate"><span class="pre">read_api_keys()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -213,8 +197,67 @@ https://YOUR_USERNAME.github.io/gabm/</p>
 </ol>
 <p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch is for static site deployment and is updated automatically. Protect your <code class="docutils literal notranslate"><span class="pre">main</span></code> branch for code review and collaboration.</p>
 </section>
+<section id="sphinx-documentation-organization">
+<h2>Sphinx Documentation Organization<a class="headerlink" href="#sphinx-documentation-organization" title="Link to this heading"></a></h2>
+<p>API reference documentation is organized to mirror the Python code structure for clarity and maintainability. Each major module has its own reStructuredText (.rst) file located in a matching directory under <code class="docutils literal notranslate"><span class="pre">docs/</span></code>.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span><span class="o">/</span>
+  <span class="n">io</span><span class="o">/</span>
+    <span class="n">llm</span><span class="o">/</span>
+      <span class="n">utils</span><span class="o">.</span><span class="n">rst</span>
+      <span class="n">openai</span><span class="o">.</span><span class="n">rst</span>
+      <span class="n">anthropic</span><span class="o">.</span><span class="n">rst</span>
+      <span class="n">genai</span><span class="o">.</span><span class="n">rst</span>
+</pre></div>
+</div>
+<p>Each module .rst file contains an <code class="docutils literal notranslate"><span class="pre">automodule</span></code> directive for its corresponding Python module, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">automodule</span><span class="p">::</span> <span class="n">src</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">llm</span><span class="o">.</span><span class="n">openai</span>
+   <span class="p">:</span><span class="n">members</span><span class="p">:</span>
+   <span class="p">:</span><span class="n">undoc</span><span class="o">-</span><span class="n">members</span><span class="p">:</span>
+   <span class="p">:</span><span class="n">show</span><span class="o">-</span><span class="n">inheritance</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>The main documentation index (<code class="docutils literal notranslate"><span class="pre">docs/index.rst</span></code>) uses a <code class="docutils literal notranslate"><span class="pre">toctree</span></code> to reference these module .rst files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">toctree</span><span class="p">::</span>
+   <span class="p">:</span><span class="n">maxdepth</span><span class="p">:</span> <span class="mi">2</span>
+   <span class="p">:</span><span class="n">caption</span><span class="p">:</span> <span class="n">API</span> <span class="n">Reference</span>
+
+   <span class="n">io</span><span class="o">/</span><span class="n">llm</span><span class="o">/</span><span class="n">utils</span>
+   <span class="n">io</span><span class="o">/</span><span class="n">llm</span><span class="o">/</span><span class="n">openai</span>
+   <span class="n">io</span><span class="o">/</span><span class="n">llm</span><span class="o">/</span><span class="n">anthropic</span>
+   <span class="n">io</span><span class="o">/</span><span class="n">llm</span><span class="o">/</span><span class="n">genai</span>
+</pre></div>
+</div>
+<p><strong>How to add a new module to the docs:</strong></p>
+<ol class="arabic simple">
+<li><p>Create a new .rst file in the appropriate directory under <code class="docutils literal notranslate"><span class="pre">docs/</span></code>.</p></li>
+<li><p>Add the <code class="docutils literal notranslate"><span class="pre">automodule</span></code> directive for your module.</p></li>
+<li><p>Reference the new .rst file in the <code class="docutils literal notranslate"><span class="pre">toctree</span></code> in <code class="docutils literal notranslate"><span class="pre">index.rst</span></code>.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code> to rebuild the documentation.</p></li>
+</ol>
+<p>This structure keeps documentation organized and easy to extend as the codebase grows.</p>
+</section>
 </section>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/utils.html">Utils Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="io/llm/utils.html#src.io.llm.utils.safe_api_call"><code class="docutils literal notranslate"><span class="pre">safe_api_call()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/openai.html">OpenAI Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="io/llm/openai.html#src.io.llm.openai.send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/anthropic.html">Anthropic Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="io/llm/anthropic.html#src.io.llm.anthropic.send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/genai.html">GenAI Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="io/llm/genai.html#src.io.llm.genai.send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a></li>
+</ul>
+</li>
+</ul>
 </div>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
@@ -231,11 +274,16 @@ https://YOUR_USERNAME.github.io/gabm/</p>
 <dt class="sig sig-object py" id="src.io.read_data.read_api_keys">
 <span class="sig-prename descclassname"><span class="pre">src.io.read_data.</span></span><span class="sig-name descname"><span class="pre">read_api_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.io.read_data.read_api_keys" title="Link to this definition"></a></dt>
 <dd><p>Reads API keys from a CSV file into a dictionary.
-Assumes the CSV has two columns: ‘api’ and ‘key’, with a header row.
-&#64;param file_path: Path to the CSV file.
-&#64;return: Dictionary with API names as keys and their corresponding keys as values.
-&#64;raises ValueError: If file_path is not provided.
-&#64;raises FileNotFoundError: If the specified file does not exist.</p>
+Assumes the CSV has two columns: ‘api’ and ‘key’, with a header row.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>file_path (str or Path): Path to the CSV file.</p>
+</dd>
+<dt>Returns:</dt><dd><p>dict[str, str]: Dictionary with API names as keys and their corresponding keys as values.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If file_path is not provided.
+FileNotFoundError: If the specified file does not exist.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -243,7 +291,9 @@ Assumes the CSV has two columns: ‘api’ and ‘key’, with a header row.
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="io/llm/utils.html" class="btn btn-neutral float-right" title="Utils Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
