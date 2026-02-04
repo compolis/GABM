@@ -1,8 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Utility functions for LLM API error handling and logging.
 """
+# Metadata
 __author__ = "Andy Turner <agdturner@gmail.com>"
 __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
@@ -13,8 +12,12 @@ import functools
 def safe_api_call(api_name):
     """
     Decorator to handle exceptions for LLM API calls and log errors gracefully.
-    @param api_name: Name of the API for logging purposes.
-    @returns None on error.
+
+    Args:
+        api_name (str): Name of the API for logging purposes.
+
+    Returns:
+        function: Decorator that wraps the target function, returning None on error.
     """
     def decorator(func):
         @functools.wraps(func)

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-The main GABM file. 
 This is the entry point for running the GABM application.
 To run, use the command:
     python3 run.py
@@ -72,4 +71,7 @@ def main():
     """
     
 if __name__ == "__main__":
+    """
+    Entry point for the script. Calls the main function.
+    """
     main()

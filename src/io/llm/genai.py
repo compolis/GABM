@@ -1,6 +1,7 @@
 """
 For sending prompts to Google Generative AI (genai), receiving responses, and caching them.
 """
+# Metadata
 __author__ = "Andy Turner <agdturner@gmail.com>"
 __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
@@ -30,19 +31,13 @@ def send(api_key, message, model="gemini-pro"):
     """
     Send a prompt to Google Generative AI and return the response object.
 
-    Parameters
-    ----------
-    api_key : str
-        The Google API key.
-    message : str
-        The message to send to Gemini.
-    model : str, optional
-        The model to use (default is "gemini-pro").
+    Args:
+        api_key (str): The Google API key.
+        message (str): The message to send to Gemini.
+        model (str, optional): The model to use (default is "gemini-pro").
 
-    Returns
-    -------
-    response : generativeai.types.GenerationResponse
-        The full Gemini response object.
+    Returns:
+        generativeai.types.GenerationResponse: The full Gemini response object.
     """
     if not api_key:
         raise RuntimeError("Google API key must be provided.")

@@ -5,3 +5,8 @@ pytest==9.0.2
 sphinx==7.2.6
 sphinx-rtd-theme==2.0.0
 myst-parser==2.0.0
+
+openai==1.13.3
+anthropic==0.25.6
+google-generativeai==0.4.1
+httpx==0.28.1

@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 For sending prompts to OpenAI, receiving responses, and caching storing and retrieving them.
 """
@@ -36,19 +34,13 @@ def send(api_key, message, model="gpt-3.5-turbo"):
     """
     Send a prompt to OpenAI and return the response object.
 
-    Parameters
-    ----------
-    api_key : str
-        The OpenAI API key.
-    message : str
-        The message to send to OpenAI.
-    model : str, optional
-        The model to use (default is "gpt-3.5-turbo").
+    Args:
+        api_key (str): The OpenAI API key.
+        message (str): The message to send to OpenAI.
+        model (str, optional): The model to use (default is "gpt-3.5-turbo").
 
-    Returns
-    -------
-    response : openai.types.ChatCompletion
-        The full OpenAI response object.
+    Returns:
+        openai.types.ChatCompletion: The full OpenAI response object.
     """
     if not api_key:
         raise RuntimeError("OpenAI API key must be provided.")

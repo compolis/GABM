@@ -1,6 +1,7 @@
 """
 For sending prompts to Anthropic Claude, receiving responses, and caching them.
 """
+# Metadata
 __author__ = "Andy Turner <agdturner@gmail.com>"
 __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
@@ -30,19 +31,13 @@ def send(api_key, message, model="claude-3-opus-20240229"):
     """
     Send a prompt to Anthropic Claude and return the response object.
 
-    Parameters
-    ----------
-    api_key : str
-        The Anthropic API key.
-    message : str
-        The message to send to Claude.
-    model : str, optional
-        The model to use (default is "claude-3-opus-20240229").
+    Args:
+        api_key (str): The Anthropic API key.
+        message (str): The message to send to Claude.
+        model (str, optional): The model to use (default is "claude-3-opus-20240229").
 
-    Returns
-    -------
-    response : anthropic.types.Message
-        The full Anthropic response object.
+    Returns:
+        anthropic.types.Message: The full Anthropic response object.
     """
     if not api_key:
         raise RuntimeError("Anthropic API key must be provided.")
