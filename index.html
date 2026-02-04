@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GABM &mdash; GABM  documentation</title>
+  <title>Roadmap &mdash; GABM  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -65,7 +65,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">GABM</li>
+      <li class="breadcrumb-item active">Roadmap</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -75,11 +75,43 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="gabm">
+  <section id="roadmap">
+<h1>Roadmap<a class="headerlink" href="#roadmap" title="Link to this heading"></a></h1>
+<p>See <a class="reference internal" href="#ROADMAP.md"><span class="xref myst">ROADMAP.md</span></a> for planned next steps and future goals.</p>
+</section>
+<section id="code-of-conduct">
+<h1>Code of Conduct<a class="headerlink" href="#code-of-conduct" title="Link to this heading"></a></h1>
+<p>Please see our <a class="reference internal" href="#CODE_OF_CONDUCT.md"><span class="xref myst">Code of Conduct</span></a> for guidelines on expected behavior and reporting issues.</p>
+</section>
+<section id="gabm">
 <h1>GABM<a class="headerlink" href="#gabm" title="Link to this heading"></a></h1>
 <p>Generative Agent Based Model</p>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<section id="llm-setup-and-onboarding">
+<h3>5. LLM Setup and Onboarding<a class="headerlink" href="#llm-setup-and-onboarding" title="Link to this heading"></a></h3>
+<p>To quickly initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, use the provided setup utility:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>setup-llms
+</pre></div>
+</div>
+<p>This will:</p>
+<ul class="simple">
+<li><p>Check for all required API keys (OpenAI, GenAI, DeepSeek, Anthropic)</p></li>
+<li><p>Test each key with a default prompt and model</p></li>
+<li><p>Generate initial <code class="docutils literal notranslate"><span class="pre">models.json</span></code> and <code class="docutils literal notranslate"><span class="pre">models.txt</span></code> for each LLM</p></li>
+<li><p>Initialize response caches (<code class="docutils literal notranslate"><span class="pre">cache.pkl</span></code>)</p></li>
+<li><p>Report any issues or missing keys</p></li>
+</ul>
+<p>You can also run the setup directly:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>setup_llms.py
+</pre></div>
+</div>
+<p>If you need to clear all caches and model lists (for a fresh start or troubleshooting), use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>clear-caches
+</pre></div>
+</div>
+<p><strong>Note:</strong> Model list files (<code class="docutils literal notranslate"><span class="pre">models.json</span></code>, <code class="docutils literal notranslate"><span class="pre">models.txt</span></code>) should be committed to the repository for reproducibility. Cache files (<code class="docutils literal notranslate"><span class="pre">cache.pkl</span></code>) are not typically committed.</p>
+</section>
 <section id="clone-the-repository">
 <h3>1. Clone the Repository<a class="headerlink" href="#clone-the-repository" title="Link to this heading"></a></h3>
 <p>First, fork the upstream repository on GitHub to your own account. Then, clone your fork:</p>
@@ -126,142 +158,238 @@
 <ol class="arabic simple">
 <li><p><strong>Fork</strong> the upstream repository to your own GitHub account.</p></li>
 <li><p><strong>Clone</strong> your fork locally.</p></li>
-<li><p><strong>Create a new branch</strong> for your feature or fix:
-<code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">my-feature</span>&#160;&#160;&#160;&#160;&#160; </code></p></li>
-<li><p><strong>Make your changes</strong> and commit them:
-<code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;Describe</span> <span class="pre">your</span> <span class="pre">change&quot;</span>&#160;&#160;&#160;&#160;&#160; </code></p></li>
-<li><p><strong>Push</strong> your branch to your fork:
-<code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">my-feature</span>&#160;&#160;&#160;&#160;&#160; </code></p></li>
-<li><p><strong>Open a Pull Request</strong> from your branch to the main branch of the upstream repository on GitHub.</p></li>
-<li><p>Wait for review and feedback. Update your branch as needed.</p></li>
 </ol>
-<section id="tips">
-<h3>Tips<a class="headerlink" href="#tips" title="Link to this heading"></a></h3>
-<ul>
-<li><p>Keep your fork up to date with the upstream repository:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/UPSTREAM_USERNAME/gabm.git
-git<span class="w"> </span>fetch<span class="w"> </span>upstream
-git<span class="w"> </span>merge<span class="w"> </span>upstream/main
-</pre></div>
-</div>
-</li>
-<li><p>For easier authentication, set up SSH keys with GitHub:</p>
-<ol class="arabic simple">
-<li><p>Generate an SSH key (if you don’t have one):
-<code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">ssh-keygen</span> <span class="pre">-t</span> <span class="pre">ed25519</span> <span class="pre">-C</span> <span class="pre">&quot;your_email&#64;example.com&quot;</span>&#160;&#160;&#160;&#160;&#160; </code></p></li>
-<li><p>Add your public key to GitHub (Settings &gt; SSH and GPG keys).</p></li>
-<li><p>Change your remotes to use SSH:
-<code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">git</span> <span class="pre">remote</span> <span class="pre">set-url</span> <span class="pre">origin</span> <span class="pre">git&#64;github.com:YOUR_USERNAME/gabm.git</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">git</span> <span class="pre">remote</span> <span class="pre">set-url</span> <span class="pre">upstream</span> <span class="pre">git&#64;github.com:compolis/gabm.git</span>&#160;&#160;&#160;&#160;&#160; </code></p></li>
-<li><p>Test with:
-<code class="docutils literal notranslate"><span class="pre">bash</span>&#160;&#160;&#160;&#160;&#160; <span class="pre">ssh</span> <span class="pre">-T</span> <span class="pre">git&#64;github.com</span>&#160;&#160;&#160;&#160;&#160; </code></p></li>
-</ol>
-</li>
-</ul>
 </section>
 </section>
-<section id="development-tasks-with-makefile">
-<h2>Development Tasks with Makefile<a class="headerlink" href="#development-tasks-with-makefile" title="Link to this heading"></a></h2>
-<p>This project uses a Makefile to simplify common development tasks. Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">help</span></code> to see available commands. Key targets include:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">help</span><span class="w">        </span><span class="c1"># List available Makefile commands</span>
-make<span class="w"> </span>sync<span class="w">        </span><span class="c1"># Sync your main branch with upstream</span>
-make<span class="w"> </span><span class="nb">test</span><span class="w">        </span><span class="c1"># Run all tests (requires pytest)</span>
-make<span class="w"> </span>docs<span class="w">        </span><span class="c1"># Build documentation (requires Sphinx, in docs/)</span>
-make<span class="w"> </span>clean<span class="w">       </span><span class="c1"># Remove build/test artifacts (docs/_build, .pyc, __pycache__)</span>
-make<span class="w"> </span>git-clean<span class="w">   </span><span class="c1"># Safely delete merged local branches (except main/gh-pages) and prune deleted remote branches</span>
+<section id="gabm-generalized-agent-based-modeling">
+<h1>gabm: Generalized Agent-Based Modeling<a class="headerlink" href="#gabm-generalized-agent-based-modeling" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>gabm is a flexible, extensible Python framework for agent-based modeling (ABM) with a focus on integrating large language models (LLMs) as agent reasoning engines. It supports multiple LLM providers, persistent response caching, and robust onboarding for new users and contributors.</p>
+</section>
+<section id="onboarding-quick-start">
+<h2>Onboarding &amp; Quick Start<a class="headerlink" href="#onboarding-quick-start" title="Link to this heading"></a></h2>
+<section id="install-requirements">
+<h3>1. Install Requirements<a class="headerlink" href="#install-requirements" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </pre></div>
 </div>
-<p><strong>Note:</strong></p>
+</section>
+<section id="set-up-api-keys">
+<h3>2. Set Up API Keys<a class="headerlink" href="#set-up-api-keys" title="Link to this heading"></a></h3>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> file with your LLM API keys. Example:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>provider</p></th>
+<th class="head"><p>key</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>openai</p></td>
+<td><p>sk-…</p></td>
+</tr>
+<tr class="row-odd"><td><p>google-generativeai</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>deepseek</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="run-onboarding-utility">
+<h3>3. Run Onboarding Utility<a class="headerlink" href="#run-onboarding-utility" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>setup_llms.py
+</pre></div>
+</div>
+<p>This utility will:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code> is safe and only removes generated files and folders.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">git-clean</span></code> is safe for most workflows, but always double-check you have pushed any important branches before running. It will not delete unmerged or protected branches.</p></li>
+<li><p>Validate your API keys</p></li>
+<li><p>List available models for each provider</p></li>
+<li><p>Initialize response/model caches</p></li>
 </ul>
-<p>Make sure you have <code class="docutils literal notranslate"><span class="pre">make</span></code> installed (standard on Linux/macOS; for Windows, use WSL or install GNU Make).</p>
 </section>
-<section id="documentation-deployment">
-<h2>Documentation Deployment<a class="headerlink" href="#documentation-deployment" title="Link to this heading"></a></h2>
-<p>Project documentation is built with Sphinx and deployed to GitHub Pages using the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch.</p>
-<p>The documentation includes an auto-generated API Reference and a module index (see <code class="docutils literal notranslate"><span class="pre">py-modindex.html</span></code> in the built docs) for easy navigation of the codebase. The Makefile and Sphinx are configured so that <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code> works out of the box (no manual PYTHONPATH changes needed).</p>
-<p>To build and deploy the docs:</p>
+<section id="run-main-program">
+<h3>4. Run Main Program<a class="headerlink" href="#run-main-program" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>run.py
+</pre></div>
+</div>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="running-the-main-program">
+<h3>Running the Main Program<a class="headerlink" href="#running-the-main-program" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>run.py
+</pre></div>
+</div>
+</section>
+<section id="example-persona-test-agent-fills-survey">
+<h3>Example: Persona Test Agent Fills Survey<a class="headerlink" href="#example-persona-test-agent-fills-survey" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>src/io/persona_test_agent_fills_survey_v1.py
+</pre></div>
+</div>
+</section>
+</section>
+<section id="model-management-caching">
+<h2>Model Management &amp; Caching<a class="headerlink" href="#model-management-caching" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>All LLM responses are cached in <code class="docutils literal notranslate"><span class="pre">data/llm_cache/</span></code> (pickled)</p></li>
+<li><p>Model lists are cached in <code class="docutils literal notranslate"><span class="pre">data/model_lists/</span></code> (JSON/TXT)</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clear-caches</span></code> to clear all caches</p></li>
+</ul>
+<section id="supported-llm-providers">
+<h3>Supported LLM Providers<a class="headerlink" href="#supported-llm-providers" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>OpenAI</p></li>
+<li><p>Google Generative AI</p></li>
+<li><p>DeepSeek</p></li>
+</ul>
+</section>
+</section>
+<section id="contributions">
+<h2>CONTRIBUTIONS<a class="headerlink" href="#contributions" title="Link to this heading"></a></h2>
+<section id="how-to-contribute">
+<h3>How to Contribute<a class="headerlink" href="#how-to-contribute" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Add your name to the <code class="docutils literal notranslate"><span class="pre">__author__</span></code> list in any Python file you edit.</p></li>
+<li><p>Increment the <code class="docutils literal notranslate"><span class="pre">__version__</span></code> string in the file if you make a significant change.</p></li>
+<li><p>Submit a pull request with a clear description of your changes.</p></li>
+</ol>
+<section id="example-metadata-block">
+<h4>Example Metadata Block<a class="headerlink" href="#example-metadata-block" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">__author__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice Smith&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob Jones&quot;</span><span class="p">]</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.2.1&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;2024-present Alice Smith, Bob Jones&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="contributor-best-practices">
+<h3>Contributor Best Practices<a class="headerlink" href="#contributor-best-practices" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Keep <code class="docutils literal notranslate"><span class="pre">__author__</span></code> as a list (not a string)</p></li>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">__version__</span></code> for meaningful changes</p></li>
+<li><p>Add yourself to the list in every file you touch</p></li>
+</ul>
+</section>
+<section id="contributor-checklist-for-prs">
+<h3>Contributor Checklist (for PRs)<a class="headerlink" href="#contributor-checklist-for-prs" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>[ ] Add your name to the CONTRIBUTORS file</p></li>
+<li><p>[ ] Add yourself to the <code class="docutils literal notranslate"><span class="pre">__author__</span></code> list in any Python file you edit</p></li>
+<li><p>[ ] Increment the <code class="docutils literal notranslate"><span class="pre">__version__</span></code> string for significant changes</p></li>
+<li><p>[ ] Update the ChangeLog.md with a summary of your changes</p></li>
+<li><p>[ ] Ensure all tests pass and documentation builds</p></li>
+<li><p>[ ] Provide a clear PR description</p></li>
+</ul>
+<section id="semantic-versioning">
+<h4>Semantic Versioning<a class="headerlink" href="#semantic-versioning" title="Link to this heading"></a></h4>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">Major.Minor.Fix</span></code> format for the <code class="docutils literal notranslate"><span class="pre">__version__</span></code> string:</p>
+<ul class="simple">
+<li><p><strong>Major</strong>: Increment for incompatible API changes or major new features.</p></li>
+<li><p><strong>Minor</strong>: Increment for backward-compatible feature additions or improvements.</p></li>
+<li><p><strong>Fix</strong>: Increment for backward-compatible bug fixes or minor changes.</p></li>
+</ul>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">0.2.1</span></code> → <code class="docutils literal notranslate"><span class="pre">0.2.2</span></code> (fix), <code class="docutils literal notranslate"><span class="pre">0.3.0</span></code> (minor), <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code> (major).</p>
+</section>
+</section>
+</section>
+<section id="makefile-reference">
+<h2>Makefile Reference<a class="headerlink" href="#makefile-reference" title="Link to this heading"></a></h2>
+<section id="common-targets">
+<h3>Common Targets<a class="headerlink" href="#common-targets" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">setup-llms</span></code> — Run onboarding utility</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clear-caches</span></code> — Remove all response/model caches</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code> — Build Sphinx documentation</p></li>
+</ul>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.PHONY</span></code> targets are grouped for clarity</p></li>
+<li><p>Comments explain each target</p></li>
+</ul>
+</section>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading"></a></h2>
+<section id="building-docs">
+<h3>Building Docs<a class="headerlink" href="#building-docs" title="Link to this heading"></a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>docs
-make<span class="w"> </span>gh-pages
 </pre></div>
 </div>
-<p>After deployment, documentation will be available at:
-https://YOUR_USERNAME.github.io/gabm/</p>
-<p>To activate GitHub Pages:</p>
-<ol class="arabic simple">
-<li><p>Go to your repository on GitHub.</p></li>
-<li><p>Click Settings &gt; Pages.</p></li>
-<li><p>Set the source to the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch (root).</p></li>
-<li><p>Save.</p></li>
-</ol>
-<p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch is for static site deployment and is updated automatically. Protect your <code class="docutils literal notranslate"><span class="pre">main</span></code> branch for code review and collaboration.</p>
+<p>Docs are generated with Sphinx and output to <code class="docutils literal notranslate"><span class="pre">docs/_build/html/</span></code>.</p>
 </section>
-<section id="sphinx-documentation-organization">
-<h2>Sphinx Documentation Organization<a class="headerlink" href="#sphinx-documentation-organization" title="Link to this heading"></a></h2>
-<p>API reference documentation is organized to mirror the Python code structure for clarity and maintainability. Each major module has its own reStructuredText (.rst) file located in a matching directory under <code class="docutils literal notranslate"><span class="pre">docs/</span></code>.</p>
-<p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span><span class="o">/</span>
-  <span class="n">io</span><span class="o">/</span>
-    <span class="n">llm</span><span class="o">/</span>
-      <span class="n">utils</span><span class="o">.</span><span class="n">rst</span>
-      <span class="n">openai</span><span class="o">.</span><span class="n">rst</span>
-      <span class="n">anthropic</span><span class="o">.</span><span class="n">rst</span>
-      <span class="n">genai</span><span class="o">.</span><span class="n">rst</span>
-</pre></div>
-</div>
-<p>Each module .rst file contains an <code class="docutils literal notranslate"><span class="pre">automodule</span></code> directive for its corresponding Python module, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">automodule</span><span class="p">::</span> <span class="n">src</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">llm</span><span class="o">.</span><span class="n">openai</span>
-   <span class="p">:</span><span class="n">members</span><span class="p">:</span>
-   <span class="p">:</span><span class="n">undoc</span><span class="o">-</span><span class="n">members</span><span class="p">:</span>
-   <span class="p">:</span><span class="n">show</span><span class="o">-</span><span class="n">inheritance</span><span class="p">:</span>
-</pre></div>
-</div>
-<p>The main documentation index (<code class="docutils literal notranslate"><span class="pre">docs/index.rst</span></code>) uses a <code class="docutils literal notranslate"><span class="pre">toctree</span></code> to reference these module .rst files:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">toctree</span><span class="p">::</span>
-   <span class="p">:</span><span class="n">maxdepth</span><span class="p">:</span> <span class="mi">2</span>
-   <span class="p">:</span><span class="n">caption</span><span class="p">:</span> <span class="n">API</span> <span class="n">Reference</span>
+</section>
+<section id="change-log">
+<h2>Change Log<a class="headerlink" href="#change-log" title="Link to this heading"></a></h2>
+<p>See <a class="reference internal" href="#CHANGE_LOG.md"><span class="xref myst">CHANGE_LOG.md</span></a> for a summary of notable changes in each version.</p>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading"></a></h2>
+<p>See <a class="reference internal" href="#LICENSE"><span class="xref myst">LICENSE</span></a>.</p>
+</section>
+<section id="credits">
+<h2>Credits<a class="headerlink" href="#credits" title="Link to this heading"></a></h2>
+<p>See <a class="reference internal" href="#CONTRIBUTORS"><span class="xref myst">CONTRIBUTORS</span></a> for a full list of contributors.
+:caption: API Reference</p>
+<p>io/llm/utils
+io/llm/openai
+io/llm/anthropic
+io/llm/genai</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+**How to add a new module to the docs:**
+1. Create a new .rst file in the appropriate directory under `docs/`.
+2. Add the `automodule` directive for your module.
+3. Reference the new .rst file in the `toctree` in `index.rst`.
+4. Run `make docs` to rebuild the documentation.
 
-   <span class="n">io</span><span class="o">/</span><span class="n">llm</span><span class="o">/</span><span class="n">utils</span>
-   <span class="n">io</span><span class="o">/</span><span class="n">llm</span><span class="o">/</span><span class="n">openai</span>
-   <span class="n">io</span><span class="o">/</span><span class="n">llm</span><span class="o">/</span><span class="n">anthropic</span>
-   <span class="n">io</span><span class="o">/</span><span class="n">llm</span><span class="o">/</span><span class="n">genai</span>
-</pre></div>
-</div>
-<p><strong>How to add a new module to the docs:</strong></p>
-<ol class="arabic simple">
-<li><p>Create a new .rst file in the appropriate directory under <code class="docutils literal notranslate"><span class="pre">docs/</span></code>.</p></li>
-<li><p>Add the <code class="docutils literal notranslate"><span class="pre">automodule</span></code> directive for your module.</p></li>
-<li><p>Reference the new .rst file in the <code class="docutils literal notranslate"><span class="pre">toctree</span></code> in <code class="docutils literal notranslate"><span class="pre">index.rst</span></code>.</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code> to rebuild the documentation.</p></li>
-</ol>
-<p>This structure keeps documentation organized and easy to extend as the codebase grows.</p>
-</section>
-<section id="llm-model-listing-caching-and-validation">
-<h2>LLM Model Listing, Caching, and Validation<a class="headerlink" href="#llm-model-listing-caching-and-validation" title="Link to this heading"></a></h2>
-<p>This project supports multiple LLM providers (OpenAI, GenAI, DeepSeek, Anthropic) with a unified workflow for model management:</p>
-<ul class="simple">
-<li><p><strong>Model Listing:</strong> Each LLM module provides a function to fetch and list available models from the provider’s API. The full model list is saved as both JSON (machine-readable) and TXT (human-readable) in the corresponding <code class="docutils literal notranslate"><span class="pre">data/llm/{provider}/</span></code> directory.</p></li>
-<li><p><strong>Caching:</strong> When a model list is fetched, it is cached locally. LLM responses are also cached for efficiency and reproducibility.</p></li>
-<li><p><strong>Validation:</strong> When running the main script, the selected model for each LLM is checked against the cached JSON model list. If the model is not found, a warning is shown and the available models can be listed automatically.</p></li>
-<li><p><strong>Extensibility:</strong> This workflow is consistent across all LLMs, making it easy to add new providers or update model selection logic.</p></li>
-</ul>
-<section id="model-selection-explicit-required">
-<h3>Model Selection (Explicit Required)<a class="headerlink" href="#model-selection-explicit-required" title="Link to this heading"></a></h3>
-<p>When running the main script, you must explicitly set the model name for each LLM provider in <code class="docutils literal notranslate"><span class="pre">run.py</span></code>. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.</p>
-<ul class="simple">
-<li><p>To select a model, set the variable (e.g., <code class="docutils literal notranslate"><span class="pre">openai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">genai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">deepseek_model</span></code>) at the top of the main function in <code class="docutils literal notranslate"><span class="pre">run.py</span></code>.</p></li>
-<li><p>If you do not set a model, the script will raise an error and prompt you to specify one.</p></li>
-<li><p>To see available models, run the model listing function for each provider or check the generated <code class="docutils literal notranslate"><span class="pre">models.json</span></code> file in <code class="docutils literal notranslate"><span class="pre">data/llm/{provider}/</span></code>.</p></li>
-</ul>
-<p>Example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">openai_model</span> <span class="o">=</span> <span class="s2">&quot;gpt-3.5-turbo&quot;</span>
-<span class="n">genai_model</span> <span class="o">=</span> <span class="s2">&quot;gemini-pro&quot;</span>
-<span class="n">deepseek_model</span> <span class="o">=</span> <span class="s2">&quot;deepseek-model-1&quot;</span>
+This structure keeps documentation organized and easy to extend as the codebase grows.
+
+## LLM Model Listing, Caching, and Validation
+
+This project supports multiple LLM providers (OpenAI, GenAI, DeepSeek, Anthropic) with a unified workflow for model management:
+
+- **Model Listing:** Each LLM module provides a function to fetch and list available models from the provider&#39;s API. The full model list is saved as both JSON (machine-readable) and TXT (human-readable) in the corresponding `data/llm/{provider}/` directory.
+- **Caching:** When a model list is fetched, it is cached locally. LLM responses are also cached for efficiency and reproducibility.
+- **Validation:** When running the main script, the selected model for each LLM is checked against the cached JSON model list. If the model is not found, a warning is shown and the available models can be listed automatically.
+- **Extensibility:** This workflow is consistent across all LLMs, making it easy to add new providers or update model selection logic.
+
+### Model Selection (Explicit Required)
+
+When running the main script, you must explicitly set the model name for each LLM provider in `run.py`. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.
+
+- To select a model, set the variable (e.g., `openai_model`, `genai_model`, `deepseek_model`) at the top of the main function in `run.py`.
+- If you do not set a model, the script will raise an error and prompt you to specify one.
+- To see available models, run the model listing function for each provider or check the generated `models.json` file in `data/llm/{provider}/`.
+
+Example:
+```python
+openai_model = &quot;gpt-3.5-turbo&quot;
+genai_model = &quot;gemini-pro&quot;
+deepseek_model = &quot;deepseek-model-1&quot;
 </pre></div>
 </div>
 <p>See the API documentation and module docstrings for more details on how model management is implemented and used in the codebase.</p>
 </section>
+<section id="id1">
+<h2>Contributions<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>If you contribute code to this project, please:</p>
+<ul class="simple">
+<li><p>Add your name and email to the end of the <code class="docutils literal notranslate"><span class="pre">__author__</span></code> list in any Python file you edit.</p></li>
+<li><p>Increment the <code class="docutils literal notranslate"><span class="pre">__version__</span></code> string if you make a significant change.</p></li>
+<li><p>Optionally, add a short comment in the file or in your pull request describing your contribution.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">__author__</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s2">&quot;Andy Turner &lt;agdturner@gmail.com&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Your Name &lt;your.email@example.com&gt;&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>This helps ensure proper attribution and makes it easy to track contributors. For large or multi-author changes, consider also updating this README or adding a CONTRIBUTORS file.</p>
 </section>
 <section id="acknowledgements">
 <h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading"></a></h2>
@@ -286,11 +414,7 @@ https://YOUR_USERNAME.github.io/gabm/</p>
 <li class="toctree-l2"><a class="reference internal" href="io/llm/openai.html#src.io.llm.openai.send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="io/llm/anthropic.html">Anthropic Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="io/llm/anthropic.html#src.io.llm.anthropic.list_available_models"><code class="docutils literal notranslate"><span class="pre">list_available_models()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="io/llm/anthropic.html#src.io.llm.anthropic.send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/anthropic.html">Anthropic Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io/llm/genai.html">GenAI Module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="io/llm/genai.html#src.io.llm.genai.list_available_models"><code class="docutils literal notranslate"><span class="pre">list_available_models()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="io/llm/genai.html#src.io.llm.genai.send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a></li>

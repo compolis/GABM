@@ -100,12 +100,12 @@ Also saves the list to data/llm/genai/models.json and models.txt.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.io.llm.genai.send">
-<span class="sig-prename descclassname"><span class="pre">src.io.llm.genai.</span></span><span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gemini-pro'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.llm.genai.send" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">src.io.llm.genai.</span></span><span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'models/gemini-2.5-pro'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.io.llm.genai.send" title="Link to this definition"></a></dt>
 <dd><p>Send a prompt to Google Generative AI and return the response as a dict.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>api_key (str): The Google API key.
 message (str): The message to send to Gemini.
-model (str, optional): The model to use (default is “gemini-pro”).</p>
+model (str, optional): The model to use (default is “models/gemini-2.5-pro”).</p>
 </dd>
 <dt>Returns:</dt><dd><p>dict: The full Gemini response as a serializable dictionary.</p>
 </dd>
