@@ -10,3 +10,4 @@ openai==1.13.3
 anthropic==0.25.6
 google-generativeai==0.4.1
 httpx==0.28.1
+deepseek==1.0.0

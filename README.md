@@ -180,3 +180,34 @@ The main documentation index (`docs/index.rst`) uses a `toctree` to reference th
 4. Run `make docs` to rebuild the documentation.
 
 This structure keeps documentation organized and easy to extend as the codebase grows.
+
+## LLM Model Listing, Caching, and Validation
+
+This project supports multiple LLM providers (OpenAI, GenAI, DeepSeek, Anthropic) with a unified workflow for model management:
+
+- **Model Listing:** Each LLM module provides a function to fetch and list available models from the provider's API. The full model list is saved as both JSON (machine-readable) and TXT (human-readable) in the corresponding `data/llm/{provider}/` directory.
+- **Caching:** When a model list is fetched, it is cached locally. LLM responses are also cached for efficiency and reproducibility.
+- **Validation:** When running the main script, the selected model for each LLM is checked against the cached JSON model list. If the model is not found, a warning is shown and the available models can be listed automatically.
+- **Extensibility:** This workflow is consistent across all LLMs, making it easy to add new providers or update model selection logic.
+
+### Model Selection (Explicit Required)
+
+When running the main script, you must explicitly set the model name for each LLM provider in `run.py`. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.
+
+- To select a model, set the variable (e.g., `openai_model`, `genai_model`, `deepseek_model`) at the top of the main function in `run.py`.
+- If you do not set a model, the script will raise an error and prompt you to specify one.
+- To see available models, run the model listing function for each provider or check the generated `models.json` file in `data/llm/{provider}/`.
+
+Example:
+```python
+openai_model = "gpt-3.5-turbo"
+genai_model = "gemini-pro"
+deepseek_model = "deepseek-model-1"
+```
+
+See the API documentation and module docstrings for more details on how model management is implemented and used in the codebase.
+
+## Acknowledgements
+
+- This project was developed with significant assistance from GitHub Copilot for code generation, refactoring, and documentation improvements.
+- Developers are encouraged to use Visual Studio Code for its rich Python and GitHub Copilot integration, but you are free to use any editor or IDE you prefer. Spyder is also a good choice for Python development, especially if you prefer a scientific workflow.

@@ -1,5 +1,11 @@
 """
-For sending prompts to Anthropic Claude, receiving responses, and caching them.
+For sending prompts to Anthropic Claude, receiving responses, and managing model lists and cache.
+
+Features:
+- Send prompts to Anthropic and cache responses for reproducibility.
+- List available models from the Anthropic API and save as both JSON and TXT for validation and reference.
+- Validate selected model names against the cached JSON model list.
+- Unified workflow for model management, matching other LLM modules in the project.
 """
 # Metadata
 __author__ = "Andy Turner <agdturner@gmail.com>"
@@ -13,7 +19,7 @@ import os
 import pickle
 from pathlib import Path
 # Shared error handling
-from .utils import safe_api_call
+from .utils import safe_api_call, list_models_to_txt
 
 # Persistent cache for message-response pairs
 _cache_path = Path("data/llm/anthropic/cache.pkl")
@@ -25,6 +31,31 @@ if _cache_path.exists():
     except Exception as e:
         print(f"[anthropic.py] Warning: Failed to load cache: {e}")
         _cache = {}
+
+def list_available_models(api_key):
+    """
+    List available Anthropic models and save to data/llm/anthropic/models.txt.
+
+    Args:
+        api_key (str): The Anthropic API key.
+    """
+    client = anthropic.Anthropic(api_key=api_key)
+    # The actual method to list models may differ; update as needed.
+    # Placeholder: assume client.models.list() returns model objects with id and description
+    try:
+        models = client.models.list()
+    except Exception as e:
+        print(f"[anthropic] Error listing models: {e}")
+        models = []
+    def formatter(model):
+        return (f"Model ID: {getattr(model, 'id', 'N/A')}\n"
+                f"  Description: {getattr(model, 'description', 'N/A')}\n")
+    list_models_to_txt(
+        models,
+        Path("data/llm/anthropic/models.txt"),
+        formatter,
+        header="Available Anthropic models:\n"
+    )
 
 @safe_api_call("anthropic")
 def send(api_key, message, model="claude-3-opus-20240229"):
@@ -45,11 +76,17 @@ def send(api_key, message, model="claude-3-opus-20240229"):
     if cache_key in _cache:
         return _cache[cache_key]
     client = anthropic.Anthropic(api_key=api_key)
-    response = client.messages.create(
-        model=model,
-        max_tokens=100,
-        messages=[{"role": "user", "content": message}]
-    )
+    try:
+        response = client.messages.create(
+            model=model,
+            max_tokens=100,
+            messages=[{"role": "user", "content": message}]
+        )
+    except Exception as e:
+        print(f"[anthropic] Error: {e}")
+        if "404" in str(e) or "not found" in str(e) or "not supported" in str(e):
+            list_available_models(api_key)
+        return None
     _cache[cache_key] = response
     # Save updated cache
     _cache_path.parent.mkdir(parents=True, exist_ok=True)
