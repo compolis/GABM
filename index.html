@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Utils Module" href="io/llm/utils.html" /> 
+    <link rel="next" title="Read Data Module" href="io/read_data.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,6 +45,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="io/read_data.html">Read Data Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io/llm/utils.html">Utils Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io/llm/openai.html">OpenAI Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io/llm/anthropic.html">Anthropic Module</a></li>
@@ -241,6 +242,10 @@ https://YOUR_USERNAME.github.io/gabm/</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="io/read_data.html">Read Data Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="io/read_data.html#src.io.read_data.read_api_keys"><code class="docutils literal notranslate"><span class="pre">read_api_keys()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="io/llm/utils.html">Utils Module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="io/llm/utils.html#src.io.llm.utils.safe_api_call"><code class="docutils literal notranslate"><span class="pre">safe_api_call()</span></code></a></li>
 </ul>
@@ -267,32 +272,15 @@ https://YOUR_USERNAME.github.io/gabm/</p>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 </section>
-<section id="module-src.io.read_data">
-<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-src.io.read_data" title="Link to this heading"></a></h1>
-<p>Reads data from various sources.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="src.io.read_data.read_api_keys">
-<span class="sig-prename descclassname"><span class="pre">src.io.read_data.</span></span><span class="sig-name descname"><span class="pre">read_api_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.io.read_data.read_api_keys" title="Link to this definition"></a></dt>
-<dd><p>Reads API keys from a CSV file into a dictionary.
-Assumes the CSV has two columns: ‘api’ and ‘key’, with a header row.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>file_path (str or Path): Path to the CSV file.</p>
-</dd>
-<dt>Returns:</dt><dd><p>dict[str, str]: Dictionary with API names as keys and their corresponding keys as values.</p>
-</dd>
-<dt>Raises:</dt><dd><p>ValueError: If file_path is not provided.
-FileNotFoundError: If the specified file does not exist.</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="io/llm/utils.html" class="btn btn-neutral float-right" title="Utils Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="io/read_data.html" class="btn btn-neutral float-right" title="Read Data Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
