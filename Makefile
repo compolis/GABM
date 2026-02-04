@@ -20,7 +20,10 @@ test:
 docs:
 	PYTHONPATH=.. sphinx-build -b html docs docs/_build/html
 
+
 gh-pages:
+	rm -rf /tmp/gh-pages
+	-git worktree remove /tmp/gh-pages
 	cd docs && sphinx-build -b html . _build/html
 	git worktree add /tmp/gh-pages gh-pages || git checkout --orphan gh-pages
 	rm -rf /tmp/gh-pages/*
