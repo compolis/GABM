@@ -1,9 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Reads data from various sources.
 """
-
 # Metadata
 __author__ = "Andy Turner <agdturner@gmail.com>"
 __version__ = "0.1.0"
@@ -17,10 +14,16 @@ def read_api_keys(file_path: str | Path) -> dict[str, str]:
     """
     Reads API keys from a CSV file into a dictionary.
     Assumes the CSV has two columns: 'api' and 'key', with a header row.
-    @param file_path: Path to the CSV file.
-    @return: Dictionary with API names as keys and their corresponding keys as values.
-    @raises ValueError: If file_path is not provided.
-    @raises FileNotFoundError: If the specified file does not exist.
+
+    Args:
+        file_path (str or Path): Path to the CSV file.
+
+    Returns:
+        dict[str, str]: Dictionary with API names as keys and their corresponding keys as values.
+
+    Raises:
+        ValueError: If file_path is not provided.
+        FileNotFoundError: If the specified file does not exist.
     """
     if not file_path:
         raise ValueError("file_path must be provided")

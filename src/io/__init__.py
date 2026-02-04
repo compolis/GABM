@@ -1,7 +1,6 @@
 """
-Initialization for the src package.
+Initialization for the io package.
 """
-
 # Metadata
 __author__ = "Andy Turner <agdturner@gmail.com>"
 __version__ = "0.1.0"
