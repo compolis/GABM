@@ -134,3 +134,49 @@ To activate GitHub Pages:
 4. Save.
 
 **Note:** The `gh-pages` branch is for static site deployment and is updated automatically. Protect your `main` branch for code review and collaboration.
+
+## Sphinx Documentation Organization
+
+API reference documentation is organized to mirror the Python code structure for clarity and maintainability. Each major module has its own reStructuredText (.rst) file located in a matching directory under `docs/`.
+
+For example:
+
+```
+docs/
+  io/
+    llm/
+      utils.rst
+      openai.rst
+      anthropic.rst
+      genai.rst
+```
+
+Each module .rst file contains an `automodule` directive for its corresponding Python module, e.g.:
+
+```
+.. automodule:: src.io.llm.openai
+   :members:
+   :undoc-members:
+   :show-inheritance:
+```
+
+The main documentation index (`docs/index.rst`) uses a `toctree` to reference these module .rst files:
+
+```
+.. toctree::
+   :maxdepth: 2
+   :caption: API Reference
+
+   io/llm/utils
+   io/llm/openai
+   io/llm/anthropic
+   io/llm/genai
+```
+
+**How to add a new module to the docs:**
+1. Create a new .rst file in the appropriate directory under `docs/`.
+2. Add the `automodule` directive for your module.
+3. Reference the new .rst file in the `toctree` in `index.rst`.
+4. Run `make docs` to rebuild the documentation.
+
+This structure keeps documentation organized and easy to extend as the codebase grows.
