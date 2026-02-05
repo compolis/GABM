@@ -7,6 +7,7 @@ sphinx-rtd-theme==2.0.0
 myst-parser==2.0.0
 
 openai==1.13.3
-anthropic==0.25.6
+#anthropic==0.25.6
 google-generativeai==0.4.1
 httpx==0.28.1
+deepseek==1.0.0

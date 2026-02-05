@@ -1,0 +1,117 @@
+# Step-by-Step Setup Guide for GABM
+
+This guide walks new users through a clean setup of the GABM project, including clearing caches, onboarding, and running the main program. Example commands and instructions for capturing console output are provided.
+
+## 1. Clean the Environment
+
+
+Before starting, remove any old caches and build artifacts to ensure a fresh setup:
+
+```bash
+make clear-caches
+make clean
+mkdir -p data/logs
+```
+
+## 2. Run the LLM Setup Utility
+
+Initialize your environment, test API keys, and generate model lists/caches:
+
+```bash
+script -c "make setup-llms" data/logs/setup-llms.log
+```
+
+> **Note:** The `script` command is available on most Unix/Linux systems (including macOS), but is not natively available on Windows. On Windows, you can use PowerShell's `Start-Transcript` or simply redirect output using `>` (e.g., `python run.py > data/logs/run-main.log 2>&1`).
+
+> **Note on Log Files:**
+>
+> You may see multiple log files with similar or identical names (e.g., `run-main.log`, `setup-llms.log`) in the `data/logs/` directory. This is expected:
+>
+> - When you use the `script` command, it captures all terminal output (including print statements and errors) and writes it to the file you specify (e.g., `data/logs/run-main.log`).
+> - At the same time, the Python logging system writes structured logs (INFO, WARNING, ERROR) to its own log files, which may have similar names (e.g., `run_main.log` or `setup_llms.log`).
+>
+> As a result, you may have both a transcript of the console session and one or more structured log files for the same run. This is normal and helps with both high-level and detailed troubleshooting.
+
+> **Caution:** Log files may use hyphens (`-`) or underscores (`_`) in their names (e.g., `run-main.log` from the `script` command vs. `run_main.log` from the Python logger). These are different files, even if their names look similar. Always check the exact filename and character used when reviewing or sharing logs.
+
+- This will save all console output to `data/logs/setup-llms.log` for reference.
+- Review the log for any errors or missing API keys.
+
+## 3. Run the Main Program
+
+Run the main entry point and capture its output:
+
+```bash
+script -c "python3 run.py" data/logs/run-main.log
+```
+
+- Output will be saved to `data/logs/run-main.log`.
+- Review the log to see what a successful run looks like.
+
+## 4. Time Estimates
+
+- `make clear-caches` and `make clean`: < 10 seconds
+- `make setup-llms`: 10–60 seconds (depends on network/API speed)
+- `python3 run.py`: 5–30 seconds (depends on model and prompt)
+
+## 5. Troubleshooting
+
+- If you encounter errors, check the log files for details.
+- Ensure your API keys are valid and present in `data/api_key.csv`.
+- If issues persist, clear caches and try again.
+
+## 6. Build and View the Documentation
+
+You can build a local copy of the Sphinx documentation to browse the API reference and guides:
+
+```bash
+make docs
+```
+
+- The generated HTML documentation will be in `docs/_build/html/`.
+- Open `docs/_build/html/index.html` in your web browser to view the docs.
+- If you encounter errors, ensure all dependencies from `requirements.txt` are installed.
+
+## Appendix: Example Log Output
+
+After running the setup and main program, you should see log files in `data/logs/` such as `setup-llms.log` and `run-main.log`. Below is an example of what a successful log might look like:
+
+<details>
+<summary>Example: data/logs/setup-llms.log</summary>
+
+```
+2026-02-04 10:15:23,456 [INFO] setup_llms: Starting LLM setup utility
+2026-02-04 10:15:23,789 [INFO] openai: Testing API key and fetching model list
+2026-02-04 10:15:24,012 [INFO] openai: Model list saved to data/llm/openai/models.json
+2026-02-04 10:15:24,345 [INFO] genai: Testing API key and fetching model list
+2026-02-04 10:15:24,678 [INFO] genai: Model list saved to data/llm/genai/models.json
+2026-02-04 10:15:25,012 [INFO] deepseek: Testing API key and fetching model list
+2026-02-04 10:15:25,345 [INFO] deepseek: Model list saved to data/llm/deepseek/models.json
+2026-02-04 10:15:25,678 [INFO] setup_llms: All LLMs initialized successfully
+```
+
+</details>
+
+<details>
+<summary>Example: data/logs/run-main.log</summary>
+
+```
+2026-02-04 10:16:01,123 [INFO] run: Starting main program
+2026-02-04 10:16:01,456 [INFO] openai: Using model gpt-3.5-turbo
+2026-02-04 10:16:01,789 [INFO] genai: Using model gemini-pro
+2026-02-04 10:16:02,012 [INFO] deepseek: Using model deepseek-model-1
+2026-02-04 10:16:02,345 [INFO] run: All tasks completed successfully
+```
+
+</details>
+
+If your logs look similar (with INFO messages and no ERROR or WARNING lines), your setup was successful. If you see ERROR or WARNING messages, review them for details and troubleshooting tips.
+
+---
+
+
+All log files are stored in the `data/logs/` directory for easy reference and sharing.
+
+For more details, see the [README.md](README.md).
+
+All major modules and utilities in GABM use centralized logging. In addition to the console output captured above, each LLM module and utility writes detailed logs automatically to the `data/logs/` directory. These logs include setup steps, API calls, warnings, and errors, making troubleshooting and reproducibility easier.

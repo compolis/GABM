@@ -202,7 +202,7 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
-# Marimo
-marimo/_static/
-marimo/_lsp/
-__marimo__/
+# LLM cache files (not committed by default)
+data/llm/*/cache.pkl
+# Log files (not committed by default)
+data/logs/
