@@ -241,13 +241,11 @@ This helps ensure proper attribution and makes it easy to track contributors. Fo
 
 ## Makefile Reference
 
+
 ### Common Targets
 
-- `make setup-llms` — Run onboarding utility
-- `make clear-caches` — Remove all response/model caches (calls `scripts/clear_caches.py`)
-- `make clean` — Remove build/test artifacts (calls `scripts/clean_project.py`)
-- `make docs` — Build Sphinx documentation (calls `scripts/update_docs_assets.py`)
-- `make gh-pages` — Build and deploy documentation to GitHub Pages (calls `scripts/gh_pages_deploy.py`)
+
+- `make git-clean` — Clean up merged local branches and prune deleted remotes. This target automatically checks out the `main` branch before deleting merged branches to avoid errors if the active branch is merged and needs deletion.
 
 ### Python Scripts Used by Makefile Targets
 

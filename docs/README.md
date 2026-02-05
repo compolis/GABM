@@ -1,58 +1,55 @@
-# GABM: Generative Agent-Based Model
+
+## GABM: Generative Agent-Based Model
 
 
-## Overview
+### Overview
 
 GABM is a flexible, extensible Python framework for agent-based modeling (ABM) with a focus on integrating large language models (LLMs) as agent reasoning engines. It supports multiple LLM providers, persistent response caching, and robust onboarding for new users and contributors.
 
-## Roadmap
+### Roadmap
 
-See [ROADMAP.md](ROADMAP.md) for planned next steps and future goals.
+See {doc}`ROADMAP.md <ROADMAP.md>` for planned next steps and future goals.
 
 To create and push a release tag:
 
 1. Ensure all changes are committed and pushed to the main branch.
 2. Run:
 
-   ```bash
-
+```
    make release VERSION=x.y.z
-   ```
+```
 
    Replace `x.y.z` with the desired version number (e.g., `0.1.0`).
 3. The release will be tagged and pushed to the remote repository.
 
-See [CHANGE_LOG.md](CHANGE_LOG.md) for details of each release.
+See {doc}`CHANGE_LOG.md <CHANGE_LOG.md>` for details of each release.
 
-## Code of Conduct
+### Code of Conduct
 
-Please see our [Code of Conduct](CODE_OF_CONDUCT.md) for guidelines on expected behavior and reporting issues.
+Please see our {doc}`Code of Conduct <CODE_OF_CONDUCT.md>` for guidelines on expected behavior and reporting issues.
 
-## Getting Started
+### Getting Started
 
-### 1. Clone the Repository
-
+#### 1. Clone the Repository
 First, fork the upstream repository on GitHub to your own account. Then, clone your fork:
 
-For a detailed, step-by-step walkthrough (including example output and troubleshooting), see [SETUP_GUIDE.md](SETUP_GUIDE.md).
+For a detailed, step-by-step walkthrough (including example output and troubleshooting), see {doc}`SETUP_GUIDE.md <SETUP_GUIDE.md>`.
 git clone https://github.com/compolis/gabm.git
 cd gabm
 
 > **Note for Developers:**
+> 
+> The documentation files in the `docs/` directory (such as `README.md`, `ROADMAP.md`, `CHANGE_LOG.md`, `CODE_OF_CONDUCT.md`, `SETUP_GUIDE.md`, `CONTRIBUTORS`, and `LICENSE`) are automatically copied from the project root as part of the documentation build process. **Do not edit these files in `docs/` directly.** Always edit the originals in the project root.
 
- The documentation files in the `docs/` directory (such as `README.md`, `ROADMAP.md`, `CHANGE_LOG.md`, `CODE_OF_CONDUCT.md`, `SETUP_GUIDE.md`, `CONTRIBUTORS`, and `LICENSE`) are automatically copied from the project root as part of the documentation build process. **Do not edit these files in `docs/` directly.** Always edit the originals in the project root.
-
-### 2. Set Up Your Environment
+#### 2. Set Up Your Environment
 
 Install Python 3.9+ and pip if you haven't already. Then install dependencies:
 
-```bash
-
+```
 pip install -r requirements.txt
-
 ```
 
-#### Recommended tools
+##### Recommended tools
 
 - [Visual Studio Code](https://code.visualstudio.com/) is recommended for its excellent Python support and [GitHub Copilot](https://github.com/features/copilot) integration.
 - Other good Python IDEs include [Spyder](https://www.spyder-ide.org/) (scientific workflow) and [PyCharm](https://www.jetbrains.com/pycharm/).
@@ -60,8 +57,7 @@ pip install -r requirements.txt
 - You are free to use any editor, IDE, or workflow you prefer.
 
 
-### 3. API Keys
-
+#### 3. API Keys
 You need a `data/api_key.csv` file with your API keys. This file is not included in the repository for security reasons.
 
 > **Security Warning:** Never commit your API keys or other secrets to the repository. The `.gitignore` file is configured to exclude `data/api_key.csv` and other sensitive files from version control. Always keep your keys private and secure.
@@ -69,24 +65,19 @@ You need a `data/api_key.csv` file with your API keys. This file is not included
 Ask the project maintainer for a template or example, or create it yourself with the following format (CSV with header):
 
 ```
-
 api,key
 openai,sk-...
 deepseek,sk-...
 genai,YOUR_GOOGLE_KEY
-
 ```
 
 Place this file in the `data/` directory.
 
-### 4. LLM Setup and Onboarding
-
+#### 4. LLM Setup and Onboarding
 To quickly initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, use the provided setup utility:
 
-```bash
-
+```
 make setup-llms
-
 ```
 
 This will:
@@ -97,62 +88,50 @@ This will:
 - Report any issues or missing keys
 
 If you need to clear all caches and model lists (for a fresh start or troubleshooting), use:
-
-```bash
-
+```
 make clear-caches
-
 ```
 
 **Note:** Model list files (`models.json`, `models.txt`) are lists of available models for each LLM service. This might change over time. To save generating the lists these are committed to the repository. Cache files (`cache.pkl`) are prompt/response data from each LLM service. These are currently not committed to the repository as they may become large. However, the intention is to store caches of prompts/responses and details of the Agent Based Models when run to generate results and explore reproducibility.
 
-### 5. Running the Code
-
+#### 5. Running the Code
 From the project root, run:
 
-```bash
-
+```
 python3 run.py
-
 ```
 
-## Usage
+### Usage
 
-### Running the Main Program
-
-```bash
-
-python3 run.py
+#### Running the Main Program
 
 ```
+python3 run.py
+```
 
-### Example: Persona Test Agent Fills Survey
+#### Example: Persona Test Agent Fills Survey
 
-```bash
-
+```
 python3 src/io/persona_test_agent_fills_survey_v1.py
-
 ```
 
-## Model Management & Caching
+### Model Management & Caching
 
 - All LLM responses are cached in `data/llm_cache/` (pickled)
 - Model lists are cached in `data/model_lists/` (JSON/TXT)
 - Use `make clear-caches` to clear all caches
 
-### Supported LLM Providers
-
+#### Supported LLM Providers
 - DeepSeek
 
-### Model Listing, Caching, and Validation
-
+#### Model Listing, Caching, and Validation
 When a model list is fetched, it is cached locally. LLM responses are also cached for efficiency and reproducibility.
 
 When running the main script, the selected model for each LLM is checked against the cached JSON model list. If the model is not found, a warning is shown and the available models can be listed automatically.
 
 This workflow is consistent across all LLMs, making it easy to add new providers or update model selection logic.
 
-#### Model Selection (Explicit Required)
+##### Model Selection (Explicit Required)
 
 When running the main script, you must explicitly set the model name for each LLM provider in `run.py`. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.
 
@@ -163,45 +142,39 @@ If you do not set a model, the script will raise an error and prompt you to spec
 To see available models, run the model listing function for each provider or check the generated `models.json` file in `data/llm/{provider}/`.
 
 Example:
-
-```python
-
+```
 openai_model = "gpt-3.5-turbo"
 genai_model = "gemini-pro"
 deepseek_model = "deepseek-model-1"
-
 ```
 
 See the API documentation and module docstrings for more details on how model management is implemented and used in the codebase.
 
-## Contribution Workflow
+### Contribution Workflow
 
 **Note:** The `main` branch is protected. All changes must be made through Pull Requests, which require at least one review and approval before merging. Direct pushes to `main` are not allowed. This ensures code quality and collaborative review.
 
-### How to Contribute
+#### How to Contribute
 
 1. Add your name to the `__author__` list in any Python file you edit.
 2. Increment the `__version__` string in the file if you make a significant change.
 3. Submit a pull request with a clear description of your changes.
 
-### Example Metadata Block
+#### Example Metadata Block
 
-```python
-
+```
 __author__ = ["Alice Smith", "Bob Jones"]
 __version__ = "0.2.1"
 __copyright__ = "2024-present Alice Smith, Bob Jones"
-
 ```
 
-### Contributor Best Practices
+#### Contributor Best Practices
 
 - Keep `__author__` as a list (not a string)
 - Update `__version__` for meaningful changes
 - Add yourself to the list in every file you touch
 
-### Contributor Checklist (for PRs)
-
+#### Contributor Checklist (for PRs)
 - [ ] Increment the `__version__` string for significant changes
 - [ ] Update the CHANGE_LOG.md with a summary of your changes
 - [ ] Ensure all tests pass and documentation builds
@@ -218,54 +191,47 @@ If you contribute code to this project, please:
 - Optionally, add a short comment in the file or in your pull request describing your contribution.
 
 Example:
-
-```python
-
+```
 __author__ = [
   "Andy Turner <agdturner@gmail.com>",
   "Your Name <your.email@example.com>"
 ]
-
 ```
 
 This helps ensure proper attribution and makes it easy to track contributors. For large or multi-author changes, consider also updating this README or adding a CONTRIBUTORS file.
 
-## Makefile Reference
-
-### Common Targets
-
-- `make setup-llms` — Run onboarding utility
-- `make clear-caches` — Remove all response/model caches (calls `scripts/clear_caches.py`)
-- `make clean` — Remove build/test artifacts (calls `scripts/clean_project.py`)
-- `make docs` — Build Sphinx documentation (calls `scripts/update_docs_assets.py`)
-- `make gh-pages` — Build and deploy documentation to GitHub Pages (calls `scripts/gh_pages_deploy.py`)
-
-### Python Scripts Used by Makefile Targets
+### Makefile Reference
 
 
+#### Common Targets
 
 
+- `make git-clean` — Clean up merged local branches and prune deleted remotes. This target automatically checks out the `main` branch before deleting merged branches to avoid errors if the active branch is merged and needs deletion.
 
+#### Python Scripts Used by Makefile Targets
 
-
-
+| Script                        | Used by Target    | Purpose                                                      |
+|-------------------------------|-------------------|--------------------------------------------------------------|
+| scripts/update_docs_assets.py  | docs              | Copies and normalizes Markdown docs for Sphinx               |
+| scripts/clean_docs_assets.py   | docs-clean        | Removes auto-copied docs assets from docs/                   |
+| scripts/clean_project.py       | clean             | Removes build/test artifacts and Python caches               |
+| scripts/clear_caches.py        | clear-caches      | Deletes all LLM/model caches and model lists                 |
+| scripts/gh_pages_deploy.py     | gh-pages          | Builds and deploys Sphinx docs to the gh-pages branch        |
 
 - All scripts are in the `scripts/` directory at the project root.
 - These scripts ensure all Makefile targets are platform-agnostic and reproducible.
 
-## Documentation
+### Documentation
 
-```bash
-
+```
 make docs
-
 ```
 
 Docs are generated with Sphinx and output to `docs/_build/html/`.
 
 > **To view the documentation:** Open `docs/_build/html/index.html` in your web browser after running `make docs`.
 
-### Adding New Modules to the Documentation
+#### Adding New Modules to the Documentation
 
 To add a new module to the docs:
 1. Create a new .rst file in the appropriate directory under `docs/`.
@@ -275,7 +241,7 @@ To add a new module to the docs:
 
 This structure keeps documentation organized and easy to extend as the codebase grows.
 
-## LLM Model Listing, Caching, and Validation
+### LLM Model Listing, Caching, and Validation
 
 This project supports multiple LLM providers (OpenAI, GenAI, DeepSeek, Anthropic) with a unified workflow for model management:
 
@@ -284,7 +250,7 @@ This project supports multiple LLM providers (OpenAI, GenAI, DeepSeek, Anthropic
 - **Validation:** When running the main script, the selected model for each LLM is checked against the cached JSON model list. If the model is not found, a warning is shown and the available models can be listed automatically.
 - **Extensibility:** This workflow is consistent across all LLMs, making it easy to add new providers or update model selection logic.
 
-### LLM Model Selection (Explicit Required)
+#### LLM Model Selection (Explicit Required)
 
 When running the main script, you must explicitly set the model name for each LLM provider in `run.py`. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.
 
@@ -293,22 +259,19 @@ When running the main script, you must explicitly set the model name for each LL
 - To see available models, run the model listing function for each provider or check the generated `models.json` file in `data/llm/{provider}/`.
 
 Example:
-
-```python
-
+```
 openai_model = "gpt-3.5-turbo"
 genai_model = "gemini-pro"
 deepseek_model = "deepseek-model-1"
-
 ```
 
 See the API documentation and module docstrings for more details on how model management is implemented and used in the codebase.
 
-## Centralized Logging
+### Centralized Logging
 
-All major modules and utilities in GABM use a centralized logging system. In addition to any console output, each LLM module and utility writes detailed logs automatically to the `data/logs/` directory. These logs include setup steps, API calls, warnings, and errors, making troubleshooting and reproducibility easier. See the [SETUP_GUIDE.md](SETUP_GUIDE.md) for details on how to view and use these logs.
+All major modules and utilities in GABM use a centralized logging system. In addition to any console output, each LLM module and utility writes detailed logs automatically to the `data/logs/` directory. These logs include setup steps, API calls, warnings, and errors, making troubleshooting and reproducibility easier. See the {doc}`SETUP_GUIDE.md <SETUP_GUIDE.md>` for details on how to view and use these logs.
 
-## Files and Directories Excluded from Version Control
+### Files and Directories Excluded from Version Control
 
 Certain files and directories are intentionally excluded from the repository via `.gitignore` to keep the project clean and secure:
 
@@ -318,10 +281,10 @@ Certain files and directories are intentionally excluded from the repository via
 
 If you do not see these files or folders in the repository, this is expected. Each collaborator should generate their own as needed by following the setup guide.
 
-- If you want to link to Markdown files (like ROADMAP.md, CHANGE_LOG.md, CODE_OF_CONDUCT.md, SETUP_GUIDE.md, CONTRIBUTORS, LICENSE) in the Sphinx docs, ensure they are present in the docs/ directory or use plain Markdown links (e.g., `[ROADMAP.md](ROADMAP.md)`) instead of MyST cross-references. Otherwise, Sphinx will warn about missing references.
+- If you want to link to Markdown files (like ROADMAP.md, CHANGE_LOG.md, CODE_OF_CONDUCT.md, SETUP_GUIDE.md, CONTRIBUTORS, LICENSE) in the Sphinx docs, ensure they are present in the docs/ directory or use plain Markdown links (e.g., `{doc}`ROADMAP.md <ROADMAP.md>``) instead of MyST cross-references. Otherwise, Sphinx will warn about missing references.
 - If you want to include a file in the Sphinx navigation, add it to a toctree in index.rst. If not, remove or comment out the reference.
 
-## Documentation Build Workflow
+### Documentation Build Workflow
 
 - The Makefile `docs` target automatically runs `scripts/update_docs_assets.py` to copy key documentation files (README.md, ROADMAP.md, etc.) from the project root to the `docs/` directory and update their internal links for Sphinx.
 - **Edit only the originals in the project root.** Do not edit the auto-copied files in `docs/`—they will be overwritten.
@@ -331,13 +294,13 @@ If you do not see these files or folders in the repository, this is expected. Ea
 > **Platform Agnostic:** All core developer workflows (build, clean, cache management, docs, deployment) are fully platform-agnostic and work on both Windows and Unix-like systems. You can develop and contribute using your preferred OS.
 
 
-## License
+### License
 
 See [LICENSE](LICENSE).
 
 
-## Acknowledgements
+### Acknowledgements
 
 This project was developed with significant assistance from GitHub Copilot for code generation, refactoring, and documentation improvements.
 
-We gratefully acknowledge support from the University of Leeds. Funding for this project comes from a UKRI Future Leaders Fellowship awarded to Professor Viktoria Spaiser (grant reference: MR/V021141/1).
+We gratefully acknowledge support from the University of Leeds. Funding for this project comes from a UKRI Future Leaders Fellowship awarded to Professor Viktoria Spaiser (grant reference: UKRI2043).

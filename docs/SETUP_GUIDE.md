@@ -112,6 +112,6 @@ If your logs look similar (with INFO messages and no ERROR or WARNING lines), yo
 
 All log files are stored in the `data/logs/` directory for easy reference and sharing.
 
-For more details, see the [README.md](README.md).
+For more details, see the {doc}`README.md <README.md>`.
 
 All major modules and utilities in GABM use centralized logging. In addition to the console output captured above, each LLM module and utility writes detailed logs automatically to the `data/logs/` directory. These logs include setup steps, API calls, warnings, and errors, making troubleshooting and reproducibility easier.
