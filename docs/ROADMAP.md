@@ -1,8 +1,8 @@
-# Project Roadmap
+## Project Roadmap
 
 This file outlines planned next steps and future goals for the project. The repository is currently private; the first public release will be version 1.0.0.
 
-## Next Target: v0.2.0
+### Next Target: v0.2.0
 
 - Begin development of an agent-based model (ABM) with agent personas derived from processed survey data.
 - Implement 4 initialized agents, each with unique biases and opinions.
@@ -11,7 +11,7 @@ This file outlines planned next steps and future goals for the project. The repo
 - After the conversations, generate a graph showing individual and aggregate opinions and confidence levels.
 - The graph will visualize both individual agent trajectories and overall group opinion/confidence.
 
-## Future Milestone: v1.0.0 (First Public Release)
+### Future Milestone: v1.0.0 (First Public Release)
 
 - Criteria and features for 1.0.0 to be determined.
 - Repository will be made public when approved by stakeholders.

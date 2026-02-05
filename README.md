@@ -1,3 +1,4 @@
+#
 <!-- Badges -->
 <p align="left">
   <a href="https://github.com/compolis/gabm/actions/workflows/ci.yml" title="Build Status">
@@ -241,13 +242,11 @@ This helps ensure proper attribution and makes it easy to track contributors. Fo
 
 ## Makefile Reference
 
+
 ### Common Targets
 
-- `make setup-llms` — Run onboarding utility
-- `make clear-caches` — Remove all response/model caches (calls `scripts/clear_caches.py`)
-- `make clean` — Remove build/test artifacts (calls `scripts/clean_project.py`)
-- `make docs` — Build Sphinx documentation (calls `scripts/update_docs_assets.py`)
-- `make gh-pages` — Build and deploy documentation to GitHub Pages (calls `scripts/gh_pages_deploy.py`)
+
+- `make git-clean` — Clean up merged local branches and prune deleted remotes. This target automatically checks out the `main` branch before deleting merged branches to avoid errors if the active branch is merged and needs deletion.
 
 ### Python Scripts Used by Makefile Targets
 
@@ -281,6 +280,16 @@ To add a new module to the docs:
 4. Run `make docs` to rebuild the documentation.
 
 This structure keeps documentation organized and easy to extend as the codebase grows.
+
+---
+**Note on Sphinx/MyST Documentation Warnings:**
+
+When building the documentation with Sphinx and MyST, you may see warnings like:
+
+  Document headings start at H2, not H1 [myst.header]
+
+These warnings occur even though all Markdown files start with H2 (`##`). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.
+---
 
 ## LLM Model Listing, Caching, and Validation
 
@@ -342,6 +351,6 @@ See [LICENSE](LICENSE).
 
 ## Acknowledgements
 
-This project was developed with significant assistance from GitHub Copilot for code generation, refactoring, and documentation improvements.
+This project was developed with significant assistance from [GitHub Copilot](https://github.com/features/copilot) for code generation, refactoring, and documentation improvements.
 
-We gratefully acknowledge support from the University of Leeds. Funding for this project comes from a UKRI Future Leaders Fellowship awarded to Professor Viktoria Spaiser (grant reference: UKRI2043).
+We gratefully acknowledge support from the [University of Leeds](https://www.leeds.ac.uk/). Funding for this project comes from a UKRI Future Leaders Fellowship awarded to [Professor Viktoria Spaiser](https://essl.leeds.ac.uk/politics/staff/102/professor-viktoria-spaiser) (grant reference: [UKRI2043](https://gtr.ukri.org/projects?ref=UKRI2043)).
