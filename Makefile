@@ -14,6 +14,7 @@ help:
 	@echo "  setup-llms   - Run onboarding/setup for all LLMs (API key check, model lists, cache init)"
 	@echo "  clear-caches - Delete all LLM caches and model lists (for a clean slate)"
 	@echo "  release      - Tag and push a release (usage: make release VERSION=x.y.z)"
+
 # Tag and push a release (usage: make release VERSION=x.y.z)
 release:
 	@if [ -z "$(VERSION)" ]; then \
@@ -55,6 +56,8 @@ clean:
 
 # Clean up merged local branches and prune deleted remotes (safe)
 git-clean:
+	@echo "Switching to main branch for safe cleanup..."
+	@git checkout main
 	@echo "Deleting local branches already merged to main..."
 	@git branch --merged main | grep -vE '(^\*|main|gh-pages)' | xargs -r git branch -d
 	@echo "Pruning deleted remote branches..."

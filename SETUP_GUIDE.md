@@ -72,6 +72,17 @@ make docs
 - Open `docs/_build/html/index.html` in your web browser to view the docs.
 - If you encounter errors, ensure all dependencies from `requirements.txt` are installed.
 
+#
+---
+**Note on Sphinx/MyST Documentation Warnings:**
+
+When building the documentation with Sphinx and MyST, you may see warnings like:
+
+	Document headings start at H2, not H1 [myst.header]
+
+These warnings occur even though all Markdown files start with H2 (`##`). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.
+---
+
 ## Appendix: Example Log Output
 
 After running the setup and main program, you should see log files in `data/logs/` such as `setup-llms.log` and `run-main.log`. Below is an example of what a successful log might look like:
