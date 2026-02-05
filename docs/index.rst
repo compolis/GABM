@@ -5,6 +5,7 @@
    :maxdepth: 2
    :caption: API Reference
 
+   io/read_data
    io/llm/utils
    io/llm/openai
    io/llm/genai
