@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Step-by-Step Setup Guide for GABM &mdash; GABM  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributors" href="CONTRIBUTORS.html" />
+    <link rel="prev" title="Contributor Covenant Code of Conduct" href="CODE_OF_CONDUCT.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GABM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/utils.html">Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/openai.html">OpenAI Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/genai.html">GenAI Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/deepseek.html">DeepSeek Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/logging_utils.html">Logging Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io/read_data.html">Read Data Module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Step-by-Step Setup Guide for GABM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#clean-the-environment">1. Clean the Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-the-llm-setup-utility">2. Run the LLM Setup Utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-the-main-program">3. Run the Main Program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#time-estimates">4. Time Estimates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">5. Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#build-and-view-the-documentation">6. Build and View the Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id1"></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#these-warnings-occur-even-though-all-markdown-files-start-with-h2-this-is-a-known-quirk-with-myst-sphinx-and-does-not-affect-the-rendered-documentation-you-can-safely-ignore-these-warnings-unless-the-formatting-in-the-html-output-is-incorrect">These warnings occur even though all Markdown files start with H2 (<code class="docutils literal notranslate"><span class="pre">##</span></code>). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#appendix-example-log-output">Appendix: Example Log Output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GABM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Step-by-Step Setup Guide for GABM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/SETUP_GUIDE.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="step-by-step-setup-guide-for-gabm">
+<h1>Step-by-Step Setup Guide for GABM<a class="headerlink" href="#step-by-step-setup-guide-for-gabm" title="Link to this heading"></a></h1>
+<p>This guide walks new users through a clean setup of the GABM project, including clearing caches, onboarding, and running the main program. Example commands and instructions for capturing console output are provided.</p>
+<section id="clean-the-environment">
+<h2>1. Clean the Environment<a class="headerlink" href="#clean-the-environment" title="Link to this heading"></a></h2>
+<p>Before starting, remove any old caches and build artifacts to ensure a fresh setup:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">clear</span><span class="o">-</span><span class="n">caches</span>
+<span class="n">make</span> <span class="n">clean</span>
+<span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">data</span><span class="o">/</span><span class="n">logs</span>
+</pre></div>
+</div>
+</section>
+<section id="run-the-llm-setup-utility">
+<h2>2. Run the LLM Setup Utility<a class="headerlink" href="#run-the-llm-setup-utility" title="Link to this heading"></a></h2>
+<p>Initialize your environment, test API keys, and generate model lists/caches:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">script</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;make setup-llms&quot;</span> <span class="n">data</span><span class="o">/</span><span class="n">logs</span><span class="o">/</span><span class="n">setup</span><span class="o">-</span><span class="n">llms</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">script</span></code> command is available on most Unix/Linux systems (including macOS), but is not natively available on Windows. On Windows, you can use PowerShell’s <code class="docutils literal notranslate"><span class="pre">Start-Transcript</span></code> or simply redirect output using <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">run.py</span> <span class="pre">&gt;</span> <span class="pre">data/logs/run-main.log</span> <span class="pre">2&gt;&amp;1</span></code>).</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Note on Log Files:</strong></p>
+<p>You may see multiple log files with similar or identical names (e.g., <code class="docutils literal notranslate"><span class="pre">run-main.log</span></code>, <code class="docutils literal notranslate"><span class="pre">setup-llms.log</span></code>) in the <code class="docutils literal notranslate"><span class="pre">data/logs/</span></code> directory. This is expected:</p>
+<ul class="simple">
+<li><p>When you use the <code class="docutils literal notranslate"><span class="pre">script</span></code> command, it captures all terminal output (including print statements and errors) and writes it to the file you specify (e.g., <code class="docutils literal notranslate"><span class="pre">data/logs/run-main.log</span></code>).</p></li>
+<li><p>At the same time, the Python logging system writes structured logs (INFO, WARNING, ERROR) to its own log files, which may have similar names (e.g., <code class="docutils literal notranslate"><span class="pre">run_main.log</span></code> or <code class="docutils literal notranslate"><span class="pre">setup_llms.log</span></code>).</p></li>
+</ul>
+<p>As a result, you may have both a transcript of the console session and one or more structured log files for the same run. This is normal and helps with both high-level and detailed troubleshooting.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Caution:</strong> Log files may use hyphens (<code class="docutils literal notranslate"><span class="pre">-</span></code>) or underscores (<code class="docutils literal notranslate"><span class="pre">_</span></code>) in their names (e.g., <code class="docutils literal notranslate"><span class="pre">run-main.log</span></code> from the <code class="docutils literal notranslate"><span class="pre">script</span></code> command vs. <code class="docutils literal notranslate"><span class="pre">run_main.log</span></code> from the Python logger). These are different files, even if their names look similar. Always check the exact filename and character used when reviewing or sharing logs.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>This will save all console output to <code class="docutils literal notranslate"><span class="pre">data/logs/setup-llms.log</span></code> for reference.</p></li>
+<li><p>Review the log for any errors or missing API keys.</p></li>
+</ul>
+</section>
+<section id="run-the-main-program">
+<h2>3. Run the Main Program<a class="headerlink" href="#run-the-main-program" title="Link to this heading"></a></h2>
+<p>Run the main entry point and capture its output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">script</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;python3 run.py&quot;</span> <span class="n">data</span><span class="o">/</span><span class="n">logs</span><span class="o">/</span><span class="n">run</span><span class="o">-</span><span class="n">main</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Output will be saved to <code class="docutils literal notranslate"><span class="pre">data/logs/run-main.log</span></code>.</p></li>
+<li><p>Review the log to see what a successful run looks like.</p></li>
+</ul>
+</section>
+<section id="time-estimates">
+<h2>4. Time Estimates<a class="headerlink" href="#time-estimates" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clear-caches</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code>: &lt; 10 seconds</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">setup-llms</span></code>: 10–60 seconds (depends on network/API speed)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">run.py</span></code>: 5–30 seconds (depends on model and prompt)</p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<h2>5. Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>If you encounter errors, check the log files for details.</p></li>
+<li><p>Ensure your API keys are valid and present in <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code>.</p></li>
+<li><p>If issues persist, clear caches and try again.</p></li>
+</ul>
+</section>
+<section id="build-and-view-the-documentation">
+<h2>6. Build and View the Documentation<a class="headerlink" href="#build-and-view-the-documentation" title="Link to this heading"></a></h2>
+<p>You can build a local copy of the Sphinx documentation to browse the API reference and guides:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">docs</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The generated HTML documentation will be in <code class="docutils literal notranslate"><span class="pre">docs/_build/html/</span></code>.</p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">docs/_build/html/index.html</span></code> in your web browser to view the docs.</p></li>
+<li><p>If you encounter errors, ensure all dependencies from <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> are installed.</p></li>
+</ul>
+</section>
+</section>
+<section id="id1">
+<h1><a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<hr class="docutils" />
+<p><strong>Note on Sphinx/MyST Documentation Warnings:</strong></p>
+<p>When building the documentation with Sphinx and MyST, you may see warnings like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Document headings start at H2, not H1 [myst.header]
+</pre></div>
+</div>
+</section>
+<section id="these-warnings-occur-even-though-all-markdown-files-start-with-h2-this-is-a-known-quirk-with-myst-sphinx-and-does-not-affect-the-rendered-documentation-you-can-safely-ignore-these-warnings-unless-the-formatting-in-the-html-output-is-incorrect">
+<h1>These warnings occur even though all Markdown files start with H2 (<code class="docutils literal notranslate"><span class="pre">##</span></code>). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.<a class="headerlink" href="#these-warnings-occur-even-though-all-markdown-files-start-with-h2-this-is-a-known-quirk-with-myst-sphinx-and-does-not-affect-the-rendered-documentation-you-can-safely-ignore-these-warnings-unless-the-formatting-in-the-html-output-is-incorrect" title="Link to this heading"></a></h1>
+<section id="appendix-example-log-output">
+<h2>Appendix: Example Log Output<a class="headerlink" href="#appendix-example-log-output" title="Link to this heading"></a></h2>
+<p>After running the setup and main program, you should see log files in <code class="docutils literal notranslate"><span class="pre">data/logs/</span></code> such as <code class="docutils literal notranslate"><span class="pre">setup-llms.log</span></code> and <code class="docutils literal notranslate"><span class="pre">run-main.log</span></code>. Below is an example of what a successful log might look like:</p>
+<details>
+<summary>Example: data/logs/setup-llms.log</summary>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">04</span> <span class="mi">10</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span><span class="mi">456</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="n">setup_llms</span><span class="p">:</span> <span class="n">Starting</span> <span class="n">LLM</span> <span class="n">setup</span> <span class="n">utility</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">04</span> <span class="mi">10</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span><span class="mi">789</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="n">openai</span><span class="p">:</span> <span class="n">Testing</span> <span class="n">API</span> <span class="n">key</span> <span class="ow">and</span> <span class="n">fetching</span> <span class="n">model</span> <span class="nb">list</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">04</span> <span class="mi">10</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">24</span><span class="p">,</span><span class="mi">012</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="n">openai</span><span class="p">:</span> <span class="n">Model</span> <span class="nb">list</span> <span class="n">saved</span> <span class="n">to</span> <span class="n">data</span><span class="o">/</span><span class="n">llm</span><span class="o">/</span><span class="n">openai</span><span class="o">/</span><span class="n">models</span><span class="o">.</span><span class="n">json</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">04</span> <span class="mi">10</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">24</span><span class="p">,</span><span class="mi">345</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="n">genai</span><span class="p">:</span> <span class="n">Testing</span> <span class="n">API</span> <span class="n">key</span> <span class="ow">and</span> <span class="n">fetching</span> <span class="n">model</span> <span class="nb">list</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">04</span> <span class="mi">10</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">24</span><span class="p">,</span><span class="mi">678</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="n">genai</span><span class="p">:</span> <span class="n">Model</span> <span class="nb">list</span> <span class="n">saved</span> <span class="n">to</span> <span class="n">data</span><span class="o">/</span><span class="n">llm</span><span class="o">/</span><span class="n">genai</span><span class="o">/</span><span class="n">models</span><span class="o">.</span><span class="n">json</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">04</span> <span class="mi">10</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span><span class="mi">012</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="n">deepseek</span><span class="p">:</span> <span class="n">Testing</span> <span class="n">API</span> <span class="n">key</span> <span class="ow">and</span> <span class="n">fetching</span> <span class="n">model</span> <span class="nb">list</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">04</span> <span class="mi">10</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span><span class="mi">345</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="n">deepseek</span><span class="p">:</span> <span class="n">Model</span> <span class="nb">list</span> <span class="n">saved</span> <span class="n">to</span> <span class="n">data</span><span class="o">/</span><span class="n">llm</span><span class="o">/</span><span class="n">deepseek</span><span class="o">/</span><span class="n">models</span><span class="o">.</span><span class="n">json</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">04</span> <span class="mi">10</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span><span class="mi">678</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="n">setup_llms</span><span class="p">:</span> <span class="n">All</span> <span class="n">LLMs</span> <span class="n">initialized</span> <span class="n">successfully</span>
+</pre></div>
+</div>
+</details>
+<details>
+<summary>Example: data/logs/run-main.log</summary>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">04</span> <span class="mi">10</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">01</span><span class="p">,</span><span class="mi">123</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="n">run</span><span class="p">:</span> <span class="n">Starting</span> <span class="n">main</span> <span class="n">program</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">04</span> <span class="mi">10</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">01</span><span class="p">,</span><span class="mi">456</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="n">openai</span><span class="p">:</span> <span class="n">Using</span> <span class="n">model</span> <span class="n">gpt</span><span class="o">-</span><span class="mf">3.5</span><span class="o">-</span><span class="n">turbo</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">04</span> <span class="mi">10</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">01</span><span class="p">,</span><span class="mi">789</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="n">genai</span><span class="p">:</span> <span class="n">Using</span> <span class="n">model</span> <span class="n">gemini</span><span class="o">-</span><span class="n">pro</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">04</span> <span class="mi">10</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">02</span><span class="p">,</span><span class="mi">012</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="n">deepseek</span><span class="p">:</span> <span class="n">Using</span> <span class="n">model</span> <span class="n">deepseek</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="mi">1</span>
+<span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">04</span> <span class="mi">10</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">02</span><span class="p">,</span><span class="mi">345</span> <span class="p">[</span><span class="n">INFO</span><span class="p">]</span> <span class="n">run</span><span class="p">:</span> <span class="n">All</span> <span class="n">tasks</span> <span class="n">completed</span> <span class="n">successfully</span>
+</pre></div>
+</div>
+</details>
+<p>If your logs look similar (with INFO messages and no ERROR or WARNING lines), your setup was successful. If you see ERROR or WARNING messages, review them for details and troubleshooting tips.</p>
+<hr class="docutils" />
+<p>All log files are stored in the <code class="docutils literal notranslate"><span class="pre">data/logs/</span></code> directory for easy reference and sharing.</p>
+<p>For more details, see the <span class="xref std std-doc">README.md</span>.</p>
+<p>All major modules and utilities in GABM use centralized logging. In addition to the console output captured above, each LLM module and utility writes detailed logs automatically to the <code class="docutils literal notranslate"><span class="pre">data/logs/</span></code> directory. These logs include setup steps, API calls, warnings, and errors, making troubleshooting and reproducibility easier.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CODE_OF_CONDUCT.html" class="btn btn-neutral float-left" title="Contributor Covenant Code of Conduct" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CONTRIBUTORS.html" class="btn btn-neutral float-right" title="Contributors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, GABM contributors, University of Leeds.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
