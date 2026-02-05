@@ -1,17 +1,3 @@
-def clean_code_blocks(md):
-    lines = md.splitlines()
-    in_code = False
-    cleaned = []
-    for line in lines:
-        if line.strip().startswith('```') or line.strip().startswith('~~~~'):
-            in_code = not in_code
-            cleaned.append('```')
-            continue
-        if in_code and line.strip() == '':
-            continue
-        cleaned.append(line)
-    return '\n'.join(cleaned)
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -53,6 +39,13 @@ LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
 
 # Always rewrite links to use just the filename (no ../)
 def update_links(text):
+    """
+    Rewrite Markdown links to use MyST cross-references for known doc files.
+    Args:
+        text (str): Markdown content.
+    Returns:
+        str: Markdown with updated links.
+    """
     def repl(match):
         label, target = match.groups()
         # If the link is to a known doc file (even if ../ is present), convert to MyST doc cross-reference
@@ -68,16 +61,83 @@ def update_links(text):
         return match.group(0)
     return LINK_RE.sub(repl, text)
 
+def clean_code_blocks(md):
+    """
+    Normalize code blocks to use triple backticks and remove extra blank lines inside code blocks.
+    Args:
+        md (str): Markdown content.
+    Returns:
+        str: Cleaned Markdown content.
+    """
+    lines = md.splitlines()
+    in_code = False
+    cleaned = []
+    for line in lines:
+        if line.strip().startswith('```') or line.strip().startswith('~~~~'):
+            in_code = not in_code
+            cleaned.append('```')
+            continue
+        if in_code and line.strip() == '':
+            continue
+        cleaned.append(line)
+    return '\n'.join(cleaned)
+
 def fix_header_levels(text):
-    # Demote all headings by one level: # -> ##, ## -> ###, ### -> ####, etc.
+    """
+    Demote all Markdown headings by one level (e.g., # to ##) for Sphinx/MyST compatibility.
+    Args:
+        text (str): Markdown content.
+    Returns:
+        str: Markdown with demoted headings.
+    """
+    # Demote all headings by one level: # -> ##, ## -> ###, etc.
     lines = text.splitlines()
+    demoted = []
+    for line in lines:
+        m = re.match(r'^(#+)(\s*)(.*)', line)
+        if m:
+            hashes, spaces, rest = m.groups()
+            new_line = '#' + hashes + spaces + rest
+            demoted.append(new_line)
+        else:
+            demoted.append(line)
+    # Debug: print first few lines to verify
+    if demoted:
+        print('[DEBUG] First lines after heading demotion:', demoted[:3])
+    return '\n'.join(demoted)
+
+def fix_definition_lists_and_blockquotes(content):
+    """
+    Insert blank lines after definition lists and block quotes for MyST compatibility.
+    Args:
+        content (str): Markdown content.
+    Returns:
+        str: Markdown with improved spacing.
+    """
+    # Insert blank lines after definition lists and block quotes for MyST
+    lines = content.splitlines()
+    new_lines = []
     for i, line in enumerate(lines):
-        if re.match(r'^(#+) ', line):
-            hashes = re.match(r'^(#+)', line).group(1)
-            lines[i] = '#' + hashes + line[len(hashes):]
-    return '\n'.join(lines)
+        new_lines.append(line)
+        # Definition list: term followed by colon (not code block)
+        if (line.strip().endswith('::') or (':' in line and not line.strip().startswith('#'))) and not line.strip().startswith('```'):
+            # If next line is not blank, insert blank line
+            if i + 1 < len(lines) and lines[i + 1].strip() != '':
+                new_lines.append('')
+        # Block quote: line starts with '>'
+        if line.strip().startswith('>'):
+            if i + 1 < len(lines) and lines[i + 1].strip() != '':
+                new_lines.append('')
+    return '\n'.join(new_lines)
 
 def fix_toc_links(text):
+    """
+    Rewrite ToC links to plain Markdown links, removing MyST :ref: or {ref} syntax.
+    Args:
+        text (str): Markdown content.
+    Returns:
+        str: Markdown with fixed ToC links.
+    """
     # Rewrite ToC links to plain Markdown links (not MyST cross-references)
     # Remove any MyST :ref: or {ref} syntax
     # Example: [Overview](#overview) or [Overview](:ref:`overview`) -> [Overview](#overview)
@@ -85,6 +145,27 @@ def fix_toc_links(text):
     text = re.sub(r'\[([^\]]+)\]\(:ref:`([^`]+)`\)', r'[\1](#\2)', text)
     text = re.sub(r'\[([^\]]+)\]\(\{ref}`([^`]+)`\)', r'[\1](#\2)', text)
     return text
+
+def force_copy_contributors_license():
+    """
+    Force copy CONTRIBUTORS and LICENSE files to docs/ with .md extension and appropriate titles, even if they already exist in docs/.
+    This ensures that the latest versions of these important files are always included in the documentation, and that they have the correct formatting for Sphinx/MyST.
+    """
+    special_titles = {"LICENSE.md": "# License\n\n", "CONTRIBUTORS.md": "# Contributors\n\n"}
+    for fname in ["CONTRIBUTORS", "LICENSE"]:
+        src = os.path.join(ROOT, fname)
+        dst = os.path.join(DOCS, fname + ".md")
+        print(f"[FORCE COPY] Checking for {src} to copy to {dst}...")
+        if os.path.exists(src):
+            with open(src, "r", encoding="utf-8") as f:
+                content = f.read()
+            title = special_titles.get(fname + ".md", "")
+            # Remove duplicate heading if present in content
+            content = re.sub(r'^# Contributors\s*', '', content, flags=re.MULTILINE)
+            content = re.sub(r'^# License\s*', '', content, flags=re.MULTILINE)
+            with open(dst, "w", encoding="utf-8") as f:
+                f.write(title + content)
+            print(f"[FORCE COPY] Copied and renamed with title: {fname} -> {fname}.md")
 
 def main():
     """
@@ -98,81 +179,71 @@ def main():
             continue
         with open(src, "r", encoding="utf-8") as f:
             content = f.read()
-        new_content = update_links(content)
         if fname == "README.md":
-            # Remove badges block and fork maintainer note
+            # Stricter fixes for README.md (included in index.rst)
+            new_content = update_links(content)
+            # Convert {doc}`...` references to plain Markdown links
+            new_content = re.sub(r'\{doc\}`([^`<>]+)(?:\s*<([^`<>]+)>)?`', lambda m: f'[{m.group(1)}]({m.group(2) if m.group(2) else m.group(1)})', new_content)
             new_content = re.sub(r'<!-- Badges -->.*?</p>\s*> \*\*Note for Fork Maintainers:\*\*[\s\S]*?repo.\n', '', new_content, flags=re.DOTALL)
             new_content = re.sub(r'## Table of Contents[\s\S]*?(?=^## |^# |\Z)', '', new_content, flags=re.MULTILINE)
-            new_content = fix_header_levels(new_content)
             new_content = fix_toc_links(new_content)
             new_content = re.sub(r'\[//\]: # \(.*\)', '', new_content)
-            # Normalize code blocks to use exactly three backticks and remove extra blank lines inside code blocks
             new_content = re.sub(r'(`{3,}|~{3,})', '```', new_content)
+            new_content = clean_code_blocks(new_content)
+            new_content = re.sub(r'^[ \t\-\|\+:]{5,}$', '', new_content, flags=re.MULTILINE)
+            # Insert blank lines after definition lists and block quotes
+            new_content = fix_definition_lists_and_blockquotes(new_content)
+            # Only close unclosed backticks if the line starts with a backtick and is missing a closing one
+            def close_unclosed_backticks(line):
+                # Do not add a closing backtick to heading lines
+                if line.lstrip().startswith('#'):
+                    return line
+                if line.startswith('`') and not line.rstrip().endswith('`') and line.count('`') == 1:
+                    return line + '`'
+                return line
+            new_content = '\n'.join([close_unclosed_backticks(l) for l in new_content.splitlines()])
+            # Only append backtick after colon for non-heading lines
+            def append_backtick_after_colon(line):
+                if line.lstrip().startswith('#'):
+                    return line
+                return re.sub(r'(:[^:`\n]+)$', r'\1:`', line)
+            new_content = '\n'.join([append_backtick_after_colon(l) for l in new_content.splitlines()])
+            def fix_indentation(text):
+                lines = text.split('\n')
+                in_code = False
+                for i, line in enumerate(lines):
+                    if line.strip().startswith('```'):
+                        in_code = not in_code
+                    elif not in_code and line.startswith('    '):
+                        lines[i] = line.lstrip()
+                return '\n'.join(lines)
+            new_content = fix_indentation(new_content)
+            # Add MyST front matter and ensure first heading is level 2
+            lines = new_content.splitlines()
+            # Remove any blank lines at the top
+            while lines and lines[0].strip() == '':
+                lines.pop(0)
+            # Remove any empty headings at the top (e.g., '##' or '#')
+            while lines and re.match(r'^#+\s*$', lines[0]):
+                lines.pop(0)
+            # Demote first heading to level 2 if it's not already
+            if lines and re.match(r'^#(?!#)', lines[0]):
+                lines[0] = '#' + lines[0]
+            myst_front_matter = ['---', 'title: Project README', '---', '']
+            new_content = '\n'.join(myst_front_matter + lines)
+        else:
+            # Demote headings first for all non-README.md files
+            new_content = fix_header_levels(content)
+            # Remove leading blank lines before the first heading
+            new_content = re.sub(r'^(\s*\n)+', '', new_content)
+            # Then apply other transformations
+            new_content = update_links(new_content)
+            # Replace {doc}`README.md` references with a link to index.html
+            new_content = re.sub(r'\{doc\}`README\\.md(?:\s*<README\\.md>)?`', '[Main Page](index.html)', new_content)
             new_content = clean_code_blocks(new_content)
         with open(dst, "w", encoding="utf-8") as f:
             f.write(new_content)
         print(f"Copied and processed: {fname}")
-
-# Helper functions moved to top level
-def convert_headings(md):
-    lines = md.splitlines()
-    out = []
-    for fname in DOC_FILES:
-        src = os.path.join(ROOT, fname)
-        dst = os.path.join(DOCS, fname)
-        if not os.path.exists(src):
-            print(f"Warning: {src} does not exist, skipping.")
-            continue
-        with open(src, "r", encoding="utf-8") as f:
-            content = f.read()
-        new_content = update_links(content)
-        if fname == "README.md":
-            # Remove badges block and fork maintainer note
-            new_content = re.sub(r'<!-- Badges -->.*?</p>\s*> \*\*Note for Fork Maintainers:\*\*[\s\S]*?repo.\n', '', new_content, flags=re.DOTALL)
-            new_content = re.sub(r'## Table of Contents[\s\S]*?(?=^## |^# |\Z)', '', new_content, flags=re.MULTILINE)
-            new_content = fix_header_levels(new_content)
-            new_content = fix_toc_links(new_content)
-            new_content = re.sub(r'\[//\]: # \(.*\)', '', new_content)
-            # Normalize code blocks to use exactly three backticks and remove extra blank lines inside code blocks
-            new_content = re.sub(r'(`{3,}|~{3,})', '```', new_content)
-            new_content = clean_code_blocks(new_content)
-        with open(dst, "w", encoding="utf-8") as f:
-            f.write(new_content)
-        print(f"Copied and processed: {fname}")
-
-    # Always copy CONTRIBUTORS and LICENSE as .md for Sphinx compatibility, with debug output
-    special_titles = {"LICENSE.md": "# License\n\n", "CONTRIBUTORS.md": "# Contributors\n\n"}
-    for fname in ["CONTRIBUTORS", "LICENSE"]:
-        src = os.path.join(ROOT, fname)
-        dst = os.path.join(DOCS, fname + ".md")
-        print(f"[FORCE COPY] Checking for {src} to copy to {dst}...")
-        if os.path.exists(src):
-            with open(src, "r", encoding="utf-8") as f:
-                content = f.read()
-            title = special_titles.get(fname + ".md", "")
-            # Remove duplicate heading if present in content
-            content = re.sub(r'^# Contributors\s*', '', content, flags=re.MULTILINE)
-            content = re.sub(r'^# License\s*', '', content, flags=re.MULTILINE)
-            with open(dst, "w", encoding="utf-8") as f:
-                f.write(title + content)
-            print(f"[FORCE COPY] Copied and renamed with title: {fname} -> {fname}.md")
-
-def force_copy_contributors_license():
-    special_titles = {"LICENSE.md": "# License\n\n", "CONTRIBUTORS.md": "# Contributors\n\n"}
-    for fname in ["CONTRIBUTORS", "LICENSE"]:
-        src = os.path.join(ROOT, fname)
-        dst = os.path.join(DOCS, fname + ".md")
-        print(f"[FORCE COPY] Checking for {src} to copy to {dst}...")
-        if os.path.exists(src):
-            with open(src, "r", encoding="utf-8") as f:
-                content = f.read()
-            title = special_titles.get(fname + ".md", "")
-            # Remove duplicate heading if present in content
-            content = re.sub(r'^# Contributors\s*', '', content, flags=re.MULTILINE)
-            content = re.sub(r'^# License\s*', '', content, flags=re.MULTILINE)
-            with open(dst, "w", encoding="utf-8") as f:
-                f.write(title + content)
-            print(f"[FORCE COPY] Copied and renamed with title: {fname} -> {fname}.md")
 
 if __name__ == "__main__":
     main()

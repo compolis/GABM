@@ -1,10 +1,12 @@
 
-.. include:: README.md
+```{include} README.md
+```
+
 
 .. toctree::
    :maxdepth: 2
-   :caption: API Reference
 
+   README.md
    io/llm/utils
    io/llm/openai
    io/llm/genai

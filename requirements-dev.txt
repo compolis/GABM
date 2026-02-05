@@ -1,10 +1,12 @@
 # Development requirements for GABM
 # Install with: pip install -r requirements-dev.txt
 
+
 pytest==9.0.2
-sphinx==7.2.6
-sphinx-rtd-theme==2.0.0
-myst-parser==2.0.0
+sphinx>=9.1.0,<10
+sphinx-rtd-theme>=3.1.0
+myst-parser>=5.0.0
+docutils>=0.22,<0.23
 
 openai==1.13.3
 #anthropic==0.25.6

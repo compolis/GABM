@@ -1,23 +1,23 @@
-# Step-by-Step Setup Guide for GABM
+## Step-by-Step Setup Guide for GABM
 
 This guide walks new users through a clean setup of the GABM project, including clearing caches, onboarding, and running the main program. Example commands and instructions for capturing console output are provided.
 
-## 1. Clean the Environment
+### 1. Clean the Environment
 
 
 Before starting, remove any old caches and build artifacts to ensure a fresh setup:
 
-```bash
+```
 make clear-caches
 make clean
 mkdir -p data/logs
 ```
 
-## 2. Run the LLM Setup Utility
+### 2. Run the LLM Setup Utility
 
 Initialize your environment, test API keys, and generate model lists/caches:
 
-```bash
+```
 script -c "make setup-llms" data/logs/setup-llms.log
 ```
 
@@ -37,34 +37,34 @@ script -c "make setup-llms" data/logs/setup-llms.log
 - This will save all console output to `data/logs/setup-llms.log` for reference.
 - Review the log for any errors or missing API keys.
 
-## 3. Run the Main Program
+### 3. Run the Main Program
 
 Run the main entry point and capture its output:
 
-```bash
+```
 script -c "python3 run.py" data/logs/run-main.log
 ```
 
 - Output will be saved to `data/logs/run-main.log`.
 - Review the log to see what a successful run looks like.
 
-## 4. Time Estimates
+### 4. Time Estimates
 
 - `make clear-caches` and `make clean`: < 10 seconds
 - `make setup-llms`: 10–60 seconds (depends on network/API speed)
 - `python3 run.py`: 5–30 seconds (depends on model and prompt)
 
-## 5. Troubleshooting
+### 5. Troubleshooting
 
 - If you encounter errors, check the log files for details.
 - Ensure your API keys are valid and present in `data/api_key.csv`.
 - If issues persist, clear caches and try again.
 
-## 6. Build and View the Documentation
+### 6. Build and View the Documentation
 
 You can build a local copy of the Sphinx documentation to browse the API reference and guides:
 
-```bash
+```
 make docs
 ```
 
@@ -72,7 +72,18 @@ make docs
 - Open `docs/_build/html/index.html` in your web browser to view the docs.
 - If you encounter errors, ensure all dependencies from `requirements.txt` are installed.
 
-## Appendix: Example Log Output
+##
+---
+**Note on Sphinx/MyST Documentation Warnings:**
+
+When building the documentation with Sphinx and MyST, you may see warnings like:
+
+	Document headings start at H2, not H1 [myst.header]
+
+These warnings occur even though all Markdown files start with H2 (`##`). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.
+---
+
+### Appendix: Example Log Output
 
 After running the setup and main program, you should see log files in `data/logs/` such as `setup-llms.log` and `run-main.log`. Below is an example of what a successful log might look like:
 

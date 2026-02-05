@@ -1,3 +1,4 @@
+#
 <!-- Badges -->
 <p align="left">
   <a href="https://github.com/compolis/gabm/actions/workflows/ci.yml" title="Build Status">
@@ -280,6 +281,16 @@ To add a new module to the docs:
 
 This structure keeps documentation organized and easy to extend as the codebase grows.
 
+---
+**Note on Sphinx/MyST Documentation Warnings:**
+
+When building the documentation with Sphinx and MyST, you may see warnings like:
+
+  Document headings start at H2, not H1 [myst.header]
+
+These warnings occur even though all Markdown files start with H2 (`##`). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.
+---
+
 ## LLM Model Listing, Caching, and Validation
 
 This project supports multiple LLM providers (OpenAI, GenAI, DeepSeek, Anthropic) with a unified workflow for model management:
@@ -340,6 +351,6 @@ See [LICENSE](LICENSE).
 
 ## Acknowledgements
 
-This project was developed with significant assistance from GitHub Copilot for code generation, refactoring, and documentation improvements.
+This project was developed with significant assistance from [GitHub Copilot](https://github.com/features/copilot) for code generation, refactoring, and documentation improvements.
 
-We gratefully acknowledge support from the University of Leeds. Funding for this project comes from a UKRI Future Leaders Fellowship awarded to Professor Viktoria Spaiser (grant reference: UKRI2043).
+We gratefully acknowledge support from the [University of Leeds](https://www.leeds.ac.uk/). Funding for this project comes from a UKRI Future Leaders Fellowship awarded to [Professor Viktoria Spaiser](https://essl.leeds.ac.uk/politics/staff/102/professor-viktoria-spaiser) (grant reference: [UKRI2043](https://gtr.ukri.org/projects?ref=UKRI2043)).
