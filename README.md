@@ -344,4 +344,4 @@ See [LICENSE](LICENSE).
 
 This project was developed with significant assistance from GitHub Copilot for code generation, refactoring, and documentation improvements.
 
-We gratefully acknowledge support from the University of Leeds. Funding for this project comes from a UKRI Future Leaders Fellowship awarded to Professor Viktoria Spaiser (grant reference: MR/V021141/1).
+We gratefully acknowledge support from the University of Leeds. Funding for this project comes from a UKRI Future Leaders Fellowship awarded to Professor Viktoria Spaiser (grant reference: UKRI2043).
