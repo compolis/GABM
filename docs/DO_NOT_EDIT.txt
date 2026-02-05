@@ -1,0 +1,7 @@
+# DO NOT EDIT THE AUTO-COPIED FILES IN THIS DIRECTORY
+#
+# The following files are automatically copied from the project root as part of the documentation build process:
+#   README.md, ROADMAP.md, CHANGE_LOG.md, CODE_OF_CONDUCT.md, SETUP_GUIDE.md, CONTRIBUTORS, LICENSE
+# Edit the originals in the project root, not the copies in docs/.
+#
+# You SHOULD add, edit, and maintain .rst files in this directory for Sphinx documentation.

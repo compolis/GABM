@@ -1,41 +1,5 @@
-<!-- Badges -->
-<p align="left">
-  <a href="https://github.com/YOUR_USERNAME/gabm/actions/workflows/ci.yml" title="Build Status">
-    <img src="https://img.shields.io/github/actions/workflow/status/YOUR_USERNAME/gabm/ci.yml?branch=main&label=build" alt="Build Status" />
-  </a>
-  <a href="https://github.com/YOUR_USERNAME/gabm/blob/main/LICENSE" title="License">
-    <img src="https://img.shields.io/github/license/YOUR_USERNAME/gabm" alt="License" />
-  </a>
-  <a href="https://www.python.org/downloads/" title="Python Version">
-    <img src="https://img.shields.io/badge/python-3.9%2B-blue.svg" alt="Python Version" />
-  </a>
-  <a href="https://YOUR_USERNAME.github.io/gabm/" title="Documentation">
-    <img src="https://img.shields.io/badge/docs-Sphinx-green" alt="Documentation" />
-  </a>
-</p>
 # GABM: Generative Agent-Based Model
 
-[//]: # (Table of Contents)
-## Table of Contents
-- [Overview](#overview)
-- [Roadmap](#roadmap)
-- [Code of Conduct](#code-of-conduct)
-- [Getting Started](#getting-started)
-  - [Set Up Your Environment](#2-set-up-your-environment)
-  - [Recommended Tools & IDEs](#recommended-tools--ides)
-  - [API Keys](#3-api-keys)
-  - [LLM Setup and Onboarding](#4-llm-setup-and-onboarding)
-  - [Running the Code](#5-running-the-code)
-- [Usage](#usage)
-- [Model Management & Caching](#model-management--caching)
-- [Contribution Workflow](#contribution-workflow)
-- [Makefile Reference](#makefile-reference)
-- [Documentation](#documentation)
-- [License](#license)
-- [Centralized Logging](#centralized-logging)
-- [Files and Directories Excluded from Version Control](#files-and-directories-excluded-from-version-control)
-- [Documentation Build Workflow](#documentation-build-workflow)
-- [Acknowledgements](#acknowledgements)
 
 ## Overview
 
@@ -51,6 +15,7 @@ To create and push a release tag:
 2. Run:
 
    ```bash
+
    make release VERSION=x.y.z
    ```
 
@@ -66,6 +31,7 @@ Please see our [Code of Conduct](CODE_OF_CONDUCT.md) for guidelines on expected 
 ## Getting Started
 
 ### 1. Clone the Repository
+
 First, fork the upstream repository on GitHub to your own account. Then, clone your fork:
 
 For a detailed, step-by-step walkthrough (including example output and troubleshooting), see [SETUP_GUIDE.md](SETUP_GUIDE.md).
@@ -73,15 +39,17 @@ git clone https://github.com/YOUR_USERNAME/gabm.git
 cd gabm
 
 > **Note for Developers:**
-> 
-> The documentation files in the `docs/` directory (such as `README.md`, `ROADMAP.md`, `CHANGE_LOG.md`, `CODE_OF_CONDUCT.md`, `SETUP_GUIDE.md`, `CONTRIBUTORS`, and `LICENSE`) are automatically copied from the project root as part of the documentation build process. **Do not edit these files in `docs/` directly.** Always edit the originals in the project root.
+
+ The documentation files in the `docs/` directory (such as `README.md`, `ROADMAP.md`, `CHANGE_LOG.md`, `CODE_OF_CONDUCT.md`, `SETUP_GUIDE.md`, `CONTRIBUTORS`, and `LICENSE`) are automatically copied from the project root as part of the documentation build process. **Do not edit these files in `docs/` directly.** Always edit the originals in the project root.
 
 ### 2. Set Up Your Environment
 
 Install Python 3.9+ and pip if you haven't already. Then install dependencies:
 
 ```bash
+
 pip install -r requirements.txt
+
 ```
 
 #### Recommended tools
@@ -93,6 +61,7 @@ pip install -r requirements.txt
 
 
 ### 3. API Keys
+
 You need a `data/api_key.csv` file with your API keys. This file is not included in the repository for security reasons.
 
 > **Security Warning:** Never commit your API keys or other secrets to the repository. The `.gitignore` file is configured to exclude `data/api_key.csv` and other sensitive files from version control. Always keep your keys private and secure.
@@ -100,19 +69,24 @@ You need a `data/api_key.csv` file with your API keys. This file is not included
 Ask the project maintainer for a template or example, or create it yourself with the following format (CSV with header):
 
 ```
+
 api,key
 openai,sk-...
 deepseek,sk-...
 genai,YOUR_GOOGLE_KEY
+
 ```
 
 Place this file in the `data/` directory.
 
 ### 4. LLM Setup and Onboarding
+
 To quickly initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, use the provided setup utility:
 
 ```bash
+
 make setup-llms
+
 ```
 
 This will:
@@ -123,17 +97,23 @@ This will:
 - Report any issues or missing keys
 
 If you need to clear all caches and model lists (for a fresh start or troubleshooting), use:
+
 ```bash
+
 make clear-caches
+
 ```
 
 **Note:** Model list files (`models.json`, `models.txt`) are lists of available models for each LLM service. This might change over time. To save generating the lists these are committed to the repository. Cache files (`cache.pkl`) are prompt/response data from each LLM service. These are currently not committed to the repository as they may become large. However, the intention is to store caches of prompts/responses and details of the Agent Based Models when run to generate results and explore reproducibility.
 
 ### 5. Running the Code
+
 From the project root, run:
 
 ```bash
+
 python3 run.py
+
 ```
 
 ## Usage
@@ -141,13 +121,17 @@ python3 run.py
 ### Running the Main Program
 
 ```bash
+
 python3 run.py
+
 ```
 
 ### Example: Persona Test Agent Fills Survey
 
 ```bash
+
 python3 src/io/persona_test_agent_fills_survey_v1.py
+
 ```
 
 ## Model Management & Caching
@@ -157,9 +141,11 @@ python3 src/io/persona_test_agent_fills_survey_v1.py
 - Use `make clear-caches` to clear all caches
 
 ### Supported LLM Providers
+
 - DeepSeek
 
 ### Model Listing, Caching, and Validation
+
 When a model list is fetched, it is cached locally. LLM responses are also cached for efficiency and reproducibility.
 
 When running the main script, the selected model for each LLM is checked against the cached JSON model list. If the model is not found, a warning is shown and the available models can be listed automatically.
@@ -177,10 +163,13 @@ If you do not set a model, the script will raise an error and prompt you to spec
 To see available models, run the model listing function for each provider or check the generated `models.json` file in `data/llm/{provider}/`.
 
 Example:
+
 ```python
+
 openai_model = "gpt-3.5-turbo"
 genai_model = "gemini-pro"
 deepseek_model = "deepseek-model-1"
+
 ```
 
 See the API documentation and module docstrings for more details on how model management is implemented and used in the codebase.
@@ -198,9 +187,11 @@ See the API documentation and module docstrings for more details on how model ma
 ### Example Metadata Block
 
 ```python
+
 __author__ = ["Alice Smith", "Bob Jones"]
 __version__ = "0.2.1"
 __copyright__ = "2024-present Alice Smith, Bob Jones"
+
 ```
 
 ### Contributor Best Practices
@@ -210,6 +201,7 @@ __copyright__ = "2024-present Alice Smith, Bob Jones"
 - Add yourself to the list in every file you touch
 
 ### Contributor Checklist (for PRs)
+
 - [ ] Increment the `__version__` string for significant changes
 - [ ] Update the CHANGE_LOG.md with a summary of your changes
 - [ ] Ensure all tests pass and documentation builds
@@ -226,11 +218,14 @@ If you contribute code to this project, please:
 - Optionally, add a short comment in the file or in your pull request describing your contribution.
 
 Example:
+
 ```python
+
 __author__ = [
   "Andy Turner <agdturner@gmail.com>",
   "Your Name <your.email@example.com>"
 ]
+
 ```
 
 This helps ensure proper attribution and makes it easy to track contributors. For large or multi-author changes, consider also updating this README or adding a CONTRIBUTORS file.
@@ -247,13 +242,13 @@ This helps ensure proper attribution and makes it easy to track contributors. Fo
 
 ### Python Scripts Used by Makefile Targets
 
-| Script                        | Used by Target    | Purpose                                                      |
-|-------------------------------|-------------------|--------------------------------------------------------------|
-| scripts/update_docs_assets.py  | docs              | Copies and normalizes Markdown docs for Sphinx               |
-| scripts/clean_docs_assets.py   | docs-clean        | Removes auto-copied docs assets from docs/                   |
-| scripts/clean_project.py       | clean             | Removes build/test artifacts and Python caches               |
-| scripts/clear_caches.py        | clear-caches      | Deletes all LLM/model caches and model lists                 |
-| scripts/gh_pages_deploy.py     | gh-pages          | Builds and deploys Sphinx docs to the gh-pages branch        |
+
+
+
+
+
+
+
 
 - All scripts are in the `scripts/` directory at the project root.
 - These scripts ensure all Makefile targets are platform-agnostic and reproducible.
@@ -261,7 +256,9 @@ This helps ensure proper attribution and makes it easy to track contributors. Fo
 ## Documentation
 
 ```bash
+
 make docs
+
 ```
 
 Docs are generated with Sphinx and output to `docs/_build/html/`.
@@ -296,10 +293,13 @@ When running the main script, you must explicitly set the model name for each LL
 - To see available models, run the model listing function for each provider or check the generated `models.json` file in `data/llm/{provider}/`.
 
 Example:
+
 ```python
+
 openai_model = "gpt-3.5-turbo"
 genai_model = "gemini-pro"
 deepseek_model = "deepseek-model-1"
+
 ```
 
 See the API documentation and module docstrings for more details on how model management is implemented and used in the codebase.
@@ -318,7 +318,7 @@ Certain files and directories are intentionally excluded from the repository via
 
 If you do not see these files or folders in the repository, this is expected. Each collaborator should generate their own as needed by following the setup guide.
 
-- If you want to link to Markdown files (like ROADMAP.md, CHANGE_LOG.md, CODE_OF_CONDUCT.md, SETUP_GUIDE.md, CONTRIBUTORS, LICENSE) in the Sphinx docs, ensure they are present in the docs/ directory or use plain Markdown links (e.g., `[ROADMAP.md](../ROADMAP.md)`) instead of MyST cross-references. Otherwise, Sphinx will warn about missing references.
+- If you want to link to Markdown files (like ROADMAP.md, CHANGE_LOG.md, CODE_OF_CONDUCT.md, SETUP_GUIDE.md, CONTRIBUTORS, LICENSE) in the Sphinx docs, ensure they are present in the docs/ directory or use plain Markdown links (e.g., `[ROADMAP.md](ROADMAP.md)`) instead of MyST cross-references. Otherwise, Sphinx will warn about missing references.
 - If you want to include a file in the Sphinx navigation, add it to a toctree in index.rst. If not, remove or comment out the reference.
 
 ## Documentation Build Workflow

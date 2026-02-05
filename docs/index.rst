@@ -1,8 +1,5 @@
 
-.. include:: ../README.md
-   :parser: myst_parser.sphinx_ 
-
-
+.. include:: README.md
 
 .. toctree::
    :maxdepth: 2
@@ -11,9 +8,21 @@
    io/read_data
    io/llm/utils
    io/llm/openai
-   io/llm/anthropic
    io/llm/genai
+   io/llm/deepseek
+   io/llm/logging_utils
+   io/read_data
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Project Documents
+
+   ROADMAP.md
+   CHANGE_LOG.md
+   CODE_OF_CONDUCT.md
+   SETUP_GUIDE.md
+   CONTRIBUTORS.md
+   LICENSE.md
 
 Indices and tables
 ==================
@@ -21,9 +30,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-
-API Reference
-=============
-
-
