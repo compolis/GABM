@@ -35,7 +35,7 @@ Please see our [Code of Conduct](CODE_OF_CONDUCT.md) for guidelines on expected 
 First, fork the upstream repository on GitHub to your own account. Then, clone your fork:
 
 For a detailed, step-by-step walkthrough (including example output and troubleshooting), see [SETUP_GUIDE.md](SETUP_GUIDE.md).
-git clone https://github.com/YOUR_USERNAME/gabm.git
+git clone https://github.com/compolis/gabm.git
 cd gabm
 
 > **Note for Developers:**

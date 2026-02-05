@@ -1,18 +1,22 @@
 <!-- Badges -->
 <p align="left">
-  <a href="https://github.com/YOUR_USERNAME/gabm/actions/workflows/ci.yml" title="Build Status">
-    <img src="https://img.shields.io/github/actions/workflow/status/YOUR_USERNAME/gabm/ci.yml?branch=main&label=build" alt="Build Status" />
+  <a href="https://github.com/compolis/gabm/actions/workflows/ci.yml" title="Build Status">
+    <img src="https://img.shields.io/github/actions/workflow/status/compolis/gabm/ci.yml?branch=main&label=build" alt="Build Status" />
   </a>
-  <a href="https://github.com/YOUR_USERNAME/gabm/blob/main/LICENSE" title="License">
-    <img src="https://img.shields.io/github/license/YOUR_USERNAME/gabm" alt="License" />
+  <a href="https://github.com/compolis/gabm/blob/main/LICENSE" title="License">
+    <img src="https://img.shields.io/github/license/compolis/gabm" alt="License" />
   </a>
   <a href="https://www.python.org/downloads/" title="Python Version">
     <img src="https://img.shields.io/badge/python-3.9%2B-blue.svg" alt="Python Version" />
   </a>
-  <a href="https://YOUR_USERNAME.github.io/gabm/" title="Documentation">
+  <a href="https://compolis.github.io/gabm/" title="Documentation">
     <img src="https://img.shields.io/badge/docs-Sphinx-green" alt="Documentation" />
   </a>
 </p>
+> **Note for Fork Maintainers:**  
+> The badges and clone URLs above reference the canonical compolis/gabm repository.  
+> If you fork this project and want badges to reflect your fork’s status, update all `compolis/gabm` URLs to your own GitHub username/repo.
+
 # GABM: Generative Agent-Based Model
 
 [//]: # (Table of Contents)
@@ -69,7 +73,7 @@ Please see our [Code of Conduct](CODE_OF_CONDUCT.md) for guidelines on expected 
 First, fork the upstream repository on GitHub to your own account. Then, clone your fork:
 
 For a detailed, step-by-step walkthrough (including example output and troubleshooting), see [SETUP_GUIDE.md](SETUP_GUIDE.md).
-git clone https://github.com/YOUR_USERNAME/gabm.git
+git clone https://github.com/compolis/gabm.git
 cd gabm
 
 > **Note for Developers:**

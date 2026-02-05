@@ -86,7 +86,8 @@ def main():
             content = f.read()
         new_content = update_links(content)
         if fname == "README.md":
-            new_content = re.sub(r'<!-- Badges -->.*?</p>\s*', '', new_content, flags=re.DOTALL)
+            # Remove badges block and fork maintainer note
+            new_content = re.sub(r'<!-- Badges -->.*?</p>\s*> \*\*Note for Fork Maintainers:\*\*[\s\S]*?repo.\n', '', new_content, flags=re.DOTALL)
             new_content = re.sub(r'## Table of Contents[\s\S]*?(?=^## |^# |\Z)', '', new_content, flags=re.MULTILINE)
             new_content = fix_header_levels(new_content)
             new_content = fix_toc_links(new_content)
