@@ -8,13 +8,14 @@ Utility functions for LLM API error handling, model listing, caching, and valida
 This supports a unified workflow for model management across all LLM providers in the project.
 """
 # Metadata
-__author__ = "Andy Turner <agdturner@gmail.com>"
+__author__ = ["Andy Turner <agdturner@gmail.com>"]
 __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
 import functools
 import json
+import logging
 from pathlib import Path
 
 def safe_api_call(api_name):
@@ -33,7 +34,7 @@ def safe_api_call(api_name):
             try:
                 return func(*args, **kwargs)
             except Exception as e:
-                print(f"[{api_name}] Error: {e}")
+                logging.error(f"[{api_name}] Error: {e}")
                 return None
         return wrapper
     return decorator
@@ -52,10 +53,13 @@ def list_models_to_txt(models, models_path, formatter, header=None):
     for model in models:
         lines.append(formatter(model))
     output = "\n".join(lines)
-    print(output)
+    logging.info(f"Writing model list to {models_path}")
     models_path.parent.mkdir(parents=True, exist_ok=True)
-    with models_path.open("w", encoding="utf-8") as f:
-        f.write(output)
+    try:
+        with models_path.open("w", encoding="utf-8") as f:
+            f.write(output)
+    except Exception as e:
+        logging.error(f"Error writing model list to {models_path}: {e}")
 
 def write_models_json_and_txt(models, models_json_path, models_txt_path, formatter, header=None):
     """
@@ -72,15 +76,23 @@ def write_models_json_and_txt(models, models_json_path, models_txt_path, formatt
     """
     # Write JSON
     models_json_path.parent.mkdir(parents=True, exist_ok=True)
-    with models_json_path.open("w", encoding="utf-8") as f:
-        json.dump([model if isinstance(model, dict) else model.__dict__ for model in models], f, indent=2)
+    try:
+        with models_json_path.open("w", encoding="utf-8") as f:
+            json.dump([model if isinstance(model, dict) else model.__dict__ for model in models], f, indent=2)
+        logging.info(f"Wrote models to JSON: {models_json_path}")
+    except Exception as e:
+        logging.error(f"Error writing models to JSON {models_json_path}: {e}")
     # Write TXT
     lines = [header] if header else []
     for model in models:
         lines.append(formatter(model))
     output = "\n".join(lines)
-    with models_txt_path.open("w", encoding="utf-8") as f:
-        f.write(output)
+    try:
+        with models_txt_path.open("w", encoding="utf-8") as f:
+            f.write(output)
+        logging.info(f"Wrote models to TXT: {models_txt_path}")
+    except Exception as e:
+        logging.error(f"Error writing models to TXT {models_txt_path}: {e}")
 
 def load_models_from_json(models_json_path):
     """
@@ -92,6 +104,11 @@ def load_models_from_json(models_json_path):
         list: List of model dicts.
     """
     if not models_json_path.exists():
+        logging.warning(f"Model JSON file not found: {models_json_path}")
         return []
-    with models_json_path.open("r", encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        with models_json_path.open("r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        logging.error(f"Error loading models from JSON {models_json_path}: {e}")
+        return []

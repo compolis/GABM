@@ -8,21 +8,23 @@ Features:
 - Unified workflow for model management, matching other LLM modules in the project.
 """
 # Metadata
-__author__ = "Andy Turner <agdturner@gmail.com>"
+__author__ = ["Andy Turner <agdturner@gmail.com>"]
 __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
-# Placeholder for DeepSeek client import
-try:
-    import deepseek
-except ImportError:
-    deepseek = None
 
+# DeepSeek client library
+import deepseek
+# Standard library imports
 import os
 from pathlib import Path
-
-from .utils import safe_api_call
+# Persistent cache for message-response pairs
 import pickle
+# Shared error handling
+from .utils import safe_api_call
+# Centralized logging
+from .logging_utils import setup_module_logger
+logger = setup_module_logger(__name__, "deepseek.log")
 
 _cache_path = Path("data/llm/deepseek/cache.pkl")
 _cache = {}
@@ -31,7 +33,7 @@ if _cache_path.exists():
         with _cache_path.open("rb") as f:
             _cache = pickle.load(f)
     except Exception as e:
-        print(f"[deepseek.py] Warning: Failed to load cache: {e}")
+        logger.warning(f"Failed to load cache: {e}")
         _cache = {}
 
 @safe_api_call("deepseek")
@@ -48,12 +50,14 @@ def send(api_key, message, model="deepseek-model-1"):
         object: The DeepSeek response object.
     """
     if not api_key:
+        logger.error("DeepSeek API key must be provided.")
         raise RuntimeError("DeepSeek API key must be provided.")
     cache_key = (message, model)
     if cache_key in _cache:
+        logger.info(f"Cache hit for model={model}, message={message}")
         return _cache[cache_key]
     if deepseek is None:
-        print("[deepseek] Python client not installed. Cannot send request.")
+        logger.error("[deepseek] Python client not installed. Cannot send request.")
         return None
     # TODO: Replace with actual DeepSeek client usage
     # Example:
@@ -64,8 +68,12 @@ def send(api_key, message, model="deepseek-model-1"):
     _cache[cache_key] = response
     # Save updated cache
     _cache_path.parent.mkdir(parents=True, exist_ok=True)
-    with _cache_path.open("wb") as f:
-        pickle.dump(_cache, f)
+    try:
+        with _cache_path.open("wb") as f:
+            pickle.dump(_cache, f)
+        logger.info(f"Cache updated for model={model}, message={message}")
+    except Exception as e:
+        logger.error(f"Failed to write cache: {e}")
     return response
 
 def list_available_models(api_key):
@@ -76,7 +84,7 @@ def list_available_models(api_key):
         api_key (str): The DeepSeek API key.
     """
     if deepseek is None:
-        print("[deepseek] Python client not installed. Cannot list models.")
+        logger.error("[deepseek] Python client not installed. Cannot list models.")
         return
     # TODO: Replace with actual DeepSeek client usage
     # client = deepseek.Client(api_key=api_key)
@@ -90,6 +98,7 @@ def list_available_models(api_key):
     def formatter(model):
         return (f"Model ID: {model['id']}\n"
                 f"  Description: {model.get('description', 'N/A')}\n")
+    logger.info("Writing DeepSeek model list to JSON and TXT.")
     write_models_json_and_txt(
         models,
         Path("data/llm/deepseek/models.json"),

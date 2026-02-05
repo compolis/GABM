@@ -1,7 +1,7 @@
-Anthropic Module
+Read Data Module
 ================
 
-.. automodule:: src.io.llm.anthropic
+.. automodule:: src.io.read_data
    :members:
    :undoc-members:
    :show-inheritance:
