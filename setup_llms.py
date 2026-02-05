@@ -24,12 +24,10 @@ LLMS = [
     ("deepseek", "src.io.llm.deepseek", "list_available_models"),
 ]
 
-# Environment variable names for API keys
-API_KEY_ENV = {
-    "openai": "OPENAI_API_KEY",
-    "genai": "GENAI_API_KEY",
-    "deepseek": "DEEPSEEK_API_KEY",
-}
+from src.io.read_data import read_api_keys
+
+# Load API keys from CSV
+API_KEYS = read_api_keys('data/api_key.csv')
 
 # Default test prompts and models for each LLM
 DEFAULT_PROMPTS = {
@@ -67,7 +65,7 @@ def main():
     """
     logging.info("\n--- LLM Setup Utility ---\n")
     for llm, module, list_func in LLMS:
-        api_key = os.environ.get(API_KEY_ENV[llm])
+        api_key = API_KEYS.get(llm)
         if not api_key or api_key.startswith("YOUR_"):
             logging.warning(f"[SKIP] {llm}: API key not set.")
             continue
