@@ -1,0 +1,7 @@
+Available DeepSeek models:
+
+Model ID: deepseek-model-1
+  Description: Example model 1
+
+Model ID: deepseek-model-2
+  Description: Example model 2

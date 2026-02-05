@@ -1,0 +1,10 @@
+[
+  {
+    "id": "deepseek-model-1",
+    "description": "Example model 1"
+  },
+  {
+    "id": "deepseek-model-2",
+    "description": "Example model 2"
+  }
+]
