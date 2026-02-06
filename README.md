@@ -7,8 +7,8 @@
   <a href="https://github.com/compolis/gabm/blob/main/LICENSE" title="License">
     <img src="https://img.shields.io/github/license/compolis/gabm" alt="License" />
   </a>
-  <a href="https://www.python.org/downloads/" title="Python Version">
-    <img src="https://img.shields.io/badge/python-3.9%2B-blue.svg" alt="Python Version" />
+  <a href="https://www.python.org/downloads/release/python-3120/" title="Python Version">
+    <img src="https://img.shields.io/badge/python-3.12%2B-blue.svg" alt="Python Version" />
   </a>
   <a href="https://compolis.github.io/gabm/" title="Documentation">
     <img src="https://img.shields.io/badge/docs-Sphinx-green" alt="Documentation" />
@@ -64,27 +64,48 @@ To create and push a release tag:
 
 See [CHANGE_LOG.md](CHANGE_LOG.md) for details of each release.
 
-## Code of Conduct
+
+## Code of Conduct and Reporting
 
 Please see our [Code of Conduct](CODE_OF_CONDUCT.md) for guidelines on expected behavior and reporting issues.
+
+For security or conduct concerns, you can also use the “Contact maintainers” link on the GitHub repository, or see the [SECURITY.md](SECURITY.md) file in the documentation for details on confidential reporting.
 
 ## Getting Started
 
 ### 1. Clone the Repository
-First, fork the upstream repository on GitHub to your own account. Then, clone your fork:
+First, fork the [upstream repository](https://github.com/compolis/GABM) on GitHub to your own account. Then, clone your fork locally:
+> Replace `<your-username>` with your GitHub username in the commands below.
+```bash
+git clone https://github.com/<your-username>/GABM.git
+```
+or
+```bash
+git clone git@github.com:<your-username>/gabm.git
+```
 
-For a detailed, step-by-step walkthrough (including example output and troubleshooting), see [SETUP_GUIDE.md](SETUP_GUIDE.md).
-git clone https://github.com/compolis/gabm.git
-cd gabm
+#### Recommended: Onboard with the Latest Stable Release
+For the most reliable onboarding experience, checkout the latest stable release branch (e.g., `stable/0.1.0`).
+```bash
+git checkout stable/0.1.0
+```
+
+This branch contains the most tested and stable code. For development or contributing, use the main or feature branches.
+
+
+For a detailed, step-by-step walkthrough, see:
+- [User Setup Guide](SETUP_GUIDE_USER.md) — for end users who want to run GABM
+- [Developer Setup Guide](SETUP_GUIDE_DEV.md) — for contributors and advanced users
+
 
 > **Note for Developers:**
 > 
-> The documentation files in the `docs/` directory (such as `README.md`, `ROADMAP.md`, `CHANGE_LOG.md`, `CODE_OF_CONDUCT.md`, `SETUP_GUIDE.md`, `CONTRIBUTORS`, and `LICENSE`) are automatically copied from the project root as part of the documentation build process. **Do not edit these files in `docs/` directly.** Always edit the originals in the project root.
+> The documentation files in the `docs/` directory (such as `README.md`, `ROADMAP.md`, `CHANGE_LOG.md`, `CODE_OF_CONDUCT.md`, `SETUP_GUIDE_USER.md`, `SETUP_GUIDE_DEV.md`, `CONTRIBUTORS`, and `LICENSE`) are automatically copied from the project root as part of the documentation build process. **Do not edit these files in `docs/` directly.** Always edit the originals in the project root.
 
 ### 2. Set Up Your Environment
 
 
-Install Python 3.9+ and pip if you haven't already.
+Install Python 3.12 or higher and pip if you haven't already.
 
 #### User Setup (Recommended for most users)
 
@@ -117,20 +138,7 @@ Use the developer setup if you plan to contribute code, run tests, or build the 
 
 
 ### 3. API Keys
-You need a `data/api_key.csv` file with your API keys. This file is not included in the repository for security reasons.
-
-> **Security Warning:** Never commit your API keys or other secrets to the repository. The `.gitignore` file is configured to exclude `data/api_key.csv` and other sensitive files from version control. Always keep your keys private and secure.
-
-Ask the project maintainer for a template or example, or create it yourself with the following format (CSV with header):
-
-```
-api,key
-openai,sk-...
-deepseek,sk-...
-genai,YOUR_GOOGLE_KEY
-```
-
-Place this file in the `data/` directory.
+See [API_KEYS.md](API_KEYS.md) for instructions on setting up your API keys and initializing your environment.
 
 ### 4. LLM Setup and Onboarding
 To quickly initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, use the provided setup utility:
@@ -338,7 +346,7 @@ See the API documentation and module docstrings for more details on how model ma
 
 ## Centralized Logging
 
-All major modules and utilities in GABM use a centralized logging system. In addition to any console output, each LLM module and utility writes detailed logs automatically to the `data/logs/` directory. These logs include setup steps, API calls, warnings, and errors, making troubleshooting and reproducibility easier. See the [SETUP_GUIDE.md](SETUP_GUIDE.md) for details on how to view and use these logs.
+All major modules and utilities in GABM use a centralized logging system. In addition to any console output, each LLM module and utility writes detailed logs automatically to the `data/logs/` directory. These logs include setup steps, API calls, warnings, and errors, making troubleshooting and reproducibility easier. See the [Developer Setup Guide](SETUP_GUIDE_DEV.md) for details on how to view and use these logs.
 
 ## Files and Directories Excluded from Version Control
 
@@ -350,7 +358,7 @@ Certain files and directories are intentionally excluded from the repository via
 
 If you do not see these files or folders in the repository, this is expected. Each collaborator should generate their own as needed by following the setup guide.
 
-- If you want to link to Markdown files (like ROADMAP.md, CHANGE_LOG.md, CODE_OF_CONDUCT.md, SETUP_GUIDE.md, CONTRIBUTORS, LICENSE) in the Sphinx docs, ensure they are present in the docs/ directory or use plain Markdown links (e.g., `[ROADMAP.md](../ROADMAP.md)`) instead of MyST cross-references. Otherwise, Sphinx will warn about missing references.
+- If you want to link to Markdown files (like ROADMAP.md, CHANGE_LOG.md, CODE_OF_CONDUCT.md, SETUP_GUIDE_USER.md, SETUP_GUIDE_DEV.md, CONTRIBUTORS, LICENSE) in the Sphinx docs, ensure they are present in the docs/ directory or use plain Markdown links (e.g., `[ROADMAP.md](../ROADMAP.md)`) instead of MyST cross-references. Otherwise, Sphinx will warn about missing references.
 - If you want to include a file in the Sphinx navigation, add it to a toctree in index.rst. If not, remove or comment out the reference.
 
 ## Documentation Build Workflow

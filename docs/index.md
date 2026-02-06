@@ -21,11 +21,14 @@ io/read_data
 ROADMAP.md
 CHANGE_LOG.md
 CODE_OF_CONDUCT.md
-SETUP_GUIDE.md
+SETUP_GUIDE_USER.md
+SETUP_GUIDE_DEV.md
+API_KEYS.md
 CONTRIBUTORS.md
 LICENSE.md
 requirements.md
 requirements-dev.md
+SECURITY.md
 ```
 
 Indices and tables

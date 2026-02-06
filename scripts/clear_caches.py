@@ -10,6 +10,21 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 # Standard library imports
 import os
 import shutil
+import logging
+from logging.handlers import RotatingFileHandler
+
+# Logging setup
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LOG_DIR = os.path.join(ROOT, 'data', 'logs', 'docs')
+os.makedirs(LOG_DIR, exist_ok=True)
+LOG_FILE = os.path.join(LOG_DIR, 'clear_caches.log')
+logger = logging.getLogger("clear_caches")
+logger.setLevel(logging.INFO)
+handler = RotatingFileHandler(LOG_FILE, maxBytes=512*1024, backupCount=3)
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+handler.setFormatter(formatter)
+if not logger.hasHandlers():
+    logger.addHandler(handler)
 
 # List of cache directories or files to remove
 CACHE_PATHS = [
@@ -19,13 +34,20 @@ CACHE_PATHS = [
 ]
 
 # Remove cache directories/files
+logger.info("Starting clear_caches.py script")
 for path in CACHE_PATHS:
     if os.path.exists(path):
-        if os.path.isdir(path):
-            shutil.rmtree(path)
-            print(f"Removed directory: {path}")
-        else:
-            os.remove(path)
-            print(f"Removed file: {path}")
+        try:
+            if os.path.isdir(path):
+                shutil.rmtree(path)
+                logger.info(f"Removed directory: {path}")
+            else:
+                os.remove(path)
+                logger.info(f"Removed file: {path}")
+        except Exception as e:
+            logger.error(f"Could not remove {path}: {e}")
     else:
-        print(f"Not found: {path}")
+        logger.warning(f"Not found: {path}")
+        
+# Final log message
+logger.info("clear_caches.py completed successfully.")

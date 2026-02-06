@@ -1,17 +1,10 @@
 
+.. NOTE FOR DEVELOPERS:
+   This file (index.rst) is a placeholder for Sphinx compatibility.
+   The main entry point for documentation is index.md (Markdown/MyST).
+   Please maintain navigation and toctrees in index.md.
+
 .. include:: README.md
-
-.. toctree::
-   :maxdepth: 2
-   :caption: API Reference
-
-   io/read_data
-   io/llm/utils
-   io/llm/openai
-   io/llm/genai
-   io/llm/deepseek
-   io/llm/logging_utils
-   io/read_data
 
 .. toctree::
    :maxdepth: 1
@@ -23,6 +16,9 @@
    SETUP_GUIDE.md
    CONTRIBUTORS.md
    LICENSE.md
+   requirements.md
+   requirements-dev.md
+   SECURITY.md
 
 Indices and tables
 ==================
