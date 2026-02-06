@@ -13,7 +13,7 @@ deepseek,sk-...
 genai,YOUR_GOOGLE_KEY
 ```
 
-The syntax requirements for the `data/api_key.csv` file is strict. Each entry should be on a new line, the API names "openai", "deepseek" and "genai" must be exactly as shown and there should be nothing but a comma character "," separating the API name and the API key. The header and everything is case senstivie. 
+The syntax requirements for the `data/api_key.csv` file is strict. Each entry should be on a new line, the API names "openai", "deepseek" and "genai" must be exactly as shown and there should be nothing but a comma character "," separating the API name and the API key. Everything is case sensitive. 
 
 The `api_key.csv` file must be stored in the `data/` directory.
 
