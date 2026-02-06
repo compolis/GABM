@@ -13,6 +13,4 @@ This file outlines planned next steps and future goals for the project. The repo
 
 ### Future Milestone: v1.0.0 (First Public Release)
 
-- Criteria and features for 1.0.0 to be determined.
-- Repository will be made public when approved by stakeholders.
-- Additional features, documentation, and polish as required for public release.
+- Criteria and features for 1.0.0 to be determined...

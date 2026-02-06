@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contributors &mdash; GABM  documentation</title>
+  <title>API Key Setup &mdash; GABM  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="License" href="LICENSE.html" />
-    <link rel="prev" title="API Key Setup" href="API_KEYS.html" /> 
+    <link rel="next" title="Contributors" href="CONTRIBUTORS.html" />
+    <link rel="prev" title="GABM Developer Setup Guide" href="SETUP_GUIDE_DEV.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,8 +58,11 @@
 <li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">GABM Contributor Covenant Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">GABM User Setup Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">GABM Developer Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributors</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Key Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quick-setup">Quick Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
@@ -79,9 +82,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Contributors</li>
+      <li class="breadcrumb-item active">API Key Setup</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/CONTRIBUTORS.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/API_KEYS.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -89,21 +92,43 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="contributors">
-<h1>Contributors<a class="headerlink" href="#contributors" title="Link to this heading"></a></h1>
-<p>Please add your name (and optionally contact or affiliation) below in alphabetical order by last name then first name when you contribute to this project.</p>
+  <section id="api-key-setup">
+<h1>API Key Setup<a class="headerlink" href="#api-key-setup" title="Link to this heading"></a></h1>
+<p>You need a <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> file with your API keys. This file is not included in the repository for security reasons.</p>
+<blockquote>
+<div><p><strong>Security Warning:</strong> Never commit your API keys or other secrets to the repository. The <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file is configured to exclude <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> and other sensitive files from version control. Always keep your keys private and secure.</p>
+</div></blockquote>
+<p>Ask the project maintainer for a template or example, or create it yourself with the following format (CSV with header):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span><span class="p">,</span><span class="n">key</span>
+<span class="n">openai</span><span class="p">,</span><span class="n">sk</span><span class="o">-...</span>
+<span class="n">deepseek</span><span class="p">,</span><span class="n">sk</span><span class="o">-...</span>
+<span class="n">genai</span><span class="p">,</span><span class="n">YOUR_GOOGLE_KEY</span>
+</pre></div>
+</div>
+<p>Place this file in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory.</p>
+<section id="quick-setup">
+<h2>Quick Setup<a class="headerlink" href="#quick-setup" title="Link to this heading"></a></h2>
+<p>To quickly initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, use the provided setup utility:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">setup</span><span class="o">-</span><span class="n">llms</span>
+</pre></div>
+</div>
+<p>This will:</p>
 <ul class="simple">
-<li><p>“Andy Turner <a class="reference external" href="mailto:agdturner&#37;&#52;&#48;gmail&#46;com">agdturner<span>&#64;</span>gmail<span>&#46;</span>com</a>”, University of Leeds</p></li>
+<li><p>Check for all required API keys (OpenAI, GenAI, DeepSeek)</p></li>
+<li><p>Test each key with a default prompt and model</p></li>
+<li><p>Generate initial <code class="docutils literal notranslate"><span class="pre">models.json</span></code> and <code class="docutils literal notranslate"><span class="pre">models.txt</span></code> for each LLM</p></li>
+<li><p>Initialize response caches (<code class="docutils literal notranslate"><span class="pre">cache.pkl</span></code>)</p></li>
+<li><p>Report any issues or missing keys</p></li>
 </ul>
-<p>(We ask for this to acknowledge all contributions!)</p>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="API_KEYS.html" class="btn btn-neutral float-left" title="API Key Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="LICENSE.html" class="btn btn-neutral float-right" title="License" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="SETUP_GUIDE_DEV.html" class="btn btn-neutral float-left" title="GABM Developer Setup Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CONTRIBUTORS.html" class="btn btn-neutral float-right" title="Contributors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

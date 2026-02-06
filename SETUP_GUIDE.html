@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Step-by-Step Setup Guide for GABM &mdash; GABM  documentation</title>
+  <title>GABM Setup Guide &mdash; GABM  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Contributors" href="CONTRIBUTORS.html" />
-    <link rel="prev" title="Contributor Covenant Code of Conduct" href="CODE_OF_CONDUCT.html" /> 
+    <link rel="prev" title="GABM Contributor Covenant Code of Conduct" href="CODE_OF_CONDUCT.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,14 +55,19 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Step-by-Step Setup Guide for GABM</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#clean-the-environment">1. Clean the Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#run-the-llm-setup-utility">2. Run the LLM Setup Utility</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#run-the-main-program">3. Run the Main Program</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#time-estimates">4. Time Estimates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">5. Troubleshooting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#build-and-view-the-documentation">6. Build and View the Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">GABM Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GABM Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#id1"></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#fork-and-clone-the-repository">0. Fork and Clone the Repository</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#recommended-onboard-with-the-latest-stable-release">Recommended: Onboard with the Latest Stable Release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clean-the-environment">1. Clean the Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-llm-setup-utility">2. Run the LLM Setup Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-main-program">3. Run the Main Program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#time-estimates">4. Time Estimates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">5. Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-and-view-the-documentation">6. Build and View the Documentation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
@@ -85,7 +90,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Step-by-Step Setup Guide for GABM</li>
+      <li class="breadcrumb-item active">GABM Setup Guide</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/SETUP_GUIDE.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -95,11 +100,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="step-by-step-setup-guide-for-gabm">
-<h1>Step-by-Step Setup Guide for GABM<a class="headerlink" href="#step-by-step-setup-guide-for-gabm" title="Link to this heading"></a></h1>
-<p>This guide walks new users through a clean setup of the GABM project, including clearing caches, onboarding, and running the main program. Example commands and instructions for capturing console output are provided.</p>
+  <section id="gabm-setup-guide">
+<h1>GABM Setup Guide<a class="headerlink" href="#gabm-setup-guide" title="Link to this heading"></a></h1>
+<p>Welcome to the GABM (Generative Agent-Based Model) setup guide. This document provides a step-by-step walkthrough for new users and contributors to get the project running from scratch, including forking, cloning, onboarding, and running the main program. It also covers troubleshooting and documentation building.</p>
+</section>
+<section id="id1">
+<h1><a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<hr class="docutils" />
+<section id="fork-and-clone-the-repository">
+<h2>0. Fork and Clone the Repository<a class="headerlink" href="#fork-and-clone-the-repository" title="Link to this heading"></a></h2>
+<p>To get started, first fork the <a class="reference external" href="https://github.com/compolis/GABM">upstream repository</a> on GitHub to your own account. Then, clone your fork locally:</p>
+<blockquote>
+<div><p>Replace <code class="docutils literal notranslate"><span class="pre">&lt;your-username&gt;</span></code> with your GitHub username in the commands below.</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/</span><span class="n">GABM</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="o">&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/</span><span class="n">gabm</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<section id="recommended-onboard-with-the-latest-stable-release">
+<h3>Recommended: Onboard with the Latest Stable Release<a class="headerlink" href="#recommended-onboard-with-the-latest-stable-release" title="Link to this heading"></a></h3>
+<p>For the most reliable onboarding experience, checkout the latest stable release branch (e.g., <code class="docutils literal notranslate"><span class="pre">stable/0.1.0</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">GABM</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">stable</span><span class="o">/</span><span class="mf">0.1.0</span>
+</pre></div>
+</div>
+<p>This branch contains the most tested and stable code. For development or contributing, use the main or feature branches.</p>
+</section>
 <section id="clean-the-environment">
-<h2>1. Clean the Environment<a class="headerlink" href="#clean-the-environment" title="Link to this heading"></a></h2>
+<h3>1. Clean the Environment<a class="headerlink" href="#clean-the-environment" title="Link to this heading"></a></h3>
 <p>Before starting, remove any old caches and build artifacts to ensure a fresh setup:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">clear</span><span class="o">-</span><span class="n">caches</span>
 <span class="n">make</span> <span class="n">clean</span>
@@ -108,7 +139,7 @@
 </div>
 </section>
 <section id="run-the-llm-setup-utility">
-<h2>2. Run the LLM Setup Utility<a class="headerlink" href="#run-the-llm-setup-utility" title="Link to this heading"></a></h2>
+<h3>2. Run the LLM Setup Utility<a class="headerlink" href="#run-the-llm-setup-utility" title="Link to this heading"></a></h3>
 <p>Initialize your environment, test API keys, and generate model lists/caches:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">script</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;make setup-llms&quot;</span> <span class="n">data</span><span class="o">/</span><span class="n">logs</span><span class="o">/</span><span class="n">setup</span><span class="o">-</span><span class="n">llms</span><span class="o">.</span><span class="n">log</span>
 </pre></div>
@@ -134,7 +165,7 @@
 </ul>
 </section>
 <section id="run-the-main-program">
-<h2>3. Run the Main Program<a class="headerlink" href="#run-the-main-program" title="Link to this heading"></a></h2>
+<h3>3. Run the Main Program<a class="headerlink" href="#run-the-main-program" title="Link to this heading"></a></h3>
 <p>Run the main entry point and capture its output:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">script</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;python3 run.py&quot;</span> <span class="n">data</span><span class="o">/</span><span class="n">logs</span><span class="o">/</span><span class="n">run</span><span class="o">-</span><span class="n">main</span><span class="o">.</span><span class="n">log</span>
 </pre></div>
@@ -145,7 +176,7 @@
 </ul>
 </section>
 <section id="time-estimates">
-<h2>4. Time Estimates<a class="headerlink" href="#time-estimates" title="Link to this heading"></a></h2>
+<h3>4. Time Estimates<a class="headerlink" href="#time-estimates" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clear-caches</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code>: &lt; 10 seconds</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">setup-llms</span></code>: 10–60 seconds (depends on network/API speed)</p></li>
@@ -153,7 +184,7 @@
 </ul>
 </section>
 <section id="troubleshooting">
-<h2>5. Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<h3>5. Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>If you encounter errors, check the log files for details.</p></li>
 <li><p>Ensure your API keys are valid and present in <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code>.</p></li>
@@ -161,7 +192,7 @@
 </ul>
 </section>
 <section id="build-and-view-the-documentation">
-<h2>6. Build and View the Documentation<a class="headerlink" href="#build-and-view-the-documentation" title="Link to this heading"></a></h2>
+<h3>6. Build and View the Documentation<a class="headerlink" href="#build-and-view-the-documentation" title="Link to this heading"></a></h3>
 <p>You can build a local copy of the Sphinx documentation to browse the API reference and guides:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">docs</span>
 </pre></div>
@@ -170,13 +201,13 @@
 <li><p>The generated HTML documentation will be in <code class="docutils literal notranslate"><span class="pre">docs/_build/html/</span></code>.</p></li>
 <li><p>Open <code class="docutils literal notranslate"><span class="pre">docs/_build/html/index.html</span></code> in your web browser to view the docs.</p></li>
 <li><p>All documentation source files (README.md, ROADMAP.md, etc.) are auto-copied from the project root to <code class="docutils literal notranslate"><span class="pre">docs/</span></code> for Sphinx builds, and cleaned up after building. Always edit the originals in the project root—never edit files in docs/.</p></li>
-<li><p>If you encounter errors, ensure all dependencies from <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> are installed.</p></li>
+<li><p>If you encounter errors, ensure all dependencies from <span class="xref std std-doc">requirements.txt</span> are installed.</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>:class: note
 When building the documentation with Sphinx and MyST, you may see warnings like:
     Document headings start at H2, not H1 [myst.header]
 These warnings occur even though all Markdown files start with H2 (`##`). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.
-### Appendix: Example Log Output
+#### Appendix: Example Log Output
 After running the setup and main program, you should see log files in `data/logs/` such as `setup-llms.log` and `run-main.log`. Below is an example of what a successful log might look like:
 &lt;details&gt;
 &lt;summary&gt;Example: data/logs/setup-llms.log&lt;/summary&gt;
@@ -210,12 +241,13 @@ All major modules and utilities in GABM use centralized logging. In addition to 
 </div>
 </section>
 </section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="CODE_OF_CONDUCT.html" class="btn btn-neutral float-left" title="Contributor Covenant Code of Conduct" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CODE_OF_CONDUCT.html" class="btn btn-neutral float-left" title="GABM Contributor Covenant Code of Conduct" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="CONTRIBUTORS.html" class="btn btn-neutral float-right" title="Contributors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

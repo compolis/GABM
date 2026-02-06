@@ -1,0 +1,31 @@
+## API Key Setup
+
+You need a `data/api_key.csv` file with your API keys. This file is not included in the repository for security reasons.
+
+> **Security Warning:** Never commit your API keys or other secrets to the repository. The `.gitignore` file is configured to exclude `data/api_key.csv` and other sensitive files from version control. Always keep your keys private and secure.
+
+Ask the project maintainer for a template or example, or create it yourself with the following format (CSV with header):
+
+```
+api,key
+openai,sk-...
+deepseek,sk-...
+genai,YOUR_GOOGLE_KEY
+```
+
+Place this file in the `data/` directory.
+
+### Quick Setup
+
+To quickly initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, use the provided setup utility:
+
+```
+make setup-llms
+```
+
+This will:
+- Check for all required API keys (OpenAI, GenAI, DeepSeek)
+- Test each key with a default prompt and model
+- Generate initial `models.json` and `models.txt` for each LLM
+- Initialize response caches (`cache.pkl`)
+- Report any issues or missing keys

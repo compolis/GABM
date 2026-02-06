@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Contributor Covenant Code of Conduct" href="CODE_OF_CONDUCT.html" />
+    <link rel="next" title="GABM Contributor Covenant Code of Conduct" href="CODE_OF_CONDUCT.html" />
     <link rel="prev" title="Project Roadmap" href="ROADMAP.html" /> 
 </head>
 
@@ -59,10 +59,16 @@
 <li class="toctree-l3"><a class="reference internal" href="#added">Added</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#unreleased">[0.2.0] - Unreleased</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Added</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE.html">Step-by-Step Setup Guide for GABM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">GABM Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">GABM User Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">GABM Developer Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
@@ -114,6 +120,22 @@
 </ul>
 </section>
 </section>
+<section id="unreleased">
+<h2>[0.2.0] - Unreleased<a class="headerlink" href="#unreleased" title="Link to this heading"></a></h2>
+<section id="id2">
+<h3>Added<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Initial agent-based model (ABM) framework with 4 initialized agents, each with unique biases and opinions.</p></li>
+<li><p>Agents use LLM API prompts and responses to converse and update their opinions based on conversation outcomes.</p></li>
+<li><p>Each agent chats with every other agent twice per simulation run.</p></li>
+<li><p>Graph generation of individual and aggregate agent opinions and confidence levels after simulation.</p></li>
+<li><p>Visualization of agent trajectories and group opinion/confidence over time.</p></li>
+<li><p>Automated Sphinx documentation workflow, including requirements file handling and navigation improvements.</p></li>
+<li><p>Project structure modernization: main scripts moved to <code class="docutils literal notranslate"><span class="pre">src/</span></code>, requirements and documentation clarified.</p></li>
+<li><p>Python 3.12+ is now required; documentation and badges updated accordingly.</p></li>
+</ul>
+</section>
+</section>
 </section>
 
 
@@ -121,7 +143,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="ROADMAP.html" class="btn btn-neutral float-left" title="Project Roadmap" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="CODE_OF_CONDUCT.html" class="btn btn-neutral float-right" title="Contributor Covenant Code of Conduct" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="CODE_OF_CONDUCT.html" class="btn btn-neutral float-right" title="GABM Contributor Covenant Code of Conduct" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

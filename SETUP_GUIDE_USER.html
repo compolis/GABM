@@ -1,0 +1,185 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GABM User Setup Guide &mdash; GABM  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GABM Developer Setup Guide" href="SETUP_GUIDE_DEV.html" />
+    <link rel="prev" title="GABM Contributor Covenant Code of Conduct" href="CODE_OF_CONDUCT.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GABM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/utils.html">Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/openai.html">OpenAI Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/genai.html">GenAI Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/deepseek.html">DeepSeek Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io/llm/logging_utils.html">Logging Utils Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io/read_data.html">Read Data Module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">GABM Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GABM User Setup Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#install-python-and-pip">1. Install Python and pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-dependencies">2. Install Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fork-and-clone-the-repository">3. Fork and Clone the Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-api-keys-optional">4. Set Up API Keys (Optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-the-main-program">5. Run the Main Program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">6. Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">GABM Developer Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GABM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">GABM User Setup Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/SETUP_GUIDE_USER.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gabm-user-setup-guide">
+<h1>GABM User Setup Guide<a class="headerlink" href="#gabm-user-setup-guide" title="Link to this heading"></a></h1>
+<p>This guide is for end users who want to run the Generative Agent-Based Model (GABM) with minimal setup.</p>
+<section id="install-python-and-pip">
+<h2>1. Install Python and pip<a class="headerlink" href="#install-python-and-pip" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Install Python 3.12 or higher from <a class="reference external" href="https://www.python.org/downloads/">python.org</a>.</p></li>
+<li><p>Ensure <code class="docutils literal notranslate"><span class="pre">pip</span></code> is available (it is included with Python 3.4+).</p></li>
+<li><p>Check your version:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">--</span><span class="n">version</span>
+<span class="n">pip</span> <span class="o">--</span><span class="n">version</span>
+</pre></div>
+</div>
+</section>
+<section id="install-dependencies">
+<h2>2. Install Dependencies<a class="headerlink" href="#install-dependencies" title="Link to this heading"></a></h2>
+<p>From the project root, install the required packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</section>
+<section id="fork-and-clone-the-repository">
+<h2>3. Fork and Clone the Repository<a class="headerlink" href="#fork-and-clone-the-repository" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fork the <a class="reference external" href="https://github.com/compolis/GABM">upstream repository</a> to your own GitHub account.</p></li>
+<li><p>Clone your fork locally:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/</span><span class="n">GABM</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">GABM</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">stable</span><span class="o">/</span><span class="mf">0.1.0</span>  <span class="c1"># Or latest stable branch</span>
+</pre></div>
+</div>
+</section>
+<section id="set-up-api-keys-optional">
+<h2>4. Set Up API Keys (Optional)<a class="headerlink" href="#set-up-api-keys-optional" title="Link to this heading"></a></h2>
+<p>If you want to use LLM features, create <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> with your API keys. See <span class="xref std std-doc">API_KEYS.md</span> for details and instructions.</p>
+</section>
+<section id="run-the-main-program">
+<h2>5. Run the Main Program<a class="headerlink" href="#run-the-main-program" title="Link to this heading"></a></h2>
+<p>From the project root:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">run</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting">
+<h2>6. Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>If you encounter errors, check your Python version and that all dependencies are installed.</p></li>
+<li><p>For more help, see the <span class="xref std std-doc">README.md</span> or open an issue on GitHub.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CODE_OF_CONDUCT.html" class="btn btn-neutral float-left" title="GABM Contributor Covenant Code of Conduct" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SETUP_GUIDE_DEV.html" class="btn btn-neutral float-right" title="GABM Developer Setup Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, GABM contributors, University of Leeds.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

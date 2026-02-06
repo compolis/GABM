@@ -11,3 +11,15 @@ All notable changes to this project will be documented in this file.
 - Persistent response/model caching.
 - Onboarding utility and Makefile targets.
 - Contributor workflow and documentation.
+
+
+### [0.2.0] - Unreleased
+#### Added
+- Initial agent-based model (ABM) framework with 4 initialized agents, each with unique biases and opinions.
+- Agents use LLM API prompts and responses to converse and update their opinions based on conversation outcomes.
+- Each agent chats with every other agent twice per simulation run.
+- Graph generation of individual and aggregate agent opinions and confidence levels after simulation.
+- Visualization of agent trajectories and group opinion/confidence over time.
+- Automated Sphinx documentation workflow, including requirements file handling and navigation improvements.
+- Project structure modernization: main scripts moved to `src/`, requirements and documentation clarified.
+- Python 3.12+ is now required; documentation and badges updated accordingly.

@@ -1,8 +1,38 @@
-## Step-by-Step Setup Guide for GABM
+## GABM Setup Guide
 
-This guide walks new users through a clean setup of the GABM project, including clearing caches, onboarding, and running the main program. Example commands and instructions for capturing console output are provided.
+Welcome to the GABM (Generative Agent-Based Model) setup guide. This document provides a step-by-step walkthrough for new users and contributors to get the project running from scratch, including forking, cloning, onboarding, and running the main program. It also covers troubleshooting and documentation building.
 
-### 1. Clean the Environment
+#
+---
+
+### 0. Fork and Clone the Repository
+
+To get started, first fork the [upstream repository](https://github.com/compolis/GABM) on GitHub to your own account. Then, clone your fork locally:
+
+> Replace `<your-username>` with your GitHub username in the commands below.
+
+```
+git clone https://github.com/<your-username>/GABM.git
+```
+or
+```
+git clone git@github.com:<your-username>/gabm.git
+```
+
+##### Recommended: Onboard with the Latest Stable Release
+For the most reliable onboarding experience, checkout the latest stable release branch (e.g., `stable/0.1.0`):
+
+```
+cd GABM
+git checkout stable/0.1.0
+```
+
+This branch contains the most tested and stable code. For development or contributing, use the main or feature branches.
+
+
+
+
+#### 1. Clean the Environment
 
 
 Before starting, remove any old caches and build artifacts to ensure a fresh setup:
@@ -13,7 +43,8 @@ make clean
 mkdir -p data/logs
 ```
 
-### 2. Run the LLM Setup Utility
+
+#### 2. Run the LLM Setup Utility
 
 Initialize your environment, test API keys, and generate model lists/caches:
 
@@ -37,7 +68,8 @@ script -c "make setup-llms" data/logs/setup-llms.log
 - This will save all console output to `data/logs/setup-llms.log` for reference.
 - Review the log for any errors or missing API keys.
 
-### 3. Run the Main Program
+
+#### 3. Run the Main Program
 
 Run the main entry point and capture its output:
 
@@ -48,19 +80,22 @@ script -c "python3 run.py" data/logs/run-main.log
 - Output will be saved to `data/logs/run-main.log`.
 - Review the log to see what a successful run looks like.
 
-### 4. Time Estimates
+
+#### 4. Time Estimates
 
 - `make clear-caches` and `make clean`: < 10 seconds
 - `make setup-llms`: 10–60 seconds (depends on network/API speed)
 - `python3 run.py`: 5–30 seconds (depends on model and prompt)
 
-### 5. Troubleshooting
+
+#### 5. Troubleshooting
 
 - If you encounter errors, check the log files for details.
 - Ensure your API keys are valid and present in `data/api_key.csv`.
 - If issues persist, clear caches and try again.
 
-### 6. Build and View the Documentation
+
+#### 6. Build and View the Documentation
 
 You can build a local copy of the Sphinx documentation to browse the API reference and guides:
 
@@ -72,14 +107,14 @@ make docs
 - The generated HTML documentation will be in `docs/_build/html/`.
 - Open `docs/_build/html/index.html` in your web browser to view the docs.
 - All documentation source files (README.md, ROADMAP.md, etc.) are auto-copied from the project root to `docs/` for Sphinx builds, and cleaned up after building. Always edit the originals in the project root—never edit files in docs/.
-- If you encounter errors, ensure all dependencies from `requirements.txt` are installed.
+- If you encounter errors, ensure all dependencies from {doc}`requirements.txt <requirements.txt>` are installed.
 
 ```
 :class: note
 When building the documentation with Sphinx and MyST, you may see warnings like:
     Document headings start at H2, not H1 [myst.header]
 These warnings occur even though all Markdown files start with H2 (`##`). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.
-### Appendix: Example Log Output
+#### Appendix: Example Log Output
 After running the setup and main program, you should see log files in `data/logs/` such as `setup-llms.log` and `run-main.log`. Below is an example of what a successful log might look like:
 <details>
 <summary>Example: data/logs/setup-llms.log</summary>
