@@ -3,6 +3,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# Ignore MAC extension .ds store
+.DS_Store
+
 # C extensions
 *.so
 
