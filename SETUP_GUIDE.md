@@ -68,20 +68,20 @@ You can build a local copy of the Sphinx documentation to browse the API referen
 make docs
 ```
 
+
 - The generated HTML documentation will be in `docs/_build/html/`.
 - Open `docs/_build/html/index.html` in your web browser to view the docs.
+- All documentation source files (README.md, ROADMAP.md, etc.) are auto-copied from the project root to `docs/` for Sphinx builds, and cleaned up after building. Always edit the originals in the project root—never edit files in docs/.
 - If you encounter errors, ensure all dependencies from `requirements.txt` are installed.
 
-#
----
-**Note on Sphinx/MyST Documentation Warnings:**
-
+```{admonition} Sphinx/MyST Documentation Warnings
+:class: note
 When building the documentation with Sphinx and MyST, you may see warnings like:
 
-	Document headings start at H2, not H1 [myst.header]
+    Document headings start at H2, not H1 [myst.header]
 
 These warnings occur even though all Markdown files start with H2 (`##`). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.
----
+
 
 ## Appendix: Example Log Output
 
