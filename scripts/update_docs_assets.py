@@ -12,10 +12,14 @@ __author__ = ["Andy Turner <agdturner@gmail.com>"]
 __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
+
 # Standard library imports
 import os
 import shutil
 import re
+import logging
+from logging.handlers import RotatingFileHandler
+
 
 # Files to copy from root to docs/
 DOC_FILES = [
@@ -23,15 +27,36 @@ DOC_FILES = [
     "ROADMAP.md",
     "CHANGE_LOG.md",
     "CODE_OF_CONDUCT.md",
-    "SETUP_GUIDE.md",
+    "SETUP_GUIDE_USER.md",
+    "SETUP_GUIDE_DEV.md",
+    "API_KEYS.md",
     "CONTRIBUTORS.md",
     "LICENSE.md",
     "requirements.txt",
     "requirements-dev.txt",
 ]
 
+# Files to copy from .github/ to docs/ (if present)
+GITHUB_DOC_FILES = [
+    "SECURITY.md",
+    "CONTACT.md",
+]
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS = os.path.join(ROOT, "docs")
+
+# Logging setup
+LOG_DIR = os.path.join(ROOT, 'data', 'logs', 'docs')
+os.makedirs(LOG_DIR, exist_ok=True)
+LOG_FILE = os.path.join(LOG_DIR, 'update_docs_assets.log')
+logger = logging.getLogger("update_docs_assets")
+logger.setLevel(logging.INFO)
+handler = RotatingFileHandler(LOG_FILE, maxBytes=512*1024, backupCount=3)
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+handler.setFormatter(formatter)
+if not logger.hasHandlers():
+    logger.addHandler(handler)
 
 # Map of original file names to their new relative links in docs/
 LINK_MAP = {name: name for name in DOC_FILES}
@@ -50,13 +75,19 @@ def update_links(text):
     """
     def repl(match):
         label, target = match.groups()
-        # If the link is to a known doc file (even if ../ is present), convert to MyST doc cross-reference
+        # Special case: README.md should always link to the GitHub README in Sphinx
+        if target == "README.md":
+            logger.debug(f"Rewriting link to README.md as GitHub README")
+            return f"[{label}](https://github.com/compolis/GABM#readme)"
+        # For files that are copied to docs/ as .md (including those that originally have no .md extension), always link as .md
         for docfile in LINK_MAP:
-            if target.endswith(docfile):
-                return f"{{doc}}`{label} <{docfile}>`"
-        # If the link is to README (without .md), rewrite to MyST doc cross-reference
+            if target == docfile or target == docfile.replace('.md', ''):
+                logger.debug(f"Rewriting link to {target} as plain Markdown link to {docfile}")
+                return f"[{label}]({docfile})"
+        # If the link is to README (without .md), rewrite to GitHub README
         if target == "README":
-            return f"{{doc}}`{label} <README.md>`"
+            logger.debug(f"Rewriting link to README as GitHub README")
+            return f"[{label}](https://github.com/compolis/GABM#readme)"
         # If the link is a local anchor, keep as is
         if target.startswith('#'):
             return match.group(0)
@@ -103,9 +134,9 @@ def fix_header_levels(text):
             demoted.append(new_line)
         else:
             demoted.append(line)
-    # Debug: print first few lines to verify
+    # Debug: log first few lines to verify
     if demoted:
-        print('[DEBUG] First lines after heading demotion:', demoted[:3])
+        logger.debug(f'First lines after heading demotion: {demoted[:3]}')
     return '\n'.join(demoted)
 
 def fix_definition_lists_and_blockquotes(content):
@@ -157,7 +188,7 @@ def force_copy_contributors_license():
     for fname in ["CONTRIBUTORS", "LICENSE"]:
         src = os.path.join(ROOT, fname)
         dst = os.path.join(DOCS, fname + ".md")
-        print(f"[FORCE COPY] Checking for {src} to copy to {dst}...")
+        logger.info(f"[FORCE COPY] Checking for {src} to copy to {dst}...")
         if os.path.exists(src):
             with open(src, "r", encoding="utf-8") as f:
                 content = f.read()
@@ -167,17 +198,19 @@ def force_copy_contributors_license():
             content = re.sub(r'^# License\s*', '', content, flags=re.MULTILINE)
             with open(dst, "w", encoding="utf-8") as f:
                 f.write(title + content)
-            print(f"[FORCE COPY] Copied and renamed with title: {fname} -> {fname}.md")
+            logger.info(f"[FORCE COPY] Copied and renamed with title: {fname} -> {fname}.md")
 
 def main():
     """
     Main function to copy files and update links.
     """
+    logger.info("Starting update_docs_assets.py script")
+    # Copy files from project root
     for fname in DOC_FILES:
         src = os.path.join(ROOT, fname)
         dst = os.path.join(DOCS, fname)
         if not os.path.exists(src):
-            print(f"Warning: {src} does not exist, skipping.")
+            logger.warning(f"{src} does not exist, skipping.")
             continue
         # Special handling for requirements files: copy both .txt and .md versions
         if fname in ["requirements.txt", "requirements-dev.txt"]:
@@ -186,7 +219,7 @@ def main():
             # Copy the .txt file directly to docs/
             with open(dst, "w", encoding="utf-8") as f:
                 f.write(content)
-            print(f"Copied: {fname} -> docs/")
+            logger.info(f"Copied: {fname} -> docs/")
             # Generate the .md version for Sphinx
             md_name = fname.replace('.txt', '.md')
             dst_md = os.path.join(DOCS, md_name)
@@ -199,8 +232,25 @@ def main():
                 f.write(f"{heading}\n\n{note}\n\n```")
                 f.write(content)
                 f.write("\n```")
-            print(f"Copied and formatted: {fname} -> {md_name}")
+            logger.info(f"Copied and formatted: {fname} -> {md_name}")
             continue
+            # Copy files from .github/ to docs/ (if present)
+            GITHUB = os.path.join(ROOT, ".github")
+            for fname in GITHUB_DOC_FILES:
+                src = os.path.join(GITHUB, fname)
+                dst = os.path.join(DOCS, fname)
+                if os.path.exists(src):
+                    with open(src, "r", encoding="utf-8") as f:
+                        content = f.read()
+                    # Demote headings for Sphinx compatibility
+                    from re import match
+                    lines = content.splitlines()
+                    if lines and match(r'^# ', lines[0]):
+                        lines[0] = '#' + lines[0]
+                    content = '\n'.join(lines)
+                    with open(dst, "w", encoding="utf-8") as f:
+                        f.write(content)
+                    print(f"Copied: .github/{fname} -> docs/{fname}")
         with open(src, "r", encoding="utf-8") as f:
             content = f.read()
         if fname == "README.md":
@@ -219,7 +269,7 @@ def main():
             new_content = fix_definition_lists_and_blockquotes(new_content)
             # Rewrite requirements.txt/dev.txt links to .md for Sphinx
             new_content = re.sub(r'\[requirements\.txt\]\(requirements\.txt\)', '[requirements.md](requirements.md)', new_content)
-            new_content = re.sub(r'\[requirements-dev\.txt\]\(requirements-dev\.txt\)', '[requirements-dev.md](requirements-dev.md)', new_content)
+            new_content = re.sub(r'\[requirements-dev\.txt\]\(requirements-dev.txt\)', '[requirements-dev.md](requirements-dev.md)', new_content)
             # Only close unclosed backticks if the line starts with a backtick and is missing a closing one
             def close_unclosed_backticks(line):
                 # Do not add a closing backtick to heading lines
@@ -253,8 +303,17 @@ def main():
                 lines[0] = '#' + lines[0]
             myst_front_matter = ['---', 'title: Project README', '---', '']
             new_content = '\n'.join(myst_front_matter + lines)
+        elif fname == "SETUP_GUIDE.md":
+            # Remove the Table of Contents section from SETUP_GUIDE.md for Sphinx
+            new_content = fix_header_levels(content)
+            # Remove leading blank lines before the first heading
+            new_content = re.sub(r'^(\s*\n)+', '', new_content)
+            # Remove only the ToC section (from '## Table of Contents' to the next heading, but not blank lines or content after)
+            new_content = re.sub(r'## Table of Contents\s*\n(?:- .+\n)*', '', new_content)
+            new_content = update_links(new_content)
+            new_content = clean_code_blocks(new_content)
         else:
-            # Demote headings first for all non-README.md files
+            # Demote headings first for all other non-README.md files
             new_content = fix_header_levels(content)
             # Remove leading blank lines before the first heading
             new_content = re.sub(r'^(\s*\n)+', '', new_content)
@@ -265,8 +324,12 @@ def main():
             new_content = clean_code_blocks(new_content)
         with open(dst, "w", encoding="utf-8") as f:
             f.write(new_content)
-        print(f"Copied and processed: {fname}")
+        logger.info(f"Copied and processed: {fname}")
 
 if __name__ == "__main__":
-    main()
-    force_copy_contributors_license()
+    try:
+        main()
+        force_copy_contributors_license()
+        logger.info("update_docs_assets.py completed successfully.")
+    except Exception as e:
+        logger.exception(f"update_docs_assets.py failed: {e}")

@@ -12,3 +12,11 @@ All notable changes to this project will be documented in this file.
 - Onboarding utility and Makefile targets.
 - Contributor workflow and documentation.
 
+
+## [0.2.0] - Unreleased
+
+### Logging
+- All asset management, cleaning, deployment, and cache scripts now use Python logging.
+- Logs are written to `data/logs/docs/` with rotating file handlers for each script.
+- Logging helps with debugging, error tracking, and collaboration.
+
