@@ -67,7 +67,7 @@ git-clean:
 
 # Run onboarding/setup for all LLMs (API key check, model lists, cache init)
 setup-llms:
-	PYTHONPATH=. python3 setup_llms.py
+	PYTHONPATH=. python3 src/setup_llms.py
 
 # Delete all LLM caches and model lists (for a clean slate)
 clear-caches:
