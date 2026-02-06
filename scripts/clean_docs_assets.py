@@ -22,6 +22,8 @@ DOC_FILES = [
     "SETUP_GUIDE.md",
     "CONTRIBUTORS.md",
     "LICENSE.md",
+    "requirements.md",
+    "requirements-dev.md",
 ]
 
 # Paths

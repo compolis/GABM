@@ -26,6 +26,8 @@ DOC_FILES = [
     "SETUP_GUIDE.md",
     "CONTRIBUTORS.md",
     "LICENSE.md",
+    "requirements.txt",
+    "requirements-dev.txt",
 ]
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -177,6 +179,28 @@ def main():
         if not os.path.exists(src):
             print(f"Warning: {src} does not exist, skipping.")
             continue
+        # Special handling for requirements files: copy both .txt and .md versions
+        if fname in ["requirements.txt", "requirements-dev.txt"]:
+            with open(src, "r", encoding="utf-8") as f:
+                content = f.read()
+            # Copy the .txt file directly to docs/
+            with open(dst, "w", encoding="utf-8") as f:
+                f.write(content)
+            print(f"Copied: {fname} -> docs/")
+            # Generate the .md version for Sphinx
+            md_name = fname.replace('.txt', '.md')
+            dst_md = os.path.join(DOCS, md_name)
+            heading = "# Requirements" if fname == "requirements.txt" else "# Requirements (Developer)"
+            note = (
+                "> **Note:** This file is for documentation only.\n"
+                "> Install dependencies from [requirements.txt](requirements.txt) and [requirements-dev.txt](requirements-dev.txt) in the project root.\n"
+            )
+            with open(dst_md, "w", encoding="utf-8") as f:
+                f.write(f"{heading}\n\n{note}\n\n```")
+                f.write(content)
+                f.write("\n```")
+            print(f"Copied and formatted: {fname} -> {md_name}")
+            continue
         with open(src, "r", encoding="utf-8") as f:
             content = f.read()
         if fname == "README.md":
@@ -193,6 +217,9 @@ def main():
             new_content = re.sub(r'^[ \t\-\|\+:]{5,}$', '', new_content, flags=re.MULTILINE)
             # Insert blank lines after definition lists and block quotes
             new_content = fix_definition_lists_and_blockquotes(new_content)
+            # Rewrite requirements.txt/dev.txt links to .md for Sphinx
+            new_content = re.sub(r'\[requirements\.txt\]\(requirements\.txt\)', '[requirements.md](requirements.md)', new_content)
+            new_content = re.sub(r'\[requirements-dev\.txt\]\(requirements-dev\.txt\)', '[requirements-dev.md](requirements-dev.md)', new_content)
             # Only close unclosed backticks if the line starts with a backtick and is missing a closing one
             def close_unclosed_backticks(line):
                 # Do not add a closing backtick to heading lines
@@ -202,12 +229,7 @@ def main():
                     return line + '`'
                 return line
             new_content = '\n'.join([close_unclosed_backticks(l) for l in new_content.splitlines()])
-            # Only append backtick after colon for non-heading lines
-            def append_backtick_after_colon(line):
-                if line.lstrip().startswith('#'):
-                    return line
-                return re.sub(r'(:[^:`\n]+)$', r'\1:`', line)
-            new_content = '\n'.join([append_backtick_after_colon(l) for l in new_content.splitlines()])
+            # Remove logic that appends backtick after colon (fixes unwanted :` in output)
             def fix_indentation(text):
                 lines = text.split('\n')
                 in_code = False

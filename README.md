@@ -83,11 +83,30 @@ cd gabm
 
 ### 2. Set Up Your Environment
 
-Install Python 3.9+ and pip if you haven't already. Then install dependencies:
+
+Install Python 3.9+ and pip if you haven't already.
+
+#### User Setup (Recommended for most users)
+
+Install only the core runtime dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
+
+#### Developer Setup (For contributors, testing, and docs)
+
+Install all runtime, development, and documentation dependencies:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+**[requirements.txt](requirements.txt)** contains only the packages needed to run GABM as a user.
+
+**[requirements-dev.txt](requirements-dev.txt)** includes everything in requirements.txt plus extra packages for development, testing, and building documentation (e.g., pytest, Sphinx, linters).
+
+Use the developer setup if you plan to contribute code, run tests, or build the documentation locally.
 
 #### Recommended tools
 
