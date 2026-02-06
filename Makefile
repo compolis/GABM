@@ -40,6 +40,7 @@ test:
 docs:
 	python3 scripts/update_docs_assets.py
 	PYTHONPATH=.. sphinx-build -b html docs docs/_build/html
+	$(MAKE) docs-clean
 
 # Build and deploy documentation to GitHub Pages
 gh-pages:

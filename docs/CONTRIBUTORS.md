@@ -1,8 +1,0 @@
-# Contributors
-
-
-Please add your name (and optionally contact or affiliation) below in alphabetical order by last name then first name when you contribute to this project.
-
-- "Andy Turner <agdturner@gmail.com>", University of Leeds
-
-(We ask for this to acknowledge all contributions!)
