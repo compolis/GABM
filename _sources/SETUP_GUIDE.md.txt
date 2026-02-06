@@ -68,28 +68,21 @@ You can build a local copy of the Sphinx documentation to browse the API referen
 make docs
 ```
 
+
 - The generated HTML documentation will be in `docs/_build/html/`.
 - Open `docs/_build/html/index.html` in your web browser to view the docs.
+- All documentation source files (README.md, ROADMAP.md, etc.) are auto-copied from the project root to `docs/` for Sphinx builds, and cleaned up after building. Always edit the originals in the project root—never edit files in docs/.
 - If you encounter errors, ensure all dependencies from `requirements.txt` are installed.
 
-##
----
-**Note on Sphinx/MyST Documentation Warnings:**
-
+```
+:class: note
 When building the documentation with Sphinx and MyST, you may see warnings like:
-
-	Document headings start at H2, not H1 [myst.header]
-
+    Document headings start at H2, not H1 [myst.header]
 These warnings occur even though all Markdown files start with H2 (`##`). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.
----
-
 ### Appendix: Example Log Output
-
 After running the setup and main program, you should see log files in `data/logs/` such as `setup-llms.log` and `run-main.log`. Below is an example of what a successful log might look like:
-
 <details>
 <summary>Example: data/logs/setup-llms.log</summary>
-
 ```
 2026-02-04 10:15:23,456 [INFO] setup_llms: Starting LLM setup utility
 2026-02-04 10:15:23,789 [INFO] openai: Testing API key and fetching model list
@@ -100,12 +93,9 @@ After running the setup and main program, you should see log files in `data/logs
 2026-02-04 10:15:25,345 [INFO] deepseek: Model list saved to data/llm/deepseek/models.json
 2026-02-04 10:15:25,678 [INFO] setup_llms: All LLMs initialized successfully
 ```
-
 </details>
-
 <details>
 <summary>Example: data/logs/run-main.log</summary>
-
 ```
 2026-02-04 10:16:01,123 [INFO] run: Starting main program
 2026-02-04 10:16:01,456 [INFO] openai: Using model gpt-3.5-turbo
@@ -113,16 +103,9 @@ After running the setup and main program, you should see log files in `data/logs
 2026-02-04 10:16:02,012 [INFO] deepseek: Using model deepseek-model-1
 2026-02-04 10:16:02,345 [INFO] run: All tasks completed successfully
 ```
-
 </details>
-
 If your logs look similar (with INFO messages and no ERROR or WARNING lines), your setup was successful. If you see ERROR or WARNING messages, review them for details and troubleshooting tips.
-
 ---
-
-
 All log files are stored in the `data/logs/` directory for easy reference and sharing.
-
 For more details, see the {doc}`README.md <README.md>`.
-
 All major modules and utilities in GABM use centralized logging. In addition to the console output captured above, each LLM module and utility writes detailed logs automatically to the `data/logs/` directory. These logs include setup steps, API calls, warnings, and errors, making troubleshooting and reproducibility easier.
