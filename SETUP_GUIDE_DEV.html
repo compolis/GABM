@@ -64,7 +64,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#set-up-api-keys">4. Set Up API Keys</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#run-tests-and-build-documentation">5. Run Tests and Build Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#contribution-workflow">6. Contribution Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">7. Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#script-logging-and-debugging">7. Script Logging and Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting-support">8. Troubleshooting &amp; Support</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
@@ -135,7 +136,7 @@
 <section id="set-up-api-keys">
 <h2>4. Set Up API Keys<a class="headerlink" href="#set-up-api-keys" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Create <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> with your API keys for LLM providers. See <span class="xref std std-doc">API_KEYS.md</span> for format and details.</p></li>
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> with your API keys for LLM providers. See <a class="reference internal" href="API_KEYS.html"><span class="std std-doc">API_KEYS.md</span></a> for format and details.</p></li>
 </ul>
 </section>
 <section id="run-tests-and-build-documentation">
@@ -159,16 +160,31 @@
 <section id="contribution-workflow">
 <h2>6. Contribution Workflow<a class="headerlink" href="#contribution-workflow" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Follow the guidelines in <span class="xref std std-doc">CONTRIBUTORS.md</span> and <span class="xref std std-doc">CODE_OF_CONDUCT.md</span>.</p></li>
+<li><p>Follow the guidelines in <a class="reference internal" href="CONTRIBUTORS.html"><span class="std std-doc">CONTRIBUTORS.md</span></a> and <a class="reference internal" href="CODE_OF_CONDUCT.html"><span class="std std-doc">CODE_OF_CONDUCT.md</span></a>.</p></li>
 <li><p>Use feature branches and submit pull requests for review.</p></li>
 <li><p>Ensure all tests pass and documentation builds before submitting a PR.</p></li>
 </ul>
 </section>
-<section id="troubleshooting">
-<h2>7. Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="script-logging-and-debugging">
+<h2>7. Script Logging and Debugging<a class="headerlink" href="#script-logging-and-debugging" title="Link to this heading"></a></h2>
+<p>Several project scripts (asset management, cleaning, deployment) now use Python logging to record their actions, warnings, and errors. Logs are written to:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>data/logs/docs/
+</pre></div>
+</div>
+<p>Each script has its own log file (e.g., <code class="docutils literal notranslate"><span class="pre">update_docs_assets.log</span></code>, <code class="docutils literal notranslate"><span class="pre">clean_docs_assets.log</span></code>). These logs help you:</p>
 <ul class="simple">
-<li><p>If you encounter errors, check your Python version, dependencies, and API keys.</p></li>
-<li><p>For more help, see the <span class="xref std std-doc">README.md</span> or open an issue on GitHub.</p></li>
+<li><p>Debug issues with documentation builds or asset copying</p></li>
+<li><p>Review script actions and errors</p></li>
+<li><p>Adjust logging levels if needed (see script source for details)</p></li>
+</ul>
+<p>If you encounter problems, check the relevant log file for details before seeking support.</p>
+</section>
+<section id="troubleshooting-support">
+<h2>8. Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>If you encounter errors, check your Python version and that all dependencies are installed.</p></li>
+<li><p>For more help, see the <a class="reference external" href="https://github.com/compolis/GABM#readme">README</a>.</p></li>
+<li><p>If you need support, you can <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue on GitHub</a>.</p></li>
 </ul>
 </section>
 </section>

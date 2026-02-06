@@ -60,7 +60,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#unreleased">[0.2.0] - Unreleased</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging">Logging</a></li>
 </ul>
 </li>
 </ul>
@@ -122,17 +122,12 @@
 </section>
 <section id="unreleased">
 <h2>[0.2.0] - Unreleased<a class="headerlink" href="#unreleased" title="Link to this heading"></a></h2>
-<section id="id2">
-<h3>Added<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<section id="logging">
+<h3>Logging<a class="headerlink" href="#logging" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Initial agent-based model (ABM) framework with 4 initialized agents, each with unique biases and opinions.</p></li>
-<li><p>Agents use LLM API prompts and responses to converse and update their opinions based on conversation outcomes.</p></li>
-<li><p>Each agent chats with every other agent twice per simulation run.</p></li>
-<li><p>Graph generation of individual and aggregate agent opinions and confidence levels after simulation.</p></li>
-<li><p>Visualization of agent trajectories and group opinion/confidence over time.</p></li>
-<li><p>Automated Sphinx documentation workflow, including requirements file handling and navigation improvements.</p></li>
-<li><p>Project structure modernization: main scripts moved to <code class="docutils literal notranslate"><span class="pre">src/</span></code>, requirements and documentation clarified.</p></li>
-<li><p>Python 3.12+ is now required; documentation and badges updated accordingly.</p></li>
+<li><p>All asset management, cleaning, deployment, and cache scripts now use Python logging.</p></li>
+<li><p>Logs are written to <code class="docutils literal notranslate"><span class="pre">data/logs/docs/</span></code> with rotating file handlers for each script.</p></li>
+<li><p>Logging helps with debugging, error tracking, and collaboration.</p></li>
 </ul>
 </section>
 </section>

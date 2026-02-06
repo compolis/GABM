@@ -34,7 +34,7 @@ git checkout stable/0.1.0  # Or latest stable branch
 
 ### 4. Set Up API Keys (Optional)
 
-If you want to use LLM features, create `data/api_key.csv` with your API keys. See {doc}`API_KEYS.md <API_KEYS.md>` for details and instructions.
+If you want to use LLM features, create `data/api_key.csv` with your API keys. See [API_KEYS.md](API_KEYS.md) for details and instructions.
 
 ### 5. Run the Main Program
 
@@ -47,4 +47,5 @@ python3 run.py
 ### 6. Troubleshooting
 
 - If you encounter errors, check your Python version and that all dependencies are installed.
-- For more help, see the {doc}`README.md <README.md>` or open an issue on GitHub.
+- For more help, see the [README](https://github.com/compolis/GABM#readme).
+- If you need support, you can [open an issue on GitHub](https://github.com/compolis/GABM/issues/new/choose).

@@ -34,7 +34,7 @@ git checkout main  # Or your feature branch
 
 ### 4. Set Up API Keys
 
-- Create `data/api_key.csv` with your API keys for LLM providers. See {doc}`API_KEYS.md <API_KEYS.md>` for format and details.
+- Create `data/api_key.csv` with your API keys for LLM providers. See [API_KEYS.md](API_KEYS.md) for format and details.
 
 ### 5. Run Tests and Build Documentation
 
@@ -54,11 +54,27 @@ make docs
 
 ### 6. Contribution Workflow
 
-- Follow the guidelines in {doc}`CONTRIBUTORS.md <CONTRIBUTORS.md>` and {doc}`CODE_OF_CONDUCT.md <CODE_OF_CONDUCT.md>`.
+- Follow the guidelines in [CONTRIBUTORS.md](CONTRIBUTORS.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 - Use feature branches and submit pull requests for review.
 - Ensure all tests pass and documentation builds before submitting a PR.
 
-### 7. Troubleshooting
 
-- If you encounter errors, check your Python version, dependencies, and API keys.
-- For more help, see the {doc}`README.md <README.md>` or open an issue on GitHub.
+### 7. Script Logging and Debugging
+
+Several project scripts (asset management, cleaning, deployment) now use Python logging to record their actions, warnings, and errors. Logs are written to:
+
+	data/logs/docs/
+
+Each script has its own log file (e.g., `update_docs_assets.log`, `clean_docs_assets.log`). These logs help you:
+
+- Debug issues with documentation builds or asset copying
+- Review script actions and errors
+- Adjust logging levels if needed (see script source for details)
+
+If you encounter problems, check the relevant log file for details before seeking support.
+
+### 8. Troubleshooting & Support
+
+- If you encounter errors, check your Python version and that all dependencies are installed.
+- For more help, see the [README](https://github.com/compolis/GABM#readme).
+- If you need support, you can [open an issue on GitHub](https://github.com/compolis/GABM/issues/new/choose).

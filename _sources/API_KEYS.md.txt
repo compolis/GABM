@@ -4,7 +4,7 @@ You need a `data/api_key.csv` file with your API keys. This file is not included
 
 > **Security Warning:** Never commit your API keys or other secrets to the repository. The `.gitignore` file is configured to exclude `data/api_key.csv` and other sensitive files from version control. Always keep your keys private and secure.
 
-Ask the project maintainer for a template or example, or create it yourself with the following format (CSV with header):
+Create `data/api_key.csv` yourself in the following CSV format:
 
 ```
 api,key
@@ -13,7 +13,9 @@ deepseek,sk-...
 genai,YOUR_GOOGLE_KEY
 ```
 
-Place this file in the `data/` directory.
+The syntax requirements for the `data/api_key.csv` file is strict. Each entry should be on a new line, the API names "openai", "deepseek" and "genai" must be exactly as shown and there should be nothing but a comma character "," separating the API name and the API key. The header and everything is case senstivie. 
+
+The `api_key.csv` file must be stored in the `data/` directory.
 
 ### Quick Setup
 
@@ -24,8 +26,10 @@ make setup-llms
 ```
 
 This will:
-- Check for all required API keys (OpenAI, GenAI, DeepSeek)
+- Check for expected API keys (OpenAI, GenAI, DeepSeek)
 - Test each key with a default prompt and model
-- Generate initial `models.json` and `models.txt` for each LLM
-- Initialize response caches (`cache.pkl`)
-- Report any issues or missing keys
+- If provided with a valid API key and the services work expect:
+  - `data\llm\` directories to be populated with
+    - `models.json` and `models.txt` files for each LLM with detailing what LLM models are available for each service
+    - Initialize response caches (`cache.pkl`) for the test `Hello` prompts sent to the default model of each service.
+- Log files are created to diagnose problems if something does not work, for example if the `api_key.csv` file is missing or not found or badly formatted, and if there are any issues with accessing the LLM services, such as problems with the service or the API keys provided.

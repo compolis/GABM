@@ -98,14 +98,15 @@
 <blockquote>
 <div><p><strong>Security Warning:</strong> Never commit your API keys or other secrets to the repository. The <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file is configured to exclude <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> and other sensitive files from version control. Always keep your keys private and secure.</p>
 </div></blockquote>
-<p>Ask the project maintainer for a template or example, or create it yourself with the following format (CSV with header):</p>
+<p>Create <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> yourself in the following CSV format:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span><span class="p">,</span><span class="n">key</span>
 <span class="n">openai</span><span class="p">,</span><span class="n">sk</span><span class="o">-...</span>
 <span class="n">deepseek</span><span class="p">,</span><span class="n">sk</span><span class="o">-...</span>
 <span class="n">genai</span><span class="p">,</span><span class="n">YOUR_GOOGLE_KEY</span>
 </pre></div>
 </div>
-<p>Place this file in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory.</p>
+<p>The syntax requirements for the <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> file is strict. Each entry should be on a new line, the API names “openai”, “deepseek” and “genai” must be exactly as shown and there should be nothing but a comma character “,” separating the API name and the API key. The header and everything is case senstivie.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">api_key.csv</span></code> file must be stored in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory.</p>
 <section id="quick-setup">
 <h2>Quick Setup<a class="headerlink" href="#quick-setup" title="Link to this heading"></a></h2>
 <p>To quickly initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, use the provided setup utility:</p>
@@ -114,11 +115,19 @@
 </div>
 <p>This will:</p>
 <ul class="simple">
-<li><p>Check for all required API keys (OpenAI, GenAI, DeepSeek)</p></li>
+<li><p>Check for expected API keys (OpenAI, GenAI, DeepSeek)</p></li>
 <li><p>Test each key with a default prompt and model</p></li>
-<li><p>Generate initial <code class="docutils literal notranslate"><span class="pre">models.json</span></code> and <code class="docutils literal notranslate"><span class="pre">models.txt</span></code> for each LLM</p></li>
-<li><p>Initialize response caches (<code class="docutils literal notranslate"><span class="pre">cache.pkl</span></code>)</p></li>
-<li><p>Report any issues or missing keys</p></li>
+<li><p>If provided with a valid API key and the services work expect:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">data\llm\</span></code> directories to be populated with</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">models.json</span></code> and <code class="docutils literal notranslate"><span class="pre">models.txt</span></code> files for each LLM with detailing what LLM models are available for each service</p></li>
+<li><p>Initialize response caches (<code class="docutils literal notranslate"><span class="pre">cache.pkl</span></code>) for the test <code class="docutils literal notranslate"><span class="pre">Hello</span></code> prompts sent to the default model of each service.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Log files are created to diagnose problems if something does not work, for example if the <code class="docutils literal notranslate"><span class="pre">api_key.csv</span></code> file is missing or not found or badly formatted, and if there are any issues with accessing the LLM services, such as problems with the service or the API keys provided.</p></li>
 </ul>
 </section>
 </section>
