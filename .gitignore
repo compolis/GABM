@@ -209,3 +209,12 @@ cython_debug/
 data/llm/*/cache.pkl
 # Log files (not committed by default)
 data/logs/
+
+# Exclude sensitive API key files
+data/api_key_ajay.csv
+data/api_key_andy.csv
+data/api_key.csv
+
+# Exclude data directories
+data2/
+data-bac/

@@ -498,36 +498,6 @@
     "top_k": 64
   },
   {
-    "name": "models/embedding-001",
-    "base_model_id": "",
-    "version": "001",
-    "display_name": "Embedding 001",
-    "description": "Obtain a distributed representation of a text.",
-    "input_token_limit": 2048,
-    "output_token_limit": 1,
-    "supported_generation_methods": [
-      "embedContent"
-    ],
-    "temperature": null,
-    "top_p": null,
-    "top_k": null
-  },
-  {
-    "name": "models/text-embedding-004",
-    "base_model_id": "",
-    "version": "004",
-    "display_name": "Text Embedding 004",
-    "description": "Obtain a distributed representation of a text.",
-    "input_token_limit": 2048,
-    "output_token_limit": 1,
-    "supported_generation_methods": [
-      "embedContent"
-    ],
-    "temperature": null,
-    "top_p": null,
-    "top_k": null
-  },
-  {
     "name": "models/gemini-embedding-001",
     "base_model_id": "",
     "version": "001",

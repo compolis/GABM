@@ -22,7 +22,7 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.autosummary', 'myst_parser']
 autosummary_generate = True
 
 templates_path = ['_templates']
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'README.md', '../README.md']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # -- Options for HTML output -------------------------------------------------
 

@@ -27,9 +27,9 @@ def test_update_links_internal_doc():
     """
     input_md = "See [Roadmap](ROADMAP.md) and [Guide](SETUP_GUIDE.md)."
     # Should convert to MyST cross-references
-    output = update_links(input_md, "README.md")
-    assert "{doc}`Roadmap <ROADMAP.md>`" in output
-    assert "{doc}`Guide <SETUP_GUIDE.md>`" in output
+    output = update_links(input_md)
+    assert "[Roadmap](ROADMAP.md)" in output
+    assert "[Guide](SETUP_GUIDE.md)" in output
 
 def test_update_links_external():
     """
@@ -38,7 +38,7 @@ def test_update_links_external():
         None
     """
     input_md = "Visit [Python](https://python.org) for more info."
-    output = update_links(input_md, "README.md")
+    output = update_links(input_md)
     assert "[Python](https://python.org)" in output
 
 def test_fix_header_levels_basic():
