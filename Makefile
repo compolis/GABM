@@ -16,15 +16,19 @@ help:
 	@echo "  release      - Tag and push a release (usage: make release VERSION=x.y.z)"
 	@echo "  sync-feature - Sync and rebase a feature/release branch onto main (usage: make sync-feature BRANCH=release/0.2.0)"
 
-# Tag and push a release (usage: make release VERSION=x.y.z)
+
+
+# Tag and push a release (usage: make release VERSION=x.y.z BRANCH=release/x.y.z)
 release:
 	@if [ -z "$(VERSION)" ]; then \
-	  echo "Error: VERSION variable not set. Usage: make release VERSION=x.y.z"; \
-	  exit 1; \
+		echo "Error: VERSION variable not set. Usage: make release VERSION=x.y.z BRANCH=release/x.y.z"; \
+		exit 1; \
 	fi
-	git tag -a v$(VERSION) -m "Release v$(VERSION)"
-	git push origin v$(VERSION)
-	@echo "Release v$(VERSION) tagged and pushed."
+	@if [ -z "$(BRANCH)" ]; then \
+		echo "Error: BRANCH variable not set. Usage: make release VERSION=x.y.z BRANCH=release/x.y.z"; \
+		exit 1; \
+	fi
+	python3 scripts/release.py --version $(VERSION) --branch $(BRANCH)
 
 # Sync your main branch with upstream
 sync:
