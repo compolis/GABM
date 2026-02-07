@@ -269,11 +269,14 @@ This helps ensure proper attribution and makes it easy to track contributors. Fo
 - All scripts are in the `scripts/` directory at the project root.
 - These scripts ensure all Makefile targets are platform-agnostic and reproducible.
 
+
 ## Documentation
 
-```
-make docs
-```
+Project documentation is available in the `docs/` directory and online via GitHub Pages.
+
+- See [`DEV_GUIDE.md`](DEV_GUIDE.md) for developer workflow, collaboration, Makefile targets, and project structure.
+- See [`USER_GUIDE.md`](USER_GUIDE.md) for user guidance, support, and future configuration instructions.
+- See `SETUP_GUIDE_DEV.md` and `SETUP_GUIDE_USER.md` for environment setup instructions.
 
 Docs are generated with Sphinx and output to `docs/_build/html/`.
 
