@@ -116,14 +116,6 @@ Model ID: models/deep-research-pro-preview-12-2025
   Description: Preview release (December 12th, 2025) of Deep Research Pro
   Supported methods: ['generateContent', 'countTokens']
 
-Model ID: models/embedding-001
-  Description: Obtain a distributed representation of a text.
-  Supported methods: ['embedContent']
-
-Model ID: models/text-embedding-004
-  Description: Obtain a distributed representation of a text.
-  Supported methods: ['embedContent']
-
 Model ID: models/gemini-embedding-001
   Description: Obtain a distributed representation of a text.
   Supported methods: ['embedContent', 'countTextTokens', 'countTokens', 'asyncBatchEmbedContent']
