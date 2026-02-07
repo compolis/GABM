@@ -209,32 +209,99 @@ def main():
     for fname in DOC_FILES:
         src = os.path.join(ROOT, fname)
         dst = os.path.join(DOCS, fname)
+        logger.info(f"[DEBUG] Processing {fname}: src={src}, dst={dst}")
         if not os.path.exists(src):
             logger.warning(f"{src} does not exist, skipping.")
             continue
-        # Special handling for requirements files: copy both .txt and .md versions
-        if fname in ["requirements.txt", "requirements-dev.txt"]:
+        try:
+            # Special handling for requirements files: copy both .txt and .md versions
+            if fname in ["requirements.txt", "requirements-dev.txt"]:
+                with open(src, "r", encoding="utf-8") as f:
+                    content = f.read()
+                # Copy the .txt file directly to docs/
+                with open(dst, "w", encoding="utf-8") as f:
+                    f.write(content)
+                logger.info(f"Copied: {fname} -> docs/")
+                # Generate the .md version for Sphinx
+                md_name = fname.replace('.txt', '.md')
+                dst_md = os.path.join(DOCS, md_name)
+                heading = "# Requirements" if fname == "requirements.txt" else "# Requirements (Developer)"
+                note = (
+                    "> **Note:** This file is for documentation only.\n"
+                    "> Install dependencies from [requirements.txt](requirements.txt) and [requirements-dev.txt](requirements-dev.txt) in the project root.\n"
+                )
+                with open(dst_md, "w", encoding="utf-8") as f:
+                    f.write(f"{heading}\n\n{note}\n\n```")
+                    f.write(content)
+                    f.write("\n```")
+                logger.info(f"Copied and formatted: {fname} -> {md_name}")
+                continue
+            # Special handling for README.md from project root
+            if fname == "README.md":
+                with open(src, "r", encoding="utf-8") as f:
+                    content = f.read()
+                new_content = update_links(content)
+                # Convert {doc}`...` references to plain Markdown links
+                new_content = re.sub(r'\{doc\}`([^`<>]+)(?:\s*<([^`<>]+)>)?`', lambda m: f'[{m.group(1)}]({m.group(2) if m.group(2) else m.group(1)})', new_content)
+                new_content = re.sub(r'<!-- Badges -->.*?</p>\s*> \*\*Note for Fork Maintainers:\*\*[\s\S]*?repo.\n', '', new_content, flags=re.DOTALL)
+                new_content = re.sub(r'## Table of Contents[\s\S]*?(?=^## |^# |\Z)', '', new_content, flags=re.MULTILINE)
+                new_content = fix_toc_links(new_content)
+                new_content = re.sub(r'\[//\]: # \(.*\)', '', new_content)
+                new_content = re.sub(r'(`{3,}|~{3,})', '```', new_content)
+                new_content = clean_code_blocks(new_content)
+                new_content = re.sub(r'^[ \t\-\|\+:]{5,}$', '', new_content, flags=re.MULTILINE)
+                # Insert blank lines after definition lists and block quotes
+                new_content = fix_definition_lists_and_blockquotes(new_content)
+                # Rewrite requirements.txt/dev.txt links to .md for Sphinx
+                new_content = re.sub(r'\[requirements\.txt\]\(requirements\.txt\)', '[requirements.md](requirements.md)', new_content)
+                new_content = re.sub(r'\[requirements-dev\.txt\]\(requirements-dev.txt\)', '[requirements-dev.md](requirements-dev.md)', new_content)
+                # Only close unclosed backticks if the line starts with a backtick and is missing a closing one
+                def close_unclosed_backticks(line):
+                    # Do not add a closing backtick to heading lines
+                    if line.lstrip().startswith('#'):
+                        return line
+                    if line.startswith('`') and not line.rstrip().endswith('`') and line.count('`') == 1:
+                        return line + '`'
+                    return line
+                new_content = '\n'.join([close_unclosed_backticks(l) for l in new_content.splitlines()])
+                # Remove logic that appends backtick after colon (fixes unwanted :` in output)
+                def fix_indentation(text):
+                    lines = text.split('\n')
+                    in_code = False
+                    for i, line in enumerate(lines):
+                        if line.strip().startswith('```'):
+                            in_code = not in_code
+                        elif not in_code and line.startswith('    '):
+                            lines[i] = line.lstrip()
+                    return '\n'.join(lines)
+                new_content = fix_indentation(new_content)
+                # Add MyST front matter and ensure first heading is level 2
+                lines = new_content.splitlines()
+                # Remove any blank lines at the top
+                while lines and lines[0].strip() == '':
+                    lines.pop(0)
+                # Remove any empty headings at the top (e.g., '##' or '#')
+                while lines and re.match(r'^#+\s*$', lines[0]):
+                    lines.pop(0)
+                # Demote first heading to level 2 if it's not already
+                if lines and re.match(r'^#(?!#)', lines[0]):
+                    lines[0] = '#' + lines[0]
+                myst_front_matter = ['---', 'title: Project README', '---', '']
+                new_content = '\n'.join(myst_front_matter + lines)
+                with open(dst, "w", encoding="utf-8") as f:
+                    f.write(new_content)
+                logger.info(f"Copied and processed: {fname}")
+                continue
+            # Generic copy for other files
             with open(src, "r", encoding="utf-8") as f:
                 content = f.read()
-            # Copy the .txt file directly to docs/
             with open(dst, "w", encoding="utf-8") as f:
                 f.write(content)
-            logger.info(f"Copied: {fname} -> docs/")
-            # Generate the .md version for Sphinx
-            md_name = fname.replace('.txt', '.md')
-            dst_md = os.path.join(DOCS, md_name)
-            heading = "# Requirements" if fname == "requirements.txt" else "# Requirements (Developer)"
-            note = (
-                "> **Note:** This file is for documentation only.\n"
-                "> Install dependencies from [requirements.txt](requirements.txt) and [requirements-dev.txt](requirements-dev.txt) in the project root.\n"
-            )
-            with open(dst_md, "w", encoding="utf-8") as f:
-                f.write(f"{heading}\n\n{note}\n\n```")
-                f.write(content)
-                f.write("\n```")
-            logger.info(f"Copied and formatted: {fname} -> {md_name}")
-            continue
+            logger.info(f"Copied generic: {fname} -> docs/")
+        except Exception as e:
+            logger.error(f"Error processing {fname}: {e}")
     # Always copy files from .github/ to docs/ (if present)
+    logger.info(f"[DEBUG] Finished DOC_FILES loop. Now processing GITHUB_DOC_FILES.")
     GITHUB = os.path.join(ROOT, ".github")
     for fname in GITHUB_DOC_FILES:
         src = os.path.join(GITHUB, fname)
