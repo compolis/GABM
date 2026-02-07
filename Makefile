@@ -1,18 +1,18 @@
 # Makefile for common development tasks
 # Usage:
-#   make help           - Show this help message
-#   make test           - Run tests (pytest)
-#   make docs           - Build documentation (Sphinx)
-#   make docs-clean     - Clean auto-copied documentation files from docs/
-#   make gh-pages       - Build and deploy documentation to GitHub Pages
-#   make clean          - Remove build/test artifacts
-#   make clear-caches   - Delete all LLM caches and model lists (for a clean slate)
-#   make git-clean      - Clean up merged local branches and prune deleted remotes
-#   make sync           - Sync main branch with upstream
-#   make sync-feature   - Sync and rebase a feature/release branch onto main (usage: make sync-feature BRANCH=release/0.2.0)
-#   make setup-llms     - Run onboarding/setup for all LLMs (API key check, model lists, cache init)
-#   make release        - Tag and push a release (usage: make release VERSION=x.y.z BRANCH=release/x.y.z)
-#   make delete-release - Delete a release tag locally and on remotes (usage: make delete-release VERSION=x.y.z)
+#   make help            - Show this help message
+#   make test            - Run tests (pytest)
+#   make docs            - Build documentation (Sphinx)
+#   make docs-clean      - Clean auto-copied documentation files from docs/
+#   make gh-pages-deploy - Build and deploy documentation to GitHub Pages
+#   make clean           - Remove build/test artifacts
+#   make clear-caches    - Delete all LLM caches and model lists (for a clean slate)
+#   make git-clean       - Clean up merged local branches and prune deleted remotes
+#   make sync            - Sync main branch with upstream
+#   make sync-feature    - Sync and rebase a feature/release branch onto main (usage: make sync-feature BRANCH=release/0.2.0)
+#   make setup-llms      - Run onboarding/setup for all LLMs (API key check, model lists, cache init)
+#   make release         - Tag and push a release (usage: make release VERSION=x.y.z BRANCH=release/x.y.z)
+#   make delete-release  - Delete a release tag locally and on remotes (usage: make delete-release VERSION=x.y.z)
 #
 # Note: This Makefile assumes you have the necessary Python dependencies installed (e.g., pytest, Sphinx) and that you have set up git remotes correctly for syncing and releasing.
 # Make sure to customize the scripts and commands as needed for your specific project structure and requirements.
@@ -26,26 +26,26 @@
 # Caution: Some commands (like git-clean, release, and delete-release) can modify your git history or delete tags. Always review the scripts they call (in the scripts/ directory) to ensure they do what you expect before running these commands.
 
 # Phony targets (not actual files)
-.PHONY: help test docs docs-clean gh-pages clean git-clean setup-llms clear-caches sync sync-feature release delete-release build build-test pypi-release testpypi-release
+.PHONY: help test docs docs-clean gh-pages-deploy clean git-clean setup-llms clear-caches sync sync-feature release delete-release build build-test pypi-release testpypi-release
 
 # Show available Makefile commands
 help:
 	@echo "Available targets:"
-	@echo "  test           - Run tests (pytest)"
-	@echo "  docs           - Build documentation (Sphinx)"
-	@echo "  docs-clean     - Clean auto-copied documentation files from docs/"
-	@echo "  gh-pages       - Build and deploy documentation to GitHub Pages"
-	@echo "  clean          - Remove build/test artifacts"
-	@echo "  clear-caches   - Delete all LLM caches and model lists (for a clean slate)"
-	@echo "  git-clean      - Clean up merged local branches and prune deleted remotes"
-	@echo "  sync           - Sync main branch with upstream"
-	@echo "  sync-feature   - Sync and rebase a feature/release branch onto main (usage: make sync-feature BRANCH=release/0.2.0)"
-	@echo "  setup-llms     - Run onboarding/setup for all LLMs (API key check, model lists, cache init)"
-	@echo "  release        - Tag and push a release (usage: make release VERSION=x.y.z BRANCH=release/x.y.z)"
-	@echo "  delete-release - Delete a release tag locally and on remotes (usage: make delete-release VERSION=x.y.z)"
-	@echo "  build          - Build a distribution package for PyPI (python -m build)"
-	@echo "  build-test     - Build and test install the package in a fresh venv"
-	@echo "  pypi-release   - Upload the built package to PyPI (twine upload dist/*)"
+	@echo "  test             - Run tests (pytest)"
+	@echo "  docs             - Build documentation (Sphinx)"
+	@echo "  docs-clean       - Clean auto-copied documentation files from docs/"
+	@echo "  gh-pages-deploy  - Build and deploy documentation to GitHub Pages"
+	@echo "  clean            - Remove build/test artifacts"
+	@echo "  clear-caches     - Delete all LLM caches and model lists (for a clean slate)"
+	@echo "  git-clean        - Clean up merged local branches and prune deleted remotes"
+	@echo "  sync             - Sync main branch with upstream"
+	@echo "  sync-feature     - Sync and rebase a feature/release branch onto main (usage: make sync-feature BRANCH=release/0.2.0)"
+	@echo "  setup-llms       - Run onboarding/setup for all LLMs (API key check, model lists, cache init)"
+	@echo "  release          - Tag and push a release (usage: make release VERSION=x.y.z BRANCH=release/x.y.z)"
+	@echo "  delete-release   - Delete a release tag locally and on remotes (usage: make delete-release VERSION=x.y.z)"
+	@echo "  build            - Build a distribution package for PyPI (python -m build)"
+	@echo "  build-test       - Build and test install the package in a fresh venv"
+	@echo "  pypi-release     - Upload the built package to PyPI (twine upload dist/*)"
 	@echo "  testpypi-release - Upload the built package to TestPyPI (twine upload --repository testpypi dist/*)"
 	
 # Run all tests (requires pytest)
@@ -64,8 +64,8 @@ docs-clean:
 	@echo "Cleaned auto-copied documentation files from docs/"
 
 # Build and deploy documentation to GitHub Pages
-gh-pages:
-	python3 scripts/gh-pages.py
+gh-pages-deploy:
+	python3 scripts/gh-pages-deploy.py
 
 
 # Remove build/test artifacts
