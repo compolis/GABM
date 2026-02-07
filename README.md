@@ -64,7 +64,8 @@ To create and push a release tag:
    Replace `x.y.z` with the desired version number (e.g., `0.1.0`).
 3. The release will be tagged and pushed to the remote repository.
 
-See [CHANGE_LOG.md](CHANGE_LOG.md) for details of each release.
+
+See [CHANGE_LOG.md](CHANGE_LOG.md) for details of each release, including the latest 0.1.1 documentation update.
 
 
 ## Code of Conduct and Reporting
