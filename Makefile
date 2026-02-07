@@ -78,4 +78,4 @@ clear-caches:
 # Sync and rebase a feature/release branch onto main
 # Usage: make sync-feature BRANCH=release/0.2.0
 sync-feature:
-	python3 scripts/sync_feature_branch.py $(BRANCH)
+	python3 scripts/sync_feature.py --branch $(BRANCH)
