@@ -260,7 +260,7 @@
 </section>
 <section id="packaging-files">
 <h2>Packaging Files<a class="headerlink" href="#packaging-files" title="Link to this heading"></a></h2>
-<p>The following files are essential for building, testing, and distributing the GABM package:</p>
+<p>The following files and directories are essential for building, testing, and distributing the GABM package:</p>
 <ul class="simple">
 <li><p><strong>pyproject.toml</strong>: Declares build system requirements and project metadata. Required for modern Python packaging (PEP 517/518).</p></li>
 <li><p><strong>setup.cfg</strong>: Contains static package metadata and configuration for setuptools, such as:</p>
@@ -283,6 +283,8 @@ This ensures users who install from source get all necessary files.</p></li>
 <li><p><strong>requirements.txt</strong>: Lists pinned dependencies for end users (used by pip install -r requirements.txt).</p></li>
 <li><p><strong>requirements-dev.txt</strong>: Lists development dependencies (testing, linting, docs) with version ranges for contributors.</p></li>
 <li><p><strong>dist/</strong>: Output directory for built distributions (.tar.gz and .whl files) after running the build process.</p></li>
+<li><p><strong>src/gabm.egg-info/</strong>: Metadata directory created by setuptools during build. Contains information about the package (version, dependencies, etc.). Safe to delete; will be recreated as needed.</p></li>
+<li><p><strong>venv-build-test/</strong>: Temporary virtual environment created by <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">build-test</span></code> for testing the built package in isolation. Can be safely deleted after testing.</p></li>
 </ul>
 </section>
 <section id="pypi-release-process">

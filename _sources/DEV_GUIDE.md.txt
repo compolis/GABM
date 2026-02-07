@@ -95,9 +95,10 @@ Refer to the Makefile for full details and usage examples.
 
 
 
+
 ## Packaging Files
 
-The following files are essential for building, testing, and distributing the GABM package:
+The following files and directories are essential for building, testing, and distributing the GABM package:
 
 - **pyproject.toml**: Declares build system requirements and project metadata. Required for modern Python packaging (PEP 517/518).
 - **setup.cfg**: Contains static package metadata and configuration for setuptools, such as:
@@ -114,6 +115,8 @@ The following files are essential for building, testing, and distributing the GA
 - **requirements.txt**: Lists pinned dependencies for end users (used by pip install -r requirements.txt).
 - **requirements-dev.txt**: Lists development dependencies (testing, linting, docs) with version ranges for contributors.
 - **dist/**: Output directory for built distributions (.tar.gz and .whl files) after running the build process.
+- **src/gabm.egg-info/**: Metadata directory created by setuptools during build. Contains information about the package (version, dependencies, etc.). Safe to delete; will be recreated as needed.
+- **venv-build-test/**: Temporary virtual environment created by `make build-test` for testing the built package in isolation. Can be safely deleted after testing.
 
 
 ## PyPI Release Process
