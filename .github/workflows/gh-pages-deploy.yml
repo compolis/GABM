@@ -1,0 +1,21 @@
+name: gh-pages-deploy
+
+on:
+  push:
+    branches:
+      - gh-pages
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build docs
+        run: |
+          # Example: build Sphinx docs
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+          sphinx-build -b html docs docs/_build/html
+      # Add deployment steps here if needed
+      - name: Deployment placeholder
+        run: echo "Docs built for gh-pages branch. Add deployment steps as needed."
