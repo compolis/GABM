@@ -1,7 +1,1 @@
-"""
-Initialization for the io package.
-"""
-# Metadata
-__author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
-__copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
+# Makes io a package
