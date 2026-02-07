@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="User Guide" href="USER_GUIDE.html" />
-    <link rel="prev" title="Contributor Covenant Code of Conduct" href="CODE_OF_CONDUCT.html" /> 
+    <link rel="prev" title="Read Data Module" href="io/read_data.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,11 +53,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#title-developer-guide">title: Developer Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#contributing-workflow">Contributing Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#collaboration-communication">Collaboration &amp; Communication</a></li>
@@ -69,14 +65,6 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
 </ul>
 
         </div>
@@ -105,10 +93,6 @@
              
   <section id="developer-guide">
 <h1>Developer Guide<a class="headerlink" href="#developer-guide" title="Link to this heading"></a></h1>
-<hr class="docutils" />
-<section id="title-developer-guide">
-<h2>title: Developer Guide<a class="headerlink" href="#title-developer-guide" title="Link to this heading"></a></h2>
-</section>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow.</p>
@@ -145,19 +129,63 @@
 </section>
 <section id="makefile-targets">
 <h2>Makefile Targets<a class="headerlink" href="#makefile-targets" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Target</p></th>
+<th class="head"><p>Usage/Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">help</span></code></p></td>
+<td><p>Show available Makefile commands</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sync</span></code></p></td>
+<td><p>Sync main branch with upstream</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code></p></td>
+<td><p>Run all tests (pytest)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code></p></td>
+<td><p>Build documentation (Sphinx) and clean auto-copied docs assets</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-clean</span></code></p></td>
+<td><p>Remove auto-copied documentation files from docs/</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code></p></td>
+<td><p>Remove build/test artifacts and Python caches</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">git-clean</span></code></p></td>
+<td><p>Clean up merged local branches and prune deleted remotes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">setup-llms</span></code></p></td>
+<td><p>Run onboarding/setup for all LLMs (API key check, model lists, cache init)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clear-caches</span></code></p></td>
+<td><p>Delete all LLM caches and model lists (for a clean slate)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">release</span> <span class="pre">VERSION=x.y.z</span></code></p></td>
+<td><p>Tag and push a release (usage: make release VERSION=x.y.z)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sync-feature</span> <span class="pre">BRANCH=release/0.2.0</span></code></p></td>
+<td><p>Sync and rebase a feature/release branch onto main</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages</span></code></p></td>
+<td><p>Build and deploy documentation to GitHub Pages</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes:</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code>: Run all tests</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code>: Build documentation</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">setup-llms</span></code>: Setup LLM configuration</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code>: Remove build artifacts</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages</span></code>: Deploy docs to GitHub Pages</p></li>
+<li><p>All scripts used by Makefile targets are in the <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory.</p></li>
+<li><p>Targets are platform-agnostic and reproducible.</p></li>
 </ul>
+<p>Refer to the Makefile for full details and usage examples.</p>
 </section>
 <section id="developing-documentation">
 <h2>Developing Documentation<a class="headerlink" href="#developing-documentation" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Edit Markdown files in <code class="docutils literal notranslate"><span class="pre">docs/</span></code> and project root</p></li>
-<li><p>Use Sphinx and MyST for documentation builds</p></li>
+<li><p>Use Sphinx and MyST via <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code> for documentation builds and update the script it uses as approriate</p></li>
 <li><p>Add new guides or API docs as needed</p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code> to preview changes</p></li>
 </ul>
@@ -172,8 +200,8 @@
 <section id="additional-resources">
 <h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>See <code class="docutils literal notranslate"><span class="pre">SETUP_GUIDE_DEV.md</span></code> for environment setup</p></li>
-<li><p>See <code class="docutils literal notranslate"><span class="pre">README.md</span></code> for project overview</p></li>
+<li><p>See <a class="reference internal" href="#SETUP_GUIDE_DEV.md"><span class="xref myst">SETUP_GUIDE_DEV.md</span></a> for environment setup</p></li>
+<li><p>See <a class="reference internal" href="#README.md"><span class="xref myst">README.md</span></a> for project overview</p></li>
 </ul>
 <hr class="docutils" />
 <p>For further questions, <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue</a> or contact maintainers via GitHub.</p>
@@ -184,7 +212,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="CODE_OF_CONDUCT.html" class="btn btn-neutral float-left" title="Contributor Covenant Code of Conduct" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="io/read_data.html" class="btn btn-neutral float-left" title="Read Data Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="USER_GUIDE.html" class="btn btn-neutral float-right" title="User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
