@@ -19,7 +19,6 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Project Roadmap" href="../ROADMAP.html" />
     <link rel="prev" title="Logging Utils Module" href="llm/logging_utils.html" /> 
 </head>
 
@@ -49,26 +48,7 @@
 <li class="toctree-l1"><a class="reference internal" href="llm/genai.html">GenAI Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="llm/deepseek.html">DeepSeek Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="llm/logging_utils.html">Logging Utils Module</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Read Data Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#src.io.read_data.read_api_keys"><code class="docutils literal notranslate"><span class="pre">read_api_keys()</span></code></a></li>
-</ul>
-</li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../ROADMAP.html">Project Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CHANGE_LOG.html">CHANGE_LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CODE_OF_CONDUCT.html">GABM Contributor Covenant Code of Conduct</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../DEV_GUIDE.html">Developer Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../USER_GUIDE.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../SETUP_GUIDE_USER.html">GABM User Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../SETUP_GUIDE_DEV.html">GABM Developer Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../API_KEYS.html">API Key Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTORS.html">Contributors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../LICENSE.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../requirements.html">Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../requirements-dev.html">Requirements (Developer)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../SECURITY.html">Security and Code of Conduct Reporting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Read Data Module</a></li>
 </ul>
 
         </div>
@@ -95,25 +75,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-src.io.read_data">
-<span id="read-data-module"></span><h1>Read Data Module<a class="headerlink" href="#module-src.io.read_data" title="Link to this heading"></a></h1>
-<p>Reads data from various sources.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="src.io.read_data.read_api_keys">
-<span class="sig-prename descclassname"><span class="pre">src.io.read_data.</span></span><span class="sig-name descname"><span class="pre">read_api_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#src.io.read_data.read_api_keys" title="Link to this definition"></a></dt>
-<dd><p>Reads API keys from a CSV file into a dictionary.
-Assumes the CSV has two columns: ‘api’ and ‘key’, with a header row.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>file_path (str or Path): Path to the CSV file.</p>
-</dd>
-<dt>Returns:</dt><dd><p>dict[str, str]: Dictionary with API names as keys and their corresponding keys as values.</p>
-</dd>
-<dt>Raises:</dt><dd><p>ValueError: If file_path is not provided.
-FileNotFoundError: If the specified file does not exist.</p>
-</dd>
-</dl>
-</dd></dl>
-
+  <section id="read-data-module">
+<h1>Read Data Module<a class="headerlink" href="#read-data-module" title="Link to this heading"></a></h1>
 </section>
 
 
@@ -121,7 +84,6 @@ FileNotFoundError: If the specified file does not exist.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="llm/logging_utils.html" class="btn btn-neutral float-left" title="Logging Utils Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../ROADMAP.html" class="btn btn-neutral float-right" title="Project Roadmap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

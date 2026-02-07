@@ -8,19 +8,24 @@
 # Install with: pip install -r requirements-dev.txt
 
 # Test dependencies
-pytest==9.0.2
+pytest>=9.0.2<10
 
 # LLM API dependencies
-openai==1.13.3
-#anthropic==0.25.6
-google-generativeai==0.4.1
-httpx==0.28.1
-deepseek==1.0.0
+openai>=1.13.3<2
+#anthropic>=0.25.6<0.26
+google-generativeai>=0.4.1<0.5
+httpx>=0.28.1<0.29
+deepseek>=1.0.0<2
 
 # Documentation dependencies
 sphinx>=9.1.0,<10
 sphinx-rtd-theme>=3.1.0
-myst-parser>=5.0.0
+myst-parser>=5.0.0<6
 docutils>=0.22,<0.23
 
+# For building distributions
+build>=1.4.0<2
+
+# For uploading to PyPI
+twine>=5.0.0<6
 ```

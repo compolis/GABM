@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="User Guide" href="USER_GUIDE.html" />
-    <link rel="prev" title="Read Data Module" href="io/read_data.html" /> 
+    <link rel="prev" title="Contributor Covenant Code of Conduct" href="CODE_OF_CONDUCT.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,18 +53,33 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#contributing-workflow">Contributing Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#collaboration-communication">Collaboration &amp; Communication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#project-structure">Project Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-package-entry-point-main-py">Python Package Entry Point: <strong>main</strong>.py</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#makefile-targets">Makefile Targets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#developing-documentation">Developing Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#python-version">Python Version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#packaging-files">Packaging Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pypi-release-process">PyPI Release Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
 </ul>
 
         </div>
@@ -95,7 +110,21 @@
 <h1>Developer Guide<a class="headerlink" href="#developer-guide" title="Link to this heading"></a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow.</p>
+<p>This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow. Documentation was updated in release 0.1.1 for clarity and completeness.</p>
+</section>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
+<li><p><a class="reference internal" href="#contributing-workflow"><span class="xref myst">Contributing Workflow</span></a></p></li>
+<li><p><a class="reference internal" href="#collaboration--communication"><span class="xref myst">Collaboration &amp; Communication</span></a></p></li>
+<li><p><a class="reference internal" href="#project-structure"><span class="xref myst">Project Structure</span></a></p></li>
+<li><p><a class="reference internal" href="#python-package-entry-point-__main__py"><span class="xref myst">Python Package Entry Point: <strong>main</strong>.py</span></a></p></li>
+<li><p><a class="reference internal" href="#makefile-targets"><span class="xref myst">Makefile Targets</span></a></p></li>
+<li><p><a class="reference internal" href="#developing-documentation"><span class="xref myst">Developing Documentation</span></a></p></li>
+<li><p><a class="reference internal" href="#python-version"><span class="xref myst">Python Version</span></a></p></li>
+<li><p><a class="reference internal" href="#additional-resources"><span class="xref myst">Additional Resources</span></a></p></li>
+</ul>
 </section>
 <section id="contributing-workflow">
 <h2>Contributing Workflow<a class="headerlink" href="#contributing-workflow" title="Link to this heading"></a></h2>
@@ -119,13 +148,28 @@
 <section id="project-structure">
 <h2>Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">src/</span></code>: Main source code</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">data/</span></code>: For data including log files</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">docs/</span></code>: Documentation and assets</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scripts/</span></code>: Utility scripts</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/gabm</span></code>: Python source code package</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tests/</span></code>: Test suite</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Makefile</span></code>: Automation targets</p></li>
 </ul>
+</section>
+<section id="python-package-entry-point-main-py">
+<h2>Python Package Entry Point: <strong>main</strong>.py<a class="headerlink" href="#python-package-entry-point-main-py" title="Link to this heading"></a></h2>
+<p>The main entry point for the GABM package is <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>. This follows Python packaging best practices and allows the application to be run using:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python3 -m gabm
+</pre></div>
+</div>
+<p>This approach is preferred over directly running a script (like <code class="docutils literal notranslate"><span class="pre">run.py</span></code>) because:</p>
+<ul class="simple">
+<li><p>It enables Python to treat <code class="docutils literal notranslate"><span class="pre">gabm</span></code> as a package, ensuring imports work correctly.</p></li>
+<li><p>It is the standard way to provide a command-line entry point for Python packages.</p></li>
+<li><p>It makes the project ready for distribution and installation via pip or PyPI.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code> file is executed when you run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">gabm</span></code> from the project root (with <code class="docutils literal notranslate"><span class="pre">src</span></code> on the Python path). If you need to add or change the main application logic, edit <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>.</p>
+<p>For more details, see the <a class="reference external" href="https://docs.python.org/3/library/__main__.html">Python Packaging documentation</a>.</p>
 </section>
 <section id="makefile-targets">
 <h2>Makefile Targets<a class="headerlink" href="#makefile-targets" title="Link to this heading"></a></h2>
@@ -139,44 +183,61 @@
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">help</span></code></p></td>
 <td><p>Show available Makefile commands</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sync</span></code></p></td>
-<td><p>Sync main branch with upstream</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code></p></td>
 <td><p>Run all tests (pytest)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code></p></td>
 <td><p>Build documentation (Sphinx) and clean auto-copied docs assets</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-clean</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-clean</span></code></p></td>
 <td><p>Remove auto-copied documentation files from docs/</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages</span></code></p></td>
+<td><p>Build and deploy documentation to GitHub Pages</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code></p></td>
 <td><p>Remove build/test artifacts and Python caches</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">git-clean</span></code></p></td>
-<td><p>Clean up merged local branches and prune deleted remotes</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">setup-llms</span></code></p></td>
-<td><p>Run onboarding/setup for all LLMs (API key check, model lists, cache init)</p></td>
-</tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clear-caches</span></code></p></td>
 <td><p>Delete all LLM caches and model lists (for a clean slate)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">release</span> <span class="pre">VERSION=x.y.z</span></code></p></td>
-<td><p>Tag and push a release (usage: make release VERSION=x.y.z)</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">git-clean</span></code></p></td>
+<td><p>Clean up merged local branches and prune deleted remotes</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sync-feature</span> <span class="pre">BRANCH=release/0.2.0</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sync</span></code></p></td>
+<td><p>Sync main branch with upstream</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sync-feature</span> <span class="pre">BRANCH=release/0.2.0</span></code></p></td>
 <td><p>Sync and rebase a feature/release branch onto main</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages</span></code></p></td>
-<td><p>Build and deploy documentation to GitHub Pages</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">setup-llms</span></code></p></td>
+<td><p>Run onboarding/setup for all LLMs (API key check, model lists, cache init)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">release</span> <span class="pre">VERSION=x.y.z</span> <span class="pre">BRANCH=release/x.y.z</span></code></p></td>
+<td><p>Tag and push a release (platform-agnostic)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">delete-release</span> <span class="pre">VERSION=x.y.z</span></code></p></td>
+<td><p>Delete a release tag locally and on remotes (origin, upstream)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">build</span></code></p></td>
+<td><p>Build a distribution package for PyPI (python -m build)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">build-test</span></code></p></td>
+<td><p>Build and test install the package in a fresh venv</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">pypi-release</span></code></p></td>
+<td><p>Upload the built package to PyPI (twine upload dist/*)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">testpypi-release</span></code></p></td>
+<td><p>Upload the built package to TestPyPI (twine upload –repository testpypi dist/*)</p></td>
 </tr>
 </tbody>
 </table>
 <p><strong>Notes:</strong></p>
 <ul class="simple">
-<li><p>All scripts used by Makefile targets are in the <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory.</p></li>
+<li><p>All Python scripts used by Makefile targets are in the <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory and are named consistently with their Makefile targets (e.g., <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-clean</span></code> runs <code class="docutils literal notranslate"><span class="pre">scripts/docs-clean.py</span></code>).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">delete-release</span></code> target is platform-agnostic and automates deleting a release tag locally and on both remotes (origin, upstream).</p></li>
+<li><p>This convention improves clarity and discoverability for contributors.</p></li>
 <li><p>Targets are platform-agnostic and reproducible.</p></li>
 </ul>
 <p>Refer to the Makefile for full details and usage examples.</p>
@@ -197,11 +258,78 @@
 <li><p>Ensure <code class="docutils literal notranslate"><span class="pre">python3</span></code> points to the correct version</p></li>
 </ul>
 </section>
+<section id="packaging-files">
+<h2>Packaging Files<a class="headerlink" href="#packaging-files" title="Link to this heading"></a></h2>
+<p>The following files are essential for building, testing, and distributing the GABM package:</p>
+<ul class="simple">
+<li><p><strong>pyproject.toml</strong>: Declares build system requirements and project metadata. Required for modern Python packaging (PEP 517/518).</p></li>
+<li><p><strong>setup.cfg</strong>: Contains static package metadata and configuration for setuptools, such as:</p>
+<ul>
+<li><p>Package name, version, author, and description</p></li>
+<li><p>Python version requirements</p></li>
+<li><p>Entry points (e.g., console_scripts)</p></li>
+<li><p>Classifiers and other options
+This file is preferred over setup.py for static, declarative configuration.</p></li>
+</ul>
+</li>
+<li><p><strong>MANIFEST.in</strong>: Tells setuptools which additional files (beyond Python modules) to include in the source distribution (sdist). For example:</p>
+<ul>
+<li><p>Documentation files (README.md, LICENSE, etc.)</p></li>
+<li><p>Data files needed at runtime</p></li>
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">include</span> <span class="pre">README.md</span> <span class="pre">LICENSE</span> <span class="pre">data/*.csv</span></code>
+This ensures users who install from source get all necessary files.</p></li>
+</ul>
+</li>
+<li><p><strong>requirements.txt</strong>: Lists pinned dependencies for end users (used by pip install -r requirements.txt).</p></li>
+<li><p><strong>requirements-dev.txt</strong>: Lists development dependencies (testing, linting, docs) with version ranges for contributors.</p></li>
+<li><p><strong>dist/</strong>: Output directory for built distributions (.tar.gz and .whl files) after running the build process.</p></li>
+</ul>
+</section>
+<section id="pypi-release-process">
+<h2>PyPI Release Process<a class="headerlink" href="#pypi-release-process" title="Link to this heading"></a></h2>
+<p>To release a new version of GABM to PyPI, follow these steps:</p>
+<ol class="arabic">
+<li><p><strong>Update Version</strong>: Bump the version in setup.cfg and/or pyproject.toml as appropriate.</p></li>
+<li><p><strong>Build the Package</strong>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>build
+</pre></div>
+</div>
+<p>This creates .tar.gz and .whl files in the dist/ directory.</p>
+</li>
+<li><p><strong>Test the Build</strong>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>build-test
+</pre></div>
+</div>
+<p>This installs the built package in a clean environment and runs the test suite.</p>
+</li>
+<li><p><strong>Upload to TestPyPI (optional but recommended):</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>testpypi-release
+</pre></div>
+</div>
+<p>This uploads the package to TestPyPI. Test installation from TestPyPI in a clean environment:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--index-url<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>gabm
+</pre></div>
+</div>
+</li>
+<li><p><strong>Upload to PyPI:</strong></p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>pypi-release
+</pre></div>
+</div>
+<p>This uploads the package to the official PyPI repository.</p>
+</li>
+<li><p><strong>Verify Release:</strong></p>
+<ul class="simple">
+<li><p>Check the PyPI page and test installation with pip install gabm</p></li>
+</ul>
+</li>
+</ol>
+<p>For more details, see the <a class="reference external" href="https://packaging.python.org/">Python Packaging User Guide</a>.</p>
+</section>
 <section id="additional-resources">
 <h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>See <a class="reference internal" href="#SETUP_GUIDE_DEV.md"><span class="xref myst">SETUP_GUIDE_DEV.md</span></a> for environment setup</p></li>
-<li><p>See <a class="reference internal" href="#README.md"><span class="xref myst">README.md</span></a> for project overview</p></li>
+<li><p>See <a class="reference internal" href="SETUP_GUIDE_DEV.html"><span class="std std-doc">SETUP_GUIDE_DEV.md</span></a> for environment setup</p></li>
+<li><p>See <a class="reference internal" href="README.html"><span class="std std-doc">README.md</span></a> for project overview</p></li>
 </ul>
 <hr class="docutils" />
 <p>For further questions, <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue</a> or contact maintainers via GitHub.</p>
@@ -212,7 +340,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="io/read_data.html" class="btn btn-neutral float-left" title="Read Data Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CODE_OF_CONDUCT.html" class="btn btn-neutral float-left" title="Contributor Covenant Code of Conduct" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="USER_GUIDE.html" class="btn btn-neutral float-right" title="User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

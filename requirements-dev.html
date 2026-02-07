@@ -101,21 +101,26 @@ Install dependencies from <a class="reference download internal" download="" hre
 <div class="highlight-# notranslate"><div class="highlight"><pre><span></span># Install with: pip install -r requirements-dev.txt
 
 # Test dependencies
-pytest==9.0.2
+pytest&gt;=9.0.2&lt;10
 
 # LLM API dependencies
-openai==1.13.3
-#anthropic==0.25.6
-google-generativeai==0.4.1
-httpx==0.28.1
-deepseek==1.0.0
+openai&gt;=1.13.3&lt;2
+#anthropic&gt;=0.25.6&lt;0.26
+google-generativeai&gt;=0.4.1&lt;0.5
+httpx&gt;=0.28.1&lt;0.29
+deepseek&gt;=1.0.0&lt;2
 
 # Documentation dependencies
 sphinx&gt;=9.1.0,&lt;10
 sphinx-rtd-theme&gt;=3.1.0
-myst-parser&gt;=5.0.0
+myst-parser&gt;=5.0.0&lt;6
 docutils&gt;=0.22,&lt;0.23
 
+# For building distributions
+build&gt;=1.4.0&lt;2
+
+# For uploading to PyPI
+twine&gt;=5.0.0&lt;6
 </pre></div>
 </div>
 </section>

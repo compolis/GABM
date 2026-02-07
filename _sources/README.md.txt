@@ -26,7 +26,8 @@ To create and push a release tag:
    Replace `x.y.z` with the desired version number (e.g., `0.1.0`).
 3. The release will be tagged and pushed to the remote repository.
 
-See [CHANGE_LOG.md](CHANGE_LOG.md) for details of each release.
+
+See [CHANGE_LOG.md](CHANGE_LOG.md) for details of each release, including the latest 0.1.1 documentation update.
 
 
 ## Code of Conduct and Reporting
@@ -142,7 +143,7 @@ make clear-caches
 From the project root, run:
 
 ```
-python3 run.py
+python3 -m gabm
 ```
 
 ## Usage
@@ -150,7 +151,7 @@ python3 run.py
 ### Running the Main Program
 
 ```
-python3 run.py
+python3 -m gabm
 ```
 
 ### Example: Persona Test Agent Fills Survey
@@ -177,9 +178,9 @@ This workflow is consistent across all LLMs, making it easy to add new providers
 
 #### Model Selection (Explicit Required)
 
-When running the main script, you must explicitly set the model name for each LLM provider in `run.py`. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.
+When running the main script, you must explicitly set the model name for each LLM provider in `src/gabm/__main__.py`. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.
 
-To select a model, set the variable (e.g., `openai_model`, `genai_model`, `deepseek_model`) at the top of the main function in `run.py`.
+To select a model, set the variable (e.g., `openai_model`, `genai_model`, `deepseek_model`) at the top of the main function in `src/gabm/__main__.py`.
 
 If you do not set a model, the script will raise an error and prompt you to specify one.
 
@@ -260,11 +261,11 @@ This helps ensure proper attribution and makes it easy to track contributors. Fo
 
 | Script                        | Used by Target    | Purpose                                                      |
 
-| scripts/update_docs_assets.py  | docs              | Copies and normalizes Markdown docs for Sphinx               |
-| scripts/clean_docs_assets.py   | docs-clean        | Removes auto-copied docs assets from docs/                   |
-| scripts/clean_project.py       | clean             | Removes build/test artifacts and Python caches               |
-| scripts/clear_caches.py        | clear-caches      | Deletes all LLM/model caches and model lists                 |
-| scripts/gh_pages_deploy.py     | gh-pages          | Builds and deploys Sphinx docs to the gh-pages branch        |
+| scripts/docs.py                | docs              | Copies and normalizes Markdown docs for Sphinx               |
+| scripts/docs-clean.py          | docs-clean        | Removes auto-copied docs assets from docs/                   |
+| scripts/clean.py               | clean             | Removes build/test artifacts and Python caches               |
+| scripts/clear-caches.py        | clear-caches      | Deletes all LLM/model caches and model lists                 |
+| scripts/gh-pages.py            | gh-pages          | Builds and deploys Sphinx docs to the gh-pages branch        |
 
 - All scripts are in the `scripts/` directory at the project root.
 - These scripts ensure all Makefile targets are platform-agnostic and reproducible.
@@ -317,9 +318,9 @@ This project supports multiple LLM providers (OpenAI, GenAI, DeepSeek, Anthropic
 
 ### LLM Model Selection (Explicit Required)
 
-When running the main script, you must explicitly set the model name for each LLM provider in `run.py`. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.
+When running the main script, you must explicitly set the model name for each LLM provider in `src/gabm/__main__.py`. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.
 
-- To select a model, set the variable (e.g., `openai_model`, `genai_model`, `deepseek_model`) at the top of the main function in `run.py`.
+- To select a model, set the variable (e.g., `openai_model`, `genai_model`, `deepseek_model`) at the top of the main function in `src/gabm/__main__.py`.
 - If you do not set a model, the script will raise an error and prompt you to specify one.
 - To see available models, run the model listing function for each provider or check the generated `models.json` file in `data/llm/{provider}/`.
 
@@ -352,7 +353,7 @@ If you do not see these files or folders in the repository, this is expected. Ea
 
 ## Documentation Build Workflow
 
-- The Makefile `docs` target automatically runs `scripts/update_docs_assets.py` to copy key documentation files (README.md, ROADMAP.md, etc.) from the project root to the `docs/` directory and update their internal links for Sphinx.
+- The Makefile `docs` target automatically runs `scripts/docs.py` to copy key documentation files (README.md, ROADMAP.md, etc.) from the project root to the `docs/` directory and update their internal links for Sphinx.
 - **Edit only the originals in the project root.** Do not edit the auto-copied files in `docs/`—they will be overwritten.
 - `.rst` files in `docs/` are meant to be created, edited, and maintained by developers for Sphinx documentation.
 - This workflow ensures that all documentation is up to date, cross-referenced, and easy to navigate in both the repository and the generated HTML docs.

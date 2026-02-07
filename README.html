@@ -109,7 +109,7 @@
 </div>
 <p>Replace <code class="docutils literal notranslate"><span class="pre">x.y.z</span></code> with the desired version number (e.g., <code class="docutils literal notranslate"><span class="pre">0.1.0</span></code>).
 3. The release will be tagged and pushed to the remote repository.</p>
-<p>See <a class="reference internal" href="CHANGE_LOG.html"><span class="std std-doc">CHANGE_LOG.md</span></a> for details of each release.</p>
+<p>See <a class="reference internal" href="CHANGE_LOG.html"><span class="std std-doc">CHANGE_LOG.md</span></a> for details of each release, including the latest 0.1.1 documentation update.</p>
 </section>
 <section id="code-of-conduct-and-reporting">
 <h2>Code of Conduct and Reporting<a class="headerlink" href="#code-of-conduct-and-reporting" title="Link to this heading"></a></h2>
@@ -210,7 +210,7 @@
 <section id="running-the-code">
 <h3>5. Running the Code<a class="headerlink" href="#running-the-code" title="Link to this heading"></a></h3>
 <p>From the project root, run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">run</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">gabm</span>
 </pre></div>
 </div>
 </section>
@@ -219,7 +219,7 @@
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <section id="running-the-main-program">
 <h3>Running the Main Program<a class="headerlink" href="#running-the-main-program" title="Link to this heading"></a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">run</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">gabm</span>
 </pre></div>
 </div>
 </section>
@@ -250,8 +250,8 @@
 <p>This workflow is consistent across all LLMs, making it easy to add new providers or update model selection logic.</p>
 <section id="model-selection-explicit-required">
 <h4>Model Selection (Explicit Required)<a class="headerlink" href="#model-selection-explicit-required" title="Link to this heading"></a></h4>
-<p>When running the main script, you must explicitly set the model name for each LLM provider in <code class="docutils literal notranslate"><span class="pre">run.py</span></code>. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.</p>
-<p>To select a model, set the variable (e.g., <code class="docutils literal notranslate"><span class="pre">openai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">genai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">deepseek_model</span></code>) at the top of the main function in <code class="docutils literal notranslate"><span class="pre">run.py</span></code>.</p>
+<p>When running the main script, you must explicitly set the model name for each LLM provider in <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.</p>
+<p>To select a model, set the variable (e.g., <code class="docutils literal notranslate"><span class="pre">openai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">genai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">deepseek_model</span></code>) at the top of the main function in <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>.</p>
 <p>If you do not set a model, the script will raise an error and prompt you to specify one.</p>
 <p>To see available models, run the model listing function for each provider or check the generated <code class="docutils literal notranslate"><span class="pre">models.json</span></code> file in <code class="docutils literal notranslate"><span class="pre">data/llm/{provider}/</span></code>.</p>
 <p>Example:</p>
@@ -329,11 +329,11 @@
 <section id="python-scripts-used-by-makefile-targets">
 <h3>Python Scripts Used by Makefile Targets<a class="headerlink" href="#python-scripts-used-by-makefile-targets" title="Link to this heading"></a></h3>
 <p>| Script                        | Used by Target    | Purpose                                                      |</p>
-<p>| scripts/update_docs_assets.py  | docs              | Copies and normalizes Markdown docs for Sphinx               |
-| scripts/clean_docs_assets.py   | docs-clean        | Removes auto-copied docs assets from docs/                   |
-| scripts/clean_project.py       | clean             | Removes build/test artifacts and Python caches               |
-| scripts/clear_caches.py        | clear-caches      | Deletes all LLM/model caches and model lists                 |
-| scripts/gh_pages_deploy.py     | gh-pages          | Builds and deploys Sphinx docs to the gh-pages branch        |</p>
+<p>| scripts/docs.py                | docs              | Copies and normalizes Markdown docs for Sphinx               |
+| scripts/docs-clean.py          | docs-clean        | Removes auto-copied docs assets from docs/                   |
+| scripts/clean.py               | clean             | Removes build/test artifacts and Python caches               |
+| scripts/clear-caches.py        | clear-caches      | Deletes all LLM/model caches and model lists                 |
+| scripts/gh-pages.py            | gh-pages          | Builds and deploys Sphinx docs to the gh-pages branch        |</p>
 <ul class="simple">
 <li><p>All scripts are in the <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory at the project root.</p></li>
 <li><p>These scripts ensure all Makefile targets are platform-agnostic and reproducible.</p></li>
@@ -382,9 +382,9 @@
 </ul>
 <section id="llm-model-selection-explicit-required">
 <h3>LLM Model Selection (Explicit Required)<a class="headerlink" href="#llm-model-selection-explicit-required" title="Link to this heading"></a></h3>
-<p>When running the main script, you must explicitly set the model name for each LLM provider in <code class="docutils literal notranslate"><span class="pre">run.py</span></code>. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.</p>
+<p>When running the main script, you must explicitly set the model name for each LLM provider in <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.</p>
 <ul class="simple">
-<li><p>To select a model, set the variable (e.g., <code class="docutils literal notranslate"><span class="pre">openai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">genai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">deepseek_model</span></code>) at the top of the main function in <code class="docutils literal notranslate"><span class="pre">run.py</span></code>.</p></li>
+<li><p>To select a model, set the variable (e.g., <code class="docutils literal notranslate"><span class="pre">openai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">genai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">deepseek_model</span></code>) at the top of the main function in <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>.</p></li>
 <li><p>If you do not set a model, the script will raise an error and prompt you to specify one.</p></li>
 <li><p>To see available models, run the model listing function for each provider or check the generated <code class="docutils literal notranslate"><span class="pre">models.json</span></code> file in <code class="docutils literal notranslate"><span class="pre">data/llm/{provider}/</span></code>.</p></li>
 </ul>
@@ -418,7 +418,7 @@
 <section id="documentation-build-workflow">
 <h2>Documentation Build Workflow<a class="headerlink" href="#documentation-build-workflow" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>The Makefile <code class="docutils literal notranslate"><span class="pre">docs</span></code> target automatically runs <code class="docutils literal notranslate"><span class="pre">scripts/update_docs_assets.py</span></code> to copy key documentation files (README.md, ROADMAP.md, etc.) from the project root to the <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory and update their internal links for Sphinx.</p></li>
+<li><p>The Makefile <code class="docutils literal notranslate"><span class="pre">docs</span></code> target automatically runs <code class="docutils literal notranslate"><span class="pre">scripts/docs.py</span></code> to copy key documentation files (README.md, ROADMAP.md, etc.) from the project root to the <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory and update their internal links for Sphinx.</p></li>
 <li><p><strong>Edit only the originals in the project root.</strong> Do not edit the auto-copied files in <code class="docutils literal notranslate"><span class="pre">docs/</span></code>—they will be overwritten.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.rst</span></code> files in <code class="docutils literal notranslate"><span class="pre">docs/</span></code> are meant to be created, edited, and maintained by developers for Sphinx documentation.</p></li>
 <li><p>This workflow ensures that all documentation is up to date, cross-referenced, and easy to navigate in both the repository and the generated HTML docs.</p></li>

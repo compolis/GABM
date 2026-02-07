@@ -55,12 +55,15 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">CHANGE_LOG</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">[0.1.0] - 2026-02-06</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#added">Added</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unreleased">[0.2.0] - Unreleased</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">[0.1.1] - 2026-02-07</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#changed">Changed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#packaging-build-workflow">Packaging &amp; Build Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging">Logging</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#unreleased">[0.2.0] - Unreleased</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#logging">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">[0.1.0] - 2026-02-06</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#added">Added</a></li>
 </ul>
 </li>
 </ul>
@@ -105,8 +108,42 @@
   <section id="change-log">
 <h1>CHANGE_LOG<a class="headerlink" href="#change-log" title="Link to this heading"></a></h1>
 <p>All notable changes to this project will be documented in this file.</p>
+<section id="unreleased">
+<h2>[0.2.0] - Unreleased<a class="headerlink" href="#unreleased" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>…</p></li>
+</ul>
+</section>
 <section id="id1">
-<h2>[0.1.0] - 2026-02-06<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<h2>[0.1.1] - 2026-02-07<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<section id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Updated documentation files for clarity and completeness (README.md, USER_GUIDE.md, DEV_GUIDE.md).</p></li>
+<li><p>Improved guide integration and Makefile target documentation.</p></li>
+<li><p>Standardized Markdown formatting and removed YAML front matter from guides.</p></li>
+</ul>
+</section>
+<section id="packaging-build-workflow">
+<h3>Packaging &amp; Build Workflow<a class="headerlink" href="#packaging-build-workflow" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Added scripts/build-test.py for platform-agnostic build and test install in a fresh virtual environment.</p></li>
+<li><p>Updated Makefile: build-test now uses scripts/build-test.py; added pypi-release and testpypi-release targets for uploading to PyPI and TestPyPI.</p></li>
+<li><p>Updated DEV_GUIDE.md: documented new Makefile targets and clarified packaging workflow.</p></li>
+<li><p>Added twine to requirements-dev.txt for PyPI uploads.</p></li>
+</ul>
+</section>
+<section id="logging">
+<h3>Logging<a class="headerlink" href="#logging" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>All asset management, cleaning, deployment, and cache scripts now use Python logging.</p></li>
+<li><p>Logs are written to <code class="docutils literal notranslate"><span class="pre">data/logs/docs/</span></code> with rotating file handlers for each script.</p></li>
+<li><p>Logging helps with debugging, error tracking, and collaboration.</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>[0.1.0] - 2026-02-06<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <section id="added">
 <h3>Added<a class="headerlink" href="#added" title="Link to this heading"></a></h3>
 <ul class="simple">
@@ -120,17 +157,6 @@
 <li><p>Persistent response/model caching.</p></li>
 <li><p>Onboarding utility and Makefile targets.</p></li>
 <li><p>Contributor workflow and documentation.</p></li>
-</ul>
-</section>
-</section>
-<section id="unreleased">
-<h2>[0.2.0] - Unreleased<a class="headerlink" href="#unreleased" title="Link to this heading"></a></h2>
-<section id="logging">
-<h3>Logging<a class="headerlink" href="#logging" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>All asset management, cleaning, deployment, and cache scripts now use Python logging.</p></li>
-<li><p>Logs are written to <code class="docutils literal notranslate"><span class="pre">data/logs/docs/</span></code> with rotating file handlers for each script.</p></li>
-<li><p>Logging helps with debugging, error tracking, and collaboration.</p></li>
 </ul>
 </section>
 </section>
