@@ -19,3 +19,6 @@ docutils>=0.22,<0.23
 
 # For building distributions
 build>=1.4.0<2
+
+# For uploading to PyPI
+twine>=5.0.0<6

@@ -9,7 +9,7 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 # Third-party imports
 import pytest
 # Local imports
-from src.io.read_data import read_api_keys
+from gabm.io.read_data import read_api_keys
 # Standard library imports
 from pathlib import Path
 
