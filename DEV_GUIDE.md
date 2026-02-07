@@ -56,6 +56,7 @@ The `__main__.py` file is executed when you run `python3 -m gabm` from the proje
 For more details, see the [Python Packaging documentation](https://docs.python.org/3/library/__main__.html).
 
 
+
 ## Makefile Targets
 
 | Target         | Usage/Description                                                                 |
@@ -64,7 +65,7 @@ For more details, see the [Python Packaging documentation](https://docs.python.o
 | `make test`    | Run all tests (pytest)                                                            |
 | `make docs`    | Build documentation (Sphinx) and clean auto-copied docs assets                    |
 | `make docs-clean` | Remove auto-copied documentation files from docs/                              |
-| `make gh-pages` | Build and deploy documentation to GitHub Pages                                   |
+| `make gh-pages-deploy` | Build and deploy documentation to GitHub Pages (runs scripts/gh-pages-deploy.py) |
 | `make clean`   | Remove build/test artifacts and Python caches                                     |
 | `make clear-caches` | Delete all LLM caches and model lists (for a clean slate)                    |
 | `make git-clean` | Clean up merged local branches and prune deleted remotes                        |
@@ -154,14 +155,17 @@ For more details, see the [Python Packaging User Guide](https://packaging.python
 
 ## Continuous Integration & Branch Protection
 
-### Automated Testing with GitHub Actions
-The project uses a GitHub Actions workflow (.github/workflows/test.yml) to automatically run `make test` on pushes and pull requests to the main branch. This ensures that all code changes are tested before merging.
 
-### Branch Protection for main
-The main branch is protected on GitHub:
-- All pull requests must pass the test workflow before merging.
-- You may need to select the workflow as a required status check in the branch protection settings.
-- If the workflow is not triggered, push a new commit or reopen the PR to activate it.
+### Automated Testing and Docs Deployment with GitHub Actions
+The project uses GitHub Actions workflows for CI/CD:
+- `.github/workflows/test.yml` automatically runs `make test` on pushes and pull requests to the main branch.
+- `.github/workflows/gh-pages-deploy.yml` builds documentation for the gh-pages branch and can be used for automated docs deployment.
+
+### Branch Protection for main and gh-pages
+- The main branch is protected: all pull requests must pass the test workflow before merging.
+- The gh-pages branch is protected: docs deployment workflow runs and branch deletion/force pushes are prevented.
+- You may need to select the workflow(s) as required status checks in the branch protection settings.
+- If a workflow is not triggered, push a new commit or reopen the PR to activate it.
 
 For more details, see [GitHub Actions documentation](https://docs.github.com/en/actions) and [GitHub branch protection rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-branch-protection-rules-for-your-repository).
 
