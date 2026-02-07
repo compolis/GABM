@@ -4,6 +4,7 @@
 ## Overview
 This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow. Documentation was updated in release 0.1.1 for clarity and completeness.
 
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -14,6 +15,9 @@ This guide provides best practices for contributing to GABM, collaborating with 
 - [Makefile Targets](#makefile-targets)
 - [Developing Documentation](#developing-documentation)
 - [Python Version](#python-version)
+- [Packaging Files](#packaging-files)
+- [PyPI Release Process](#pypi-release-process)
+- [Continuous Integration & Branch Protection](#continuous-integration--branch-protection)
 - [Additional Resources](#additional-resources)
 
 ## Contributing Workflow
@@ -93,12 +97,8 @@ Refer to the Makefile for full details and usage examples.
 - Python 3.12+ required for development
 - Ensure `python3` points to the correct version
 
-
-
 ## Packaging Files
-
-The following files are essential for building, testing, and distributing the GABM package:
-
+The following files and directories are essential for building, testing, and distributing the GABM package:
 - **pyproject.toml**: Declares build system requirements and project metadata. Required for modern Python packaging (PEP 517/518).
 - **setup.cfg**: Contains static package metadata and configuration for setuptools, such as:
 	- Package name, version, author, and description
@@ -114,6 +114,8 @@ The following files are essential for building, testing, and distributing the GA
 - **requirements.txt**: Lists pinned dependencies for end users (used by pip install -r requirements.txt).
 - **requirements-dev.txt**: Lists development dependencies (testing, linting, docs) with version ranges for contributors.
 - **dist/**: Output directory for built distributions (.tar.gz and .whl files) after running the build process.
+- **src/gabm.egg-info/**: Metadata directory created by setuptools during build. Contains information about the package (version, dependencies, etc.). Safe to delete; will be recreated as needed.
+- **venv-build-test/**: Temporary virtual environment created by `make build-test` for testing the built package in isolation. Can be safely deleted after testing.
 
 
 ## PyPI Release Process
@@ -148,6 +150,20 @@ To release a new version of GABM to PyPI, follow these steps:
 	- Check the PyPI page and test installation with pip install gabm
 
 For more details, see the [Python Packaging User Guide](https://packaging.python.org/).
+
+
+## Continuous Integration & Branch Protection
+
+### Automated Testing with GitHub Actions
+The project uses a GitHub Actions workflow (.github/workflows/test.yml) to automatically run `make test` on pushes and pull requests to the main branch. This ensures that all code changes are tested before merging.
+
+### Branch Protection for main
+The main branch is protected on GitHub:
+- All pull requests must pass the test workflow before merging.
+- You may need to select the workflow as a required status check in the branch protection settings.
+- If the workflow is not triggered, push a new commit or reopen the PR to activate it.
+
+For more details, see [GitHub Actions documentation](https://docs.github.com/en/actions) and [GitHub branch protection rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-branch-protection-rules-for-your-repository).
 
 ## Additional Resources
 - See [SETUP_GUIDE_DEV.md](SETUP_GUIDE_DEV.md) for environment setup
