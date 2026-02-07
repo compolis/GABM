@@ -41,7 +41,7 @@ help:
 	@echo "  sync           - Sync main branch with upstream"
 	@echo "  sync-feature   - Sync and rebase a feature/release branch onto main (usage: make sync-feature BRANCH=release/0.2.0)"
 	@echo "  setup-llms     - Run onboarding/setup for all LLMs (API key check, model lists, cache init)"
-	@echo "  release        - Tag and push a release (usage: make release VERSION=x.y.z)"
+	@echo "  release        - Tag and push a release (usage: make release VERSION=x.y.z BRANCH=release/x.y.z)"
 	@echo "  delete-release - Delete a release tag locally and on remotes (usage: make delete-release VERSION=x.y.z)"
 	@echo "  build          - Build a distribution package for PyPI (python -m build)"
 	@echo "  build-test     - Build and test install the package in a fresh venv"
