@@ -168,7 +168,7 @@ make clear-caches
 From the project root, run:
 
 ```bash
-python3 run.py
+python3 -m gabm
 ```
 
 ## Usage
@@ -176,7 +176,7 @@ python3 run.py
 ### Running the Main Program
 
 ```bash
-python3 run.py
+python3 -m gabm
 ```
 
 ### Example: Persona Test Agent Fills Survey
@@ -203,9 +203,9 @@ This workflow is consistent across all LLMs, making it easy to add new providers
 
 #### Model Selection (Explicit Required)
 
-When running the main script, you must explicitly set the model name for each LLM provider in `run.py`. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.
+When running the main script, you must explicitly set the model name for each LLM provider in `src/gabm/__main__.py`. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.
 
-To select a model, set the variable (e.g., `openai_model`, `genai_model`, `deepseek_model`) at the top of the main function in `run.py`.
+To select a model, set the variable (e.g., `openai_model`, `genai_model`, `deepseek_model`) at the top of the main function in `src/gabm/__main__.py`.
 
 If you do not set a model, the script will raise an error and prompt you to specify one.
 
@@ -335,9 +335,9 @@ This project supports multiple LLM providers (OpenAI, GenAI, DeepSeek, Anthropic
 
 ### LLM Model Selection (Explicit Required)
 
-When running the main script, you must explicitly set the model name for each LLM provider in `run.py`. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.
+When running the main script, you must explicitly set the model name for each LLM provider in `src/gabm/__main__.py`. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.
 
-- To select a model, set the variable (e.g., `openai_model`, `genai_model`, `deepseek_model`) at the top of the main function in `run.py`.
+- To select a model, set the variable (e.g., `openai_model`, `genai_model`, `deepseek_model`) at the top of the main function in `src/gabm/__main__.py`.
 - If you do not set a model, the script will raise an error and prompt you to specify one.
 - To see available models, run the model listing function for each provider or check the generated `models.json` file in `data/llm/{provider}/`.
 

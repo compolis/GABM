@@ -26,25 +26,28 @@
 # Caution: Some commands (like git-clean, release, and delete-release) can modify your git history or delete tags. Always review the scripts they call (in the scripts/ directory) to ensure they do what you expect before running these commands.
 
 # Phony targets (not actual files)
-.PHONY: help test docs docs-clean gh-pages clean git-clean setup-llms clear-caches sync sync-feature release delete-release
+.PHONY: help test docs docs-clean gh-pages clean git-clean setup-llms clear-caches sync sync-feature release delete-release build build-test pypi-release testpypi-release
 
 # Show available Makefile commands
 help:
 	@echo "Available targets:"
-	@echo "  test         - Run tests (pytest)"
-	@echo "  docs         - Build documentation (Sphinx)"
-	@echo "  docs-clean   - Clean auto-copied documentation files from docs/"
-	@echo "  gh-pages     - Build and deploy documentation to GitHub Pages"
-	@echo "  clean        - Remove build/test artifacts"
-	@echo "  clear-caches - Delete all LLM caches and model lists (for a clean slate)"
-	@echo "  git-clean    - Clean up merged local branches and prune deleted remotes"
-	@echo "  sync         - Sync main branch with upstream"
-	@echo "  sync-feature - Sync and rebase a feature/release branch onto main (usage: make sync-feature BRANCH=release/0.2.0)"
-	@echo "  setup-llms   - Run onboarding/setup for all LLMs (API key check, model lists, cache init)"
-	@echo "  release      - Tag and push a release (usage: make release VERSION=x.y.z)"
+	@echo "  test           - Run tests (pytest)"
+	@echo "  docs           - Build documentation (Sphinx)"
+	@echo "  docs-clean     - Clean auto-copied documentation files from docs/"
+	@echo "  gh-pages       - Build and deploy documentation to GitHub Pages"
+	@echo "  clean          - Remove build/test artifacts"
+	@echo "  clear-caches   - Delete all LLM caches and model lists (for a clean slate)"
+	@echo "  git-clean      - Clean up merged local branches and prune deleted remotes"
+	@echo "  sync           - Sync main branch with upstream"
+	@echo "  sync-feature   - Sync and rebase a feature/release branch onto main (usage: make sync-feature BRANCH=release/0.2.0)"
+	@echo "  setup-llms     - Run onboarding/setup for all LLMs (API key check, model lists, cache init)"
+	@echo "  release        - Tag and push a release (usage: make release VERSION=x.y.z)"
 	@echo "  delete-release - Delete a release tag locally and on remotes (usage: make delete-release VERSION=x.y.z)"
+	@echo "  build          - Build a distribution package for PyPI (python -m build)"
+	@echo "  build-test     - Build and test install the package in a fresh venv"
+	@echo "  pypi-release   - Upload the built package to PyPI (twine upload dist/*)"
+	@echo "  testpypi-release - Upload the built package to TestPyPI (twine upload --repository testpypi dist/*)"
 	
-
 # Run all tests (requires pytest)
 test:
 	PYTHONPATH=. pytest
@@ -125,3 +128,19 @@ delete-release:
 	git push origin :refs/tags/v$(VERSION)
 	git push upstream :refs/tags/v$(VERSION)
 	@echo "Deleted tag v$(VERSION) locally, on origin, and on upstream."
+
+# Build a distribution package for PyPI
+build:
+	python3 -m build
+
+# Build and test install the package in a fresh venv
+build-test:
+	python3 scripts/build-test.py
+
+# Upload the built package to PyPI
+pypi-release:
+	twine upload dist/*
+
+# Upload the built package to TestPyPI
+testpypi-release:
+	twine upload --repository testpypi dist/*

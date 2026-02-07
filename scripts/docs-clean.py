@@ -18,19 +18,21 @@ from logging.handlers import RotatingFileHandler
 
 # Files to remove from docs/
 DOC_FILES = [
-    "README.md",
-    "ROADMAP.md",
+    "API_KEYS.md",
     "CHANGE_LOG.md",
     "CODE_OF_CONDUCT.md",
-    "SETUP_GUIDE_USER.md",
-    "SETUP_GUIDE_DEV.md",
-    "API_KEYS.md",
+    "CONTACT.md",
     "CONTRIBUTORS.md",
+    "DEV_GUIDE.md",
     "LICENSE.md",
+    "README.md",
     "requirements.md",
     "requirements-dev.md",
+    "ROADMAP.md",
     "SECURITY.md",
-    "CONTACT.md",
+    "SETUP_GUIDE_USER.md",
+    "SETUP_GUIDE_DEV.md",
+    "USER_GUIDE.md",
 ]
 
 # Paths

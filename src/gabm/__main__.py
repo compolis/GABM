@@ -3,7 +3,7 @@
 """
 This is the entry point for running the GABM application.
 To run, use the command:
-    python3 run.py
+    python3 -m gabm
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
@@ -112,7 +112,7 @@ def main():
     if not deepseek_model:
         missing_models.append("deepseek_model")
     if missing_models:
-        logging.error(f"You must explicitly set the following model variable(s) in run.py: {', '.join(missing_models)}")
+        logging.error(f"You must explicitly set the following model variable(s) in __main__.py: {', '.join(missing_models)}")
         logging.error("See data/llm/{provider}/models.json for available models.")
         return
 

@@ -41,7 +41,7 @@ If you want to use LLM features, create `data/api_key.csv` with your API keys. S
 From the project root:
 
 ```bash
-python3 run.py
+python3 -m gabm
 ```
 
 ## 6. Troubleshooting
