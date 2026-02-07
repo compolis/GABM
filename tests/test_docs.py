@@ -15,9 +15,8 @@ import pytest
 import sys
 import os
 # Local imports
-from scripts.docs import fix_header_levels, clean_code_blocks, update_links
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'scripts')))
+from docs import fix_header_levels, clean_code_blocks, update_links
 
 def test_update_links_internal_doc():
     """

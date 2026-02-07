@@ -50,7 +50,7 @@ help:
 	
 # Run all tests (requires pytest)
 test:
-	PYTHONPATH=. pytest
+	PYTHONPATH=src:scripts pytest
 
 # Build documentation (requires Sphinx, in docs/)
 docs:
