@@ -49,7 +49,7 @@ Refer to the Makefile for full details and usage examples.
 
 ## Developing Documentation
 - Edit Markdown files in `docs/` and project root
-- Use Sphinx and MyST for documentation builds
+- Use Sphinx and MyST via `make docs` for documentation builds and update the script it uses as approriate
 - Add new guides or API docs as needed
 - Run `make docs` to preview changes
 
@@ -58,8 +58,8 @@ Refer to the Makefile for full details and usage examples.
 - Ensure `python3` points to the correct version
 
 ## Additional Resources
-- See `SETUP_GUIDE_DEV.md` for environment setup
-- See `README.md` for project overview
+- See [SETUP_GUIDE_DEV.md](SETUP_GUIDE_DEV.md) for environment setup
+- See [README.md](README.md) for project overview
 
 ---
 For further questions, [open an issue](https://github.com/compolis/GABM/issues/new/choose) or contact maintainers via GitHub.
