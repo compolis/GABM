@@ -24,6 +24,8 @@ from logging.handlers import RotatingFileHandler
 # Files to copy from root to docs/
 DOC_FILES = [
     "README.md",
+    "DEV_GUIDE.md",
+    "USER_GUIDE.md",
     "ROADMAP.md",
     "CHANGE_LOG.md",
     "CODE_OF_CONDUCT.md",

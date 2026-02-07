@@ -1,4 +1,4 @@
-# GABM User Setup Guide
+# User Setup Guide
 
 This guide is for end users who want to run the Generative Agent-Based Model (GABM) with minimal setup.
 

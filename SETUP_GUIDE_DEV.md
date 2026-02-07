@@ -1,4 +1,4 @@
-# GABM Developer Setup Guide
+# Developer Setup Guide
 
 This guide is for contributors and developers who want to work on the GABM codebase, run tests, or build documentation.
 
