@@ -1,0 +1,8 @@
+Add platform-agnostic build-test script, PyPI upload Makefile targets, and documentation updates
+
+- Added scripts/build-test.py for cross-platform build and test install of the package in a fresh virtual environment
+- Updated Makefile: build-test now uses scripts/build-test.py; added pypi-release and testpypi-release targets for uploading to PyPI and TestPyPI
+- Updated DEV_GUIDE.md: documented new Makefile targets and clarified packaging workflow
+- Added twine to requirements-dev.txt for PyPI uploads
+
+These changes improve the reliability and accessibility of the build and release process for all contributors.

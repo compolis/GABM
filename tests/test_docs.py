@@ -1,5 +1,5 @@
 """
-Unit tests for scripts/update_docs_assets.py Markdown transformation functions.
+Unit tests for scripts/docs.py Markdown transformation functions.
 
 These tests ensure that heading demotion, code block normalization, and link rewriting work as expected,
 helping to maintain Sphinx/MyST compatibility for automated documentation builds.
@@ -15,7 +15,7 @@ import pytest
 import sys
 import os
 # Local imports
-from scripts.update_docs_assets import fix_header_levels, clean_code_blocks, update_links
+from scripts.docs import fix_header_levels, clean_code_blocks, update_links
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
