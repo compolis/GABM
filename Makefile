@@ -1,7 +1,7 @@
 # Makefile for common development tasks
 
 # Phony targets (not actual files)
-.PHONY: help sync test docs clean git-clean setup-llms clear-caches release
+.PHONY: help sync test docs clean git-clean setup-llms clear-caches release sync-feature
 
 # Show available Makefile commands
 help:
@@ -14,6 +14,7 @@ help:
 	@echo "  setup-llms   - Run onboarding/setup for all LLMs (API key check, model lists, cache init)"
 	@echo "  clear-caches - Delete all LLM caches and model lists (for a clean slate)"
 	@echo "  release      - Tag and push a release (usage: make release VERSION=x.y.z)"
+	@echo "  sync-feature  - Sync and rebase a feature/release branch onto main (usage: make sync-feature BRANCH=your_branch_name)"
 
 # Tag and push a release (usage: make release VERSION=x.y.z)
 release:
@@ -67,11 +68,14 @@ git-clean:
 
 # Run onboarding/setup for all LLMs (API key check, model lists, cache init)
 setup-llms:
-	PYTHONPATH=. python3 setup_llms.py
+	PYTHONPATH=. python3 src/setup_llms.py
 
 # Delete all LLM caches and model lists (for a clean slate)
 clear-caches:
 	python3 scripts/clear_caches.py
 	echo "All LLM caches and model lists cleared."
 
-# End of Makefile
+# Sync and rebase a feature/release branch onto main
+# Usage: make sync-feature BRANCH=release/0.2.0
+sync-feature:
+	python3 scripts/sync_feature.py --branch $(BRANCH)
