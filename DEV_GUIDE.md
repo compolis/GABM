@@ -1,7 +1,7 @@
 # Developer Guide
 
 ## Overview
-This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow.
+This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow. Documentation was updated in release 0.1.1 for clarity and completeness.
 
 ## Contributing Workflow
 - Fork the repository and create feature branches for new work.

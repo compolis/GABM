@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.1] - 2026-02-07
+### Changed
+- Updated documentation files for clarity and completeness (README.md, USER_GUIDE.md, DEV_GUIDE.md).
+- Improved guide integration and Makefile target documentation.
+- Standardized Markdown formatting and removed YAML front matter from guides.
+
+## [0.2.0] - Unreleased
+
+### Logging
+- All asset management, cleaning, deployment, and cache scripts now use Python logging.
+- Logs are written to `data/logs/docs/` with rotating file handlers for each script.
+- Logging helps with debugging, error tracking, and collaboration.
+
 ## [0.1.0] - 2026-02-06
 ### Added
 - Initial private release.
@@ -11,12 +24,4 @@ All notable changes to this project will be documented in this file.
 - Persistent response/model caching.
 - Onboarding utility and Makefile targets.
 - Contributor workflow and documentation.
-
-
-## [0.2.0] - Unreleased
-
-### Logging
-- All asset management, cleaning, deployment, and cache scripts now use Python logging.
-- Logs are written to `data/logs/docs/` with rotating file handlers for each script.
-- Logging helps with debugging, error tracking, and collaboration.
 

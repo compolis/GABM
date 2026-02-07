@@ -1,7 +1,7 @@
 # User Guide
 
 ## Overview
-This guide helps users get started with GABM, find documentation, and get support. It will be updated as more features and configuration options are added.
+This guide helps users get started with GABM, find documentation, and get support. Documentation was updated in release 0.1.1 for clarity and completeness. It will be updated as more features and configuration options are added.
 
 ## Getting Started
 - See [SETUP_GUIDE_USER.md](SETUP_GUIDE_USER.md) for installation and setup instructions.
