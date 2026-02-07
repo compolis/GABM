@@ -14,6 +14,7 @@ help:
 	@echo "  setup-llms   - Run onboarding/setup for all LLMs (API key check, model lists, cache init)"
 	@echo "  clear-caches - Delete all LLM caches and model lists (for a clean slate)"
 	@echo "  release      - Tag and push a release (usage: make release VERSION=x.y.z)"
+	@echo "  sync-feature - Sync and rebase a feature/release branch onto main (usage: make sync-feature BRANCH=release/0.2.0)"
 
 # Tag and push a release (usage: make release VERSION=x.y.z)
 release:
@@ -74,4 +75,7 @@ clear-caches:
 	python3 scripts/clear_caches.py
 	@echo "All LLM caches and model lists cleared."
 
-# End of Makefile
+# Sync and rebase a feature/release branch onto main
+# Usage: make sync-feature BRANCH=release/0.2.0
+sync-feature:
+	python3 scripts/sync_feature_branch.py $(BRANCH)
