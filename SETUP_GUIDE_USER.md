@@ -1,0 +1,51 @@
+# GABM User Setup Guide
+
+This guide is for end users who want to run the Generative Agent-Based Model (GABM) with minimal setup.
+
+## 1. Install Python and pip
+
+- Install Python 3.12 or higher from [python.org](https://www.python.org/downloads/).
+- Ensure `pip` is available (it is included with Python 3.4+).
+- Check your version:
+
+```bash
+python3 --version
+pip --version
+```
+
+## 2. Install Dependencies
+
+From the project root, install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+## 3. Fork and Clone the Repository
+
+- Fork the [upstream repository](https://github.com/compolis/GABM) to your own GitHub account.
+- Clone your fork locally:
+
+```bash
+git clone https://github.com/<your-username>/GABM.git
+cd GABM
+git checkout stable/0.1.0  # Or latest stable branch
+```
+
+## 4. Set Up API Keys (Optional)
+
+If you want to use LLM features, create `data/api_key.csv` with your API keys. See [API_KEYS.md](API_KEYS.md) for details and instructions.
+
+## 5. Run the Main Program
+
+From the project root:
+
+```bash
+python3 run.py
+```
+
+## 6. Troubleshooting
+
+- If you encounter errors, check your Python version and that all dependencies are installed.
+- For more help, see the [README](README.md).
+- If you need support, you can [open an issue on GitHub](https://github.com/compolis/GABM/issues/new/choose).

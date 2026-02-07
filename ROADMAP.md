@@ -5,7 +5,7 @@ This file outlines planned next steps and future goals for the project. The repo
 ## Next Target: v0.2.0
 
 - Begin development of an agent-based model (ABM) with agent personas derived from processed survey data.
-- Implement 4 initialized agents, each with unique biases and opinions.
+- Implement 10 initialized agents, each with unique biases and opinions.
 - Agents will use LLM API prompts and responses to have a "conversation" and modify their opinions based on their biases and what they "learn" or are influenced by in the conversation.
 - Each agent will chat with every other agent twice.
 - After the conversations, generate a graph showing individual and aggregate opinions and confidence levels.
@@ -13,6 +13,4 @@ This file outlines planned next steps and future goals for the project. The repo
 
 ## Future Milestone: v1.0.0 (First Public Release)
 
-- Criteria and features for 1.0.0 to be determined.
-- Repository will be made public when approved by stakeholders.
-- Additional features, documentation, and polish as required for public release.
+- Criteria and features for 1.0.0 to be determined...
