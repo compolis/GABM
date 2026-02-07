@@ -110,15 +110,15 @@
 <li><p>Ensure <code class="docutils literal notranslate"><span class="pre">pip</span></code> is available.</p></li>
 <li><p>Check your version:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">--</span><span class="n">version</span>
-<span class="n">pip</span> <span class="o">--</span><span class="n">version</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>--version
+pip<span class="w"> </span>--version
 </pre></div>
 </div>
 </section>
 <section id="install-development-dependencies">
 <h2>2. Install Development Dependencies<a class="headerlink" href="#install-development-dependencies" title="Link to this heading"></a></h2>
 <p>From the project root, install all runtime, development, and documentation dependencies:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">-</span><span class="n">dev</span><span class="o">.</span><span class="n">txt</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-dev.txt
 </pre></div>
 </div>
 </section>
@@ -128,9 +128,9 @@
 <li><p>Fork the <a class="reference external" href="https://github.com/compolis/GABM">upstream repository</a> to your own GitHub account.</p></li>
 <li><p>Clone your fork locally:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/</span><span class="n">GABM</span><span class="o">.</span><span class="n">git</span>
-<span class="n">cd</span> <span class="n">GABM</span>
-<span class="n">git</span> <span class="n">checkout</span> <span class="n">main</span>  <span class="c1"># Or your feature branch</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/&lt;your-username&gt;/GABM.git
+<span class="nb">cd</span><span class="w"> </span>GABM
+git<span class="w"> </span>checkout<span class="w"> </span>main<span class="w">  </span><span class="c1"># Or your feature branch</span>
 </pre></div>
 </div>
 </section>
@@ -145,13 +145,13 @@
 <ul class="simple">
 <li><p>Run tests:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Build documentation:</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">docs</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>docs
 </pre></div>
 </div>
 <ul class="simple">
@@ -184,7 +184,7 @@
 <h2>8. Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>If you encounter errors, check your Python version and that all dependencies are installed.</p></li>
-<li><p>For more help, see the <a class="reference external" href="https://github.com/compolis/GABM#readme">README</a>.</p></li>
+<li><p>For more help, see the <a class="reference internal" href="README.html"><span class="std std-doc">README</span></a>.</p></li>
 <li><p>If you need support, you can <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue on GitHub</a>.</p></li>
 </ul>
 </section>
