@@ -234,23 +234,23 @@ def main():
                 f.write("\n```")
             logger.info(f"Copied and formatted: {fname} -> {md_name}")
             continue
-            # Copy files from .github/ to docs/ (if present)
-            GITHUB = os.path.join(ROOT, ".github")
-            for fname in GITHUB_DOC_FILES:
-                src = os.path.join(GITHUB, fname)
-                dst = os.path.join(DOCS, fname)
-                if os.path.exists(src):
-                    with open(src, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    # Demote headings for Sphinx compatibility
-                    from re import match
-                    lines = content.splitlines()
-                    if lines and match(r'^# ', lines[0]):
-                        lines[0] = '#' + lines[0]
-                    content = '\n'.join(lines)
-                    with open(dst, "w", encoding="utf-8") as f:
-                        f.write(content)
-                    print(f"Copied: .github/{fname} -> docs/{fname}")
+    # Always copy files from .github/ to docs/ (if present)
+    GITHUB = os.path.join(ROOT, ".github")
+    for fname in GITHUB_DOC_FILES:
+        src = os.path.join(GITHUB, fname)
+        dst = os.path.join(DOCS, fname)
+        if os.path.exists(src):
+            with open(src, "r", encoding="utf-8") as f:
+                content = f.read()
+            # Demote headings for Sphinx compatibility
+            from re import match
+            lines = content.splitlines()
+            if lines and match(r'^# ', lines[0]):
+                lines[0] = '#' + lines[0]
+            content = '\n'.join(lines)
+            with open(dst, "w", encoding="utf-8") as f:
+                f.write(content)
+            logger.info(f"Copied: .github/{fname} -> docs/{fname}")
         with open(src, "r", encoding="utf-8") as f:
             content = f.read()
         if fname == "README.md":
