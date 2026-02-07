@@ -1,9 +1,5 @@
 # User Guide
 
----
-title: User Guide
----
-
 ## Overview
 This guide helps users get started with GABM, find documentation, and get support. It will be updated as more features and configuration options are added.
 
