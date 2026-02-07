@@ -17,10 +17,10 @@ This guide provides best practices for contributing to GABM, collaborating with 
 - Respect code review feedback and project coding standards.
 
 ## Project Structure
-- `src/`: Main source code
 - `data/`: For data including log files
 - `docs/`: Documentation and assets
 - `scripts/`: Utility scripts
+- `src/`: Main source code
 - `tests/`: Test suite
 - `Makefile`: Automation targets
 
@@ -30,17 +30,17 @@ This guide provides best practices for contributing to GABM, collaborating with 
 | Target         | Usage/Description                                                                 |
 |--------------- |----------------------------------------------------------------------------------|
 | `make help`    | Show available Makefile commands                                                  |
-| `make sync`    | Sync main branch with upstream                                                    |
 | `make test`    | Run all tests (pytest)                                                            |
 | `make docs`    | Build documentation (Sphinx) and clean auto-copied docs assets                    |
 | `make docs-clean` | Remove auto-copied documentation files from docs/                              |
-| `make clean`   | Remove build/test artifacts and Python caches                                     |
-| `make git-clean` | Clean up merged local branches and prune deleted remotes                        |
-| `make setup-llms` | Run onboarding/setup for all LLMs (API key check, model lists, cache init)     |
-| `make clear-caches` | Delete all LLM caches and model lists (for a clean slate)                    |
-| `make release VERSION=x.y.z BRANCH=release/x.y.z` | Tag and push a release (platform-agnostic)     |
-| `make sync-feature BRANCH=release/0.2.0` | Sync and rebase a feature/release branch onto main     |
 | `make gh-pages` | Build and deploy documentation to GitHub Pages                                   |
+| `make clean`   | Remove build/test artifacts and Python caches                                     |
+| `make clear-caches` | Delete all LLM caches and model lists (for a clean slate)                    |
+| `make git-clean` | Clean up merged local branches and prune deleted remotes                        |
+| `make sync`    | Sync main branch with upstream                                                    |
+| `make sync-feature BRANCH=release/0.2.0` | Sync and rebase a feature/release branch onto main     |
+| `make setup-llms` | Run onboarding/setup for all LLMs (API key check, model lists, cache init)     |
+| `make release VERSION=x.y.z BRANCH=release/x.y.z` | Tag and push a release (platform-agnostic)     |
 | `make delete-release VERSION=x.y.z` | Delete a release tag locally and on remotes (origin, upstream) |
 
 
