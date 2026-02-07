@@ -24,6 +24,7 @@ This guide provides best practices for contributing to GABM, collaborating with 
 - `tests/`: Test suite
 - `Makefile`: Automation targets
 
+
 ## Makefile Targets
 
 | Target         | Usage/Description                                                                 |
@@ -37,12 +38,16 @@ This guide provides best practices for contributing to GABM, collaborating with 
 | `make git-clean` | Clean up merged local branches and prune deleted remotes                        |
 | `make setup-llms` | Run onboarding/setup for all LLMs (API key check, model lists, cache init)     |
 | `make clear-caches` | Delete all LLM caches and model lists (for a clean slate)                    |
-| `make release VERSION=x.y.z` | Tag and push a release (usage: make release VERSION=x.y.z)          |
+| `make release VERSION=x.y.z BRANCH=release/x.y.z` | Tag and push a release (platform-agnostic)     |
 | `make sync-feature BRANCH=release/0.2.0` | Sync and rebase a feature/release branch onto main     |
 | `make gh-pages` | Build and deploy documentation to GitHub Pages                                   |
+| `make delete-release VERSION=x.y.z` | Delete a release tag locally and on remotes (origin, upstream) |
+
 
 **Notes:**
-- All scripts used by Makefile targets are in the `scripts/` directory.
+- All Python scripts used by Makefile targets are in the `scripts/` directory and are named consistently with their Makefile targets (e.g., `make docs-clean` runs `scripts/docs-clean.py`).
+- The `delete-release` target is platform-agnostic and automates deleting a release tag locally and on both remotes (origin, upstream).
+- This convention improves clarity and discoverability for contributors.
 - Targets are platform-agnostic and reproducible.
 
 Refer to the Makefile for full details and usage examples.

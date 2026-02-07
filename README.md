@@ -282,11 +282,11 @@ This helps ensure proper attribution and makes it easy to track contributors. Fo
 
 | Script                        | Used by Target    | Purpose                                                      |
 |-------------------------------|-------------------|--------------------------------------------------------------|
-| scripts/update_docs_assets.py  | docs              | Copies and normalizes Markdown docs for Sphinx               |
-| scripts/clean_docs_assets.py   | docs-clean        | Removes auto-copied docs assets from docs/                   |
-| scripts/clean_project.py       | clean             | Removes build/test artifacts and Python caches               |
-| scripts/clear_caches.py        | clear-caches      | Deletes all LLM/model caches and model lists                 |
-| scripts/gh_pages_deploy.py     | gh-pages          | Builds and deploys Sphinx docs to the gh-pages branch        |
+| scripts/docs.py                | docs              | Copies and normalizes Markdown docs for Sphinx               |
+| scripts/docs-clean.py          | docs-clean        | Removes auto-copied docs assets from docs/                   |
+| scripts/clean.py               | clean             | Removes build/test artifacts and Python caches               |
+| scripts/clear-caches.py        | clear-caches      | Deletes all LLM/model caches and model lists                 |
+| scripts/gh-pages.py            | gh-pages          | Builds and deploys Sphinx docs to the gh-pages branch        |
 
 - All scripts are in the `scripts/` directory at the project root.
 - These scripts ensure all Makefile targets are platform-agnostic and reproducible.
@@ -369,7 +369,7 @@ If you do not see these files or folders in the repository, this is expected. Ea
 
 ## Documentation Build Workflow
 
-- The Makefile `docs` target automatically runs `scripts/update_docs_assets.py` to copy key documentation files (README.md, ROADMAP.md, etc.) from the project root to the `docs/` directory and update their internal links for Sphinx.
+- The Makefile `docs` target automatically runs `scripts/docs.py` to copy key documentation files (README.md, ROADMAP.md, etc.) from the project root to the `docs/` directory and update their internal links for Sphinx.
 - **Edit only the originals in the project root.** Do not edit the auto-copied files in `docs/`—they will be overwritten.
 - `.rst` files in `docs/` are meant to be created, edited, and maintained by developers for Sphinx documentation.
 - This workflow ensures that all documentation is up to date, cross-referenced, and easy to navigate in both the repository and the generated HTML docs.
