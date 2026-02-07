@@ -68,6 +68,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#python-version">Python Version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#packaging-files">Packaging Files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#pypi-release-process">PyPI Release Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#continuous-integration-branch-protection">Continuous Integration &amp; Branch Protection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#automated-testing-and-docs-deployment-with-github-actions">Automated Testing and Docs Deployment with GitHub Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#branch-protection-for-main-and-gh-pages">Branch Protection for main and gh-pages</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
 </ul>
 </li>
@@ -123,6 +128,9 @@
 <li><p><a class="reference internal" href="#makefile-targets"><span class="xref myst">Makefile Targets</span></a></p></li>
 <li><p><a class="reference internal" href="#developing-documentation"><span class="xref myst">Developing Documentation</span></a></p></li>
 <li><p><a class="reference internal" href="#python-version"><span class="xref myst">Python Version</span></a></p></li>
+<li><p><a class="reference internal" href="#packaging-files"><span class="xref myst">Packaging Files</span></a></p></li>
+<li><p><a class="reference internal" href="#pypi-release-process"><span class="xref myst">PyPI Release Process</span></a></p></li>
+<li><p><a class="reference internal" href="#continuous-integration--branch-protection"><span class="xref myst">Continuous Integration &amp; Branch Protection</span></a></p></li>
 <li><p><a class="reference internal" href="#additional-resources"><span class="xref myst">Additional Resources</span></a></p></li>
 </ul>
 </section>
@@ -192,8 +200,8 @@
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-clean</span></code></p></td>
 <td><p>Remove auto-copied documentation files from docs/</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages</span></code></p></td>
-<td><p>Build and deploy documentation to GitHub Pages</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages-deploy</span></code></p></td>
+<td><p>Build and deploy documentation to GitHub Pages (runs scripts/gh-pages-deploy.py)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code></p></td>
 <td><p>Remove build/test artifacts and Python caches</p></td>
@@ -326,6 +334,27 @@ This ensures users who install from source get all necessary files.</p></li>
 </li>
 </ol>
 <p>For more details, see the <a class="reference external" href="https://packaging.python.org/">Python Packaging User Guide</a>.</p>
+</section>
+<section id="continuous-integration-branch-protection">
+<h2>Continuous Integration &amp; Branch Protection<a class="headerlink" href="#continuous-integration-branch-protection" title="Link to this heading"></a></h2>
+<section id="automated-testing-and-docs-deployment-with-github-actions">
+<h3>Automated Testing and Docs Deployment with GitHub Actions<a class="headerlink" href="#automated-testing-and-docs-deployment-with-github-actions" title="Link to this heading"></a></h3>
+<p>The project uses GitHub Actions workflows for CI/CD:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.github/workflows/test.yml</span></code> automatically runs <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> on pushes and pull requests to the main branch.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.github/workflows/gh-pages-deploy.yml</span></code> builds documentation for the gh-pages branch and can be used for automated docs deployment.</p></li>
+</ul>
+</section>
+<section id="branch-protection-for-main-and-gh-pages">
+<h3>Branch Protection for main and gh-pages<a class="headerlink" href="#branch-protection-for-main-and-gh-pages" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The main branch is protected: all pull requests must pass the test workflow before merging.</p></li>
+<li><p>The gh-pages branch is protected: docs deployment workflow runs and branch deletion/force pushes are prevented.</p></li>
+<li><p>You may need to select the workflow(s) as required status checks in the branch protection settings.</p></li>
+<li><p>If a workflow is not triggered, push a new commit or reopen the PR to activate it.</p></li>
+</ul>
+<p>For more details, see <a class="reference external" href="https://docs.github.com/en/actions">GitHub Actions documentation</a> and <a class="reference external" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-branch-protection-rules-for-your-repository">GitHub branch protection rules</a>.</p>
+</section>
 </section>
 <section id="additional-resources">
 <h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading"></a></h2>
