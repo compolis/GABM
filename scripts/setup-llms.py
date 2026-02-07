@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Setup utility for LLM onboarding: tests API keys, generates model lists, and initializes caches.
-Run with: python3 setup_llms.py
+Run with: python3 setup-llms.py
 Or use the provided Makefile target `make setup-llms`.
 """
 # Metadata
