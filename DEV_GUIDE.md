@@ -18,6 +18,7 @@ This guide provides best practices for contributing to GABM, collaborating with 
 - [Packaging Files](#packaging-files)
 - [PyPI Release Process](#pypi-release-process)
 - [Continuous Integration & Branch Protection](#continuous-integration--branch-protection)
+- [JOSS Article Intention](#joss-article-intention)
 - [Additional Resources](#additional-resources)
 
 ## Contributing Workflow
@@ -168,6 +169,13 @@ The project uses GitHub Actions workflows for CI/CD:
 - If a workflow is not triggered, push a new commit or reopen the PR to activate it.
 
 For more details, see [GitHub Actions documentation](https://docs.github.com/en/actions) and [GitHub branch protection rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-branch-protection-rules-for-your-repository).
+
+
+## JOSS Article Intention
+
+The project team intends to write and submit an article to the Journal of Open Source Software (JOSS) describing the development, purpose, and impact of GABM. Scaffolding for the JOSS article and submission workflow will be created in future sessions. Contributors and collaborators are encouraged to participate in the drafting and review process.
+
+For updates and progress, see DEVELOPMENT_HISTORY.md and the Sphinx documentation.
 
 ## Additional Resources
 - See [SETUP_GUIDE_DEV.md](SETUP_GUIDE_DEV.md) for environment setup
