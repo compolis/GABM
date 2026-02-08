@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Updated documentation files for clarity and completeness (README.md, USER_GUIDE.md, DEV_GUIDE.md).
 - Improved guide integration and Makefile target documentation.
 - Standardized Markdown formatting and removed YAML front matter from guides.
+- Started preparation for [JOSS submission](JOSS_SUBMISSION.md)
 
 ### Packaging & Build Workflow
 - Added scripts/build-test.py for platform-agnostic build and test install in a fresh virtual environment.

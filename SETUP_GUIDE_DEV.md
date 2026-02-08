@@ -73,6 +73,9 @@ Each script has its own log file (e.g., `update_docs_assets.log`, `clean_docs_as
 
 If you encounter problems, check the relevant log file for details before seeking support.
 
+
+
+
 ## 8. Troubleshooting & Support
 
 - If you encounter errors, check your Python version and that all dependencies are installed.

@@ -30,6 +30,8 @@ CONTRIBUTORS.md
 LICENSE.md
 requirements.md
 requirements-dev.md
+DEVELOPMENT_HISTORY.md
+JOSS_SUBMISSION.md
 SECURITY.md
 ```
 

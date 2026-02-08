@@ -16,12 +16,13 @@
 </p>
 > **Note for Fork Maintainers:**  
 > The badges and clone URLs above reference the canonical compolis/gabm repository.  
+
 > If you fork this project and want badges to reflect your fork’s status, update all `compolis/gabm` URLs to your own GitHub username/repo.
 
 # GABM: Generative Agent-Based Model
 
-[//]: # (Table of Contents)
 ## Table of Contents
+- [Development History & Project Journal](#development-history--project-journal)
 - [Overview](#overview)
 - [Roadmap](#roadmap)
 - [Code of Conduct](#code-of-conduct)
@@ -380,6 +381,16 @@ If you do not see these files or folders in the repository, this is expected. Ea
 ## License
 
 See [LICENSE](LICENSE).
+
+
+## Development History & Project Journal
+
+We are documenting the collaborative development of this project, including key milestones, decisions, and lessons learned. See:
+- [DEVELOPMENT_HISTORY.md](DEVELOPMENT_HISTORY.md) for a full narrative and session summaries
+- [data/logs/dev_sessions/](data/logs/dev_sessions/) for detailed session logs (may use GitHub LFS for large files)
+- [Sphinx documentation: Development History](docs/development_history.md) for a published summary
+
+This record is being maintained as part of our open science and transparency practices, and will be referenced in our planned [Journal of Open Source Software (JOSS)](https://joss.theoj.org/) submission.
 
 
 ## Acknowledgements

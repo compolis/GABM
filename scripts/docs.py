@@ -23,25 +23,27 @@ from logging.handlers import RotatingFileHandler
 
 # Files to copy from root to docs/
 DOC_FILES = [
-    "README.md",
-    "DEV_GUIDE.md",
-    "USER_GUIDE.md",
-    "ROADMAP.md",
+    "API_KEYS.md",
     "CHANGE_LOG.md",
     "CODE_OF_CONDUCT.md",
-    "SETUP_GUIDE_USER.md",
-    "SETUP_GUIDE_DEV.md",
-    "API_KEYS.md",
     "CONTRIBUTORS.md",
+    "JOSS_SUBMISSION.md",
+    "DEV_GUIDE.md",
+    "DEVELOPMENT_HISTORY.md",
     "LICENSE.md",
+    "README.md",
     "requirements.txt",
     "requirements-dev.txt",
+    "ROADMAP.md",
+    "SETUP_GUIDE_USER.md",
+    "SETUP_GUIDE_DEV.md",
+    "USER_GUIDE.md",
 ]
 
 # Files to copy from .github/ to docs/ (if present)
 GITHUB_DOC_FILES = [
-    "SECURITY.md",
     "CONTACT.md",
+    "SECURITY.md",
 ]
 
 
