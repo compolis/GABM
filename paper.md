@@ -88,7 +88,14 @@ Prior to GABM, Andy worked on two consultancy projects—MXG and RiboCode—usin
 - **RiboCode**: An ongoing PWA for comparing ribosome datasets in 3D using [Mol*](https://github.com/molstar/molstar) ([repo](https://github.com/ribocode-slola/ribocode1/)).
 
 These experiences gave Andy a strong foundation in using VS Code with Copilot and modern development workflows. The integration of AI pair programming is now considered as transformative as the adoption of IDEs was a decade ago, enabling rapid learning and productivity gains for developers.
+## Relevance of Global Tipping Points
+
+The Global Tipping Points Report (2025) [@globaltipping2025] synthesizes the latest research on both positive and negative tipping points in the Earth system, with contributions from 160 authors across 23 countries and 87 institutions. Viktoria, a co-author of part of this report, has helped consolidate knowledge on the governance, risks, and opportunities associated with climate and biosphere tipping points. The report is highly relevant to the GABM project, as our application aims to model and understand the dynamics of global tipping points and their implications for climate, ecosystems, and society. Insights from the report inform the design and intended use cases of GABM, particularly in exploring interventions to avoid harmful tipping points and trigger positive ones.
 The development of GABM began by reviewing preliminary work by Ajay and Charlie, who had experimented with Python scripts to communicate with LLMs. In the project kick-off meeting, Viktoria and Ajay agreed with Andy to use Python as the main development language, given Ajay's experience and the strong ecosystem of Python libraries for LLM integration. Although the team was not aware of any ready-made Python ABM frameworks that fit their requirements, developing an ABM in Python was considered accessible. Andy brought experience from teaching ABM in Python and had created online resources for Geographers, which informed the early approach (see: https://agdturner.github.io/Python0/public_html/home/index.html).
+
+## Generative Agent-Based Modeling and Concordia
+
+The recent work by Vezhnevets et al. (2023) [@vezhnevets2023concordia] introduces Concordia, a library for generative agent-based modeling (GABM) that leverages large language models (LLMs) to enable agents to act, reason, and interact in simulated physical, social, or digital environments. Concordia’s architecture, which includes a Game Master agent to mediate between agent intentions and environment constraints, demonstrates the potential of LLM-driven ABMs to simulate complex, language-mediated behaviors and interactions. This work provides important context and inspiration for GABM, highlighting both the opportunities and challenges of integrating LLMs into agent-based modeling. Our platform builds on these ideas, aiming for modularity, extensibility, and transparency, and is designed to support a wide range of research and application domains.
 
 # Statement of Need
 
@@ -105,6 +112,10 @@ The development of GABM began by reviewing preliminary work by Ajay and Charlie,
 This project was developed with significant assistance from [GitHub Copilot](https://github.com/features/copilot) for code generation, refactoring, and documentation improvements.
 
 We gratefully acknowledge support from the [University of Leeds](https://www.leeds.ac.uk/). Funding for this project comes from a UKRI Future Leaders Fellowship awarded to [Professor Viktoria Spaiser](https://essl.leeds.ac.uk/politics/staff/102/professor-viktoria-spaiser) (grant reference: [UKRI2043](https://gtr.ukri.org/projects?ref=UKRI2043)).
+
+# AI Usage Disclosure
+
+This project made extensive use of generative AI, specifically GitHub Copilot (GPT-4.1), for code generation, refactoring, documentation, and drafting of this paper. All AI-assisted outputs were reviewed, edited, and validated by the human authors, who made all core design decisions. GitHub Copilot is included as a co-author to reflect its substantial contribution to the development and documentation process, in line with the collaborative and transparent ethos of the project.
 
 # References
 
