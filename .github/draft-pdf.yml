@@ -1,0 +1,22 @@
+name: Build JOSS PDF draft
+on:
+  push:
+    paths:
+      - 'paper.md'
+      - 'paper.bib'
+      - '.github/draft-pdf.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt || true
+      - name: Build JOSS PDF draft
+        run: |
+          echo "This is a placeholder for the JOSS PDF build step. See JOSS docs for actual workflow."

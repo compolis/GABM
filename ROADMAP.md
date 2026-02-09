@@ -1,3 +1,5 @@
+## Planned for Version 0.2.0
+- Implement tidy-up scripts for logs and caches to help users and developers manage storage and maintain a clean environment.
 # Project Roadmap
 
 This file outlines planned next steps and future goals for the project. The repository is currently private; the first public release will be version 1.0.0.
