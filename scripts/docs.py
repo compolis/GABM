@@ -12,7 +12,6 @@ __author__ = ["Andy Turner <agdturner@gmail.com>"]
 __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
-
 # Standard library imports
 import os
 import shutil
@@ -20,32 +19,11 @@ import re
 import logging
 from logging.handlers import RotatingFileHandler
 
-
 # Files to copy from root to docs/
-DOC_FILES = [
-    "API_KEYS.md",
-    "CHANGE_LOG.md",
-    "CODE_OF_CONDUCT.md",
-    "CONTRIBUTORS.md",
-    "JOSS_SUBMISSION.md",
-    "DEV_GUIDE.md",
-    "DEVELOPMENT_HISTORY.md",
-    "LICENSE.md",
-    "README.md",
-    "requirements.txt",
-    "requirements-dev.txt",
-    "ROADMAP.md",
-    "SETUP_GUIDE_USER.md",
-    "SETUP_GUIDE_DEV.md",
-    "USER_GUIDE.md",
-]
+from docs_assets import DOC_FILES
 
 # Files to copy from .github/ to docs/ (if present)
-GITHUB_DOC_FILES = [
-    "CONTACT.md",
-    "SECURITY.md",
-]
-
+from docs_assets import GITHUB_DOC_FILES
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS = os.path.join(ROOT, "docs")

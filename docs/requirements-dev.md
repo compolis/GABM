@@ -1,4 +1,10 @@
-# Development requirements for GABM
+# Requirements (Developer)
+
+> **Note:** This file is for documentation only.
+> Install dependencies from [requirements.txt](requirements.txt) and [requirements-dev.txt](requirements-dev.txt) in the project root.
+
+
+```# Development requirements for GABM
 # Install with: pip install -r requirements-dev.txt
 
 # Test dependencies
@@ -22,3 +28,4 @@ build>=1.4.0<2
 
 # For uploading to PyPI
 twine>=5.0.0<6
+```
