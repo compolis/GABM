@@ -5,7 +5,6 @@ title: Project README
 
 # GABM: Generative Agent-Based Model
 
-
 ## Overview
 
 GABM is a flexible, extensible Python framework for agent-based modeling (ABM) with a focus on integrating large language models (LLMs) as agent reasoning engines. It supports multiple LLM providers, persistent response caching, and robust onboarding for new users and contributors.
@@ -364,6 +363,17 @@ If you do not see these files or folders in the repository, this is expected. Ea
 ## License
 
 See [LICENSE](LICENSE.md).
+
+
+## Development History & Project Journal
+
+We are documenting the collaborative development of this project, including key milestones, decisions, and lessons learned. See:
+
+- [DEVELOPMENT_HISTORY.md](DEVELOPMENT_HISTORY.md) for a full narrative and session summaries
+- [data/logs/dev_sessions/](data/logs/dev_sessions/) for detailed session logs (may use GitHub LFS for large files)
+- [Sphinx documentation: Development History](docs/development_history.md) for a published summary
+
+This record is being maintained as part of our open science and transparency practices, and will be referenced in our planned [Journal of Open Source Software (JOSS)](https://joss.theoj.org/) submission.
 
 
 ## Acknowledgements

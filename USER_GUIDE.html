@@ -53,11 +53,14 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Planned for Version 0.2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html#project-roadmap">Project Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DEV_GUIDE.html">Developer Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#managing-logs-and-caches">Managing Logs and Caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-documentation-files-for-users">Key Documentation Files for Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#support-feedback">Support &amp; Feedback</a></li>
@@ -72,6 +75,8 @@
 <li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History and Project Journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
 </ul>
 
@@ -101,6 +106,21 @@
              
   <section id="user-guide">
 <h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h1>
+<section id="managing-logs-and-caches">
+<h2>Managing Logs and Caches<a class="headerlink" href="#managing-logs-and-caches" title="Link to this heading"></a></h2>
+<p>GABM creates logs and caches (such as prompt/response caches for LLM services) that can grow large over time. These files are not stored in the GitHub repository. Tools for tidying up logs and caches are planned for a future release. More details will be provided as these features are implemented.</p>
+</section>
+<section id="key-documentation-files-for-users">
+<h2>Key Documentation Files for Users<a class="headerlink" href="#key-documentation-files-for-users" title="Link to this heading"></a></h2>
+<p>The following Markdown files are most relevant for users:</p>
+<ul class="simple">
+<li><p><strong>README.md</strong>: Project overview and quick start instructions.</p></li>
+<li><p><strong>USER_GUIDE.md</strong>: Detailed user instructions for installing, configuring, and running GABM.</p></li>
+<li><p><strong>SETUP_GUIDE_USER.md</strong>: Step-by-step environment setup for users.</p></li>
+<li><p><strong>API_KEYS.md</strong>: Information on required API keys for LLMs and how to configure them.</p></li>
+</ul>
+<p>Refer to these files for guidance on using GABM. Additional documentation is available for developers and contributors.</p>
+</section>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
 <p>This guide helps users get started with GABM, find documentation, and get support. Documentation was updated in release 0.1.1 for clarity and completeness. It will be updated as more features and configuration options are added.</p>

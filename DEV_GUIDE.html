@@ -53,7 +53,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Planned for Version 0.2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html#project-roadmap">Project Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Guide</a><ul>
@@ -73,7 +74,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#branch-protection-for-main-and-gh-pages">Branch Protection for main and gh-pages</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#joss-article-intention">JOSS Article Intention</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview-of-project-markdown-files">Overview of Project Markdown Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-an-ai-pair-programmer">Working with an AI Pair Programmer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#managing-logs-and-caches">Managing Logs and Caches</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
@@ -84,6 +89,8 @@
 <li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History and Project Journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
 </ul>
 
@@ -131,6 +138,7 @@
 <li><p><a class="reference internal" href="#packaging-files"><span class="xref myst">Packaging Files</span></a></p></li>
 <li><p><a class="reference internal" href="#pypi-release-process"><span class="xref myst">PyPI Release Process</span></a></p></li>
 <li><p><a class="reference internal" href="#continuous-integration--branch-protection"><span class="xref myst">Continuous Integration &amp; Branch Protection</span></a></p></li>
+<li><p><a class="reference internal" href="#joss-article-intention"><span class="xref myst">JOSS Article Intention</span></a></p></li>
 <li><p><a class="reference internal" href="#additional-resources"><span class="xref myst">Additional Resources</span></a></p></li>
 </ul>
 </section>
@@ -356,8 +364,51 @@ This ensures users who install from source get all necessary files.</p></li>
 <p>For more details, see <a class="reference external" href="https://docs.github.com/en/actions">GitHub Actions documentation</a> and <a class="reference external" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-branch-protection-rules-for-your-repository">GitHub branch protection rules</a>.</p>
 </section>
 </section>
+<section id="joss-article-intention">
+<h2>JOSS Article Intention<a class="headerlink" href="#joss-article-intention" title="Link to this heading"></a></h2>
+<p>The project team intends to write and submit an article to the Journal of Open Source Software (JOSS) describing the development, purpose, and impact of GABM. Scaffolding for the JOSS article and submission workflow will be created in future sessions. Contributors and collaborators are encouraged to participate in the drafting and review process.</p>
+<p>For updates and progress, see DEVELOPMENT_HISTORY.md and the Sphinx documentation.</p>
+</section>
 <section id="additional-resources">
 <h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading"></a></h2>
+</section>
+<section id="overview-of-project-markdown-files">
+<h2>Overview of Project Markdown Files<a class="headerlink" href="#overview-of-project-markdown-files" title="Link to this heading"></a></h2>
+</section>
+<section id="working-with-an-ai-pair-programmer">
+<h2>Working with an AI Pair Programmer<a class="headerlink" href="#working-with-an-ai-pair-programmer" title="Link to this heading"></a></h2>
+</section>
+<section id="managing-logs-and-caches">
+<h2>Managing Logs and Caches<a class="headerlink" href="#managing-logs-and-caches" title="Link to this heading"></a></h2>
+<p>Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large and are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0. This section will be expanded as these tools are implemented.
+Using an AI pair programmer (such as GitHub Copilot) can greatly accelerate development and normalize good practice. To get the most benefit:</p>
+<ul class="simple">
+<li><p>Review all changes, as AI assistants have limited session memory and may occasionally miss details.</p></li>
+<li><p>Maintain comprehensive documentation to bridge memory gaps and enable effective guidance.</p></li>
+<li><p>Refer the AI assistant to existing documentation to help it provide accurate and context-aware support.</p></li>
+<li><p>Use clear prompts and feedback to teach and guide the AI assistant as needed.</p></li>
+</ul>
+<p>This collaborative workflow helps ensure continuity, reproducibility, and efficient development for both human and AI contributors.
+The project includes several Markdown files, each serving a specific purpose:</p>
+<ul class="simple">
+<li><p><strong>README.md</strong>: Project overview, setup instructions, and links to key documentation.</p></li>
+<li><p><strong>DEV_GUIDE.md</strong>: Developer workflow, project structure, and best practices.</p></li>
+<li><p><strong>USER_GUIDE.md</strong>: End user instructions for installing, configuring, and running GABM.</p></li>
+<li><p><strong>SETUP_GUIDE_USER.md</strong>: Step-by-step environment setup for users.</p></li>
+<li><p><strong>SETUP_GUIDE_DEV.md</strong>: Step-by-step environment setup for developers.</p></li>
+<li><p><strong>API_KEYS.md</strong>: Required API keys for LLMs and configuration details.</p></li>
+<li><p><strong>CHANGE_LOG.md</strong>: Tracks changes and updates across releases.</p></li>
+<li><p><strong>ROADMAP.md</strong>: Planned features and future development goals.</p></li>
+<li><p><strong>CODE_OF_CONDUCT.md</strong>: Expected behavior and reporting procedures.</p></li>
+<li><p><strong>CONTRIBUTORS.md</strong>: Project contributors and roles.</p></li>
+<li><p><strong>LICENSE.md</strong>: Software license and terms of use.</p></li>
+<li><p><strong>requirements.txt</strong>: Pinned dependencies for end users.</p></li>
+<li><p><strong>requirements-dev.txt</strong>: Flexible dependencies for developers.</p></li>
+<li><p><strong>SECURITY.md</strong>: Security guidelines and contact information.</p></li>
+<li><p><strong>CONTACT.md</strong>: Maintainer and support contact details.</p></li>
+<li><p><strong>DEVELOPMENT_HISTORY.md</strong>: Project development, milestones, and reflections.</p></li>
+</ul>
+<p>This structure helps developers find relevant information and understand the documentation layout. These files are referenced and included in Sphinx documentation for consistency and accessibility.</p>
 <ul class="simple">
 <li><p>See <a class="reference internal" href="SETUP_GUIDE_DEV.html"><span class="std std-doc">SETUP_GUIDE_DEV.md</span></a> for environment setup</p></li>
 <li><p>See <a class="reference internal" href="README.html"><span class="std std-doc">README.md</span></a> for project overview</p></li>
