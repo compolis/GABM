@@ -6,12 +6,12 @@
 :maxdepth: 2
 :caption: API Reference
 
-io/llm/utils
-io/llm/openai
-io/llm/genai
-io/llm/deepseek
-io/llm/logging_utils
-io/read_data
+gabm/io/llm/utils
+gabm/io/llm/openai
+gabm/io/llm/genai
+gabm/io/llm/deepseek
+gabm/io/llm/logging_utils
+gabm/io/read_data
 ```
 
 ```{toctree}

@@ -10,30 +10,14 @@ __author__ = ["Andy Turner <agdturner@gmail.com>"]
 __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
-
 # Standard library imports
 import os
 import logging
 from logging.handlers import RotatingFileHandler
 
 # Files to remove from docs/
-DOC_FILES = [
-    "API_KEYS.md",
-    "CHANGE_LOG.md",
-    "CODE_OF_CONDUCT.md",
-    "CONTACT.md",
-    "CONTRIBUTORS.md",
-    "DEV_GUIDE.md",
-    "LICENSE.md",
-    "README.md",
-    "requirements.md",
-    "requirements-dev.md",
-    "ROADMAP.md",
-    "SECURITY.md",
-    "SETUP_GUIDE_USER.md",
-    "SETUP_GUIDE_DEV.md",
-    "USER_GUIDE.md",
-]
+from docs_assets import DOC_FILES
+from docs_assets import GITHUB_DOC_FILES
 
 # Paths
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -53,7 +37,7 @@ if not logger.hasHandlers():
 
 # Remove old copies of doc files from docs/
 logger.info("Starting clean_docs_assets.py script")
-for fname in DOC_FILES:
+for fname in DOC_FILES + GITHUB_DOC_FILES:
     fpath = os.path.join(DOCS, fname)
     try:
         if os.path.exists(fpath):
