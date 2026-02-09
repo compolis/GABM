@@ -178,6 +178,38 @@ The project team intends to write and submit an article to the Journal of Open S
 For updates and progress, see DEVELOPMENT_HISTORY.md and the Sphinx documentation.
 
 ## Additional Resources
+## Overview of Project Markdown Files
+## Working with an AI Pair Programmer
+## Managing Logs and Caches
+Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large and are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0. This section will be expanded as these tools are implemented.
+Using an AI pair programmer (such as GitHub Copilot) can greatly accelerate development and normalize good practice. To get the most benefit:
+
+- Review all changes, as AI assistants have limited session memory and may occasionally miss details.
+- Maintain comprehensive documentation to bridge memory gaps and enable effective guidance.
+- Refer the AI assistant to existing documentation to help it provide accurate and context-aware support.
+- Use clear prompts and feedback to teach and guide the AI assistant as needed.
+
+This collaborative workflow helps ensure continuity, reproducibility, and efficient development for both human and AI contributors.
+The project includes several Markdown files, each serving a specific purpose:
+
+- **README.md**: Project overview, setup instructions, and links to key documentation.
+- **DEV_GUIDE.md**: Developer workflow, project structure, and best practices.
+- **USER_GUIDE.md**: End user instructions for installing, configuring, and running GABM.
+- **SETUP_GUIDE_USER.md**: Step-by-step environment setup for users.
+- **SETUP_GUIDE_DEV.md**: Step-by-step environment setup for developers.
+- **API_KEYS.md**: Required API keys for LLMs and configuration details.
+- **CHANGE_LOG.md**: Tracks changes and updates across releases.
+- **ROADMAP.md**: Planned features and future development goals.
+- **CODE_OF_CONDUCT.md**: Expected behavior and reporting procedures.
+- **CONTRIBUTORS.md**: Project contributors and roles.
+- **LICENSE.md**: Software license and terms of use.
+- **requirements.txt**: Pinned dependencies for end users.
+- **requirements-dev.txt**: Flexible dependencies for developers.
+- **SECURITY.md**: Security guidelines and contact information.
+- **CONTACT.md**: Maintainer and support contact details.
+- **DEVELOPMENT_HISTORY.md**: Project development, milestones, and reflections.
+
+This structure helps developers find relevant information and understand the documentation layout. These files are referenced and included in Sphinx documentation for consistency and accessibility.
 - See [SETUP_GUIDE_DEV.md](SETUP_GUIDE_DEV.md) for environment setup
 - See [README.md](README.md) for project overview
 
