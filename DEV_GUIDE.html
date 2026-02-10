@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Developer Guide &mdash; GABM  documentation</title>
+  <title>Troubleshooting &mdash; GABM  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
@@ -47,7 +47,11 @@
 <li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Guide</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#github-pages-worktree-conflict">GitHub Pages Worktree Conflict</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#developer-guide">Developer Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#contributing-workflow">Contributing Workflow</a></li>
@@ -102,7 +106,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Developer Guide</li>
+      <li class="breadcrumb-item active">Troubleshooting</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/DEV_GUIDE.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -112,7 +116,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="developer-guide">
+  <section id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h1>
+<section id="github-pages-worktree-conflict">
+<h2>GitHub Pages Worktree Conflict<a class="headerlink" href="#github-pages-worktree-conflict" title="Link to this heading"></a></h2>
+<p>When deploying documentation with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages-deploy</span></code>, you may encounter an error like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fatal</span><span class="p">:</span> <span class="s1">&#39;gh-pages&#39;</span> <span class="ow">is</span> <span class="n">already</span> <span class="n">used</span> <span class="n">by</span> <span class="n">worktree</span> <span class="n">at</span> <span class="s1">&#39;/tmp/gh-pages-xxxx...&#39;</span>
+</pre></div>
+</div>
+<p>This occurs if a previous deployment left a lingering worktree directory for the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch. The deployment script now automatically checks for and removes any existing worktree before adding a new one. If you still encounter this error, manually remove the worktree:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">worktree</span> <span class="n">remove</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">gh</span><span class="o">-</span><span class="n">pages</span><span class="o">-</span><span class="n">xxxx</span><span class="o">...</span>
+</pre></div>
+</div>
+<p>For more details, see the comments in the Makefile and the deployment script.</p>
+</section>
+</section>
+<section id="developer-guide">
 <h1>Developer Guide<a class="headerlink" href="#developer-guide" title="Link to this heading"></a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>

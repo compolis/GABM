@@ -1,3 +1,20 @@
+## Troubleshooting
+
+### GitHub Pages Worktree Conflict
+
+When deploying documentation with `make gh-pages-deploy`, you may encounter an error like:
+
+```
+fatal: 'gh-pages' is already used by worktree at '/tmp/gh-pages-xxxx...'
+```
+
+This occurs if a previous deployment left a lingering worktree directory for the `gh-pages` branch. The deployment script now automatically checks for and removes any existing worktree before adding a new one. If you still encounter this error, manually remove the worktree:
+
+```
+git worktree remove /tmp/gh-pages-xxxx...
+```
+
+For more details, see the comments in the Makefile and the deployment script.
 
 # Developer Guide
 
