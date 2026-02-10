@@ -1,3 +1,19 @@
+                - For detailed session logs and workflow rationale, see [docs/DEV_SESSION_LOGGING.md](docs/DEV_SESSION_LOGGING.md).
+            - [2026-02-10] Makefile dependency chaining and documentation update
+                - Updated Makefile to use dependency chaining for docs and gh-pages-deploy targets, ensuring DRY and consistent build logic.
+                - Documented the rationale and recommended style in DEV_GUIDE.md and Makefile comments.
+                - Discussed and implemented best practices for maintainable automation and contributor clarity.
+                - Ready to test make docs and make gh-pages-deploy with the new workflow.
+        - [2026-02-10] Makefile/gh-pages-deploy refactor for DRY principle
+            - Refactored Makefile so gh-pages-deploy depends on the docs target, ensuring docs are always built the same way before deployment.
+            - Removed the Sphinx build step from scripts/gh-pages-deploy.py to avoid duplication and inconsistency.
+            - This change follows the DRY (Don't Repeat Yourself) and consistency principles, making the workflow more robust and maintainable.
+            - Recommend documenting this approach and rationale in DEV_GUIDE.md for future contributors.
+    - [2026-02-10] Sphinx autodoc fix and workflow update
+        - Identified that Sphinx/autodoc could not find the gabm modules after moving io into src/gabm.
+        - Added '../src' to sys.path in docs/conf.py to resolve the import path issue.
+        - Docs now build correctly, with API Reference and README content rendering as expected.
+        - Next steps: Test the workflow for pushing these changes, and review branch protection rules for the gh-pages branch on upstream to ensure documentation deployment works smoothly.
 # Development History and Project Journal
 
 This document provides a chronological summary and reflective narrative of the development of this project, including key decisions, milestones, and collaborative experiences. Detailed session logs are stored in data/logs/dev_sessions/ and referenced here for transparency and archival purposes.

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Indices and tables &mdash; GABM  documentation</title>
+  <title>GABM: Generative Agent-Based Model &mdash; GABM  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Requirements" href="requirements.html" /> 
+    <link rel="next" title="License" href="LICENSE.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,8 +43,22 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEV_GUIDE.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History and Project Journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTACT.html">Contact</a></li>
 </ul>
 
         </div>
@@ -61,7 +75,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Indices and tables</li>
+      <li class="breadcrumb-item active">GABM: Generative Agent-Based Model</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -71,15 +85,386 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="toctree-wrapper compound">
+  <section id="gabm-generative-agent-based-model">
+<h1>GABM: Generative Agent-Based Model<a class="headerlink" href="#gabm-generative-agent-based-model" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>GABM is a flexible, extensible Python framework for agent-based modeling (ABM) with a focus on integrating large language models (LLMs) as agent reasoning engines. It supports multiple LLM providers, persistent response caching, and robust onboarding for new users and contributors.</p>
+</section>
+<section id="roadmap">
+<h2>Roadmap<a class="headerlink" href="#roadmap" title="Link to this heading"></a></h2>
+<p>See <a class="reference internal" href="ROADMAP.html"><span class="std std-doc">ROADMAP.md</span></a> for planned next steps and future goals.</p>
+<p>To create and push a release tag:</p>
+<ol class="arabic simple">
+<li><p>Ensure all changes are committed and pushed to the main branch.</p></li>
+<li><p>Run:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">make</span> <span class="n">release</span> <span class="n">VERSION</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">z</span>
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">x.y.z</span></code> with the desired version number (e.g., <code class="docutils literal notranslate"><span class="pre">0.1.0</span></code>).
+3. The release will be tagged and pushed to the remote repository.</p>
+<p>See <a class="reference internal" href="CHANGE_LOG.html"><span class="std std-doc">CHANGE_LOG.md</span></a> for details of each release, including the latest 0.1.1 documentation update.</p>
+</section>
+<section id="code-of-conduct-and-reporting">
+<h2>Code of Conduct and Reporting<a class="headerlink" href="#code-of-conduct-and-reporting" title="Link to this heading"></a></h2>
+<p>Please see our <a class="reference internal" href="CODE_OF_CONDUCT.html"><span class="std std-doc">Code of Conduct</span></a> for guidelines on expected behavior and reporting issues.</p>
+<p>For security or conduct concerns, you can also use the “Contact maintainers” link on the GitHub repository, or see the <a class="reference internal" href="SECURITY.html"><span class="std std-doc">SECURITY.md</span></a> file in the documentation for details on confidential reporting.</p>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<section id="clone-the-repository">
+<h3>1. Clone the Repository<a class="headerlink" href="#clone-the-repository" title="Link to this heading"></a></h3>
+<p>First, fork the <a class="reference external" href="https://github.com/compolis/GABM">upstream repository</a> on GitHub to your own account. Then, clone your fork locally:</p>
+<blockquote>
+<div><p>Replace <code class="docutils literal notranslate"><span class="pre">&lt;your-username&gt;</span></code> with your GitHub username in the commands below.</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/</span><span class="n">GABM</span><span class="o">.</span><span class="n">git</span>
+
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="o">&lt;</span><span class="n">your</span><span class="o">-</span><span class="n">username</span><span class="o">&gt;/</span><span class="n">gabm</span><span class="o">.</span><span class="n">git</span>
+
+</pre></div>
+</div>
+<section id="recommended-onboard-with-the-latest-stable-release">
+<h4>Recommended: Onboard with the Latest Stable Release<a class="headerlink" href="#recommended-onboard-with-the-latest-stable-release" title="Link to this heading"></a></h4>
+<p>For the most reliable onboarding experience, checkout the latest stable release branch (e.g., <code class="docutils literal notranslate"><span class="pre">stable/0.1.0</span></code>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="n">stable</span><span class="o">/</span><span class="mf">0.1.0</span>
+</pre></div>
+</div>
+<p>This branch contains the most tested and stable code. For development or contributing, use the main or feature branches.</p>
+<p>For a detailed, step-by-step walkthrough, see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="SETUP_GUIDE_USER.html"><span class="std std-doc">User Setup Guide</span></a> — for end users who want to run GABM</p></li>
+<li><p><a class="reference internal" href="SETUP_GUIDE_DEV.html"><span class="std std-doc">Developer Setup Guide</span></a> — for contributors and advanced users</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note for Developers:</strong></p>
+</div></blockquote>
+<blockquote>
+<div><p>The documentation files in the <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory (such as <code class="docutils literal notranslate"><span class="pre">README.md</span></code>, <code class="docutils literal notranslate"><span class="pre">ROADMAP.md</span></code>, <code class="docutils literal notranslate"><span class="pre">CHANGE_LOG.md</span></code>, <code class="docutils literal notranslate"><span class="pre">CODE_OF_CONDUCT.md</span></code>, <code class="docutils literal notranslate"><span class="pre">SETUP_GUIDE_USER.md</span></code>, <code class="docutils literal notranslate"><span class="pre">SETUP_GUIDE_DEV.md</span></code>, <code class="docutils literal notranslate"><span class="pre">CONTRIBUTORS</span></code>, and <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code>) are automatically copied from the project root as part of the documentation build process. <strong>Do not edit these files in <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directly.</strong> Always edit the originals in the project root.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="set-up-your-environment">
+<h3>2. Set Up Your Environment<a class="headerlink" href="#set-up-your-environment" title="Link to this heading"></a></h3>
+<p>Install Python 3.12 or higher and pip if you haven’t already.</p>
+<section id="user-setup-recommended-for-most-users">
+<h4>User Setup (Recommended for most users)<a class="headerlink" href="#user-setup-recommended-for-most-users" title="Link to this heading"></a></h4>
+<p>Install only the core runtime dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</section>
+<section id="developer-setup-for-contributors-testing-and-docs">
+<h4>Developer Setup (For contributors, testing, and docs)<a class="headerlink" href="#developer-setup-for-contributors-testing-and-docs" title="Link to this heading"></a></h4>
+<p>Install all runtime, development, and documentation dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">-</span><span class="n">dev</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p><strong><a class="reference internal" href="requirements.html"><span class="std std-doc">requirements.md</span></a></strong> contains only the packages needed to run GABM as a user.</p>
+<p><strong><a class="reference internal" href="requirements-dev.html"><span class="std std-doc">requirements-dev.md</span></a></strong> includes everything in requirements.txt plus extra packages for development, testing, and building documentation (e.g., pytest, Sphinx, linters).</p>
+<p>Use the developer setup if you plan to contribute code, run tests, or build the documentation locally.</p>
+</section>
+<section id="recommended-tools">
+<h4>Recommended tools<a class="headerlink" href="#recommended-tools" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p><a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a> is recommended for its excellent Python support and <a class="reference external" href="https://github.com/features/copilot">GitHub Copilot</a> integration.</p></li>
+<li><p>Other good Python IDEs include <a class="reference external" href="https://www.spyder-ide.org/">Spyder</a> (scientific workflow) and <a class="reference external" href="https://www.jetbrains.com/pycharm/">PyCharm</a>.</p></li>
+<li><p><a class="reference external" href="https://www.gnu.org/software/make/">Make</a> is used for build and clean workflow automation. All Makefile targets in this project are platform-agnostic and work on both Windows and Unix-like systems.</p></li>
+<li><p>You are free to use any editor, IDE, or workflow you prefer.</p></li>
+</ul>
+</section>
+</section>
+<section id="api-keys">
+<h3>3. API Keys<a class="headerlink" href="#api-keys" title="Link to this heading"></a></h3>
+<p>See <a class="reference internal" href="API_KEYS.html"><span class="std std-doc">API_KEYS.md</span></a> for instructions on setting up your API keys and initializing your environment.</p>
+</section>
+<section id="llm-setup-and-onboarding">
+<h3>4. LLM Setup and Onboarding<a class="headerlink" href="#llm-setup-and-onboarding" title="Link to this heading"></a></h3>
+<p>To quickly initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, use the provided setup utility:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">setup</span><span class="o">-</span><span class="n">llms</span>
+</pre></div>
+</div>
+<p>This will:</p>
+<ul class="simple">
+<li><p>Check for all required API keys (OpenAI, GenAI, DeepSeek)</p></li>
+<li><p>Test each key with a default prompt and model</p></li>
+<li><p>Generate initial <code class="docutils literal notranslate"><span class="pre">models.json</span></code> and <code class="docutils literal notranslate"><span class="pre">models.txt</span></code> for each LLM</p></li>
+<li><p>Initialize response caches (<code class="docutils literal notranslate"><span class="pre">cache.pkl</span></code>)</p></li>
+<li><p>Report any issues or missing keys</p></li>
+</ul>
+<p>If you need to clear all caches and model lists (for a fresh start or troubleshooting), use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">clear</span><span class="o">-</span><span class="n">caches</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> Model list files (<code class="docutils literal notranslate"><span class="pre">models.json</span></code>, <code class="docutils literal notranslate"><span class="pre">models.txt</span></code>) are lists of available models for each LLM service. This might change over time. To save generating the lists these are committed to the repository. Cache files (<code class="docutils literal notranslate"><span class="pre">cache.pkl</span></code>) are prompt/response data from each LLM service. These are currently not committed to the repository as they may become large. However, the intention is to store caches of prompts/responses and details of the Agent Based Models when run to generate results and explore reproducibility.</p>
+</section>
+<section id="running-the-code">
+<h3>5. Running the Code<a class="headerlink" href="#running-the-code" title="Link to this heading"></a></h3>
+<p>From the project root, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">gabm</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<section id="running-the-main-program">
+<h3>Running the Main Program<a class="headerlink" href="#running-the-main-program" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">gabm</span>
+</pre></div>
+</div>
+</section>
+<section id="example-persona-test-agent-fills-survey">
+<h3>Example: Persona Test Agent Fills Survey<a class="headerlink" href="#example-persona-test-agent-fills-survey" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">src</span><span class="o">/</span><span class="n">io</span><span class="o">/</span><span class="n">persona_test_agent_fills_survey_v1</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="model-management-caching">
+<h2>Model Management &amp; Caching<a class="headerlink" href="#model-management-caching" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>All LLM responses are cached in <code class="docutils literal notranslate"><span class="pre">data/llm_cache/</span></code> (pickled)</p></li>
+<li><p>Model lists are cached in <code class="docutils literal notranslate"><span class="pre">data/model_lists/</span></code> (JSON/TXT)</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clear-caches</span></code> to clear all caches</p></li>
+</ul>
+<section id="supported-llm-providers">
+<h3>Supported LLM Providers<a class="headerlink" href="#supported-llm-providers" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>DeepSeek</p></li>
+</ul>
+</section>
+<section id="model-listing-caching-and-validation">
+<h3>Model Listing, Caching, and Validation<a class="headerlink" href="#model-listing-caching-and-validation" title="Link to this heading"></a></h3>
+<p>When a model list is fetched, it is cached locally. LLM responses are also cached for efficiency and reproducibility.</p>
+<p>When running the main script, the selected model for each LLM is checked against the cached JSON model list. If the model is not found, a warning is shown and the available models can be listed automatically.</p>
+<p>This workflow is consistent across all LLMs, making it easy to add new providers or update model selection logic.</p>
+<section id="model-selection-explicit-required">
+<h4>Model Selection (Explicit Required)<a class="headerlink" href="#model-selection-explicit-required" title="Link to this heading"></a></h4>
+<p>When running the main script, you must explicitly set the model name for each LLM provider in <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.</p>
+<p>To select a model, set the variable (e.g., <code class="docutils literal notranslate"><span class="pre">openai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">genai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">deepseek_model</span></code>) at the top of the main function in <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>.</p>
+<p>If you do not set a model, the script will raise an error and prompt you to specify one.</p>
+<p>To see available models, run the model listing function for each provider or check the generated <code class="docutils literal notranslate"><span class="pre">models.json</span></code> file in <code class="docutils literal notranslate"><span class="pre">data/llm/{provider}/</span></code>.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openai_model</span> <span class="o">=</span> <span class="s2">&quot;gpt-3.5-turbo&quot;</span>
+<span class="n">genai_model</span> <span class="o">=</span> <span class="s2">&quot;gemini-pro&quot;</span>
+<span class="n">deepseek_model</span> <span class="o">=</span> <span class="s2">&quot;deepseek-model-1&quot;</span>
+</pre></div>
+</div>
+<p>See the API documentation and module docstrings for more details on how model management is implemented and used in the codebase.</p>
+</section>
+</section>
+</section>
+<section id="contribution-workflow">
+<h2>Contribution Workflow<a class="headerlink" href="#contribution-workflow" title="Link to this heading"></a></h2>
+<p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">main</span></code> branch is protected. All changes must be made through Pull Requests, which require at least one review and approval before merging. Direct pushes to <code class="docutils literal notranslate"><span class="pre">main</span></code> are not allowed. This ensures code quality and collaborative review.</p>
+<section id="how-to-contribute">
+<h3>How to Contribute<a class="headerlink" href="#how-to-contribute" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Add your name to the <code class="docutils literal notranslate"><span class="pre">__author__</span></code> list in any Python file you edit.</p></li>
+<li><p>Increment the <code class="docutils literal notranslate"><span class="pre">__version__</span></code> string in the file if you make a significant change.</p></li>
+<li><p>Submit a pull request with a clear description of your changes.</p></li>
+</ol>
+</section>
+<section id="example-metadata-block">
+<h3>Example Metadata Block<a class="headerlink" href="#example-metadata-block" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">__author__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice Smith&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob Jones&quot;</span><span class="p">]</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.2.1&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;2024-present Alice Smith, Bob Jones&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="contributor-best-practices">
+<h3>Contributor Best Practices<a class="headerlink" href="#contributor-best-practices" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Keep <code class="docutils literal notranslate"><span class="pre">__author__</span></code> as a list (not a string)</p></li>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">__version__</span></code> for meaningful changes</p></li>
+<li><p>Add yourself to the list in every file you touch</p></li>
+</ul>
+</section>
+<section id="contributor-checklist-for-prs">
+<h3>Contributor Checklist (for PRs)<a class="headerlink" href="#contributor-checklist-for-prs" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>[ ] Increment the <code class="docutils literal notranslate"><span class="pre">__version__</span></code> string for significant changes</p></li>
+<li><p>[ ] Update the CHANGE_LOG.md with a summary of your changes</p></li>
+<li><p>[ ] Ensure all tests pass and documentation builds</p></li>
+<li><p><strong>Major</strong>: Increment for incompatible API changes or major new features.</p></li>
+<li><p><strong>Minor</strong>: Increment for backward-compatible feature additions or improvements.</p></li>
+<li><p><strong>Fix</strong>: Increment for backward-compatible bug fixes or minor changes.</p></li>
+</ul>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">0.2.1</span></code> → <code class="docutils literal notranslate"><span class="pre">0.2.2</span></code> (fix), <code class="docutils literal notranslate"><span class="pre">0.3.0</span></code> (minor), <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code> (major).</p>
+<p>If you contribute code to this project, please:</p>
+<ul class="simple">
+<li><p>Add your name and email to the end of the <code class="docutils literal notranslate"><span class="pre">__author__</span></code> list in any Python file you edit.</p></li>
+<li><p>Increment the <code class="docutils literal notranslate"><span class="pre">__version__</span></code> string if you make a significant change.</p></li>
+<li><p>Optionally, add a short comment in the file or in your pull request describing your contribution.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">__author__</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s2">&quot;Andy Turner &lt;agdturner@gmail.com&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Your Name &lt;your.email@example.com&gt;&quot;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>This helps ensure proper attribution and makes it easy to track contributors. For large or multi-author changes, consider also updating this README or adding a CONTRIBUTORS file.</p>
+</section>
+</section>
+<section id="makefile-reference">
+<h2>Makefile Reference<a class="headerlink" href="#makefile-reference" title="Link to this heading"></a></h2>
+<section id="common-targets">
+<h3>Common Targets<a class="headerlink" href="#common-targets" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">git-clean</span></code> — Clean up merged local branches and prune deleted remotes. This target automatically checks out the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch before deleting merged branches to avoid errors if the active branch is merged and needs deletion.</p></li>
+</ul>
+</section>
+<section id="python-scripts-used-by-makefile-targets">
+<h3>Python Scripts Used by Makefile Targets<a class="headerlink" href="#python-scripts-used-by-makefile-targets" title="Link to this heading"></a></h3>
+<p>| Script                        | Used by Target    | Purpose                                                      |</p>
+<p>| scripts/docs.py                | docs              | Copies and normalizes Markdown docs for Sphinx               |
+| scripts/docs-clean.py          | docs-clean        | Removes auto-copied docs assets from docs/                   |
+| scripts/clean.py               | clean             | Removes build/test artifacts and Python caches               |
+| scripts/clear-caches.py        | clear-caches      | Deletes all LLM/model caches and model lists                 |
+| scripts/gh-pages.py            | gh-pages          | Builds and deploys Sphinx docs to the gh-pages branch        |</p>
+<ul class="simple">
+<li><p>All scripts are in the <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory at the project root.</p></li>
+<li><p>These scripts ensure all Makefile targets are platform-agnostic and reproducible.</p></li>
+</ul>
+</section>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading"></a></h2>
+<p>Project documentation is available in the <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory and online via GitHub Pages.</p>
+<ul class="simple">
+<li><p>See <a class="reference internal" href="DEV_GUIDE.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">DEV_GUIDE.md</span></code></span></a> for developer workflow, collaboration, Makefile targets, and project structure.</p></li>
+<li><p>See <a class="reference internal" href="USER_GUIDE.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">USER_GUIDE.md</span></code></span></a> for user guidance, support, and future configuration instructions.</p></li>
+<li><p>See <code class="docutils literal notranslate"><span class="pre">SETUP_GUIDE_DEV.md</span></code> and <code class="docutils literal notranslate"><span class="pre">SETUP_GUIDE_USER.md</span></code> for environment setup instructions.</p></li>
+</ul>
+<p>Docs are generated with Sphinx and output to <code class="docutils literal notranslate"><span class="pre">docs/_build/html/</span></code>.</p>
+<blockquote>
+<div><p><strong>To view the documentation:</strong> Open <code class="docutils literal notranslate"><span class="pre">docs/_build/html/index.html</span></code> in your web browser after running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code>.</p>
+</div></blockquote>
+<section id="adding-new-modules-to-the-documentation">
+<h3>Adding New Modules to the Documentation<a class="headerlink" href="#adding-new-modules-to-the-documentation" title="Link to this heading"></a></h3>
+<p>To add a new module to the docs:</p>
+<ol class="arabic simple">
+<li><p>Create a new .rst file in the appropriate directory under <code class="docutils literal notranslate"><span class="pre">docs/</span></code>.</p></li>
+<li><p>Add the <code class="docutils literal notranslate"><span class="pre">automodule</span></code> directive for your module.</p></li>
+<li><p>Reference the new .rst file in the <code class="docutils literal notranslate"><span class="pre">toctree</span></code> in <code class="docutils literal notranslate"><span class="pre">index.rst</span></code>.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code> to rebuild the documentation.</p></li>
+</ol>
+<p>This structure keeps documentation organized and easy to extend as the codebase grows.</p>
+<hr class="docutils" />
+<p><strong>Note on Sphinx/MyST Documentation Warnings:</strong></p>
+<p>When building the documentation with Sphinx and MyST, you may see warnings like:</p>
+<p>Document headings start at H2, not H1 [myst.header]</p>
+</section>
+</section>
+<section id="these-warnings-occur-even-though-all-markdown-files-start-with-h2-this-is-a-known-quirk-with-myst-sphinx-and-does-not-affect-the-rendered-documentation-you-can-safely-ignore-these-warnings-unless-the-formatting-in-the-html-output-is-incorrect">
+<h2>These warnings occur even though all Markdown files start with H2 (<code class="docutils literal notranslate"><span class="pre">##</span></code>). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.<a class="headerlink" href="#these-warnings-occur-even-though-all-markdown-files-start-with-h2-this-is-a-known-quirk-with-myst-sphinx-and-does-not-affect-the-rendered-documentation-you-can-safely-ignore-these-warnings-unless-the-formatting-in-the-html-output-is-incorrect" title="Link to this heading"></a></h2>
+</section>
+<section id="llm-model-listing-caching-and-validation">
+<h2>LLM Model Listing, Caching, and Validation<a class="headerlink" href="#llm-model-listing-caching-and-validation" title="Link to this heading"></a></h2>
+<p>This project supports multiple LLM providers (OpenAI, GenAI, DeepSeek, Anthropic) with a unified workflow for model management:</p>
+<ul class="simple">
+<li><p><strong>Model Listing:</strong> Each LLM module provides a function to fetch and list available models from the provider’s API. The full model list is saved as both JSON (machine-readable) and TXT (human-readable) in the corresponding <code class="docutils literal notranslate"><span class="pre">data/llm/{provider}/</span></code> directory.</p></li>
+<li><p><strong>Caching:</strong> When a model list is fetched, it is cached locally. LLM responses are also cached for efficiency and reproducibility.</p></li>
+<li><p><strong>Validation:</strong> When running the main script, the selected model for each LLM is checked against the cached JSON model list. If the model is not found, a warning is shown and the available models can be listed automatically.</p></li>
+<li><p><strong>Extensibility:</strong> This workflow is consistent across all LLMs, making it easy to add new providers or update model selection logic.</p></li>
+</ul>
+<section id="llm-model-selection-explicit-required">
+<h3>LLM Model Selection (Explicit Required)<a class="headerlink" href="#llm-model-selection-explicit-required" title="Link to this heading"></a></h3>
+<p>When running the main script, you must explicitly set the model name for each LLM provider in <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.</p>
+<ul class="simple">
+<li><p>To select a model, set the variable (e.g., <code class="docutils literal notranslate"><span class="pre">openai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">genai_model</span></code>, <code class="docutils literal notranslate"><span class="pre">deepseek_model</span></code>) at the top of the main function in <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>.</p></li>
+<li><p>If you do not set a model, the script will raise an error and prompt you to specify one.</p></li>
+<li><p>To see available models, run the model listing function for each provider or check the generated <code class="docutils literal notranslate"><span class="pre">models.json</span></code> file in <code class="docutils literal notranslate"><span class="pre">data/llm/{provider}/</span></code>.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openai_model</span> <span class="o">=</span> <span class="s2">&quot;gpt-3.5-turbo&quot;</span>
+<span class="n">genai_model</span> <span class="o">=</span> <span class="s2">&quot;gemini-pro&quot;</span>
+<span class="n">deepseek_model</span> <span class="o">=</span> <span class="s2">&quot;deepseek-model-1&quot;</span>
+</pre></div>
+</div>
+<p>See the API documentation and module docstrings for more details on how model management is implemented and used in the codebase.</p>
+</section>
+</section>
+<section id="centralized-logging">
+<h2>Centralized Logging<a class="headerlink" href="#centralized-logging" title="Link to this heading"></a></h2>
+<p>All major modules and utilities in GABM use a centralized logging system. In addition to any console output, each LLM module and utility writes detailed logs automatically to the <code class="docutils literal notranslate"><span class="pre">data/logs/</span></code> directory. These logs include setup steps, API calls, warnings, and errors, making troubleshooting and reproducibility easier. See the <a class="reference internal" href="SETUP_GUIDE_DEV.html"><span class="std std-doc">Developer Setup Guide</span></a> for details on how to view and use these logs.</p>
+</section>
+<section id="files-and-directories-excluded-from-version-control">
+<h2>Files and Directories Excluded from Version Control<a class="headerlink" href="#files-and-directories-excluded-from-version-control" title="Link to this heading"></a></h2>
+<p>Certain files and directories are intentionally excluded from the repository via <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> to keep the project clean and secure:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data/logs/</span></code> — All log files generated by scripts and modules (can be large and environment-specific)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/llm/*/cache.pkl</span></code> — LLM response cache files (can be large and are not needed for collaboration)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> — API keys (never commit secrets)</p></li>
+</ul>
+<p>If you do not see these files or folders in the repository, this is expected. Each collaborator should generate their own as needed by following the setup guide.</p>
+<ul class="simple">
+<li><p>If you want to link to Markdown files (like ROADMAP.md, CHANGE_LOG.md, CODE_OF_CONDUCT.md, SETUP_GUIDE_USER.md, SETUP_GUIDE_DEV.md, CONTRIBUTORS, LICENSE) in the Sphinx docs, ensure they are present in the docs/ directory or use plain Markdown links (e.g., <code class="docutils literal notranslate"><span class="pre">[ROADMAP.md](../ROADMAP.md)</span></code>) instead of MyST cross-references. Otherwise, Sphinx will warn about missing references.</p></li>
+<li><p>If you want to include a file in the Sphinx navigation, add it to a toctree in index.rst. If not, remove or comment out the reference.</p></li>
+</ul>
+</section>
+<section id="documentation-build-workflow">
+<h2>Documentation Build Workflow<a class="headerlink" href="#documentation-build-workflow" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The Makefile <code class="docutils literal notranslate"><span class="pre">docs</span></code> target automatically runs <code class="docutils literal notranslate"><span class="pre">scripts/docs.py</span></code> to copy key documentation files (README.md, ROADMAP.md, etc.) from the project root to the <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory and update their internal links for Sphinx.</p></li>
+<li><p><strong>Edit only the originals in the project root.</strong> Do not edit the auto-copied files in <code class="docutils literal notranslate"><span class="pre">docs/</span></code>—they will be overwritten.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.rst</span></code> files in <code class="docutils literal notranslate"><span class="pre">docs/</span></code> are meant to be created, edited, and maintained by developers for Sphinx documentation.</p></li>
+<li><p>This workflow ensures that all documentation is up to date, cross-referenced, and easy to navigate in both the repository and the generated HTML docs.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Platform Agnostic:</strong> All core developer workflows (build, clean, cache management, docs, deployment) are fully platform-agnostic and work on both Windows and Unix-like systems. You can develop and contribute using your preferred OS.</p>
+</div></blockquote>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading"></a></h2>
+<p>See <a class="reference internal" href="LICENSE.html"><span class="std std-doc">LICENSE</span></a>.</p>
+</section>
+<section id="development-history-project-journal">
+<h2>Development History &amp; Project Journal<a class="headerlink" href="#development-history-project-journal" title="Link to this heading"></a></h2>
+<p>We are documenting the collaborative development of this project, including key milestones, decisions, and lessons learned. See:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="DEVELOPMENT_HISTORY.html"><span class="std std-doc">DEVELOPMENT_HISTORY.md</span></a> for a full narrative and session summaries</p></li>
+<li><p><a class="reference internal" href="#data/logs/dev_sessions/"><span class="xref myst">data/logs/dev_sessions/</span></a> for detailed session logs (may use GitHub LFS for large files)</p></li>
+<li><p><a class="reference internal" href="#docs/development_history.md"><span class="xref myst">Sphinx documentation: Development History</span></a> for a published summary</p></li>
+</ul>
+<p>This record is being maintained as part of our open science and transparency practices, and will be referenced in our planned <a class="reference external" href="https://joss.theoj.org/">Journal of Open Source Software (JOSS)</a> submission.</p>
+</section>
+<section id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading"></a></h2>
+<p>This project was developed with significant assistance from <a class="reference external" href="https://github.com/features/copilot">GitHub Copilot</a> for code generation, refactoring, and documentation improvements.</p>
+<p>We gratefully acknowledge support from the <a class="reference external" href="https://www.leeds.ac.uk/">University of Leeds</a>. Funding for this project comes from a UKRI Future Leaders Fellowship awarded to <a class="reference external" href="https://essl.leeds.ac.uk/politics/staff/102/professor-viktoria-spaiser">Professor Viktoria Spaiser</a> (grant reference: <a class="reference external" href="https://gtr.ukri.org/projects?ref=UKRI2043">UKRI2043</a>).</p>
+<div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEV_GUIDE.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History and Project Journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTACT.html">Contact</a></li>
 </ul>
 </div>
+</section>
+</section>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
 <ul class="simple">
@@ -93,7 +478,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="requirements.html" class="btn btn-neutral float-right" title="Requirements" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="LICENSE.html" class="btn btn-neutral float-right" title="License" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

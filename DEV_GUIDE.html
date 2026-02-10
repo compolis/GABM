@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="User Guide" href="USER_GUIDE.html" />
-    <link rel="prev" title="Contributor Covenant Code of Conduct" href="CODE_OF_CONDUCT.html" /> 
+    <link rel="prev" title="User Setup Guide" href="SETUP_GUIDE_USER.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,10 +44,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Planned for Version 0.2.0</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html#project-roadmap">Project Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
@@ -55,7 +54,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#collaboration-communication">Collaboration &amp; Communication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#project-structure">Project Structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#python-package-entry-point-main-py">Python Package Entry Point: <strong>main</strong>.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#makefile-targets">Makefile Targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#makefile-targets">Makefile Targets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#target-chaining-dry-and-consistency">Target Chaining, DRY, and Consistency</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#developing-documentation">Developing Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#python-version">Python Version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#packaging-files">Packaging Files</a></li>
@@ -73,16 +75,17 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History and Project Journal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTACT.html">Contact</a></li>
 </ul>
 
         </div>
@@ -113,7 +116,8 @@
 <h1>Developer Guide<a class="headerlink" href="#developer-guide" title="Link to this heading"></a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow. Documentation was updated in release 0.1.1 for clarity and completeness.</p>
+<p>For detailed session logs and workflow rationale, see <a class="reference internal" href="#docs/DEV_SESSION_LOGGING.md"><span class="xref myst">docs/DEV_SESSION_LOGGING.md</span></a>.
+This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow. Documentation was updated in release 0.1.1 for clarity and completeness.</p>
 </section>
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
@@ -180,6 +184,29 @@
 </section>
 <section id="makefile-targets">
 <h2>Makefile Targets<a class="headerlink" href="#makefile-targets" title="Link to this heading"></a></h2>
+<section id="target-chaining-dry-and-consistency">
+<h3>Target Chaining, DRY, and Consistency<a class="headerlink" href="#target-chaining-dry-and-consistency" title="Link to this heading"></a></h3>
+<p>For maintainability, all Makefile targets that depend on other build steps should use Make’s built-in dependency chaining (e.g., <code class="docutils literal notranslate"><span class="pre">gh-pages-deploy:</span> <span class="pre">docs</span></code>) rather than manually invoking <code class="docutils literal notranslate"><span class="pre">$(MAKE)</span></code> or shelling out to <code class="docutils literal notranslate"><span class="pre">make</span></code> within a target. This ensures:</p>
+<ul class="simple">
+<li><p>Each target is only responsible for its own logic.</p></li>
+<li><p>The DRY (Don’t Repeat Yourself) principle is followed—no duplicated build logic.</p></li>
+<li><p>Consistency: all targets use the same build steps, and changes to one target (like <code class="docutils literal notranslate"><span class="pre">docs</span></code>) automatically propagate to dependents (like <code class="docutils literal notranslate"><span class="pre">gh-pages-deploy</span></code>).</p></li>
+</ul>
+<p><strong>Recommended style:</strong></p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">gh-pages-deploy</span><span class="o">:</span><span class="w"> </span><span class="n">docs</span>
+<span class="w">	</span>python3<span class="w"> </span>scripts/gh-pages-deploy.py
+</pre></div>
+</div>
+<p><strong>Not recommended:</strong></p>
+<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">docs</span><span class="o">:</span>
+<span class="w">	</span>python3<span class="w"> </span>scripts/docs.py
+<span class="w">	</span><span class="nv">PYTHONPATH</span><span class="o">=</span>..<span class="w"> </span>sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w"> </span>docs<span class="w"> </span>docs/_build/html
+<span class="w">	</span><span class="k">$(</span>MAKE<span class="k">)</span><span class="w"> </span>docs-clean
+</pre></div>
+</div>
+<p>or calling <code class="docutils literal notranslate"><span class="pre">make</span></code> from within a target, as this can lead to recursion, confusion, or inconsistent builds.</p>
+<p><strong>Document this approach in comments in the Makefile and in the developer guide.</strong></p>
+<p>This approach is now used for <code class="docutils literal notranslate"><span class="pre">gh-pages-deploy</span></code> and should be followed for future targets.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Target</p></th>
@@ -196,46 +223,49 @@
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code></p></td>
 <td><p>Build documentation (Sphinx) and clean auto-copied docs assets</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-clean</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-build</span></code></p></td>
+<td><p>Build documentation (Sphinx)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-clean</span></code></p></td>
 <td><p>Remove auto-copied documentation files from docs/</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages-deploy</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages-deploy</span></code></p></td>
 <td><p>Build and deploy documentation to GitHub Pages (runs scripts/gh-pages-deploy.py)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code></p></td>
 <td><p>Remove build/test artifacts and Python caches</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clear-caches</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clear-caches</span></code></p></td>
 <td><p>Delete all LLM caches and model lists (for a clean slate)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">git-clean</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">git-clean</span></code></p></td>
 <td><p>Clean up merged local branches and prune deleted remotes</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sync</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sync</span></code></p></td>
 <td><p>Sync main branch with upstream</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sync-feature</span> <span class="pre">BRANCH=release/0.2.0</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sync-feature</span> <span class="pre">BRANCH=release/0.2.0</span></code></p></td>
 <td><p>Sync and rebase a feature/release branch onto main</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">setup-llms</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">setup-llms</span></code></p></td>
 <td><p>Run onboarding/setup for all LLMs (API key check, model lists, cache init)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">release</span> <span class="pre">VERSION=x.y.z</span> <span class="pre">BRANCH=release/x.y.z</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">release</span> <span class="pre">VERSION=x.y.z</span> <span class="pre">BRANCH=release/x.y.z</span></code></p></td>
 <td><p>Tag and push a release (platform-agnostic)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">delete-release</span> <span class="pre">VERSION=x.y.z</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">delete-release</span> <span class="pre">VERSION=x.y.z</span></code></p></td>
 <td><p>Delete a release tag locally and on remotes (origin, upstream)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">build</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">build</span></code></p></td>
 <td><p>Build a distribution package for PyPI (python -m build)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">build-test</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">build-test</span></code></p></td>
 <td><p>Build and test install the package in a fresh venv</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">pypi-release</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">pypi-release</span></code></p></td>
 <td><p>Upload the built package to PyPI (twine upload dist/*)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">testpypi-release</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">testpypi-release</span></code></p></td>
 <td><p>Upload the built package to TestPyPI (twine upload –repository testpypi dist/*)</p></td>
 </tr>
 </tbody>
@@ -243,11 +273,12 @@
 <p><strong>Notes:</strong></p>
 <ul class="simple">
 <li><p>All Python scripts used by Makefile targets are in the <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory and are named consistently with their Makefile targets (e.g., <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-clean</span></code> runs <code class="docutils literal notranslate"><span class="pre">scripts/docs-clean.py</span></code>).</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">delete-release</span></code> target is platform-agnostic and automates deleting a release tag locally and on both remotes (origin, upstream).</p></li>
-<li><p>This convention improves clarity and discoverability for contributors.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">delete-release</span></code> target automates deleting a release tag locally and on both remotes (origin, upstream).</p></li>
+<li><p>This convention improves clarity and discoverability for contributors. For releases that are published in PyPI, the release tag is protected in the canonical upstream repository.</p></li>
 <li><p>Targets are platform-agnostic and reproducible.</p></li>
 </ul>
 <p>Refer to the Makefile for full details and usage examples.</p>
+</section>
 </section>
 <section id="developing-documentation">
 <h2>Developing Documentation<a class="headerlink" href="#developing-documentation" title="Link to this heading"></a></h2>
@@ -413,7 +444,7 @@ The project includes several Markdown files, each serving a specific purpose:</p
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="CODE_OF_CONDUCT.html" class="btn btn-neutral float-left" title="Contributor Covenant Code of Conduct" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SETUP_GUIDE_USER.html" class="btn btn-neutral float-left" title="User Setup Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="USER_GUIDE.html" class="btn btn-neutral float-right" title="User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

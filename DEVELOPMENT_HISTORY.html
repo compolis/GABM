@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="JOSS Submission Planning and Draft" href="JOSS_SUBMISSION.html" />
-    <link rel="prev" title="Requirements (Developer)" href="requirements-dev.html" /> 
+    <link rel="prev" title="CHANGE_LOG" href="CHANGE_LOG.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,19 +44,18 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Planned for Version 0.2.0</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html#project-roadmap">Project Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DEV_GUIDE.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
-<li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Development History and Project Journal</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#early-development-decisions">Early Development Decisions</a></li>
@@ -88,6 +87,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTACT.html">Contact</a></li>
 </ul>
 
         </div>
@@ -114,7 +114,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="development-history-and-project-journal">
+  <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>            - For detailed session logs and workflow rationale, see [docs/DEV_SESSION_LOGGING.md](docs/DEV_SESSION_LOGGING.md).
+        - [2026-02-10] Makefile dependency chaining and documentation update
+            - Updated Makefile to use dependency chaining for docs and gh-pages-deploy targets, ensuring DRY and consistent build logic.
+            - Documented the rationale and recommended style in DEV_GUIDE.md and Makefile comments.
+            - Discussed and implemented best practices for maintainable automation and contributor clarity.
+            - Ready to test make docs and make gh-pages-deploy with the new workflow.
+    - [2026-02-10] Makefile/gh-pages-deploy refactor for DRY principle
+        - Refactored Makefile so gh-pages-deploy depends on the docs target, ensuring docs are always built the same way before deployment.
+        - Removed the Sphinx build step from scripts/gh-pages-deploy.py to avoid duplication and inconsistency.
+        - This change follows the DRY (Don&#39;t Repeat Yourself) and consistency principles, making the workflow more robust and maintainable.
+        - Recommend documenting this approach and rationale in DEV_GUIDE.md for future contributors.
+- [2026-02-10] Sphinx autodoc fix and workflow update
+    - Identified that Sphinx/autodoc could not find the gabm modules after moving io into src/gabm.
+    - Added &#39;../src&#39; to sys.path in docs/conf.py to resolve the import path issue.
+    - Docs now build correctly, with API Reference and README content rendering as expected.
+    - Next steps: Test the workflow for pushing these changes, and review branch protection rules for the gh-pages branch on upstream to ensure documentation deployment works smoothly.
+</pre></div>
+</div>
+<section id="development-history-and-project-journal">
 <h1>Development History and Project Journal<a class="headerlink" href="#development-history-and-project-journal" title="Link to this heading"></a></h1>
 <p>This document provides a chronological summary and reflective narrative of the development of this project, including key decisions, milestones, and collaborative experiences. Detailed session logs are stored in data/logs/dev_sessions/ and referenced here for transparency and archival purposes.</p>
 <section id="overview">
@@ -294,7 +312,7 @@ The initial development of this repository began by reviewing preliminary work b
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="requirements-dev.html" class="btn btn-neutral float-left" title="Requirements (Developer)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CHANGE_LOG.html" class="btn btn-neutral float-left" title="CHANGE_LOG" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="JOSS_SUBMISSION.html" class="btn btn-neutral float-right" title="JOSS Submission Planning and Draft" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

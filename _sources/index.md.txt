@@ -18,21 +18,23 @@ gabm/io/read_data
 :maxdepth: 1
 :caption: Project Documents
 
-ROADMAP.md
-CHANGE_LOG.md
-CODE_OF_CONDUCT.md
+LICENSE.md
+SETUP_GUIDE_DEV.md
+SETUP_GUIDE_USER.md
 DEV_GUIDE.md
 USER_GUIDE.md
-SETUP_GUIDE_USER.md
-SETUP_GUIDE_DEV.md
+requirements-dev.md
+requirements.md
 API_KEYS.md
 CONTRIBUTORS.md
-LICENSE.md
-requirements.md
-requirements-dev.md
+CODE_OF_CONDUCT.md
+ROADMAP.md
+CHANGE_LOG.md
 DEVELOPMENT_HISTORY.md
+DEV_SESSION_LOGGING.md
 JOSS_SUBMISSION.md
 SECURITY.md
+CONTACT.md
 ```
 
 Indices and tables

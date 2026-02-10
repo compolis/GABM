@@ -2,6 +2,7 @@
 # Developer Guide
 
 ## Overview
+For detailed session logs and workflow rationale, see [docs/DEV_SESSION_LOGGING.md](docs/DEV_SESSION_LOGGING.md).
 This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow. Documentation was updated in release 0.1.1 for clarity and completeness.
 
 
@@ -60,11 +61,41 @@ For more details, see the [Python Packaging documentation](https://docs.python.o
 
 ## Makefile Targets
 
+### Target Chaining, DRY, and Consistency
+
+For maintainability, all Makefile targets that depend on other build steps should use Make's built-in dependency chaining (e.g., `gh-pages-deploy: docs`) rather than manually invoking `$(MAKE)` or shelling out to `make` within a target. This ensures:
+- Each target is only responsible for its own logic.
+- The DRY (Don't Repeat Yourself) principle is followed—no duplicated build logic.
+- Consistency: all targets use the same build steps, and changes to one target (like `docs`) automatically propagate to dependents (like `gh-pages-deploy`).
+
+**Recommended style:**
+
+```makefile
+gh-pages-deploy: docs
+	python3 scripts/gh-pages-deploy.py
+```
+
+**Not recommended:**
+
+```makefile
+docs:
+	python3 scripts/docs.py
+	PYTHONPATH=.. sphinx-build -b html docs docs/_build/html
+	$(MAKE) docs-clean
+```
+
+or calling `make` from within a target, as this can lead to recursion, confusion, or inconsistent builds.
+
+**Document this approach in comments in the Makefile and in the developer guide.**
+
+This approach is now used for `gh-pages-deploy` and should be followed for future targets.
+
 | Target         | Usage/Description                                                                 |
 |--------------- |----------------------------------------------------------------------------------|
 | `make help`    | Show available Makefile commands                                                  |
 | `make test`    | Run all tests (pytest)                                                            |
 | `make docs`    | Build documentation (Sphinx) and clean auto-copied docs assets                    |
+| `make docs-build` | Build documentation (Sphinx)                                                      |
 | `make docs-clean` | Remove auto-copied documentation files from docs/                              |
 | `make gh-pages-deploy` | Build and deploy documentation to GitHub Pages (runs scripts/gh-pages-deploy.py) |
 | `make clean`   | Remove build/test artifacts and Python caches                                     |
@@ -83,8 +114,8 @@ For more details, see the [Python Packaging documentation](https://docs.python.o
 
 **Notes:**
 - All Python scripts used by Makefile targets are in the `scripts/` directory and are named consistently with their Makefile targets (e.g., `make docs-clean` runs `scripts/docs-clean.py`).
-- The `delete-release` target is platform-agnostic and automates deleting a release tag locally and on both remotes (origin, upstream).
-- This convention improves clarity and discoverability for contributors.
+- The `delete-release` target automates deleting a release tag locally and on both remotes (origin, upstream).
+- This convention improves clarity and discoverability for contributors. For releases that are published in PyPI, the release tag is protected in the canonical upstream repository.
 - Targets are platform-agnostic and reproducible.
 
 Refer to the Makefile for full details and usage examples.

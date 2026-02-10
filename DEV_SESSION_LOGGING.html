@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Development Session Logging Guide &mdash; GABM  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GABM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Planned for Version 0.2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html#project-roadmap">Project Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEV_GUIDE.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History and Project Journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GABM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Development Session Logging Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/DEV_SESSION_LOGGING.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="development-session-logging-guide">
+<h1>Development Session Logging Guide<a class="headerlink" href="#development-session-logging-guide" title="Link to this heading"></a></h1>
+<p>This document describes the workflow and best practices for logging development sessions in the GABM project. Maintaining detailed and structured logs supports transparency, reproducibility, onboarding, and reflection (e.g., for JOSS paper preparation).</p>
+<section id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Provide a persistent, chronological record of development sessions, decisions, and technical changes.</p></li>
+<li><p>Enable contributors to review project history and rationale for key workflow choices.</p></li>
+<li><p>Support writing project summaries, onboarding new team members, and preparing publications.</p></li>
+</ul>
+</section>
+<section id="where-to-log">
+<h2>Where to Log<a class="headerlink" href="#where-to-log" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Detailed session logs:</strong></p>
+<ul>
+<li><p>Store in <code class="docutils literal notranslate"><span class="pre">data/logs/dev_sessions/</span></code> as dated Markdown or text files (e.g., <code class="docutils literal notranslate"><span class="pre">2026-02-10-session.md</span></code>).</p></li>
+<li><p>Capture step-by-step actions, commands, decisions, and troubleshooting.</p></li>
+</ul>
+</li>
+<li><p><strong>Summary logs:</strong></p>
+<ul>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">DEVELOPMENT_HISTORY.md</span></code> with concise summaries of major sessions, milestones, and workflow changes.</p></li>
+<li><p>Reference detailed session logs where appropriate.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="what-to-log">
+<h2>What to Log<a class="headerlink" href="#what-to-log" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Date, participants, and context of the session.</p></li>
+<li><p>Key actions taken (code changes, workflow updates, troubleshooting steps).</p></li>
+<li><p>Decisions made and rationale (especially for workflow/process changes).</p></li>
+<li><p>Problems encountered and how they were resolved.</p></li>
+<li><p>Next steps or open questions.</p></li>
+</ul>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Log sessions in real time or immediately after work is completed.</p></li>
+<li><p>Use clear, descriptive headings and bullet points for readability.</p></li>
+<li><p>Reference related issues, PRs, or documentation as needed.</p></li>
+<li><p>For major workflow/process changes, update <code class="docutils literal notranslate"><span class="pre">DEV_GUIDE.md</span></code> and reference the change in the session log.</p></li>
+<li><p>For JOSS or other publications, use the logs to reconstruct the project’s development narrative.</p></li>
+</ul>
+</section>
+<section id="example-structure">
+<h2>Example Structure<a class="headerlink" href="#example-structure" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">10</span> <span class="n">Session</span><span class="p">:</span> <span class="n">Makefile</span> <span class="n">Refactor</span> <span class="ow">and</span> <span class="n">Docs</span> <span class="n">Automation</span>
+<span class="o">--------------------------------------------------------</span>
+<span class="o">-</span> <span class="n">Participants</span><span class="p">:</span> <span class="n">Andy</span><span class="p">,</span> <span class="n">Ajay</span>
+<span class="o">-</span> <span class="n">Refactored</span> <span class="n">Makefile</span> <span class="n">to</span> <span class="n">use</span> <span class="n">dependency</span> <span class="n">chaining</span> <span class="k">for</span> <span class="n">docs</span> <span class="ow">and</span> <span class="n">gh</span><span class="o">-</span><span class="n">pages</span><span class="o">-</span><span class="n">deploy</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">Updated</span> <span class="n">DEV_GUIDE</span><span class="o">.</span><span class="n">md</span> <span class="n">to</span> <span class="n">document</span> <span class="n">DRY</span><span class="o">/</span><span class="n">consistency</span> <span class="n">rationale</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">Discussed</span> <span class="n">session</span> <span class="n">logging</span> <span class="n">best</span> <span class="n">practices</span> <span class="ow">and</span> <span class="n">created</span> <span class="n">this</span> <span class="n">guide</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">Next</span><span class="p">:</span> <span class="n">Test</span> <span class="n">new</span> <span class="n">workflow</span> <span class="ow">and</span> <span class="n">update</span> <span class="n">session</span> <span class="n">logs</span> <span class="n">accordingly</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>See <code class="docutils literal notranslate"><span class="pre">DEVELOPMENT_HISTORY.md</span></code> for milestone summaries.</p></li>
+<li><p>See <code class="docutils literal notranslate"><span class="pre">DEV_GUIDE.md</span></code> for workflow and automation best practices.</p></li>
+</ul>
+<hr class="docutils" />
+<p><em>This guide should be updated as the project evolves. For questions or suggestions, open an issue or discuss in a development session.</em></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, GABM contributors, University of Leeds.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

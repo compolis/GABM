@@ -1,0 +1,49 @@
+# Development Session Logging Guide
+
+This document describes the workflow and best practices for logging development sessions in the GABM project. Maintaining detailed and structured logs supports transparency, reproducibility, onboarding, and reflection (e.g., for JOSS paper preparation).
+
+## Purpose
+- Provide a persistent, chronological record of development sessions, decisions, and technical changes.
+- Enable contributors to review project history and rationale for key workflow choices.
+- Support writing project summaries, onboarding new team members, and preparing publications.
+
+## Where to Log
+- **Detailed session logs:**
+  - Store in `data/logs/dev_sessions/` as dated Markdown or text files (e.g., `2026-02-10-session.md`).
+  - Capture step-by-step actions, commands, decisions, and troubleshooting.
+- **Summary logs:**
+  - Update `DEVELOPMENT_HISTORY.md` with concise summaries of major sessions, milestones, and workflow changes.
+  - Reference detailed session logs where appropriate.
+
+## What to Log
+- Date, participants, and context of the session.
+- Key actions taken (code changes, workflow updates, troubleshooting steps).
+- Decisions made and rationale (especially for workflow/process changes).
+- Problems encountered and how they were resolved.
+- Next steps or open questions.
+
+## Best Practices
+- Log sessions in real time or immediately after work is completed.
+- Use clear, descriptive headings and bullet points for readability.
+- Reference related issues, PRs, or documentation as needed.
+- For major workflow/process changes, update `DEV_GUIDE.md` and reference the change in the session log.
+- For JOSS or other publications, use the logs to reconstruct the project’s development narrative.
+
+## Example Structure
+```
+2026-02-10 Session: Makefile Refactor and Docs Automation
+--------------------------------------------------------
+- Participants: Andy, Ajay
+- Refactored Makefile to use dependency chaining for docs and gh-pages-deploy.
+- Updated DEV_GUIDE.md to document DRY/consistency rationale.
+- Discussed session logging best practices and created this guide.
+- Next: Test new workflow and update session logs accordingly.
+```
+
+## References
+- See `DEVELOPMENT_HISTORY.md` for milestone summaries.
+- See `DEV_GUIDE.md` for workflow and automation best practices.
+
+---
+
+_This guide should be updated as the project evolves. For questions or suggestions, open an issue or discuss in a development session._
