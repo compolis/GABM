@@ -1,21 +1,3 @@
-## Troubleshooting
-
-### GitHub Pages Worktree Conflict
-
-When deploying documentation with `make gh-pages-deploy`, you may encounter an error like:
-
-```
-fatal: 'gh-pages' is already used by worktree at '/tmp/gh-pages-xxxx...'
-```
-
-This occurs if a previous deployment left a lingering worktree directory for the `gh-pages` branch. The deployment script now automatically checks for and removes any existing worktree before adding a new one. If you still encounter this error, manually remove the worktree:
-
-```
-git worktree remove /tmp/gh-pages-xxxx...
-```
-
-For more details, see the comments in the Makefile and the deployment script.
-
 # Developer Guide
 
 ## Overview
@@ -37,6 +19,7 @@ This guide provides best practices for contributing to GABM, collaborating with 
 - [PyPI Release Process](#pypi-release-process)
 - [Continuous Integration & Branch Protection](#continuous-integration--branch-protection)
 - [JOSS Article Intention](#joss-article-intention)
+- [Maintainer Guide](#maintainer-guide)
 - [Additional Resources](#additional-resources)
 
 ## Contributing Workflow
@@ -225,41 +208,76 @@ The project team intends to write and submit an article to the Journal of Open S
 
 For updates and progress, see DEVELOPMENT_HISTORY.md and the Sphinx documentation.
 
-## Additional Resources
-## Overview of Project Markdown Files
-## Working with an AI Pair Programmer
-## Managing Logs and Caches
-Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large and are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0. This section will be expanded as these tools are implemented.
-Using an AI pair programmer (such as GitHub Copilot) can greatly accelerate development and normalize good practice. To get the most benefit:
 
+## Maintainer Guide
+
+### gh-pages Branch and Documentation Deployment
+
+Only maintainers should update or force-push the `gh-pages` branch on the upstream (canonical) repository. This branch is used exclusively for GitHub Pages deployment and should not be merged into `main`.
+
+**Policy:**
+- Developers should focus on writing Python code and docstrings in `src/`, which are auto-included in Sphinx documentation builds.
+- Sphinx documentation is built and deployed by maintainers using `make gh-pages-deploy`.
+- If the upstream `gh-pages` branch is out of sync or needs to be replaced, maintainers may use `git push --force upstream gh-pages` to overwrite it with the correct local version. This should be done with care, as it replaces the branch history.
+- Developers should not push directly to the upstream `gh-pages` branch.
+
+**Summary:**
+- Most contributors work in feature branches and submit PRs for code and documentation changes (in Markdown or docstrings).
+- Only maintainers handle the deployment and updating of the `gh-pages` branch.
+
+### Troubleshooting
+
+#### GitHub Pages Worktree Conflict
+
+When deploying documentation with `make gh-pages-deploy`, you may encounter an error like:
+
+```
+fatal: 'gh-pages' is already used by worktree at '/tmp/gh-pages-xxxx...'
+```
+
+This occurs if a previous deployment left a lingering worktree directory for the `gh-pages` branch. The deployment script now automatically checks for and removes any existing worktree before adding a new one. If you still encounter this error, manually remove the worktree:
+
+```
+git worktree remove /tmp/gh-pages-xxxx...
+```
+
+For more details, see the comments in the Makefile and the deployment script.
+
+
+## Additional Resources
+
+### Overview of Project Markdown Files
+The project includes several Markdown files, each serving a specific purpose:
+
+- **README.md**: Project overview, setup instructions, and links to key documentation.
+- **SETUP_GUIDE_USER.md**: Step-by-step environment setup for users.
+- **SETUP_GUIDE_DEV.md**: Step-by-step environment setup for developers.
+- **USER_GUIDE.md**: End user instructions for installing, configuring, and running GABM.developers.
+- **DEV_GUIDE.md**: Developer workflow, project structure, and best practices.
+- **API_KEYS.md**: Required API keys for LLMs and configuration details.
+- **CODE_OF_CONDUCT.md**: Expected behavior and reporting procedures.
+- **CONTRIBUTORS.md**: Project contributors and roles.
+- **ROADMAP.md**: Planned features and future development goals.
+- **CHANGE_LOG.md**: Tracks changes and updates across releases.
+- **DEVELOPMENT_HISTORY.md**: Project development, milestones, and reflections.
+
+This structure helps developers find relevant information and understand the documentation layout. These files are referenced and included in Sphinx documentation for consistency and accessibility.
+- See [SETUP_GUIDE_DEV.md](SETUP_GUIDE_DEV.md) for environment setup
+- See [README.md](README.md) for project overview
+
+
+### Working with an AI Pair Programmer
+- Using an AI pair programmer (such as GitHub Copilot) can greatly accelerate development and normalize good practice. To get the most benefit:
 - Review all changes, as AI assistants have limited session memory and may occasionally miss details.
 - Maintain comprehensive documentation to bridge memory gaps and enable effective guidance.
 - Refer the AI assistant to existing documentation to help it provide accurate and context-aware support.
 - Use clear prompts and feedback to teach and guide the AI assistant as needed.
 
 This collaborative workflow helps ensure continuity, reproducibility, and efficient development for both human and AI contributors.
-The project includes several Markdown files, each serving a specific purpose:
 
-- **README.md**: Project overview, setup instructions, and links to key documentation.
-- **DEV_GUIDE.md**: Developer workflow, project structure, and best practices.
-- **USER_GUIDE.md**: End user instructions for installing, configuring, and running GABM.
-- **SETUP_GUIDE_USER.md**: Step-by-step environment setup for users.
-- **SETUP_GUIDE_DEV.md**: Step-by-step environment setup for developers.
-- **API_KEYS.md**: Required API keys for LLMs and configuration details.
-- **CHANGE_LOG.md**: Tracks changes and updates across releases.
-- **ROADMAP.md**: Planned features and future development goals.
-- **CODE_OF_CONDUCT.md**: Expected behavior and reporting procedures.
-- **CONTRIBUTORS.md**: Project contributors and roles.
-- **LICENSE.md**: Software license and terms of use.
-- **requirements.txt**: Pinned dependencies for end users.
-- **requirements-dev.txt**: Flexible dependencies for developers.
-- **SECURITY.md**: Security guidelines and contact information.
-- **CONTACT.md**: Maintainer and support contact details.
-- **DEVELOPMENT_HISTORY.md**: Project development, milestones, and reflections.
 
-This structure helps developers find relevant information and understand the documentation layout. These files are referenced and included in Sphinx documentation for consistency and accessibility.
-- See [SETUP_GUIDE_DEV.md](SETUP_GUIDE_DEV.md) for environment setup
-- See [README.md](README.md) for project overview
+### Managing Logs and Caches
+- Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large. Typically they are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0.
 
 ---
 For further questions, [open an issue](https://github.com/compolis/GABM/issues/new/choose) or contact maintainers via GitHub.

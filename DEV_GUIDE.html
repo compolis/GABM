@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Troubleshooting &mdash; GABM  documentation</title>
+  <title>Developer Guide &mdash; GABM  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
@@ -47,11 +47,7 @@
 <li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#github-pages-worktree-conflict">GitHub Pages Worktree Conflict</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="#developer-guide">Developer Guide</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#contributing-workflow">Contributing Workflow</a></li>
@@ -72,10 +68,20 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#joss-article-intention">JOSS Article Intention</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#overview-of-project-markdown-files">Overview of Project Markdown Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#working-with-an-ai-pair-programmer">Working with an AI Pair Programmer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#managing-logs-and-caches">Managing Logs and Caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#maintainer-guide">Maintainer Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gh-pages-branch-and-documentation-deployment">gh-pages Branch and Documentation Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#github-pages-worktree-conflict">GitHub Pages Worktree Conflict</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview-of-project-markdown-files">Overview of Project Markdown Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#working-with-an-ai-pair-programmer">Working with an AI Pair Programmer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#managing-logs-and-caches">Managing Logs and Caches</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
@@ -106,7 +112,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Troubleshooting</li>
+      <li class="breadcrumb-item active">Developer Guide</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/DEV_GUIDE.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -116,22 +122,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="troubleshooting">
-<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h1>
-<section id="github-pages-worktree-conflict">
-<h2>GitHub Pages Worktree Conflict<a class="headerlink" href="#github-pages-worktree-conflict" title="Link to this heading"></a></h2>
-<p>When deploying documentation with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages-deploy</span></code>, you may encounter an error like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fatal</span><span class="p">:</span> <span class="s1">&#39;gh-pages&#39;</span> <span class="ow">is</span> <span class="n">already</span> <span class="n">used</span> <span class="n">by</span> <span class="n">worktree</span> <span class="n">at</span> <span class="s1">&#39;/tmp/gh-pages-xxxx...&#39;</span>
-</pre></div>
-</div>
-<p>This occurs if a previous deployment left a lingering worktree directory for the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch. The deployment script now automatically checks for and removes any existing worktree before adding a new one. If you still encounter this error, manually remove the worktree:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">worktree</span> <span class="n">remove</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">gh</span><span class="o">-</span><span class="n">pages</span><span class="o">-</span><span class="n">xxxx</span><span class="o">...</span>
-</pre></div>
-</div>
-<p>For more details, see the comments in the Makefile and the deployment script.</p>
-</section>
-</section>
-<section id="developer-guide">
+  <section id="developer-guide">
 <h1>Developer Guide<a class="headerlink" href="#developer-guide" title="Link to this heading"></a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
@@ -153,6 +144,7 @@ This guide provides best practices for contributing to GABM, collaborating with 
 <li><p><a class="reference internal" href="#pypi-release-process"><span class="xref myst">PyPI Release Process</span></a></p></li>
 <li><p><a class="reference internal" href="#continuous-integration--branch-protection"><span class="xref myst">Continuous Integration &amp; Branch Protection</span></a></p></li>
 <li><p><a class="reference internal" href="#joss-article-intention"><span class="xref myst">JOSS Article Intention</span></a></p></li>
+<li><p><a class="reference internal" href="#maintainer-guide"><span class="xref myst">Maintainer Guide</span></a></p></li>
 <li><p><a class="reference internal" href="#additional-resources"><span class="xref myst">Additional Resources</span></a></p></li>
 </ul>
 </section>
@@ -410,43 +402,56 @@ This ensures users who install from source get all necessary files.</p></li>
 <p>The project team intends to write and submit an article to the Journal of Open Source Software (JOSS) describing the development, purpose, and impact of GABM. Scaffolding for the JOSS article and submission workflow will be created in future sessions. Contributors and collaborators are encouraged to participate in the drafting and review process.</p>
 <p>For updates and progress, see DEVELOPMENT_HISTORY.md and the Sphinx documentation.</p>
 </section>
+<section id="maintainer-guide">
+<h2>Maintainer Guide<a class="headerlink" href="#maintainer-guide" title="Link to this heading"></a></h2>
+<section id="gh-pages-branch-and-documentation-deployment">
+<h3>gh-pages Branch and Documentation Deployment<a class="headerlink" href="#gh-pages-branch-and-documentation-deployment" title="Link to this heading"></a></h3>
+<p>Only maintainers should update or force-push the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch on the upstream (canonical) repository. This branch is used exclusively for GitHub Pages deployment and should not be merged into <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
+<p><strong>Policy:</strong></p>
+<ul class="simple">
+<li><p>Developers should focus on writing Python code and docstrings in <code class="docutils literal notranslate"><span class="pre">src/</span></code>, which are auto-included in Sphinx documentation builds.</p></li>
+<li><p>Sphinx documentation is built and deployed by maintainers using <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages-deploy</span></code>.</p></li>
+<li><p>If the upstream <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch is out of sync or needs to be replaced, maintainers may use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--force</span> <span class="pre">upstream</span> <span class="pre">gh-pages</span></code> to overwrite it with the correct local version. This should be done with care, as it replaces the branch history.</p></li>
+<li><p>Developers should not push directly to the upstream <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch.</p></li>
+</ul>
+<p><strong>Summary:</strong></p>
+<ul class="simple">
+<li><p>Most contributors work in feature branches and submit PRs for code and documentation changes (in Markdown or docstrings).</p></li>
+<li><p>Only maintainers handle the deployment and updating of the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch.</p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h3>
+<section id="github-pages-worktree-conflict">
+<h4>GitHub Pages Worktree Conflict<a class="headerlink" href="#github-pages-worktree-conflict" title="Link to this heading"></a></h4>
+<p>When deploying documentation with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages-deploy</span></code>, you may encounter an error like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fatal</span><span class="p">:</span> <span class="s1">&#39;gh-pages&#39;</span> <span class="ow">is</span> <span class="n">already</span> <span class="n">used</span> <span class="n">by</span> <span class="n">worktree</span> <span class="n">at</span> <span class="s1">&#39;/tmp/gh-pages-xxxx...&#39;</span>
+</pre></div>
+</div>
+<p>This occurs if a previous deployment left a lingering worktree directory for the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch. The deployment script now automatically checks for and removes any existing worktree before adding a new one. If you still encounter this error, manually remove the worktree:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">worktree</span> <span class="n">remove</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">gh</span><span class="o">-</span><span class="n">pages</span><span class="o">-</span><span class="n">xxxx</span><span class="o">...</span>
+</pre></div>
+</div>
+<p>For more details, see the comments in the Makefile and the deployment script.</p>
+</section>
+</section>
+</section>
 <section id="additional-resources">
 <h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading"></a></h2>
-</section>
 <section id="overview-of-project-markdown-files">
-<h2>Overview of Project Markdown Files<a class="headerlink" href="#overview-of-project-markdown-files" title="Link to this heading"></a></h2>
-</section>
-<section id="working-with-an-ai-pair-programmer">
-<h2>Working with an AI Pair Programmer<a class="headerlink" href="#working-with-an-ai-pair-programmer" title="Link to this heading"></a></h2>
-</section>
-<section id="managing-logs-and-caches">
-<h2>Managing Logs and Caches<a class="headerlink" href="#managing-logs-and-caches" title="Link to this heading"></a></h2>
-<p>Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large and are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0. This section will be expanded as these tools are implemented.
-Using an AI pair programmer (such as GitHub Copilot) can greatly accelerate development and normalize good practice. To get the most benefit:</p>
-<ul class="simple">
-<li><p>Review all changes, as AI assistants have limited session memory and may occasionally miss details.</p></li>
-<li><p>Maintain comprehensive documentation to bridge memory gaps and enable effective guidance.</p></li>
-<li><p>Refer the AI assistant to existing documentation to help it provide accurate and context-aware support.</p></li>
-<li><p>Use clear prompts and feedback to teach and guide the AI assistant as needed.</p></li>
-</ul>
-<p>This collaborative workflow helps ensure continuity, reproducibility, and efficient development for both human and AI contributors.
-The project includes several Markdown files, each serving a specific purpose:</p>
+<h3>Overview of Project Markdown Files<a class="headerlink" href="#overview-of-project-markdown-files" title="Link to this heading"></a></h3>
+<p>The project includes several Markdown files, each serving a specific purpose:</p>
 <ul class="simple">
 <li><p><strong>README.md</strong>: Project overview, setup instructions, and links to key documentation.</p></li>
-<li><p><strong>DEV_GUIDE.md</strong>: Developer workflow, project structure, and best practices.</p></li>
-<li><p><strong>USER_GUIDE.md</strong>: End user instructions for installing, configuring, and running GABM.</p></li>
 <li><p><strong>SETUP_GUIDE_USER.md</strong>: Step-by-step environment setup for users.</p></li>
 <li><p><strong>SETUP_GUIDE_DEV.md</strong>: Step-by-step environment setup for developers.</p></li>
+<li><p><strong>USER_GUIDE.md</strong>: End user instructions for installing, configuring, and running GABM.developers.</p></li>
+<li><p><strong>DEV_GUIDE.md</strong>: Developer workflow, project structure, and best practices.</p></li>
 <li><p><strong>API_KEYS.md</strong>: Required API keys for LLMs and configuration details.</p></li>
-<li><p><strong>CHANGE_LOG.md</strong>: Tracks changes and updates across releases.</p></li>
-<li><p><strong>ROADMAP.md</strong>: Planned features and future development goals.</p></li>
 <li><p><strong>CODE_OF_CONDUCT.md</strong>: Expected behavior and reporting procedures.</p></li>
 <li><p><strong>CONTRIBUTORS.md</strong>: Project contributors and roles.</p></li>
-<li><p><strong>LICENSE.md</strong>: Software license and terms of use.</p></li>
-<li><p><strong>requirements.txt</strong>: Pinned dependencies for end users.</p></li>
-<li><p><strong>requirements-dev.txt</strong>: Flexible dependencies for developers.</p></li>
-<li><p><strong>SECURITY.md</strong>: Security guidelines and contact information.</p></li>
-<li><p><strong>CONTACT.md</strong>: Maintainer and support contact details.</p></li>
+<li><p><strong>ROADMAP.md</strong>: Planned features and future development goals.</p></li>
+<li><p><strong>CHANGE_LOG.md</strong>: Tracks changes and updates across releases.</p></li>
 <li><p><strong>DEVELOPMENT_HISTORY.md</strong>: Project development, milestones, and reflections.</p></li>
 </ul>
 <p>This structure helps developers find relevant information and understand the documentation layout. These files are referenced and included in Sphinx documentation for consistency and accessibility.</p>
@@ -454,8 +459,26 @@ The project includes several Markdown files, each serving a specific purpose:</p
 <li><p>See <a class="reference internal" href="SETUP_GUIDE_DEV.html"><span class="std std-doc">SETUP_GUIDE_DEV.md</span></a> for environment setup</p></li>
 <li><p>See <a class="reference internal" href="README.html"><span class="std std-doc">README.md</span></a> for project overview</p></li>
 </ul>
+</section>
+<section id="working-with-an-ai-pair-programmer">
+<h3>Working with an AI Pair Programmer<a class="headerlink" href="#working-with-an-ai-pair-programmer" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Using an AI pair programmer (such as GitHub Copilot) can greatly accelerate development and normalize good practice. To get the most benefit:</p></li>
+<li><p>Review all changes, as AI assistants have limited session memory and may occasionally miss details.</p></li>
+<li><p>Maintain comprehensive documentation to bridge memory gaps and enable effective guidance.</p></li>
+<li><p>Refer the AI assistant to existing documentation to help it provide accurate and context-aware support.</p></li>
+<li><p>Use clear prompts and feedback to teach and guide the AI assistant as needed.</p></li>
+</ul>
+<p>This collaborative workflow helps ensure continuity, reproducibility, and efficient development for both human and AI contributors.</p>
+</section>
+<section id="managing-logs-and-caches">
+<h3>Managing Logs and Caches<a class="headerlink" href="#managing-logs-and-caches" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large. Typically they are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0.</p></li>
+</ul>
 <hr class="docutils" />
 <p>For further questions, <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue</a> or contact maintainers via GitHub.</p>
+</section>
 </section>
 </section>
 
