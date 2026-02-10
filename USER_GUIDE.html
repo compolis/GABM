@@ -49,14 +49,14 @@
 <li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DEV_GUIDE.html">Developer Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#managing-logs-and-caches">Managing Logs and Caches</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#key-documentation-files-for-users">Key Documentation Files for Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-documentation-files-for-users">Key Documentation Files for Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#support-feedback">Support &amp; Feedback</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuration-running-models">Configuration &amp; Running Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#managing-logs-and-caches">Managing Logs and Caches</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
 </ul>
 </li>
@@ -99,31 +99,16 @@
              
   <section id="user-guide">
 <h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h1>
-<section id="managing-logs-and-caches">
-<h2>Managing Logs and Caches<a class="headerlink" href="#managing-logs-and-caches" title="Link to this heading"></a></h2>
-<p>GABM creates logs and caches (such as prompt/response caches for LLM services) that can grow large over time. These files are not stored in the GitHub repository. Tools for tidying up logs and caches are planned for a future release. More details will be provided as these features are implemented.</p>
-</section>
-<section id="key-documentation-files-for-users">
-<h2>Key Documentation Files for Users<a class="headerlink" href="#key-documentation-files-for-users" title="Link to this heading"></a></h2>
-<p>The following Markdown files are most relevant for users:</p>
-<ul class="simple">
-<li><p><strong>README.md</strong>: Project overview and quick start instructions.</p></li>
-<li><p><strong>USER_GUIDE.md</strong>: Detailed user instructions for installing, configuring, and running GABM.</p></li>
-<li><p><strong>SETUP_GUIDE_USER.md</strong>: Step-by-step environment setup for users.</p></li>
-<li><p><strong>API_KEYS.md</strong>: Information on required API keys for LLMs and how to configure them.</p></li>
-</ul>
-<p>Refer to these files for guidance on using GABM. Additional documentation is available for developers and contributors.</p>
-</section>
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="#managing-logs-and-caches"><span class="xref myst">Managing Logs and Caches</span></a></p></li>
-<li><p><a class="reference internal" href="#key-documentation-files-for-users"><span class="xref myst">Key Documentation Files for Users</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
 <li><p><a class="reference internal" href="#getting-started"><span class="xref myst">Getting Started</span></a></p></li>
+<li><p><a class="reference internal" href="#key-documentation-files-for-users"><span class="xref myst">Key Documentation Files for Users</span></a></p></li>
 <li><p><a class="reference internal" href="#support--feedback"><span class="xref myst">Support &amp; Feedback</span></a></p></li>
 <li><p><a class="reference internal" href="#configuration--running-models"><span class="xref myst">Configuration &amp; Running Models</span></a></p></li>
 <li><p><a class="reference internal" href="#troubleshooting"><span class="xref myst">Troubleshooting</span></a></p></li>
+<li><p><a class="reference internal" href="#managing-logs-and-caches"><span class="xref myst">Managing Logs and Caches</span></a></p></li>
 <li><p><a class="reference internal" href="#additional-resources"><span class="xref myst">Additional Resources</span></a></p></li>
 </ul>
 </section>
@@ -137,6 +122,17 @@
 <li><p>See <a class="reference internal" href="SETUP_GUIDE_USER.html"><span class="std std-doc">SETUP_GUIDE_USER.md</span></a> for installation and setup instructions.</p></li>
 <li><p>Explore the documentation in the <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory or online via GitHub Pages.</p></li>
 </ul>
+</section>
+<section id="key-documentation-files-for-users">
+<h2>Key Documentation Files for Users<a class="headerlink" href="#key-documentation-files-for-users" title="Link to this heading"></a></h2>
+<p>The following Markdown files are most relevant for users:</p>
+<ul class="simple">
+<li><p><strong>README.md</strong>: Project overview and quick start instructions.</p></li>
+<li><p><strong>USER_GUIDE.md</strong>: Detailed user instructions for installing, configuring, and running GABM.</p></li>
+<li><p><strong>SETUP_GUIDE_USER.md</strong>: Step-by-step environment setup for users.</p></li>
+<li><p><strong>API_KEYS.md</strong>: Information on required API keys for LLMs and how to configure them.</p></li>
+</ul>
+<p>Refer to these files for guidance on using GABM. Additional documentation is available for developers and contributors.</p>
 </section>
 <section id="support-feedback">
 <h2>Support &amp; Feedback<a class="headerlink" href="#support-feedback" title="Link to this heading"></a></h2>
@@ -156,14 +152,16 @@
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
 <p>This section is for documenting common issues users may encounter when installing, configuring, or running GABM, along with solutions and workarounds. If you experience a problem, check here for guidance or updates. As the project evolves, troubleshooting tips and frequently asked questions will be added to help users resolve issues quickly.</p>
 </section>
+<section id="managing-logs-and-caches">
+<h2>Managing Logs and Caches<a class="headerlink" href="#managing-logs-and-caches" title="Link to this heading"></a></h2>
+<p>GABM creates logs and caches (such as prompt/response caches for LLM services) that can grow large over time. These files are not stored in the GitHub repository. Tools for tidying up logs and caches are planned for a future release. More details will be provided as these features are implemented.</p>
+</section>
 <section id="additional-resources">
 <h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>See <a class="reference internal" href="README.html"><span class="std std-doc">README.md</span></a> for project overview</p></li>
-<li><p>See <a class="reference internal" href="SETUP_GUIDE_USER.html"><span class="std std-doc">SETUP_GUIDE_USER.md</span></a> for setup</p></li>
+<li><p>If you encounter difficulties, please peruse <a class="reference external" href="https://github.com/compolis/GABM/issues">reported issues</a> and comment on an open issue or <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue</a>.</p></li>
 </ul>
-<hr class="docutils" />
-<p>For further questions, <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue</a> or contact maintainers via GitHub.</p>
 </section>
 </section>
 

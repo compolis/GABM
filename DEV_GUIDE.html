@@ -48,12 +48,12 @@
 <li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#contributing-workflow">Contributing Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#collaboration-communication">Collaboration &amp; Communication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#project-structure">Project Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#python-package-entry-point-main-py">Python Package Entry Point: <strong>main</strong>.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-package-entry-point">Python Package Entry Point</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#makefile-targets">Makefile Targets</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#target-chaining-dry-and-consistency">Target Chaining, DRY, and Consistency</a></li>
 </ul>
@@ -124,11 +124,6 @@
              
   <section id="developer-guide">
 <h1>Developer Guide<a class="headerlink" href="#developer-guide" title="Link to this heading"></a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>For detailed session logs and workflow rationale, see <a class="reference internal" href="#docs/DEV_SESSION_LOGGING.md"><span class="xref myst">docs/DEV_SESSION_LOGGING.md</span></a>.
-This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow. Documentation was updated in release 0.1.1 for clarity and completeness.</p>
-</section>
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -136,7 +131,7 @@ This guide provides best practices for contributing to GABM, collaborating with 
 <li><p><a class="reference internal" href="#contributing-workflow"><span class="xref myst">Contributing Workflow</span></a></p></li>
 <li><p><a class="reference internal" href="#collaboration--communication"><span class="xref myst">Collaboration &amp; Communication</span></a></p></li>
 <li><p><a class="reference internal" href="#project-structure"><span class="xref myst">Project Structure</span></a></p></li>
-<li><p><a class="reference internal" href="#python-package-entry-point-__main__py"><span class="xref myst">Python Package Entry Point: <strong>main</strong>.py</span></a></p></li>
+<li><p><a class="reference internal" href="#python-package-entry-point"><span class="xref myst">Python Package Entry Point</span></a></p></li>
 <li><p><a class="reference internal" href="#makefile-targets"><span class="xref myst">Makefile Targets</span></a></p></li>
 <li><p><a class="reference internal" href="#developing-documentation"><span class="xref myst">Developing Documentation</span></a></p></li>
 <li><p><a class="reference internal" href="#python-version"><span class="xref myst">Python Version</span></a></p></li>
@@ -145,8 +140,12 @@ This guide provides best practices for contributing to GABM, collaborating with 
 <li><p><a class="reference internal" href="#continuous-integration--branch-protection"><span class="xref myst">Continuous Integration &amp; Branch Protection</span></a></p></li>
 <li><p><a class="reference internal" href="#joss-article-intention"><span class="xref myst">JOSS Article Intention</span></a></p></li>
 <li><p><a class="reference internal" href="#maintainer-guide"><span class="xref myst">Maintainer Guide</span></a></p></li>
-<li><p><a class="reference internal" href="#additional-resources"><span class="xref myst">Additional Resources</span></a></p></li>
 </ul>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>For detailed session logs and workflow rationale, see <a class="reference internal" href="#docs/DEV_SESSION_LOGGING.md"><span class="xref myst">docs/DEV_SESSION_LOGGING.md</span></a>.
+This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow. Documentation was updated in release 0.1.1 for clarity and completeness.</p>
 </section>
 <section id="contributing-workflow">
 <h2>Contributing Workflow<a class="headerlink" href="#contributing-workflow" title="Link to this heading"></a></h2>
@@ -161,25 +160,25 @@ This guide provides best practices for contributing to GABM, collaborating with 
 <section id="collaboration-communication">
 <h2>Collaboration &amp; Communication<a class="headerlink" href="#collaboration-communication" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Use GitHub Issues and PRs for discussion and tracking.</p></li>
-<li><p>Communicate blockers or questions early.</p></li>
-<li><p>Reference related issues/PRs in your commits and comments.</p></li>
+<li><p>Use GitHub Issues and create Pull Requests (PRs) in the normal way.</p></li>
+<li><p>Reference related issues in your PRs and comments.</p></li>
 <li><p>Respect code review feedback and project coding standards.</p></li>
+<li><p>If you encounter difficulties, please contact maintainers via GitHub.</p></li>
 </ul>
 </section>
 <section id="project-structure">
 <h2>Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">data/</span></code>: For data including log files</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">docs/</span></code>: Documentation and assets</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/</span></code>: Documentation</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scripts/</span></code>: Utility scripts</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">src/gabm</span></code>: Python source code package</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tests/</span></code>: Test suite</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Makefile</span></code>: Automation targets</p></li>
 </ul>
 </section>
-<section id="python-package-entry-point-main-py">
-<h2>Python Package Entry Point: <strong>main</strong>.py<a class="headerlink" href="#python-package-entry-point-main-py" title="Link to this heading"></a></h2>
+<section id="python-package-entry-point">
+<h2>Python Package Entry Point<a class="headerlink" href="#python-package-entry-point" title="Link to this heading"></a></h2>
 <p>The main entry point for the GABM package is <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>. This follows Python packaging best practices and allows the application to be run using:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python3 -m gabm
 </pre></div>
@@ -476,8 +475,6 @@ This ensures users who install from source get all necessary files.</p></li>
 <ul class="simple">
 <li><p>Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large. Typically they are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0.</p></li>
 </ul>
-<hr class="docutils" />
-<p>For further questions, <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue</a> or contact maintainers via GitHub.</p>
 </section>
 </section>
 </section>

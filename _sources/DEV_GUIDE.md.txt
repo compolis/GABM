@@ -1,17 +1,11 @@
 # Developer Guide
 
-## Overview
-For detailed session logs and workflow rationale, see [docs/DEV_SESSION_LOGGING.md](docs/DEV_SESSION_LOGGING.md).
-This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow. Documentation was updated in release 0.1.1 for clarity and completeness.
-
-
 ## Table of Contents
-
 - [Overview](#overview)
 - [Contributing Workflow](#contributing-workflow)
 - [Collaboration & Communication](#collaboration--communication)
 - [Project Structure](#project-structure)
-- [Python Package Entry Point: __main__.py](#python-package-entry-point-__main__py)
+- [Python Package Entry Point](#python-package-entry-point)
 - [Makefile Targets](#makefile-targets)
 - [Developing Documentation](#developing-documentation)
 - [Python Version](#python-version)
@@ -20,7 +14,12 @@ This guide provides best practices for contributing to GABM, collaborating with 
 - [Continuous Integration & Branch Protection](#continuous-integration--branch-protection)
 - [JOSS Article Intention](#joss-article-intention)
 - [Maintainer Guide](#maintainer-guide)
-- [Additional Resources](#additional-resources)
+
+
+## Overview
+For detailed session logs and workflow rationale, see [docs/DEV_SESSION_LOGGING.md](docs/DEV_SESSION_LOGGING.md).
+This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow. Documentation was updated in release 0.1.1 for clarity and completeness.
+
 
 ## Contributing Workflow
 - Fork the repository and create feature branches for new work.
@@ -29,21 +28,24 @@ This guide provides best practices for contributing to GABM, collaborating with 
 - Review and respond to feedback promptly.
 - Keep your branch up to date with upstream/main.
 
+
 ## Collaboration & Communication
-- Use GitHub Issues and PRs for discussion and tracking.
-- Communicate blockers or questions early.
-- Reference related issues/PRs in your commits and comments.
+- Use GitHub Issues and create Pull Requests (PRs) in the normal way.
+- Reference related issues in your PRs and comments.
 - Respect code review feedback and project coding standards.
+- If you encounter difficulties, please contact maintainers via GitHub.
+
 
 ## Project Structure
 - `data/`: For data including log files
-- `docs/`: Documentation and assets
+- `docs/`: Documentation
 - `scripts/`: Utility scripts
 - `src/gabm`: Python source code package
 - `tests/`: Test suite
 - `Makefile`: Automation targets
 
-## Python Package Entry Point: __main__.py
+
+## Python Package Entry Point
 The main entry point for the GABM package is `src/gabm/__main__.py`. This follows Python packaging best practices and allows the application to be run using:
 
 	python3 -m gabm
@@ -278,6 +280,3 @@ This collaborative workflow helps ensure continuity, reproducibility, and effici
 
 ### Managing Logs and Caches
 - Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large. Typically they are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0.
-
----
-For further questions, [open an issue](https://github.com/compolis/GABM/issues/new/choose) or contact maintainers via GitHub.
