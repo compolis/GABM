@@ -17,7 +17,6 @@
 - [Managing Logs and Caches](#managing-logs-and-caches)
 
 
-
 ## Overview
 For detailed session logs and workflow rationale, see [docs/DEV_SESSION_LOGGING.md](docs/DEV_SESSION_LOGGING.md).
 This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow. Documentation was updated in release 0.1.1 for clarity and completeness.
