@@ -1,8 +1,12 @@
-## Planned for Version 0.2.0
-- Implement tidy-up scripts for logs and caches to help users and developers manage storage and maintain a clean environment.
 # Project Roadmap
 
 This file outlines planned next steps and future goals for the project. The repository is currently private; the first public release will be version 1.0.0.
+
+
+## Planned for Version 0.2.0
+
+- Implement tidy-up scripts for logs and caches to help users and developers manage storage and maintain a clean environment.
+
 
 ## Next Target: v0.2.0
 
@@ -12,6 +16,7 @@ This file outlines planned next steps and future goals for the project. The repo
 - Each agent will chat with every other agent twice.
 - After the conversations, generate a graph showing individual and aggregate opinions and confidence levels.
 - The graph will visualize both individual agent trajectories and overall group opinion/confidence.
+
 
 ## Future Milestone: v1.0.0 (First Public Release)
 
