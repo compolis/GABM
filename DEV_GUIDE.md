@@ -139,7 +139,7 @@ The project includes several Markdown files in the root directory, each serving 
 - **DEVELOPMENT_HISTORY.md**: Project development, milestones, and reflections.
 
 These files are referenced and compiled into the Sphinx documentation.
-- DEvelopers should add new Markdown file entries to `doc_assets.py` DOC_FILES and `docs/index.md` Project Documents to include them in Sphinx documentation
+- Developers should add new Markdown file entries to `doc_assets.py` DOC_FILES and `docs/index.md` Project Documents to include them in Sphinx documentation
 - Add `src` API docs via as needed
 - Run `make docs` to preview changes
 - Run `make gh-pages-deploy` to deploy/update the gh-pages branch
@@ -169,6 +169,8 @@ The following files and directories are essential for building, testing, and dis
 
 
 ## PyPI Release Process
+
+**Note:** Only maintainers should perform official releases to PyPI. Contributors should submit changes via pull requests; maintainers are responsible for versioning, building, and uploading releases to ensure project integrity and security.
 
 To release a new version of GABM to PyPI, follow these steps:
 
