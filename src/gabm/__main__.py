@@ -60,7 +60,7 @@ def main():
             return
         api_key = api_keys.get(key_name)
         logging.info(f"{name} API Key: {api_key}")
-        module = __import__(f"src.io.llm.{module_name}", fromlist=[module_name])
+        module = __import__(f"gabm.io.llm.{module_name}", fromlist=[module_name])
         send_func = getattr(module, "send")
         import inspect
         send_params = inspect.signature(send_func).parameters

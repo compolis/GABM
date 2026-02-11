@@ -1,2 +1,2 @@
 """GABM: Generative Agent-Based Model framework gabm package."""
-__version__ = "0.1.2"
+__version__ = "0.1.3"
