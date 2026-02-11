@@ -3,8 +3,6 @@ title: "GABM: Generative Agent-Based Model Platform"
 authors:
   - name: GitHub Copilot
     affiliation: 1
-  - name: Sorrel Harriet
-    affiliation: 2
   - name: Ajaykumar Manivannan
     affiliation: 2
   - name: Charlie Pilgrim
@@ -21,13 +19,13 @@ affiliations:
 ---
 
 # Introduction
-GABM is a Python platform for agent-based modeling with integrated LLM support. This paper describes the platforming, onboarding, and open science practices.
+GABM is a [Python](https://www.python.org/) platform for agent-based modeling with integrated LLM support. It was developed and is available via [GABM GitHub Repository](https://github.com/compolis/GABM) which is managed within the [University of Leeds GitHub Enterprise](https://github.com/enterprises/the-university-of-leeds). GABM is also released and made available via [PyPI](https://pypi.org/) as [https://pypi.org/project/gabm/](https://pypi.org/project/gabm/) and can be installed with [PIP](https://pypi.org/project/pip/).
 
 Introduce the Brussels Workshop
 
-The development of GABM began with Andy reviewing preliminary work by Ajay and Charlie, who had experimented with Python scripts to communicate with Large Language Model (LLM) services. Ajay had developed code to process some survey data into personas which could be provide with other context to LLM models to prompt responses tht reflect the repsonse of a persona as provided by the LLM model. The personas were derived from a YouGov survey and the context and responses for the use case are based on climate change mitigation.
+The development of GABM began with Ajay and Charlie writing experimental Python scripts to communicate with Large Language Model (LLM) services. Ajay developed code to process some survey data into personas which could be provide with other context to LLM models to prompt responses that reflect the repsonse of a persona as provided by the LLM model. The personas were derived from a YouGov survey(reference required) and the context and responses for the use case are based on climate change mitigation.
 
-Python libraries for using LLM Application Programming Interfaces(APIs) have been maturing for years. Developing an Agent Based Model (ABM) in Python is quite straightforward and something the development team had considerable experience with. It was decided to start the development with a requirement of Python >=3.12 as this wideley being used and would remain in maintenance for the project duration.
+Python libraries for using LLM Application Programming Interfaces(APIs) have been maturing for years. Developing a bespoke Agent Based Model (ABM) in Python without depending on an existing framework was thought to be best. It was decided to base the development on Python 3.12 initially as this is in widespread use and is to remain in maintenance for several months after which upgrading to Python 3.14 should be considered.
 
 
 ## Software Licensing

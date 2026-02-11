@@ -43,7 +43,8 @@ def main():
     logging.info("Running gabm...")
     # Get the api keys
     # Importing here to avoid circular imports
-    from src.io.read_data import read_api_keys
+    from gabm.io.read_data import read_api_keys
+    #from src.io.read_data import read_api_keys
     # Read API keys from the default location
     api_keys = read_api_keys(file_path='data/api_key.csv')
     # Print the API keys

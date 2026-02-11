@@ -1,48 +1,55 @@
 # User Setup Guide
-
-This guide is for end users who want to run the Generative Agent-Based Model (GABM) with minimal setup.
-
-## 1. Install Python and pip
-
-- Install Python 3.12 or higher from [python.org](https://www.python.org/downloads/).
-- Ensure `pip` is available (it is included with Python 3.4+).
-- Check your version:
+This guide is for end users who want to use GABM with minimal setup. You will either need [Conda](https://conda.org/) or to use an installation of [Python](https://www.python.org/) at version 3.12. Check your Python version:
 
 ```bash
 python3 --version
-pip --version
 ```
 
-## 2. Install Dependencies
-
-From the project root, install the required packages:
+## 1. Quickstart for Conda Users
+If you use [Conda](https://conda.org/) which is distributed with[Anaconda](https://www.anaconda.com/)/[Miniconda](https://docs.conda.io/en/latest/miniconda.html) and [Miniforge](https://github.com/conda-forge/miniforge) you can set up GABM in a new environment as follows:
 
 ```bash
-pip install -r requirements.txt
+conda create -n gabm
+conda activate gabm
+conda install python=3.12
+pip install gabm==0.1.1
 ```
 
-## 3. Fork and Clone the Repository
-
-- Fork the [upstream repository](https://github.com/compolis/GABM) to your own GitHub account.
-- Clone your fork locally:
+You can then check all installed dependencies and create your own requirements file with:
 
 ```bash
-git clone https://github.com/<your-username>/GABM.git
-cd GABM
-git checkout stable/0.1.0  # Or latest stable branch
+conda list -e > requirements.txt
 ```
 
-## 4. Set Up API Keys (Optional)
 
+## 2. Quickstart for Python 3.12 users
+Install from [PyPI](https://pypi.org/) using [Pip](https://pypi.org/project/pip/) as follows:
+
+```bash
+python3 -m venv gabm-venv
+source gabm-venv/bin/activate  # On Windows: gabm-venv\\Scripts\\activate
+pip install --upgrade pip
+pip install gabm==0.1.1
+```
+
+You can then check installed dependencies with:
+
+```bash
+pip freeze > requirements.txt
+```
+
+
+## 3. Set Up API Keys (Optional)
 If you want to use LLM features, create `data/api_key.csv` with your API keys. See [API_KEYS.md](API_KEYS.md) for details and instructions.
 
-## 5. Run the Main Program
 
+## 4. Run the Main Program
 From the project root:
 
 ```bash
 python3 -m gabm
 ```
+
 
 ## 6. Troubleshooting
 

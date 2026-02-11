@@ -18,7 +18,9 @@ myst-parser>=5.0.0<6
 docutils>=0.22,<0.23
 
 # For building distributions
-build>=1.4.0<2
+build>=1.4.0,<2
+setuptools>=61.0,<70
+wheel>=0.42.0,<1
 
 # For uploading to PyPI
-twine>=5.0.0<6
+twine>=5.0.0,<6

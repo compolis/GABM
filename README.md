@@ -22,32 +22,49 @@
 # GABM: Generative Agent-Based Model
 
 ## Table of Contents
-- [Development History & Project Journal](#development-history--project-journal)
 - [Overview](#overview)
+- [License](#license)
+- [Code of Conduct and Reporting](#code-of-conduct-and-reporting)
 - [Roadmap](#roadmap)
-- [Code of Conduct](#code-of-conduct)
-- [Getting Started](#getting-started)
-  - [Set Up Your Environment](#2-set-up-your-environment)
-  - [Recommended Tools & IDEs](#recommended-tools--ides)
-  - [API Keys](#3-api-keys)
-  - [LLM Setup and Onboarding](#4-llm-setup-and-onboarding)
-  - [Running the Code](#5-running-the-code)
+- [Development History & Project Journal](#development-history--project-journal)
+- [Setup Guides](#setup-guides)
+  - [User Setup Guide](#user-setup-guide)
+  - [Developer Setup Guide](#developer-setup-guide)
+- [Requirements](#requirements)
+  - [requirements.txt](#requirementstxt)
+  - [requirements-dev.txt](#requirements-devtxt)
+- [API Keys](#api-keys)
+- [User Guide](#user-guide)
+- [Developer Guide](#developer-guide)
+- [Makefile Reference](#makefile-reference)
 - [Usage](#usage)
 - [Model Management & Caching](#model-management--caching)
 - [Contribution Workflow](#contribution-workflow)
-- [Makefile Reference](#makefile-reference)
-- [Developer Guide](DEV_GUIDE.md)
-- [User Guide](USER_GUIDE.md)
 - [Documentation](#documentation)
-- [License](#license)
 - [Centralized Logging](#centralized-logging)
 - [Files and Directories Excluded from Version Control](#files-and-directories-excluded-from-version-control)
 - [Documentation Build Workflow](#documentation-build-workflow)
+- [Session Logging](#session-logging)
+- [JOSS Submission](#joss-submission)
 - [Acknowledgements](#acknowledgements)
+
 
 ## Overview
 
-GABM is a flexible, extensible Python framework for agent-based modeling (ABM) with a focus on integrating large language models (LLMs) as agent reasoning engines. It supports multiple LLM providers, persistent response caching, and robust onboarding for new users and contributors.
+GABM is a flexible, extensible [Python](https://www.python.org/) framework for agent-based modeling (ABM) with a focus on integrating large language models (LLMs) as agent reasoning engines. It supports use of multiple LLM providers and implements persistent response caching.
+
+
+## License
+
+See [LICENSE](LICENSE).
+
+
+## Code of Conduct and Reporting
+
+Please see our [Code of Conduct](CODE_OF_CONDUCT.md) for guidelines on expected behavior and reporting issues.
+
+For security or conduct concerns, you can also use the `Contact maintainers` link on the GitHub repository, or see the [SECURITY.md](SECURITY.md) file in the documentation for details on confidential reporting.
+
 
 ## Roadmap
 
@@ -69,11 +86,15 @@ To create and push a release tag:
 See [CHANGE_LOG.md](CHANGE_LOG.md) for details of each release, including the latest 0.1.1 documentation update.
 
 
-## Code of Conduct and Reporting
+## Development History & Project Journal
 
-Please see our [Code of Conduct](CODE_OF_CONDUCT.md) for guidelines on expected behavior and reporting issues.
+We are documenting the collaborative development of this project, including key milestones, decisions, and lessons learned. See:
+- [DEVELOPMENT_HISTORY.md](DEVELOPMENT_HISTORY.md) for a full narrative and session summaries
+- [data/logs/dev_sessions/](data/logs/dev_sessions/) for detailed session logs (may use GitHub LFS for large files)
+- [Sphinx documentation: Development History](docs/development_history.md) for a published summary
 
-For security or conduct concerns, you can also use the “Contact maintainers” link on the GitHub repository, or see the [SECURITY.md](SECURITY.md) file in the documentation for details on confidential reporting.
+This record is being maintained as part of our open science and transparency practices, and will be referenced in our planned [Journal of Open Source Software (JOSS)](https://joss.theoj.org/) submission.
+
 
 ## Getting Started
 
@@ -108,8 +129,7 @@ For a detailed, step-by-step walkthrough, see:
 
 ### 2. Set Up Your Environment
 
-
-Install Python 3.12 or higher and pip if you haven't already.
+You will need [Python](https://www.python.org/) >=3.12 and [PIP](https://pypi.org/project/pip/).
 
 #### User Setup (Recommended for most users)
 
@@ -325,31 +345,8 @@ When building the documentation with Sphinx and MyST, you may see warnings like:
 These warnings occur even though all Markdown files start with H2 (`##`). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.
 ---
 
-## LLM Model Listing, Caching, and Validation
 
-This project supports multiple LLM providers (OpenAI, GenAI, DeepSeek, Anthropic) with a unified workflow for model management:
-
-- **Model Listing:** Each LLM module provides a function to fetch and list available models from the provider's API. The full model list is saved as both JSON (machine-readable) and TXT (human-readable) in the corresponding `data/llm/{provider}/` directory.
-- **Caching:** When a model list is fetched, it is cached locally. LLM responses are also cached for efficiency and reproducibility.
-- **Validation:** When running the main script, the selected model for each LLM is checked against the cached JSON model list. If the model is not found, a warning is shown and the available models can be listed automatically.
-- **Extensibility:** This workflow is consistent across all LLMs, making it easy to add new providers or update model selection logic.
-
-### LLM Model Selection (Explicit Required)
-
-When running the main script, you must explicitly set the model name for each LLM provider in `src/gabm/__main__.py`. There are no defaults—this ensures clarity and prevents accidental use of deprecated or unsupported models.
-
-- To select a model, set the variable (e.g., `openai_model`, `genai_model`, `deepseek_model`) at the top of the main function in `src/gabm/__main__.py`.
-- If you do not set a model, the script will raise an error and prompt you to specify one.
-- To see available models, run the model listing function for each provider or check the generated `models.json` file in `data/llm/{provider}/`.
-
-Example:
-```python
-openai_model = "gpt-3.5-turbo"
-genai_model = "gemini-pro"
-deepseek_model = "deepseek-model-1"
-```
-
-See the API documentation and module docstrings for more details on how model management is implemented and used in the codebase.
+<!-- Removed redundant LLM Model Listing, Caching, and Validation section (content is covered in Model Management & Caching) -->
 
 ## Centralized Logging
 
@@ -376,21 +373,6 @@ If you do not see these files or folders in the repository, this is expected. Ea
 - This workflow ensures that all documentation is up to date, cross-referenced, and easy to navigate in both the repository and the generated HTML docs.
 
 > **Platform Agnostic:** All core developer workflows (build, clean, cache management, docs, deployment) are fully platform-agnostic and work on both Windows and Unix-like systems. You can develop and contribute using your preferred OS.
-
-
-## License
-
-See [LICENSE](LICENSE).
-
-
-## Development History & Project Journal
-
-We are documenting the collaborative development of this project, including key milestones, decisions, and lessons learned. See:
-- [DEVELOPMENT_HISTORY.md](DEVELOPMENT_HISTORY.md) for a full narrative and session summaries
-- [data/logs/dev_sessions/](data/logs/dev_sessions/) for detailed session logs (may use GitHub LFS for large files)
-- [Sphinx documentation: Development History](docs/development_history.md) for a published summary
-
-This record is being maintained as part of our open science and transparency practices, and will be referenced in our planned [Journal of Open Source Software (JOSS)](https://joss.theoj.org/) submission.
 
 
 ## Acknowledgements
