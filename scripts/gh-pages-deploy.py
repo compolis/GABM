@@ -6,7 +6,6 @@ __author__ = ["Andy Turner <agdturner@gmail.com>"]
 __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
-
 # Standard library imports
 import os
 import shutil
@@ -29,13 +28,23 @@ handler.setFormatter(formatter)
 if not logger.hasHandlers():
     logger.addHandler(handler)
 
-# Build docs
-logger.info("Building Sphinx docs...")
-subprocess.run(["python3", "-m", "sphinx", "-b", "html", "docs", "docs/_build/html"], check=True)
-logger.info("Docs build complete.")
+
+# Check for existing gh-pages worktree in /tmp and remove it if found
+import glob
+tmp_dir = tempfile.gettempdir()
+existing_worktrees = glob.glob(os.path.join(tmp_dir, "gh-pages-*") )
+for wt in existing_worktrees:
+    # Check if this worktree is actually for gh-pages
+    try:
+        with open(os.path.join(wt, ".git"), "r") as f:
+            if "gh-pages" in f.read():
+                logger.info(f"Removing existing gh-pages worktree: {wt}")
+                subprocess.run(["git", "worktree", "remove", wt], check=False)
+    except Exception:
+        pass
 
 # Prepare a unique temporary gh-pages directory path (do not create it yet)
-gh_pages_dir = os.path.join(tempfile.gettempdir(), f"gh-pages-{uuid.uuid4().hex}")
+gh_pages_dir = os.path.join(tmp_dir, f"gh-pages-{uuid.uuid4().hex}")
 logger.info(f"Preparing gh-pages worktree at {gh_pages_dir}")
 
 # Git commands to deploy (assumes gh-pages branch exists and is set up)

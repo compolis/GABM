@@ -6,7 +6,6 @@ __author__ = ["Andy Turner <agdturner@gmail.com>"]
 __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
-
 DOC_FILES = [
     "API_KEYS.md",
     "CHANGE_LOG.md",
@@ -14,6 +13,7 @@ DOC_FILES = [
     "CONTRIBUTORS.md",
     "JOSS_SUBMISSION.md",
     "DEV_GUIDE.md",
+    "DEV_SESSION_LOGGING.md",
     "DEVELOPMENT_HISTORY.md",
     "LICENSE.md",
     "README.md",

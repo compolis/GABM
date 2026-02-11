@@ -105,21 +105,49 @@ def fix_header_levels(text):
     Returns:
         str: Markdown with demoted headings.
     """
-    # Demote all headings by one level: # -> ##, ## -> ###, etc.
+    # Special-case for SECURITY.md and CONTACT.md: if only one heading and it's H1, demote to H2
+    import inspect
+    caller = inspect.stack()[1].function
+    special_case = False
+    if caller == 'main':
+        import sys
+        # Try to get the filename from sys._getframe
+        try:
+            filename = sys._getframe(1).f_locals.get('fname', '')
+            if filename in ('SECURITY.md', 'CONTACT.md'):
+                special_case = True
+        except Exception:
+            pass
     lines = text.splitlines()
-    demoted = []
+    headings = [i for i, l in enumerate(lines) if re.match(r'^# ', l)]
+    if special_case and len(headings) == 1:
+        idx = headings[0]
+        lines[idx] = '#'+lines[idx]
+        return '\n'.join(lines)
+    # Only demote headings if the first non-blank line is a single H1 (# )
+    first_heading_level = None
     for line in lines:
-        m = re.match(r'^(#+)(\s*)(.*)', line)
+        m = re.match(r'^(#+)\s+.*', line)
         if m:
-            hashes, spaces, rest = m.groups()
-            new_line = '#' + hashes + spaces + rest
-            demoted.append(new_line)
-        else:
-            demoted.append(line)
-    # Debug: log first few lines to verify
-    if demoted:
-        logger.debug(f'First lines after heading demotion: {demoted[:3]}')
-    return '\n'.join(demoted)
+            first_heading_level = len(m.group(1))
+            break
+    # Only demote if first heading is H1
+    if first_heading_level == 1:
+        demoted = []
+        for line in lines:
+            m = re.match(r'^(#+)(\s*)(.*)', line)
+            if m:
+                hashes, spaces, rest = m.groups()
+                new_line = '#' + hashes + spaces + rest
+                demoted.append(new_line)
+            else:
+                demoted.append(line)
+        if demoted:
+            logger.debug(f'First lines after heading demotion: {demoted[:3]}')
+        return '\n'.join(demoted)
+    else:
+        # No demotion needed
+        return text
 
 def fix_definition_lists_and_blockquotes(content):
     """

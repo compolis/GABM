@@ -1,3 +1,19 @@
+                - For detailed session logs and workflow rationale, see [docs/DEV_SESSION_LOGGING.md](docs/DEV_SESSION_LOGGING.md).
+            - [2026-02-10] Makefile dependency chaining and documentation update
+                - Updated Makefile to use dependency chaining for docs and gh-pages-deploy targets, ensuring DRY and consistent build logic.
+                - Documented the rationale and recommended style in DEV_GUIDE.md and Makefile comments.
+                - Discussed and implemented best practices for maintainable automation and contributor clarity.
+                - Ready to test make docs and make gh-pages-deploy with the new workflow.
+        - [2026-02-10] Makefile/gh-pages-deploy refactor for DRY principle
+            - Refactored Makefile so gh-pages-deploy depends on the docs target, ensuring docs are always built the same way before deployment.
+            - Removed the Sphinx build step from scripts/gh-pages-deploy.py to avoid duplication and inconsistency.
+            - This change follows the DRY (Don't Repeat Yourself) and consistency principles, making the workflow more robust and maintainable.
+            - Recommend documenting this approach and rationale in DEV_GUIDE.md for future contributors.
+    - [2026-02-10] Sphinx autodoc fix and workflow update
+        - Identified that Sphinx/autodoc could not find the gabm modules after moving io into src/gabm.
+        - Added '../src' to sys.path in docs/conf.py to resolve the import path issue.
+        - Docs now build correctly, with API Reference and README content rendering as expected.
+        - Next steps: Test the workflow for pushing these changes, and review branch protection rules for the gh-pages branch on upstream to ensure documentation deployment works smoothly.
 # Development History and Project Journal
 
 This document provides a chronological summary and reflective narrative of the development of this project, including key decisions, milestones, and collaborative experiences. Detailed session logs are stored in data/logs/dev_sessions/ and referenced here for transparency and archival purposes.
@@ -67,9 +83,16 @@ The initial development of this repository began by reviewing preliminary work b
     - [2026-02-16] GABM Project meeting
         - Sorrel, Viktoria, Ajay, Andy
         - The goal is to further define what "success" looks like from a service perspective, reflect on the intesive work and progress over a 2 week period, and reach agreement on opening the repository. This will pave the way for releasing the project and submitting a draft article to JOSS. Preparation will continue in the meantime. Details of the JOSS submission are being captured in [JOSS_SUBMISSION.md](JOSS_SUBMISSION.md)
-    - [2026-02-09] Onboarding Session 2 Ajay and Andy
-        - ... 
-- [2026-02-06] Onboarding Session 1 Ajay and Andy
+    - [2026-02-09/10] Onboarding and Documentation Session (Ajay)
+        ------------------------------------------------------
+        - Ajay joined onboarding using a managed Apple laptop; system Python was updating, so work was done on the lead developer's machine.
+        - Guided Ajay through making the upstream repository public and configuring GitHub Pages to serve from the gh-pages branch.
+        - Attempted to update the gh-pages-deploy workflow, but the documentation served on upstream remained outdated, possibly due to branch protection or workflow/caching issues.
+        - Confirmed that local and origin documentation builds matched, but upstream's gh-pages branch was different and not updating as expected.
+        - Discussed the workflow of pushing built docs to origin/gh-pages and making a PR to upstream/gh-pages for review and deployment, which is a robust and transparent approach.
+        - Noted that branch protection on upstream/gh-pages may now be preventing updates, which could explain the lack of documentation refresh.
+        - Did not fully test pypi-release and testpypi-release workflows during the session; these remain to be verified.
+        - Next steps: Review branch protection rules, test PyPI workflows, and document onboarding steps for future collaborators.
 	- Ajay had prepared by trying to step through the onboarding workflow but had a problem with running one of the workflows. We investigate this to try to workaround it and submitted [this issue on GitHub](https://github.com/compolis/GABM/issues/33), but our key focus was to learn the set up and practise key development workflows.
     - Andy presented the environment setup, workflow automation, and project structure. - Ajay's details were added to [CONTRIBUTORS](CONTRIBUTORS), and he quickly learned the command line commit-push process and about creating GitHub Pull Requests to merge changes upstream. Makefile targets for syncing and clearing up branches were introduced and Ajay practised using these and began realising/appreciating the workflow and set up being advocated.
     - This session marked an important step in building the contributor community and knowledge transfer for the project.
