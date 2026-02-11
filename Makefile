@@ -111,12 +111,14 @@ git-clean:
 
 # Sync your main branch with upstream
 sync:
-	@echo "Syncing main branch with upstream..."
+	@echo "Syncing main branch with upstream and origin..."
 	git fetch upstream
+	git fetch origin
 	git checkout main
 	git merge upstream/main
+	git pull origin main
 	git push origin main
-	@echo "...done syncing main branch with upstream."
+	@echo "...done syncing main branch with upstream and origin."
 
 # Sync and rebase a feature/release branch with main
 # Usage: make sync-feature BRANCH=release/0.2.0
