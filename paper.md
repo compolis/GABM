@@ -23,6 +23,8 @@ affiliations:
 # Introduction
 GABM is a Python platform for agent-based modeling with integrated LLM support. This paper describes the platforming, onboarding, and open science practices.
 
+Introduce the Brussels Workshop
+
 The development of GABM began with Andy reviewing preliminary work by Ajay and Charlie, who had experimented with Python scripts to communicate with Large Language Model (LLM) services. Ajay had developed code to process some survey data into personas which could be provide with other context to LLM models to prompt responses tht reflect the repsonse of a persona as provided by the LLM model. The personas were derived from a YouGov survey and the context and responses for the use case are based on climate change mitigation.
 
 Python libraries for using LLM Application Programming Interfaces(APIs) have been maturing for years. Developing an Agent Based Model (ABM) in Python is quite straightforward and something the development team had considerable experience with. It was decided to start the development with a requirement of Python >=3.12 as this wideley being used and would remain in maintenance for the project duration.
@@ -94,8 +96,9 @@ The Global Tipping Points Report (2025) [@globaltipping2025] synthesizes the lat
 
 # Statement of Need
 - Why could we not just use existing software?
-
-The recent work by Vezhnevets et al. (2023) [@vezhnevets2023concordia] introduces Concordia, a library for generative agent-based modeling (GABM) that leverages large language models (LLMs) to enable agents to act, reason, and interact in simulated physical, social, or digital environments. Concordia’s architecture, which includes a Game Master agent to mediate between agent intentions and environment constraints, demonstrates the potential of LLM-driven ABMs to simulate complex, language-mediated behaviors and interactions. This work provides important context and inspiration for GABM, highlighting both the opportunities and challenges of integrating LLMs into agent-based modeling. Our platform builds on these ideas, aiming for modularity, extensibility, and transparency, and is designed to support a wide range of research and application domains.
+  - Concordia
+    - https://github.com/google-deepmind/concordia
+    - Concordia is introduced in Vezhnevets et al. (2023) [@vezhnevets2023concordia] as a library for generative agent-based modelling that leverages large language models to enable agents to act, reason, and interact in simulated physical, social, or digital environments. Concordia's architecture, which includes a Game Master agent to mediate between agent intentions and environment constraints, demonstrates the potential of LLM-driven ABMs to simulate complex, language-mediated behaviors and interactions. This work provides important context and inspiration for GABM, highlighting both the opportunities and challenges of integrating LLMs into agent-based modeling. GABM builds on these ideas, aiming for modularity, extensibility, and transparency, and is designed to support a wide range of research and application domains.
 
 
 # Functionality
