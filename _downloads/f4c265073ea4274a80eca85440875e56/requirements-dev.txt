@@ -22,5 +22,8 @@ build>=1.4.0,<2
 setuptools>=61.0,<70
 wheel>=0.42.0,<1
 
+# For updating version references in files
+bump2version>=1.0.1<2
+
 # For uploading to PyPI
 twine>=5.0.0,<6

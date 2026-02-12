@@ -124,6 +124,7 @@ For maintainability, all Makefile targets that depend on other build steps shoul
 | `make build-test` | Build and test install the package in a fresh venv                               |
 | `make pypi-release` | Upload the built package to PyPI (twine upload dist/*)                         |
 | `make testpypi-release` | Upload the built package to TestPyPI (twine upload --repository testpypi dist/*) |
+| `make bump-version` | Bump the project version everywhere (patch by default; use `make bump-version part=minor` or `part=major` for other bumps). Uses bump2version and updates all relevant files. |
 
 
 All Python scripts used by Makefile targets are in the `scripts/` directory and are named consistently with their Makefile targets (e.g., `make docs-clean` runs `scripts/docs-clean.py`).

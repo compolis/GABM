@@ -288,6 +288,9 @@ make<span class="w"> </span>docs
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">testpypi-release</span></code></p></td>
 <td><p>Upload the built package to TestPyPI (twine upload –repository testpypi dist/*)</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">bump-version</span></code></p></td>
+<td><p>Bump the project version everywhere (patch by default; use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">bump-version</span> <span class="pre">part=minor</span></code> or <code class="docutils literal notranslate"><span class="pre">part=major</span></code> for other bumps). Uses bump2version and updates all relevant files.</p></td>
+</tr>
 </tbody>
 </table>
 <p>All Python scripts used by Makefile targets are in the <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory and are named consistently with their Makefile targets (e.g., <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-clean</span></code> runs <code class="docutils literal notranslate"><span class="pre">scripts/docs-clean.py</span></code>).</p>
