@@ -12,7 +12,7 @@
 - [Branch Protection](#branch-protection)
 - [Maintainer Guide](#maintainer-guide)
 - [Branch and Documentation Deployment](#branch-and-documentation-deployment)
-- [Working with an AI Pair Programmer](#working-with-an-ai-pair-programmer)
+- [GitHub Copilot](#github-copilot)
 - [Managing Logs and Caches](#managing-logs-and-caches)
 - [Files and Directories Excluded from Version Control](#files-and-directories-excluded-from-version-control)
 
@@ -124,6 +124,7 @@ For maintainability, all Makefile targets that depend on other build steps shoul
 | `make build-test` | Build and test install the package in a fresh venv                               |
 | `make pypi-release` | Upload the built package to PyPI (twine upload dist/*)                         |
 | `make testpypi-release` | Upload the built package to TestPyPI (twine upload --repository testpypi dist/*) |
+| `make bump-version` | Bump the project version everywhere (patch by default; use `make bump-version part=minor` or `part=major` for other bumps). Uses bump2version and updates all relevant files. |
 
 
 All Python scripts used by Makefile targets are in the `scripts/` directory and are named consistently with their Makefile targets (e.g., `make docs-clean` runs `scripts/docs-clean.py`).
@@ -264,8 +265,10 @@ git worktree remove /tmp/gh-pages-xxxx...
 For more details, see the comments in the Makefile and the deployment script.
 
 
-## Working with an AI Pair Programmer
-Using an AI pair programmer (such as [GitHub Copilot](https://github.com/features/copilot)), also known as [vibe coding](https://en.wikipedia.org/wiki/Vibe_coding), can accelerate development and normalise practice. In essence this uses large language models (LLMs) to help with tasks using prompts. Bear in mind that contemporary AI pair programmers use limited context and that context can be lost between sessions. This is why it is good to develop documentation at the same time as code and refer the AI assistant to existing documentation to help it provide accurate and context-aware support.
+## GitHub Copilot
+Using [GitHub Copilot](https://github.com/features/copilot)) for [vibe coding](https://en.wikipedia.org/wiki/Vibe_coding), can help with understanding workflows and developing documentation, code and tests.
+
+GitHub Copilot uses limited context and the chat context does not currently persist between sessions. As a result, it is good to develop/update documentation along with changes. GitHub Copilot can be asked to read the [README](README.md) and [Developer Guide](DEV_GUIDE.md) at the start of a session so as to be more context aware and provide better support.
 
 
 ## Managing Logs and Caches

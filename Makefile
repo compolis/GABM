@@ -25,7 +25,7 @@
 # Caution: Some commands (like git-clean, release, and delete-release) can modify your git history or delete tags. Always review the scripts they call (in the scripts/ directory) to ensure they do what you expect before running these commands.
 
 # Phony targets (not actual files)
-.PHONY: help test docs docs-clean gh-pages-deploy clean git-clean setup-llms clear-caches sync sync-feature release delete-release build build-test pypi-release testpypi-release
+.PHONY: help test docs docs-clean gh-pages-deploy clean git-clean setup-llms clear-caches sync sync-feature release delete-release build build-test pypi-release testpypi-release bump-version
 
 # Show available Makefile commands
 help:
@@ -46,7 +46,9 @@ help:
 	@echo "  build-test       - Build and test install the package in a fresh venv"
 	@echo "  pypi-release     - Upload the built package to PyPI (twine upload dist/*)"
 	@echo "  testpypi-release - Upload the built package to TestPyPI (twine upload --repository testpypi dist/*)"
-	
+	@echo "  bump-version     - Bump the project version (usage: make bump-version part=patch|minor|major)"
+	@echo "Use 'make <target>' to run a specific target. For targets that require additional variables (like release and sync-feature), include them as shown in the usage instructions."
+
 # Run all tests (requires pytest)
 test:
 	@echo "Running tests with pytest..."
@@ -162,25 +164,29 @@ delete-release:
 	@echo "...done deleting release tag version $(VERSION) locally and on remotes."
 
 # Build a distribution package for PyPI
-build:
+build: clean
 	@echo "Building a distribution package for PyPI..."
 	python3 -m build
 	@echo "...done building a distribution package for PyPI. Output in dist/"
 
 # Build and test install the package in a fresh venv
-build-test:
+build-test: build
 	@echo "Building and test installing the package in a fresh venv..."
 	python3 scripts/build-test.py
 	@echo "...done building and test installing the package in a fresh venv."
 
 # Upload the built package to PyPI
-pypi-release:
+pypi-release: build
 	@echo "Uploading the built package to PyPI..."
 	twine upload dist/*
 	@echo "...done uploading the built package to PyPI."
 
 # Upload the built package to TestPyPI
-testpypi-release:
+testpypi-release: build
 	@echo "Uploading the built package to TestPyPI..."
 	twine upload --repository testpypi dist/*
 	@echo "...done uploading the built package to TestPyPI."
+
+# Bump version everywhere (patch by default; use 'make bump-version part=minor' or 'part=major' for other bumps)
+bump-version:
+	bump2version --allow-dirty --list $${part:-patch}

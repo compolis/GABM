@@ -1,8 +1,10 @@
 # Development History
 
-
 ## Table of Contents
 - [Overview](#overview)
+- [GitHub Copilot](#github-copilot)
+- [Contributors](#contributors)
+- [Development Timeline](#development-timeline)
 
 
 ## Overview
@@ -19,41 +21,13 @@ Capturing information about interactions between other developers and GitHub Cop
 GitHub Copilot has only limited session memory and no memory between sessions. Project documentation can help provide context to GitHub Copilot to tailor responses to better reflect how GABM is organised.
 
 
-## Session Logs
-Detailed logs of development sessions are stored in UTF-8 encoded JSON files, with filenames indicating the session start and end times (e.g., session_YYYY-MM-DDTHHMMSS_to_YYYY-MM-DDTHHMMSS.json). Each log contains:
-- Session metadata (start/end, participants, notes, encoding)
-- An array of prompt/response history entries, each with a timestamp, role (user/assistant), and content
-
-**Format Example:**
-```json
-{
-	"session_metadata": {
-		"start": "2026-02-08T00:00:00",
-		"end": "2026-02-08T23:59:59",
-		"participants": ["Andy Turner", "GitHub Copilot"],
-		"encoding": "UTF-8",
-		"notes": "Session log is a partial, human-curated record of prompt/response and key actions. Not all development steps or context are captured."
-	},
-	"history": [ ... ]
-}
-```
-
-The session logs are stored in [data/logs/dev_sessions/](data/logs/dev_sessions/).
-
-To keep logs organized and accessible, use the `compress_dev_logs.py` script to compress plain text/markdown logs in `data/logs/dev_sessions/` and generate an index file ([data/logs/dev_sessions/index.md](data/logs/dev_sessions/index.md)) with links to each compressed log:
-
-```bash
-python scripts/compress_dev_logs.py
-```
-
-
 ## Contributors
 - Ajaykumar Manivannan (Ajay)
 - Viktoria Spaiser (Viktoria)
 - Andy Turner (Andy)
 - Charlie Pilgrim (Charlie)
 
-## Session Summaries
+## Development Timeline
 - [2026-02-16] GABM Project meeting
   - Viktoria, Ajay, Andy
   - ...
@@ -71,8 +45,8 @@ python scripts/compress_dev_logs.py
   - Andy presented the environment setup, workflow automation, and project structure.
   - Ajay added his details to [CONTRIBUTORS](CONTRIBUTORS), and he quickly learned the command line commit-push process and about creating GitHub Pull Requests to merge changes from a feature branch to the upstream repository main branch.
   - Makefile targets for syncing and clearing up branches were introduced and Ajay practised using these and began realising/appreciating the way the workflow were set up.
-- [2026-02-03] Set up of new GABM repository in [compolis](https://github.com/compolis/)
-  - The idea is to abstract from the Climate-Action-GABM Repository the general parts and keep in Climate-Action-GABM Repository the specific parts to do with Climate Action.
+- [2026-02-03] GABM Repository created in [compolis](https://github.com/compolis/)
+  - The idea is to develop GABM in part by abstracting general things from the Climate-Action-GABM Repository the specific parts to do with Climate Action will remain in the Climate-Action-GABM Repository.
 - [2026-02-02] GABM Project meeting
   - Viktoria, Ajay, Andy
   - Climate-Action-GABM Repository transered to [compolis](https://github.com/compolis/)

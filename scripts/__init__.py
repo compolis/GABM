@@ -1,1 +1,2 @@
-# Makes scripts a package for import in tests
+"""GABM: Generative Agent-Based Model framework scripts package."""
+__version__ = "0.1.0"
