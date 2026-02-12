@@ -375,7 +375,7 @@ This file is preferred over setup.py for static, declarative configuration.</p><
 <h3>PyPI Release Process<a class="headerlink" href="#pypi-release-process" title="Link to this heading"></a></h3>
 <p>To release a new version of GABM to <a class="reference external" href="https://pypi.org/">PyPI</a>, follow these steps:</p>
 <ol class="arabic">
-<li><p><strong>Update Version</strong>: Bump the version in setup.cfg, pyproject.toml and <a class="reference internal" href="USER_GUIDE.html"><span class="std std-doc">User Guide</span></a> as appropriate.</p></li>
+<li><p><strong>Update Version</strong>: Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">bump-version</span></code> to update the version everywhere (including setup.cfg, pyproject.toml, src/gabm/<strong>init</strong>.py, requirements-dev.txt, and all occurrences in <a class="reference internal" href="USER_GUIDE.html"><span class="std std-doc">User Guide</span></a>). Use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">bump-version</span> <span class="pre">part=minor</span></code> or <code class="docutils literal notranslate"><span class="pre">part=major</span></code> for non-patch bumps. Commit and push the changes before continuing.</p></li>
 <li><p><strong>Build the Package</strong>:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>build
 </pre></div>

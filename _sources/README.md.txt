@@ -9,12 +9,12 @@ title: Project README
 <img src="https://img.shields.io/github/license/compolis/gabm" alt="License" />
 
   </a>
-  <a href="https://www.python.org/downloads/release/python-3120/" title="Python Version">
+  <a href="https://www.python.org/downloads/release/python-31212/" title="Python Version">
 
 <img src="https://img.shields.io/badge/python-3.12%2B-blue.svg" alt="Python Version" />
 
   </a>
-  <a href="https://compolis.github.io/gabm/" title="Documentation">
+  <a href="https://compolis.github.io/GABM/" title="Documentation">
 
 <img src="https://img.shields.io/badge/docs-Sphinx-green" alt="Documentation" />
 
@@ -22,6 +22,7 @@ title: Project README
 </p>
 
 # GABM: Generative Agent-Based Model
+
 
 ## Overview
 GABM is a flexible, extensible [Python](https://www.python.org/) framework for developing agent-based models that use large language models (LLMs) as agent reasoning engines. It supports use of multiple LLM providers and implements persistent response caching.
@@ -37,6 +38,14 @@ Please see our [Code of Conduct](CODE_OF_CONDUCT.md) for guidelines on expected 
 For security or conduct concerns, you can also use the `Contact maintainers` link on the GitHub repository, or see the [SECURITY.md](SECURITY.md) file in the documentation for details on confidential reporting.
 
 
+## User Guide
+Please use the [User Guide](USER_GUIDE.md).
+
+
+## Developer Guide
+Please use the [Developer Guide](DEV_GUIDE.md).
+
+
 ## Roadmap
 See [ROADMAP.md](ROADMAP.md) for planned next steps and future goals.
 
@@ -47,14 +56,6 @@ See [CHANGE_LOG.md](CHANGE_LOG.md) for details of each release.
 
 ## Development History
 The collaborative development of GABM is captured in the [DEVELOPMENT_HISTORY.md](DEVELOPMENT_HISTORY.md).
-
-
-## Users
-Please use the [User Guide](USER_GUIDE.md).
-
-
-## Developers
-Please use the [Developer Guide](DEV_GUIDE.md).
 
 
 ## Acknowledgements
