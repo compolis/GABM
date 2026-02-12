@@ -215,7 +215,7 @@ This section is aimed at developers that are maintainers. Developers that are no
 ### PyPI Release Process
 To release a new version of GABM to [PyPI](https://pypi.org/), follow these steps:
 
-1. **Update Version**: Bump the version in setup.cfg, pyproject.toml and [User Guide](USER_GUIDE.md) as appropriate.
+1. **Update Version**: Run `make bump-version` to update the version everywhere (including setup.cfg, pyproject.toml, src/gabm/__init__.py, requirements-dev.txt, and all occurrences in [User Guide](USER_GUIDE.md)). Use `make bump-version part=minor` or `part=major` for non-patch bumps. Commit and push the changes before continuing.
 2. **Build the Package**:
 	```sh
 	make build
