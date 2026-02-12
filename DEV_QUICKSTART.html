@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Quickstart &mdash; GABM  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Requirements (Developer)" href="requirements-dev.html" />
+    <link rel="prev" title="Developer Guide" href="DEV_GUIDE.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GABM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEV_GUIDE.html">Developer Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pre-requisits">Pre-requisits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fork-and-clone">1. Fork and Clone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-dependencies">2. Install Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-llm-api-keys">3. Set Up LLM API Keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-tests-and-build-documentation">4. Run Tests and Build Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTACT.html">Contact</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GABM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Developer Quickstart</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/DEV_QUICKSTART.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="developer-quickstart">
+<h1>Developer Quickstart<a class="headerlink" href="#developer-quickstart" title="Link to this heading"></a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
+<li><p><a class="reference internal" href="#pre-requisits"><span class="xref myst">Pre-requisites</span></a></p></li>
+<li><p><a class="reference internal" href="#1-fork-and-clone"><span class="xref myst">1. Fork and Clone</span></a></p></li>
+<li><p><a class="reference internal" href="#2-install-dependencies"><span class="xref myst">2. Install Dependencies</span></a></p></li>
+<li><p><a class="reference internal" href="#3-set-up-llm-api-keys"><span class="xref myst">3. Set Up LLM API Keys</span></a></p></li>
+<li><p><a class="reference internal" href="#4-run-tests-and-build-documentation"><span class="xref myst">4. Run Tests and Build Documentation</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting"><span class="xref myst">Troubleshooting</span></a></p></li>
+<li><p><a class="reference internal" href="#additional-resources"><span class="xref myst">Additional Resources</span></a></p></li>
+</ul>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This guide helps developers get started with GABM quickly. Please refer to the <a class="reference internal" href="DEV_GUIDE.html"><span class="std std-doc">Developer Guide</span></a> for details of how to contribute.</p>
+<p>In the rest of the document “you” means you as a GABM developer.</p>
+<p>Your choice of development environment is your own, but we recommend <a class="reference external" href="https://code.visualstudio.com/">Visual Studio Code</a>.</p>
+</section>
+<section id="pre-requisits">
+<h2>Pre-requisits<a class="headerlink" href="#pre-requisits" title="Link to this heading"></a></h2>
+<p>You need:</p>
+<ul class="simple">
+<li><p>A <a class="reference external" href="https://github.com/">GitHub</a> account to contribute.</p></li>
+<li><p><a class="reference external" href="https://git-scm.com/">git</a> version 2 at or above 2.43.</p></li>
+<li><p><a class="reference external" href="https://www.python.org/">Python</a> version 3 at or above version 3.12.</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/pip/">PIP</a> at or above version 25.2.</p></li>
+<li><p><a class="reference external" href="https://www.gnu.org/software/make/">GNU Make</a> version 4 at or above version 4.3.</p></li>
+</ul>
+<p>To check your Python version run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>To check your PIP version run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>To check you GNU Make version run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>You may have multiple versions of Python and GNU Make on your system. Please use the right <a class="reference external" href="https://en.wikipedia.org/wiki/Path_(computing)">Path</a> to the versions needed for GABM when developing GABM. You might want to do this by modifying your <a class="reference external" href="https://en.wikipedia.org/wiki/PATH_(variable)">PATH</a>.</p>
+<p>With the pre-requisites in place, the following steps should have you set up in a matter of minutes.</p>
+</section>
+<section id="fork-and-clone">
+<h2>1. Fork and Clone<a class="headerlink" href="#fork-and-clone" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fork from the <a class="reference external" href="https://github.com/compolis/GABM">GABM Repository</a> to your own GitHub account using the “Fork” button to “Create a new fork”.</p></li>
+<li><p>Clone your fork locally using the following command and by replacing “<your-GitHub-username>” with your actual GitHub username:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/&lt;your-GitHub-username&gt;/GABM.git
+</pre></div>
+</div>
+</section>
+<section id="install-dependencies">
+<h2>2. Install Dependencies<a class="headerlink" href="#install-dependencies" title="Link to this heading"></a></h2>
+<p>Change into the GABM directory. From the project root, install all runtime, development, and documentation dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements-dev.txt
+</pre></div>
+</div>
+</section>
+<section id="set-up-llm-api-keys">
+<h2>3. Set Up LLM API Keys<a class="headerlink" href="#set-up-llm-api-keys" title="Link to this heading"></a></h2>
+<p>Create <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> with your API keys for LLM providers. See <a class="reference internal" href="API_KEYS.html"><span class="std std-doc">API_KEYS.md</span></a> for format and details.</p>
+<p>To initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>setup-llms
+</pre></div>
+</div>
+<p>This will:</p>
+<ul class="simple">
+<li><p>Check for all required API keys (OpenAI, GenAI, DeepSeek)</p></li>
+<li><p>Test each key with a default prompt and model</p></li>
+<li><p>Generate initial <code class="docutils literal notranslate"><span class="pre">models.json</span></code> and <code class="docutils literal notranslate"><span class="pre">models.txt</span></code> for each LLM</p></li>
+<li><p>Initialize response caches (<code class="docutils literal notranslate"><span class="pre">cache.pkl</span></code>)</p></li>
+<li><p>Report any issues or missing keys</p></li>
+</ul>
+<p>If you need to clear all caches and model lists (for a fresh start or troubleshooting), use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>clear-caches
+</pre></div>
+</div>
+<p><strong>Note:</strong> For each LLM service directories are created in <code class="docutils literal notranslate"><span class="pre">data/llm</span></code>, for example <code class="docutils literal notranslate"><span class="pre">data/llm/openai</span></code>. Model list files (<code class="docutils literal notranslate"><span class="pre">models.json</span></code>, <code class="docutils literal notranslate"><span class="pre">models.txt</span></code>) are lists of available models for the LLM service. Cache files (<code class="docutils literal notranslate"><span class="pre">cache.pkl</span></code>) are prompt/response data from each LLM service.</p>
+</section>
+<section id="run-tests-and-build-documentation">
+<h2>4. Run Tests and Build Documentation<a class="headerlink" href="#run-tests-and-build-documentation" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Run tests:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">test</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Build documentation:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>docs
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>View docs in your browser: open <code class="docutils literal notranslate"><span class="pre">docs/_build/html/index.html</span></code></p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<p>If you encounter errors, double-check your setup steps above. If you want help, <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue on GitHub</a>.</p>
+</section>
+<section id="additional-resources">
+<h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="README.html"><span class="std std-doc">README</span></a></p></li>
+<li><p><a class="reference internal" href="DEV_GUIDE.html"><span class="std std-doc">Developer Guide</span></a></p></li>
+<li><p><a class="reference external" href="https://github.com/compolis/GABM/issues">Reported Issues</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="DEV_GUIDE.html" class="btn btn-neutral float-left" title="Developer Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="requirements-dev.html" class="btn btn-neutral float-right" title="Requirements (Developer)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, GABM contributors, University of Leeds.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

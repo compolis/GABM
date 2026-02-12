@@ -19,15 +19,14 @@ gabm/io/read_data
 :caption: Project Documents
 
 LICENSE.md
-SETUP_GUIDE_DEV.md
-SETUP_GUIDE_USER.md
-DEV_GUIDE.md
+CODE_OF_CONDUCT.md
+CONTRIBUTORS.md
 USER_GUIDE.md
+DEV_GUIDE.md
+DEV_QUICKSTART.md
 requirements-dev.md
 requirements.md
 API_KEYS.md
-CONTRIBUTORS.md
-CODE_OF_CONDUCT.md
 ROADMAP.md
 CHANGE_LOG.md
 DEVELOPMENT_HISTORY.md

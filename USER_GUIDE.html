@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Requirements (Developer)" href="requirements-dev.html" />
-    <link rel="prev" title="Developer Guide" href="DEV_GUIDE.html" /> 
+    <link rel="next" title="Developer Guide" href="DEV_GUIDE.html" />
+    <link rel="prev" title="Contributors" href="CONTRIBUTORS.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,29 +45,36 @@
               <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DEV_GUIDE.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#key-documentation-files-for-users">Key Documentation Files for Users</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#support-feedback">Support &amp; Feedback</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configuration-running-models">Configuration &amp; Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pre-requisits">Pre-requisits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#initial-set-up">Initial set up</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-conda">Using Conda</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-python-3-12">Using Python &gt;=3.12</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-api-keys">Set Up API Keys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-main-program">Run the Main Program</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-models">Running Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#managing-logs-and-caches">Managing Logs and Caches</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="DEV_GUIDE.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEV_QUICKSTART.html">Developer Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History and Project Journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CONTACT.html">Contact</a></li>
@@ -104,63 +111,135 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
 <li><p><a class="reference internal" href="#getting-started"><span class="xref myst">Getting Started</span></a></p></li>
-<li><p><a class="reference internal" href="#key-documentation-files-for-users"><span class="xref myst">Key Documentation Files for Users</span></a></p></li>
-<li><p><a class="reference internal" href="#support--feedback"><span class="xref myst">Support &amp; Feedback</span></a></p></li>
-<li><p><a class="reference internal" href="#configuration--running-models"><span class="xref myst">Configuration &amp; Running Models</span></a></p></li>
 <li><p><a class="reference internal" href="#troubleshooting"><span class="xref myst">Troubleshooting</span></a></p></li>
+<li><p><a class="reference internal" href="#running-models"><span class="xref myst">Running Models</span></a></p></li>
 <li><p><a class="reference internal" href="#managing-logs-and-caches"><span class="xref myst">Managing Logs and Caches</span></a></p></li>
 <li><p><a class="reference internal" href="#additional-resources"><span class="xref myst">Additional Resources</span></a></p></li>
 </ul>
 </section>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>This guide helps users get started with GABM, find documentation, and get support. Documentation was updated in release 0.1.1 for clarity and completeness. It will be updated as more features and configuration options are added.</p>
+<p>This guide helps users get started with GABM, find documentation, and get support. Documentation will be updated as more features and configuration options are added.</p>
+<p>In the rest of the document “you” means you as a GABM user.</p>
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>See <a class="reference internal" href="SETUP_GUIDE_USER.html"><span class="std std-doc">SETUP_GUIDE_USER.md</span></a> for installation and setup instructions.</p></li>
-<li><p>Explore the documentation in the <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory or online via GitHub Pages.</p></li>
-</ul>
+<section id="pre-requisits">
+<h3>Pre-requisits<a class="headerlink" href="#pre-requisits" title="Link to this heading"></a></h3>
+<p>You will either need a local installation of <a class="reference external" href="https://conda.org/">Conda</a>, or <a class="reference external" href="https://www.python.org/">Python</a> at or above version 3.12. To check your default Python version run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>--version
+</pre></div>
+</div>
 </section>
-<section id="key-documentation-files-for-users">
-<h2>Key Documentation Files for Users<a class="headerlink" href="#key-documentation-files-for-users" title="Link to this heading"></a></h2>
-<p>The following Markdown files are most relevant for users:</p>
-<ul class="simple">
-<li><p><strong>README.md</strong>: Project overview and quick start instructions.</p></li>
-<li><p><strong>USER_GUIDE.md</strong>: Detailed user instructions for installing, configuring, and running GABM.</p></li>
-<li><p><strong>SETUP_GUIDE_USER.md</strong>: Step-by-step environment setup for users.</p></li>
-<li><p><strong>API_KEYS.md</strong>: Information on required API keys for LLMs and how to configure them.</p></li>
-</ul>
-<p>Refer to these files for guidance on using GABM. Additional documentation is available for developers and contributors.</p>
+<section id="initial-set-up">
+<h3>Initial set up<a class="headerlink" href="#initial-set-up" title="Link to this heading"></a></h3>
+<section id="using-conda">
+<h4>Using Conda<a class="headerlink" href="#using-conda" title="Link to this heading"></a></h4>
+<p>If you use <a class="reference external" href="https://conda.org/">Conda</a> which is distributed with<a class="reference external" href="https://www.anaconda.com/">Anaconda</a>/<a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a> and <a class="reference external" href="https://github.com/conda-forge/miniforge">Miniforge</a> you can set up GABM in a new environment as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>gabm
+conda<span class="w"> </span>activate<span class="w"> </span>gabm
+conda<span class="w"> </span>install<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.1.3
+</pre></div>
+</div>
+<p>You can then check all installed dependencies and create your own requirements file with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>list<span class="w"> </span>-e<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
 </section>
-<section id="support-feedback">
-<h2>Support &amp; Feedback<a class="headerlink" href="#support-feedback" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>If you encounter issues or have questions, please submit a GitHub Issue in the repository.</p></li>
-<li><p>For general feedback or feature requests, use GitHub Issues or contact maintainers via GitHub.</p></li>
-</ul>
+<section id="using-python-3-12">
+<h4>Using Python &gt;=3.12<a class="headerlink" href="#using-python-3-12" title="Link to this heading"></a></h4>
+<p>Install from <a class="reference external" href="https://pypi.org/">PyPI</a> using <a class="reference external" href="https://pypi.org/project/pip/">Pip</a> as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>gabm-venv
+<span class="nb">source</span><span class="w"> </span>gabm-venv/bin/activate<span class="w">  </span><span class="c1"># On Windows: gabm-venv\\Scripts\\activate</span>
+pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.1.1
+</pre></div>
+</div>
+<p>You can then check installed dependencies with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>freeze<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
 </section>
-<section id="configuration-running-models">
-<h2>Configuration &amp; Running Models<a class="headerlink" href="#configuration-running-models" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>(To be updated as features are added)</p></li>
-<li><p>In future releases, users will be able to configure and run models directly from the interface or command line.</p></li>
-</ul>
+</section>
+<section id="set-up-api-keys">
+<h3>Set Up API Keys<a class="headerlink" href="#set-up-api-keys" title="Link to this heading"></a></h3>
+<p>Create <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> with your API keys. See <a class="reference internal" href="API_KEYS.html"><span class="std std-doc">API_KEYS.md</span></a> for details and instructions.</p>
+</section>
+<section id="run-the-main-program">
+<h3>Run the Main Program<a class="headerlink" href="#run-the-main-program" title="Link to this heading"></a></h3>
+<p>From the project root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>gabm
+</pre></div>
+</div>
+<p>Depending on what LLM services are running and working, and if your LLM API Keys are valid, you will get different console mesages and files created in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
+<p>The console messages should look something along the following lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>2026-02-11 22:48:01,988 [INFO] Running gabm...
+2026-02-11 22:48:01,989 [INFO] API Keys: {&#39;openai&#39;: &#39;sk-Key&#39;, &#39;deepseek&#39;: &#39;sk-Key&#39;, &#39;genai&#39;: &#39;Key&#39;}
+2026-02-11 22:48:01,989 [WARNING] Model list file not found: data/llm/openai/models.txt
+2026-02-11 22:48:01,989 [WARNING] Model list file not found: data/llm/genai/models.txt
+2026-02-11 22:48:01,989 [WARNING] Model list file not found: data/llm/deepseek/models.txt
+2026-02-11 22:48:01,989 [INFO] OpenAI API Key: sk-Key
+2026-02-11 22:48:02,191 [ERROR] [openai] Error: Client.__init__() got an unexpected keyword argument &#39;proxies&#39;
+2026-02-11 22:48:02,191 [INFO] Listing available models for OpenAI...
+2026-02-11 22:48:02,191 [ERROR] Error listing models for OpenAI: Client.__init__() got an unexpected keyword argument &#39;proxies&#39;
+2026-02-11 22:48:02,191 [ERROR] OpenAI response: None (API error or timeout)
+2026-02-11 22:48:02,192 [INFO] GenAI API Key: Key
+2026-02-11 22:48:15,205 [INFO] gabm.io.llm.genai: Cache updated for model=models/gemini-2.5-pro, message=Hello, GenAI!
+2026-02-11 22:48:15,205 [INFO] Cache updated for model=models/gemini-2.5-pro, message=Hello, GenAI!
+2026-02-11 22:48:15,205 [INFO] Full GenAI response:
+{&#39;_done&#39;: True, &#39;_iterator&#39;: None, &#39;_result&#39;: candidates {
+  index: 0
+  content {
+    parts {
+      text: &quot;Hello there! It\&#39;s great to connect with you.\n\nHow can I help you today? I\&#39;m ready for any questions, creative ideas, or tasks you have in mind.&quot;
+    }
+    role: &quot;model&quot;
+  }
+  finish_reason: STOP
+}
+, &#39;_chunks&#39;: [candidates {
+  index: 0
+  content {
+    parts {
+      text: &quot;Hello there! It\&#39;s great to connect with you.\n\nHow can I help you today? I\&#39;m ready for any questions, creative ideas, or tasks you have in mind.&quot;
+    }
+    role: &quot;model&quot;
+  }
+  finish_reason: STOP
+}
+], &#39;_error&#39;: None}
+2026-02-11 22:48:15,205 [ERROR] GenAI response content: [Error accessing content: &#39;dict&#39; object has no attribute &#39;text&#39;]
+2026-02-11 22:48:15,206 [INFO] DeepSeek API Key: sk-Key
+2026-02-11 22:48:15,209 [INFO] gabm.io.llm.deepseek: Cache updated for model=deepseek-model-1, message=Hello, DeepSeek!
+2026-02-11 22:48:15,209 [INFO] Cache updated for model=deepseek-model-1, message=Hello, DeepSeek!
+2026-02-11 22:48:15,209 [INFO] Full DeepSeek response:
+{&#39;model&#39;: &#39;deepseek-model-1&#39;, &#39;message&#39;: &#39;Hello, DeepSeek!&#39;, &#39;result&#39;: &#39;[Placeholder DeepSeek response]&#39;}
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">data/logs</span></code> directory should contain the following files:
+<code class="docutils literal notranslate"><span class="pre">deepseek.log</span></code>,  <code class="docutils literal notranslate"><span class="pre">genai.log</span></code>, <code class="docutils literal notranslate"><span class="pre">openai.log</span></code>, <code class="docutils literal notranslate"><span class="pre">run_main.log</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">data/llm</span></code> directory should contain directories for each of the LLM services that accepted the API keys provided and provided a response to the prompt given by running the main program.</p>
+</section>
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
-<p>This section is for documenting common issues users may encounter when installing, configuring, or running GABM, along with solutions and workarounds. If you experience a problem, check here for guidance or updates. As the project evolves, troubleshooting tips and frequently asked questions will be added to help users resolve issues quickly.</p>
+<p>If you experience issues when installing, configuring, or running GABM, check here for guidance or updates. As the project evolves, troubleshooting tips and frequently asked questions will be added here.</p>
+<p>If you encounter errors, check your Python version and that all dependencies are installed. If all versions match the documentation, please peruse <a class="reference external" href="https://github.com/compolis/GABM/issues">reported issues</a>, comment on a relevent open issue or <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue</a> to request support.</p>
+</section>
+<section id="running-models">
+<h2>Running Models<a class="headerlink" href="#running-models" title="Link to this heading"></a></h2>
+<p>It is intended that you will be able to configure and run models. This section is to explain how to do this. This documentation will be updated in due course…</p>
 </section>
 <section id="managing-logs-and-caches">
 <h2>Managing Logs and Caches<a class="headerlink" href="#managing-logs-and-caches" title="Link to this heading"></a></h2>
-<p>GABM creates logs and caches (such as prompt/response caches for LLM services) that can grow large over time. These files are not stored in the GitHub repository. Tools for tidying up logs and caches are planned for a future release. More details will be provided as these features are implemented.</p>
+<p>GABM creates logs and caches (such as prompt/response caches for LLM services) that can grow large over time. User friendly ways to tidy up logs and caches and compile data into reproducible research objects are being developed for a future release. Similarly, more details will be provided as these features are implemented.</p>
 </section>
 <section id="additional-resources">
 <h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>See <a class="reference internal" href="README.html"><span class="std std-doc">README.md</span></a> for project overview</p></li>
-<li><p>If you encounter difficulties, please peruse <a class="reference external" href="https://github.com/compolis/GABM/issues">reported issues</a> and comment on an open issue or <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue</a>.</p></li>
+<li><p><a class="reference internal" href="README.html"><span class="std std-doc">README.md</span></a></p></li>
+<li><p><a class="reference external" href="https://github.com/compolis/GABM/issues">Reported Issues</a></p></li>
 </ul>
 </section>
 </section>
@@ -169,8 +248,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="DEV_GUIDE.html" class="btn btn-neutral float-left" title="Developer Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="requirements-dev.html" class="btn btn-neutral float-right" title="Requirements (Developer)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="CONTRIBUTORS.html" class="btn btn-neutral float-left" title="Contributors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DEV_GUIDE.html" class="btn btn-neutral float-right" title="Developer Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

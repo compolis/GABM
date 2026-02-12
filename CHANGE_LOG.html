@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Development History and Project Journal" href="DEVELOPMENT_HISTORY.html" />
+    <link rel="next" title="Development History" href="DEVELOPMENT_HISTORY.html" />
     <link rel="prev" title="Project Roadmap" href="ROADMAP.html" /> 
 </head>
 
@@ -45,31 +45,26 @@
               <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DEV_GUIDE.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEV_GUIDE.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEV_QUICKSTART.html">Developer Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">CHANGE_LOG</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#unreleased">[0.2.0] - Unreleased</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">[0.1.1] - 2026-02-07</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#changed">Changed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">[0.1.1] - 2026-02-12</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#packaging-build-workflow">Packaging &amp; Build Workflow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#logging">Logging</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">[0.1.0] - 2026-02-06</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#added">Added</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">[0.1.0] - 2026-02-06</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History and Project Journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CONTACT.html">Contact</a></li>
@@ -101,7 +96,7 @@
              
   <section id="change-log">
 <h1>CHANGE_LOG<a class="headerlink" href="#change-log" title="Link to this heading"></a></h1>
-<p>All notable changes to this project will be documented in this file.</p>
+<p>All notable changes to this project are to be documented in this file.</p>
 <section id="unreleased">
 <h2>[0.2.0] - Unreleased<a class="headerlink" href="#unreleased" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -109,29 +104,24 @@
 </ul>
 </section>
 <section id="id1">
-<h2>[0.1.1] - 2026-02-07<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
-<section id="changed">
-<h3>Changed<a class="headerlink" href="#changed" title="Link to this heading"></a></h3>
+<h2>[0.1.1] - 2026-02-12<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Updated documentation files for clarity and completeness (README.md, USER_GUIDE.md, DEV_GUIDE.md).</p></li>
-<li><p>Improved guide integration and Makefile target documentation.</p></li>
+<li><p>Updated documentation to improve clarity and completeness</p></li>
 <li><p>Standardized Markdown formatting and removed YAML front matter from guides.</p></li>
-<li><p>Started preparation for <a class="reference internal" href="JOSS_SUBMISSION.html"><span class="std std-doc">JOSS submission</span></a></p></li>
 </ul>
-</section>
 <section id="packaging-build-workflow">
 <h3>Packaging &amp; Build Workflow<a class="headerlink" href="#packaging-build-workflow" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>Added scripts/build-test.py for platform-agnostic build and test install in a fresh virtual environment.</p></li>
-<li><p>Updated Makefile: build-test now uses scripts/build-test.py; added pypi-release and testpypi-release targets for uploading to PyPI and TestPyPI.</p></li>
-<li><p>Updated DEV_GUIDE.md: documented new Makefile targets and clarified packaging workflow.</p></li>
-<li><p>Added twine to requirements-dev.txt for PyPI uploads.</p></li>
+<li><p>Added <code class="docutils literal notranslate"><span class="pre">scripts/build-test.py</span></code> for platform agnostic builds.</p></li>
+<li><p>Makefile pypi-release and testpypi-release targets added for uploading to <a class="reference external" href="https://pypi.org/">PyPI</a> and <a class="reference external" href="https://test.pypi.org/">TestPyPI</a>.</p></li>
+<li><p>Updated <a class="reference internal" href="DEV_GUIDE.html"><span class="std std-doc">Developer Guide</span></a> by documenting new Makefile targets and clarifying packaging workflow.</p></li>
+<li><p>Added <a class="reference external" href="https://pypi.org/project/twine/">Twine</a> to <code class="docutils literal notranslate"><span class="pre">requirements-dev.txt</span></code> for PyPI uploads.</p></li>
 </ul>
 </section>
 <section id="logging">
 <h3>Logging<a class="headerlink" href="#logging" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p>All asset management, cleaning, deployment, and cache scripts now use Python logging.</p></li>
+<li><p>All asset management, cleaning, deployment, and cache scripts now use <a class="reference external" href="https://docs.python.org/3/library/logging.html">Python logging</a>.</p></li>
 <li><p>Logs are written to <code class="docutils literal notranslate"><span class="pre">data/logs/docs/</span></code> with rotating file handlers for each script.</p></li>
 <li><p>Logging helps with debugging, error tracking, and collaboration.</p></li>
 </ul>
@@ -139,21 +129,21 @@
 </section>
 <section id="id2">
 <h2>[0.1.0] - 2026-02-06<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
-<section id="added">
-<h3>Added<a class="headerlink" href="#added" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Initial private release.</p></li>
-<li><p>Road map outlines next step:</p>
+<li><p>Project Documentation initialised</p>
 <ul>
-<li><p>0.2.0 implementation of a simple agent-based model</p></li>
+<li><p><a class="reference internal" href="README.html"><span class="std std-doc">README</span></a></p></li>
+<li><p><a class="reference internal" href="#RoadMap.md"><span class="xref myst">Road Map</span></a></p></li>
+<li><p><a class="reference internal" href="USER_GUIDE.html"><span class="std std-doc">User Guide</span></a></p></li>
+<li><p><a class="reference internal" href="DEV_GUIDE.html"><span class="std std-doc">Developer Guide</span></a></p></li>
 </ul>
 </li>
-<li><p>LLM integration (OpenAI, Google Generative AI, DeepSeek).</p></li>
-<li><p>Persistent response/model caching.</p></li>
-<li><p>Onboarding utility and Makefile targets.</p></li>
+<li><p>LLM setup tested for (OpenAI, Google Generative AI and DeepSeek).</p></li>
+<li><p>Persistent response/model caching implemented.</p></li>
+<li><p>Makefile targets.</p></li>
 <li><p>Contributor workflow and documentation.</p></li>
 </ul>
-</section>
 </section>
 </section>
 
@@ -162,7 +152,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="ROADMAP.html" class="btn btn-neutral float-left" title="Project Roadmap" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="DEVELOPMENT_HISTORY.html" class="btn btn-neutral float-right" title="Development History and Project Journal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="DEVELOPMENT_HISTORY.html" class="btn btn-neutral float-right" title="Development History" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

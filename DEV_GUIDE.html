@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="User Guide" href="USER_GUIDE.html" />
-    <link rel="prev" title="User Setup Guide" href="SETUP_GUIDE_USER.html" /> 
+    <link rel="next" title="Developer Quickstart" href="DEV_QUICKSTART.html" />
+    <link rel="prev" title="User Guide" href="USER_GUIDE.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,49 +45,42 @@
               <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_DEV.html">Developer Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SETUP_GUIDE_USER.html">User Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Developer Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#contributing-workflow">Contributing Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#collaboration-communication">Collaboration &amp; Communication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#project-structure">Project Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing-and-communicating">Contributing and Communicating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#project-directories">Project Directories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#python-package-entry-point">Python Package Entry Point</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#makefile-targets">Makefile Targets</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#target-chaining-dry-and-consistency">Target Chaining, DRY, and Consistency</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#developing-documentation">Developing Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#python-version">Python Version</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#packaging-files">Packaging Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pypi-release-process">PyPI Release Process</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#continuous-integration-branch-protection">Continuous Integration &amp; Branch Protection</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#automated-testing-and-docs-deployment-with-github-actions">Automated Testing and Docs Deployment with GitHub Actions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#branch-protection-for-main">Branch Protection for main</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#developing-documentation">Developing Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sphinx-documentation">Sphinx Documentation</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#packaging-and-deployment">Packaging and Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#branch-protection">Branch Protection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#maintainer-guide">Maintainer Guide</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#gh-pages-branch-and-documentation-deployment">gh-pages Branch and Documentation Deployment</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#github-pages-worktree-conflict">GitHub Pages Worktree Conflict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pypi-release-process">PyPI Release Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#branch-and-documentation-deployment">Branch and Documentation Deployment</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#working-with-an-ai-pair-programmer">Working with an AI Pair Programmer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#managing-logs-and-caches">Managing Logs and Caches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#files-and-directories-excluded-from-version-control">Files and Directories Excluded from Version Control</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEV_QUICKSTART.html">Developer Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Project Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History and Project Journal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CONTACT.html">Contact</a></li>
@@ -123,96 +116,117 @@
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
-<li><p><a class="reference internal" href="#contributing-workflow"><span class="xref myst">Contributing Workflow</span></a></p></li>
-<li><p><a class="reference internal" href="#collaboration--communication"><span class="xref myst">Collaboration &amp; Communication</span></a></p></li>
-<li><p><a class="reference internal" href="#project-structure"><span class="xref myst">Project Structure</span></a></p></li>
+<li><p><a class="reference internal" href="#contributing-and-communicating"><span class="xref myst">Contributing and Communicating</span></a></p></li>
+<li><p><a class="reference internal" href="#project-directories"><span class="xref myst">Project Directories</span></a></p></li>
 <li><p><a class="reference internal" href="#python-package-entry-point"><span class="xref myst">Python Package Entry Point</span></a></p></li>
 <li><p><a class="reference internal" href="#makefile-targets"><span class="xref myst">Makefile Targets</span></a></p></li>
 <li><p><a class="reference internal" href="#developing-documentation"><span class="xref myst">Developing Documentation</span></a></p></li>
-<li><p><a class="reference internal" href="#python-version"><span class="xref myst">Python Version</span></a></p></li>
-<li><p><a class="reference internal" href="#packaging-files"><span class="xref myst">Packaging Files</span></a></p></li>
-<li><p><a class="reference internal" href="#pypi-release-process"><span class="xref myst">PyPI Release Process</span></a></p></li>
-<li><p><a class="reference internal" href="#continuous-integration--branch-protection"><span class="xref myst">Continuous Integration &amp; Branch Protection</span></a></p></li>
+<li><p><a class="reference internal" href="#packaging-and-deployment"><span class="xref myst">Packaging and Deployment</span></a></p></li>
+<li><p><a class="reference internal" href="#branch-protection"><span class="xref myst">Branch Protection</span></a></p></li>
 <li><p><a class="reference internal" href="#maintainer-guide"><span class="xref myst">Maintainer Guide</span></a></p></li>
+<li><p><a class="reference internal" href="#branch-and-documentation-deployment"><span class="xref myst">Branch and Documentation Deployment</span></a></p></li>
 <li><p><a class="reference internal" href="#working-with-an-ai-pair-programmer"><span class="xref myst">Working with an AI Pair Programmer</span></a></p></li>
 <li><p><a class="reference internal" href="#managing-logs-and-caches"><span class="xref myst">Managing Logs and Caches</span></a></p></li>
+<li><p><a class="reference internal" href="#files-and-directories-excluded-from-version-control"><span class="xref myst">Files and Directories Excluded from Version Control</span></a></p></li>
 </ul>
 </section>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>For detailed session logs and workflow rationale, see <a class="reference internal" href="#docs/DEV_SESSION_LOGGING.md"><span class="xref myst">docs/DEV_SESSION_LOGGING.md</span></a>.
-This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow. Documentation was updated in release 0.1.1 for clarity and completeness.</p>
+<p>The GABM developer guide provides guidance for developers some of which are also maintainers.</p>
+<p>Please follow the <a class="reference internal" href="DEV_QUICKSTART.html"><span class="std std-doc">Developer Quick Start Guide</span></a> to get set up to contribute as a developer.</p>
+<p>In the rest of the document “you” means you as a GABM developer.</p>
 </section>
-<section id="contributing-workflow">
-<h2>Contributing Workflow<a class="headerlink" href="#contributing-workflow" title="Link to this heading"></a></h2>
+<section id="contributing-and-communicating">
+<h2>Contributing and Communicating<a class="headerlink" href="#contributing-and-communicating" title="Link to this heading"></a></h2>
+<p>Please follow the <a class="reference internal" href="CODE_OF_CONDUCT.html"><span class="std std-doc">CODE_OF_CONDUCT.md</span></a>.</p>
+<p>For the time being, please communicate by commenting on or raising new <a class="reference external" href="https://github.com/compolis/GABM/issues">GABM Repository Issues</a>.</p>
+<p>You should have forked the <a class="reference external" href="https://github.com/compolis/GABM">GABM Repository</a> to your own GitHub account.</p>
+<p>The general workflow for contributing is to:</p>
 <ul class="simple">
-<li><p>Fork the repository and create feature branches for new work.</p></li>
-<li><p>Commit changes with clear messages.</p></li>
-<li><p>Push to your fork and open a pull request (PR) against the main repository.</p></li>
-<li><p>Review and respond to feedback promptly.</p></li>
-<li><p>Keep your branch up to date with upstream/main.</p></li>
+<li><p>Create a check out new local branch:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>my_feature
+git<span class="w"> </span>checkout<span class="w"> </span>my_feature
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Make changes:</p>
+<ul>
+<li><p>For each Python file edited, please adjust the Metadata at the top of the file by:</p>
+<ul>
+<li><p>Adding your details to the <code class="docutils literal notranslate"><span class="pre">__author__</span></code> list</p></li>
+<li><p>Incrementing the <code class="docutils literal notranslate"><span class="pre">__version__</span></code></p></li>
+</ul>
+</li>
+<li><p>Update the <a class="reference internal" href="CHANGE_LOG.html"><span class="std std-doc">Change Log</span></a> with a summary of your changes.</p></li>
+</ul>
+</li>
+<li><p>Commit changes with a clear message. For example:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Clear message that explains changes.&quot;</span><span class="w"> </span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Ensure tests pass and documentation builds before submitting a PR:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">test</span>
+make<span class="w"> </span>docs
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Push to your Fork, For example:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>my_feature
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Open a PR on GitHub to merge your <code class="docutils literal notranslate"><span class="pre">my_feature</span></code> branch into the the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch of the upstream GABM Repository.</p>
+<ul>
+<li><p>Please refer to any related issues in the PR comments.</p></li>
+</ul>
+</li>
+<li><p>The PR will be reviewed and once the review is complete, changes will be merged.</p></li>
 </ul>
 </section>
-<section id="collaboration-communication">
-<h2>Collaboration &amp; Communication<a class="headerlink" href="#collaboration-communication" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Use GitHub Issues and create Pull Requests (PRs) in the normal way.</p></li>
-<li><p>Reference related issues in your PRs and comments.</p></li>
-<li><p>Respect code review feedback and project coding standards.</p></li>
-<li><p>If you encounter difficulties, please contact maintainers via GitHub.</p></li>
-</ul>
-</section>
-<section id="project-structure">
-<h2>Project Structure<a class="headerlink" href="#project-structure" title="Link to this heading"></a></h2>
+<section id="project-directories">
+<h2>Project Directories<a class="headerlink" href="#project-directories" title="Link to this heading"></a></h2>
+<p>The root project directory contains documentation and files needed for building and deploying. The sub-diretories include:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">data/</span></code>: For data including log files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dist/</span></code>: Output directory for built distributions.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">docs/</span></code>: Documentation</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scripts/</span></code>: Utility scripts</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">src/gabm</span></code>: Python source code package</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tests/</span></code>: Test suite</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Makefile</span></code>: Automation targets</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src/</span></code>: Python source code</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests/</span></code>: Test suite for src</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">venv-build-test/</span></code>: For temporary virtual environments created for testing.</p></li>
 </ul>
 </section>
 <section id="python-package-entry-point">
 <h2>Python Package Entry Point<a class="headerlink" href="#python-package-entry-point" title="Link to this heading"></a></h2>
-<p>The main entry point for the GABM package is <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>. This follows Python packaging best practices and allows the application to be run using:</p>
+<p>The main entry point for the GABM package is <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>. This allows the application to be run using:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python3 -m gabm
 </pre></div>
 </div>
-<p>This approach is preferred over directly running a script (like <code class="docutils literal notranslate"><span class="pre">run.py</span></code>) because:</p>
+<p>This approach is preferred over directly running a script (like <code class="docutils literal notranslate"><span class="pre">run.py</span></code>) as:</p>
 <ul class="simple">
 <li><p>It enables Python to treat <code class="docutils literal notranslate"><span class="pre">gabm</span></code> as a package, ensuring imports work correctly.</p></li>
 <li><p>It is the standard way to provide a command-line entry point for Python packages.</p></li>
-<li><p>It makes the project ready for distribution and installation via pip or PyPI.</p></li>
+<li><p>It makes the project ready for distribution and installation.</p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code> file is executed when you run <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">gabm</span></code> from the project root (with <code class="docutils literal notranslate"><span class="pre">src</span></code> on the Python path). If you need to add or change the main application logic, edit <code class="docutils literal notranslate"><span class="pre">src/gabm/__main__.py</span></code>.</p>
-<p>For more details, see the <a class="reference external" href="https://docs.python.org/3/library/__main__.html">Python Packaging documentation</a>.</p>
+<p>Please see the <a class="reference external" href="https://docs.python.org/3/library/__main__.html">Python Packaging documentation</a> for information about Python packaging.</p>
 </section>
 <section id="makefile-targets">
 <h2>Makefile Targets<a class="headerlink" href="#makefile-targets" title="Link to this heading"></a></h2>
+<p>The root directory contains a <a class="reference external" href="https://www.gnu.org/software/make/manual/make.html#Introduction">Makefile</a>. This is set up to automate tasks using <a class="reference external" href="https://www.gnu.org/software/make">GNU Make</a>. This section explains the rules or targets in the Makefile. Please ensure any changes to the Makefile are platform agnostic.</p>
 <section id="target-chaining-dry-and-consistency">
 <h3>Target Chaining, DRY, and Consistency<a class="headerlink" href="#target-chaining-dry-and-consistency" title="Link to this heading"></a></h3>
 <p>For maintainability, all Makefile targets that depend on other build steps should use Make’s built-in dependency chaining (e.g., <code class="docutils literal notranslate"><span class="pre">gh-pages-deploy:</span> <span class="pre">docs</span></code>) rather than manually invoking <code class="docutils literal notranslate"><span class="pre">$(MAKE)</span></code> or shelling out to <code class="docutils literal notranslate"><span class="pre">make</span></code> within a target. This ensures:</p>
 <ul class="simple">
 <li><p>Each target is only responsible for its own logic.</p></li>
-<li><p>The DRY (Don’t Repeat Yourself) principle is followed—no duplicated build logic.</p></li>
-<li><p>Consistency: all targets use the same build steps, and changes to one target (like <code class="docutils literal notranslate"><span class="pre">docs</span></code>) automatically propagate to dependents (like <code class="docutils literal notranslate"><span class="pre">gh-pages-deploy</span></code>).</p></li>
+<li><p>Consistency: all targets use the same build steps, and changes to one target (like <code class="docutils literal notranslate"><span class="pre">docs</span></code>) automatically propagate to dependents (like <code class="docutils literal notranslate"><span class="pre">gh-pages-deploy</span></code>). The following is a presentation of the Makefile rules/targets:</p></li>
 </ul>
-<p><strong>Recommended style:</strong></p>
-<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">gh-pages-deploy</span><span class="o">:</span><span class="w"> </span><span class="n">docs</span>
-<span class="w">	</span>python3<span class="w"> </span>scripts/gh-pages-deploy.py
-</pre></div>
-</div>
-<p><strong>Not recommended:</strong></p>
-<div class="highlight-makefile notranslate"><div class="highlight"><pre><span></span><span class="nf">docs</span><span class="o">:</span>
-<span class="w">	</span>python3<span class="w"> </span>scripts/docs.py
-<span class="w">	</span><span class="nv">PYTHONPATH</span><span class="o">=</span>..<span class="w"> </span>sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w"> </span>docs<span class="w"> </span>docs/_build/html
-<span class="w">	</span><span class="k">$(</span>MAKE<span class="k">)</span><span class="w"> </span>docs-clean
-</pre></div>
-</div>
-<p>or calling <code class="docutils literal notranslate"><span class="pre">make</span></code> from within a target, as this can lead to recursion, confusion, or inconsistent builds.</p>
-<p><strong>Document this approach in comments in the Makefile and in the developer guide.</strong></p>
-<p>This approach is now used for <code class="docutils literal notranslate"><span class="pre">gh-pages-deploy</span></code> and should be followed for future targets.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Target</p></th>
@@ -276,50 +290,51 @@ This guide provides best practices for contributing to GABM, collaborating with 
 </tr>
 </tbody>
 </table>
-<p><strong>Notes:</strong></p>
-<ul class="simple">
-<li><p>All Python scripts used by Makefile targets are in the <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory and are named consistently with their Makefile targets (e.g., <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-clean</span></code> runs <code class="docutils literal notranslate"><span class="pre">scripts/docs-clean.py</span></code>).</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">delete-release</span></code> target automates deleting a release tag locally and on both remotes (origin, upstream).</p></li>
-<li><p>For releases that are published in PyPI, the release tag and branch are to be protected in the canonical upstream repository.</p></li>
-<li><p>Targets are designed to run in a platform-agnostic way.</p></li>
-<li><p>Refer to the Makefile for full details.</p></li>
-</ul>
+<p>All Python scripts used by Makefile targets are in the <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory and are named consistently with their Makefile targets (e.g., <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-clean</span></code> runs <code class="docutils literal notranslate"><span class="pre">scripts/docs-clean.py</span></code>).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">delete-release</span></code> target automates deleting a release tag locally and on both remotes (origin, upstream).</p>
+<p>Please refer to the Makefile for full details.</p>
 </section>
 </section>
 <section id="developing-documentation">
 <h2>Developing Documentation<a class="headerlink" href="#developing-documentation" title="Link to this heading"></a></h2>
-<p>The project includes several Markdown files in the root directory, each serving a specific purpose:</p>
+<p>Markdown files in the root directory, each serving a specific purpose:</p>
 <ul class="simple">
-<li><p><strong>README.md</strong>: Project overview, setup instructions, and links to key documentation.</p></li>
-<li><p><strong>SETUP_GUIDE_USER.md</strong>: Step-by-step environment setup for users.</p></li>
-<li><p><strong>SETUP_GUIDE_DEV.md</strong>: Step-by-step environment setup for developers.</p></li>
-<li><p><strong>USER_GUIDE.md</strong>: End user instructions for installing, configuring, and running GABM.developers.</p></li>
-<li><p><strong>DEV_GUIDE.md</strong>: Developer workflow, project structure, and best practices.</p></li>
-<li><p><strong>API_KEYS.md</strong>: Required API keys for LLMs and configuration details.</p></li>
-<li><p><strong>CODE_OF_CONDUCT.md</strong>: Expected behavior and reporting procedures.</p></li>
-<li><p><strong>CONTRIBUTORS.md</strong>: Project contributors and roles.</p></li>
-<li><p><strong>ROADMAP.md</strong>: Planned features and future development goals.</p></li>
-<li><p><strong>CHANGE_LOG.md</strong>: Tracks changes and updates across releases.</p></li>
-<li><p><strong>DEVELOPMENT_HISTORY.md</strong>: Project development, milestones, and reflections.</p></li>
+<li><p><a class="reference internal" href="README.html"><span class="std std-doc">README.md</span></a>: A general <a class="reference external" href="https://en.wikipedia.org/wiki/README">README</a> that links to much of the documentation outlined below including the developer and user guides. It is included in the Sphinx documentation and forms the basis for the main Sphinx documentation page.</p></li>
+<li><p><a class="reference internal" href="CODE_OF_CONDUCT.html"><span class="std std-doc">CODE_OF_CONDUCT.md</span></a>: Provides details on expected behavior of developers and reporting procedures.</p></li>
+<li><p><a class="reference internal" href="USER_GUIDE.html"><span class="std std-doc">USER_GUIDE.md</span></a>: Provides step-by-step instructions for users to get set, and should provide guidance for using GABM.</p></li>
+<li><p><a class="reference internal" href="DEV_QUICKSTART.html"><span class="std std-doc">DEV_QUICKSTART.md</span></a> Provides step-by-step instructions for developers to get set up for contributing to GABM development.</p></li>
+<li><p><a class="reference internal" href="#"><span class="std std-doc">DEV_GUIDE.md</span></a>: Explains how to contribute to GABM as a developer. It provides details about project structure, and workflow guidance.</p></li>
+<li><p><a class="reference internal" href="API_KEYS.html"><span class="std std-doc">API_KEYS.md</span></a>: Explains how to create a file containing API keys for communicating with LLMs.</p></li>
+<li><p><a class="reference internal" href="ROADMAP.html"><span class="std std-doc">ROADMAP.md</span></a>: Document to outline planned features and future development goals.</p></li>
+<li><p><a class="reference internal" href="CHANGE_LOG.html"><span class="std std-doc">CHANGE_LOG.md</span></a>: Document to describe changes and updates.</p></li>
+<li><p>[DEVELOPMENT_HISTORY.md]: Document about development, milestones, and reflections.</p></li>
+<li><p>If you add a new Markdown file in the root directory, please update entries to <code class="docutils literal notranslate"><span class="pre">doc_assets.py</span></code> DOC_FILES and <code class="docutils literal notranslate"><span class="pre">docs/index.md</span></code> Project Documents to include them in Sphinx documentation.</p></li>
+<li><p>Add API docs via <code class="docutils literal notranslate"><span class="pre">docs/index.md</span></code></p></li>
 </ul>
-<p>These files are referenced and compiled into the Sphinx documentation.</p>
+<section id="sphinx-documentation">
+<h3>Sphinx Documentation<a class="headerlink" href="#sphinx-documentation" title="Link to this heading"></a></h3>
+<p>To build run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>docs
+</pre></div>
+</div>
 <ul class="simple">
-<li><p>DEvelopers should add new Markdown file entries to <code class="docutils literal notranslate"><span class="pre">doc_assets.py</span></code> DOC_FILES and <code class="docutils literal notranslate"><span class="pre">docs/index.md</span></code> Project Documents to include them in Sphinx documentation</p></li>
-<li><p>Add <code class="docutils literal notranslate"><span class="pre">src</span></code> API docs via as needed</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code> to preview changes</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages-deploy</span></code> to deploy/update the gh-pages branch</p></li>
-<li><p>Please submit a PR to incorporate documentation changes into main. A maintainer will subsequently update the upstream repository gh-pages branch.</p></li>
+<li><p>This effectively runs <code class="docutils literal notranslate"><span class="pre">scripts/docs.py</span></code> to copy key documentation files from the project root to the <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory, pre-processes them for building the Sphinx documentation, then delete those copied files once the build completes.</p></li>
 </ul>
+<p><strong>Note on Sphinx/MyST Documentation Warnings:</strong></p>
+<p>When building the documentation with <a class="reference external" href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="reference external" href="https://mystmd.org/">MyST</a>, you may see warnings like:</p>
+<p>Document headings start at H2, not H1 [myst.header]</p>
+<p>These warnings occur even though all Markdown files start with H2 (<code class="docutils literal notranslate"><span class="pre">##</span></code>). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.</p>
+<p>Preview the Sphinx documentation by opening <code class="docutils literal notranslate"><span class="pre">docs/_build/html/index.html</span></code> in a <a class="reference external" href="https://en.wikipedia.org/wiki/Web_browser">Web browser</a>.</p>
+<p>To deploying the Sphinx Documentation run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>gh-pages-deploy
+</pre></div>
+</div>
+<p>This should deploy/update the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch on your origin Fork. If your Fork uses the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch for <a class="reference external" href="https://docs.github.com/en/pages">GitHub Pages</a>, then the documentation should update there.</p>
+<p>If it all looks good. Please submit a PR to incorporate documentation changes into main. A maintainer will subsequently update the upstream repository gh-pages branch.</p>
 </section>
-<section id="python-version">
-<h2>Python Version<a class="headerlink" href="#python-version" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Python &gt;3.12 required for development</p></li>
-<li><p>Ensure <code class="docutils literal notranslate"><span class="pre">python3</span></code> points to the correct version</p></li>
-</ul>
 </section>
-<section id="packaging-files">
-<h2>Packaging Files<a class="headerlink" href="#packaging-files" title="Link to this heading"></a></h2>
+<section id="packaging-and-deployment">
+<h2>Packaging and Deployment<a class="headerlink" href="#packaging-and-deployment" title="Link to this heading"></a></h2>
 <p>The following files and directories are essential for building, testing, and distributing the GABM package:</p>
 <ul class="simple">
 <li><p><strong>pyproject.toml</strong>: Declares build system requirements and project metadata. Required for modern Python packaging (PEP 517/518).</p></li>
@@ -340,11 +355,24 @@ This file is preferred over setup.py for static, declarative configuration.</p><
 <li><p><strong>venv-build-test/</strong>: Temporary virtual environment created by <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">build-test</span></code> for testing the built package in isolation. This can be safely deleted after testing.</p></li>
 </ul>
 </section>
+<section id="branch-protection">
+<h2>Branch Protection<a class="headerlink" href="#branch-protection" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://github.com/features/actions">GitHub Actions</a> workflows are used to help manage Pull Requests (PRs):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.github/workflows/test.yml</span></code> automatically runs <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> on PRs to the main branch.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.github/workflows/gh-pages-deploy.yml</span></code> builds documentation for the gh-pages branch and is for automated docs deployment.</p></li>
+</ul>
+<p>PRs to the <a class="reference external" href="https://github.com/compolis/GABM/tree/main">GAB Repository main branch</a> must pass the test workflow before merging.</p>
+<p>The gh-pages branch is protected from deletion.</p>
+</section>
+<section id="maintainer-guide">
+<h2>Maintainer Guide<a class="headerlink" href="#maintainer-guide" title="Link to this heading"></a></h2>
+<p>This section is aimed at developers that are maintainers. Developers that are not maintainers are requested to refrain from publishing releases to PyPI so maintainers can ensure project integrity and security.</p>
 <section id="pypi-release-process">
-<h2>PyPI Release Process<a class="headerlink" href="#pypi-release-process" title="Link to this heading"></a></h2>
-<p>To release a new version of GABM to PyPI, follow these steps:</p>
+<h3>PyPI Release Process<a class="headerlink" href="#pypi-release-process" title="Link to this heading"></a></h3>
+<p>To release a new version of GABM to <a class="reference external" href="https://pypi.org/">PyPI</a>, follow these steps:</p>
 <ol class="arabic">
-<li><p><strong>Update Version</strong>: Bump the version in setup.cfg and/or pyproject.toml as appropriate.</p></li>
+<li><p><strong>Update Version</strong>: Bump the version in setup.cfg, pyproject.toml and <a class="reference internal" href="USER_GUIDE.html"><span class="std std-doc">User Guide</span></a> as appropriate.</p></li>
 <li><p><strong>Build the Package</strong>:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>build
 </pre></div>
@@ -365,56 +393,31 @@ This file is preferred over setup.py for static, declarative configuration.</p><
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--index-url<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>gabm
 </pre></div>
 </div>
+<p>You will need to have an account on https://test.pypi.org and have created an API key for this to work.</p>
 </li>
 <li><p><strong>Upload to PyPI:</strong></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>pypi-release
 </pre></div>
 </div>
-<p>This uploads the package to the official PyPI repository.</p>
+<p>This uploads the package to the official PyPI repository.
+You will need to have an account on https://pypi.org and have created an API key for this to work.</p>
 </li>
 <li><p><strong>Verify Release:</strong></p>
 <ul class="simple">
-<li><p>Check the PyPI page and test installation with pip install gabm</p></li>
+<li><p>Check the PyPI page and test installation as a user ensuring the instructions in the <a class="reference internal" href="USER_GUIDE.html"><span class="std std-doc">User Guide</span></a> work.</p></li>
 </ul>
 </li>
 </ol>
 <p>For more details, see the <a class="reference external" href="https://packaging.python.org/">Python Packaging User Guide</a>.</p>
 </section>
-<section id="continuous-integration-branch-protection">
-<h2>Continuous Integration &amp; Branch Protection<a class="headerlink" href="#continuous-integration-branch-protection" title="Link to this heading"></a></h2>
-<section id="automated-testing-and-docs-deployment-with-github-actions">
-<h3>Automated Testing and Docs Deployment with GitHub Actions<a class="headerlink" href="#automated-testing-and-docs-deployment-with-github-actions" title="Link to this heading"></a></h3>
-<p>The project uses GitHub Actions workflows for CI/CD:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">.github/workflows/test.yml</span></code> automatically runs <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code> on pushes and pull requests to the main branch.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.github/workflows/gh-pages-deploy.yml</span></code> builds documentation for the gh-pages branch and can be used for automated docs deployment.</p></li>
-</ul>
-</section>
-<section id="branch-protection-for-main">
-<h3>Branch Protection for main<a class="headerlink" href="#branch-protection-for-main" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p>The main branch is protected: all pull requests must pass the test workflow before merging.</p></li>
-<li><p>The gh-pages branch is protected from deletion.</p></li>
-</ul>
-<p>For more details, see <a class="reference external" href="https://docs.github.com/en/actions">GitHub Actions documentation</a> and <a class="reference external" href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-branch-protection-rules-for-your-repository">GitHub branch protection rules</a>.</p>
-</section>
-</section>
-<section id="maintainer-guide">
-<h2>Maintainer Guide<a class="headerlink" href="#maintainer-guide" title="Link to this heading"></a></h2>
-<section id="gh-pages-branch-and-documentation-deployment">
-<h3>gh-pages Branch and Documentation Deployment<a class="headerlink" href="#gh-pages-branch-and-documentation-deployment" title="Link to this heading"></a></h3>
-<p>Sphinx documentation is built and deployed using <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages-deploy</span></code>. If the upstream <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch is out of sync or needs to be replaced, maintainers may use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--force</span> <span class="pre">upstream</span> <span class="pre">gh-pages</span></code> to overwrite it with the correct local version. This should be done with care, as it replaces the branch history. Developers that are not maintainers should not push directly to the upstream <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch.</p>
-</section>
-</section>
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
-<section id="github-pages-worktree-conflict">
-<h3>GitHub Pages Worktree Conflict<a class="headerlink" href="#github-pages-worktree-conflict" title="Link to this heading"></a></h3>
+<section id="branch-and-documentation-deployment">
+<h3>Branch and Documentation Deployment<a class="headerlink" href="#branch-and-documentation-deployment" title="Link to this heading"></a></h3>
+<p>Sphinx documentation is built and deployed using <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages-deploy</span></code>. If the upstream <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch is out of sync or needs to be replaced, use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--force</span> <span class="pre">upstream</span> <span class="pre">gh-pages</span></code> to overwrite it with the correct local version. This should be done with care, as it replaces the branch history.</p>
 <p>When deploying documentation with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">gh-pages-deploy</span></code>, you may encounter an error like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fatal</span><span class="p">:</span> <span class="s1">&#39;gh-pages&#39;</span> <span class="ow">is</span> <span class="n">already</span> <span class="n">used</span> <span class="n">by</span> <span class="n">worktree</span> <span class="n">at</span> <span class="s1">&#39;/tmp/gh-pages-xxxx...&#39;</span>
 </pre></div>
 </div>
-<p>This occurs if a previous deployment left a lingering worktree directory for the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch. The deployment script now automatically checks for and removes any existing worktree before adding a new one. If you still encounter this error, manually remove the worktree:</p>
+<p>This occurs if a previous deployment left a lingering worktree directory for the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch. The deployment script should automatically check for and removes any existing worktree before adding a new one. If you encounter this error, manually remove the worktree:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">worktree</span> <span class="n">remove</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">gh</span><span class="o">-</span><span class="n">pages</span><span class="o">-</span><span class="n">xxxx</span><span class="o">...</span>
 </pre></div>
 </div>
@@ -423,19 +426,30 @@ This file is preferred over setup.py for static, declarative configuration.</p><
 </section>
 <section id="working-with-an-ai-pair-programmer">
 <h2>Working with an AI Pair Programmer<a class="headerlink" href="#working-with-an-ai-pair-programmer" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Using an AI pair programmer (such as GitHub Copilot) can greatly accelerate development and normalize good practice. To get the most benefit:</p></li>
-<li><p>Review all changes, as AI assistants have limited session memory and may occasionally miss details.</p></li>
-<li><p>Maintain comprehensive documentation to bridge memory gaps and enable effective guidance.</p></li>
-<li><p>Refer the AI assistant to existing documentation to help it provide accurate and context-aware support.</p></li>
-<li><p>Use clear prompts and feedback to teach and guide the AI assistant as needed.</p></li>
-</ul>
-<p>This collaborative workflow helps ensure continuity, reproducibility, and efficient development for both human and AI contributors.</p>
+<p>Using an AI pair programmer (such as <a class="reference external" href="https://github.com/features/copilot">GitHub Copilot</a>), also known as <a class="reference external" href="https://en.wikipedia.org/wiki/Vibe_coding">vibe coding</a>, can accelerate development and normalise practice. In essence this uses large language models (LLMs) to help with tasks using prompts. Bear in mind that contemporary AI pair programmers use limited context and that context can be lost between sessions. This is why it is good to develop documentation at the same time as code and refer the AI assistant to existing documentation to help it provide accurate and context-aware support.</p>
 </section>
 <section id="managing-logs-and-caches">
 <h2>Managing Logs and Caches<a class="headerlink" href="#managing-logs-and-caches" title="Link to this heading"></a></h2>
+<p>Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large. Typically they are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0.</p>
+<p>Project Python scripts use Python logging and write logs to:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>data/logs/docs/
+</pre></div>
+</div>
+<p>Each Python script has its own log file to help:</p>
 <ul class="simple">
-<li><p>Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large. Typically they are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0.</p></li>
+<li><p>Debug issues with documentation builds or asset copying</p></li>
+<li><p>Review script actions and errors</p></li>
+</ul>
+<p>Logging levels can be adjusted as needed.</p>
+<p>If you encounter problems, please check relevant log files for details.</p>
+</section>
+<section id="files-and-directories-excluded-from-version-control">
+<h2>Files and Directories Excluded from Version Control<a class="headerlink" href="#files-and-directories-excluded-from-version-control" title="Link to this heading"></a></h2>
+<p>Certain files and directories are intentionally excluded from the repository via <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> to keep the project clean and secure:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data/logs/</span></code> — All log files generated by scripts and modules (can be large and environment-specific)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/io/llm/*/cache.pkl</span></code> — LLM response cache files (can be large and are not needed for collaboration)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> — API keys (never commit secrets)</p></li>
 </ul>
 </section>
 </section>
@@ -444,8 +458,8 @@ This file is preferred over setup.py for static, declarative configuration.</p><
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="SETUP_GUIDE_USER.html" class="btn btn-neutral float-left" title="User Setup Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="USER_GUIDE.html" class="btn btn-neutral float-right" title="User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="USER_GUIDE.html" class="btn btn-neutral float-left" title="User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DEV_QUICKSTART.html" class="btn btn-neutral float-right" title="Developer Quickstart" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
