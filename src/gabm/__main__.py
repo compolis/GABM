@@ -7,7 +7,7 @@ To run, use the command:
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.1.3"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
@@ -43,7 +43,8 @@ def main():
     logging.info("Running gabm...")
     # Get the api keys
     # Importing here to avoid circular imports
-    from src.io.read_data import read_api_keys
+    from gabm.io.read_data import read_api_keys
+    #from src.io.read_data import read_api_keys
     # Read API keys from the default location
     api_keys = read_api_keys(file_path='data/api_key.csv')
     # Print the API keys
@@ -59,7 +60,7 @@ def main():
             return
         api_key = api_keys.get(key_name)
         logging.info(f"{name} API Key: {api_key}")
-        module = __import__(f"src.io.llm.{module_name}", fromlist=[module_name])
+        module = __import__(f"gabm.io.llm.{module_name}", fromlist=[module_name])
         send_func = getattr(module, "send")
         import inspect
         send_params = inspect.signature(send_func).parameters

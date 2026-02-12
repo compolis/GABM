@@ -1,4 +1,10 @@
-# Development requirements for GABM
+# Requirements (Developer)
+
+> **Note:** This file is for documentation only.
+> Install dependencies from [requirements.txt](requirements.txt) and [requirements-dev.txt](requirements-dev.txt) in the project root.
+
+
+```# Development requirements for GABM
 # Install with: pip install -r requirements-dev.txt
 
 # Test dependencies
@@ -18,7 +24,13 @@ myst-parser>=5.0.0<6
 docutils>=0.22,<0.23
 
 # For building distributions
-build>=1.4.0<2
+build>=1.4.0,<2
+setuptools>=61.0,<70
+wheel>=0.42.0,<1
+
+# For updating version references in files
+bump2version>=1.0.1<2
 
 # For uploading to PyPI
-twine>=5.0.0<6
+twine>=5.0.0,<6
+```

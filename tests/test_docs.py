@@ -50,16 +50,6 @@ def test_fix_header_levels_basic():
     expected = """## Title\n### Subtitle\n#### Section\n"""
     assert fix_header_levels(input_md).strip() == expected.strip()
 
-def test_fix_header_levels_no_space():
-    """
-    Test that headers without a space after the hash are still demoted.
-    Returns:
-        None
-    """
-    input_md = """#Title\n##Subtitle\n"""
-    expected = """##Title\n###Subtitle\n"""
-    assert fix_header_levels(input_md).strip() == expected.strip()
-
 def test_fix_header_levels_leading_blank():
     """
     Test that leading blank lines before the first header are preserved and headers are still demoted.

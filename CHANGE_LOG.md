@@ -1,34 +1,34 @@
 # CHANGE_LOG
-
-All notable changes to this project will be documented in this file.
+All notable changes to this project are to be documented in this file.
 
 ## [0.2.0] - Unreleased
 - ...
 
-## [0.1.1] - 2026-02-07
-### Changed
-- Updated documentation files for clarity and completeness (README.md, USER_GUIDE.md, DEV_GUIDE.md).
-- Improved guide integration and Makefile target documentation.
+
+## [0.1.1] - 2026-02-12
+- Updated documentation to improve clarity and completeness
 - Standardized Markdown formatting and removed YAML front matter from guides.
-- Started preparation for [JOSS submission](JOSS_SUBMISSION.md)
 
 ### Packaging & Build Workflow
-- Added scripts/build-test.py for platform-agnostic build and test install in a fresh virtual environment.
-- Updated Makefile: build-test now uses scripts/build-test.py; added pypi-release and testpypi-release targets for uploading to PyPI and TestPyPI.
-- Updated DEV_GUIDE.md: documented new Makefile targets and clarified packaging workflow.
-- Added twine to requirements-dev.txt for PyPI uploads.
+- Added `scripts/build-test.py` for platform agnostic builds.
+- Makefile pypi-release and testpypi-release targets added for uploading to [PyPI](https://pypi.org/) and [TestPyPI](https://test.pypi.org/).
+- Updated [Developer Guide](DEV_GUIDE.md) by documenting new Makefile targets and clarifying packaging workflow.
+- Added [Twine](https://pypi.org/project/twine/) to `requirements-dev.txt` for PyPI uploads.
 
 ### Logging
-- All asset management, cleaning, deployment, and cache scripts now use Python logging.
+- All asset management, cleaning, deployment, and cache scripts now use [Python logging](https://docs.python.org/3/library/logging.html).
 - Logs are written to `data/logs/docs/` with rotating file handlers for each script.
 - Logging helps with debugging, error tracking, and collaboration.
 
+
 ## [0.1.0] - 2026-02-06
-### Added
 - Initial private release.
-- Road map outlines next step:
-  - 0.2.0 implementation of a simple agent-based model
-- LLM integration (OpenAI, Google Generative AI, DeepSeek).
-- Persistent response/model caching.
-- Onboarding utility and Makefile targets.
+- Project Documentation initialised
+  - [README](README.md)
+  - [Road Map](RoadMap.md)
+  - [User Guide](USER_GUIDE.md)
+  - [Developer Guide](DEV_GUIDE.md)
+- LLM setup tested for (OpenAI, Google Generative AI and DeepSeek).
+- Persistent response/model caching implemented.
+- Makefile targets.
 - Contributor workflow and documentation.

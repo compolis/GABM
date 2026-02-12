@@ -1,70 +1,115 @@
-
 # Developer Guide
-
-## Overview
-This guide provides best practices for contributing to GABM, collaborating with other developers, and understanding the project structure, Makefile targets, and documentation workflow. Documentation was updated in release 0.1.1 for clarity and completeness.
 
 
 ## Table of Contents
-
 - [Overview](#overview)
-- [Contributing Workflow](#contributing-workflow)
-- [Collaboration & Communication](#collaboration--communication)
-- [Project Structure](#project-structure)
-- [Python Package Entry Point: __main__.py](#python-package-entry-point-__main__py)
+- [Contributing and Communicating](#contributing-and-communicating)
+- [Project Directories](#project-directories)
+- [Python Package Entry Point](#python-package-entry-point)
 - [Makefile Targets](#makefile-targets)
 - [Developing Documentation](#developing-documentation)
-- [Python Version](#python-version)
-- [Packaging Files](#packaging-files)
-- [PyPI Release Process](#pypi-release-process)
-- [Continuous Integration & Branch Protection](#continuous-integration--branch-protection)
-- [JOSS Article Intention](#joss-article-intention)
-- [Additional Resources](#additional-resources)
+- [Packaging and Deployment](#packaging-and-deployment)
+- [Branch Protection](#branch-protection)
+- [Maintainer Guide](#maintainer-guide)
+- [Branch and Documentation Deployment](#branch-and-documentation-deployment)
+- [GitHub Copilot](#github-copilot)
+- [Managing Logs and Caches](#managing-logs-and-caches)
+- [Files and Directories Excluded from Version Control](#files-and-directories-excluded-from-version-control)
 
-## Contributing Workflow
-- Fork the repository and create feature branches for new work.
-- Commit changes with clear messages.
-- Push to your fork and open a pull request (PR) against the main repository.
-- Review and respond to feedback promptly.
-- Keep your branch up to date with upstream/main.
 
-## Collaboration & Communication
-- Use GitHub Issues and PRs for discussion and tracking.
-- Communicate blockers or questions early.
-- Reference related issues/PRs in your commits and comments.
-- Respect code review feedback and project coding standards.
+## Overview
+The GABM developer guide provides guidance for developers some of which are also maintainers.
 
-## Project Structure
+Please follow the [Developer Quick Start Guide](DEV_QUICKSTART.md) to get set up to contribute as a developer.
+
+In the rest of the document "you" means you as a GABM developer.
+
+
+## Contributing and Communicating
+Please follow the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+For the time being, please communicate by commenting on or raising new [GABM Repository Issues](https://github.com/compolis/GABM/issues).
+
+You should have forked the [GABM Repository](https://github.com/compolis/GABM) to your own GitHub account.
+
+The general workflow for contributing is to:
+- Create a check out new local branch:
+
+```bash
+git branch my_feature
+git checkout my_feature
+```
+
+- Make changes:
+  - For each Python file edited, please adjust the Metadata at the top of the file by:
+    - Adding your details to the `__author__` list
+    - Incrementing the `__version__`
+  - Update the [Change Log](CHANGE_LOG.md) with a summary of your changes.
+- Commit changes with a clear message. For example:
+
+```bash
+git add .
+git commit -m "Clear message that explains changes." 
+```
+
+- Ensure tests pass and documentation builds before submitting a PR:
+
+```bash
+make test
+make docs
+```
+
+- Push to your Fork, For example:
+
+```bash
+git push origin my_feature
+```
+
+- Open a PR on GitHub to merge your `my_feature` branch into the the `main` branch of the upstream GABM Repository.
+  - Please refer to any related issues in the PR comments.
+- The PR will be reviewed and once the review is complete, changes will be merged.
+
+
+## Project Directories
+The root project directory contains documentation and files needed for building and deploying. The sub-diretories include: 
 - `data/`: For data including log files
-- `docs/`: Documentation and assets
+- `dist/`: Output directory for built distributions.
+- `docs/`: Documentation
 - `scripts/`: Utility scripts
-- `src/gabm`: Python source code package
-- `tests/`: Test suite
-- `Makefile`: Automation targets
+- `src/`: Python source code
+- `tests/`: Test suite for src
+- `venv-build-test/`: For temporary virtual environments created for testing.
 
-## Python Package Entry Point: __main__.py
-The main entry point for the GABM package is `src/gabm/__main__.py`. This follows Python packaging best practices and allows the application to be run using:
+
+## Python Package Entry Point
+The main entry point for the GABM package is `src/gabm/__main__.py`. This allows the application to be run using:
 
 	python3 -m gabm
 
-This approach is preferred over directly running a script (like `run.py`) because:
-- It enables Python to treat `gabm` as a package, ensuring imports work correctly.
-- It is the standard way to provide a command-line entry point for Python packages.
-- It makes the project ready for distribution and installation via pip or PyPI.
+This approach is preferred over directly running a script (like `run.py`) as:
+  - It enables Python to treat `gabm` as a package, ensuring imports work correctly.
+  - It is the standard way to provide a command-line entry point for Python packages.
+  - It makes the project ready for distribution and installation.
 
 The `__main__.py` file is executed when you run `python3 -m gabm` from the project root (with `src` on the Python path). If you need to add or change the main application logic, edit `src/gabm/__main__.py`.
 
-For more details, see the [Python Packaging documentation](https://docs.python.org/3/library/__main__.html).
-
+Please see the [Python Packaging documentation](https://docs.python.org/3/library/__main__.html) for information about Python packaging.
 
 
 ## Makefile Targets
+The root directory contains a [Makefile](https://www.gnu.org/software/make/manual/make.html#Introduction). This is set up to automate tasks using [GNU Make](https://www.gnu.org/software/make). This section explains the rules or targets in the Makefile. Please ensure any changes to the Makefile are platform agnostic.
+
+### Target Chaining, DRY, and Consistency
+For maintainability, all Makefile targets that depend on other build steps should use Make's built-in dependency chaining (e.g., `gh-pages-deploy: docs`) rather than manually invoking `$(MAKE)` or shelling out to `make` within a target. This ensures:
+- Each target is only responsible for its own logic.
+- Consistency: all targets use the same build steps, and changes to one target (like `docs`) automatically propagate to dependents (like `gh-pages-deploy`). The following is a presentation of the Makefile rules/targets:
 
 | Target         | Usage/Description                                                                 |
 |--------------- |----------------------------------------------------------------------------------|
 | `make help`    | Show available Makefile commands                                                  |
 | `make test`    | Run all tests (pytest)                                                            |
 | `make docs`    | Build documentation (Sphinx) and clean auto-copied docs assets                    |
+| `make docs-build` | Build documentation (Sphinx)                                                      |
 | `make docs-clean` | Remove auto-copied documentation files from docs/                              |
 | `make gh-pages-deploy` | Build and deploy documentation to GitHub Pages (runs scripts/gh-pages-deploy.py) |
 | `make clean`   | Remove build/test artifacts and Python caches                                     |
@@ -79,27 +124,64 @@ For more details, see the [Python Packaging documentation](https://docs.python.o
 | `make build-test` | Build and test install the package in a fresh venv                               |
 | `make pypi-release` | Upload the built package to PyPI (twine upload dist/*)                         |
 | `make testpypi-release` | Upload the built package to TestPyPI (twine upload --repository testpypi dist/*) |
+| `make bump-version` | Bump the project version everywhere (patch by default; use `make bump-version part=minor` or `part=major` for other bumps). Uses bump2version and updates all relevant files. |
 
 
-**Notes:**
-- All Python scripts used by Makefile targets are in the `scripts/` directory and are named consistently with their Makefile targets (e.g., `make docs-clean` runs `scripts/docs-clean.py`).
-- The `delete-release` target is platform-agnostic and automates deleting a release tag locally and on both remotes (origin, upstream).
-- This convention improves clarity and discoverability for contributors.
-- Targets are platform-agnostic and reproducible.
+All Python scripts used by Makefile targets are in the `scripts/` directory and are named consistently with their Makefile targets (e.g., `make docs-clean` runs `scripts/docs-clean.py`).
 
-Refer to the Makefile for full details and usage examples.
+The `delete-release` target automates deleting a release tag locally and on both remotes (origin, upstream).
+
+Please refer to the Makefile for full details.
+
 
 ## Developing Documentation
-- Edit Markdown files in `docs/` and project root
-- Use Sphinx and MyST via `make docs` for documentation builds and update the script it uses as approriate
-- Add new guides or API docs as needed
-- Run `make docs` to preview changes
+Markdown files in the root directory, each serving a specific purpose:
+  - [README.md](README.md): A general [README](https://en.wikipedia.org/wiki/README) that links to much of the documentation outlined below including the developer and user guides. It is included in the Sphinx documentation and forms the basis for the main Sphinx documentation page.
+  - [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): Provides details on expected behavior of developers and reporting procedures.
+  - [USER_GUIDE.md](USER_GUIDE.md): Provides step-by-step instructions for users to get set, and should provide guidance for using GABM.
+  - [DEV_QUICKSTART.md](DEV_QUICKSTART.md) Provides step-by-step instructions for developers to get set up for contributing to GABM development.
+  - [DEV_GUIDE.md](DEV_GUIDE.md): Explains how to contribute to GABM as a developer. It provides details about project structure, and workflow guidance.
+  - [API_KEYS.md](API_KEYS.md): Explains how to create a file containing API keys for communicating with LLMs.
+  - [ROADMAP.md](ROADMAP.md): Document to outline planned features and future development goals.
+  - [CHANGE_LOG.md](CHANGE_LOG.md): Document to describe changes and updates.
+  - [DEVELOPMENT_HISTORY.md]: Document about development, milestones, and reflections.
 
-## Python Version
-- Python 3.12+ required for development
-- Ensure `python3` points to the correct version
+- If you add a new Markdown file in the root directory, please update entries to `doc_assets.py` DOC_FILES and `docs/index.md` Project Documents to include them in Sphinx documentation.
+- Add API docs via `docs/index.md`
 
-## Packaging Files
+### Sphinx Documentation
+To build run:
+
+```bash
+make docs
+```
+
+- This effectively runs `scripts/docs.py` to copy key documentation files from the project root to the `docs/` directory, pre-processes them for building the Sphinx documentation, then delete those copied files once the build completes.
+
+
+**Note on Sphinx/MyST Documentation Warnings:**
+
+When building the documentation with [Sphinx](https://www.sphinx-doc.org/) and [MyST](https://mystmd.org/), you may see warnings like:
+
+  Document headings start at H2, not H1 [myst.header]
+
+These warnings occur even though all Markdown files start with H2 (`##`). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.
+
+
+Preview the Sphinx documentation by opening `docs/_build/html/index.html` in a [Web browser](https://en.wikipedia.org/wiki/Web_browser).
+
+To deploying the Sphinx Documentation run:
+
+```bash
+make gh-pages-deploy
+```
+
+This should deploy/update the `gh-pages` branch on your origin Fork. If your Fork uses the `gh-pages` branch for [GitHub Pages](https://docs.github.com/en/pages), then the documentation should update there.
+
+If it all looks good. Please submit a PR to incorporate documentation changes into main. A maintainer will subsequently update the upstream repository gh-pages branch.
+
+
+## Packaging and Deployment
 The following files and directories are essential for building, testing, and distributing the GABM package:
 - **pyproject.toml**: Declares build system requirements and project metadata. Required for modern Python packaging (PEP 517/518).
 - **setup.cfg**: Contains static package metadata and configuration for setuptools, such as:
@@ -108,23 +190,32 @@ The following files and directories are essential for building, testing, and dis
 	- Entry points (e.g., console_scripts)
 	- Classifiers and other options
 	This file is preferred over setup.py for static, declarative configuration.
-- **MANIFEST.in**: Tells setuptools which additional files (beyond Python modules) to include in the source distribution (sdist). For example:
-	- Documentation files (README.md, LICENSE, etc.)
-	- Data files needed at runtime
-	- Example: `include README.md LICENSE data/*.csv`
-	This ensures users who install from source get all necessary files.
+- **MANIFEST.in**: Informs setuptools which additional files (beyond Python modules) to include in the source distribution (sdist). This should be updated so users who install from source get all necessary files.
 - **requirements.txt**: Lists pinned dependencies for end users (used by pip install -r requirements.txt).
 - **requirements-dev.txt**: Lists development dependencies (testing, linting, docs) with version ranges for contributors.
 - **dist/**: Output directory for built distributions (.tar.gz and .whl files) after running the build process.
 - **src/gabm.egg-info/**: Metadata directory created by setuptools during build. Contains information about the package (version, dependencies, etc.). Safe to delete; will be recreated as needed.
-- **venv-build-test/**: Temporary virtual environment created by `make build-test` for testing the built package in isolation. Can be safely deleted after testing.
+- **venv-build-test/**: Temporary virtual environment created by `make build-test` for testing the built package in isolation. This can be safely deleted after testing.
 
 
-## PyPI Release Process
+## Branch Protection
+[GitHub Actions](https://github.com/features/actions) workflows are used to help manage Pull Requests (PRs):
+- `.github/workflows/test.yml` automatically runs `make test` on PRs to the main branch.
+- `.github/workflows/gh-pages-deploy.yml` builds documentation for the gh-pages branch and is for automated docs deployment.
 
-To release a new version of GABM to PyPI, follow these steps:
+PRs to the [GAB Repository main branch](https://github.com/compolis/GABM/tree/main) must pass the test workflow before merging.
 
-1. **Update Version**: Bump the version in setup.cfg and/or pyproject.toml as appropriate.
+The gh-pages branch is protected from deletion.
+
+
+## Maintainer Guide
+This section is aimed at developers that are maintainers. Developers that are not maintainers are requested to refrain from publishing releases to PyPI so maintainers can ensure project integrity and security.
+
+
+### PyPI Release Process
+To release a new version of GABM to [PyPI](https://pypi.org/), follow these steps:
+
+1. **Update Version**: Bump the version in setup.cfg, pyproject.toml and [User Guide](USER_GUIDE.md) as appropriate.
 2. **Build the Package**:
 	```sh
 	make build
@@ -143,75 +234,62 @@ To release a new version of GABM to PyPI, follow these steps:
 	```sh
 	pip install --index-url https://test.pypi.org/simple/ gabm
 	```
+	You will need to have an account on https://test.pypi.org and have created an API key for this to work.
 5. **Upload to PyPI:**
 	```sh
 	make pypi-release
 	```
 	This uploads the package to the official PyPI repository.
+	You will need to have an account on https://pypi.org and have created an API key for this to work.
 6. **Verify Release:**
-	- Check the PyPI page and test installation with pip install gabm
+	- Check the PyPI page and test installation as a user ensuring the instructions in the [User Guide](USER_GUIDE.md) work.
 
 For more details, see the [Python Packaging User Guide](https://packaging.python.org/).
 
 
-## Continuous Integration & Branch Protection
+### Branch and Documentation Deployment
+Sphinx documentation is built and deployed using `make gh-pages-deploy`. If the upstream `gh-pages` branch is out of sync or needs to be replaced, use `git push --force upstream gh-pages` to overwrite it with the correct local version. This should be done with care, as it replaces the branch history. 
+
+When deploying documentation with `make gh-pages-deploy`, you may encounter an error like:
+
+```
+fatal: 'gh-pages' is already used by worktree at '/tmp/gh-pages-xxxx...'
+```
+
+This occurs if a previous deployment left a lingering worktree directory for the `gh-pages` branch. The deployment script should automatically check for and removes any existing worktree before adding a new one. If you encounter this error, manually remove the worktree:
+
+```
+git worktree remove /tmp/gh-pages-xxxx...
+```
+
+For more details, see the comments in the Makefile and the deployment script.
 
 
-### Automated Testing and Docs Deployment with GitHub Actions
-The project uses GitHub Actions workflows for CI/CD:
-- `.github/workflows/test.yml` automatically runs `make test` on pushes and pull requests to the main branch.
-- `.github/workflows/gh-pages-deploy.yml` builds documentation for the gh-pages branch and can be used for automated docs deployment.
+## GitHub Copilot
+Using [GitHub Copilot](https://github.com/features/copilot)) for [vibe coding](https://en.wikipedia.org/wiki/Vibe_coding), can help with understanding workflows and developing documentation, code and tests.
 
-### Branch Protection for main and gh-pages
-- The main branch is protected: all pull requests must pass the test workflow before merging.
-- The gh-pages branch is protected: docs deployment workflow runs and branch deletion/force pushes are prevented.
-- You may need to select the workflow(s) as required status checks in the branch protection settings.
-- If a workflow is not triggered, push a new commit or reopen the PR to activate it.
-
-For more details, see [GitHub Actions documentation](https://docs.github.com/en/actions) and [GitHub branch protection rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-branch-protection-rules-for-your-repository).
+GitHub Copilot uses limited context and the chat context does not currently persist between sessions. As a result, it is good to develop/update documentation along with changes. GitHub Copilot can be asked to read the [README](README.md) and [Developer Guide](DEV_GUIDE.md) at the start of a session so as to be more context aware and provide better support.
 
 
-## JOSS Article Intention
-
-The project team intends to write and submit an article to the Journal of Open Source Software (JOSS) describing the development, purpose, and impact of GABM. Scaffolding for the JOSS article and submission workflow will be created in future sessions. Contributors and collaborators are encouraged to participate in the drafting and review process.
-
-For updates and progress, see DEVELOPMENT_HISTORY.md and the Sphinx documentation.
-
-## Additional Resources
-## Overview of Project Markdown Files
-## Working with an AI Pair Programmer
 ## Managing Logs and Caches
-Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large and are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0. This section will be expanded as these tools are implemented.
-Using an AI pair programmer (such as GitHub Copilot) can greatly accelerate development and normalize good practice. To get the most benefit:
+Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large. Typically they are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0.
 
-- Review all changes, as AI assistants have limited session memory and may occasionally miss details.
-- Maintain comprehensive documentation to bridge memory gaps and enable effective guidance.
-- Refer the AI assistant to existing documentation to help it provide accurate and context-aware support.
-- Use clear prompts and feedback to teach and guide the AI assistant as needed.
+Project Python scripts use Python logging and write logs to:
 
-This collaborative workflow helps ensure continuity, reproducibility, and efficient development for both human and AI contributors.
-The project includes several Markdown files, each serving a specific purpose:
+	data/logs/docs/
 
-- **README.md**: Project overview, setup instructions, and links to key documentation.
-- **DEV_GUIDE.md**: Developer workflow, project structure, and best practices.
-- **USER_GUIDE.md**: End user instructions for installing, configuring, and running GABM.
-- **SETUP_GUIDE_USER.md**: Step-by-step environment setup for users.
-- **SETUP_GUIDE_DEV.md**: Step-by-step environment setup for developers.
-- **API_KEYS.md**: Required API keys for LLMs and configuration details.
-- **CHANGE_LOG.md**: Tracks changes and updates across releases.
-- **ROADMAP.md**: Planned features and future development goals.
-- **CODE_OF_CONDUCT.md**: Expected behavior and reporting procedures.
-- **CONTRIBUTORS.md**: Project contributors and roles.
-- **LICENSE.md**: Software license and terms of use.
-- **requirements.txt**: Pinned dependencies for end users.
-- **requirements-dev.txt**: Flexible dependencies for developers.
-- **SECURITY.md**: Security guidelines and contact information.
-- **CONTACT.md**: Maintainer and support contact details.
-- **DEVELOPMENT_HISTORY.md**: Project development, milestones, and reflections.
+Each Python script has its own log file to help:
+- Debug issues with documentation builds or asset copying
+- Review script actions and errors
 
-This structure helps developers find relevant information and understand the documentation layout. These files are referenced and included in Sphinx documentation for consistency and accessibility.
-- See [SETUP_GUIDE_DEV.md](SETUP_GUIDE_DEV.md) for environment setup
-- See [README.md](README.md) for project overview
+Logging levels can be adjusted as needed.
 
----
-For further questions, [open an issue](https://github.com/compolis/GABM/issues/new/choose) or contact maintainers via GitHub.
+If you encounter problems, please check relevant log files for details.
+
+
+## Files and Directories Excluded from Version Control
+Certain files and directories are intentionally excluded from the repository via `.gitignore` to keep the project clean and secure:
+
+- `data/logs/` — All log files generated by scripts and modules (can be large and environment-specific)
+- `data/io/llm/*/cache.pkl` — LLM response cache files (can be large and are not needed for collaboration)
+- `data/api_key.csv` — API keys (never commit secrets)
