@@ -46,10 +46,7 @@ See [CHANGE_LOG.md](CHANGE_LOG.md) for details of each release.
 
 
 ## Development History
-The collaborative development of GABM is captured in the [DEVELOPMENT_HISTORY.md](DEVELOPMENT_HISTORY.md) and in some 
-[session logs](data/logs/dev_sessions/) that contain prompts and response pairs for AI pair programming development sessions.
-
-This record was created to inform and be referred to from a [Journal of Open Source Software (JOSS)](https://joss.theoj.org/) submission: See [JOSS Submission](JOSS_SUBMISSION.md) for details.
+The collaborative development of GABM is captured in the [DEVELOPMENT_HISTORY.md](DEVELOPMENT_HISTORY.md).
 
 
 ## Users

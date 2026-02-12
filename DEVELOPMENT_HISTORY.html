@@ -61,9 +61,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#github-copilot">GitHub Copilot</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#session-logs">Session Logs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#contributors">Contributors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#session-summaries">Session Summaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-timeline">Development Timeline</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
@@ -101,6 +100,9 @@
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
+<li><p><a class="reference internal" href="#github-copilot"><span class="xref myst">GitHub Copilot</span></a></p></li>
+<li><p><a class="reference internal" href="#contributors"><span class="xref myst">Contributors</span></a></p></li>
+<li><p><a class="reference internal" href="#development-timeline"><span class="xref myst">Development Timeline</span></a></p></li>
 </ul>
 </section>
 <section id="overview">
@@ -114,32 +116,6 @@
 <p>GitHub Copilot has only limited session memory and no memory between sessions. Project documentation can help provide context to GitHub Copilot to tailor responses to better reflect how GABM is organised.</p>
 </section>
 </section>
-<section id="session-logs">
-<h2>Session Logs<a class="headerlink" href="#session-logs" title="Link to this heading"></a></h2>
-<p>Detailed logs of development sessions are stored in UTF-8 encoded JSON files, with filenames indicating the session start and end times (e.g., session_YYYY-MM-DDTHHMMSS_to_YYYY-MM-DDTHHMMSS.json). Each log contains:</p>
-<ul class="simple">
-<li><p>Session metadata (start/end, participants, notes, encoding)</p></li>
-<li><p>An array of prompt/response history entries, each with a timestamp, role (user/assistant), and content</p></li>
-</ul>
-<p><strong>Format Example:</strong></p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">	</span><span class="nt">&quot;session_metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">		</span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-02-08T00:00:00&quot;</span><span class="p">,</span>
-<span class="w">		</span><span class="nt">&quot;end&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-02-08T23:59:59&quot;</span><span class="p">,</span>
-<span class="w">		</span><span class="nt">&quot;participants&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Andy Turner&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;GitHub Copilot&quot;</span><span class="p">],</span>
-<span class="w">		</span><span class="nt">&quot;encoding&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UTF-8&quot;</span><span class="p">,</span>
-<span class="w">		</span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Session log is a partial, human-curated record of prompt/response and key actions. Not all development steps or context are captured.&quot;</span>
-<span class="w">	</span><span class="p">},</span>
-<span class="w">	</span><span class="nt">&quot;history&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>The session logs are stored in <a class="reference internal" href="#data/logs/dev_sessions/"><span class="xref myst">data/logs/dev_sessions/</span></a>.</p>
-<p>To keep logs organized and accessible, use the <code class="docutils literal notranslate"><span class="pre">compress_dev_logs.py</span></code> script to compress plain text/markdown logs in <code class="docutils literal notranslate"><span class="pre">data/logs/dev_sessions/</span></code> and generate an index file (<a class="reference internal" href="#data/logs/dev_sessions/index.md"><span class="xref myst">data/logs/dev_sessions/index.md</span></a>) with links to each compressed log:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>scripts/compress_dev_logs.py
-</pre></div>
-</div>
-</section>
 <section id="contributors">
 <h2>Contributors<a class="headerlink" href="#contributors" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -149,8 +125,8 @@
 <li><p>Charlie Pilgrim (Charlie)</p></li>
 </ul>
 </section>
-<section id="session-summaries">
-<h2>Session Summaries<a class="headerlink" href="#session-summaries" title="Link to this heading"></a></h2>
+<section id="development-timeline">
+<h2>Development Timeline<a class="headerlink" href="#development-timeline" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>[2026-02-16] GABM Project meeting</p>
 <ul>
@@ -181,9 +157,9 @@
 <li><p>Makefile targets for syncing and clearing up branches were introduced and Ajay practised using these and began realising/appreciating the way the workflow were set up.</p></li>
 </ul>
 </li>
-<li><p>[2026-02-03] Set up of new GABM repository in <a class="reference external" href="https://github.com/compolis/">compolis</a></p>
+<li><p>[2026-02-03] GABM Repository created in <a class="reference external" href="https://github.com/compolis/">compolis</a></p>
 <ul>
-<li><p>The idea is to abstract from the Climate-Action-GABM Repository the general parts and keep in Climate-Action-GABM Repository the specific parts to do with Climate Action.</p></li>
+<li><p>The idea is to develop GABM in part by abstracting general things from the Climate-Action-GABM Repository the specific parts to do with Climate Action will remain in the Climate-Action-GABM Repository.</p></li>
 </ul>
 </li>
 <li><p>[2026-02-02] GABM Project meeting</p>

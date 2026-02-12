@@ -69,7 +69,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#branch-and-documentation-deployment">Branch and Documentation Deployment</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#working-with-an-ai-pair-programmer">Working with an AI Pair Programmer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#github-copilot">GitHub Copilot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#managing-logs-and-caches">Managing Logs and Caches</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#files-and-directories-excluded-from-version-control">Files and Directories Excluded from Version Control</a></li>
 </ul>
@@ -125,7 +125,7 @@
 <li><p><a class="reference internal" href="#branch-protection"><span class="xref myst">Branch Protection</span></a></p></li>
 <li><p><a class="reference internal" href="#maintainer-guide"><span class="xref myst">Maintainer Guide</span></a></p></li>
 <li><p><a class="reference internal" href="#branch-and-documentation-deployment"><span class="xref myst">Branch and Documentation Deployment</span></a></p></li>
-<li><p><a class="reference internal" href="#working-with-an-ai-pair-programmer"><span class="xref myst">Working with an AI Pair Programmer</span></a></p></li>
+<li><p><a class="reference internal" href="#github-copilot"><span class="xref myst">GitHub Copilot</span></a></p></li>
 <li><p><a class="reference internal" href="#managing-logs-and-caches"><span class="xref myst">Managing Logs and Caches</span></a></p></li>
 <li><p><a class="reference internal" href="#files-and-directories-excluded-from-version-control"><span class="xref myst">Files and Directories Excluded from Version Control</span></a></p></li>
 </ul>
@@ -424,9 +424,10 @@ You will need to have an account on https://pypi.org and have created an API key
 <p>For more details, see the comments in the Makefile and the deployment script.</p>
 </section>
 </section>
-<section id="working-with-an-ai-pair-programmer">
-<h2>Working with an AI Pair Programmer<a class="headerlink" href="#working-with-an-ai-pair-programmer" title="Link to this heading"></a></h2>
-<p>Using an AI pair programmer (such as <a class="reference external" href="https://github.com/features/copilot">GitHub Copilot</a>), also known as <a class="reference external" href="https://en.wikipedia.org/wiki/Vibe_coding">vibe coding</a>, can accelerate development and normalise practice. In essence this uses large language models (LLMs) to help with tasks using prompts. Bear in mind that contemporary AI pair programmers use limited context and that context can be lost between sessions. This is why it is good to develop documentation at the same time as code and refer the AI assistant to existing documentation to help it provide accurate and context-aware support.</p>
+<section id="github-copilot">
+<h2>GitHub Copilot<a class="headerlink" href="#github-copilot" title="Link to this heading"></a></h2>
+<p>Using <a class="reference external" href="https://github.com/features/copilot">GitHub Copilot</a>) for <a class="reference external" href="https://en.wikipedia.org/wiki/Vibe_coding">vibe coding</a>, can help with understanding workflows and developing documentation, code and tests.</p>
+<p>GitHub Copilot uses limited context and the chat context does not currently persist between sessions. As a result, it is good to develop/update documentation along with changes. GitHub Copilot can be asked to read the <a class="reference internal" href="README.html"><span class="std std-doc">README</span></a> and <a class="reference internal" href="#"><span class="std std-doc">Developer Guide</span></a> at the start of a session so as to be more context aware and provide better support.</p>
 </section>
 <section id="managing-logs-and-caches">
 <h2>Managing Logs and Caches<a class="headerlink" href="#managing-logs-and-caches" title="Link to this heading"></a></h2>
