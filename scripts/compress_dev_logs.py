@@ -4,7 +4,6 @@
 Compress all plain text or markdown logs in logs/dev_sessions/ and generate an index file with links.
 Run this script after adding new logs or before a release.
 """
-
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
 __version__ = "0.1.0"

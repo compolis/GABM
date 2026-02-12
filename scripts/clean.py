@@ -26,14 +26,29 @@ handler.setFormatter(formatter)
 if not logger.hasHandlers():
     logger.addHandler(handler)
 
-
 # Remove docs/_build
-build_dir = os.path.join("docs", "_build")
+docs_build_dir = os.path.join("docs", "_build")
+if os.path.exists(docs_build_dir):
+    shutil.rmtree(docs_build_dir)
+    logger.info(f"Removed: {docs_build_dir}")
+else:
+    logger.warning(f"Build directory not found: {docs_build_dir}")
+
+# Remove dist/ directory
+dist_dir = os.path.join(ROOT, "dist")
+if os.path.exists(dist_dir):
+    shutil.rmtree(dist_dir)
+    logger.info(f"Removed: {dist_dir}")
+else:
+    logger.info(f"dist directory not found: {dist_dir}")
+
+# Remove build/ directory
+build_dir = os.path.join(ROOT, "build")
 if os.path.exists(build_dir):
     shutil.rmtree(build_dir)
     logger.info(f"Removed: {build_dir}")
 else:
-    logger.warning(f"Build directory not found: {build_dir}")
+    logger.info(f"build directory not found: {build_dir}")
 
 # Remove src/gabm.egg-info
 egg_info_dir = os.path.join("src", "gabm.egg-info")

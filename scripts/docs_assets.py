@@ -7,22 +7,21 @@ __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 DOC_FILES = [
-    "API_KEYS.md",
-    "CHANGE_LOG.md",
+    "README.md",
+    "LICENSE.md",
     "CODE_OF_CONDUCT.md",
     "CONTRIBUTORS.md",
-    "JOSS_SUBMISSION.md",
+    "USER_GUIDE.md",
     "DEV_GUIDE.md",
-    "DEV_SESSION_LOGGING.md",
-    "DEVELOPMENT_HISTORY.md",
-    "LICENSE.md",
-    "README.md",
+    "DEV_QUICKSTART.md",
     "requirements.txt",
     "requirements-dev.txt",
+    "API_KEYS.md",
     "ROADMAP.md",
-    "SETUP_GUIDE_USER.md",
-    "SETUP_GUIDE_DEV.md",
-    "USER_GUIDE.md",
+    "CHANGE_LOG.md",
+    "DEV_SESSION_LOGGING.md",
+    "DEVELOPMENT_HISTORY.md",
+    "JOSS_SUBMISSION.md",
 ]
 
 GITHUB_DOC_FILES = [
