@@ -51,7 +51,7 @@ Install from [PyPI](https://pypi.org/) using [Pip](https://pypi.org/project/pip/
 python3 -m venv gabm-venv
 source gabm-venv/bin/activate  # On Windows: gabm-venv\\Scripts\\activate
 pip install --upgrade pip
-pip install gabm==0.1.1
+pip install gabm==0.1.4
 ```
 
 You can then check installed dependencies with:
