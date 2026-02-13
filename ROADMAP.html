@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Roadmap &mdash; GABM  documentation</title>
+  <title>Roadmap &mdash; GABM  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="CHANGE_LOG" href="CHANGE_LOG.html" />
+    <link rel="next" title="Change Log" href="CHANGE_LOG.html" />
     <link rel="prev" title="API Key Setup" href="API_KEYS.html" /> 
 </head>
 
@@ -53,13 +53,14 @@
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Project Roadmap</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#planned-for-version-0-2-0">Planned for Version 0.2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#next-target-v0-2-0">Next Target: v0.2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#future-milestone-v1-0-0-first-public-release">Future Milestone: v1.0.0 (First Public Release)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Roadmap</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">0.2</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">CHANGE_LOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
@@ -80,7 +81,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Project Roadmap</li>
+      <li class="breadcrumb-item active">Roadmap</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/ROADMAP.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -90,30 +91,51 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="project-roadmap">
-<h1>Project Roadmap<a class="headerlink" href="#project-roadmap" title="Link to this heading"></a></h1>
-<p>This file outlines planned next steps and future goals for the project. The repository is currently private; the first public release will be version 1.0.0.</p>
-<section id="planned-for-version-0-2-0">
-<h2>Planned for Version 0.2.0<a class="headerlink" href="#planned-for-version-0-2-0" title="Link to this heading"></a></h2>
+  <section id="roadmap">
+<h1>Roadmap<a class="headerlink" href="#roadmap" title="Link to this heading"></a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
+<li><p><a class="reference internal" href="#10"><span class="xref myst">1.0</span></a></p></li>
+<li><p><a class="reference internal" href="#02"><span class="xref myst">0.2</span></a></p></li>
+</ol>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This file outlines planned next steps and future goals.</p>
+</section>
+<section id="id1">
+<h2>1.0<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Criteria and features to be determined…</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>0.2<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Implement tidy-up scripts for logs and caches to help users and developers manage storage and maintain a clean environment.</p></li>
+<li><p>Add agent-based model (ABM) code</p>
+<ul>
+<li><p>Agents</p>
+<ul>
+<li><p>These will:</p>
+<ul>
+<li><p>Belong to “networks” of other Agents</p></li>
+<li><p>Be able to use LLM API prompts and responses to have a “conversations” with other agents.</p></li>
+<li><p>Be modify their opinions based on their biases and what they “learn” or are influenced by in the conversation with other agents.</p></li>
 </ul>
-</section>
-<section id="next-target-v0-2-0">
-<h2>Next Target: v0.2.0<a class="headerlink" href="#next-target-v0-2-0" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Begin development of an agent-based model (ABM) with agent personas derived from processed survey data.</p></li>
-<li><p>Implement 10 initialized agents, each with unique biases and opinions.</p></li>
-<li><p>Agents will use LLM API prompts and responses to have a “conversation” and modify their opinions based on their biases and what they “learn” or are influenced by in the conversation.</p></li>
-<li><p>Each agent will chat with every other agent twice.</p></li>
-<li><p>After the conversations, generate a graph showing individual and aggregate opinions and confidence levels.</p></li>
-<li><p>The graph will visualize both individual agent trajectories and overall group opinion/confidence.</p></li>
+</li>
 </ul>
-</section>
-<section id="future-milestone-v1-0-0-first-public-release">
-<h2>Future Milestone: v1.0.0 (First Public Release)<a class="headerlink" href="#future-milestone-v1-0-0-first-public-release" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Criteria and features for 1.0.0 to be determined…</p></li>
+</li>
+<li><p>Model</p>
+<ul>
+<li><p>Agents will be able to chat with other agents.</p></li>
+<li><p>Graphs will be output to show how individual and aggregate opinions change over time.</p></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </section>
 </section>
@@ -123,7 +145,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="API_KEYS.html" class="btn btn-neutral float-left" title="API Key Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="CHANGE_LOG.html" class="btn btn-neutral float-right" title="CHANGE_LOG" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="CHANGE_LOG.html" class="btn btn-neutral float-right" title="Change Log" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

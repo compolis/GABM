@@ -1,5 +1,6 @@
 # Development History
 
+
 ## Table of Contents
 - [Overview](#overview)
 - [GitHub Copilot](#github-copilot)
@@ -11,14 +12,10 @@
 This document summarises the development of GABM, including key decisions, milestones, and collaborative experiences. A summary of changes is provided in the [Change Log](CHANGE_LOG.md).
 
 
-### GitHub Copilot
-GABM development has paired human expertise with assistance from [GitHub Copilot](https://github.com/features/copilot). This helped rapidly develop the software.
+## GitHub Copilot
+[GitHub Copilot](https://github.com/features/copilot) has beenused to help automate release and cleanup tasks, develop document, test and formulate code.
 
-GitHub Copilot helped automate release and cleanup tasks and document not just technical steps, but also the reasoning and learning process.
-
-Capturing information about interactions between other developers and GitHub Copilot was attempted, but has proven difficult to sustain.
-
-GitHub Copilot has only limited session memory and no memory between sessions. Project documentation can help provide context to GitHub Copilot to tailor responses to better reflect how GABM is organised.
+GitHub Copilot has only limited session memory and no memory between sessions. Project documentation provides context so GitHub Copilot can better tailor responses, but you may need to guide GitHub Copilot to ensure this is done.
 
 
 ## Contributors
@@ -34,19 +31,23 @@ GitHub Copilot has only limited session memory and no memory between sessions. P
 - [2026-02-13] GABM Meeting
   - Ajay and Andy
   - ...
+- [2026-02-14] [GABM version 0.1.4 Released on PyPI](https://pypi.org/project/gabm/0.1.4)
+- [2026-02-11] [GABM version 0.1.3 Released on PyPI](https://pypi.org/project/gabm/0.1.3)
+- [2026-02-11] [GABM version 0.1.2 Released on PyPI](https://pypi.org/project/gabm/0.1.2)
+- [2026-02-11] [GABM version 0.1.1 Released on PyPI](https://pypi.org/project/gabm/0.1.1)
 - [2026-02-09] GABM Meeting
   - Ajay and Andy
   - GABM Repository visibility changed from Private to Public
   - Branch protection explained
-  - Climate-Action-GABM Repository code explanation and review 
+  - Climate-Action-GABM Repository code explanation and review
 - [2026-02-06] GABM Onboarding Session
   - Ajay and Andy
-  - Ajay had prepared by following steps in the README and Developer Guide, but there was [an issue which submitted together](https://github.com/compolis/GABM/issues/33)
+  - [Submitted first issue](https://github.com/compolis/GABM/issues/33)
   - Andy presented the environment setup, workflow automation, and project structure.
-  - Ajay added his details to [CONTRIBUTORS](CONTRIBUTORS), and he quickly learned the command line commit-push process and about creating GitHub Pull Requests to merge changes from a feature branch to the upstream repository main branch.
-  - Makefile targets for syncing and clearing up branches were introduced and Ajay practised using these and began realising/appreciating the way the workflow were set up.
+  - Ajay added his details to [CONTRIBUTORS](CONTRIBUTORS), and quickly learned the command line commit-push process and about creating GitHub Pull Requests to merge changes from a feature branch to the upstream repository main branch.
+  - Makefile targets for syncing and clearing up branches were introduced and Ajay practised using these.
 - [2026-02-03] GABM Repository created in [compolis](https://github.com/compolis/)
-  - The idea is to develop GABM in part by abstracting general things from the Climate-Action-GABM Repository the specific parts to do with Climate Action will remain in the Climate-Action-GABM Repository.
+  - The idea is to develop GABM in part by abstracting general things from the Climate-Action-GABM Repository. Specific parts to do with Climate Action will remain in the Climate-Action-GABM Repository.
 - [2026-02-02] GABM Project meeting
   - Viktoria, Ajay, Andy
   - Climate-Action-GABM Repository transered to [compolis](https://github.com/compolis/)

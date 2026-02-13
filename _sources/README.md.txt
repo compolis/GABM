@@ -4,9 +4,9 @@ title: Project README
 
 <!-- Badges -->
 <p align="left">
-  <a href="https://github.com/compolis/gabm/blob/main/LICENSE" title="License">
+  <a href="https://github.com/compolis/GABM/blob/main/LICENSE" title="License">
 
-<img src="https://img.shields.io/github/license/compolis/gabm" alt="License" />
+<img src="https://img.shields.io/github/license/compolis/GABM" alt="License" />
 
   </a>
   <a href="https://www.python.org/downloads/release/python-31212/" title="Python Version">
@@ -25,7 +25,7 @@ title: Project README
 
 
 ## Overview
-GABM is a flexible, extensible [Python](https://www.python.org/) framework for developing agent-based models that use large language models (LLMs) as agent reasoning engines. It supports use of multiple LLM providers and implements persistent response caching.
+[GABM](https://github.com/compolis/GABM/) is a flexible, extensible [Python](https://www.python.org/) framework for developing agent-based models that use large language models (LLMs) as agent reasoning engines. It supports use of multiple LLM providers and implements persistent response caching.
 
 
 ## License
