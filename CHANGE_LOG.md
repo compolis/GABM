@@ -1,5 +1,16 @@
-# CHANGE_LOG
-All notable changes to this project are to be documented in this file.
+# Change Log
+
+
+## Table of Contents
+- [Overview](#overview)
+- [0.2.0 - Unreleased](#020---unreleased)
+- [0.1.1 - 2026-02-12](#011---2026-02-12)
+- [0.1.0 - 2026-02-06](#010---2026-02-06)
+
+
+## Overview
+Notable changes are to be documented in this file.
+
 
 ## [0.2.0] - Unreleased
 - ...
