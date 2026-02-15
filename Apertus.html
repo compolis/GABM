@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roadmap &mdash; GABM  documentation</title>
+  <title>Using Apertus LLM Models &mdash; GABM  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
 
@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Change Log" href="CHANGE_LOG.html" />
-    <link rel="prev" title="Using Apertus LLM Models" href="Apertus.html" /> 
+    <link rel="next" title="Roadmap" href="ROADMAP.html" />
+    <link rel="prev" title="API Key Setup" href="API_KEYS.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,14 +53,13 @@
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Apertus.html">Using Apertus LLM Models</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Roadmap</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Apertus LLM Models</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">1.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#local-setup">Local Setup</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History</a></li>
 <li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
@@ -82,9 +81,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Roadmap</li>
+      <li class="breadcrumb-item active">Using Apertus LLM Models</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/ROADMAP.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/Apertus.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -92,52 +91,55 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="roadmap">
-<h1>Roadmap<a class="headerlink" href="#roadmap" title="Link to this heading"></a></h1>
+  <section id="using-apertus-llm-models">
+<h1>Using Apertus LLM Models<a class="headerlink" href="#using-apertus-llm-models" title="Link to this heading"></a></h1>
+<p>This guide explains how to set up and use Apertus LLM models locally and via API in GABM.</p>
 <section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
-<ol class="arabic simple">
+<ul class="simple">
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
-<li><p><a class="reference internal" href="#10"><span class="xref myst">1.0</span></a></p></li>
-<li><p><a class="reference internal" href="#02"><span class="xref myst">0.2</span></a></p></li>
-</ol>
+<li><p><a class="reference internal" href="#local-setup"><span class="xref myst">Local Setup</span></a></p></li>
+<li><p><a class="reference internal" href="#api-integration"><span class="xref myst">API Integration</span></a></p></li>
+<li><p><a class="reference internal" href="#integration-with-gabm"><span class="xref myst">Integration with GABM</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting"><span class="xref myst">Troubleshooting</span></a></p></li>
+</ul>
 </section>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
-<p>This file outlines planned next steps and future goals.</p>
+<p>Apertus LLM models are available for download from Hugging Face and can also be accessed via API. This guide covers both approaches.</p>
 </section>
-<section id="id1">
-<h2>1.0<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Criteria and features to be determined…</p></li>
-</ul>
-</section>
-<section id="id2">
-<h2>0.2<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>Implement tidy-up scripts for logs and caches to help users and developers manage storage and maintain a clean environment.</p></li>
-<li><p>Add agent-based model (ABM) code</p>
-<ul>
-<li><p>Agents</p>
-<ul>
-<li><p>These will:</p>
-<ul>
-<li><p>Belong to “networks” of other Agents</p></li>
-<li><p>Be able to use LLM API prompts and responses to have a “conversations” with other agents.</p></li>
-<li><p>Be modify their opinions based on their biases and what they “learn” or are influenced by in the conversation with other agents.</p></li>
-</ul>
+<section id="local-setup">
+<h2>Local Setup<a class="headerlink" href="#local-setup" title="Link to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Visit <a class="reference external" href="https://huggingface.co/collections/swiss-ai/apertus-llm">Apertus LLM on Hugging Face</a> and choose a model.</p></li>
+<li><p>Install Hugging Face Transformers:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>transformers
+</pre></div>
+</div>
 </li>
-</ul>
+<li><p>Download and load the model in Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
+
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;swiss-ai/apertus-llm-7b&quot;</span>  <span class="c1"># Example</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+
+<span class="c1"># Some models may not have a chat template. If you get an error about &#39;chat_template&#39;,</span>
+<span class="c1"># use a plain prompt instead of apply_chat_template:</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;Give me a brief explanation of gravity in simple terms.&quot;</span>
+<span class="n">model_inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+<span class="n">generated_ids</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="o">**</span><span class="n">model_inputs</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">output_text</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">generated_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output_text</span><span class="p">)</span>
+
+<span class="c1"># If you want to use chat-style prompting and the model supports it, see:</span>
+<span class="c1"># https://huggingface.co/docs/transformers/main/en/chat_templating</span>
+<span class="c1"># or check the model card for a recommended template.</span>
+</pre></div>
+</div>
 </li>
-<li><p>Model</p>
-<ul>
-<li><p>Agents will be able to chat with other agents.</p></li>
-<li><p>Graphs will be output to show how individual and aggregate opinions change over time.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<li><p>Integrate this into your GABM framework for local inference.</p></li>
+</ol>
 </section>
 </section>
 
@@ -145,8 +147,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Apertus.html" class="btn btn-neutral float-left" title="Using Apertus LLM Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="CHANGE_LOG.html" class="btn btn-neutral float-right" title="Change Log" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="API_KEYS.html" class="btn btn-neutral float-left" title="API Key Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ROADMAP.html" class="btn btn-neutral float-right" title="Roadmap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

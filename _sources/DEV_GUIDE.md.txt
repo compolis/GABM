@@ -15,9 +15,12 @@
 - [GitHub Copilot](#github-copilot)
 - [Managing Logs and Caches](#managing-logs-and-caches)
 - [Files and Directories Excluded from Version Control](#files-and-directories-excluded-from-version-control)
+- [LLM Service Architecture](#llm-service-architecture)
+- [Additional Resources](#additional-resources)
 
 
 ## Overview
+
 The GABM developer guide provides guidance for developers some of which are also maintainers.
 
 Please follow the [Developer Quick Start Guide](DEV_QUICKSTART.md) to get set up to contribute as a developer.
@@ -26,6 +29,7 @@ In the rest of the document "you" means you as a GABM developer.
 
 
 ## Contributing and Communicating
+
 Please follow the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 For the time being, please communicate by commenting on or raising new [GABM Repository Issues](https://github.com/compolis/GABM/issues).
@@ -71,6 +75,7 @@ git push origin my_feature
 
 
 ## Project Directories
+
 The root project directory contains documentation and files needed for building and deploying. The sub-diretories include: 
 - `data/`: For data including log files
 - `dist/`: Output directory for built distributions.
@@ -82,6 +87,7 @@ The root project directory contains documentation and files needed for building 
 
 
 ## Python Package Entry Point
+
 The main entry point for the GABM package is `src/gabm/__main__.py`. This allows the application to be run using:
 
 	python3 -m gabm
@@ -97,9 +103,12 @@ Please see the [Python Packaging documentation](https://docs.python.org/3/librar
 
 
 ## Makefile Targets
+
 The root directory contains a [Makefile](https://www.gnu.org/software/make/manual/make.html#Introduction). This is set up to automate tasks using [GNU Make](https://www.gnu.org/software/make). This section explains the rules or targets in the Makefile. Please ensure any changes to the Makefile are platform agnostic.
 
+
 ### Target Chaining, DRY, and Consistency
+
 For maintainability, all Makefile targets that depend on other build steps should use Make's built-in dependency chaining (e.g., `gh-pages-deploy: docs`) rather than manually invoking `$(MAKE)` or shelling out to `make` within a target. This ensures:
 - Each target is only responsible for its own logic.
 - Consistency: all targets use the same build steps, and changes to one target (like `docs`) automatically propagate to dependents (like `gh-pages-deploy`). The following is a presentation of the Makefile rules/targets:
@@ -125,6 +134,8 @@ For maintainability, all Makefile targets that depend on other build steps shoul
 | `make pypi-release` | Upload the built package to PyPI (twine upload dist/*)                         |
 | `make testpypi-release` | Upload the built package to TestPyPI (twine upload --repository testpypi dist/*) |
 | `make bump-version` | Bump the project version everywhere (patch by default; use `make bump-version part=minor` or `part=major` for other bumps). Uses bump2version and updates all relevant files. |
+| `make run-local` | Run gabm using local source (PYTHONPATH=src) |
+| `make run-installed` | Run gabm using installed package |
 
 
 All Python scripts used by Makefile targets are in the `scripts/` directory and are named consistently with their Makefile targets (e.g., `make docs-clean` runs `scripts/docs-clean.py`).
@@ -135,6 +146,7 @@ Please refer to the Makefile for full details.
 
 
 ## Developing Documentation
+
 Markdown files in the root directory, each serving a specific purpose:
   - [README.md](README.md): A general [README](https://en.wikipedia.org/wiki/README) that links to much of the documentation outlined below including the developer and user guides. It is included in the Sphinx documentation and forms the basis for the main Sphinx documentation page.
   - [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): Provides details on expected behavior of developers and reporting procedures.
@@ -149,7 +161,9 @@ Markdown files in the root directory, each serving a specific purpose:
 - If you add a new Markdown file in the root directory, please update entries to `doc_assets.py` DOC_FILES and `docs/index.md` Project Documents to include them in Sphinx documentation.
 - Add API docs via `docs/index.md`
 
+
 ### Sphinx Documentation
+
 To build run:
 
 ```bash
@@ -157,7 +171,6 @@ make docs
 ```
 
 - This effectively runs `scripts/docs.py` to copy key documentation files from the project root to the `docs/` directory, pre-processes them for building the Sphinx documentation, then delete those copied files once the build completes.
-
 
 **Note on Sphinx/MyST Documentation Warnings:**
 
@@ -182,6 +195,7 @@ If it all looks good. Please submit a PR to incorporate documentation changes in
 
 
 ## Packaging and Deployment
+
 The following files and directories are essential for building, testing, and distributing the GABM package:
 - **pyproject.toml**: Declares build system requirements and project metadata. Required for modern Python packaging (PEP 517/518).
 - **setup.cfg**: Contains static package metadata and configuration for setuptools, such as:
@@ -199,6 +213,7 @@ The following files and directories are essential for building, testing, and dis
 
 
 ## Branch Protection
+
 [GitHub Actions](https://github.com/features/actions) workflows are used to help manage Pull Requests (PRs):
 - `.github/workflows/test.yml` automatically runs `make test` on PRs to the main branch.
 - `.github/workflows/gh-pages-deploy.yml` builds documentation for the gh-pages branch and is for automated docs deployment.
@@ -209,10 +224,12 @@ The gh-pages branch is protected from deletion.
 
 
 ## Maintainer Guide
+
 This section is aimed at developers that are maintainers. Developers that are not maintainers are requested to refrain from publishing releases to PyPI so maintainers can ensure project integrity and security.
 
 
 ### PyPI Release Process
+
 To release a new version of GABM to [PyPI](https://pypi.org/), follow these steps:
 
 1. **Update Version**: Run `make bump-version` to update the version everywhere (including setup.cfg, pyproject.toml, src/gabm/__init__.py, requirements-dev.txt, and all occurrences in [User Guide](USER_GUIDE.md)). Use `make bump-version part=minor` or `part=major` for non-patch bumps. Commit and push the changes before continuing.
@@ -248,6 +265,7 @@ For more details, see the [Python Packaging User Guide](https://packaging.python
 
 
 ### Branch and Documentation Deployment
+
 Sphinx documentation is built and deployed using `make gh-pages-deploy`. If the upstream `gh-pages` branch is out of sync or needs to be replaced, use `git push --force upstream gh-pages` to overwrite it with the correct local version. This should be done with care, as it replaces the branch history. 
 
 When deploying documentation with `make gh-pages-deploy`, you may encounter an error like:
@@ -266,20 +284,23 @@ For more details, see the comments in the Makefile and the deployment script.
 
 
 ## GitHub Copilot
+
 Using [GitHub Copilot](https://github.com/features/copilot)) for [vibe coding](https://en.wikipedia.org/wiki/Vibe_coding), can help with understanding workflows and developing documentation, code and tests.
 
 GitHub Copilot uses limited context and the chat context does not currently persist between sessions. As a result, it is good to develop/update documentation along with changes. GitHub Copilot can be asked to read the [README](README.md) and [Developer Guide](DEV_GUIDE.md) at the start of a session so as to be more context aware and provide better support.
 
 
 ## Managing Logs and Caches
+
 Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large. Typically they are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0.
 
 Project Python scripts use Python logging and write logs to:
 
-	data/logs/docs/
+	data/logs/docs/         # Documentation logs
+	data/logs/llm/          # LLM module logs (OpenAI, DeepSeek, GenAI, etc.)
 
-Each Python script has its own log file to help:
-- Debug issues with documentation builds or asset copying
+Each Python script and LLM module has its own log file to help:
+- Debug issues with documentation builds, asset copying, or LLM API calls
 - Review script actions and errors
 
 Logging levels can be adjusted as needed.
@@ -288,8 +309,46 @@ If you encounter problems, please check relevant log files for details.
 
 
 ## Files and Directories Excluded from Version Control
+
 Certain files and directories are intentionally excluded from the repository via `.gitignore` to keep the project clean and secure:
 
 - `data/logs/` — All log files generated by scripts and modules (can be large and environment-specific)
-- `data/io/llm/*/cache.pkl` — LLM response cache files (can be large and are not needed for collaboration)
+- `data/io/llm/*/send_response.pkl` — LLM response cache files (can be large and are not needed for collaboration)
 - `data/api_key.csv` — API keys (never commit secrets)
+
+
+## LLM Service Architecture
+
+GABM uses a class architecture for integrating LLM services. All LLM modules (OpenAI, GenAI, DeepSeek, PublicAI, etc.) subclass a shared LLMService base class, which provides:
+- Generic caching and logging for prompt/response pairs
+- Consistent file naming and path management
+- Centralized error handling and environment variable setup
+- Model list writing utilities
+
+To add a new LLM service:
+- Create a new class (e.g., MyLLMService) that subclasses LLMService.
+- Implement the send and list_available_models methods.
+- Use the base class helpers:
+  - _pre_send_check_and_cache for API key, cache, and env setup
+  - _call_and_cache_response for error handling and caching
+  - _write_model_list for model list output
+
+Example:
+```Python
+class MyLLMService(LLMService):
+    SERVICE_NAME = "myllm"
+    def send(self, api_key, message, model="default-model"):
+        cached = self._pre_send_check_and_cache(api_key, message, model)
+        if cached is not None:
+            return cached
+        cache_key = (message, model)
+        def api_call():
+            # Actual LLM API call here
+            return myllm_client.send(model=model, prompt=message)
+        return self._call_and_cache_response(api_call, cache_key, message, model, api_key)
+```
+
+
+## Additional Resources
+
+- [Apertus LLM Setup and Usage](Apertus.md) — for details on obtaining and using local Apertus LLM models

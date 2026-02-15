@@ -60,6 +60,12 @@ With the pre-requisites in place, the following steps should have you set up in 
 git clone https://github.com/<your-GitHub-username>/GABM.git
 ```
 
+To keep your fork up to date with the main repository, add the upstream remote:
+
+```bash
+git remote add upstream https://github.com/compolis/GABM.git
+```
+
 ## 2. Install Dependencies
 Change into the GABM directory. From the project root, install all runtime, development, and documentation dependencies:
 
@@ -67,9 +73,17 @@ Change into the GABM directory. From the project root, install all runtime, deve
 pip install -r requirements-dev.txt
 ```
 
+**Important:** The `torch` package (PyTorch) is required for Apertus LLM model inference and can take several minutes to install. The download size is typically hundreds of megabytes, and the installed package may require over 1 GB of disk space. Please ensure you have sufficient storage and bandwidth before installing. For GPU support, follow the instructions at [pytorch.org](https://pytorch.org/get-started/locally/) to match your environment. Using local installs of Apertus models is optional.
+
+**Warning about LLM model downloads:**
+
+If you want to use a local LLM (such as Apertus), see [Apertus.md](Apertus.md) for full instructions. Downloading the model weights from Hugging Face can require a very large amount of disk space (10–20 GB or more per model) and a fast, stable internet connection. The download and setup of these models is **optional** for most users. If you only want to use API-based LLMs (OpenAI, GenAI, DeepSeek, etc.), you do not need to download any local models.
+
+If you do want to use a local LLM, ensure you have at least 20 GB of free disk space and be prepared for a long download time. For development and testing, consider using a smaller model if available.
+
 
 ## 3. Set Up LLM API Keys
-Create `data/api_key.csv` with your API keys for LLM providers. See [API_KEYS.md](API_KEYS.md) for format and details.
+Create `data/api_key.csv` with your API keys for LLM providers. For all supported providers (including PublicAI/Apertus), see [API_KEYS.md](API_KEYS.md) for format and details.
 
 To initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, run:
 
@@ -81,7 +95,7 @@ This will:
 - Check for all required API keys (OpenAI, GenAI, DeepSeek)
 - Test each key with a default prompt and model
 - Generate initial `models.json` and `models.txt` for each LLM
-- Initialize response caches (`cache.pkl`)
+- Initialize response caches (`send_response.pkl`)
 - Report any issues or missing keys
 
 If you need to clear all caches and model lists (for a fresh start or troubleshooting), use:
@@ -89,7 +103,7 @@ If you need to clear all caches and model lists (for a fresh start or troublesho
 make clear-caches
 ```
 
-**Note:** For each LLM service directories are created in `data/llm`, for example `data/llm/openai`. Model list files (`models.json`, `models.txt`) are lists of available models for the LLM service. Cache files (`cache.pkl`) are prompt/response data from each LLM service.
+**Note:** For each LLM service directories are created in `data/llm`, for example `data/llm/openai`. Model list files (`models.json`, `models.txt`) are lists of available models for the LLM service. Cache files (`send_response.pkl`) are prompt/response data from each LLM service.
 
 
 ## 4. Run Tests and Build Documentation

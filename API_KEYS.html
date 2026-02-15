@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Roadmap" href="ROADMAP.html" />
+    <link rel="next" title="Using Apertus LLM Models" href="Apertus.html" />
     <link rel="prev" title="Requirements" href="requirements.html" /> 
 </head>
 
@@ -53,9 +53,11 @@
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Key Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-obtain-api-keys">How to Obtain API Keys</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#quick-setup">Quick Setup</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="Apertus.html">Using Apertus LLM Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History</a></li>
@@ -95,14 +97,26 @@
 <div><p><strong>Security Warning:</strong> Never commit your API keys or other secrets to the repository. The <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file is configured to exclude <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> and other sensitive files from version control. Always keep your keys private and secure.</p>
 </div></blockquote>
 <p>Create <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> yourself in the following CSV format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span><span class="p">,</span><span class="n">key</span>
+<section id="how-to-obtain-api-keys">
+<h2>How to Obtain API Keys<a class="headerlink" href="#how-to-obtain-api-keys" title="Link to this heading"></a></h2>
+<p>You must sign up with each LLM provider to obtain an API key:</p>
+<ul class="simple">
+<li><p><strong>OpenAI:</strong> Go to <a class="reference external" href="https://platform.openai.com/signup">platform.openai.com/signup</a> and create an account. After logging in, visit <a class="reference external" href="https://platform.openai.com/api-keys">API Keys</a> to generate a key. Use <code class="docutils literal notranslate"><span class="pre">openai</span></code> as the API name.</p></li>
+<li><p><strong>DeepSeek:</strong> Register at <a class="reference external" href="https://deepseek.com/">deepseek.com</a> and follow their documentation to obtain an API key. Use <code class="docutils literal notranslate"><span class="pre">deepseek</span></code> as the API name.</p></li>
+<li><p><strong>GenAI (Google):</strong> Go to <a class="reference external" href="https://makersuite.google.com/">makersuite.google.com</a> and sign in with your Google account. Follow instructions to get an API key. Use <code class="docutils literal notranslate"><span class="pre">genai</span></code> as the API name.
+<strong>PublicAI (Apertus):</strong> Sign up at <a class="reference external" href="https://publicai.co/">publicai.co</a> to get your API key. Use <code class="docutils literal notranslate"><span class="pre">publicai</span></code> as the API name.</p></li>
+</ul>
+<p>Add each key to your <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> file as shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">publicai</span><span class="p">,</span><span class="n">zpka_</span><span class="o">...</span>
 <span class="n">openai</span><span class="p">,</span><span class="n">sk</span><span class="o">-...</span>
 <span class="n">deepseek</span><span class="p">,</span><span class="n">sk</span><span class="o">-...</span>
 <span class="n">genai</span><span class="p">,</span><span class="n">YOUR_GOOGLE_KEY</span>
+<span class="n">publicai</span><span class="p">,</span><span class="n">YOUR_PUBLICAI_KEY</span>
 </pre></div>
 </div>
 <p>The syntax requirements for the <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> file is strict. Each entry should be on a new line, the API names “openai”, “deepseek” and “genai” must be exactly as shown and there should be nothing but a comma character “,” separating the API name and the API key. Everything is case sensitive.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">api_key.csv</span></code> file must be stored in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory.</p>
+</section>
 <section id="quick-setup">
 <h2>Quick Setup<a class="headerlink" href="#quick-setup" title="Link to this heading"></a></h2>
 <p>To quickly initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, use the provided setup utility:</p>
@@ -111,7 +125,7 @@
 </div>
 <p>This will:</p>
 <ul class="simple">
-<li><p>Check for expected API keys (OpenAI, GenAI, DeepSeek)</p></li>
+<li><p>Check for expected API keys (OpenAI, GenAI, DeepSeek, PublicAI)</p></li>
 <li><p>Test each key with a default prompt and model</p></li>
 <li><p>If provided with a valid API key and the services work expect:</p>
 <ul>
@@ -133,7 +147,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="requirements.html" class="btn btn-neutral float-left" title="Requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ROADMAP.html" class="btn btn-neutral float-right" title="Roadmap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Apertus.html" class="btn btn-neutral float-right" title="Using Apertus LLM Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

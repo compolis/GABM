@@ -53,6 +53,7 @@
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Apertus.html">Using Apertus LLM Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History</a></li>
@@ -91,15 +92,18 @@
 <div><p><strong>Note:</strong> This file is for documentation only.
 Install dependencies from <a class="reference download internal" download="" href="_downloads/b4ef698db8ca845e5845c4618278f29a/requirements.txt"><span class="xref download myst">requirements.txt</span></a> and <a class="reference download internal" download="" href="_downloads/f4c265073ea4274a80eca85440875e56/requirements-dev.txt"><span class="xref download myst">requirements-dev.txt</span></a> in the project root.</p>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run requirements for GABM</span>
-<span class="c1"># Install with: pip install -r requirements.txt</span>
+<div class="highlight-# notranslate"><div class="highlight"><pre><span></span># Install with: pip install -r requirements.txt
 
-<span class="c1"># LLM API dependencies</span>
-<span class="n">openai</span><span class="o">==</span><span class="mf">1.13.3</span>
-<span class="c1">#anthropic==0.25.6</span>
-<span class="n">google</span><span class="o">-</span><span class="n">generativeai</span><span class="o">==</span><span class="mf">0.4.1</span>
-<span class="n">httpx</span><span class="o">==</span><span class="mf">0.28.1</span>
-<span class="n">deepseek</span><span class="o">==</span><span class="mf">1.0.0</span>
+# LLM API dependencies
+openai==2.21.0
+#anthropic==0.25.6
+google-generativeai==0.4.1
+httpx==0.28.1
+deepseek==1.0.0
+
+# Dependencies for Apertus
+transformers==5.1.0
+torch==2.10.0
 
 </pre></div>
 </div>

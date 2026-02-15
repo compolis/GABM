@@ -11,6 +11,7 @@
 
 
 ## Overview
+
 This guide helps users get started with GABM, find documentation, and get support. Documentation will be updated as more features and configuration options are added.
 
 In the rest of the document "you" means you as a GABM user.
@@ -19,6 +20,7 @@ In the rest of the document "you" means you as a GABM user.
 ## Getting Started
 
 ### Pre-requisits
+
  You will either need a local installation of [Conda](https://conda.org/), or [Python](https://www.python.org/) at or above version 3.12. To check your default Python version run:
 
 ```bash
@@ -34,7 +36,7 @@ If you use [Conda](https://conda.org/) which is distributed with[Anaconda](https
 conda create -n gabm
 conda activate gabm
 conda install python=3.12
-pip install gabm==0.1.3
+pip install gabm==0.1.4
 ```
 
 You can then check all installed dependencies and create your own requirements file with:
@@ -45,6 +47,7 @@ conda list -e > requirements.txt
 
 
 #### Using Python >=3.12
+
 Install from [PyPI](https://pypi.org/) using [Pip](https://pypi.org/project/pip/) as follows:
 
 ```bash
@@ -62,10 +65,17 @@ pip freeze > requirements.txt
 
 
 ### Set Up API Keys
-Create `data/api_key.csv` with your API keys. See [API_KEYS.md](API_KEYS.md) for details and instructions.
+
+Create `data/api_key.csv` with your API keys. For all supported LLM providers (including PublicAI/Apertus), see [API_KEYS.md](API_KEYS.md) for up-to-date details and instructions.
+
+
+#### Using Local Apertus LLM Models
+
+For instructions on downloading, installing, and using local Apertus LLM models, see [Apertus.md](Apertus.md). This guide covers both local and API-based usage, storage requirements, and troubleshooting.
 
 
 ### Run the Main Program
+
 From the project root:
 
 ```bash
@@ -127,19 +137,65 @@ The `data/llm` directory should contain directories for each of the LLM services
 
 
 ## Troubleshooting
+
 If you experience issues when installing, configuring, or running GABM, check here for guidance or updates. As the project evolves, troubleshooting tips and frequently asked questions will be added here.
 
 If you encounter errors, check your Python version and that all dependencies are installed. If all versions match the documentation, please peruse [reported issues](https://github.com/compolis/GABM/issues), comment on a relevent open issue or [open an issue](https://github.com/compolis/GABM/issues/new/choose) to request support.
 
 
 ## Running Models
+
 It is intended that you will be able to configure and run models. This section is to explain how to do this. This documentation will be updated in due course...
 
 
 ## Managing Logs and Caches
-GABM creates logs and caches (such as prompt/response caches for LLM services) that can grow large over time. User friendly ways to tidy up logs and caches and compile data into reproducible research objects are being developed for a future release. Similarly, more details will be provided as these features are implemented.
+
+GABM creates logs and caches (such as prompt/response caches for LLM services) that can grow large over time. Logs for LLM modules are now written to:
+
+  data/logs/llm/
+
+Check these log files for troubleshooting LLM API issues, prompt/response errors, or cache problems. User friendly ways to tidy up logs and caches and compile data into reproducible research objects are being developed for a future release. More details will be provided as these features are implemented.
+
+
+## Using LLM Modules
+
+GABM provides unified interfaces for sending prompts to various LLMs and listing available models. Each LLM module exposes a service class with the following functions:
+```python
+def send(self, api_key, message, model=None):
+    """
+    Send a prompt to the LLM and return the response object.
+    Args:
+        api_key (str): The API key for the LLM service.
+        message (str): The message to send.
+        model (str, optional): The model to use for the request.
+    Returns:
+        The response object from the LLM.
+    """
+
+def list_available_models(self, api_key):
+    """
+    List available models for the LLM service.
+    Args:
+        api_key (str): The API key for the LLM service.
+    Returns:
+        A list of available models.
+    """
+```
+
+Caching and Logging:
+- Responses are cached for reproducibility; repeated prompts return cached results.
+- All send/responses are logged for audit and debugging.
+
+Example Usage (where ```<User_API_Key>``` should be replaced with the user's API key for the OpenAI Service):
+```python
+from gabm.io.llm.openai import OpenAIService
+service = OpenAIService()
+response = service.send(api_key="<User_API_Key>", message="Hello!", model="gpt-3.5-turbo")
+service.list_available_models(api_key="<User_API_Key>")
+```
 
 
 ## Additional Resources
+
 - [README.md](README.md)
 - [Reported Issues](https://github.com/compolis/GABM/issues)

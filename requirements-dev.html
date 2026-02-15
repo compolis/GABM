@@ -53,6 +53,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Requirements (Developer)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Apertus.html">Using Apertus LLM Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History</a></li>
@@ -97,11 +98,15 @@ Install dependencies from <a class="reference download internal" download="" hre
 pytest&gt;=9.0.2,&lt;10
 
 # LLM API dependencies
-openai&gt;=1.13.3,&lt;2
+openai&gt;=2.21.0,&lt;3
 #anthropic&gt;=0.25.6,&lt;0.26
 google-generativeai&gt;=0.4.1,&lt;0.5
 httpx&gt;=0.28.1,&lt;0.29
 deepseek&gt;=1.0.0,&lt;2
+
+# Dependencies for Apertus
+transformers&gt;=5.1.0,&lt;6
+torch&gt;=2.10.0,&lt;3
 
 # Documentation dependencies
 sphinx&gt;=9.1.0,&lt;10

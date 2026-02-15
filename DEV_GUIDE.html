@@ -72,12 +72,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#github-copilot">GitHub Copilot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#managing-logs-and-caches">Managing Logs and Caches</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#files-and-directories-excluded-from-version-control">Files and Directories Excluded from Version Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#llm-service-architecture">LLM Service Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="DEV_QUICKSTART.html">Developer Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Apertus.html">Using Apertus LLM Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History</a></li>
@@ -128,6 +131,8 @@
 <li><p><a class="reference internal" href="#github-copilot"><span class="xref myst">GitHub Copilot</span></a></p></li>
 <li><p><a class="reference internal" href="#managing-logs-and-caches"><span class="xref myst">Managing Logs and Caches</span></a></p></li>
 <li><p><a class="reference internal" href="#files-and-directories-excluded-from-version-control"><span class="xref myst">Files and Directories Excluded from Version Control</span></a></p></li>
+<li><p><a class="reference internal" href="#llm-service-architecture"><span class="xref myst">LLM Service Architecture</span></a></p></li>
+<li><p><a class="reference internal" href="#additional-resources"><span class="xref myst">Additional Resources</span></a></p></li>
 </ul>
 </section>
 <section id="overview">
@@ -291,6 +296,12 @@ make<span class="w"> </span>docs
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">bump-version</span></code></p></td>
 <td><p>Bump the project version everywhere (patch by default; use <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">bump-version</span> <span class="pre">part=minor</span></code> or <code class="docutils literal notranslate"><span class="pre">part=major</span></code> for other bumps). Uses bump2version and updates all relevant files.</p></td>
 </tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run-local</span></code></p></td>
+<td><p>Run gabm using local source (PYTHONPATH=src)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run-installed</span></code></p></td>
+<td><p>Run gabm using installed package</p></td>
+</tr>
 </tbody>
 </table>
 <p>All Python scripts used by Makefile targets are in the <code class="docutils literal notranslate"><span class="pre">scripts/</span></code> directory and are named consistently with their Makefile targets (e.g., <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs-clean</span></code> runs <code class="docutils literal notranslate"><span class="pre">scripts/docs-clean.py</span></code>).</p>
@@ -436,12 +447,13 @@ You will need to have an account on https://pypi.org and have created an API key
 <h2>Managing Logs and Caches<a class="headerlink" href="#managing-logs-and-caches" title="Link to this heading"></a></h2>
 <p>Logs and caches (including prompt/response caches for LLM services) are generated during development and use. These files can become large. Typically they are not committed to the repository. Tidy-up scripts and Makefile targets for managing logs and caches are planned for version 0.2.0.</p>
 <p>Project Python scripts use Python logging and write logs to:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>data/logs/docs/
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>data/logs/docs/         # Documentation logs
+data/logs/llm/          # LLM module logs (OpenAI, DeepSeek, GenAI, etc.)
 </pre></div>
 </div>
-<p>Each Python script has its own log file to help:</p>
+<p>Each Python script and LLM module has its own log file to help:</p>
 <ul class="simple">
-<li><p>Debug issues with documentation builds or asset copying</p></li>
+<li><p>Debug issues with documentation builds, asset copying, or LLM API calls</p></li>
 <li><p>Review script actions and errors</p></li>
 </ul>
 <p>Logging levels can be adjusted as needed.</p>
@@ -452,8 +464,50 @@ You will need to have an account on https://pypi.org and have created an API key
 <p>Certain files and directories are intentionally excluded from the repository via <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> to keep the project clean and secure:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">data/logs/</span></code> — All log files generated by scripts and modules (can be large and environment-specific)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">data/io/llm/*/cache.pkl</span></code> — LLM response cache files (can be large and are not needed for collaboration)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/io/llm/*/send_response.pkl</span></code> — LLM response cache files (can be large and are not needed for collaboration)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> — API keys (never commit secrets)</p></li>
+</ul>
+</section>
+<section id="llm-service-architecture">
+<h2>LLM Service Architecture<a class="headerlink" href="#llm-service-architecture" title="Link to this heading"></a></h2>
+<p>GABM uses a class architecture for integrating LLM services. All LLM modules (OpenAI, GenAI, DeepSeek, PublicAI, etc.) subclass a shared LLMService base class, which provides:</p>
+<ul class="simple">
+<li><p>Generic caching and logging for prompt/response pairs</p></li>
+<li><p>Consistent file naming and path management</p></li>
+<li><p>Centralized error handling and environment variable setup</p></li>
+<li><p>Model list writing utilities</p></li>
+</ul>
+<p>To add a new LLM service:</p>
+<ul class="simple">
+<li><p>Create a new class (e.g., MyLLMService) that subclasses LLMService.</p></li>
+<li><p>Implement the send and list_available_models methods.</p></li>
+<li><p>Use the base class helpers:</p>
+<ul>
+<li><p>_pre_send_check_and_cache for API key, cache, and env setup</p></li>
+<li><p>_call_and_cache_response for error handling and caching</p></li>
+<li><p>_write_model_list for model list output</p></li>
+</ul>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MyLLMService</span><span class="p">(</span><span class="n">LLMService</span><span class="p">):</span>
+    <span class="n">SERVICE_NAME</span> <span class="o">=</span> <span class="s2">&quot;myllm&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api_key</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;default-model&quot;</span><span class="p">):</span>
+        <span class="n">cached</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pre_send_check_and_cache</span><span class="p">(</span><span class="n">api_key</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cached</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cached</span>
+        <span class="n">cache_key</span> <span class="o">=</span> <span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">api_call</span><span class="p">():</span>
+            <span class="c1"># Actual LLM API call here</span>
+            <span class="k">return</span> <span class="n">myllm_client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_and_cache_response</span><span class="p">(</span><span class="n">api_call</span><span class="p">,</span> <span class="n">cache_key</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">api_key</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="additional-resources">
+<h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="Apertus.html"><span class="std std-doc">Apertus LLM Setup and Usage</span></a> — for details on obtaining and using local Apertus LLM models</p></li>
 </ul>
 </section>
 </section>
