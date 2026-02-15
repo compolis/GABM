@@ -17,9 +17,9 @@ DOC_FILES = [
     "requirements.txt",
     "requirements-dev.txt",
     "API_KEYS.md",
+    "Apertus.md",
     "ROADMAP.md",
     "CHANGE_LOG.md",
-    "DEV_SESSION_LOGGING.md",
     "DEVELOPMENT_HISTORY.md",
     "JOSS_SUBMISSION.md",
 ]

@@ -9,7 +9,7 @@ This supports a unified workflow for model management across all LLM providers i
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
@@ -17,6 +17,8 @@ import functools
 import json
 import logging
 from pathlib import Path
+import pickle
+from datetime import datetime
 
 def safe_api_call(api_name):
     """
@@ -112,3 +114,4 @@ def load_models_from_json(models_json_path):
     except Exception as e:
         logging.error(f"Error loading models from JSON {models_json_path}: {e}")
         return []
+

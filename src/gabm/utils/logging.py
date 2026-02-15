@@ -13,10 +13,10 @@ import sys
 
 def setup_module_logger(module_name, log_file_name):
     """
-    Set up a logger for a module, writing to data/logs/log_file_name and the console.
+    Set up a logger for a module, writing to data/logs/llm/log_file_name and the console.
     Returns a logger instance for use in the module.
     """
-    log_dir = Path("data/logs")
+    log_dir = Path("data/logs/llm")
     log_dir.mkdir(parents=True, exist_ok=True)
     log_file = log_dir / log_file_name
     logger = logging.getLogger(module_name)

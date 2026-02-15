@@ -12,97 +12,73 @@ __author__ = ["Andy Turner <agdturner@gmail.com>"]
 __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
-
 # DeepSeek client library
 import deepseek
-# Standard library imports
-import os
-from pathlib import Path
-# Persistent cache for message-response pairs
-import pickle
-# Shared error handling
-from .utils import safe_api_call
-# Centralized logging
-from .logging_utils import setup_module_logger
-logger = setup_module_logger(__name__, "deepseek.log")
+# LLM service base class
+from .llm_service import LLMService
 
-_cache_path = Path("data/llm/deepseek/cache.pkl")
-_cache = {}
-if _cache_path.exists():
-    try:
-        with _cache_path.open("rb") as f:
-            _cache = pickle.load(f)
-    except Exception as e:
-        logger.warning(f"Failed to load cache: {e}")
-        _cache = {}
-
-@safe_api_call("deepseek")
-def send(api_key, message, model="deepseek-model-1"):
+class DeepSeekService(LLMService):
     """
-    Send a prompt to DeepSeek and return the response object.
-
-    Args:
-        api_key (str): The DeepSeek API key.
-        message (str): The message to send to DeepSeek.
-        model (str, optional): The model to use (default is "deepseek-model-1").
-
-    Returns:
-        object: The DeepSeek response object.
+    Service class for DeepSeek LLM integration. 
+    Handles prompt sending, response caching, logging, and model listing.
     """
-    if not api_key:
-        logger.error("DeepSeek API key must be provided.")
-        raise RuntimeError("DeepSeek API key must be provided.")
-    cache_key = (message, model)
-    if cache_key in _cache:
-        logger.info(f"Cache hit for model={model}, message={message}")
-        return _cache[cache_key]
-    if deepseek is None:
-        logger.error("[deepseek] Python client not installed. Cannot send request.")
-        return None
-    # TODO: Replace with actual DeepSeek client usage
-    # Example:
-    # client = deepseek.Client(api_key=api_key)
-    # response = client.chat.completions.create(model=model, messages=[{"role": "user", "content": message}])
-    # For now, just a placeholder response:
-    response = {"model": model, "message": message, "result": "[Placeholder DeepSeek response]"}
-    _cache[cache_key] = response
-    # Save updated cache
-    _cache_path.parent.mkdir(parents=True, exist_ok=True)
-    try:
-        with _cache_path.open("wb") as f:
-            pickle.dump(_cache, f)
-        logger.info(f"Cache updated for model={model}, message={message}")
-    except Exception as e:
-        logger.error(f"Failed to write cache: {e}")
-    return response
+    SERVICE_NAME = "deepseek"
 
-def list_available_models(api_key):
-    """
-    List available DeepSeek models and save to data/llm/deepseek/models.json and models.txt.
+    def send(self, api_key, message, model="deepseek-model-1"):
+        """
+        Send a prompt to DeepSeek and return the response object.
+        Caches and logs the response for reproducibility.
+        Args:
+            api_key (str): DeepSeek API key.
+            message (str): Prompt to send.
+            model (str): Model name (default: "deepseek-model-1").
+        Returns:
+            Response object (dict) or None on error.
+        """
+        cached = self._pre_send_check_and_cache(api_key, message, model)
+        if cached is not None:
+            return cached
+        cache_key = (message, model)
+        if deepseek is None:
+            self.logger.error("[deepseek] Python client not installed. Cannot send request.")
+            return None
+        # TODO: Replace with actual DeepSeek client usage
+        # client = deepseek.Client(api_key=api_key)
+        # def api_call():
+        #     return client.chat.completions.create(model=model, messages=[{"role": "user", "content": message}])
+        # For now, just a placeholder response:
+        def api_call():
+            return {"model": model, "message": message, "result": "[Placeholder DeepSeek response]"}
+        return self._call_and_cache_response(api_call, cache_key, message, model, api_key)
 
-    Args:
-        api_key (str): The DeepSeek API key.
-    """
-    if deepseek is None:
-        logger.error("[deepseek] Python client not installed. Cannot list models.")
-        return
-    # TODO: Replace with actual DeepSeek client usage
-    # client = deepseek.Client(api_key=api_key)
-    # models = client.list_models()
-    # For now, just a placeholder:
-    models = [
-        {"id": "deepseek-model-1", "description": "Example model 1"},
-        {"id": "deepseek-model-2", "description": "Example model 2"},
-    ]
-    from .utils import write_models_json_and_txt
-    def formatter(model):
-        return (f"Model ID: {model['id']}\n"
-                f"  Description: {model.get('description', 'N/A')}\n")
-    logger.info("Writing DeepSeek model list to JSON and TXT.")
-    write_models_json_and_txt(
-        models,
-        Path("data/llm/deepseek/models.json"),
-        Path("data/llm/deepseek/models.txt"),
-        formatter,
-        header="Available DeepSeek models:\n"
-    )
+    def list_available_models(self, api_key):
+        """
+        List available DeepSeek models and write them to JSON and TXT files.
+        Args:
+            api_key (str): DeepSeek API key.
+        """
+        if deepseek is None:
+            self.logger.error("[deepseek] Python client not installed. Cannot list models.")
+            return
+        # TODO: Replace with actual DeepSeek client usage
+        # client = deepseek.Client(api_key=api_key)
+        # models = client.list_models()
+        # For now, just a placeholder:
+        models = [
+            {"id": "deepseek-model-1", "description": "Example model 1"},
+            {"id": "deepseek-model-2", "description": "Example model 2"},
+        ]
+        def formatter(model):
+            return (f"Model ID: {model['id']}\n"
+                    f"  Description: {model.get('description', 'N/A')}\n")
+        self.logger.info("Writing DeepSeek model list to JSON and TXT.")
+        self._write_model_list(
+            models,
+            formatter,
+            header=f"Available {self.SERVICE_NAME.capitalize()} models:\n"
+        )
+
+# For compatibility with existing code
+_service = DeepSeekService()
+send = _service.send
+list_available_models = _service.list_available_models

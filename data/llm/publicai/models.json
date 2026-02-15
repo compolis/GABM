@@ -1,0 +1,10 @@
+[
+  {
+    "id": "apertus-llm-7b",
+    "description": "Apertus LLM 7B"
+  },
+  {
+    "id": "apertus-llm-8b",
+    "description": "Apertus LLM 8B"
+  }
+]
