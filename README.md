@@ -21,8 +21,8 @@
 - [Roadmap](#roadmap)
 - [Change Log](#change-log)
 - [Development History](#development-history)
-- [Users](#users)
-- [Developers](#developers)
+- [User Guide](#user-guide)
+- [Developer Guide](#developer-guide)
 - [Acknowledgements](#acknowledgements)
 
 

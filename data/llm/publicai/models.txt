@@ -1,0 +1,7 @@
+Available PublicAI models:
+
+Model ID: apertus-llm-7b
+  Description: Apertus LLM 7B
+
+Model ID: apertus-llm-8b
+  Description: Apertus LLM 8B

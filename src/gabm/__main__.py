@@ -41,97 +41,116 @@ def main():
     Main function for GABM.
     """
     logging.info("Running gabm...")
-    # Get the api keys
-    # Importing here to avoid circular imports
-    from gabm.io.read_data import read_api_keys
-    #from src.io.read_data import read_api_keys
-    # Read API keys from the default location
-    api_keys = read_api_keys(file_path='data/api_key.csv')
-    # Print the API keys
-    logging.info(f"API Keys: {api_keys}")
-    
-    if not api_keys:
-        logging.error("No API keys found. Exiting.")
-        return
 
-    def handle_llm(name, key_name, module_name, message, content_path=None, model=None):
-        if key_name not in api_keys:
-            logging.warning(f"{name} API key not found. Skipping.")
+    if (True):  # Set to False to skip Apertus LLM test
+        logging.info("Testing Apertus LLM integration...")
+        try:
+            from gabm.io.llm.apertus import tokenizer, model, device
+            prompt = "Give me a brief explanation of gravity in simple terms."
+            messages_think = [
+                {"role": "user", "content": prompt}
+            ]
+            text = tokenizer.apply_chat_template(
+                messages_think,
+                tokenize=False,
+                add_generation_prompt=True,
+            )
+            model_inputs = tokenizer([text], return_tensors="pt").to(device)
+            generated_ids = model.generate(**model_inputs, max_new_tokens=32768)
+            output_ids = generated_ids[0][len(model_inputs.input_ids[0]) :]
+            output_text = tokenizer.decode(output_ids, skip_special_tokens=True)
+            logging.info(f"Apertus response:\n{output_text}")
+        except Exception as e:
+            logging.error(f"Error testing Apertus LLM: {e}")
+
+    if (False):  # Set to False to skip Proprietary LLM tests
+        logging.info("Testing Proprietary LLM integrations...")
+        # Get the api keys
+        # Importing here to avoid circular imports
+        from gabm.io.read_data import read_api_keys
+        #from src.io.read_data import read_api_keys
+        # Read API keys from the default location
+        api_keys = read_api_keys(file_path='data/api_key.csv')
+        # Print the API keys
+        logging.info(f"API Keys: {api_keys}")
+        
+        if not api_keys:
+            logging.error("No API keys found. Exiting.")
             return
-        api_key = api_keys.get(key_name)
-        logging.info(f"{name} API Key: {api_key}")
-        module = __import__(f"gabm.io.llm.{module_name}", fromlist=[module_name])
-        send_func = getattr(module, "send")
-        import inspect
-        send_params = inspect.signature(send_func).parameters
-        if "model" in send_params:
-            response = send_func(api_key, message, model=model)
-        else:
-            response = send_func(api_key, message)
-        if response is None:
-            if hasattr(module, "list_available_models"):
+
+        def handle_llm(name, key_name, module_name, service_class, message, content_path=None, model=None):
+            if key_name not in api_keys:
+                logging.warning(f"{name} API key not found. Skipping.")
+                return
+            api_key = api_keys.get(key_name)
+            logging.info(f"{name} API Key: {api_key}")
+            module = __import__(f"gabm.io.llm.{module_name}", fromlist=[service_class])
+            Service = getattr(module, service_class)
+            service = Service()
+            response = service.send(api_key, message, model=model)
+            if response is None:
                 logging.info(f"Listing available models for {name}...")
                 try:
-                    module.list_available_models(api_key)
+                    service.list_available_models(api_key)
                 except Exception as e:
                     logging.error(f"Error listing models for {name}: {e}")
-            logging.error(f"{name} response: None (API error or timeout)")
+                logging.error(f"{name} response: None (API error or timeout)")
+                return
+            # Log full response if possible
+            if hasattr(response, "model_dump_json"):
+                logging.info(f"Full {name} response:\n{response.model_dump_json(indent=2)}")
+            else:
+                logging.info(f"Full {name} response:\n{response}")
+            # Log content if path provided
+            if content_path:
+                try:
+                    content = response
+                    for attr in content_path:
+                        if isinstance(attr, int):
+                            content = content[attr]
+                        else:
+                            content = getattr(content, attr)
+                    logging.info(f"{name} response content:\n{content}")
+                except Exception as e:
+                    logging.error(f"{name} response content: [Error accessing content: {e}]")
+
+        # Require explicit model names for each LLM
+        #openai_model = None  # e.g., "gpt-3.5-turbo"
+        openai_model = "gpt-3.5-turbo"
+        #genai_model = None   # e.g., "models/gemini-2.5-pro"
+        genai_model = "models/gemini-2.5-pro"
+        #deepseek_model = None  # e.g., "deepseek-model-1"
+        deepseek_model = "deepseek-model-1"
+        # Add more as needed
+
+        # Prompt or error if any model is not set
+        missing_models = []
+        if not openai_model:
+            missing_models.append("openai_model")
+        if not genai_model:
+            missing_models.append("genai_model")
+        if not deepseek_model:
+            missing_models.append("deepseek_model")
+        if missing_models:
+            logging.error(f"You must explicitly set the following model variable(s) in __main__.py: {', '.join(missing_models)}")
+            logging.error("See data/llm/{provider}/models.json for available models.")
             return
-        # Log full response if possible
-        if hasattr(response, "model_dump_json"):
-            logging.info(f"Full {name} response:\n{response.model_dump_json(indent=2)}")
-        else:
-            logging.info(f"Full {name} response:\n{response}")
-        # Log content if path provided
-        if content_path:
-            try:
-                content = response
-                for attr in content_path:
-                    if isinstance(attr, int):
-                        content = content[attr]
-                    else:
-                        content = getattr(content, attr)
-                logging.info(f"{name} response content:\n{content}")
-            except Exception as e:
-                logging.error(f"{name} response content: [Error accessing content: {e}]")
 
-    # Require explicit model names for each LLM
-    #openai_model = None  # e.g., "gpt-3.5-turbo"
-    openai_model = "gpt-3.5-turbo"
-    #genai_model = None   # e.g., "models/gemini-2.5-pro"
-    genai_model = "models/gemini-2.5-pro"
-    #deepseek_model = None  # e.g., "deepseek-model-1"
-    deepseek_model = "deepseek-model-1"
-    # Add more as needed
-
-    # Prompt or error if any model is not set
-    missing_models = []
-    if not openai_model:
-        missing_models.append("openai_model")
-    if not genai_model:
-        missing_models.append("genai_model")
-    if not deepseek_model:
-        missing_models.append("deepseek_model")
-    if missing_models:
-        logging.error(f"You must explicitly set the following model variable(s) in __main__.py: {', '.join(missing_models)}")
-        logging.error("See data/llm/{provider}/models.json for available models.")
-        return
-
-    # Check models.txt for each LLM if present
-    from pathlib import Path
-    openai_models_txt = Path("data/llm/openai/models.txt")
-    genai_models_txt = Path("data/llm/genai/models.txt")
-    deepseek_models_txt = Path("data/llm/deepseek/models.txt")
-    if not check_model_in_txt(openai_models_txt, openai_model):
-        print(f"[OpenAI] '{openai_model}' may not be available. See {openai_models_txt}.")
-    if not check_model_in_txt(genai_models_txt, genai_model):
-        print(f"[GenAI] '{genai_model}' may not be available. See {genai_models_txt}.")
-    if not check_model_in_txt(deepseek_models_txt, deepseek_model):
-        print(f"[DeepSeek] '{deepseek_model}' may not be available. See {deepseek_models_txt}.")
-    # Handle each LLM
-    handle_llm("OpenAI", "openai", "openai", "Hello, OpenAI!", ["choices", 0, "message", "content"], model=openai_model)
-    handle_llm("GenAI", "genai", "genai", "Hello, GenAI!", ["text"], model=genai_model)
-    handle_llm("DeepSeek", "deepseek", "deepseek", "Hello, DeepSeek!", None, model=deepseek_model)
+        # Check models.txt for each LLM if present
+        from pathlib import Path
+        openai_models_txt = Path("data/llm/openai/models.txt")
+        genai_models_txt = Path("data/llm/genai/models.txt")
+        deepseek_models_txt = Path("data/llm/deepseek/models.txt")
+        if not check_model_in_txt(openai_models_txt, openai_model):
+            print(f"[OpenAI] '{openai_model}' may not be available. See {openai_models_txt}.")
+        if not check_model_in_txt(genai_models_txt, genai_model):
+            print(f"[GenAI] '{genai_model}' may not be available. See {genai_models_txt}.")
+        if not check_model_in_txt(deepseek_models_txt, deepseek_model):
+            print(f"[DeepSeek] '{deepseek_model}' may not be available. See {deepseek_models_txt}.")
+        # Handle each LLM
+        handle_llm("OpenAI", "openai", "openai", "OpenAIService", "Hello, OpenAI!", ["choices", 0, "message", "content"], model=openai_model)
+        handle_llm("GenAI", "genai", "genai", "GenAIService", "Hello, GenAI!", ["text"], model=genai_model)
+        handle_llm("DeepSeek", "deepseek", "deepseek", "DeepSeekService", "Hello, DeepSeek!", None, model=deepseek_model)
     
 if __name__ == "__main__":
     """

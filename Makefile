@@ -25,7 +25,7 @@
 # Caution: Some commands (like git-clean, release, and delete-release) can modify your git history or delete tags. Always review the scripts they call (in the scripts/ directory) to ensure they do what you expect before running these commands.
 
 # Phony targets (not actual files)
-.PHONY: help test docs docs-clean gh-pages-deploy clean git-clean setup-llms clear-caches sync sync-feature release delete-release build build-test pypi-release testpypi-release bump-version
+.PHONY: help test docs docs-clean gh-pages-deploy gh-pages-deploy2 clean git-clean setup-llms clear-caches sync sync-feature release delete-release build build-test pypi-release testpypi-release bump-version run-local run-installed
 
 # Show available Makefile commands
 help:
@@ -34,6 +34,7 @@ help:
 	@echo "  docs             - Build documentation (Sphinx)"
 	@echo "  docs-clean       - Clean auto-copied documentation files from docs/"
 	@echo "  gh-pages-deploy  - Build and deploy documentation to GitHub Pages"
+	@echo "  gh-pages-deploy2 - Build and deploy documentation to GitHub Pages on upstream remote (force push)"
 	@echo "  clean            - Remove build/test artifacts"
 	@echo "  clear-caches     - Delete all LLM caches and model lists (for a clean slate)"
 	@echo "  git-clean        - Clean up merged local branches and prune deleted remotes"
@@ -47,6 +48,8 @@ help:
 	@echo "  pypi-release     - Upload the built package to PyPI (twine upload dist/*)"
 	@echo "  testpypi-release - Upload the built package to TestPyPI (twine upload --repository testpypi dist/*)"
 	@echo "  bump-version     - Bump the project version (usage: make bump-version part=patch|minor|major)"
+	@echo "  run-local        - Run gabm using local source (development mode)"
+	@echo "  run-installed    - Run gabm using installed package (production mode)"
 	@echo "Use 'make <target>' to run a specific target. For targets that require additional variables (like release and sync-feature), include them as shown in the usage instructions."
 
 # Run all tests (requires pytest)
@@ -86,6 +89,12 @@ gh-pages-deploy: docs
 	python3 scripts/gh-pages-deploy.py
 	@echo "...done deploying documentation to GitHub Pages."
 
+# Deploy documentation to GitHub Pages on upstream remote (force push)
+# This is a more aggressive deployment that force pushes to the gh-pages branch on the upstream remote. Use with caution, as it will overwrite the gh-pages branch on upstream.
+gh-pages-deploy2: gh-pages-deploy
+	@echo "Deploying documentation to GitHub Pages on upstream remote..."
+	git push --force upstream gh-pages
+	@echo "...done deploying documentation to GitHub Pages on upstream remote."
 
 # Remove build/test artifacts
 clean:
@@ -133,7 +142,7 @@ sync-feature:
 # Run onboarding/setup for all LLMs (API key check, model lists, cache init)
 setup-llms:
 	@echo "Running setup for LLMs (API key check, model lists, cache init)..."
-	python3 scripts/setup-llms.py
+	PYTHONPATH=src python3 scripts/setup-llms.py
 	@echo "...done running setup for LLMs."	
 
 
@@ -190,3 +199,11 @@ testpypi-release: build
 # Bump version everywhere (patch by default; use 'make bump-version part=minor' or 'part=major' for other bumps)
 bump-version:
 	bump2version --allow-dirty --list $${part:-patch}
+
+# Run gabm using local source (development mode)
+run-local:
+	PYTHONPATH=src python3 -m gabm
+
+# Run gabm using installed package (production mode)
+run-installed:
+	python3 -m gabm

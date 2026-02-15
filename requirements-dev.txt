@@ -5,11 +5,15 @@
 pytest>=9.0.2,<10
 
 # LLM API dependencies
-openai>=1.13.3,<2
+openai>=2.21.0,<3
 #anthropic>=0.25.6,<0.26
 google-generativeai>=0.4.1,<0.5
 httpx>=0.28.1,<0.29
 deepseek>=1.0.0,<2
+
+# Dependencies for Apertus
+transformers>=5.1.0,<6
+torch>=2.10.0,<3
 
 # Documentation dependencies
 sphinx>=9.1.0,<10

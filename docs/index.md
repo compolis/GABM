@@ -27,10 +27,10 @@ DEV_QUICKSTART.md
 requirements-dev.md
 requirements.md
 API_KEYS.md
+Apertus.md
 ROADMAP.md
 CHANGE_LOG.md
 DEVELOPMENT_HISTORY.md
-DEV_SESSION_LOGGING.md
 JOSS_SUBMISSION.md
 SECURITY.md
 CONTACT.md
