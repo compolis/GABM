@@ -95,7 +95,7 @@ This will:
 - Check for all required API keys (OpenAI, GenAI, DeepSeek)
 - Test each key with a default prompt and model
 - Generate initial `models.json` and `models.txt` for each LLM
-- Initialize response caches (`send_response.pkl`)
+- Initialize response caches (`prompt_response_cache.pkl`)
 - Report any issues or missing keys
 
 If you need to clear all caches and model lists (for a fresh start or troubleshooting), use:
@@ -103,7 +103,7 @@ If you need to clear all caches and model lists (for a fresh start or troublesho
 make clear-caches
 ```
 
-**Note:** For each LLM service directories are created in `data/llm`, for example `data/llm/openai`. Model list files (`models.json`, `models.txt`) are lists of available models for the LLM service. Cache files (`send_response.pkl`) are prompt/response data from each LLM service.
+**Note:** For each LLM service directories are created in `data/llm`, for example `data/llm/openai`. Model list files (`models.json`, `models.txt`) are lists of available models for the LLM service. Cache files (`prompt_response_cache.pkl`) are prompt/response data from each LLM service.
 
 
 ## 4. Run Tests and Build Documentation

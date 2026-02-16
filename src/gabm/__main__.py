@@ -42,7 +42,7 @@ def main():
     """
     logging.info("Running gabm...")
 
-    if (True):  # Set to False to skip Apertus LLM test
+    if True:  # Set to False to skip Apertus LLM test
         logging.info("Testing Apertus LLM integration...")
         try:
             from gabm.io.llm.apertus import tokenizer, model, device
@@ -63,7 +63,9 @@ def main():
         except Exception as e:
             logging.error(f"Error testing Apertus LLM: {e}")
 
-    if (False):  # Set to False to skip Proprietary LLM tests
+    # Toggle proprietary LLM tests (OpenAI, GenAI, DeepSeek, etc.)
+    ENABLE_PROPRIETARY_LLM_TESTS = False
+    if ENABLE_PROPRIETARY_LLM_TESTS:
         logging.info("Testing Proprietary LLM integrations...")
         # Get the api keys
         # Importing here to avoid circular imports

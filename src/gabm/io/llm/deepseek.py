@@ -77,8 +77,3 @@ class DeepSeekService(LLMService):
             formatter,
             header=f"Available {self.SERVICE_NAME.capitalize()} models:\n"
         )
-
-# For compatibility with existing code
-_service = DeepSeekService()
-send = _service.send
-list_available_models = _service.list_available_models

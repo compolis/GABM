@@ -7,7 +7,7 @@ Or use the provided Makefile target `make setup-llms`.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
@@ -19,21 +19,33 @@ import logging
 # Import function to read API keys from CSV
 from gabm.io.read_data import read_api_keys
 
-# Either set to True to generate model lists for all LLMs (requires valid API keys and may take time), or False to skip this step and just test sending a prompt and caching the response. 
+# Set to True to generate model lists for LLM services (requires valid API keys and may take time)
+# Set to False to skip generate model lists for LLM services and just test sending a prompt and caching the response. 
 GENERATE_MODEL_LISTS = False
 #GENERATE_MODEL_LISTS = True
 
 # Load API keys from CSV
 API_KEYS = read_api_keys('data/api_key.csv')
 
-# LLM configuration
+# Enable/disable LLMs to test
+ENABLED_LLMS = {
+    "openai": False,
+    "genai": True,
+    "deepseek": False,
+    "publicai": False,
+    "apertus": False,  # Local model
+}
+
+# LLM configuration: (llm_name, module_path)
 LLMS = []
-if True:
-    # Uncomment the LLMs you want to set up and test. Make sure to set API keys in data/api_key.csv before running.
+if ENABLED_LLMS["openai"]:
     LLMS.append(("openai", "gabm.io.llm.openai"))
-    #LLMS.append(("genai", "gabm.io.llm.genai"))
-    #LLMS.append(("deepseek", "gabm.io.llm.deepseek"))
-    #LLMS.append(("publicai", "gabm.io.llm.publicai"))
+if ENABLED_LLMS["genai"]:
+    LLMS.append(("genai", "gabm.io.llm.genai"))
+if ENABLED_LLMS["deepseek"]:
+    LLMS.append(("deepseek", "gabm.io.llm.deepseek"))
+if ENABLED_LLMS["publicai"]:
+    LLMS.append(("publicai", "gabm.io.llm.publicai"))
 
 # Map LLM names to their service class names
 SERVICE_CLASSES = {
@@ -45,12 +57,12 @@ SERVICE_CLASSES = {
 
 # Default test prompts and models for each LLM
 DEFAULT_PROMPTS = {}
-if True: 
-    # Uncomment and customize the default prompts and models for testing each LLM. These will be used to send a test prompt and check the response, as well as initialize the cache.
-    DEFAULT_PROMPTS["openai"] = ("gpt-3.5-turbo", "Hello OpenAI!")
-    #DEFAULT_PROMPTS["genai"] = ("models/gemini-2.5-pro", "Hello GenAI!")
-    #DEFAULT_PROMPTS["deepseek"] = ("deepseek-model-1", "Hello DeepSeek!")
-    #DEFAULT_PROMPTS["publicai"] = ("swiss-ai/Apertus-8B-2509", "Give me a brief explanation of gravity in simple terms."),
+# Uncomment and customize the default prompts and models for testing each LLM. These will be used to send a test prompt and check the response, as well as initialize the cache.
+#DEFAULT_PROMPTS["openai"] = ("gpt-3.5-turbo", "Hello OpenAI!")
+DEFAULT_PROMPTS["genai"] = ("models/gemini-2.5-pro", "Hello GenAI!")
+#DEFAULT_PROMPTS["deepseek"] = ("deepseek-model-1", "Hello DeepSeek!")
+#DEFAULT_PROMPTS["publicai"] = ("swiss-ai/Apertus-8B-2509", "Give me a brief explanation of gravity in simple terms."),
+
 
 def test_llm(llm, module, service_class, api_key, model, prompt):
     """
@@ -76,6 +88,7 @@ def test_llm(llm, module, service_class, api_key, model, prompt):
     except Exception as e:
         logging.error(f"  Error testing {llm}: {e}")
 
+def main():
     """
     Main setup function to generate model lists and test LLMs.
     """
@@ -99,6 +112,28 @@ def test_llm(llm, module, service_class, api_key, model, prompt):
         if llm in DEFAULT_PROMPTS:
             model, prompt = DEFAULT_PROMPTS[llm]
             test_llm(llm, module, SERVICE_CLASSES[llm], api_key, model, prompt)
+
+    # Optionally test Apertus local model
+    if ENABLED_LLMS.get("apertus"):
+        logging.info("\n--- Testing Apertus Local Model ---\n")
+        try:
+            from gabm.io.llm.apertus import tokenizer, model, device
+            prompt = "Give me a brief explanation of gravity in simple terms."
+            messages_think = [
+                {"role": "user", "content": prompt}
+            ]
+            text = tokenizer.apply_chat_template(
+                messages_think,
+                tokenize=False,
+                add_generation_prompt=True,
+            )
+            model_inputs = tokenizer([text], return_tensors="pt").to(device)
+            generated_ids = model.generate(**model_inputs, max_new_tokens=512)
+            output_ids = generated_ids[0][len(model_inputs.input_ids[0]):]
+            output_text = tokenizer.decode(output_ids, skip_special_tokens=True)
+            logging.info(f"Apertus response:\n{output_text}")
+        except Exception as e:
+            logging.error(f"Error testing Apertus local model: {e}")
     logging.info("\nSetup complete. Check data/llm/* for model lists and caches.")
 
 if __name__ == "__main__":

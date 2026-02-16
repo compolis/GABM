@@ -78,3 +78,57 @@ class GenAIService(LLMService):
             formatter,
             header=f"Available {self.SERVICE_NAME.capitalize()} models and supported methods:\n"
         )
+
+    def extract_text_from_response(self, response):
+        """
+        Extract the text content from a GenAI response object for logging.
+        Recursively searches for the first 'text' value in any nested structure.
+        Logs a warning if no text is found.
+        """
+        import ast
+        def find_text(obj):
+            if isinstance(obj, dict):
+                # Direct text field
+                if "text" in obj and isinstance(obj["text"], str):
+                    return obj["text"]
+                # Recursively search all values
+                for v in obj.values():
+                    result = find_text(v)
+                    if result:
+                        return result
+            elif isinstance(obj, list):
+                for item in obj:
+                    result = find_text(item)
+                    if result:
+                        return result
+            return None
+
+        # Debug: log the type and a preview of the response
+        if hasattr(self, 'logger') and self.logger:
+            self.logger.debug(f"[GenAI] extract_text_from_response type={type(response)} preview={str(response)[:200]}")
+
+        # If response is a string that looks like a dict, try to eval/parse it
+        if isinstance(response, str) and response.strip().startswith("{"):
+            try:
+                resp_dict = ast.literal_eval(response)
+                text = find_text(resp_dict)
+                if text:
+                    return text
+            except Exception:
+                pass
+        # If response is a dict or list, search recursively
+        if isinstance(response, (dict, list)):
+            text = find_text(response)
+            if text:
+                return text
+        # If response is an object, try attribute access
+        if hasattr(response, "text") and isinstance(response.text, str):
+            return response.text
+        if hasattr(response, "candidates") and response.candidates:
+            text = find_text(response.candidates)
+            if text:
+                return text
+        # Fallback
+        if hasattr(self, 'logger') and self.logger:
+            self.logger.warning(f"[GenAI] Could not extract text from response: {str(response)[:200]}")
+        return str(response)
