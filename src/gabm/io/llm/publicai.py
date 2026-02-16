@@ -13,9 +13,12 @@ __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 
-
+# Standard library imports
 import requests
+# LLM service base class
 from .llm_service import LLMService
+# Shared utilities for caching and logging
+from .utils import pre_send_check_and_cache, call_and_cache_response, cache_and_log
 
 class PublicAIService(LLMService):
     """
@@ -34,7 +37,7 @@ class PublicAIService(LLMService):
         Returns:
             Response object (dict) or None on error.
         """
-        cached = self._pre_send_check_and_cache(api_key, message, model)
+        cached = pre_send_check_and_cache(api_key, message, model, self.cache, self.logger, self.SERVICE_NAME, self.API_KEY_ENV_VAR)
         if cached is not None:
             return cached
         cache_key = (message, model)
@@ -54,7 +57,20 @@ class PublicAIService(LLMService):
             response = requests.post(url, headers=headers, json=data)
             response.raise_for_status()
             return response.json()
-        return self._call_and_cache_response(api_call, cache_key, message, model, api_key)
+        return call_and_cache_response(
+            api_call,
+            cache_and_log,
+            self.cache,
+            cache_key,
+            self.cache_path,
+            self.jsonl_path,
+            message,
+            model,
+            api_key,
+            self.logger,
+            self.SERVICE_NAME,
+            self.list_available_models
+        )
 
     def list_available_models(self, api_key):
         """
