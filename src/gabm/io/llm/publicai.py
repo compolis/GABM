@@ -13,6 +13,8 @@ __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 
+
+import requests
 from .llm_service import LLMService
 
 class PublicAIService(LLMService):
@@ -21,7 +23,7 @@ class PublicAIService(LLMService):
     """
     SERVICE_NAME = "publicai"
 
-    def send(self, api_key, message, model="apertus-llm-7b"):
+    def send(self, api_key, message, model="swiss-ai/apertus-8b-instruct"):
         """
         Send a prompt to PublicAI and return the response object.
         Caches and logs the response for reproducibility.
@@ -36,10 +38,22 @@ class PublicAIService(LLMService):
         if cached is not None:
             return cached
         cache_key = (message, model)
-        # TODO: Implement actual PublicAI API call here
-        # For now, just a placeholder response:
         def api_call():
-            return {"model": model, "message": message, "result": "[Placeholder PublicAI response]"}
+            url = "https://api.publicai.co/v1/chat/completions"
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {api_key}",
+                "User-Agent": "GABM/1.0"
+            }
+            data = {
+                "model": model,
+                "messages": [
+                    {"role": "user", "content": message}
+                ]
+            }
+            response = requests.post(url, headers=headers, json=data)
+            response.raise_for_status()
+            return response.json()
         return self._call_and_cache_response(api_call, cache_key, message, model, api_key)
 
     def list_available_models(self, api_key):
@@ -48,15 +62,22 @@ class PublicAIService(LLMService):
         Args:
             api_key (str): PublicAI API key.
         """
-        # TODO: Implement actual PublicAI API call here
-        # For now, just a placeholder:
-        models = [
-            {"id": "apertus-llm-7b", "description": "Apertus LLM 7B"},
-            {"id": "apertus-llm-8b", "description": "Apertus LLM 8B"},
-        ]
+        url = "https://api.publicai.co/v1/models"
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "User-Agent": "GABM/1.0"
+        }
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        models_data = response.json()
+        # The API returns a dict with a 'data' key containing the list of models
+        models = models_data.get("data", [])
         def formatter(model):
-            return (f"Model ID: {model['id']}\n"
-                    f"  Description: {model.get('description', 'N/A')}\n")
+            if isinstance(model, dict):
+                return (f"Model ID: {model.get('id', model.get('model', 'N/A'))}\n"
+                        f"  Description: {model.get('description', 'N/A')}\n")
+            else:
+                return f"Model: {model}\n"
         self.logger.info("Writing PublicAI model list to JSON and TXT.")
         self._write_model_list(
             models,

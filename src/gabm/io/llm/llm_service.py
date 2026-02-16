@@ -28,7 +28,7 @@ def get_llm_cache_paths(service_name):
         tuple: (cache_path, jsonl_path) as Path objects
     """
     base = Path(f"data/llm/{service_name}")
-    name = "prompts_response";
+    name = "prompt_response_cache"
     return (
         base / f"{name}.pkl",
         base / f"{name}.jsonl"
@@ -52,17 +52,13 @@ def load_llm_cache(cache_path, logger=None):
                 logger.warning(f"Failed to load cache: {e}")
     return {}
 
-
-def cache_and_log(self, cache_key, response, prompt=None, model=None, extra=None):
-def _write_model_list(self, models, formatter, header=None):
-
 class LLMService(ABC):
     """
     Abstract base class for LLM service modules. Provides shared cache management, logging, and model list utilities.
     Subclasses must implement the send() and list_available_models() methods.
     """
 
-        SERVICE_NAME = None  # Should be overridden by subclasses
+    SERVICE_NAME = None  # Should be overridden by subclasses
 
     def __init__(self, logger=None):
         """
@@ -79,8 +75,8 @@ class LLMService(ABC):
         """Environment variable name for the API key."""
         return self.SERVICE_NAME.upper() + "_API_KEY"
 
-    @staticmethod
     def _cache_and_log_response(
+        self,
         cache: dict,
         cache_key,
         response,
@@ -119,7 +115,7 @@ class LLMService(ABC):
             "timestamp": datetime.utcnow().isoformat() + "Z",
             "model": model,
             "prompt": prompt,
-            "response": response,
+            "response": self.extract_text_from_response(response),
         }
         if extra:
             log_entry.update(extra)
@@ -131,6 +127,13 @@ class LLMService(ABC):
         except Exception as e:
             if logger:
                 logger.error(f"Failed to write JSONL log: {e}")
+
+    def extract_text_from_response(self, response):
+        """
+        Extract the text content from the LLM response object for logging.
+        Subclasses should override this method for their response types.
+        """
+        return str(response)
 
     def set_api_key_env(self, api_key):
         """

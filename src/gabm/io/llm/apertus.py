@@ -12,32 +12,56 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-model_name = "swiss-ai/Apertus-8B-2509"
-#device = "cuda"  # for GPU usage or "cpu" for CPU usage
-device = "cpu"  # for GPU usage or "cpu" for CPU usage
+def download_apertus_model(model_name: str):
+    """
+    Downloads and caches the specified Apertus model and tokenizer using Hugging Face Transformers.
+    Args:
+        model_name (str): The Hugging Face model name to download (e.g., 'swiss-ai/apertus-70b-instruct').
+    """
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+    print(f"Downloading model and tokenizer for: {model_name}")
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name)
+    print("Download complete. Model and tokenizer are now cached locally.")
 
-# load the tokenizer and the model
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(
-    model_name,
-).to(device)
-
-# prepare the model input
-prompt = "Give me a brief explanation of gravity in simple terms."
-messages_think = [
-    {"role": "user", "content": prompt}
-]
-
-text = tokenizer.apply_chat_template(
-    messages_think,
-    tokenize=False,
-    add_generation_prompt=True,
-)
-model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
-
-# Generate the output
-generated_ids = model.generate(**model_inputs, max_new_tokens=32768)
-
-# Get and decode the output
-output_ids = generated_ids[0][len(model_inputs.input_ids[0]) :]
-print(tokenizer.decode(output_ids, skip_special_tokens=True))
+def local_apertus_infer(model_name: str, prompt: str, device: str = "cpu", cache: dict = None, cache_path: str = None, max_new_tokens: int = 32768):
+    """
+    Run local inference with an Apertus model, optionally caching the response.
+    Args:
+        model_name (str): Hugging Face model name (e.g., 'swiss-ai/Apertus-8B-2509').
+        prompt (str): The prompt to send.
+        device (str): 'cpu' or 'cuda'.
+        cache (dict, optional): In-memory cache to use.
+        cache_path (str, optional): Path to pickle file for caching.
+        max_new_tokens (int): Maximum tokens to generate.
+    Returns:
+        str: The generated response text.
+    """
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+    import pickle
+    messages_think = [{"role": "user", "content": prompt}]
+    cache_key = (model_name, prompt)
+    # Check cache
+    if cache is not None and cache_key in cache:
+        return cache[cache_key]
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
+    text = tokenizer.apply_chat_template(
+        messages_think,
+        tokenize=False,
+        add_generation_prompt=True,
+    )
+    model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
+    generated_ids = model.generate(**model_inputs, max_new_tokens=max_new_tokens)
+    output_ids = generated_ids[0][len(model.inputs_ids[0]) :]
+    response = tokenizer.decode(output_ids, skip_special_tokens=True)
+    # Cache response
+    if cache is not None:
+        cache[cache_key] = response
+        if cache_path:
+            try:
+                with open(cache_path, "wb") as f:
+                    pickle.dump(cache, f)
+            except Exception as e:
+                print(f"Failed to write cache: {e}")
+    return response

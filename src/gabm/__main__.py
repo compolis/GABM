@@ -42,7 +42,7 @@ def main():
     """
     logging.info("Running gabm...")
 
-    if (True):  # Set to False to skip Apertus LLM test
+    if True:  # Set to False to skip Apertus LLM test
         logging.info("Testing Apertus LLM integration...")
         try:
             from gabm.io.llm.apertus import tokenizer, model, device
@@ -57,13 +57,15 @@ def main():
             )
             model_inputs = tokenizer([text], return_tensors="pt").to(device)
             generated_ids = model.generate(**model_inputs, max_new_tokens=32768)
-            output_ids = generated_ids[0][len(model_inputs.input_ids[0]) :]
+            output_ids = generated_ids[0][len(model.inputs_ids[0]) :]
             output_text = tokenizer.decode(output_ids, skip_special_tokens=True)
             logging.info(f"Apertus response:\n{output_text}")
         except Exception as e:
             logging.error(f"Error testing Apertus LLM: {e}")
 
-    if (False):  # Set to False to skip Proprietary LLM tests
+    # Toggle proprietary LLM tests (OpenAI, GenAI, DeepSeek, etc.)
+    ENABLE_PROPRIETARY_LLM_TESTS = False
+    if ENABLE_PROPRIETARY_LLM_TESTS:
         logging.info("Testing Proprietary LLM integrations...")
         # Get the api keys
         # Importing here to avoid circular imports
@@ -71,6 +73,11 @@ def main():
         #from src.io.read_data import read_api_keys
         # Read API keys from the default location
         api_keys = read_api_keys(file_path='data/api_key.csv')
+        # Optionally set HF_TOKEN for Hugging Face if present and not already set
+        import os
+        if 'huggingface' in api_keys and not os.environ.get('HF_TOKEN'):
+            os.environ['HF_TOKEN'] = api_keys['huggingface']
+            logging.info("Set HF_TOKEN from data/api_key.csv for Hugging Face usage.")
         # Print the API keys
         logging.info(f"API Keys: {api_keys}")
         

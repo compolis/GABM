@@ -13,7 +13,7 @@ __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # DeepSeek client library
-import deepseek
+from deepseek import DeepSeekAPI
 # LLM service base class
 from .llm_service import LLMService
 
@@ -39,16 +39,18 @@ class DeepSeekService(LLMService):
         if cached is not None:
             return cached
         cache_key = (message, model)
-        if deepseek is None:
-            self.logger.error("[deepseek] Python client not installed. Cannot send request.")
+        try:
+            client = DeepSeekAPI(api_key=api_key)
+        except Exception as e:
+            self.logger.error(f"[deepseek] Could not initialize DeepSeekAPI: {e}")
             return None
-        # TODO: Replace with actual DeepSeek client usage
-        # client = deepseek.Client(api_key=api_key)
-        # def api_call():
-        #     return client.chat.completions.create(model=model, messages=[{"role": "user", "content": message}])
-        # For now, just a placeholder response:
         def api_call():
-            return {"model": model, "message": message, "result": "[Placeholder DeepSeek response]"}
+            # The DeepSeek API expects a 'prompt' argument, not 'messages' or 'model'.
+            # If model selection is supported, add as a kwarg.
+            kwargs = {"prompt": message}
+            if model:
+                kwargs["model"] = model
+            return client.chat_completion(**kwargs)
         return self._call_and_cache_response(api_call, cache_key, message, model, api_key)
 
     def list_available_models(self, api_key):
@@ -57,28 +59,23 @@ class DeepSeekService(LLMService):
         Args:
             api_key (str): DeepSeek API key.
         """
-        if deepseek is None:
-            self.logger.error("[deepseek] Python client not installed. Cannot list models.")
+        try:
+            client = DeepSeekAPI(api_key=api_key)
+        except Exception as e:
+            self.logger.error(f"[deepseek] Could not initialize DeepSeekAPI: {e}")
             return
-        # TODO: Replace with actual DeepSeek client usage
-        # client = deepseek.Client(api_key=api_key)
-        # models = client.list_models()
-        # For now, just a placeholder:
-        models = [
-            {"id": "deepseek-model-1", "description": "Example model 1"},
-            {"id": "deepseek-model-2", "description": "Example model 2"},
-        ]
+        models = client.get_models()
+        self.logger.info(f"Raw model list from DeepSeek: {models}")
+        # Handle both string and dict model formats
         def formatter(model):
-            return (f"Model ID: {model['id']}\n"
-                    f"  Description: {model.get('description', 'N/A')}\n")
+            if isinstance(model, dict):
+                return (f"Model ID: {model.get('id', model.get('model', 'N/A'))}\n"
+                        f"  Description: {model.get('description', 'N/A')}\n")
+            else:
+                return f"Model: {model}\n"
         self.logger.info("Writing DeepSeek model list to JSON and TXT.")
         self._write_model_list(
             models,
             formatter,
             header=f"Available {self.SERVICE_NAME.capitalize()} models:\n"
         )
-
-# For compatibility with existing code
-_service = DeepSeekService()
-send = _service.send
-list_available_models = _service.list_available_models

@@ -206,7 +206,7 @@ cython_debug/
 .cursorindexingignore
 
 # LLM cache files (not committed by default)
-data/llm/*/cache.pkl
+data/llm/*/prompt_response_cache.pkl
 
 # Log files (not committed by default)
 data/logs/docs/
