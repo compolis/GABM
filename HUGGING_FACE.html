@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hugging Face Model Usage Guide &mdash; GABM  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Roadmap" href="ROADMAP.html" />
+    <link rel="prev" title="API Key Setup" href="API_KEYS.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GABM
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTORS.html">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="USER_GUIDE.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEV_GUIDE.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEV_QUICKSTART.html">Developer Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hugging Face Model Usage Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-setup">Model Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-a-model-from-hugging-face">Using a Model from Hugging Face</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-a-downloaded-model-from-local-cache">Using a Downloaded Model from Local Cache</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#comparing-local-and-remote-outputs">Comparing Local and Remote Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JOSS_SUBMISSION.html">JOSS Submission Planning and Draft</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SECURITY.html">Security and Code of Conduct Reporting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTACT.html">Contact</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GABM</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Hugging Face Model Usage Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/HUGGING_FACE.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hugging-face-model-usage-guide">
+<h1>Hugging Face Model Usage Guide<a class="headerlink" href="#hugging-face-model-usage-guide" title="Link to this heading"></a></h1>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
+<li><p><a class="reference internal" href="#authentication"><span class="xref myst">Authentication</span></a></p></li>
+<li><p><a class="reference internal" href="#model-setup"><span class="xref myst">Model Setup</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#using-a-model-from-hugging-face"><span class="xref myst">Using a Model from Hugging Face</span></a></p></li>
+<li><p><a class="reference internal" href="#using-a-downloaded-model-from-local-cache"><span class="xref myst">Using a Downloaded Model from Local Cache</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#comparing-local-and-remote-outputs"><span class="xref myst">Comparing Local and Remote Outputs</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting"><span class="xref myst">Troubleshooting</span></a></p></li>
+</ul>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This guide explains how to set up and use Hugging Face-hosted models (including Apertus LLMs) with GABM, both locally and via remote APIs.</p>
+</section>
+<section id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Link to this heading"></a></h2>
+<p>Some models require authentication to download from Hugging Face.</p>
+<ul class="simple">
+<li><p><strong>Recommended:</strong> Store your Hugging Face token in <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> as described in <a class="reference internal" href="API_KEYS.html"><span class="std std-doc">API_KEYS.md</span></a>. GABM setup scripts will automatically set the <code class="docutils literal notranslate"><span class="pre">HF_TOKEN</span></code> environment variable from this file if present and not already set.</p></li>
+</ul>
+</section>
+<section id="model-setup">
+<h2>Model Setup<a class="headerlink" href="#model-setup" title="Link to this heading"></a></h2>
+<section id="using-a-model-from-hugging-face">
+<h3>Using a Model from Hugging Face<a class="headerlink" href="#using-a-model-from-hugging-face" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Visit the <a class="reference external" href="https://huggingface.co/collections/swiss-ai/apertus-llm">Apertus LLM collection</a> and choose a model.</p></li>
+<li><p>Install the required package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>transformers
+</pre></div>
+</div>
+</li>
+<li><p>Load and use the model in Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
+
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;swiss-ai/apertus-llm-7b&quot;</span>  <span class="c1"># Example</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;Give me a brief explanation of gravity in simple terms.&quot;</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">output_text</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output_text</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For chat-style prompting, see the <a class="reference external" href="https://huggingface.co/docs/transformers/main/en/chat_templating">Hugging Face chat templating docs</a> or the model card.</p>
+</li>
+</ol>
+</section>
+<section id="using-a-downloaded-model-from-local-cache">
+<h3>Using a Downloaded Model from Local Cache<a class="headerlink" href="#using-a-downloaded-model-from-local-cache" title="Link to this heading"></a></h3>
+<p>If you have already downloaded a model (e.g., <code class="docutils literal notranslate"><span class="pre">swiss-ai/Apertus-8B-2509</span></code>), you can load it directly from your Hugging Face cache directory. This avoids re-downloading and works even if the model is no longer public.</p>
+<p>Example (all platforms, adjust path as needed):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">local_model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-2509&quot;</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">local_model_path</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">local_model_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Replace the path with your actual cache location if different. On Windows, the cache is typically in <code class="docutils literal notranslate"><span class="pre">%USERPROFILE%\.cache\huggingface\hub</span></code>.</p>
+</section>
+</section>
+<section id="comparing-local-and-remote-outputs">
+<h2>Comparing Local and Remote Outputs<a class="headerlink" href="#comparing-local-and-remote-outputs" title="Link to this heading"></a></h2>
+<p>You can compare the output of a local model and the same model accessed via a service API (e.g., PublicAI) to ensure consistency.</p>
+<p>Example comparison script:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;Give me a brief explanation of gravity in simple terms.&quot;</span>
+
+<span class="c1"># Local inference</span>
+<span class="n">local_model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-2509&quot;</span><span class="p">)</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">local_model_path</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">local_model_path</span><span class="p">)</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">)</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">,</span> <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">local_result</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Local output:&quot;</span><span class="p">,</span> <span class="n">local_result</span><span class="p">)</span>
+
+<span class="c1"># Remote (PublicAI API example)</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s2">&quot;YOUR_PUBLICAI_KEY&quot;</span>  <span class="c1"># Replace with your key</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://api.publicai.co/v1/chat/completions&quot;</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="n">api_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="s2">&quot;GABM/1.0&quot;</span>
+<span class="p">}</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;swiss-ai/apertus-8b-instruct&quot;</span><span class="p">,</span>  <span class="c1"># or 70b-instruct</span>
+   <span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">}]</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">remote_result</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Remote output:&quot;</span><span class="p">,</span> <span class="n">remote_result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This lets you verify that your local and remote model outputs are similar or spot differences.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>If you see “401 Unauthorized”, check your Hugging Face authentication and token.</p></li>
+<li><p><strong>Tip:</strong> If you want to use only locally downloaded models, you do not need to set HF_TOKEN.</p></li>
+<li><p>For more details, see <a class="reference internal" href="API_KEYS.html"><span class="std std-doc">API_KEYS.md</span></a> and the Hugging Face documentation.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="API_KEYS.html" class="btn btn-neutral float-left" title="API Key Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ROADMAP.html" class="btn btn-neutral float-right" title="Roadmap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, GABM contributors, University of Leeds.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

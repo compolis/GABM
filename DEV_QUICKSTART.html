@@ -64,7 +64,7 @@
 <li class="toctree-l1"><a class="reference internal" href="requirements-dev.html">Requirements (Developer)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="API_KEYS.html">API Key Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Apertus.html">Using Apertus LLM Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="HUGGING_FACE.html">Hugging Face Model Usage Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ROADMAP.html">Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CHANGE_LOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History</a></li>
@@ -165,8 +165,8 @@
 </div>
 <p><strong>Important:</strong> The <code class="docutils literal notranslate"><span class="pre">torch</span></code> package (PyTorch) is required for Apertus LLM model inference and can take several minutes to install. The download size is typically hundreds of megabytes, and the installed package may require over 1 GB of disk space. Please ensure you have sufficient storage and bandwidth before installing. For GPU support, follow the instructions at <a class="reference external" href="https://pytorch.org/get-started/locally/">pytorch.org</a> to match your environment. Using local installs of Apertus models is optional.</p>
 <p><strong>Warning about LLM model downloads:</strong></p>
-<p>If you want to use a local LLM (such as Apertus), see <a class="reference internal" href="Apertus.html"><span class="std std-doc">Apertus.md</span></a> for full instructions. Downloading the model weights from Hugging Face can require a very large amount of disk space (10–20 GB or more per model) and a fast, stable internet connection. The download and setup of these models is <strong>optional</strong> for most users. If you only want to use API-based LLMs (OpenAI, GenAI, DeepSeek, etc.), you do not need to download any local models.</p>
-<p>If you do want to use a local LLM, ensure you have at least 20 GB of free disk space and be prepared for a long download time. For development and testing, consider using a smaller model if available.</p>
+<p>If you want to use a local LLM (such as Apertus), see <a class="reference internal" href="HUGGING_FACE.html"><span class="std std-doc">HUGGING_FACE.md</span></a> for full instructions, including authentication and troubleshooting. Downloading the model weights from Hugging Face can require a very large amount of disk space (10–20 GB or more per model) and a fast, stable internet connection. The download and setup of these models is <strong>optional</strong> for most users. If you only want to use API-based LLMs (OpenAI, GenAI, DeepSeek, etc.), you do not need to download any local models.</p>
+<p>If you do want to use a local LLM, ensure you have at least 20 GB of free disk space and be prepared for a long download time.</p>
 </section>
 <section id="set-up-llm-api-keys">
 <h2>3. Set Up LLM API Keys<a class="headerlink" href="#set-up-llm-api-keys" title="Link to this heading"></a></h2>
@@ -180,14 +180,14 @@
 <li><p>Check for all required API keys (OpenAI, GenAI, DeepSeek)</p></li>
 <li><p>Test each key with a default prompt and model</p></li>
 <li><p>Generate initial <code class="docutils literal notranslate"><span class="pre">models.json</span></code> and <code class="docutils literal notranslate"><span class="pre">models.txt</span></code> for each LLM</p></li>
-<li><p>Initialize response caches (<code class="docutils literal notranslate"><span class="pre">send_response.pkl</span></code>)</p></li>
+<li><p>Initialize response caches (<code class="docutils literal notranslate"><span class="pre">prompt_response_cache.pkl</span></code>)</p></li>
 <li><p>Report any issues or missing keys</p></li>
 </ul>
 <p>If you need to clear all caches and model lists (for a fresh start or troubleshooting), use:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>clear-caches
 </pre></div>
 </div>
-<p><strong>Note:</strong> For each LLM service directories are created in <code class="docutils literal notranslate"><span class="pre">data/llm</span></code>, for example <code class="docutils literal notranslate"><span class="pre">data/llm/openai</span></code>. Model list files (<code class="docutils literal notranslate"><span class="pre">models.json</span></code>, <code class="docutils literal notranslate"><span class="pre">models.txt</span></code>) are lists of available models for the LLM service. Cache files (<code class="docutils literal notranslate"><span class="pre">send_response.pkl</span></code>) are prompt/response data from each LLM service.</p>
+<p><strong>Note:</strong> For each LLM service directories are created in <code class="docutils literal notranslate"><span class="pre">data/llm</span></code>, for example <code class="docutils literal notranslate"><span class="pre">data/llm/openai</span></code>. Model list files (<code class="docutils literal notranslate"><span class="pre">models.json</span></code>, <code class="docutils literal notranslate"><span class="pre">models.txt</span></code>) are lists of available models for the LLM service. Cache files (<code class="docutils literal notranslate"><span class="pre">prompt_response_cache.pkl</span></code>) are prompt/response data from each LLM service.</p>
 </section>
 <section id="run-tests-and-build-documentation">
 <h2>4. Run Tests and Build Documentation<a class="headerlink" href="#run-tests-and-build-documentation" title="Link to this heading"></a></h2>

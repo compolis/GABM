@@ -27,7 +27,7 @@ DEV_QUICKSTART.md
 requirements-dev.md
 requirements.md
 API_KEYS.md
-Apertus.md
+HUGGING_FACE.md
 ROADMAP.md
 CHANGE_LOG.md
 DEVELOPMENT_HISTORY.md

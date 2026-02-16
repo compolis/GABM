@@ -13,6 +13,9 @@ Notable changes are to be documented in this file.
 
 
 ## [0.2.0] - Unreleased
+- Implemented class architecture for LLM services
+- Added PublicAI LLM service
+- Added Apertus LLM model that can optionally be used locally 
 - ...
 
 
