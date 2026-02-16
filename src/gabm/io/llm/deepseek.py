@@ -9,13 +9,17 @@ Features:
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
+
 
 # DeepSeek client library
 from deepseek import DeepSeekAPI
 # LLM service base class
 from .llm_service import LLMService
+# Shared utilities for caching and logging
+from .utils import pre_send_check_and_cache, call_and_cache_response, cache_and_log
+
 
 class DeepSeekService(LLMService):
     """
@@ -35,7 +39,7 @@ class DeepSeekService(LLMService):
         Returns:
             Response object (dict) or None on error.
         """
-        cached = self._pre_send_check_and_cache(api_key, message, model)
+        cached = pre_send_check_and_cache(api_key, message, model, self.cache, self.logger, self.SERVICE_NAME, self.API_KEY_ENV_VAR)
         if cached is not None:
             return cached
         cache_key = (message, model)
@@ -45,13 +49,24 @@ class DeepSeekService(LLMService):
             self.logger.error(f"[deepseek] Could not initialize DeepSeekAPI: {e}")
             return None
         def api_call():
-            # The DeepSeek API expects a 'prompt' argument, not 'messages' or 'model'.
-            # If model selection is supported, add as a kwarg.
             kwargs = {"prompt": message}
             if model:
                 kwargs["model"] = model
             return client.chat_completion(**kwargs)
-        return self._call_and_cache_response(api_call, cache_key, message, model, api_key)
+        return call_and_cache_response(
+            api_call,
+            cache_and_log,
+            self.cache,
+            cache_key,
+            self.cache_path,
+            self.jsonl_path,
+            message,
+            model,
+            api_key,
+            self.logger,
+            self.SERVICE_NAME,
+            self.list_available_models
+        )
 
     def list_available_models(self, api_key):
         """

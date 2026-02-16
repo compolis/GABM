@@ -26,9 +26,9 @@ GENERATE_MODEL_LISTS = True
 
 # Enable/disable LLMs to test
 ENABLED_LLMS = {
-    "openai": False,
-    "genai": False,
-    "deepseek": False,
+    "openai": True,
+    "genai": True,
+    "deepseek": True,
     "publicai": True,
     "apertus": False,  # Local model
 }
@@ -153,14 +153,15 @@ def main():
                 else:
                     logging.warning(f"No local model mapping found for API model '{model}'.")
 
-    # Optionally test Apertus local model
-    if ENABLED_LLMS.get("apertus"):
+    # Optionally test Apertus local model ONLY if enabled
+    if ENABLED_LLMS.get("apertus") is True:
         logging.info("\n--- Testing Apertus Local Model ---\n")
         try:
             from gabm.io.llm.apertus import local_apertus_infer
-            model_id = "swiss-ai/apertus-70b-instruct"
+            api_model_id = "swiss-ai/apertus-70b-instruct"
+            local_model_id = API_TO_LOCAL_MODEL.get(api_model_id, api_model_id)
             prompt = "Give me a brief explanation of gravity in simple terms."
-            response = local_apertus_infer(model_id, prompt, device="cuda" if os.environ.get("CUDA_VISIBLE_DEVICES") else "cpu")
+            response = local_apertus_infer(local_model_id, prompt, device="cuda" if os.environ.get("CUDA_VISIBLE_DEVICES") else "cpu")
             logging.info(f"Apertus response:\n{response}")
         except Exception as e:
             logging.error(f"Error testing Apertus local model: {e}")
