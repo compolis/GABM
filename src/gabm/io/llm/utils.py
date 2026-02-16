@@ -77,8 +77,16 @@ def write_models_json_and_txt(models, models_json_path, models_txt_path, formatt
     # Write JSON
     models_json_path.parent.mkdir(parents=True, exist_ok=True)
     try:
+        # If model is a dict, keep as is; if string, keep as is; if object, use __dict__
+        def model_to_json(model):
+            if isinstance(model, dict):
+                return model
+            elif isinstance(model, str):
+                return model
+            else:
+                return model.__dict__
         with models_json_path.open("w", encoding="utf-8") as f:
-            json.dump([model if isinstance(model, dict) else model.__dict__ for model in models], f, indent=2)
+            json.dump([model_to_json(model) for model in models], f, indent=2)
         logging.info(f"Wrote models to JSON: {models_json_path}")
     except Exception as e:
         logging.error(f"Error writing models to JSON {models_json_path}: {e}")

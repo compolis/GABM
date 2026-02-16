@@ -1,10 +1,133 @@
 [
   {
-    "id": "apertus-llm-7b",
-    "description": "Apertus LLM 7B"
+    "id": "meta-llama/Llama-3.2-3B-Instruct",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "meta-llama",
+    "pricing": {
+      "input": 0.15,
+      "output": 0.2
+    },
+    "context_length": 128000
   },
   {
-    "id": "apertus-llm-8b",
-    "description": "Apertus LLM 8B"
+    "id": "Cohere/Cohere-embed-multilingual-v3.0",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "Cohere",
+    "context_length": 512
+  },
+  {
+    "id": "Cohere/rerank-v3.5",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "Cohere",
+    "context_length": 32000
+  },
+  {
+    "id": "allenai/Molmo2-8B",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "allenai"
+  },
+  {
+    "id": "allenai/Olmo-3.1-32B-Think",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "allenai",
+    "pricing": {
+      "input": 0.15,
+      "output": 0.5
+    }
+  },
+  {
+    "id": "allenai/Olmo-3.1-32B-Instruct",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "allenai",
+    "pricing": {
+      "input": 0.2,
+      "output": 0.6
+    }
+  },
+  {
+    "id": "utter-project/EuroLLM-22B-Instruct-2512",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "utter-project",
+    "pricing": {
+      "input": 0.1,
+      "output": 0.2
+    }
+  },
+  {
+    "id": "allenai/Olmo-3-7B-Instruct",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "allenai",
+    "pricing": {
+      "input": 0.1,
+      "output": 0.2
+    }
+  },
+  {
+    "id": "swiss-ai/apertus-8b-instruct",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "swiss-ai",
+    "pricing": {
+      "input": 0.1,
+      "output": 0.2
+    }
+  },
+  {
+    "id": "swiss-ai/apertus-70b-instruct",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "swiss-ai",
+    "pricing": {
+      "input": 0.82,
+      "output": 2.92
+    }
+  },
+  {
+    "id": "aisingapore/Gemma-SEA-LION-v4-27B-IT",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "aisingapore",
+    "pricing": {
+      "input": 0.2,
+      "output": 0.4
+    }
+  },
+  {
+    "id": "aisingapore/Qwen-SEA-LION-v4-32B-IT",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "aisingapore",
+    "pricing": {
+      "input": 0.25,
+      "output": 0.5
+    }
+  },
+  {
+    "id": "mistralai/mistral-small-3-1",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "mistralai",
+    "pricing": {
+      "input": 0.11,
+      "output": 0.17
+    }
+  },
+  {
+    "id": "dicta-il/DictaLM-3.0-24B-Thinking",
+    "object": "model",
+    "created": 1677610602,
+    "owned_by": "dicta-il",
+    "pricing": {
+      "input": 0.2,
+      "output": 0.4
+    }
   }
 ]

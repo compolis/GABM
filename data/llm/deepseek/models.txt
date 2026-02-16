@@ -1,7 +1,5 @@
-Available DeepSeek models:
+Available Deepseek models:
 
-Model ID: deepseek-model-1
-  Description: Example model 1
+Model: deepseek-chat
 
-Model ID: deepseek-model-2
-  Description: Example model 2
+Model: deepseek-reasoner

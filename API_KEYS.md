@@ -15,16 +15,23 @@ You must sign up with each LLM provider to obtain an API key:
 - **GenAI (Google):** Go to [makersuite.google.com](https://makersuite.google.com/) and sign in with your Google account. Follow instructions to get an API key. Use `genai` as the API name.
 - **PublicAI (Apertus):** Sign up at [publicai.co](https://publicai.co/) to get your API key. Use `publicai` as the API name.
 
-Add each key to your `data/api_key.csv` file as shown below:
+deepseek,sk-...
+genai,YOUR_GOOGLE_KEY
+publicai,YOUR_PUBLICAI_KEY
+
+You can also add your Hugging Face token for downloading private or gated models (such as Apertus LLMs):
 
 ```
 openai,sk-...
 deepseek,sk-...
 genai,YOUR_GOOGLE_KEY
 publicai,YOUR_PUBLICAI_KEY
+huggingface,hf_xxx...your_token...
 ```
 
-The syntax requirements for the `data/api_key.csv` file is strict. Each entry should be on a new line, the API names `openai`, `deepseek`, `genai` and `publicai` must be exactly as shown and there should be nothing but a comma character `,` separating the API name and the API key. Everything is case sensitive. 
+If you add a `huggingface` entry, the setup scripts will automatically set the `HF_TOKEN` environment variable for you, enabling authenticated model downloads. This is recommended for users who need to access private or gated models on Hugging Face.
+
+The syntax requirements for the `data/api_key.csv` file is strict. Each entry should be on a new line, the API names `openai`, `deepseek`, `genai`, `publicai` and `huggingface` must be exactly as shown and there should be nothing but a comma character `,` separating the API name and the API key. Everything is case sensitive. 
 
 The `api_key.csv` file must be stored in the `data/` directory.
 

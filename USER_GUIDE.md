@@ -69,9 +69,10 @@ pip freeze > requirements.txt
 Create `data/api_key.csv` with your API keys. For all supported LLM providers (including PublicAI/Apertus), see [API_KEYS.md](API_KEYS.md) for up-to-date details and instructions.
 
 
+
 #### Using Local Apertus LLM Models
 
-For instructions on downloading, installing, and using local Apertus LLM models, see [Apertus.md](Apertus.md). This guide covers both local and API-based usage, storage requirements, and troubleshooting.
+For instructions on downloading, authenticating, and using local Apertus LLM models (and other Hugging Face models), see [HUGGING_FACE.md](HUGGING_FACE.md). This guide covers both local and API-based usage, storage requirements, authentication, and troubleshooting.
 
 
 ### Run the Main Program
