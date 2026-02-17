@@ -14,8 +14,4 @@ google-generativeai==0.4.1
 httpx==0.28.1
 deepseek==1.0.0
 
-# Dependencies for Apertus
-transformers==5.1.0
-torch==2.10.0
-
 ```

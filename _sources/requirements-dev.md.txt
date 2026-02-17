@@ -1,7 +1,7 @@
 # Requirements (Developer)
 
 > **Note:** This file is for documentation only.
-> Install dependencies from [requirements.txt](requirements.txt) and [requirements-dev.txt](requirements-dev.txt) in the project root.
+> Install dependencies from [requirements-dev.txt](requirements-dev.txt) in the project root.
 
 
 ```# Development requirements for GABM
@@ -29,13 +29,13 @@ docutils>=0.22,<0.23
 
 # For building distributions
 build>=1.4.0,<2
-setuptools>=61.0,<70
+setuptools>=82.0.0,<70
 wheel>=0.42.0,<1
-toml>=0.10.2,<2
+tomlkit>=0.14.0,<2
 
 # For updating version references in files
 bump2version>=1.0.1,<2
 
 # For uploading to PyPI
-twine>=5.0.0,<6
+twine>=6.2.0,<7
 ```
