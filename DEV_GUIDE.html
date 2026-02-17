@@ -422,6 +422,13 @@ You will need to have an account on https://pypi.org and have created an API key
 </ul>
 </li>
 </ol>
+<p>To help recover from accidental corruption, template copies of the main packaging metadata files are provided:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">setup.cfg.template</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pyproject.toml.template</span></code></p></li>
+</ul>
+<p>If you need to reset <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code> or <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>, copy these templates over the originals.</p>
+<p><strong>Note:</strong> These templates should be updated if you make structural changes to the originals. Bear in mind that the originals are processed to insert the dependency requirements from requirements.txt.</p>
 <p>For more details, see the <a class="reference external" href="https://packaging.python.org/">Python Packaging User Guide</a>.</p>
 </section>
 <section id="branch-and-documentation-deployment">
