@@ -25,6 +25,7 @@ docutils>=0.22,<0.23
 build>=1.4.0,<2
 setuptools>=61.0,<70
 wheel>=0.42.0,<1
+toml>=0.10.2,<2
 
 # For updating version references in files
 bump2version>=1.0.1,<2
