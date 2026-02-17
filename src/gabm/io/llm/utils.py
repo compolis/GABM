@@ -14,7 +14,6 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 
 # Standard library imports
-
 from datetime import datetime
 import functools
 import json
@@ -151,10 +150,24 @@ def load_llm_cache(cache_path: Path, logger: Optional[Any] = None) -> Dict[Any, 
     if cache_path.exists():
         try:
             with cache_path.open("rb") as f:
-                return pickle.load(f)
+                data = pickle.load(f)
+            if isinstance(data, dict):
+                return data
+            # Loaded object is not a dict; warn and fall back to empty cache.
+            log = logger if logger is not None else logging.getLogger(__name__)
+            log.warning(
+                "Cache file '%s' did not contain a dict (got %s). "
+                "Ignoring cache and using an empty dict instead.",
+                cache_path,
+                type(data).__name__,
+            )
         except Exception as e:
-            if logger:
-                logger.warning(f"Failed to load cache: {e}")
+            if logger is not None:
+                logger.warning("Failed to load cache from '%s': %s", cache_path, e)
+            else:
+                logging.getLogger(__name__).warning(
+                    "Failed to load cache from '%s': %s", cache_path, e
+                )
     return {}
 
 def cache_and_log(
@@ -166,7 +179,8 @@ def cache_and_log(
     prompt: Optional[str] = None,
     model: Optional[str] = None,
     extra: Optional[Dict[str, Any]] = None,
-    logger: Optional[Any] = None
+    logger: Optional[Any] = None,
+    extract_text_from_response: Optional[Callable[[Any], str]] = None
 ) -> None:
     """
     Cache and log the prompt/response pair to a JSONL file.
@@ -180,6 +194,7 @@ def cache_and_log(
         model (str, optional): The model used for the request (for logging).
         extra (dict, optional): Any extra information to include in the log entry.
         logger: Logger for info/error messages (optional).
+        extract_text_from_response (callable, optional): Function to extract text from the response for logging. Defaults to global extract_text_from_response.
     """
     cache[cache_key] = response
     cache_path = Path(cache_path)
@@ -278,7 +293,8 @@ def call_and_cache_response(
     api_key: str,
     logger: Any,
     service_name: str,
-    list_available_models_func: Callable[[str], Any]
+    list_available_models_func: Callable[[str], Any],
+    extract_text_from_response: Optional[Callable[[Any], str]] = None
 ) -> Optional[Any]:
     """
     Generic try/except, error logging, model listing, and caching for LLM send methods.
@@ -295,6 +311,7 @@ def call_and_cache_response(
         logger: Logger for info/error messages.
         service_name (str): Name of the LLM service (for error messages).
         list_available_models_func (callable): Function to list available models.
+        extract_text_from_response (callable, optional): Function to extract text from the response for logging. Passed to cache_and_log_func.
     Returns:
         The response object or None on error.
     """
@@ -305,5 +322,9 @@ def call_and_cache_response(
         if "404" in str(e) or "not found" in str(e) or "not supported" in str(e):
             list_available_models_func(api_key)
         return None
-    cache_and_log_func(cache, cache_key, response, cache_path, jsonl_path, prompt=prompt, model=model, logger=logger)
+    cache_and_log_func(
+        cache, cache_key, response, cache_path, jsonl_path,
+        prompt=prompt, model=model, logger=logger,
+        extract_text_from_response=extract_text_from_response
+    )
     return response

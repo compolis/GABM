@@ -1,8 +1,6 @@
 """
-This script demonstrates how to use the Apertus-8B-2509 model from the Hugging Face Transformers library. It loads the model and tokenizer, prepares a prompt, generates a response, and prints the output.
-To run this script, ensure you have the `transformers` library installed and access to the specified model. You can install the library using pip:
-    pip install transformers
-Adjust the `device` variable to "cuda" if you have a compatible GPU for faster inference.
+This script demonstrates how to use the Apertus models from the Hugging Face Transformers library.
+It loads the model and tokenizer, prepares a prompt, generates a response, and prints the output.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
@@ -13,6 +11,7 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 # Standard library imports
 from pathlib import Path
 import time
+from typing import Any, Optional, Dict
 # Hugging Face Transformers for local model loading and inference
 from transformers import AutoModelForCausalLM, AutoTokenizer
 # Shared utilities for caching and logging
@@ -28,8 +27,6 @@ def download_apertus_model(model_name: str) -> None:
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name)
     print("Download complete. Model and tokenizer are now cached locally.")
-
-from typing import Any, Optional, Dict
 
 def local_apertus_infer(
     model_name: str,
@@ -105,7 +102,8 @@ def local_apertus_infer(
         jsonl_path,
         prompt=prompt,
         model=model_name,
-        logger=logger
+        logger=logger,
+        extract_text_from_response=None
     )
     if logger:
         logger.info(f"Local inference complete for model={model_name}.")

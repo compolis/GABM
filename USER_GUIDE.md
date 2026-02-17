@@ -83,56 +83,17 @@ From the project root:
 python3 -m gabm
 ```
 
-Depending on what LLM services are running and working, and if your LLM API Keys are valid, you will get different console mesages and files created in the `data` directory.
+Depending on what LLM services are running and working, and what LLM API Keys are provided and valid, you will get different console messages and files created in the `data` directory.
 
-The console messages should look something along the following lines:
 
-```
-2026-02-11 22:48:01,988 [INFO] Running gabm...
-2026-02-11 22:48:01,989 [INFO] API Keys: {'openai': 'sk-Key', 'deepseek': 'sk-Key', 'genai': 'Key'}
-2026-02-11 22:48:01,989 [WARNING] Model list file not found: data/llm/openai/models.txt
-2026-02-11 22:48:01,989 [WARNING] Model list file not found: data/llm/genai/models.txt
-2026-02-11 22:48:01,989 [WARNING] Model list file not found: data/llm/deepseek/models.txt
-2026-02-11 22:48:01,989 [INFO] OpenAI API Key: sk-Key
-2026-02-11 22:48:02,191 [ERROR] [openai] Error: Client.__init__() got an unexpected keyword argument 'proxies'
-2026-02-11 22:48:02,191 [INFO] Listing available models for OpenAI...
-2026-02-11 22:48:02,191 [ERROR] Error listing models for OpenAI: Client.__init__() got an unexpected keyword argument 'proxies'
-2026-02-11 22:48:02,191 [ERROR] OpenAI response: None (API error or timeout)
-2026-02-11 22:48:02,192 [INFO] GenAI API Key: Key
-2026-02-11 22:48:15,205 [INFO] gabm.io.llm.genai: Cache updated for model=models/gemini-2.5-pro, message=Hello, GenAI!
-2026-02-11 22:48:15,205 [INFO] Cache updated for model=models/gemini-2.5-pro, message=Hello, GenAI!
-2026-02-11 22:48:15,205 [INFO] Full GenAI response:
-{'_done': True, '_iterator': None, '_result': candidates {
-  index: 0
-  content {
-    parts {
-      text: "Hello there! It\'s great to connect with you.\n\nHow can I help you today? I\'m ready for any questions, creative ideas, or tasks you have in mind."
-    }
-    role: "model"
-  }
-  finish_reason: STOP
-}
-, '_chunks': [candidates {
-  index: 0
-  content {
-    parts {
-      text: "Hello there! It\'s great to connect with you.\n\nHow can I help you today? I\'m ready for any questions, creative ideas, or tasks you have in mind."
-    }
-    role: "model"
-  }
-  finish_reason: STOP
-}
-], '_error': None}
-2026-02-11 22:48:15,205 [ERROR] GenAI response content: [Error accessing content: 'dict' object has no attribute 'text']
-2026-02-11 22:48:15,206 [INFO] DeepSeek API Key: sk-Key
-2026-02-11 22:48:15,209 [INFO] gabm.io.llm.deepseek: Cache updated for model=deepseek-model-1, message=Hello, DeepSeek!
-2026-02-11 22:48:15,209 [INFO] Cache updated for model=deepseek-model-1, message=Hello, DeepSeek!
-2026-02-11 22:48:15,209 [INFO] Full DeepSeek response:
-{'model': 'deepseek-model-1', 'message': 'Hello, DeepSeek!', 'result': '[Placeholder DeepSeek response]'}
-```
+The `data/logs` directory should contain the following file:
+- `run_main.log`
 
-The `data/logs` directory should contain the following files:
-`deepseek.log`,  `genai.log`, `openai.log`, `run_main.log`
+The `data/logs/llm` directory should contain the following files:
+- `deepseek.log`
+- `genai.log`
+- `openai.log`
+- `publicai.log`
 
 The `data/llm` directory should contain directories for each of the LLM services that accepted the API keys provided and provided a response to the prompt given by running the main program.
 

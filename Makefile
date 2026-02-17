@@ -172,11 +172,19 @@ delete-release:
 	git push upstream :refs/tags/v$(VERSION)
 	@echo "...done deleting release tag version $(VERSION) locally and on remotes."
 
-# Build a distribution package for PyPI
-build: clean
+
+# Build a distribution package for PyPI (auto-sync README and requirements)
+build: clean pypi-prep
 	@echo "Building a distribution package for PyPI..."
 	python3 -m build
 	@echo "...done building a distribution package for PyPI. Output in dist/"
+
+# Prepare PyPI packaging: sync requirements and generate README
+pypi-prep:
+	@echo "Syncing requirements and generating PyPI README..."
+	python3 scripts/sync_requirements_for_pypi.py
+	python3 scripts/generate_pypi_readme.py
+	@echo "...done prepping for PyPI packaging."
 
 # Build and test install the package in a fresh venv
 build-test: build

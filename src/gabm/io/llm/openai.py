@@ -9,7 +9,7 @@ Features:
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # OpenAI client library
@@ -17,7 +17,8 @@ from openai import OpenAI
 # LLM service base class
 from .llm_service import LLMService
 # Shared utilities for caching and logging
-from .utils import pre_send_check_and_cache, call_and_cache_response, cache_and_log
+from .utils import pre_send_check_and_cache, call_and_cache_response, cache_and_log, write_models_json_and_txt
+
 
 class OpenAIService(LLMService):
     """
@@ -59,7 +60,8 @@ class OpenAIService(LLMService):
             api_key,
             self.logger,
             self.SERVICE_NAME,
-            self.list_available_models
+            self.list_available_models,
+            extract_text_from_response=None
         )
 
     def list_available_models(self, api_key):
@@ -68,16 +70,17 @@ class OpenAIService(LLMService):
         Args:
             api_key (str): OpenAI API key.
         """
-        self.set_api_key_env(api_key)
-        client = OpenAI()
+        client = OpenAI(api_key=api_key)
         models = client.models.list()
         def formatter(model):
             return (f"Model ID: {model.id}\n"
                     f"  Owned by: {getattr(model, 'owned_by', 'N/A')}\n"
                     f"  Created: {getattr(model, 'created', 'N/A')}\n")
         self.logger.info(f"Writing {self.SERVICE_NAME} model list to JSON and TXT.")
-        self._write_model_list(
+        write_models_json_and_txt(
             models,
+            self.cache_path.parent / "models.json",
+            self.cache_path.parent / "models.txt",
             formatter,
             header=f"Available {self.SERVICE_NAME} models:\n"
         )

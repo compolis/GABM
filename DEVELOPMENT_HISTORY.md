@@ -25,12 +25,13 @@ GitHub Copilot has only limited session memory and no memory between sessions. P
 - Charlie Pilgrim (Charlie)
 
 ## Development Timeline
+- [2026-02-17] [GABM version 0.2.0 Released on PyPI](https://pypi.org/project/gabm/0.2.0)
 - [2026-02-16] GABM Project meeting
   - Viktoria, Ajay, Andy
-  - ...
+  - Plan to release GABM 0.2 and Climate-Action GABM 0.1
 - [2026-02-13] GABM Meeting
   - Ajay and Andy
-  - ...
+  - Focused on Climate-Action GABM documentation and set up
 - [2026-02-14] [GABM version 0.1.4 Released on PyPI](https://pypi.org/project/gabm/0.1.4)
 - [2026-02-11] [GABM version 0.1.3 Released on PyPI](https://pypi.org/project/gabm/0.1.3)
 - [2026-02-11] [GABM version 0.1.2 Released on PyPI](https://pypi.org/project/gabm/0.1.2)

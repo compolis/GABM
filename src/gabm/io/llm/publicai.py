@@ -9,7 +9,7 @@ Features:
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 
@@ -18,7 +18,7 @@ import requests
 # LLM service base class
 from .llm_service import LLMService
 # Shared utilities for caching and logging
-from .utils import pre_send_check_and_cache, call_and_cache_response, cache_and_log
+from .utils import pre_send_check_and_cache, call_and_cache_response, cache_and_log, write_models_json_and_txt
 
 class PublicAIService(LLMService):
     """
@@ -69,7 +69,8 @@ class PublicAIService(LLMService):
             api_key,
             self.logger,
             self.SERVICE_NAME,
-            self.list_available_models
+            self.list_available_models,
+            extract_text_from_response=None
         )
 
     def list_available_models(self, api_key):
@@ -95,8 +96,10 @@ class PublicAIService(LLMService):
             else:
                 return f"Model: {model}\n"
         self.logger.info("Writing PublicAI model list to JSON and TXT.")
-        self._write_model_list(
+        write_models_json_and_txt(
             models,
+            self.cache_path.parent / "models.json",
+            self.cache_path.parent / "models.txt",
             formatter,
             header="Available PublicAI models:\n"
         )

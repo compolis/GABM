@@ -12,14 +12,15 @@ __author__ = ["Andy Turner <agdturner@gmail.com>"]
 __version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
-
+# Standard library imports
+import ast
 # Google Generative AI client library
 import google.generativeai as genai
 # LLM service base class
 from .llm_service import LLMService
 # Shared utilities for caching and logging
-from .utils import pre_send_check_and_cache, call_and_cache_response, cache_and_log
-        
+from .utils import pre_send_check_and_cache, call_and_cache_response, cache_and_log, write_models_json_and_txt
+
 
 class GenAIService(LLMService):
     """
@@ -66,7 +67,8 @@ class GenAIService(LLMService):
             api_key,
             self.logger,
             self.SERVICE_NAME,
-            self.list_available_models
+            self.list_available_models,
+            extract_text_from_response=self.extract_text_from_response
         )
 
     def list_available_models(self, api_key):
@@ -90,8 +92,10 @@ class GenAIService(LLMService):
                     f"  Description: {desc}\n"
                     f"  Supported methods: {methods}\n")
         self.logger.info("Writing GenAI model list to JSON and TXT.")
-        self._write_model_list(
+        write_models_json_and_txt(
             models,
+            self.cache_path.parent / "models.json",
+            self.cache_path.parent / "models.txt",
             formatter,
             header=f"Available {self.SERVICE_NAME.capitalize()} models and supported methods:\n"
         )
@@ -102,7 +106,6 @@ class GenAIService(LLMService):
         Recursively searches for the first 'text' value in any nested structure.
         Logs a warning if no text is found.
         """
-        import ast
         def find_text(obj):
             if isinstance(obj, dict):
                 # Direct text field

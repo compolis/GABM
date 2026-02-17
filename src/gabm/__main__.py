@@ -1,168 +1,142 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 """
-This is the entry point for running the GABM application.
-To run, use the command:
-    python3 -m gabm
+Entry point for running the GABM application.
+To run: python3 -m gabm
+This script tests LLM integrations, generates model lists, and caches responses, similar to setup-llms.py.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.3"
+__version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
-# Standard library imports
-import re
+import os
 import sys
 import logging
 from pathlib import Path
+from gabm.io.read_data import read_api_keys
 
-def check_model_in_txt(models_txt_path, model_name):
-    """
-    Check if the specified model name exists in the models TXT file.
-    Args:
-        models_txt_path (Path): Path to the models TXT file.
-        model_name (str): The model name to check.
-    Returns:
-        bool: True if the model is found or file does not exist, False otherwise.
-    """
-    if not models_txt_path.exists():
-        logging.warning(f"Model list file not found: {models_txt_path}")
-        return True  # Allow if no list exists
-    with models_txt_path.open("r", encoding="utf-8") as f:
-        content = f.read()
-    # Look for exact model name in the file
-    if re.search(rf"Model ID: (?:models/)?{re.escape(model_name)}\\b", content):
-        return True
-    logging.warning(f"Model '{model_name}' not found in {models_txt_path}. Please check available models.")
-    return False
+# Enable/disable LLMs to test
+ENABLED_LLMS = {
+    "openai": True,
+    "genai": True,
+    "deepseek": True,
+    "publicai": True,
+    "apertus": False,  # Local model
+}
+
+# Map LLM names to their service class names
+SERVICE_CLASSES = {
+    "openai": "OpenAIService",
+    "genai": "GenAIService",
+    "deepseek": "DeepSeekService",
+    "publicai": "PublicAIService",
+}
+
+# Default prompts and models for each LLM
+DEFAULT_PROMPTS = {
+    "openai": ("gpt-3.5-turbo", "Hello OpenAI!"),
+    "genai": ("models/gemini-2.5-pro", "Hello GenAI!"),
+    "deepseek": ("deepseek-chat", "Hello DeepSeek!"),
+    "publicai": ("swiss-ai/apertus-70b-instruct", "Give me a brief explanation of gravity in simple terms."),
+}
+
+# Mapping from API model names to local Hugging Face model names
+API_TO_LOCAL_MODEL = {
+    "swiss-ai/apertus-8b-instruct": "swiss-ai/Apertus-8B-2509",
+    "swiss-ai/apertus-70b-instruct": "swiss-ai/Apertus-70B-2509",
+}
+
+def model_list_files_exist(llm_name):
+    base_dir = Path(f"data/llm/{llm_name}")
+    json_file = base_dir / "models.json"
+    txt_file = base_dir / "models.txt"
+    return json_file.exists() and txt_file.exists()
+
+def test_llm(llm, module, service_class, api_key, model, prompt):
+    try:
+        mod = __import__(module, fromlist=[service_class])
+        Service = getattr(mod, service_class)
+        service = Service()
+        logging.info(f"Testing {llm} with model '{model}'...")
+        resp = service.send(api_key, prompt, model=model)
+        if resp:
+            logging.info(f"  Success: Received response.")
+        else:
+            logging.warning(f"  Warning: No response received.")
+    except Exception as e:
+        logging.error(f"  Error testing {llm}: {e}")
 
 def main():
-    """
-    Main function for GABM.
-    """
-    logging.info("Running gabm...")
+    logging.info("\n--- GABM LLM Integration Test ---\n")
+    # Load API keys
+    try:
+        api_keys = read_api_keys('data/api_key.csv')
+    except (FileNotFoundError, ValueError) as e:
+        logging.error(f"Failed to load API keys: {e}\nPlease ensure 'data/api_key.csv' exists and is valid. See API_KEYS.md for setup instructions.")
+        sys.exit(1)
+    # Optionally set HF_TOKEN for Hugging Face if present and not already set
+    if 'huggingface' in api_keys and not os.environ.get('HF_TOKEN'):
+        os.environ['HF_TOKEN'] = api_keys['huggingface']
+        logging.info("Set HF_TOKEN from data/api_key.csv for Hugging Face usage.")
 
-    if True:  # Set to False to skip Apertus LLM test
-        logging.info("Testing Apertus LLM integration...")
+    # Test each enabled LLM
+    for llm, enabled in ENABLED_LLMS.items():
+        if not enabled:
+            continue
+        api_key = api_keys.get(llm)
+        if not api_key or api_key.startswith("YOUR_"):
+            logging.warning(f"[SKIP] {llm}: API key not set.")
+            continue
+        module = f"gabm.io.llm.{llm}"
+        service_class = SERVICE_CLASSES.get(llm)
+        if not service_class:
+            logging.warning(f"[SKIP] {llm}: No service class mapping.")
+            continue
+        # Generate model list if needed
+        if not model_list_files_exist(llm):
+            try:
+                mod = __import__(module, fromlist=[service_class])
+                Service = getattr(mod, service_class)
+                service = Service()
+                logging.info(f"Generating model list for {llm}...")
+                service.list_available_models(api_key)
+                logging.info(f"  Model list generated.")
+            except Exception as e:
+                logging.error(f"  Error generating model list for {llm}: {e}")
+        # Test prompt/response and cache
+        if llm in DEFAULT_PROMPTS:
+            model, prompt = DEFAULT_PROMPTS[llm]
+            test_llm(llm, module, service_class, api_key, model, prompt)
+            # If PublicAI, also test local model for comparison
+            if llm == "publicai":
+                local_model = API_TO_LOCAL_MODEL.get(model)
+                if local_model:
+                    try:
+                        from gabm.io.llm.apertus import local_apertus_infer
+                        local_response = local_apertus_infer(local_model, prompt, device="cuda" if os.environ.get("CUDA_VISIBLE_DEVICES") else "cpu")
+                        logging.info(f"Local Apertus response for '{local_model}':\n{local_response}")
+                    except Exception as e:
+                        logging.error(f"Error testing local Apertus model '{local_model}': {e}")
+                else:
+                    logging.warning(f"No local model mapping found for API model '{model}'.")
+
+    # Optionally test Apertus local model ONLY if enabled
+    if ENABLED_LLMS.get("apertus") is True:
+        logging.info("\n--- Testing Apertus Local Model ---\n")
         try:
-            from gabm.io.llm.apertus import tokenizer, model, device
+            from gabm.io.llm.apertus import local_apertus_infer
+            api_model_id = "swiss-ai/apertus-70b-instruct"
+            local_model_id = API_TO_LOCAL_MODEL.get(api_model_id, api_model_id)
             prompt = "Give me a brief explanation of gravity in simple terms."
-            messages_think = [
-                {"role": "user", "content": prompt}
-            ]
-            text = tokenizer.apply_chat_template(
-                messages_think,
-                tokenize=False,
-                add_generation_prompt=True,
-            )
-            model_inputs = tokenizer([text], return_tensors="pt").to(device)
-            generated_ids = model.generate(**model_inputs, max_new_tokens=32768)
-            output_ids = generated_ids[0][len(model.inputs_ids[0]) :]
-            output_text = tokenizer.decode(output_ids, skip_special_tokens=True)
-            logging.info(f"Apertus response:\n{output_text}")
+            response = local_apertus_infer(local_model_id, prompt, device="cuda" if os.environ.get("CUDA_VISIBLE_DEVICES") else "cpu")
+            logging.info(f"Apertus response:\n{response}")
         except Exception as e:
-            logging.error(f"Error testing Apertus LLM: {e}")
+            logging.error(f"Error testing Apertus local model: {e}")
+    logging.info("\nGABM LLM integration test complete. Check data/llm/* for model lists and caches.")
 
-    # Toggle proprietary LLM tests (OpenAI, GenAI, DeepSeek, etc.)
-    ENABLE_PROPRIETARY_LLM_TESTS = False
-    if ENABLE_PROPRIETARY_LLM_TESTS:
-        logging.info("Testing Proprietary LLM integrations...")
-        # Get the api keys
-        # Importing here to avoid circular imports
-        from gabm.io.read_data import read_api_keys
-        #from src.io.read_data import read_api_keys
-        # Read API keys from the default location
-        api_keys = read_api_keys(file_path='data/api_key.csv')
-        # Optionally set HF_TOKEN for Hugging Face if present and not already set
-        import os
-        if 'huggingface' in api_keys and not os.environ.get('HF_TOKEN'):
-            os.environ['HF_TOKEN'] = api_keys['huggingface']
-            logging.info("Set HF_TOKEN from data/api_key.csv for Hugging Face usage.")
-        # Print the API keys
-        logging.info(f"API Keys: {api_keys}")
-        
-        if not api_keys:
-            logging.error("No API keys found. Exiting.")
-            return
-
-        def handle_llm(name, key_name, module_name, service_class, message, content_path=None, model=None):
-            if key_name not in api_keys:
-                logging.warning(f"{name} API key not found. Skipping.")
-                return
-            api_key = api_keys.get(key_name)
-            logging.info(f"{name} API Key: {api_key}")
-            module = __import__(f"gabm.io.llm.{module_name}", fromlist=[service_class])
-            Service = getattr(module, service_class)
-            service = Service()
-            response = service.send(api_key, message, model=model)
-            if response is None:
-                logging.info(f"Listing available models for {name}...")
-                try:
-                    service.list_available_models(api_key)
-                except Exception as e:
-                    logging.error(f"Error listing models for {name}: {e}")
-                logging.error(f"{name} response: None (API error or timeout)")
-                return
-            # Log full response if possible
-            if hasattr(response, "model_dump_json"):
-                logging.info(f"Full {name} response:\n{response.model_dump_json(indent=2)}")
-            else:
-                logging.info(f"Full {name} response:\n{response}")
-            # Log content if path provided
-            if content_path:
-                try:
-                    content = response
-                    for attr in content_path:
-                        if isinstance(attr, int):
-                            content = content[attr]
-                        else:
-                            content = getattr(content, attr)
-                    logging.info(f"{name} response content:\n{content}")
-                except Exception as e:
-                    logging.error(f"{name} response content: [Error accessing content: {e}]")
-
-        # Require explicit model names for each LLM
-        #openai_model = None  # e.g., "gpt-3.5-turbo"
-        openai_model = "gpt-3.5-turbo"
-        #genai_model = None   # e.g., "models/gemini-2.5-pro"
-        genai_model = "models/gemini-2.5-pro"
-        #deepseek_model = None  # e.g., "deepseek-model-1"
-        deepseek_model = "deepseek-model-1"
-        # Add more as needed
-
-        # Prompt or error if any model is not set
-        missing_models = []
-        if not openai_model:
-            missing_models.append("openai_model")
-        if not genai_model:
-            missing_models.append("genai_model")
-        if not deepseek_model:
-            missing_models.append("deepseek_model")
-        if missing_models:
-            logging.error(f"You must explicitly set the following model variable(s) in __main__.py: {', '.join(missing_models)}")
-            logging.error("See data/llm/{provider}/models.json for available models.")
-            return
-
-        # Check models.txt for each LLM if present
-        from pathlib import Path
-        openai_models_txt = Path("data/llm/openai/models.txt")
-        genai_models_txt = Path("data/llm/genai/models.txt")
-        deepseek_models_txt = Path("data/llm/deepseek/models.txt")
-        if not check_model_in_txt(openai_models_txt, openai_model):
-            print(f"[OpenAI] '{openai_model}' may not be available. See {openai_models_txt}.")
-        if not check_model_in_txt(genai_models_txt, genai_model):
-            print(f"[GenAI] '{genai_model}' may not be available. See {genai_models_txt}.")
-        if not check_model_in_txt(deepseek_models_txt, deepseek_model):
-            print(f"[DeepSeek] '{deepseek_model}' may not be available. See {deepseek_models_txt}.")
-        # Handle each LLM
-        handle_llm("OpenAI", "openai", "openai", "OpenAIService", "Hello, OpenAI!", ["choices", 0, "message", "content"], model=openai_model)
-        handle_llm("GenAI", "genai", "genai", "GenAIService", "Hello, GenAI!", ["text"], model=genai_model)
-        handle_llm("DeepSeek", "deepseek", "deepseek", "DeepSeekService", "Hello, DeepSeek!", None, model=deepseek_model)
-    
 if __name__ == "__main__":
-    """
-    Entry point for the script. Calls the main function.
-    """
     # Set up logging to file and console
     log_dir = Path("data/logs")
     log_dir.mkdir(parents=True, exist_ok=True)

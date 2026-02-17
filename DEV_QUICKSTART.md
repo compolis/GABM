@@ -92,18 +92,20 @@ make setup-llms
 ```
 
 This will:
-- Check for all required API keys (OpenAI, GenAI, DeepSeek)
+- Check for all required API keys (OpenAI, GenAI, DeepSeek, PublicAI)
 - Test each key with a default prompt and model
-- Generate initial `models.json` and `models.txt` for each LLM
-- Initialize response caches (`prompt_response_cache.pkl`)
-- Report any issues or missing keys
+- Populate `data/llm/` directories with:
+  - `models.json` and `models.txt` files for each LLM, detailing available models
+  - Response caches: `prompt_response_cache.pkl` and `prompt_response_cache.jsonl` for test prompts sent to the default model of each service
+- Create log files in `data/logs/llm` and `data/logs/setup_llms.log` for diagnostics
+- Report any issues, such as missing or malformed `api_key.csv`, or problems with API keys/services
 
 If you need to clear all caches and model lists (for a fresh start or troubleshooting), use:
 ```bash
 make clear-caches
 ```
 
-**Note:** For each LLM service directories are created in `data/llm`, for example `data/llm/openai`. Model list files (`models.json`, `models.txt`) are lists of available models for the LLM service. Cache files (`prompt_response_cache.pkl`) are prompt/response data from each LLM service.
+**Note:** For each LLM service directories are created in `data/llm`, for example `data/llm/openai`. Model list files (`models.json`, `models.txt`) are lists of available models for the LLM service. Cache files (`prompt_response_cache.pkl`, `prompt_response_cache.json`) are prompt/response data from each LLM service.
 
 
 ## 4. Run Tests and Build Documentation
