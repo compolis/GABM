@@ -4,7 +4,8 @@
 > Install dependencies from [requirements.txt](requirements.txt) and [requirements-dev.txt](requirements-dev.txt) in the project root.
 
 
-```# Run requirements for GABM
+````
+# Run requirements for GABM
 # Install with: pip install -r requirements.txt
 
 # LLM API dependencies
@@ -14,4 +15,4 @@ google-generativeai==0.4.1
 httpx==0.28.1
 deepseek==1.0.0
 
-```
+````

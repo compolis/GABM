@@ -4,7 +4,8 @@
 > Install dependencies from [requirements-dev.txt](requirements-dev.txt) in the project root.
 
 
-```# Development requirements for GABM
+````
+# Development requirements for GABM
 # Install with: pip install -r requirements-dev.txt
 
 # Test dependencies
@@ -38,4 +39,4 @@ bump2version>=1.0.1,<2
 
 # For uploading to PyPI
 twine>=6.2.0,<7
-```
+````

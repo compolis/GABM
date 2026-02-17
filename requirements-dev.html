@@ -42,7 +42,11 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
+              <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/modules.html">gabm</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="LICENSE.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a></li>
@@ -93,39 +97,40 @@
 <div><p><strong>Note:</strong> This file is for documentation only.
 Install dependencies from <a class="reference download internal" download="" href="_downloads/f4c265073ea4274a80eca85440875e56/requirements-dev.txt"><span class="xref download myst">requirements-dev.txt</span></a> in the project root.</p>
 </div></blockquote>
-<div class="highlight-# notranslate"><div class="highlight"><pre><span></span># Install with: pip install -r requirements-dev.txt
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Development requirements for GABM</span>
+<span class="c1"># Install with: pip install -r requirements-dev.txt</span>
 
-# Test dependencies
-pytest&gt;=9.0.2,&lt;10
+<span class="c1"># Test dependencies</span>
+<span class="n">pytest</span><span class="o">&gt;=</span><span class="mf">9.0.2</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">10</span>
 
-# LLM API dependencies
-openai&gt;=2.21.0,&lt;3
-#anthropic&gt;=0.25.6,&lt;0.26
-google-generativeai&gt;=0.4.1,&lt;0.5
-httpx&gt;=0.28.1,&lt;0.29
-deepseek&gt;=1.0.0,&lt;2
+<span class="c1"># LLM API dependencies</span>
+<span class="n">openai</span><span class="o">&gt;=</span><span class="mf">2.21.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">3</span>
+<span class="c1">#anthropic&gt;=0.25.6,&lt;0.26</span>
+<span class="n">google</span><span class="o">-</span><span class="n">generativeai</span><span class="o">&gt;=</span><span class="mf">0.4.1</span><span class="p">,</span><span class="o">&lt;</span><span class="mf">0.5</span>
+<span class="n">httpx</span><span class="o">&gt;=</span><span class="mf">0.28.1</span><span class="p">,</span><span class="o">&lt;</span><span class="mf">0.29</span>
+<span class="n">deepseek</span><span class="o">&gt;=</span><span class="mf">1.0.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">2</span>
 
-# Dependencies for Apertus
-transformers&gt;=5.1.0,&lt;6
-torch&gt;=2.10.0,&lt;3
+<span class="c1"># Dependencies for Apertus</span>
+<span class="n">transformers</span><span class="o">&gt;=</span><span class="mf">5.1.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">6</span>
+<span class="n">torch</span><span class="o">&gt;=</span><span class="mf">2.10.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">3</span>
 
-# Documentation dependencies
-sphinx&gt;=9.1.0,&lt;10
-sphinx-rtd-theme&gt;=3.1.0,&lt;4
-myst-parser&gt;=5.0.0,&lt;6
-docutils&gt;=0.22,&lt;0.23
+<span class="c1"># Documentation dependencies</span>
+<span class="n">sphinx</span><span class="o">&gt;=</span><span class="mf">9.1.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">10</span>
+<span class="n">sphinx</span><span class="o">-</span><span class="n">rtd</span><span class="o">-</span><span class="n">theme</span><span class="o">&gt;=</span><span class="mf">3.1.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">4</span>
+<span class="n">myst</span><span class="o">-</span><span class="n">parser</span><span class="o">&gt;=</span><span class="mf">5.0.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">6</span>
+<span class="n">docutils</span><span class="o">&gt;=</span><span class="mf">0.22</span><span class="p">,</span><span class="o">&lt;</span><span class="mf">0.23</span>
 
-# For building distributions
-build&gt;=1.4.0,&lt;2
-setuptools&gt;=82.0.0,&lt;70
-wheel&gt;=0.42.0,&lt;1
-tomlkit&gt;=0.14.0,&lt;2
+<span class="c1"># For building distributions</span>
+<span class="n">build</span><span class="o">&gt;=</span><span class="mf">1.4.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">2</span>
+<span class="n">setuptools</span><span class="o">&gt;=</span><span class="mf">82.0.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">70</span>
+<span class="n">wheel</span><span class="o">&gt;=</span><span class="mf">0.42.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">1</span>
+<span class="n">tomlkit</span><span class="o">&gt;=</span><span class="mf">0.14.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">2</span>
 
-# For updating version references in files
-bump2version&gt;=1.0.1,&lt;2
+<span class="c1"># For updating version references in files</span>
+<span class="n">bump2version</span><span class="o">&gt;=</span><span class="mf">1.0.1</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">2</span>
 
-# For uploading to PyPI
-twine&gt;=6.2.0,&lt;7
+<span class="c1"># For uploading to PyPI</span>
+<span class="n">twine</span><span class="o">&gt;=</span><span class="mf">6.2.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">7</span>
 </pre></div>
 </div>
 </section>
