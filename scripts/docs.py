@@ -9,7 +9,7 @@ meant to be run before building the documentation to ensure all assets are up to
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
@@ -225,7 +225,7 @@ def main():
             continue
         try:
             # Special handling for requirements files: copy both .txt and .md versions
-            if fname in ["requirements.txt", "requirements-dev.txt"]:
+            if fname in ["requirements.txt", "requirements-dev.txt", "requirements-local-llm.txt"]:
                 with open(src, "r", encoding="utf-8") as f:
                     content = f.read()
                 # Copy the .txt file directly to docs/
@@ -235,11 +235,24 @@ def main():
                 # Generate the .md version for Sphinx
                 md_name = fname.replace('.txt', '.md')
                 dst_md = os.path.join(DOCS, md_name)
-                heading = "# Requirements" if fname == "requirements.txt" else "# Requirements (Developer)"
-                note = (
-                    "> **Note:** This file is for documentation only.\n"
-                    "> Install dependencies from [requirements.txt](requirements.txt) and [requirements-dev.txt](requirements-dev.txt) in the project root.\n"
-                )
+                if fname == "requirements.txt":
+                    heading = "# Requirements"
+                    note = (
+                        "> **Note:** This file is for documentation only.\n"
+                        "> Install dependencies from [requirements.txt](requirements.txt) and [requirements-dev.txt](requirements-dev.txt) in the project root.\n"
+                    )
+                elif fname == "requirements-dev.txt":
+                    heading = "# Requirements (Developer)"
+                    note = (
+                        "> **Note:** This file is for documentation only.\n"
+                        "> Install dependencies from [requirements-dev.txt](requirements-dev.txt) in the project root.\n"
+                    )
+                else:
+                    heading = "# Requirements for Local LLMs"
+                    note = (
+                        "> **Note:** These dependencies are only needed if you want to run LLMs locally.\n"
+                        "> Install from [requirements-local-llm.txt](requirements-local-llm.txt) in the project root, or use the [llm-local] extra as outlined in the [User Guide](USER_GUIDE.md#optional-local-llm-support).\n"
+                    )
                 with open(dst_md, "w", encoding="utf-8") as f:
                     f.write(f"{heading}\n\n{note}\n\n```")
                     f.write(content)
@@ -265,6 +278,7 @@ def main():
                 # Rewrite requirements.txt/dev.txt links to .md for Sphinx
                 new_content = re.sub(r'\[requirements\.txt\]\(requirements\.txt\)', '[requirements.md](requirements.md)', new_content)
                 new_content = re.sub(r'\[requirements-dev\.txt\]\(requirements-dev.txt\)', '[requirements-dev.md](requirements-dev.md)', new_content)
+                new_content = re.sub(r'\[requirements-local-llm\.txt\]\(requirements-local-llm.txt\)', '[requirements-local-llm.md](requirements-local-llm.md)', new_content)
                 # Only close unclosed backticks if the line starts with a backtick and is missing a closing one
                 def close_unclosed_backticks(line):
                     # Do not add a closing backtick to heading lines
@@ -346,6 +360,7 @@ def main():
             new_content = fix_definition_lists_and_blockquotes(new_content)
             # Rewrite requirements.txt/dev.txt links to .md for Sphinx
             new_content = re.sub(r'\[requirements\.txt\]\(requirements\.txt\)', '[requirements.md](requirements.md)', new_content)
+            new_content = re.sub(r'\[requirements-local-llm\.txt\]\(requirements-local-llm\.txt\)', '[requirements-local-llm.md](requirements-local-llm.md)', new_content)
             new_content = re.sub(r'\[requirements-dev\.txt\]\(requirements-dev.txt\)', '[requirements-dev.md](requirements-dev.md)', new_content)
             # Only close unclosed backticks if the line starts with a backtick and is missing a closing one
             def close_unclosed_backticks(line):
