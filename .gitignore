@@ -220,4 +220,7 @@ data/api_key.csv
 # Exclude data backup directory
 data-bac/
 
+# Exclude JSONL cache files
+*.jsonl
+
 

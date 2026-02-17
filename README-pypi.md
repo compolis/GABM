@@ -35,13 +35,31 @@ You must sign up with each LLM provider to obtain an API key:
 
 You can also add your [Hugging Face](https://huggingface.co/) token for downloading private or gated models:
 
-## Quick Example
-```python
-from gabm.io.llm.openai import OpenAIService
-service = OpenAIService()
-response = service.send(api_key="<User_API_Key>", message="Hello!", model="gpt-3.5-turbo")
-service.list_available_models(api_key="<User_API_Key>")
+## Installation
+```bash
+pip install gabm
 ```
+
+## Run the Main Program
+From the project root:
+
+```bash
+python3 -m gabm
+```
+
+Depending on what LLM services are running and working, and what LLM API Keys are provided and valid, you will get different console messages and files created in the `data` directory.
+
+
+The `data/logs` directory should contain the following file:
+- `run_main.log`
+
+The `data/logs/llm` directory should contain the following files:
+- `deepseek.log`
+- `genai.log`
+- `openai.log`,
+- `publicai.log`
+
+The `data/llm` directory should contain directories for each of the LLM services that accepted the API keys provided and provided a response to the prompt given by running the main program.
 
 ## Documentation
 Full documentation: https://compolis.github.io/GABM/

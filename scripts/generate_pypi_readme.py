@@ -89,8 +89,11 @@ def main():
     api_keys_section_clean = re.sub(r"> \*\*Security Warning:.*?(?:\n(?!\S)|$)+", "", api_keys_section_clean, flags=re.DOTALL)
 
     # Only include Installation section if install is not empty or just a stray '#'
-    install_block = install.strip()
-    show_install = install_block and install_block != "#"
+    # Extract 'Run the Main Program' section from USER_GUIDE.md
+    run_main_section = ""
+    run_main_match = re.search(r"### Run the Main Program(.*?)(?:\n## |\Z)", user_guide, re.DOTALL)
+    if run_main_match:
+        run_main_section = run_main_match.group(1).strip()
 
     pypi_readme = f"""
 {badges}# GABM: Generative Agent-Based Model
@@ -102,15 +105,14 @@ def main():
 
 ## API Keys
 {api_keys_section_clean}
-"""
-    if show_install:
-        pypi_readme += f"""
+
 ## Installation
-{install_block}
-"""
-    pypi_readme += f"""
-## Quick Example
-{quick_example if quick_example else '```python\nimport gabm\n# See documentation for usage examples\n```'}
+```bash
+pip install gabm
+```
+
+## Run the Main Program
+{run_main_section}
 
 ## Documentation
 Full documentation: https://compolis.github.io/GABM/
