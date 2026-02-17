@@ -181,53 +181,18 @@ pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm<
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>gabm
 </pre></div>
 </div>
-<p>Depending on what LLM services are running and working, and if your LLM API Keys are valid, you will get different console mesages and files created in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
-<p>The console messages should look something along the following lines:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>2026-02-11 22:48:01,988 [INFO] Running gabm...
-2026-02-11 22:48:01,989 [INFO] API Keys: {&#39;openai&#39;: &#39;sk-Key&#39;, &#39;deepseek&#39;: &#39;sk-Key&#39;, &#39;genai&#39;: &#39;Key&#39;}
-2026-02-11 22:48:01,989 [WARNING] Model list file not found: data/llm/openai/models.txt
-2026-02-11 22:48:01,989 [WARNING] Model list file not found: data/llm/genai/models.txt
-2026-02-11 22:48:01,989 [WARNING] Model list file not found: data/llm/deepseek/models.txt
-2026-02-11 22:48:01,989 [INFO] OpenAI API Key: sk-Key
-2026-02-11 22:48:02,191 [ERROR] [openai] Error: Client.__init__() got an unexpected keyword argument &#39;proxies&#39;
-2026-02-11 22:48:02,191 [INFO] Listing available models for OpenAI...
-2026-02-11 22:48:02,191 [ERROR] Error listing models for OpenAI: Client.__init__() got an unexpected keyword argument &#39;proxies&#39;
-2026-02-11 22:48:02,191 [ERROR] OpenAI response: None (API error or timeout)
-2026-02-11 22:48:02,192 [INFO] GenAI API Key: Key
-2026-02-11 22:48:15,205 [INFO] gabm.io.llm.genai: Cache updated for model=models/gemini-2.5-pro, message=Hello, GenAI!
-2026-02-11 22:48:15,205 [INFO] Cache updated for model=models/gemini-2.5-pro, message=Hello, GenAI!
-2026-02-11 22:48:15,205 [INFO] Full GenAI response:
-{&#39;_done&#39;: True, &#39;_iterator&#39;: None, &#39;_result&#39;: candidates {
-  index: 0
-  content {
-    parts {
-      text: &quot;Hello there! It\&#39;s great to connect with you.\n\nHow can I help you today? I\&#39;m ready for any questions, creative ideas, or tasks you have in mind.&quot;
-    }
-    role: &quot;model&quot;
-  }
-  finish_reason: STOP
-}
-, &#39;_chunks&#39;: [candidates {
-  index: 0
-  content {
-    parts {
-      text: &quot;Hello there! It\&#39;s great to connect with you.\n\nHow can I help you today? I\&#39;m ready for any questions, creative ideas, or tasks you have in mind.&quot;
-    }
-    role: &quot;model&quot;
-  }
-  finish_reason: STOP
-}
-], &#39;_error&#39;: None}
-2026-02-11 22:48:15,205 [ERROR] GenAI response content: [Error accessing content: &#39;dict&#39; object has no attribute &#39;text&#39;]
-2026-02-11 22:48:15,206 [INFO] DeepSeek API Key: sk-Key
-2026-02-11 22:48:15,209 [INFO] gabm.io.llm.deepseek: Cache updated for model=deepseek-model-1, message=Hello, DeepSeek!
-2026-02-11 22:48:15,209 [INFO] Cache updated for model=deepseek-model-1, message=Hello, DeepSeek!
-2026-02-11 22:48:15,209 [INFO] Full DeepSeek response:
-{&#39;model&#39;: &#39;deepseek-model-1&#39;, &#39;message&#39;: &#39;Hello, DeepSeek!&#39;, &#39;result&#39;: &#39;[Placeholder DeepSeek response]&#39;}
-</pre></div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">data/logs</span></code> directory should contain the following files:
-<code class="docutils literal notranslate"><span class="pre">deepseek.log</span></code>,  <code class="docutils literal notranslate"><span class="pre">genai.log</span></code>, <code class="docutils literal notranslate"><span class="pre">openai.log</span></code>, <code class="docutils literal notranslate"><span class="pre">run_main.log</span></code></p>
+<p>Depending on what LLM services are running and working, and what LLM API Keys are provided and valid, you will get different console messages and files created in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">data/logs</span></code> directory should contain the following file:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">run_main.log</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">data/logs/llm</span></code> directory should contain the following files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">deepseek.log</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">genai.log</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">openai.log</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">publicai.log</span></code></p></li>
+</ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">data/llm</span></code> directory should contain directories for each of the LLM services that accepted the API keys provided and provided a response to the prompt given by running the main program.</p>
 </section>
 </section>

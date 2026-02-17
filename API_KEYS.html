@@ -54,7 +54,6 @@
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Key Setup</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#how-to-obtain-api-keys">How to Obtain API Keys</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#quick-setup">Quick Setup</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="HUGGING_FACE.html">Hugging Face Model Usage Guide</a></li>
@@ -106,43 +105,17 @@
 <li><p><strong>GenAI (Google):</strong> Go to <a class="reference external" href="https://makersuite.google.com/">makersuite.google.com</a> and sign in with your Google account. Follow instructions to get an API key. Use <code class="docutils literal notranslate"><span class="pre">genai</span></code> as the API name.</p></li>
 <li><p><strong>PublicAI (Apertus):</strong> Sign up at <a class="reference external" href="https://publicai.co/">publicai.co</a> to get your API key. Use <code class="docutils literal notranslate"><span class="pre">publicai</span></code> as the API name.</p></li>
 </ul>
-<p>deepseek,sk-…
+<p>You can also add your <a class="reference external" href="https://huggingface.co/">Hugging Face</a> token for downloading private or gated models:</p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>openai,sk-...
+deepseek,sk-...
 genai,YOUR_GOOGLE_KEY
-publicai,YOUR_PUBLICAI_KEY</p>
-<p>You can also add your Hugging Face token for downloading private or gated models (such as Apertus LLMs):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">openai</span><span class="p">,</span><span class="n">sk</span><span class="o">-...</span>
-<span class="n">deepseek</span><span class="p">,</span><span class="n">sk</span><span class="o">-...</span>
-<span class="n">genai</span><span class="p">,</span><span class="n">YOUR_GOOGLE_KEY</span>
-<span class="n">publicai</span><span class="p">,</span><span class="n">YOUR_PUBLICAI_KEY</span>
-<span class="n">huggingface</span><span class="p">,</span><span class="n">hf_xxx</span><span class="o">...</span><span class="n">your_token</span><span class="o">...</span>
+publicai,YOUR_PUBLICAI_KEY
+huggingface,hf_xxx...your_token...
 </pre></div>
 </div>
-<p>If you add a <code class="docutils literal notranslate"><span class="pre">huggingface</span></code> entry, the setup scripts will automatically set the <code class="docutils literal notranslate"><span class="pre">HF_TOKEN</span></code> environment variable for you, enabling authenticated model downloads. This is recommended for users who need to access private or gated models on Hugging Face.</p>
+<p>If you add a <code class="docutils literal notranslate"><span class="pre">huggingface</span></code> entry, the setup scripts will automatically set the <code class="docutils literal notranslate"><span class="pre">HF_TOKEN</span></code> environment variable for you, enabling authenticated model downloads.</p>
 <p>The syntax requirements for the <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> file is strict. Each entry should be on a new line, the API names <code class="docutils literal notranslate"><span class="pre">openai</span></code>, <code class="docutils literal notranslate"><span class="pre">deepseek</span></code>, <code class="docutils literal notranslate"><span class="pre">genai</span></code>, <code class="docutils literal notranslate"><span class="pre">publicai</span></code> and <code class="docutils literal notranslate"><span class="pre">huggingface</span></code> must be exactly as shown and there should be nothing but a comma character <code class="docutils literal notranslate"><span class="pre">,</span></code> separating the API name and the API key. Everything is case sensitive.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">api_key.csv</span></code> file must be stored in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory.</p>
-</section>
-<section id="quick-setup">
-<h2>Quick Setup<a class="headerlink" href="#quick-setup" title="Link to this heading"></a></h2>
-<p>To quickly initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, use the provided setup utility:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>setup-llms
-</pre></div>
-</div>
-<p>This will:</p>
-<ul class="simple">
-<li><p>Check for expected API keys (OpenAI, GenAI, DeepSeek, PublicAI)</p></li>
-<li><p>Test each key with a default prompt and model</p></li>
-<li><p>If provided with a valid API key and the services work expect:</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">data\llm\</span></code> directories to be populated with</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">models.json</span></code> and <code class="docutils literal notranslate"><span class="pre">models.txt</span></code> files for each LLM with detailing what LLM models are available for each service</p></li>
-<li><p>Initialize response caches (<code class="docutils literal notranslate"><span class="pre">prompt_response_cache.pkl</span></code>) for the test prompts sent to the default model of each service.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Log files are created to diagnose problems if something does not work, for example if the <code class="docutils literal notranslate"><span class="pre">api_key.csv</span></code> file is missing or not found or badly formatted, and if there are any issues with accessing the LLM services, such as problems with the service or the API keys provided.</p></li>
-</ul>
 </section>
 </section>
 

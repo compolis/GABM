@@ -56,6 +56,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#fork-and-clone">1. Fork and Clone</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#install-dependencies">2. Install Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-up-llm-api-keys">3. Set Up LLM API Keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quick-setup">Quick Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#run-tests-and-build-documentation">4. Run Tests and Build Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
@@ -183,11 +184,34 @@
 <li><p>Initialize response caches (<code class="docutils literal notranslate"><span class="pre">prompt_response_cache.pkl</span></code>)</p></li>
 <li><p>Report any issues or missing keys</p></li>
 </ul>
+</section>
+<section id="quick-setup">
+<h2>Quick Setup<a class="headerlink" href="#quick-setup" title="Link to this heading"></a></h2>
+<p>To quickly initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, use the provided setup utility:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>setup-llms
+</pre></div>
+</div>
+<p>This will:</p>
+<ul class="simple">
+<li><p>Check for expected API keys (OpenAI, GenAI, DeepSeek, PublicAI)</p></li>
+<li><p>Test each key with a default prompt and model</p></li>
+<li><p>If provided with a valid API key and the services work expect:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">data\llm\</span></code> directories are populated with</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">models.json</span></code> and <code class="docutils literal notranslate"><span class="pre">models.txt</span></code> files for each LLM detailing what LLM models are available for each service</p></li>
+<li><p>Initialize response caches (<code class="docutils literal notranslate"><span class="pre">prompt_response_cache.pkl</span></code>, <code class="docutils literal notranslate"><span class="pre">prompt_response_cache.jsonl</span></code>) for the test prompts sent to the default model of each service.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Log files are created in <code class="docutils literal notranslate"><span class="pre">data/logs/llm</span></code> and <code class="docutils literal notranslate"><span class="pre">data/logs/setup_llms.log</span></code> is also written and can be used to diagnose problems if something does not work, for example if the <code class="docutils literal notranslate"><span class="pre">api_key.csv</span></code> file is missing or not found or badly formatted, and if there are any issues with accessing the LLM services, such as problems with the service or the API keys provided.</p></li>
+</ul>
 <p>If you need to clear all caches and model lists (for a fresh start or troubleshooting), use:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>clear-caches
 </pre></div>
 </div>
-<p><strong>Note:</strong> For each LLM service directories are created in <code class="docutils literal notranslate"><span class="pre">data/llm</span></code>, for example <code class="docutils literal notranslate"><span class="pre">data/llm/openai</span></code>. Model list files (<code class="docutils literal notranslate"><span class="pre">models.json</span></code>, <code class="docutils literal notranslate"><span class="pre">models.txt</span></code>) are lists of available models for the LLM service. Cache files (<code class="docutils literal notranslate"><span class="pre">prompt_response_cache.pkl</span></code>) are prompt/response data from each LLM service.</p>
+<p><strong>Note:</strong> For each LLM service directories are created in <code class="docutils literal notranslate"><span class="pre">data/llm</span></code>, for example <code class="docutils literal notranslate"><span class="pre">data/llm/openai</span></code>. Model list files (<code class="docutils literal notranslate"><span class="pre">models.json</span></code>, <code class="docutils literal notranslate"><span class="pre">models.txt</span></code>) are lists of available models for the LLM service. Cache files (<code class="docutils literal notranslate"><span class="pre">prompt_response_cache.pkl</span></code>, <code class="docutils literal notranslate"><span class="pre">prompt_response_cache.json</span></code>) are prompt/response data from each LLM service.</p>
 </section>
 <section id="run-tests-and-build-documentation">
 <h2>4. Run Tests and Build Documentation<a class="headerlink" href="#run-tests-and-build-documentation" title="Link to this heading"></a></h2>
