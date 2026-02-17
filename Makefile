@@ -147,14 +147,10 @@ setup-llms:
 
 
 # Make a tag release on GitHub (usage: make release VERSION=x.y.z BRANCH=release/x.y.z)
-release:
+release: sync-feature
 	@echo "Making a tag release on GitHub for version $(VERSION) from branch $(BRANCH)..."
 	@if [ -z "$(VERSION)" ]; then \
 		echo "Error: VERSION variable not set. Usage: make release VERSION=x.y.z BRANCH=release/x.y.z"; \
-		exit 1; \
-	fi
-	@if [ -z "$(BRANCH)" ]; then \
-		echo "Error: BRANCH variable not set. Usage: make release VERSION=x.y.z BRANCH=release/x.y.z"; \
 		exit 1; \
 	fi
 	python3 scripts/release.py --version $(VERSION) --branch $(BRANCH)
