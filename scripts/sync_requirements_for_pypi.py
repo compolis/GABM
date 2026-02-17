@@ -13,7 +13,7 @@ import configparser
 from pathlib import Path
 import sys
 # Third-party imports
-import toml
+import tomlkit
 
 ROOT = Path(__file__).parent.parent
 REQ_TXT = ROOT / "requirements.txt"
@@ -38,16 +38,17 @@ if SETUP_CFG.exists():
     print(f"Updated install_requires in {SETUP_CFG}")
 
 
-# Update pyproject.toml if present (safe TOML edit)
+# Update pyproject.toml if present (preserve formatting with tomlkit)
 if PYPROJECT.exists():
     with open(PYPROJECT, encoding="utf-8") as f:
-        pyproject_data = toml.load(f)
-    if "project" not in pyproject_data:
+        pyproject_doc = tomlkit.parse(f.read())
+    if "project" not in pyproject_doc:
         print(f"[project] section missing in {PYPROJECT}", file=sys.stderr)
         sys.exit(1)
-    pyproject_data["project"]["dependencies"] = reqs
+    # Replace dependencies array, preserving formatting
+    pyproject_doc["project"]["dependencies"] = tomlkit.array(reqs)
     with open(PYPROJECT, 'w', encoding='utf-8') as f:
-        toml.dump(pyproject_data, f)
+        f.write(tomlkit.dumps(pyproject_doc))
     print(f"Updated dependencies in {PYPROJECT}")
 
 print("Requirements sync complete.")

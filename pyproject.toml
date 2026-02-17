@@ -1,5 +1,5 @@
 [build-system]
-requires = [ "setuptools>=61.0", "wheel",]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -8,17 +8,19 @@ version = "0.2.0"
 description = "Generative Agent-Based Model (GABM) framework."
 readme = "README-pypi.md"
 requires-python = ">=3.12"
-classifiers = [ "Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License", "Operating System :: OS Independent",]
-dependencies = [ "openai==2.21.0", "google-generativeai==0.4.1", "httpx==0.28.1", "deepseek==1.0.0", "transformers==5.1.0", "torch==2.10.0",]
-[[project.authors]]
-name = "GABM Contributors"
-email = "agdturner@gmail.com"
-
-[project.license]
-text = "BSD-3-Clause"
+license = {text = "BSD License"}
+authors = [
+    {name = "GABM Contributors", email = "agdturner@gmail.com"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent"
+]
+dependencies = ['openai==2.21.0', 'google-generativeai==0.4.1', 'httpx==0.28.1', 'deepseek==1.0.0', 'transformers==5.1.0', 'torch==2.10.0']
 
 [tool.setuptools]
-packages = [ "gabm",]
+package-dir = {"" = "src"}
+packages = ["gabm"]
 
-[tool.setuptools.package-dir]
-"" = "src"
+
