@@ -71,7 +71,11 @@ def test_llm(llm, module, service_class, api_key, model, prompt):
 def main():
     logging.info("\n--- GABM LLM Integration Test ---\n")
     # Load API keys
-    api_keys = read_api_keys('data/api_key.csv')
+    try:
+        api_keys = read_api_keys('data/api_key.csv')
+    except (FileNotFoundError, ValueError) as e:
+        logging.error(f"Failed to load API keys: {e}\nPlease ensure 'data/api_key.csv' exists and is valid. See API_KEYS.md for setup instructions.")
+        sys.exit(1)
     # Optionally set HF_TOKEN for Hugging Face if present and not already set
     if 'huggingface' in api_keys and not os.environ.get('HF_TOKEN'):
         os.environ['HF_TOKEN'] = api_keys['huggingface']
