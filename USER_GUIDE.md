@@ -64,6 +64,31 @@ pip freeze > requirements.txt
 ```
 
 
+#### Optional: Local LLM Support
+
+By default, GABM installs only the dependencies needed for hosted LLM providers (OpenAI, Google, DeepSeek, etc.).
+If you want to run LLMs locally (e.g., downloaded from Hugging Face), you need additional dependencies:
+
+- torch
+- transformers
+
+These are listed in requirements-local-llm.txt in the project root.
+
+To install with local LLM support, use:
+
+```bash
+pip install gabm[llm-local]
+```
+
+Or, manually install from requirements-local-llm.txt:
+
+```bash
+pip install -r requirements-local-llm.txt
+```
+
+This keeps the core installation lightweight for users who only use hosted LLMs.
+
+
 ### Set Up API Keys
 
 Create `data/api_key.csv` with your API keys. For all supported LLM providers (including PublicAI/Apertus), see [API_KEYS.md](API_KEYS.md) for up-to-date details and instructions.

@@ -16,6 +16,7 @@ DOC_FILES = [
     "DEV_QUICKSTART.md",
     "requirements.txt",
     "requirements-dev.txt",
+    "requirements-local-llm.txt",
     "API_KEYS.md",
     "HUGGING_FACE.md",
     "ROADMAP.md",
