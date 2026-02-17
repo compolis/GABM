@@ -18,6 +18,7 @@ You must sign up with each LLM provider to obtain an API key:
 You can also add your [Hugging Face](https://huggingface.co/) token for downloading private or gated models:
 
 ```csv
+api,key
 openai,sk-...
 deepseek,sk-...
 genai,YOUR_GOOGLE_KEY

@@ -12,11 +12,11 @@
 Notable changes are to be documented in this file.
 
 
-## [0.2.0] - Unreleased
+## [0.2.0] - 2026-02-17
 - Implemented class architecture for LLM services
 - Added PublicAI LLM service
 - Added Apertus LLM model that can optionally be used locally 
-- ...
+- New scripts to compile [PyPI specific README](README-pypi.md)
 
 
 ## [0.1.1] - 2026-02-12
