@@ -8,15 +8,12 @@ __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 
-
+# Standard library imports
 import configparser
 from pathlib import Path
 import sys
-try:
-    import toml
-except ImportError:
-    print("Please install the 'toml' package: pip install toml", file=sys.stderr)
-    sys.exit(1)
+# Third-party imports
+import toml
 
 ROOT = Path(__file__).parent.parent
 REQ_TXT = ROOT / "requirements.txt"
