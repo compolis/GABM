@@ -22,8 +22,6 @@ import os
 from pathlib import Path
 import pickle
 from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple, Union
-# Local imports
-from .utils import extract_text_from_response as default_extract
 
 
 def safe_api_call(api_name: str) -> Callable:
@@ -212,15 +210,11 @@ def cache_and_log(
             logger.error(f"Failed to write cache: {e}")
     # Write JSONL log
     jsonl_path.parent.mkdir(parents=True, exist_ok=True)
-    if extract_text_from_response is None:
-        extract_fn = default_extract
-    else:
-        extract_fn = extract_text_from_response
     log_entry = {
         "timestamp": datetime.utcnow().isoformat() + "Z",
         "model": model,
         "prompt": prompt,
-        "response": extract_fn(response),
+        "response": extract_text_from_response(response),
     }
     if extra:
         log_entry.update(extra)
