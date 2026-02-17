@@ -4,8 +4,9 @@
 > Install from [requirements-local-llm.txt](requirements-local-llm.txt) in the project root, or use the [llm-local] extra as outlined in the [User Guide](USER_GUIDE.md#optional-local-llm-support).
 
 
-```# Requirements for running local LLMs (downloaded from Hugging Face)
+````
+# Requirements for running local LLMs (downloaded from Hugging Face)
 torch==2.10.0
 transformers==5.1.0
 
-```
+````

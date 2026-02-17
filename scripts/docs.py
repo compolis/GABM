@@ -215,6 +215,22 @@ def main():
     Main function to copy files and update links.
     """
     logger.info("Starting update_docs_assets.py script")
+    # Generate API documentation .rst files using sphinx-apidoc
+    apidoc_output = os.path.join(DOCS, '_autosummary')
+    src_dir = os.path.join(ROOT, 'src', 'gabm')
+    os.makedirs(apidoc_output, exist_ok=True)
+    logger.info(f"Running sphinx-apidoc for {src_dir} -> {apidoc_output}")
+    try:
+        import subprocess
+        subprocess.run([
+            'sphinx-apidoc',
+            '-o', apidoc_output,
+            src_dir,
+            '--force', '--separate'
+        ], check=True)
+        logger.info("sphinx-apidoc completed successfully.")
+    except Exception as e:
+        logger.error(f"sphinx-apidoc failed: {e}")
     # Copy files from project root
     for fname in DOC_FILES:
         src = os.path.join(ROOT, fname)
@@ -254,9 +270,9 @@ def main():
                         "> Install from [requirements-local-llm.txt](requirements-local-llm.txt) in the project root, or use the [llm-local] extra as outlined in the [User Guide](USER_GUIDE.md#optional-local-llm-support).\n"
                     )
                 with open(dst_md, "w", encoding="utf-8") as f:
-                    f.write(f"{heading}\n\n{note}\n\n```")
+                    f.write(f"{heading}\n\n{note}\n\n````\n")
                     f.write(content)
-                    f.write("\n```")
+                    f.write("\n````")
                 logger.info(f"Copied and formatted: {fname} -> {md_name}")
                 continue
             # Special handling for README.md from project root
