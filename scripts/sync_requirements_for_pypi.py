@@ -8,10 +8,15 @@ __version__ = "0.1.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 
-# Standard library imports
+
 import configparser
 from pathlib import Path
-import re
+import sys
+try:
+    import toml
+except ImportError:
+    print("Please install the 'toml' package: pip install toml", file=sys.stderr)
+    sys.exit(1)
 
 ROOT = Path(__file__).parent.parent
 REQ_TXT = ROOT / "requirements.txt"
@@ -22,31 +27,30 @@ PYPROJECT = ROOT / "pyproject.toml"
 with open(REQ_TXT, encoding="utf-8") as f:
     reqs = [line.strip() for line in f if line.strip() and not line.startswith('#')]
 
-# Update setup.cfg if present
+# Update setup.cfg if present (robust INI update)
 if SETUP_CFG.exists():
     config = configparser.ConfigParser()
+    config.optionxform = str  # preserve case
     config.read(SETUP_CFG)
     if 'options' not in config:
         config['options'] = {}
-    config['options']['install_requires'] = '\n' + '\n'.join(reqs)
+    # Indent each requirement for correct format
+    config['options']['install_requires'] = '\n' + '\n'.join(f'    {r}' for r in reqs)
     with open(SETUP_CFG, 'w', encoding='utf-8') as f:
         config.write(f)
     print(f"Updated install_requires in {SETUP_CFG}")
 
-# Update pyproject.toml if present
+
+# Update pyproject.toml if present (safe TOML edit)
 if PYPROJECT.exists():
     with open(PYPROJECT, encoding="utf-8") as f:
-        pyproject = f.read()
-    # Replace [project] dependencies = [...]
-    new_deps = '\n'.join([f'    "{r}",' for r in reqs])
-    pyproject_new = re.sub(
-        r'(\[project\][^\[]*?dependencies\s*=\s*\[)[^\]]*?(\])',
-        lambda m: m.group(1) + '\n' + new_deps + '\n' + m.group(2),
-        pyproject,
-        flags=re.DOTALL
-    )
+        pyproject_data = toml.load(f)
+    if "project" not in pyproject_data:
+        print(f"[project] section missing in {PYPROJECT}", file=sys.stderr)
+        sys.exit(1)
+    pyproject_data["project"]["dependencies"] = reqs
     with open(PYPROJECT, 'w', encoding='utf-8') as f:
-        f.write(pyproject_new)
+        toml.dump(pyproject_data, f)
     print(f"Updated dependencies in {PYPROJECT}")
 
 print("Requirements sync complete.")

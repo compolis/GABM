@@ -56,7 +56,7 @@ The `data/logs` directory should contain the following file:
 The `data/logs/llm` directory should contain the following files:
 - `deepseek.log`
 - `genai.log`
-- `openai.log`,
+- `openai.log`
 - `publicai.log`
 
 The `data/llm` directory should contain directories for each of the LLM services that accepted the API keys provided and provided a response to the prompt given by running the main program.

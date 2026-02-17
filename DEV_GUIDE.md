@@ -261,6 +261,16 @@ To release a new version of GABM to [PyPI](https://pypi.org/), follow these step
 6. **Verify Release:**
 	- Check the PyPI page and test installation as a user ensuring the instructions in the [User Guide](USER_GUIDE.md) work.
 
+To help recover from accidental corruption, template copies of the main packaging metadata files are provided:
+
+- `setup.cfg.template`
+- `pyproject.toml.template`
+
+If you need to reset `setup.cfg` or `pyproject.toml`, copy these templates over the originals.
+
+**Note:** These templates should be updated if you make structural changes to the originals. Bear in mind that the originals are processed to insert the dependency requirements from requirements.txt.
+
+
 For more details, see the [Python Packaging User Guide](https://packaging.python.org/).
 
 
