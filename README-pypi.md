@@ -41,25 +41,33 @@ pip install gabm
 ```
 
 ## Run the Main Program
-From the project root:
+When you run GABM (e.g., with `python3 -m gabm`), the default behavior is to execute an Agent-Based Model (ABM) simulation. Here’s what happens:
 
-```bash
-python3 -m gabm
-```
+### Agent Groups and Opinions
 
-Depending on what LLM services are running and working, and what LLM API Keys are provided and valid, you will get different console messages and files created in the `data` directory.
+- The simulation creates three groups of agents: Negative, Positive, and Neutral.
+- You can configure the number of agents in each group by editing variables at the top of the main script.
+- Negative agents start with an opinion of -1.0, Positive agents with 1.0, and Neutral agents with 0.0.
 
+### Communication Rounds
 
-The `data/logs` directory should contain the following file:
-- `run_main.log`
+- The simulation runs for several rounds (configurable).
+- In each round, agents from the Negative and Positive groups communicate with randomly selected Neutral agents.
+- When a Neutral agent communicates, both the Neutral agent and the other agent update their opinions to the average of their current opinions. This models opinion mixing and convergence.
 
-The `data/logs/llm` directory should contain the following files:
-- `deepseek.log`
-- `genai.log`
-- `openai.log`
-- `publicai.log`
+### Output and Visualization
 
-The `data/llm` directory should contain directories for each of the LLM services that accepted the API keys provided and provided a response to the prompt given by running the main program.
+- The simulation logs the state of the environment and the average opinion after each round to `data/logs/run_main.log`.
+- After the simulation, a boxplot is generated showing the distribution of agent opinions at each round. This plot is saved to `data/output/test.png`.
+- The boxplot helps visualize how opinions change and converge over time.
+- The `data/logs` directory should contain `run_main.log`.
+
+### Customization
+
+- You can change the number of agents in each group, the number of rounds, and other parameters by editing the main script.
+- The random seed is set for reproducibility, so results are consistent across runs unless you change the seed.
+
+This ABM demonstration is a starting point, it does not show how LLMs can be used in an ABM yet!
 
 ## Documentation
 Full documentation: https://compolis.github.io/GABM/

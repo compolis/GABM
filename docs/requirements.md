@@ -10,9 +10,12 @@
 
 # LLM API dependencies
 openai==2.21.0
-#anthropic==0.25.6
-google-generativeai==0.4.1
+#anthropic==0.81.0
+google-genai==0.8.0
 httpx==0.28.1
 deepseek==1.0.0
+
+# For plotting
+matplotlib==3.10.8
 
 ````
