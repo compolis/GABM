@@ -12,6 +12,16 @@
 Notable changes are to be documented in this file.
 
 
+## [0.2.1] - 2026-02-18
+- ABM simulation now runs by default: agents are grouped as Negative, Positive, and Neutral, and communicate to mix opinions over several rounds.
+- Added matplotlib boxplot output to visualize opinion change over time (saved to data/output/test.png).
+- Group sizes and simulation parameters are now easily configurable in the main script.
+- Random seed set for reproducibility.
+- Updated USER_GUIDE.md: added a new section "What Happens When You Run GABM?" and updated the Table of Contents to reflect the new ABM simulation behavior and outputs.
+- Migrated LLM integration from deprecated `google-generativeai` to the new `google-genai` API, updating authentication and model listing logic.
+- Extended and improved the test suite to cover all LLM service classes (OpenAI, GenAI, DeepSeek, PublicAI, and local LLMs), ensuring robust and maintainable LLM integration.
+
+
 ## [0.2.0] - 2026-02-17
 - Implemented class architecture for LLM services
 - Added PublicAI LLM service

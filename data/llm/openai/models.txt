@@ -1,4 +1,4 @@
-Available OpenAI models:
+Available openai models:
 
 Model ID: gpt-4-0613
   Owned by: openai
@@ -123,10 +123,6 @@ Model ID: gpt-4o-mini
 Model ID: gpt-4o-2024-08-06
   Owned by: system
   Created: 1722814719
-
-Model ID: chatgpt-4o-latest
-  Owned by: system
-  Created: 1723515131
 
 Model ID: gpt-4o-audio-preview
   Owned by: system

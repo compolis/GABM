@@ -9,13 +9,13 @@ Features:
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
 import ast
 # Google Generative AI client library
-import google.generativeai as genai
+import google.genai as genai
 # LLM service base class
 from .llm_service import LLMService
 # Shared utilities for caching and logging
@@ -44,7 +44,9 @@ class GenAIService(LLMService):
         if cached is not None:
             return cached
         cache_key = (message, model)
-        genai.configure(api_key=api_key)
+        # Set API key for google-genai
+        import os
+        os.environ["GOOGLE_API_KEY"] = api_key
         def api_call():
             model_obj = genai.GenerativeModel(model)
             response = model_obj.generate_content(message)
@@ -73,32 +75,34 @@ class GenAIService(LLMService):
 
     def list_available_models(self, api_key):
         """
-        List available GenAI models and write them to JSON and TXT files.
-        Args:
-            api_key (str): Google API key.
+        Return a static list of supported Gemini model names for google-genai.
+        The google-genai package does not provide a list_models() method.
+        See: https://ai.google.dev/models/gemini
         """
-        genai.configure(api_key=api_key)
-        models = list(genai.list_models())
+        models = [
+            {"name": "models/gemini-1.5-pro-latest", "description": "Gemini 1.5 Pro (latest)", "supported_generation_methods": ["generateContent"]},
+            {"name": "models/gemini-1.0-pro", "description": "Gemini 1.0 Pro", "supported_generation_methods": ["generateContent"]},
+            {"name": "models/gemini-1.0-pro-001", "description": "Gemini 1.0 Pro (001)", "supported_generation_methods": ["generateContent"]},
+            {"name": "models/gemini-1.0-pro-latest", "description": "Gemini 1.0 Pro (latest)", "supported_generation_methods": ["generateContent"]},
+            {"name": "models/gemini-1.0-pro-vision-latest", "description": "Gemini 1.0 Pro Vision (latest)", "supported_generation_methods": ["generateContent"]},
+            {"name": "models/gemini-1.5-flash-latest", "description": "Gemini 1.5 Flash (latest)", "supported_generation_methods": ["generateContent"]},
+        ]
         def formatter(model):
-            if isinstance(model, dict):
-                name = model.get('name', 'N/A')
-                desc = model.get('description', 'N/A')
-                methods = model.get('supported_generation_methods', 'N/A')
-            else:
-                name = getattr(model, 'name', 'N/A')
-                desc = getattr(model, 'description', 'N/A')
-                methods = getattr(model, 'supported_generation_methods', 'N/A')
+            name = model.get('name', 'N/A')
+            desc = model.get('description', 'N/A')
+            methods = model.get('supported_generation_methods', 'N/A')
             return (f"Model ID: {name}\n"
                     f"  Description: {desc}\n"
                     f"  Supported methods: {methods}\n")
-        self.logger.info("Writing GenAI model list to JSON and TXT.")
+        self.logger.info("Writing GenAI model list to JSON and TXT (static list, see https://ai.google.dev/models/gemini).")
         write_models_json_and_txt(
             models,
             self.cache_path.parent / "models.json",
             self.cache_path.parent / "models.txt",
             formatter,
-            header=f"Available {self.SERVICE_NAME.capitalize()} models and supported methods:\n"
+            header=f"Available {self.SERVICE_NAME.capitalize()} models and supported methods (static list):\n"
         )
+        return models
 
     def extract_text_from_response(self, response):
         """

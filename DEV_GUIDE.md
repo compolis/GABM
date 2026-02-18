@@ -5,6 +5,7 @@
 - [Overview](#overview)
 - [Contributing and Communicating](#contributing-and-communicating)
 - [Project Directories](#project-directories)
+- [Testing](#testing)
 - [Python Package Entry Point](#python-package-entry-point)
 - [Makefile Targets](#makefile-targets)
 - [Developing Documentation](#developing-documentation)
@@ -12,7 +13,7 @@
 - [Branch Protection](#branch-protection)
 - [Maintainer Guide](#maintainer-guide)
 - [Branch and Documentation Deployment](#branch-and-documentation-deployment)
-- [GitHub Copilot](#github-copilot)
+- [GitHub Copilot](#gitHub-copilot)
 - [Managing Logs and Caches](#managing-logs-and-caches)
 - [Files and Directories Excluded from Version Control](#files-and-directories-excluded-from-version-control)
 - [LLM Service Architecture](#llm-service-architecture)
@@ -37,7 +38,7 @@ For the time being, please communicate by commenting on or raising new [GABM Rep
 You should have forked the [GABM Repository](https://github.com/compolis/GABM) to your own GitHub account.
 
 The general workflow for contributing is to:
-- Create a check out new local branch:
+- Create and check out new local branch:
 
 ```bash
 git branch my_feature
@@ -74,9 +75,10 @@ git push origin my_feature
 - The PR will be reviewed and once the review is complete, changes will be merged.
 
 
+
 ## Project Directories
 
-The root project directory contains documentation and files needed for building and deploying. The sub-diretories include: 
+The root project directory contains documentation and files needed for building and deploying. The sub-directories include:
 - `data/`: For data including log files
 - `dist/`: Output directory for built distributions.
 - `docs/`: Documentation
@@ -84,6 +86,54 @@ The root project directory contains documentation and files needed for building 
 - `src/`: Python source code
 - `tests/`: Test suite for src
 - `venv-build-test/`: For temporary virtual environments created for testing.
+
+
+## Testing
+
+GABM uses pytest for all unit and integration tests. The test suite is located in the `tests/` directory and covers core functionality, LLM integration, and more.
+
+### Running Tests
+
+- Run all tests with:
+  ```bash
+  make test
+  ```
+  or
+  ```bash
+  pytest
+  ```
+- By default, tests marked as `@pytest.mark.slow` are excluded (see `pytest.ini`). To run slow tests:
+  ```bash
+  pytest -m slow
+  ```
+
+### Adding Tests
+
+- Add new tests to the `tests/` directory, following pytest conventions.
+- Use descriptive function names and docstrings.
+- Mark slow or resource-intensive tests with `@pytest.mark.slow` and set a timeout if needed (e.g., `@pytest.mark.timeout(120)`).
+
+### Local LLM Tests
+
+- Tests for local LLMs (e.g., Apertus) are marked as slow and excluded by default.
+- These tests require significant hardware resources (GPU recommended). On CPU-only machines, inference may be extremely slow or impractical.
+- If you wish to run local LLM tests, ensure your environment is suitable and use `pytest -m slow`.
+
+### Test Workflow
+
+- All PRs must pass the test workflow before merging.
+- See `.github/workflows/test.yml` for CI details.
+
+
+### Useful pytest markers
+- `@pytest.mark.slow`: Marks tests as slow; skipped by default.
+- `@pytest.mark.timeout(seconds)`: Fails test if it exceeds the given duration.
+
+### Note on DeprecationWarnings
+You may see DeprecationWarnings related to protobuf (e.g., `Type google._upb._message.MessageMapContainer uses PyType_Spec with a metaclass that has custom tp_new`).
+These warnings originate from upstream libraries (e.g., Google APIs) and do not affect GABM functionality. They are expected to be resolved in future library updates. You can safely ignore them unless they cause test failures or runtime errors.
+
+For more details, see the pytest documentation: https://docs.pytest.org/en/latest/
 
 
 ## Python Package Entry Point

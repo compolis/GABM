@@ -1,177 +1,25 @@
-Available GenAI models and supported methods:
+Available Genai models and supported methods (static list):
 
-Model ID: models/gemini-2.5-flash
-  Description: Stable version of Gemini 2.5 Flash, our mid-size multimodal model that supports up to 1 million tokens, released in June of 2025.
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
+Model ID: models/gemini-1.5-pro-latest
+  Description: Gemini 1.5 Pro (latest)
+  Supported methods: ['generateContent']
 
-Model ID: models/gemini-2.5-pro
-  Description: Stable release (June 17th, 2025) of Gemini 2.5 Pro
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
+Model ID: models/gemini-1.0-pro
+  Description: Gemini 1.0 Pro
+  Supported methods: ['generateContent']
 
-Model ID: models/gemini-2.0-flash
-  Description: Gemini 2.0 Flash
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
+Model ID: models/gemini-1.0-pro-001
+  Description: Gemini 1.0 Pro (001)
+  Supported methods: ['generateContent']
 
-Model ID: models/gemini-2.0-flash-001
-  Description: Stable version of Gemini 2.0 Flash, our fast and versatile multimodal model for scaling across diverse tasks, released in January of 2025.
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
+Model ID: models/gemini-1.0-pro-latest
+  Description: Gemini 1.0 Pro (latest)
+  Supported methods: ['generateContent']
 
-Model ID: models/gemini-2.0-flash-lite-001
-  Description: Stable version of Gemini 2.0 Flash-Lite
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
+Model ID: models/gemini-1.0-pro-vision-latest
+  Description: Gemini 1.0 Pro Vision (latest)
+  Supported methods: ['generateContent']
 
-Model ID: models/gemini-2.0-flash-lite
-  Description: Gemini 2.0 Flash-Lite
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
-
-Model ID: models/gemini-exp-1206
-  Description: Experimental release (March 25th, 2025) of Gemini 2.5 Pro
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
-
-Model ID: models/gemini-2.5-flash-preview-tts
-  Description: Gemini 2.5 Flash Preview TTS
-  Supported methods: ['countTokens', 'generateContent']
-
-Model ID: models/gemini-2.5-pro-preview-tts
-  Description: Gemini 2.5 Pro Preview TTS
-  Supported methods: ['countTokens', 'generateContent', 'batchGenerateContent']
-
-Model ID: models/gemma-3-1b-it
-  Description: 
-  Supported methods: ['generateContent', 'countTokens']
-
-Model ID: models/gemma-3-4b-it
-  Description: 
-  Supported methods: ['generateContent', 'countTokens']
-
-Model ID: models/gemma-3-12b-it
-  Description: 
-  Supported methods: ['generateContent', 'countTokens']
-
-Model ID: models/gemma-3-27b-it
-  Description: 
-  Supported methods: ['generateContent', 'countTokens']
-
-Model ID: models/gemma-3n-e4b-it
-  Description: 
-  Supported methods: ['generateContent', 'countTokens']
-
-Model ID: models/gemma-3n-e2b-it
-  Description: 
-  Supported methods: ['generateContent', 'countTokens']
-
-Model ID: models/gemini-flash-latest
-  Description: Latest release of Gemini Flash
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
-
-Model ID: models/gemini-flash-lite-latest
-  Description: Latest release of Gemini Flash-Lite
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
-
-Model ID: models/gemini-pro-latest
-  Description: Latest release of Gemini Pro
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
-
-Model ID: models/gemini-2.5-flash-lite
-  Description: Stable version of Gemini 2.5 Flash-Lite, released in July of 2025
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
-
-Model ID: models/gemini-2.5-flash-image
-  Description: Gemini 2.5 Flash Preview Image
-  Supported methods: ['generateContent', 'countTokens', 'batchGenerateContent']
-
-Model ID: models/gemini-2.5-flash-preview-09-2025
-  Description: Gemini 2.5 Flash Preview Sep 2025
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
-
-Model ID: models/gemini-2.5-flash-lite-preview-09-2025
-  Description: Preview release (Septempber 25th, 2025) of Gemini 2.5 Flash-Lite
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
-
-Model ID: models/gemini-3-pro-preview
-  Description: Gemini 3 Pro Preview
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
-
-Model ID: models/gemini-3-flash-preview
-  Description: Gemini 3 Flash Preview
-  Supported methods: ['generateContent', 'countTokens', 'createCachedContent', 'batchGenerateContent']
-
-Model ID: models/gemini-3-pro-image-preview
-  Description: Gemini 3 Pro Image Preview
-  Supported methods: ['generateContent', 'countTokens', 'batchGenerateContent']
-
-Model ID: models/nano-banana-pro-preview
-  Description: Gemini 3 Pro Image Preview
-  Supported methods: ['generateContent', 'countTokens', 'batchGenerateContent']
-
-Model ID: models/gemini-robotics-er-1.5-preview
-  Description: Gemini Robotics-ER 1.5 Preview
-  Supported methods: ['generateContent', 'countTokens']
-
-Model ID: models/gemini-2.5-computer-use-preview-10-2025
-  Description: Gemini 2.5 Computer Use Preview 10-2025
-  Supported methods: ['generateContent', 'countTokens']
-
-Model ID: models/deep-research-pro-preview-12-2025
-  Description: Preview release (December 12th, 2025) of Deep Research Pro
-  Supported methods: ['generateContent', 'countTokens']
-
-Model ID: models/gemini-embedding-001
-  Description: Obtain a distributed representation of a text.
-  Supported methods: ['embedContent', 'countTextTokens', 'countTokens', 'asyncBatchEmbedContent']
-
-Model ID: models/aqa
-  Description: Model trained to return answers to questions that are grounded in provided sources, along with estimating answerable probability.
-  Supported methods: ['generateAnswer']
-
-Model ID: models/imagen-4.0-generate-preview-06-06
-  Description: Vertex served Imagen 4.0 model
-  Supported methods: ['predict']
-
-Model ID: models/imagen-4.0-ultra-generate-preview-06-06
-  Description: Vertex served Imagen 4.0 ultra model
-  Supported methods: ['predict']
-
-Model ID: models/imagen-4.0-generate-001
-  Description: Vertex served Imagen 4.0 model
-  Supported methods: ['predict']
-
-Model ID: models/imagen-4.0-ultra-generate-001
-  Description: Vertex served Imagen 4.0 ultra model
-  Supported methods: ['predict']
-
-Model ID: models/imagen-4.0-fast-generate-001
-  Description: Vertex served Imagen 4.0 Fast model
-  Supported methods: ['predict']
-
-Model ID: models/veo-2.0-generate-001
-  Description: Vertex served Veo 2 model. Access to this model requires billing to be enabled on the associated Google Cloud Platform account. Please visit https://console.cloud.google.com/billing to enable it.
-  Supported methods: ['predictLongRunning']
-
-Model ID: models/veo-3.0-generate-001
-  Description: Veo 3
-  Supported methods: ['predictLongRunning']
-
-Model ID: models/veo-3.0-fast-generate-001
-  Description: Veo 3 fast
-  Supported methods: ['predictLongRunning']
-
-Model ID: models/veo-3.1-generate-preview
-  Description: Veo 3.1
-  Supported methods: ['predictLongRunning']
-
-Model ID: models/veo-3.1-fast-generate-preview
-  Description: Veo 3.1 fast
-  Supported methods: ['predictLongRunning']
-
-Model ID: models/gemini-2.5-flash-native-audio-latest
-  Description: Latest release of Gemini 2.5 Flash Native Audio
-  Supported methods: ['countTokens', 'bidiGenerateContent']
-
-Model ID: models/gemini-2.5-flash-native-audio-preview-09-2025
-  Description: Gemini 2.5 Flash Native Audio Preview 09-2025
-  Supported methods: ['countTokens', 'bidiGenerateContent']
-
-Model ID: models/gemini-2.5-flash-native-audio-preview-12-2025
-  Description: Gemini 2.5 Flash Native Audio Preview 12-2025
-  Supported methods: ['countTokens', 'bidiGenerateContent']
+Model ID: models/gemini-1.5-flash-latest
+  Description: Gemini 1.5 Flash (latest)
+  Supported methods: ['generateContent']

@@ -66,9 +66,11 @@ class OpenAIService(LLMService):
 
     def list_available_models(self, api_key):
         """
-        List available OpenAI models and write them to JSON and TXT files.
+        List available OpenAI models and write them to JSON and TXT files. Returns the list.
         Args:
             api_key (str): OpenAI API key.
+        Returns:
+            list: List of model objects.
         """
         client = OpenAI(api_key=api_key)
         models = client.models.list()
@@ -84,3 +86,4 @@ class OpenAIService(LLMService):
             formatter,
             header=f"Available {self.SERVICE_NAME} models:\n"
         )
+        return models

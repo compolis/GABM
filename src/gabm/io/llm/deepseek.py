@@ -70,18 +70,19 @@ class DeepSeekService(LLMService):
 
     def list_available_models(self, api_key):
         """
-        List available DeepSeek models and write them to JSON and TXT files.
+        List available DeepSeek models and write them to JSON and TXT files. Returns the list.
         Args:
             api_key (str): DeepSeek API key.
+        Returns:
+            list: List of model objects.
         """
         try:
             client = DeepSeekAPI(api_key=api_key)
         except Exception as e:
             self.logger.error(f"[deepseek] Could not initialize DeepSeekAPI: {e}")
-            return
+            return None
         models = client.get_models()
         self.logger.info(f"Raw model list from DeepSeek: {models}")
-        # Handle both string and dict model formats
         def formatter(model):
             if isinstance(model, dict):
                 return (f"Model ID: {model.get('id', model.get('model', 'N/A'))}\n"
@@ -96,3 +97,4 @@ class DeepSeekService(LLMService):
             formatter,
             header=f"Available {self.SERVICE_NAME.capitalize()} models:\n"
         )
+        return models

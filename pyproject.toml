@@ -17,13 +17,10 @@ classifiers = [
     "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent"
 ]
-dependencies = ['openai==2.21.0', 'google-generativeai==0.4.1', 'httpx==0.28.1', 'deepseek==1.0.0']
+dependencies = ['openai==2.21.0', 'google-genai>=0.8.0', 'httpx==0.28.1', 'deepseek==1.0.0']
 
 [project.optional-dependencies]
-llm-local = [
-    'torch==2.10.0',
-    'transformers==5.1.0'
-]
+llm-local = ['torch==2.10.0', 'transformers==5.1.0']
 
 [tool.setuptools]
 package-dir = {"" = "src"}
