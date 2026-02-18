@@ -63,13 +63,14 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Change Log</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">[0.2.0] - 2026-02-17</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">[0.1.1] - 2026-02-12</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">[0.2.1] - 2026-02-18</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">[0.2.0] - 2026-02-17</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">[0.1.1] - 2026-02-12</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#packaging-build-workflow">Packaging &amp; Build Workflow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#logging">Logging</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">[0.1.0] - 2026-02-06</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">[0.1.0] - 2026-02-06</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="DEVELOPMENT_HISTORY.html">Development History</a></li>
@@ -118,7 +119,19 @@
 <p>Notable changes are to be documented in this file.</p>
 </section>
 <section id="id1">
-<h2>[0.2.0] - 2026-02-17<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<h2>[0.2.1] - 2026-02-18<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>ABM simulation now runs by default: agents are grouped as Negative, Positive, and Neutral, and communicate to mix opinions over several rounds.</p></li>
+<li><p>Added matplotlib boxplot output to visualize opinion change over time (saved to data/output/test.png).</p></li>
+<li><p>Group sizes and simulation parameters are now easily configurable in the main script.</p></li>
+<li><p>Random seed set for reproducibility.</p></li>
+<li><p>Updated USER_GUIDE.md: added a new section “What Happens When You Run GABM?” and updated the Table of Contents to reflect the new ABM simulation behavior and outputs.</p></li>
+<li><p>Migrated LLM integration from deprecated <code class="docutils literal notranslate"><span class="pre">google-generativeai</span></code> to the new <code class="docutils literal notranslate"><span class="pre">google-genai</span></code> API, updating authentication and model listing logic.</p></li>
+<li><p>Extended and improved the test suite to cover all LLM service classes (OpenAI, GenAI, DeepSeek, PublicAI, and local LLMs), ensuring robust and maintainable LLM integration.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>[0.2.0] - 2026-02-17<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Implemented class architecture for LLM services</p></li>
 <li><p>Added PublicAI LLM service</p></li>
@@ -126,8 +139,8 @@
 <li><p>New scripts to compile <a class="reference internal" href="#README-pypi.md"><span class="xref myst">PyPI specific README</span></a></p></li>
 </ul>
 </section>
-<section id="id2">
-<h2>[0.1.1] - 2026-02-12<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h2>[0.1.1] - 2026-02-12<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Updated documentation to improve clarity and completeness</p></li>
 <li><p>Standardized Markdown formatting and removed YAML front matter from guides.</p></li>
@@ -150,8 +163,8 @@
 </ul>
 </section>
 </section>
-<section id="id3">
-<h2>[0.1.0] - 2026-02-06<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<section id="id4">
+<h2>[0.1.0] - 2026-02-06<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Initial private release.</p></li>
 <li><p>Project Documentation initialised</p>

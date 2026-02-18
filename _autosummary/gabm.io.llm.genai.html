@@ -47,7 +47,9 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">gabm</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="gabm.html">gabm package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="gabm.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="gabm.abm.html">gabm.abm package</a></li>
 <li class="toctree-l4 current"><a class="reference internal" href="gabm.io.html">gabm.io package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gabm.utils.html">gabm.utils package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="gabm.html#module-gabm">Module contents</a></li>
@@ -135,11 +137,9 @@ Logs a warning if no text is found.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gabm.io.llm.genai.GenAIService.list_available_models">
 <span class="sig-name descname"><span class="pre">list_available_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.io.llm.genai.GenAIService.list_available_models" title="Link to this definition"></a></dt>
-<dd><p>List available GenAI models and write them to JSON and TXT files.
-Args:</p>
-<blockquote>
-<div><p>api_key (str): Google API key.</p>
-</div></blockquote>
+<dd><p>Return a static list of supported Gemini model names for google-genai.
+The google-genai package does not provide a list_models() method.
+See: <a class="reference external" href="https://ai.google.dev/models/gemini">https://ai.google.dev/models/gemini</a></p>
 </dd></dl>
 
 <dl class="py method">

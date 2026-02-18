@@ -66,11 +66,16 @@
 <li class="toctree-l4"><a class="reference internal" href="#using-local-apertus-llm-models">Using Local Apertus LLM Models</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#run-the-main-program">Run the Main Program</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-models">Running Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-happens-when-you-run-gabm">What Happens When You Run GABM?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#agent-groups-and-opinions">Agent Groups and Opinions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#communication-rounds">Communication Rounds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-and-visualization">Output and Visualization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customization">Customization</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#managing-logs-and-caches">Managing Logs and Caches</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-llm-modules">Using LLM Modules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
@@ -123,6 +128,7 @@
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
 <li><p><a class="reference internal" href="#getting-started"><span class="xref myst">Getting Started</span></a></p></li>
 <li><p><a class="reference internal" href="#troubleshooting"><span class="xref myst">Troubleshooting</span></a></p></li>
+<li><p><a class="reference internal" href="#what-happens-when-you-run-gabm"><span class="xref myst">What Happens When You Run GABM?</span></a></p></li>
 <li><p><a class="reference internal" href="#running-models"><span class="xref myst">Running Models</span></a></p></li>
 <li><p><a class="reference internal" href="#managing-logs-and-caches"><span class="xref myst">Managing Logs and Caches</span></a></p></li>
 <li><p><a class="reference internal" href="#additional-resources"><span class="xref myst">Additional Resources</span></a></p></li>
@@ -197,38 +203,50 @@ If you want to run LLMs locally (e.g., downloaded from Hugging Face), you need a
 <p>Create <code class="docutils literal notranslate"><span class="pre">data/api_key.csv</span></code> with your API keys. For all supported LLM providers (including PublicAI/Apertus), see <a class="reference internal" href="API_KEYS.html"><span class="std std-doc">API_KEYS.md</span></a> for up-to-date details and instructions.</p>
 <section id="using-local-apertus-llm-models">
 <h4>Using Local Apertus LLM Models<a class="headerlink" href="#using-local-apertus-llm-models" title="Link to this heading"></a></h4>
-<p>For instructions on downloading, authenticating, and using local Apertus LLM models (and other Hugging Face models), see <a class="reference internal" href="HUGGING_FACE.html"><span class="std std-doc">HUGGING_FACE.md</span></a>. This guide covers both local and API-based usage, storage requirements, authentication, and troubleshooting.</p>
+<p>For instructions on downloading, authenticating, and using local Apertus LLM models (and other Hugging Face models), see <a class="reference internal" href="HUGGING_FACE.html"><span class="std std-doc">HUGGING_FACE.md</span></a>.</p>
 </section>
-</section>
-<section id="run-the-main-program">
-<h3>Run the Main Program<a class="headerlink" href="#run-the-main-program" title="Link to this heading"></a></h3>
-<p>From the project root:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>gabm
-</pre></div>
-</div>
-<p>Depending on what LLM services are running and working, and what LLM API Keys are provided and valid, you will get different console messages and files created in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">data/logs</span></code> directory should contain the following file:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">run_main.log</span></code></p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">data/logs/llm</span></code> directory should contain the following files:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">deepseek.log</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">genai.log</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">openai.log</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">publicai.log</span></code></p></li>
-</ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">data/llm</span></code> directory should contain directories for each of the LLM services that accepted the API keys provided and provided a response to the prompt given by running the main program.</p>
 </section>
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
-<p>If you experience issues when installing, configuring, or running GABM, check here for guidance or updates. As the project evolves, troubleshooting tips and frequently asked questions will be added here.</p>
 <p>If you encounter errors, check your Python version and that all dependencies are installed. If all versions match the documentation, please peruse <a class="reference external" href="https://github.com/compolis/GABM/issues">reported issues</a>, comment on a relevent open issue or <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue</a> to request support.</p>
 </section>
-<section id="running-models">
-<h2>Running Models<a class="headerlink" href="#running-models" title="Link to this heading"></a></h2>
-<p>It is intended that you will be able to configure and run models. This section is to explain how to do this. This documentation will be updated in due course…</p>
+<section id="what-happens-when-you-run-gabm">
+<h2>What Happens When You Run GABM?<a class="headerlink" href="#what-happens-when-you-run-gabm" title="Link to this heading"></a></h2>
+<p>When you run GABM (e.g., with <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">gabm</span></code>), the default behavior is to execute an Agent-Based Model (ABM) simulation. Here’s what happens:</p>
+<section id="agent-groups-and-opinions">
+<h3>Agent Groups and Opinions<a class="headerlink" href="#agent-groups-and-opinions" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The simulation creates three groups of agents: Negative, Positive, and Neutral.</p></li>
+<li><p>You can configure the number of agents in each group by editing variables at the top of the main script.</p></li>
+<li><p>Negative agents start with an opinion of -1.0, Positive agents with 1.0, and Neutral agents with 0.0.</p></li>
+</ul>
+</section>
+<section id="communication-rounds">
+<h3>Communication Rounds<a class="headerlink" href="#communication-rounds" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The simulation runs for several rounds (configurable).</p></li>
+<li><p>In each round, agents from the Negative and Positive groups communicate with randomly selected Neutral agents.</p></li>
+<li><p>When a Neutral agent communicates, both the Neutral agent and the other agent update their opinions to the average of their current opinions. This models opinion mixing and convergence.</p></li>
+</ul>
+</section>
+<section id="output-and-visualization">
+<h3>Output and Visualization<a class="headerlink" href="#output-and-visualization" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The simulation logs the state of the environment and the average opinion after each round to <code class="docutils literal notranslate"><span class="pre">data/logs/run_main.log</span></code>.</p></li>
+<li><p>After the simulation, a boxplot is generated showing the distribution of agent opinions at each round. This plot is saved to <code class="docutils literal notranslate"><span class="pre">data/output/test.png</span></code>.</p></li>
+<li><p>The boxplot helps visualize how opinions change and converge over time.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">data/logs</span></code> directory should contain <code class="docutils literal notranslate"><span class="pre">run_main.log</span></code>.</p></li>
+</ul>
+</section>
+<section id="customization">
+<h3>Customization<a class="headerlink" href="#customization" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>You can change the number of agents in each group, the number of rounds, and other parameters by editing the main script.</p></li>
+<li><p>The random seed is set for reproducibility, so results are consistent across runs unless you change the seed.</p></li>
+</ul>
+<p>This ABM demonstration is a starting point, it does not show how LLMs can be used in an ABM yet!</p>
+</section>
 </section>
 <section id="managing-logs-and-caches">
 <h2>Managing Logs and Caches<a class="headerlink" href="#managing-logs-and-caches" title="Link to this heading"></a></h2>
@@ -272,6 +290,8 @@ If you want to run LLMs locally (e.g., downloaded from Hugging Face), you need a
 <span class="n">service</span><span class="o">.</span><span class="n">list_available_models</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;&lt;User_API_Key&gt;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">data/logs/llm</span></code> directory is for log files for each LLM service used.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">data/llm</span></code> directory is for caches of prompts and responses for each LLM service used.</p>
 </section>
 <section id="additional-resources">
 <h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading"></a></h2>

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gabm.io.llm.deepseek module &mdash; GABM  documentation</title>
+  <title>gabm.abm package &mdash; GABM  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
@@ -19,8 +19,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="gabm.io.llm.genai module" href="gabm.io.llm.genai.html" />
-    <link rel="prev" title="gabm.io.llm.apertus module" href="gabm.io.llm.apertus.html" /> 
+    <link rel="next" title="gabm.abm.agents package" href="gabm.abm.agents.html" />
+    <link rel="prev" title="gabm package" href="gabm.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,8 +47,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">gabm</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="gabm.html">gabm package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="gabm.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="gabm.abm.html">gabm.abm package</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="gabm.io.html">gabm.io package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">gabm.abm package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gabm.io.html">gabm.io package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="gabm.utils.html">gabm.utils package</a></li>
 </ul>
 </li>
@@ -95,11 +95,9 @@
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="modules.html">gabm</a></li>
           <li class="breadcrumb-item"><a href="gabm.html">gabm package</a></li>
-          <li class="breadcrumb-item"><a href="gabm.io.html">gabm.io package</a></li>
-          <li class="breadcrumb-item"><a href="gabm.io.llm.html">gabm.io.llm package</a></li>
-      <li class="breadcrumb-item active">gabm.io.llm.deepseek module</li>
+      <li class="breadcrumb-item active">gabm.abm package</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/_autosummary/gabm.io.llm.deepseek.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/_autosummary/gabm.abm.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -107,66 +105,53 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-gabm.io.llm.deepseek">
-<span id="gabm-io-llm-deepseek-module"></span><h1>gabm.io.llm.deepseek module<a class="headerlink" href="#module-gabm.io.llm.deepseek" title="Link to this heading"></a></h1>
-<p>For sending prompts to DeepSeek, receiving responses, and managing model lists and cache.</p>
-<p>Features:
-- Send prompts to DeepSeek and cache responses for reproducibility.
-- List available models from the DeepSeek API and save as both JSON and TXT for validation and reference.
-- Validate selected model names against the cached JSON model list.
-- Unified workflow for model management, matching other LLM modules in the project.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="gabm.io.llm.deepseek.DeepSeekService">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.io.llm.deepseek.</span></span><span class="sig-name descname"><span class="pre">DeepSeekService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.io.llm.deepseek.DeepSeekService" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="gabm.io.llm.llm_service.html#gabm.io.llm.llm_service.LLMService" title="gabm.io.llm.llm_service.LLMService"><code class="xref py py-class docutils literal notranslate"><span class="pre">LLMService</span></code></a></p>
-<p>Service class for DeepSeek LLM integration. 
-Handles prompt sending, response caching, logging, and model listing.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="gabm.io.llm.deepseek.DeepSeekService.SERVICE_NAME">
-<span class="sig-name descname"><span class="pre">SERVICE_NAME</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'deepseek'</span></span><a class="headerlink" href="#gabm.io.llm.deepseek.DeepSeekService.SERVICE_NAME" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gabm.io.llm.deepseek.DeepSeekService.list_available_models">
-<span class="sig-name descname"><span class="pre">list_available_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.io.llm.deepseek.DeepSeekService.list_available_models" title="Link to this definition"></a></dt>
-<dd><p>List available DeepSeek models and write them to JSON and TXT files. Returns the list.
-Args:</p>
-<blockquote>
-<div><p>api_key (str): DeepSeek API key.</p>
-</div></blockquote>
-<dl class="simple">
-<dt>Returns:</dt><dd><p>list: List of model objects.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gabm.io.llm.deepseek.DeepSeekService.send">
-<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deepseek-model-1'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.io.llm.deepseek.DeepSeekService.send" title="Link to this definition"></a></dt>
-<dd><p>Send a prompt to DeepSeek and return the response object.
-Caches and logs the response for reproducibility.
-Args:</p>
-<blockquote>
-<div><p>api_key (str): DeepSeek API key.
-message (str): Prompt to send.
-model (str): Model name (default: “deepseek-model-1”).</p>
-</div></blockquote>
-<dl class="simple">
-<dt>Returns:</dt><dd><p>Response object (dict) or None on error.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+  <section id="gabm-abm-package">
+<h1>gabm.abm package<a class="headerlink" href="#gabm-abm-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gabm.abm.agents.html">gabm.abm.agents package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gabm.abm.agents.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gabm.abm.agents.agent.html">gabm.abm.agents.agent module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gabm.abm.agents.agent.html#gabm.abm.agents.agent.Agent"><code class="docutils literal notranslate"><span class="pre">Agent</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gabm.abm.agents.group.html">gabm.abm.agents.group module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gabm.abm.agents.group.html#gabm.abm.agents.group.Group"><code class="docutils literal notranslate"><span class="pre">Group</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gabm.abm.agents.html#module-gabm.abm.agents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gabm.abm.environment.html">gabm.abm.environment module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gabm.abm.environment.html#gabm.abm.environment.Environment"><code class="docutils literal notranslate"><span class="pre">Environment</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-gabm.abm">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gabm.abm" title="Link to this heading"></a></h2>
+<p>GABM: Generative Agent-Based Model framework abm package.</p>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="gabm.io.llm.apertus.html" class="btn btn-neutral float-left" title="gabm.io.llm.apertus module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="gabm.io.llm.genai.html" class="btn btn-neutral float-right" title="gabm.io.llm.genai module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="gabm.html" class="btn btn-neutral float-left" title="gabm package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gabm.abm.agents.html" class="btn btn-neutral float-right" title="gabm.abm.agents package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

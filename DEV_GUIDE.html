@@ -57,6 +57,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#contributing-and-communicating">Contributing and Communicating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#project-directories">Project Directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-tests">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-tests">Adding Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#local-llm-tests">Local LLM Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-workflow">Test Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#useful-pytest-markers">Useful pytest markers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#note-on-deprecationwarnings">Note on DeprecationWarnings</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#python-package-entry-point">Python Package Entry Point</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#makefile-targets">Makefile Targets</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#target-chaining-dry-and-consistency">Target Chaining, DRY, and Consistency</a></li>
@@ -126,6 +135,7 @@
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
 <li><p><a class="reference internal" href="#contributing-and-communicating"><span class="xref myst">Contributing and Communicating</span></a></p></li>
 <li><p><a class="reference internal" href="#project-directories"><span class="xref myst">Project Directories</span></a></p></li>
+<li><p><a class="reference internal" href="#testing"><span class="xref myst">Testing</span></a></p></li>
 <li><p><a class="reference internal" href="#python-package-entry-point"><span class="xref myst">Python Package Entry Point</span></a></p></li>
 <li><p><a class="reference internal" href="#makefile-targets"><span class="xref myst">Makefile Targets</span></a></p></li>
 <li><p><a class="reference internal" href="#developing-documentation"><span class="xref myst">Developing Documentation</span></a></p></li>
@@ -133,7 +143,7 @@
 <li><p><a class="reference internal" href="#branch-protection"><span class="xref myst">Branch Protection</span></a></p></li>
 <li><p><a class="reference internal" href="#maintainer-guide"><span class="xref myst">Maintainer Guide</span></a></p></li>
 <li><p><a class="reference internal" href="#branch-and-documentation-deployment"><span class="xref myst">Branch and Documentation Deployment</span></a></p></li>
-<li><p><a class="reference internal" href="#github-copilot"><span class="xref myst">GitHub Copilot</span></a></p></li>
+<li><p><a class="reference internal" href="#gitHub-copilot"><span class="xref myst">GitHub Copilot</span></a></p></li>
 <li><p><a class="reference internal" href="#managing-logs-and-caches"><span class="xref myst">Managing Logs and Caches</span></a></p></li>
 <li><p><a class="reference internal" href="#files-and-directories-excluded-from-version-control"><span class="xref myst">Files and Directories Excluded from Version Control</span></a></p></li>
 <li><p><a class="reference internal" href="#llm-service-architecture"><span class="xref myst">LLM Service Architecture</span></a></p></li>
@@ -153,7 +163,7 @@
 <p>You should have forked the <a class="reference external" href="https://github.com/compolis/GABM">GABM Repository</a> to your own GitHub account.</p>
 <p>The general workflow for contributing is to:</p>
 <ul class="simple">
-<li><p>Create a check out new local branch:</p></li>
+<li><p>Create and check out new local branch:</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>my_feature
 git<span class="w"> </span>checkout<span class="w"> </span>my_feature
@@ -201,7 +211,7 @@ make<span class="w"> </span>docs
 </section>
 <section id="project-directories">
 <h2>Project Directories<a class="headerlink" href="#project-directories" title="Link to this heading"></a></h2>
-<p>The root project directory contains documentation and files needed for building and deploying. The sub-diretories include:</p>
+<p>The root project directory contains documentation and files needed for building and deploying. The sub-directories include:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">data/</span></code>: For data including log files</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">dist/</span></code>: Output directory for built distributions.</p></li>
@@ -211,6 +221,65 @@ make<span class="w"> </span>docs
 <li><p><code class="docutils literal notranslate"><span class="pre">tests/</span></code>: Test suite for src</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">venv-build-test/</span></code>: For temporary virtual environments created for testing.</p></li>
 </ul>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>GABM uses pytest for all unit and integration tests. The test suite is located in the <code class="docutils literal notranslate"><span class="pre">tests/</span></code> directory and covers core functionality, LLM integration, and more.</p>
+<section id="running-tests">
+<h3>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading"></a></h3>
+<ul>
+<li><p>Run all tests with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span><span class="nb">test</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest
+</pre></div>
+</div>
+</li>
+<li><p>By default, tests marked as <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.slow</span></code> are excluded (see <code class="docutils literal notranslate"><span class="pre">pytest.ini</span></code>). To run slow tests:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest<span class="w"> </span>-m<span class="w"> </span>slow
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="adding-tests">
+<h3>Adding Tests<a class="headerlink" href="#adding-tests" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add new tests to the <code class="docutils literal notranslate"><span class="pre">tests/</span></code> directory, following pytest conventions.</p></li>
+<li><p>Use descriptive function names and docstrings.</p></li>
+<li><p>Mark slow or resource-intensive tests with <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.slow</span></code> and set a timeout if needed (e.g., <code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.timeout(120)</span></code>).</p></li>
+</ul>
+</section>
+<section id="local-llm-tests">
+<h3>Local LLM Tests<a class="headerlink" href="#local-llm-tests" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Tests for local LLMs (e.g., Apertus) are marked as slow and excluded by default.</p></li>
+<li><p>These tests require significant hardware resources (GPU recommended). On CPU-only machines, inference may be extremely slow or impractical.</p></li>
+<li><p>If you wish to run local LLM tests, ensure your environment is suitable and use <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">-m</span> <span class="pre">slow</span></code>.</p></li>
+</ul>
+</section>
+<section id="test-workflow">
+<h3>Test Workflow<a class="headerlink" href="#test-workflow" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>All PRs must pass the test workflow before merging.</p></li>
+<li><p>See <code class="docutils literal notranslate"><span class="pre">.github/workflows/test.yml</span></code> for CI details.</p></li>
+</ul>
+</section>
+<section id="useful-pytest-markers">
+<h3>Useful pytest markers<a class="headerlink" href="#useful-pytest-markers" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.slow</span></code>: Marks tests as slow; skipped by default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;pytest.mark.timeout(seconds)</span></code>: Fails test if it exceeds the given duration.</p></li>
+</ul>
+</section>
+<section id="note-on-deprecationwarnings">
+<h3>Note on DeprecationWarnings<a class="headerlink" href="#note-on-deprecationwarnings" title="Link to this heading"></a></h3>
+<p>You may see DeprecationWarnings related to protobuf (e.g., <code class="docutils literal notranslate"><span class="pre">Type</span> <span class="pre">google._upb._message.MessageMapContainer</span> <span class="pre">uses</span> <span class="pre">PyType_Spec</span> <span class="pre">with</span> <span class="pre">a</span> <span class="pre">metaclass</span> <span class="pre">that</span> <span class="pre">has</span> <span class="pre">custom</span> <span class="pre">tp_new</span></code>).
+These warnings originate from upstream libraries (e.g., Google APIs) and do not affect GABM functionality. They are expected to be resolved in future library updates. You can safely ignore them unless they cause test failures or runtime errors.</p>
+<p>For more details, see the pytest documentation: https://docs.pytest.org/en/latest/</p>
+</section>
 </section>
 <section id="python-package-entry-point">
 <h2>Python Package Entry Point<a class="headerlink" href="#python-package-entry-point" title="Link to this heading"></a></h2>
