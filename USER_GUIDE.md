@@ -1,10 +1,12 @@
 # User Guide
 
 
+
 ## Table of Contents
 - [Overview](#overview)
 - [Getting Started](#getting-started)
 - [Troubleshooting](#troubleshooting)
+- [What Happens When You Run GABM?](#what-happens-when-you-run-gabm)
 - [Running Models](#running-models)
 - [Managing Logs and Caches](#managing-logs-and-caches)
 - [Additional Resources](#additional-resources)
@@ -36,7 +38,7 @@ If you use [Conda](https://conda.org/) which is distributed with[Anaconda](https
 conda create -n gabm
 conda activate gabm
 conda install python=3.12
-pip install gabm==0.1.4
+pip install gabm==0.2.1
 ```
 
 You can then check all installed dependencies and create your own requirements file with:
@@ -54,7 +56,7 @@ Install from [PyPI](https://pypi.org/) using [Pip](https://pypi.org/project/pip/
 python3 -m venv gabm-venv
 source gabm-venv/bin/activate  # On Windows: gabm-venv\\Scripts\\activate
 pip install --upgrade pip
-pip install gabm==0.1.4
+pip install gabm==0.2.1
 ```
 
 You can then check installed dependencies with:
@@ -97,42 +99,44 @@ Create `data/api_key.csv` with your API keys. For all supported LLM providers (i
 
 #### Using Local Apertus LLM Models
 
-For instructions on downloading, authenticating, and using local Apertus LLM models (and other Hugging Face models), see [HUGGING_FACE.md](HUGGING_FACE.md). This guide covers both local and API-based usage, storage requirements, authentication, and troubleshooting.
-
-
-### Run the Main Program
-
-From the project root:
-
-```bash
-python3 -m gabm
-```
-
-Depending on what LLM services are running and working, and what LLM API Keys are provided and valid, you will get different console messages and files created in the `data` directory.
-
-
-The `data/logs` directory should contain the following file:
-- `run_main.log`
-
-The `data/logs/llm` directory should contain the following files:
-- `deepseek.log`
-- `genai.log`
-- `openai.log`
-- `publicai.log`
-
-The `data/llm` directory should contain directories for each of the LLM services that accepted the API keys provided and provided a response to the prompt given by running the main program.
+For instructions on downloading, authenticating, and using local Apertus LLM models (and other Hugging Face models), see [HUGGING_FACE.md](HUGGING_FACE.md).
 
 
 ## Troubleshooting
 
-If you experience issues when installing, configuring, or running GABM, check here for guidance or updates. As the project evolves, troubleshooting tips and frequently asked questions will be added here.
-
 If you encounter errors, check your Python version and that all dependencies are installed. If all versions match the documentation, please peruse [reported issues](https://github.com/compolis/GABM/issues), comment on a relevent open issue or [open an issue](https://github.com/compolis/GABM/issues/new/choose) to request support.
 
 
-## Running Models
 
-It is intended that you will be able to configure and run models. This section is to explain how to do this. This documentation will be updated in due course...
+## What Happens When You Run GABM?
+
+When you run GABM (e.g., with `python3 -m gabm`), the default behavior is to execute an Agent-Based Model (ABM) simulation. Here’s what happens:
+
+### Agent Groups and Opinions
+
+- The simulation creates three groups of agents: Negative, Positive, and Neutral.
+- You can configure the number of agents in each group by editing variables at the top of the main script.
+- Negative agents start with an opinion of -1.0, Positive agents with 1.0, and Neutral agents with 0.0.
+
+### Communication Rounds
+
+- The simulation runs for several rounds (configurable).
+- In each round, agents from the Negative and Positive groups communicate with randomly selected Neutral agents.
+- When a Neutral agent communicates, both the Neutral agent and the other agent update their opinions to the average of their current opinions. This models opinion mixing and convergence.
+
+### Output and Visualization
+
+- The simulation logs the state of the environment and the average opinion after each round to `data/logs/run_main.log`.
+- After the simulation, a boxplot is generated showing the distribution of agent opinions at each round. This plot is saved to `data/output/test.png`.
+- The boxplot helps visualize how opinions change and converge over time.
+- The `data/logs` directory should contain `run_main.log`.
+
+### Customization
+
+- You can change the number of agents in each group, the number of rounds, and other parameters by editing the main script.
+- The random seed is set for reproducibility, so results are consistent across runs unless you change the seed.
+
+This ABM demonstration is a starting point, it does not show how LLMs can be used in an ABM yet!
 
 
 ## Managing Logs and Caches
@@ -180,6 +184,10 @@ service = OpenAIService()
 response = service.send(api_key="<User_API_Key>", message="Hello!", model="gpt-3.5-turbo")
 service.list_available_models(api_key="<User_API_Key>")
 ```
+
+The `data/logs/llm` directory is for log files for each LLM service used.
+
+The `data/llm` directory is for caches of prompts and responses for each LLM service used.
 
 
 ## Additional Resources

@@ -75,9 +75,11 @@ class PublicAIService(LLMService):
 
     def list_available_models(self, api_key):
         """
-        List available PublicAI models and write them to JSON and TXT files.
+        List available PublicAI models and write them to JSON and TXT files. Returns the list.
         Args:
             api_key (str): PublicAI API key.
+        Returns:
+            list: List of model objects.
         """
         url = "https://api.publicai.co/v1/models"
         headers = {
@@ -103,3 +105,4 @@ class PublicAIService(LLMService):
             formatter,
             header="Available PublicAI models:\n"
         )
+        return models

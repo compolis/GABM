@@ -186,12 +186,6 @@
     "owned_by": "system"
   },
   {
-    "id": "chatgpt-4o-latest",
-    "created": 1723515131,
-    "object": "model",
-    "owned_by": "system"
-  },
-  {
     "id": "gpt-4o-audio-preview",
     "created": 1727460443,
     "object": "model",
