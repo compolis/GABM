@@ -55,7 +55,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pre-requisits">Pre-requisits</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#initial-set-up">Initial set up</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#using-conda">Using Conda</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-python-3-12">Using Python &gt;=3.12</a></li>
@@ -68,8 +68,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#what-happens-when-you-run-gabm">What Happens When You Run GABM?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#run-the-main-program">Run the Main Program</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#agent-groups-and-opinions">Agent Groups and Opinions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#communication-rounds">Communication Rounds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#output-and-visualization">Output and Visualization</a></li>
@@ -78,6 +77,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#managing-logs-and-caches">Managing Logs and Caches</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-llm-modules">Using LLM Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional Resources</a></li>
 </ul>
 </li>
@@ -127,10 +127,10 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p></li>
 <li><p><a class="reference internal" href="#getting-started"><span class="xref myst">Getting Started</span></a></p></li>
-<li><p><a class="reference internal" href="#troubleshooting"><span class="xref myst">Troubleshooting</span></a></p></li>
-<li><p><a class="reference internal" href="#what-happens-when-you-run-gabm"><span class="xref myst">What Happens When You Run GABM?</span></a></p></li>
-<li><p><a class="reference internal" href="#running-models"><span class="xref myst">Running Models</span></a></p></li>
+<li><p><a class="reference internal" href="#run-the-main-program"><span class="xref myst">Run the Main Program</span></a></p></li>
 <li><p><a class="reference internal" href="#managing-logs-and-caches"><span class="xref myst">Managing Logs and Caches</span></a></p></li>
+<li><p><a class="reference internal" href="#using-llm-modules"><span class="xref myst">Using LLM Modules</span></a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting"><span class="xref myst">Troubleshooting</span></a></p></li>
 <li><p><a class="reference internal" href="#additional-resources"><span class="xref myst">Additional Resources</span></a></p></li>
 </ul>
 </section>
@@ -141,8 +141,8 @@
 </section>
 <section id="getting-started">
 <h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
-<section id="pre-requisits">
-<h3>Pre-requisits<a class="headerlink" href="#pre-requisits" title="Link to this heading"></a></h3>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h3>
 <p>You will either need a local installation of <a class="reference external" href="https://conda.org/">Conda</a>, or <a class="reference external" href="https://www.python.org/">Python</a> at or above version 3.12. To check your default Python version run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>--version
 </pre></div>
@@ -152,11 +152,11 @@
 <h3>Initial set up<a class="headerlink" href="#initial-set-up" title="Link to this heading"></a></h3>
 <section id="using-conda">
 <h4>Using Conda<a class="headerlink" href="#using-conda" title="Link to this heading"></a></h4>
-<p>If you use <a class="reference external" href="https://conda.org/">Conda</a> which is distributed with<a class="reference external" href="https://www.anaconda.com/">Anaconda</a>/<a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a> and <a class="reference external" href="https://github.com/conda-forge/miniforge">Miniforge</a> you can set up GABM in a new environment as follows:</p>
+<p>If you use <a class="reference external" href="https://conda.org/">Conda</a> which is distributed with <a class="reference external" href="https://www.anaconda.com/">Anaconda</a>, <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>, or <a class="reference external" href="https://github.com/conda-forge/miniforge">Miniforge</a>, you can set up GABM in a new environment as follows:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>gabm
 conda<span class="w"> </span>activate<span class="w"> </span>gabm
 conda<span class="w"> </span>install<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.2.1
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.2.2
 </pre></div>
 </div>
 <p>You can then check all installed dependencies and create your own requirements file with:</p>
@@ -170,7 +170,7 @@ pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm<
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>gabm-venv
 <span class="nb">source</span><span class="w"> </span>gabm-venv/bin/activate<span class="w">  </span><span class="c1"># On Windows: gabm-venv\\Scripts\\activate</span>
 pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.2.1
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.2.2
 </pre></div>
 </div>
 <p>You can then check installed dependencies with:</p>
@@ -207,12 +207,8 @@ If you want to run LLMs locally (e.g., downloaded from Hugging Face), you need a
 </section>
 </section>
 </section>
-<section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
-<p>If you encounter errors, check your Python version and that all dependencies are installed. If all versions match the documentation, please peruse <a class="reference external" href="https://github.com/compolis/GABM/issues">reported issues</a>, comment on a relevent open issue or <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue</a> to request support.</p>
-</section>
-<section id="what-happens-when-you-run-gabm">
-<h2>What Happens When You Run GABM?<a class="headerlink" href="#what-happens-when-you-run-gabm" title="Link to this heading"></a></h2>
+<section id="run-the-main-program">
+<h2>Run the Main Program<a class="headerlink" href="#run-the-main-program" title="Link to this heading"></a></h2>
 <p>When you run GABM (e.g., with <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">gabm</span></code>), the default behavior is to execute an Agent-Based Model (ABM) simulation. Here’s what happens:</p>
 <section id="agent-groups-and-opinions">
 <h3>Agent Groups and Opinions<a class="headerlink" href="#agent-groups-and-opinions" title="Link to this heading"></a></h3>
@@ -250,9 +246,8 @@ If you want to run LLMs locally (e.g., downloaded from Hugging Face), you need a
 </section>
 <section id="managing-logs-and-caches">
 <h2>Managing Logs and Caches<a class="headerlink" href="#managing-logs-and-caches" title="Link to this heading"></a></h2>
-<p>GABM creates logs and caches (such as prompt/response caches for LLM services) that can grow large over time. Logs for LLM modules are now written to:</p>
-<p>data/logs/llm/</p>
-<p>Check these log files for troubleshooting LLM API issues, prompt/response errors, or cache problems. User friendly ways to tidy up logs and caches and compile data into reproducible research objects are being developed for a future release. More details will be provided as these features are implemented.</p>
+<p>GABM creates logs and caches (such as prompt/response caches for LLM services and logs for ABM runs) that can grow large over time. Logs for LLM modules are written to <code class="docutils literal notranslate"><span class="pre">data/logs/llm/</span></code>, and logs for ABM runs are written to <code class="docutils literal notranslate"><span class="pre">data/logs/run_main.log</span></code>.</p>
+<p>Check these log files for troubleshooting API issues, prompt/response errors, or cache problems. User-friendly ways to tidy up logs and caches and compile data into reproducible research objects are being developed for a future release. More details will be provided as these features are implemented.</p>
 </section>
 <section id="using-llm-modules">
 <h2>Using LLM Modules<a class="headerlink" href="#using-llm-modules" title="Link to this heading"></a></h2>
@@ -292,6 +287,10 @@ If you want to run LLMs locally (e.g., downloaded from Hugging Face), you need a
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">data/logs/llm</span></code> directory is for log files for each LLM service used.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">data/llm</span></code> directory is for caches of prompts and responses for each LLM service used.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<p>If you encounter errors, check your Python version and that all dependencies are installed. If all versions match the documentation, please peruse <a class="reference external" href="https://github.com/compolis/GABM/issues">reported issues</a>, comment on a relevant open issue or <a class="reference external" href="https://github.com/compolis/GABM/issues/new/choose">open an issue</a> to request support.</p>
 </section>
 <section id="additional-resources">
 <h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading"></a></h2>
