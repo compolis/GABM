@@ -91,7 +91,7 @@ def main():
     # Only include Installation section if install is not empty or just a stray '#'
     # Extract 'Run the Main Program' section from USER_GUIDE.md
     run_main_section = ""
-    run_main_match = re.search(r"### Run the Main Program(.*?)(?:\n## |\Z)", user_guide, re.DOTALL)
+    run_main_match = re.search(r"## Run the Main Program(.*?)(?:\n## |\Z)", user_guide, re.DOTALL)
     if run_main_match:
         run_main_section = run_main_match.group(1).strip()
 

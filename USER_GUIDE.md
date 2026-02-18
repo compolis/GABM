@@ -1,14 +1,13 @@
 # User Guide
 
 
-
 ## Table of Contents
 - [Overview](#overview)
 - [Getting Started](#getting-started)
-- [Troubleshooting](#troubleshooting)
-- [What Happens When You Run GABM?](#what-happens-when-you-run-gabm)
-- [Running Models](#running-models)
+- [Run the Main Program](#run-the-main-program)
 - [Managing Logs and Caches](#managing-logs-and-caches)
+- [Using LLM Modules](#using-llm-modules)
+- [Troubleshooting](#troubleshooting)
 - [Additional Resources](#additional-resources)
 
 
@@ -21,7 +20,7 @@ In the rest of the document "you" means you as a GABM user.
 
 ## Getting Started
 
-### Pre-requisits
+### Prerequisites
 
  You will either need a local installation of [Conda](https://conda.org/), or [Python](https://www.python.org/) at or above version 3.12. To check your default Python version run:
 
@@ -32,7 +31,7 @@ python3 --version
 ### Initial set up
 
 #### Using Conda
-If you use [Conda](https://conda.org/) which is distributed with[Anaconda](https://www.anaconda.com/)/[Miniconda](https://docs.conda.io/en/latest/miniconda.html) and [Miniforge](https://github.com/conda-forge/miniforge) you can set up GABM in a new environment as follows:
+If you use [Conda](https://conda.org/) which is distributed with [Anaconda](https://www.anaconda.com/), [Miniconda](https://docs.conda.io/en/latest/miniconda.html), or [Miniforge](https://github.com/conda-forge/miniforge), you can set up GABM in a new environment as follows:
 
 ```bash
 conda create -n gabm
@@ -102,13 +101,7 @@ Create `data/api_key.csv` with your API keys. For all supported LLM providers (i
 For instructions on downloading, authenticating, and using local Apertus LLM models (and other Hugging Face models), see [HUGGING_FACE.md](HUGGING_FACE.md).
 
 
-## Troubleshooting
-
-If you encounter errors, check your Python version and that all dependencies are installed. If all versions match the documentation, please peruse [reported issues](https://github.com/compolis/GABM/issues), comment on a relevent open issue or [open an issue](https://github.com/compolis/GABM/issues/new/choose) to request support.
-
-
-
-## What Happens When You Run GABM?
+## Run the Main Program
 
 When you run GABM (e.g., with `python3 -m gabm`), the default behavior is to execute an Agent-Based Model (ABM) simulation. Here’s what happens:
 
@@ -141,11 +134,9 @@ This ABM demonstration is a starting point, it does not show how LLMs can be use
 
 ## Managing Logs and Caches
 
-GABM creates logs and caches (such as prompt/response caches for LLM services) that can grow large over time. Logs for LLM modules are now written to:
+GABM creates logs and caches (such as prompt/response caches for LLM services and logs for ABM runs) that can grow large over time. Logs for LLM modules are written to `data/logs/llm/`, and logs for ABM runs are written to `data/logs/run_main.log`.
 
-  data/logs/llm/
-
-Check these log files for troubleshooting LLM API issues, prompt/response errors, or cache problems. User friendly ways to tidy up logs and caches and compile data into reproducible research objects are being developed for a future release. More details will be provided as these features are implemented.
+Check these log files for troubleshooting API issues, prompt/response errors, or cache problems. User-friendly ways to tidy up logs and caches and compile data into reproducible research objects are being developed for a future release. More details will be provided as these features are implemented.
 
 
 ## Using LLM Modules
@@ -188,6 +179,11 @@ service.list_available_models(api_key="<User_API_Key>")
 The `data/logs/llm` directory is for log files for each LLM service used.
 
 The `data/llm` directory is for caches of prompts and responses for each LLM service used.
+
+
+## Troubleshooting
+
+If you encounter errors, check your Python version and that all dependencies are installed. If all versions match the documentation, please peruse [reported issues](https://github.com/compolis/GABM/issues), comment on a relevant open issue or [open an issue](https://github.com/compolis/GABM/issues/new/choose) to request support.
 
 
 ## Additional Resources

@@ -5,6 +5,7 @@
 
 
 ````
+matplotlib
 # Development requirements for GABM
 # Install with: pip install -r requirements-dev.txt
 
@@ -13,10 +14,13 @@ pytest>=9.0.2,<10
 
 # LLM API dependencies
 openai>=2.21.0,<3
-#anthropic>=0.25.6,<0.26
-google-generativeai>=0.4.1,<0.5
-httpx>=0.28.1,<0.29
+#anthropic>=0.81.0,<2
+google-genai>=0.8.0,<2
+httpx>=0.28.1,<2
 deepseek>=1.0.0,<2
+
+# For plotting
+matplotlib>=3.10.8,<4
 
 # Dependencies for Apertus
 transformers>=5.1.0,<6
@@ -30,7 +34,7 @@ docutils>=0.22,<0.23
 
 # For building distributions
 build>=1.4.0,<2
-setuptools>=82.0.0,<70
+setuptools>=82.0.0
 wheel>=0.42.0,<1
 tomlkit>=0.14.0,<2
 
