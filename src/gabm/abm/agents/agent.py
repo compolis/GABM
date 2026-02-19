@@ -20,7 +20,7 @@ if TYPE_CHECKING:
 
 class Agent:
     """
-    An Agent is an entity within an Enviornment.
+    An Agent is an entity within an Environment.
     Attributes:
         id (int): Unique identifier for the agent.
         environment (Environment): The shared environment the agent belongs to.
