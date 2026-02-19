@@ -70,8 +70,4 @@ class Nation(Opinionated_Environment):
         """
         super().__init__(year=year, place=name)
         self.nation = nation
-        """
-        A dictionary to hold opinions.
-        The key is a short name, the value is a description.
-        """
         self.opinions = {}
