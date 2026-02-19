@@ -139,7 +139,7 @@ class Person(Animal):
         The key is a short name for the topic, and the value is an int opinion value.
         (e.g., {"positive": 5}, {"neutral": 0}, {"negative": -3}).
     """
-    def __init__(self, agent_id: int, environment: Opinionated_Environment,
+    def __init__(self, agent_id: int, environment: "Opinionated_Environment",
         year_of_birth: int = None, gender: int = None,
         opinions: dict = None):
         """
