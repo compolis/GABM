@@ -2,7 +2,7 @@
 # due to Python syntax rules for __future__ imports.
 from __future__ import annotations
 """
-Defines the Group class for collections of Agent instances.
+Group module for GABM.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
@@ -11,7 +11,8 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 from typing import TYPE_CHECKING, Set
 if TYPE_CHECKING:
-    from gabm.abm.agents.agent import Agent
+    # Agent is imported under TYPE_CHECKING to avoid circular imports, as Group and Agent reference each other.
+    from gabm.abm.agent import Agent
 
 class Group:
     """
@@ -68,12 +69,11 @@ class Group:
         """
         return tuple(self.members)
 
-class Opinionated_Group(Group):
+class OpinionatedGroup(Group):
     """
-    An Opinionated_Group is a Group that has opinions on various topics.
+    A Group that has opinions.
     Attributes:
-        opinions: A dictionary of opinions on various topics.
-        The key is a short name for the topic, and the value is an int opinion value.
+        opinions: A dictionary of opinions. The key is a short name, and the value is an int opinion value. The opinion value may map onto something else.
         (e.g., {"positive": 5}, {"neutral": 0}, {"negative": -3}).
     """
     def __init__(self, group_id: int, name: str = None, opinions: dict = None):

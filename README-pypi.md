@@ -55,11 +55,12 @@ When you run GABM (e.g., with `python3 -m gabm`), the default behavior is to exe
 - In each round, agents from the Negative and Positive groups communicate with randomly selected Neutral agents.
 - When a Neutral agent communicates, both the Neutral agent and the other agent update their opinions to the average of their current opinions. This models opinion mixing and convergence.
 
+
 ### Output and Visualization
 
 - The simulation logs the state of the environment and the average opinion after each round to `data/logs/run_main.log`.
-- After the simulation, a boxplot is generated showing the distribution of agent opinions at each round. This plot is saved to `data/output/test.png`.
-- The boxplot helps visualize how opinions change and converge over time.
+- After the simulation, a separate boxplot is generated for each opinion topic (negative, neutral, positive), showing the distribution of agent opinions at each round. These plots are saved as `opinions_negative.png`, `opinions_neutral.png`, and `opinions_positive.png` in `data/output`.
+- The boxplots help visualize how opinions change and converge over time for each topic. You should see positive and negative opinions mix and converge, while neutral opinions may behave differently depending on the communication rules.
 - The `data/logs` directory should contain `run_main.log`.
 
 ### Customization

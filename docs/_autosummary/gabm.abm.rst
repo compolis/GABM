@@ -1,21 +1,16 @@
 gabm.abm package
 ================
 
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 4
-
-   gabm.abm.agents
-
 Submodules
 ----------
 
 .. toctree::
    :maxdepth: 4
 
+   gabm.abm.agent
    gabm.abm.environment
+   gabm.abm.group
+   gabm.abm.opinion
 
 Module contents
 ---------------

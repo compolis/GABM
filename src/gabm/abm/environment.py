@@ -1,5 +1,5 @@
 """
-Defines the generic Environment class.
+Environment module for GABM.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
@@ -10,13 +10,13 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 # Standard library imports
 from typing import Dict
 # Local imports
-from gabm.abm.agents.agent import Agent
-from gabm.abm.agents.group import Group
+from gabm.abm.agent import Agent
+from gabm.abm.group import Group
 
 class Environment:
     """
-    The Environment class represents the shared context in which agents and groups interact.
-    It can be extended to represent specific types of environments (e.g., a Nation).
+    Represents the shared context in which Agent instances interact.
+    It can be extended to represent specific types of environment.
     Attributes:
         year (int): The current year in the simulation.
         place (str): The name of the place or environment.
@@ -40,34 +40,35 @@ class Environment:
         self.groups_active: Dict[int, Group] = {}
         self.groups_inactive: Dict[int, Group] = {}
 
-class Opinionated_Environment(Environment):
+class OpinionatedEnvironment(Environment):
     """
-    An extension of the Environment class that includes opinions.
+    An Environment with opinions.
     Attributes:
         opinions (Dict[str, str]): A dictionary to hold opinions.
         The key is a short name, the value is a description.
     """
-    def __init__(self, year: int = 2026, place: str = "Earth"):
+    def __init__(self, year: int = 2026, place: str = "Earth",
+    opinions: Dict[str, str] = None):
         super().__init__(year=year, place=place)
-        self.opinions = {}
+        self.opinions = opinions if opinions is not None else {}
 
-class Nation(Opinionated_Environment):
+class Nation(OpinionatedEnvironment):
     """
-    A specific type of Opinionated_Environment representing a nation.
+    An OpinionatedEnvironment representing a nation.
     Can be extended with nation-specific attributes and methods.
     Attributes:
-        opinions (Dict[str, str]): A dictionary to hold opinions.
-        The key is a short name, the value is a description.
         nation (str): The name of the nation (e.g., "United Kingdom").
     """
-    def __init__(self, name: str, year: int = 2026, nation: str = "United Kingdom"):
+    def __init__(self, year: int = 2026, place: str = "Earth", 
+    opinions: Dict[str, str] = None, nation: str = "United Kingdom"):
         """
         Initialize a Nation environment.
         Args:
-            name: The name of the nation.
             year: The current year in the simulation.
+            place: The name of the place or environment.
+            opinions: A dictionary of opinions, where the key is a short 
+            name and the value is a description.
             nation: The name of the nation (e.g., "United Kingdom").
         """
-        super().__init__(year=year, place=name)
+        super().__init__(year=year, place=place, opinions=opinions)
         self.nation = nation
-        self.opinions = {}

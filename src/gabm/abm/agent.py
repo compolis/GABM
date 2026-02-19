@@ -2,11 +2,11 @@
 # due to Python syntax rules for __future__ imports.
 from __future__ import annotations
 """
-Defines the generic Agent class.
+Agent module for GABM.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 
@@ -15,20 +15,25 @@ from typing import TYPE_CHECKING, Set
 import logging
 # TYPE_CHECKING is used to avoid circular imports.
 if TYPE_CHECKING:
-    from gabm.abm.environment import Environment, Opinionated_Environment
-    from gabm.abm.agents.group import Group, Opinionated_Group
+    from gabm.abm.environment import Environment, OpinionatedEnvironment
+    from gabm.abm.group import Group, Opinionated_Group
 
 class Agent:
     """
-    An Agent is an entity within an Environment.
+    For representing an entity within an Environment. 
+    The type annotation for environment is quoted as it is imported 
+    under TYPE_CHECKING to avoid circular imports.
     Attributes:
-        id (int): Unique identifier for the agent.
+        agent_id (int): Unique identifier for the agent.
         environment (Environment): The shared environment the agent belongs to.
         groups (Set[Group]): A set of groups that the agent belongs to.
     """
-    def __init__(self, agent_id: int, environment: Environment, opinion: float = 0.0):
+    def __init__(self, agent_id: int, environment: "Environment"):
         """
         Initialize.
+        Args:
+            agent_id: Unique identifier for the agent.
+            environment: The shared environment the agent belongs to.
         """
         self.id = agent_id
         self.environment = environment
@@ -66,20 +71,28 @@ class Agent:
 
 class Animal(Agent):
     """
-    Animal is an Agent with a year of birth and gender.
+    An Agent with a year of birth and gender.
+    The type annotation for environment is quoted as it is imported 
+    under TYPE_CHECKING to avoid circular imports.
     Attributes:
         year_of_birth (int): The year the animal was born.
         gender (int): The gender of the animal (0 is female, 1 is male, 2 is non-binary, None is not set).  
     """
-    def __init__(self, agent_id: int, environment: Environment,
+    def __init__(self, agent_id: int, environment: "Environment",
         year_of_birth: int = None, gender: int = None):
         """
-        Initialize
-        If year of birth is none, then the person is initialised with a 
-        year of birth that would make them 18 years old in the current 
-        year of the environment. This is just a default assumption to 
-        give them an age, but it can be overridden by providing a 
-        specific year_of_birth.
+        Initialize. If year of birth is none, then the instance is 
+        initialised with a year of birth that would make them 18 years 
+        old in the current year of the environment. If year_of_birth 
+        is a value greater than environment.year, then self.year_of_birth
+        is set to the current year in the environment with a warning. 
+        This avoids having agents with negative ages.
+        Args:
+            agent_id: Unique identifier for the agent.
+            environment: The shared environment the agent belongs to    
+            year_of_birth: The year the animal was born.
+            gender: The gender of the animal (0 is female, 1 is male, 
+            2 is non-binary, None is not set).
         """
         super().__init__(agent_id, environment)
         if year_of_birth is None:
@@ -101,7 +114,7 @@ class Animal(Agent):
             String representation of the Person.
         """
         super_str = super().__str__()
-        return f"{super_str}, year_of_birth={self.year_of_birth}, gender={self.get_Gender()}"
+        return f"{super_str}, year_of_birth={self.year_of_birth}, gender={self.get_gender()}"
 
     def __repr__(self):
         """
@@ -110,7 +123,7 @@ class Animal(Agent):
         """
         return self.__str__()
 
-    def get_Age(self) -> int:
+    def get_age(self) -> int:
         """
         Get the age in years based on the current year in the environment.
         Return:
@@ -120,7 +133,7 @@ class Animal(Agent):
             return None
         return self.environment.year - self.year_of_birth
 
-    def get_Gender(self) -> str:
+    def get_gender(self) -> str:
         """
         Get the gender as a string.
         Return:
@@ -133,22 +146,23 @@ class Animal(Agent):
 
 class Person(Animal):    
     """
-    A Person is an Animal with opinions that is part of an Opinionated_Environment.
+    An Animal with opinions that is part of an OpinionatedEnvironment.
+    The type annotation for environment is quoted as it is imported 
+    under TYPE_CHECKING to avoid circular imports.
     Attributes:
         opinions: A dictionary of opinions on various topics.
         The key is a short name for the topic, and the value is an int opinion value.
         (e.g., {"positive": 5}, {"neutral": 0}, {"negative": -3}).
     """
-    def __init__(self, agent_id: int, environment: "Opinionated_Environment",
+    def __init__(self, agent_id: int, environment: "OpinionatedEnvironment",
         year_of_birth: int = None, gender: int = None,
         opinions: dict = None):
         """
         Initialize
         """
         super().__init__(agent_id, environment, year_of_birth=year_of_birth, gender=gender)
-        if self.get_Age() > 200:
-            logging.warning(f"Age ({self.get_Age()}) is unusually high. Setting year_of_birth to be 200 years ago.")
-            self.year_of_birth = self.environment.year - 200
+        if self.get_age() > 200:
+            logging.warning(f"Age ({self.get_age()}) is unusually high.")
         self.opinions = opinions
 
     def __str__(self):
@@ -166,7 +180,7 @@ class Person(Animal):
         """
         return self.__str__()
         
-    def get_Opinion(self, topic: str) -> int:
+    def get_opinion(self, topic: str) -> int:
         """
         Get the opinion value on a specific topic.
         Args:
@@ -178,7 +192,7 @@ class Person(Animal):
             return None
         return self.opinions.get(topic)
 
-    def set_Opinion(self, topic: str, value: int):
+    def set_opinion(self, topic: str, value: int):
         """
         Set the opinion on a specific topic.
         Args:
@@ -189,7 +203,7 @@ class Person(Animal):
             self.opinions = {}
         self.opinion[topic] = value
 
-    def update_Opinion(self, topic: str, delta: int):
+    def update_opinion(self, topic: str, delta: int):
         """
         Update the opinion of the person on a specific topic by adding a delta value.
         Args:
@@ -216,7 +230,7 @@ class Person(Animal):
         """
         # For the time being, return a simple summary what the opinions are.
         summary = "I have opinions about the following topics:\n"
-        for topic, value in self.opinion.items():
+        for topic, value in self.opinions.items():
             summary += f"  {topic}\n"
         return summary
 
@@ -226,10 +240,10 @@ class Person(Animal):
         Return:
             A string describing the person.
         """
-        age = self.get_Age()
+        age = self.get_age()
         desc = f"I am {age} years old. "
         if self.gender is not None:
-            desc += f"I am {self.get_Gender()}. "
+            desc += f"I am {self.get_gender()}. "
         return desc
 
     def communicate(self, i: int):
@@ -237,8 +251,14 @@ class Person(Animal):
         Communicate with another agent.
         Args:
             i: The index of the agent to communicate with.
+        Note:
+            This method should only be used when both self and the other agent are instances of Person
+            (i.e., have an 'opinions' attribute). If not, the method will log a warning and do nothing.
         """
         other_agent = self.environment.agents_active[i]
+        if not (hasattr(self, 'opinions') and hasattr(other_agent, 'opinions')):
+            logging.warning(f"communicate called with non-Person agent(s): self={type(self)}, other_agent={type(other_agent)}. Skipping communication.")
+            return
         logging.info(f"{self} is communicating with {other_agent}")
         # If either agent is in the Neutral group, update the neutral agents opinions to the average
         neutral_groups = [group for group in self.environment.groups_active.values() if group.name == "Neutral"]

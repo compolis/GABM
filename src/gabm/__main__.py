@@ -20,9 +20,9 @@ import random
 # Visualization
 import matplotlib.pyplot as plt
 # Local imports
-from gabm.abm.environment import Environment, Opinionated_Environment, Nation
-from gabm.abm.agents.agent import Agent, Person
-from gabm.abm.agents.group import Group, Opinionated_Group
+from gabm.abm.environment import Environment, OpinionatedEnvironment, Nation
+from gabm.abm.agent import Agent, Person
+from gabm.abm.group import Group, OpinionatedGroup
 
 def main():
     logging.info("\n--- GABM ---\n")
@@ -42,7 +42,7 @@ def main():
     opinions_over_time = []
 
     # Initialize the environment
-    env = Opinionated_Environment()
+    env = OpinionatedEnvironment()
 
     # Create negative agents
     negative = env.groups_active[0] = Group(0, "Negative")
