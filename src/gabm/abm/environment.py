@@ -30,8 +30,8 @@ class Environment:
         """
         Initialize the environment.
         Args:
-            name: The name of the nation.
             year: The current year in the simulation.
+            place: The name of the place or environment.
         """
         self.year = year
         self.place = place
