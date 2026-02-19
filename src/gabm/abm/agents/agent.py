@@ -145,7 +145,7 @@ class Person(Animal):
         """
         Initialize
         """
-        super().__init__(agent_id, environment, year_of_birth=year_of_birth)
+        super().__init__(agent_id, environment, year_of_birth=year_of_birth, gender=gender)
         if self.get_Age() > 200:
             logging.warning(f"Age ({self.get_Age()}) is unusually high. Setting year_of_birth to be 200 years ago.")
             self.year_of_birth = self.environment.year - 200
