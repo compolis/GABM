@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gabm"
-version = "0.2.1"
+version = "0.2.2"
 description = "Generative Agent-Based Model (GABM) framework."
 readme = "README-pypi.md"
 requires-python = ">=3.12"
