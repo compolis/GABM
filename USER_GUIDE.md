@@ -37,7 +37,7 @@ If you use [Conda](https://conda.org/) which is distributed with [Anaconda](http
 conda create -n gabm
 conda activate gabm
 conda install python=3.12
-pip install gabm==0.2.4
+pip install gabm==0.2.5
 ```
 
 You can then check all installed dependencies and create your own requirements file with:
@@ -55,7 +55,7 @@ Install from [PyPI](https://pypi.org/) using [Pip](https://pypi.org/project/pip/
 python3 -m venv gabm-venv
 source gabm-venv/bin/activate  # On Windows: gabm-venv\\Scripts\\activate
 pip install --upgrade pip
-pip install gabm==0.2.4
+pip install gabm==0.2.5
 ```
 
 You can then check installed dependencies with:
