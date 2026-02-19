@@ -156,7 +156,7 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>gabm
 conda<span class="w"> </span>activate<span class="w"> </span>gabm
 conda<span class="w"> </span>install<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.2.2
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.2.1
 </pre></div>
 </div>
 <p>You can then check all installed dependencies and create your own requirements file with:</p>
@@ -170,7 +170,7 @@ pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm<
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>gabm-venv
 <span class="nb">source</span><span class="w"> </span>gabm-venv/bin/activate<span class="w">  </span><span class="c1"># On Windows: gabm-venv\\Scripts\\activate</span>
 pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.2.2
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.2.1
 </pre></div>
 </div>
 <p>You can then check installed dependencies with:</p>
@@ -230,8 +230,8 @@ If you want to run LLMs locally (e.g., downloaded from Hugging Face), you need a
 <h3>Output and Visualization<a class="headerlink" href="#output-and-visualization" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>The simulation logs the state of the environment and the average opinion after each round to <code class="docutils literal notranslate"><span class="pre">data/logs/run_main.log</span></code>.</p></li>
-<li><p>After the simulation, a boxplot is generated showing the distribution of agent opinions at each round. This plot is saved to <code class="docutils literal notranslate"><span class="pre">data/output/test.png</span></code>.</p></li>
-<li><p>The boxplot helps visualize how opinions change and converge over time.</p></li>
+<li><p>After the simulation, a separate boxplot is generated for each opinion topic (negative, neutral, positive), showing the distribution of agent opinions at each round. These plots are saved as <code class="docutils literal notranslate"><span class="pre">opinions_negative.png</span></code>, <code class="docutils literal notranslate"><span class="pre">opinions_neutral.png</span></code>, and <code class="docutils literal notranslate"><span class="pre">opinions_positive.png</span></code> in <code class="docutils literal notranslate"><span class="pre">data/output</span></code>.</p></li>
+<li><p>The boxplots help visualize how opinions change and converge over time for each topic. You should see positive and negative opinions mix and converge, while neutral opinions may behave differently depending on the communication rules.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">data/logs</span></code> directory should contain <code class="docutils literal notranslate"><span class="pre">run_main.log</span></code>.</p></li>
 </ul>
 </section>

@@ -99,11 +99,14 @@
  | <a href="#J"><strong>J</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
+ | <a href="#U"><strong>U</strong></a>
  | <a href="#W"><strong>W</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
  
 </div>
 <h2 id="A">A</h2>
@@ -111,9 +114,11 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/gabm.abm.agents.group.html#gabm.abm.agents.group.Group.add_member">add_member() (gabm.abm.agents.group.Group method)</a>
 </li>
+      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Agent">Agent (class in gabm.abm.agents.agent)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Agent">Agent (class in gabm.abm.agents.agent)</a>
+      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Animal">Animal (class in gabm.abm.agents.agent)</a>
 </li>
       <li><a href="_autosummary/gabm.io.llm.llm_service.html#gabm.io.llm.llm_service.LLMService.API_KEY_ENV_VAR">API_KEY_ENV_VAR (gabm.io.llm.llm_service.LLMService property)</a>
 </li>
@@ -125,11 +130,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/gabm.io.llm.utils.html#gabm.io.llm.utils.cache_and_log">cache_and_log() (in module gabm.io.llm.utils)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/gabm.io.llm.utils.html#gabm.io.llm.utils.call_and_cache_response">call_and_cache_response() (in module gabm.io.llm.utils)</a>
 </li>
-      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Agent.communicate">communicate() (gabm.abm.agents.agent.Agent method)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Person.communicate">communicate() (gabm.abm.agents.agent.Person method)</a>
+</li>
+      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Person.communicate_with_llm">communicate_with_llm() (gabm.abm.agents.agent.Person method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -235,8 +242,6 @@
         <li><a href="_autosummary/gabm.io.llm.deepseek.html#module-gabm.io.llm.deepseek">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     gabm.io.llm.genai
 
@@ -244,6 +249,8 @@
         <li><a href="_autosummary/gabm.io.llm.genai.html#module-gabm.io.llm.genai">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     gabm.io.llm.llm_service
 
@@ -295,7 +302,19 @@
       </ul></li>
       <li><a href="_autosummary/gabm.io.llm.genai.html#gabm.io.llm.genai.GenAIService">GenAIService (class in gabm.io.llm.genai)</a>
 </li>
+      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Animal.get_Age">get_Age() (gabm.abm.agents.agent.Animal method)</a>
+</li>
+      <li><a href="_autosummary/gabm.abm.agents.group.html#gabm.abm.agents.group.Opinionated_Group.get_AverageOpinion">get_AverageOpinion() (gabm.abm.agents.group.Opinionated_Group method)</a>
+</li>
+      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Animal.get_Gender">get_Gender() (gabm.abm.agents.agent.Animal method)</a>
+</li>
       <li><a href="_autosummary/gabm.io.llm.utils.html#gabm.io.llm.utils.get_llm_cache_paths">get_llm_cache_paths() (in module gabm.io.llm.utils)</a>
+</li>
+      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Person.get_Opinion">get_Opinion() (gabm.abm.agents.agent.Person method)</a>
+</li>
+      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Person.get_opinion_profile">get_opinion_profile() (gabm.abm.agents.agent.Person method)</a>
+</li>
+      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Person.get_self_description">get_self_description() (gabm.abm.agents.agent.Person method)</a>
 </li>
       <li><a href="_autosummary/gabm.abm.agents.group.html#gabm.abm.agents.group.Group">Group (class in gabm.abm.agents.group)</a>
 </li>
@@ -391,10 +410,28 @@
   </ul></td>
 </tr></table>
 
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/gabm.abm.environment.html#gabm.abm.environment.Nation">Nation (class in gabm.abm.environment)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/gabm.abm.environment.html#gabm.abm.environment.Nation.nation">nation (gabm.abm.environment.Nation attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="O">O</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/gabm.io.llm.openai.html#gabm.io.llm.openai.OpenAIService">OpenAIService (class in gabm.io.llm.openai)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/gabm.abm.environment.html#gabm.abm.environment.Opinionated_Environment">Opinionated_Environment (class in gabm.abm.environment)</a>
+</li>
+      <li><a href="_autosummary/gabm.abm.agents.group.html#gabm.abm.agents.group.Opinionated_Group">Opinionated_Group (class in gabm.abm.agents.group)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -402,10 +439,12 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/gabm.io.llm.utils.html#gabm.io.llm.utils.pre_send_check_and_cache">pre_send_check_and_cache() (in module gabm.io.llm.utils)</a>
+      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Person">Person (class in gabm.abm.agents.agent)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/gabm.io.llm.utils.html#gabm.io.llm.utils.pre_send_check_and_cache">pre_send_check_and_cache() (in module gabm.io.llm.utils)</a>
+</li>
       <li><a href="_autosummary/gabm.io.llm.publicai.html#gabm.io.llm.publicai.PublicAIService">PublicAIService (class in gabm.io.llm.publicai)</a>
 </li>
   </ul></td>
@@ -454,7 +493,17 @@
         <li><a href="_autosummary/gabm.io.llm.publicai.html#gabm.io.llm.publicai.PublicAIService.SERVICE_NAME">(gabm.io.llm.publicai.PublicAIService attribute)</a>
 </li>
       </ul></li>
+      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Person.set_Opinion">set_Opinion() (gabm.abm.agents.agent.Person method)</a>
+</li>
       <li><a href="_autosummary/gabm.utils.logging.html#gabm.utils.logging.setup_module_logger">setup_module_logger() (in module gabm.utils.logging)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Person.update_Opinion">update_Opinion() (gabm.abm.agents.agent.Person method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -463,6 +512,14 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/gabm.io.llm.utils.html#gabm.io.llm.utils.write_models_json_and_txt">write_models_json_and_txt() (in module gabm.io.llm.utils)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/gabm.abm.agents.agent.html#gabm.abm.agents.agent.Animal.year_of_birth">year_of_birth (gabm.abm.agents.agent.Animal attribute)</a>
 </li>
   </ul></td>
 </tr></table>
