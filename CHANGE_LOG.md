@@ -11,7 +11,7 @@
 ## Overview
 Notable changes are to be documented in this file.
 
-## [0.3] - Unreleased
+## [0.2.3] - 2026-02-19
 - New types of Agent and Environment added.
 - Example run is now more nuanced. 
 
