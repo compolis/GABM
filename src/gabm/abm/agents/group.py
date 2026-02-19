@@ -14,12 +14,16 @@ if TYPE_CHECKING:
     from gabm.abm.agents.agent import Agent
 
 class Group:
+    """
+    A Group is a collection of Agents that can interact with each other and the environment.
+    Attributes:
+        id (int): Unique identifier for the group.
+        name (str): Optional name for the group.
+        members (Set[Agent]): A set of Agent instances that are members of the group.
+    """
     def __init__(self, group_id: int, name: str = None):
         """
-        Initialize a group with an id, name, and empty set of members.
-        Args:
-            group_id: The uniqueinteger id of the group.
-            name: Optional name for the group (defaults to str(group_id)).
+        Initialize
         """
         self.id = group_id
         self.name = name or str(group_id)
@@ -27,7 +31,7 @@ class Group:
 
     def add_member(self, agent: Agent):
         """
-        Add an agent to the group and update the agent's group membership.
+        Add agent to the group and update the agent's group membership.
         Args:
             agent: The Agent instance to add to the group.
         """
@@ -44,10 +48,53 @@ class Group:
         agent.groups.discard(self)
 
     def __str__(self):
+        """
+        Return:
+            String representation.
+        """
         return f"Group '{self.name}' (id={self.id}) with {len(self.members)} members"
+
+    def __repr__(self):
+        """
+        Return:
+            Official String representation.
+        """
+        return self.__str__()
 
     def list_members(self):
         """
-        Return a list of the group's members.
+        Return:
+            A new tuple of the members.
         """
-        return list(self.members)
+        return tuple(self.members)
+
+class Opinionated_Group(Group):
+    """
+    An Opinionated_Group is a Group that has opinions on various topics.
+    Attributes:
+        opinions: A dictionary of opinions on various topics.
+        The key is a short name for the topic, and the value is an int opinion value.
+        (e.g., {"positive": 5}, {"neutral": 0}, {"negative": -3}).
+    """
+    def __init__(self, group_id: int, name: str = None, opinions: dict = None):
+        super().__init__(group_id=group_id, name=name)
+        self.opinions = opinions or {}
+
+    def get_AverageOpinion(self, topic: str) -> float:
+        """
+        Get the average opinion value of the group members on a specific topic.
+        Args:
+            topic: The topic to get the average opinion on.
+        Return:
+            The average opinion value for the topic, or None if no members have an opinion on it.
+        """
+        total_opinion = 0.0
+        count = 0
+        for member in self.members:
+            member_opinion = member.get_Opinion(topic)
+            if member_opinion is not None:
+                total_opinion += member_opinion
+                count += 1
+        if count == 0:
+            return None
+        return total_opinion / count
