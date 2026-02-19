@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gabm.abm.agents.group module &mdash; GABM  documentation</title>
+  <title>gabm.abm.opinion module &mdash; GABM  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
@@ -18,7 +18,9 @@
       <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gabm.io package" href="gabm.io.html" />
+    <link rel="prev" title="gabm.abm.group module" href="gabm.abm.group.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,8 +43,20 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">gabm</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">gabm</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="gabm.html">gabm package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="gabm.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="gabm.abm.html">gabm.abm package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gabm.io.html">gabm.io package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gabm.utils.html">gabm.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gabm.html#module-gabm">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Project Documents</span></p>
 <ul>
@@ -79,9 +93,12 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">gabm.abm.agents.group module</li>
+          <li class="breadcrumb-item"><a href="modules.html">gabm</a></li>
+          <li class="breadcrumb-item"><a href="gabm.html">gabm package</a></li>
+          <li class="breadcrumb-item"><a href="gabm.abm.html">gabm.abm package</a></li>
+      <li class="breadcrumb-item active">gabm.abm.opinion module</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/_autosummary/gabm.abm.agents.group.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/_autosummary/gabm.abm.opinion.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -89,14 +106,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="gabm-abm-agents-group-module">
-<h1>gabm.abm.agents.group module<a class="headerlink" href="#gabm-abm-agents-group-module" title="Link to this heading"></a></h1>
+  <section id="module-gabm.abm.opinion">
+<span id="gabm-abm-opinion-module"></span><h1>gabm.abm.opinion module<a class="headerlink" href="#module-gabm.abm.opinion" title="Link to this heading"></a></h1>
+<p>Opinion module for GABM.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="gabm.abm.opinion.Opinion">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.opinion.</span></span><span class="sig-name descname"><span class="pre">Opinion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.opinion.Opinion" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An Opinion is a value that can be associated with a Person, 
+OpinionatedGroup, and/or a OpinionatedEnvironment.
+Attributes:</p>
+<blockquote>
+<div><p>name (str): The name of the opinion.
+description (str): A description of the opinion.
+value (int): The value of the opinion.</p>
+</div></blockquote>
+</dd></dl>
+
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gabm.abm.group.html" class="btn btn-neutral float-left" title="gabm.abm.group module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gabm.io.html" class="btn btn-neutral float-right" title="gabm.io package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
