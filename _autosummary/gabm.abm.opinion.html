@@ -111,15 +111,111 @@
 <p>Opinion module for GABM.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="gabm.abm.opinion.Opinion">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.opinion.</span></span><span class="sig-name descname"><span class="pre">Opinion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.opinion.Opinion" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.opinion.</span></span><span class="sig-name descname"><span class="pre">Opinion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opinion_topic_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gabm.abm.opinion.OpinionTopicID" title="gabm.abm.opinion.OpinionTopicID"><span class="pre">OpinionTopicID</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">opinion_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gabm.abm.opinion.OpinionValues" title="gabm.abm.opinion.OpinionValues"><span class="pre">OpinionValues</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.opinion.Opinion" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>An Opinion is a value that can be associated with a Person, 
-OpinionatedGroup, and/or a OpinionatedEnvironment.
+<p>An Opinion can belong to a Person, OpinionatedGroup, or OpinionatedEnvironment.
 Attributes:</p>
 <blockquote>
-<div><p>name (str): The name of the opinion.
-description (str): A description of the opinion.
+<div><p>opinion_id (OpinionTopicID): The unique identifier for the opinion.
+opinion_values (OpinionValues): The opinion values for the opinion.
 value (int): The value of the opinion.</p>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="gabm.abm.opinion.Opinion.get_description">
+<span class="sig-name descname"><span class="pre">get_description</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#gabm.abm.opinion.Opinion.get_description" title="Link to this definition"></a></dt>
+<dd><p>Get the description of the opinion value.
+Returns:</p>
+<blockquote>
+<div><p>str: The description of the opinion value, or None if not found.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gabm.abm.opinion.Opinion.get_value">
+<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#gabm.abm.opinion.Opinion.get_value" title="Link to this definition"></a></dt>
+<dd><p>Get the value of the opinion.
+Returns:</p>
+<blockquote>
+<div><p>int: The value of the opinion.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gabm.abm.opinion.Opinion.set_value">
+<span class="sig-name descname"><span class="pre">set_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.opinion.Opinion.set_value" title="Link to this definition"></a></dt>
+<dd><p>Set the value of the opinion.
+Args:</p>
+<blockquote>
+<div><p>value: The new value of the opinion.</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gabm.abm.opinion.OpinionTopic">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.opinion.</span></span><span class="sig-name descname"><span class="pre">OpinionTopic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opinion_topic_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gabm.abm.opinion.OpinionTopicID" title="gabm.abm.opinion.OpinionTopicID"><span class="pre">OpinionTopicID</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.opinion.OpinionTopic" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A topic for an opinion.
+Examples:</p>
+<blockquote>
+<div><p>id = 0, topic = “positive”, description = “A positive opinion.”
+id = 1, topic = “neutral”, description = “A neutral opinion.”
+id = 2, topic = “negative”, description = “A negative opinion.”</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>opinion_topic_id (OpinionTopicID): The unique identifier for the opinion topic.
+topic (str): The topic of the opinion.
+description (str): A description of the opinion topic.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gabm.abm.opinion.OpinionTopicID">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.opinion.</span></span><span class="sig-name descname"><span class="pre">OpinionTopicID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opinion_topic_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.opinion.OpinionTopicID" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A unique identifier for an opinion topic.
+Attributes:</p>
+<blockquote>
+<div><p>opinion_topic_id (int): The unique identifier for the opinion topic.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gabm.abm.opinion.OpinionValue">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.opinion.</span></span><span class="sig-name descname"><span class="pre">OpinionValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opinion_topic_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gabm.abm.opinion.OpinionTopicID" title="gabm.abm.opinion.OpinionTopicID"><span class="pre">OpinionTopicID</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.opinion.OpinionValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A value for an opinion.
+Attributes:</p>
+<blockquote>
+<div><p>opinion_topic_id (OpinionTopicID): The unique identifier for the opinion.
+value (int): An integer value of the opinion.</p>
+<blockquote>
+<div><p>This can be used as a key in a dictionary to map to the description.
+This could be a number mapped to a bipolar Likert scale (<a class="reference external" href="https://en.wikipedia.org/wiki/Likert_scale">https://en.wikipedia.org/wiki/Likert_scale</a>) survey response option.
+It is left to the user to decide how to interpret the value, and what it maps onto.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>description (str): A description of the opinion value.</dt><dd><p>For example:
+-2, “Strongly disagree”
+-1, “Disagree”
+0, “Neither agree nor disagree”
+1, “Agree”
+2, “Strongly agree”</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gabm.abm.opinion.OpinionValues">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.opinion.</span></span><span class="sig-name descname"><span class="pre">OpinionValues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#gabm.abm.opinion.OpinionTopicID" title="gabm.abm.opinion.OpinionTopicID"><span class="pre">OpinionTopicID</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#gabm.abm.opinion.OpinionValue" title="gabm.abm.opinion.OpinionValue"><span class="pre">OpinionValue</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.opinion.OpinionValues" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A dictionary of OpinionValues.
+Attributes:</p>
+<blockquote>
+<div><p>values (Dict[OpinionTopicID, OpinionValue]): A dictionary mapping OpinionTopicID objects to OpinionValue objects.</p>
 </div></blockquote>
 </dd></dl>
 

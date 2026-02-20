@@ -110,12 +110,12 @@
 <span id="gabm-abm-group-module"></span><h1>gabm.abm.group module<a class="headerlink" href="#module-gabm.abm.group" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="gabm.abm.group.Group">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.group.</span></span><span class="sig-name descname"><span class="pre">Group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.group.Group" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.group.</span></span><span class="sig-name descname"><span class="pre">Group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gabm.abm.group.GroupID" title="gabm.abm.group.GroupID"><span class="pre">GroupID</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.group.Group" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A Group is a collection of Agents that can interact with each other and the environment.
 Attributes:</p>
 <blockquote>
-<div><p>id (int): Unique identifier for the group.
+<div><p>id (GroupID): Unique identifier for the group.
 name (str): Optional name for the group.
 members (Set[Agent]): A set of Agent instances that are members of the group.</p>
 </div></blockquote>
@@ -151,22 +151,36 @@ Args:</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="gabm.abm.group.GroupID">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.group.</span></span><span class="sig-name descname"><span class="pre">GroupID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.group.GroupID" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A unique identifier for a Group instance.
+Attributes:</p>
+<blockquote>
+<div><p>group_id (int): The unique identifier for the group.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="gabm.abm.group.OpinionatedGroup">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.group.</span></span><span class="sig-name descname"><span class="pre">OpinionatedGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opinions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.group.OpinionatedGroup" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.group.</span></span><span class="sig-name descname"><span class="pre">OpinionatedGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gabm.abm.group.GroupID" title="gabm.abm.group.GroupID"><span class="pre">GroupID</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opinions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.group.OpinionatedGroup" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gabm.abm.group.Group" title="gabm.abm.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a></p>
 <p>A Group that has opinions.
 Attributes:</p>
 <blockquote>
-<div><p>opinions: A dictionary of opinions. The key is a short name, and the value is an int opinion value. The opinion value may map onto something else.
-(e.g., {“positive”: 5}, {“neutral”: 0}, {“negative”: -3}).</p>
+<div><dl class="simple">
+<dt>opinions: A dictionary of Opinions.</dt><dd><p>The keys are OpinionTopicIDs, and the values are Opinion objects.
+This allows the group to have its own opinions, which can be influenced by its members and can also influence its members.</p>
+</dd>
+</dl>
 </div></blockquote>
 <dl class="py method">
 <dt class="sig sig-object py" id="gabm.abm.group.OpinionatedGroup.get_AverageOpinion">
-<span class="sig-name descname"><span class="pre">get_AverageOpinion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gabm.abm.group.OpinionatedGroup.get_AverageOpinion" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_AverageOpinion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opinion_topic_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gabm.abm.opinion.html#gabm.abm.opinion.OpinionTopicID" title="gabm.abm.opinion.OpinionTopicID"><span class="pre">OpinionTopicID</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#gabm.abm.group.OpinionatedGroup.get_AverageOpinion" title="Link to this definition"></a></dt>
 <dd><p>Get the average opinion value of the group members on a specific topic.
 Args:</p>
 <blockquote>
-<div><p>topic: The topic to get the average opinion on.</p>
+<div><p>opinion_topic_id: The opinion topic ID to get the average opinion on.</p>
 </div></blockquote>
 <dl class="simple">
 <dt>Return:</dt><dd><p>The average opinion value for the topic, or None if no members have an opinion on it.</p>
