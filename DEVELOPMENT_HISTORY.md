@@ -21,6 +21,8 @@ See [CONTRIBUTORS].
 
 
 ## Development Timeline
+- [2026-02-20] [GABM version 0.2.5 Released on PyPI](https://pypi.org/project/gabm/0.2.6)
+- [2026-02-19] [GABM version 0.2.5 Released on PyPI](https://pypi.org/project/gabm/0.2.5)
 - [2026-02-18] [GABM version 0.2.2 Released on PyPI](https://pypi.org/project/gabm/0.2.2)
 - [2026-02-17] [GABM version 0.2.1 Released on PyPI](https://pypi.org/project/gabm/0.2.1)
 - [2026-02-17] [GABM version 0.2.0 Released on PyPI](https://pypi.org/project/gabm/0.2.0)
