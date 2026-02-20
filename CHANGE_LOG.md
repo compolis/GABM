@@ -3,58 +3,58 @@
 
 ## Table of Contents
 - [Overview](#overview)
-- [0.2.0 - Unreleased](#020---unreleased)
-- [0.1.1 - 2026-02-12](#011---2026-02-12)
+- [0.2.6 - 2026-02-20](#026---2026-02-20)
+- [0.2.5 - 2026-02-19](#025---2026-02-19)
+- [0.2.2 - 2026-02-18](#022---2026-02-18)
+- [0.2.0 - 2026-02-17](#020---2026-02-17)
+- [0.1.1 - 2026-02-11](#011---2026-02-11)
 - [0.1.0 - 2026-02-06](#010---2026-02-06)
 
 
 ## Overview
-Notable changes are to be documented in this file.
+A summary of changes are documented in this file.
 
-## [0.2.3] - 2026-02-19
-- New types of Agent and Environment added.
-- Example run is now more nuanced. 
+
+## [0.2.6] - 2026-02-20
+- [Public release on PyPI](https://pypi.org/project/gabm/0.2.6/)
+- Major ABM improvements.
+
+
+## [0.2.5] - 2026-02-19
+- [Public release on PyPI](https://pypi.org/project/gabm/0.2.5/)
+- Major ABM improvements.
+
 
 ## [0.2.2] - 2026-02-18
-- ABM simulation now runs by default: agents are grouped as Negative, Positive, and Neutral, and communicate to mix opinions over several rounds.
-- Added matplotlib boxplot output to visualize opinion change over time (saved to data/output/test.png).
-- Group sizes and simulation parameters are now easily configurable in the main script.
+- [Public release on PyPI](https://pypi.org/project/gabm/0.2.2/)
+- ABM running and outputs graphs showing change of opinion over time.
 - Random seed set for reproducibility.
-- Updated USER_GUIDE.md: added a new section "What Happens When You Run GABM?" and updated the Table of Contents to reflect the new ABM simulation behavior and outputs.
-- Migrated LLM integration from deprecated `google-generativeai` to the new `google-genai` API, updating authentication and model listing logic.
-- Extended and improved the test suite to cover all LLM service classes (OpenAI, GenAI, DeepSeek, PublicAI, and local LLMs), ensuring robust and maintainable LLM integration.
+- Updated USER_GUIDE.md.
+- Migrated LLM integration from deprecated `google-generativeai` to the new `google-genai` AP.
+- Extended and improved the test suite to cover all LLM service classes.
+
 
 ## [0.2.0] - 2026-02-17
-- Implemented class architecture for LLM services
-- Added PublicAI LLM service
-- Added Apertus LLM model that can optionally be used locally 
-- New scripts to compile [PyPI specific README](README-pypi.md)
+- [Public release on PyPI](https://pypi.org/project/gabm/0.2.0/)
+- Implemented class architecture for LLM services.
+- Added `publicai` LLM service.
+- LLM models from Hugging Face that can optionally be used locally.
+- New scripts to compile [PyPI specific README](README-pypi.md).
 
 
-## [0.1.1] - 2026-02-12
-- Updated documentation to improve clarity and completeness
-- Standardized Markdown formatting and removed YAML front matter from guides.
-
-### Packaging & Build Workflow
-- Added `scripts/build-test.py` for platform agnostic builds.
-- Makefile pypi-release and testpypi-release targets added for uploading to [PyPI](https://pypi.org/) and [TestPyPI](https://test.pypi.org/).
-- Updated [Developer Guide](DEV_GUIDE.md) by documenting new Makefile targets and clarifying packaging workflow.
-- Added [Twine](https://pypi.org/project/twine/) to `requirements-dev.txt` for PyPI uploads.
-
-### Logging
-- All asset management, cleaning, deployment, and cache scripts now use [Python logging](https://docs.python.org/3/library/logging.html).
-- Logs are written to `data/logs/docs/` with rotating file handlers for each script.
-- Logging helps with debugging, error tracking, and collaboration.
+## [0.1.1] - 2026-02-11
+- [Public release on PyPI](https://pypi.org/project/gabm/0.1.1/)
+- Builds are platform agnostic.
+- Makefile `pypi-release` and `testpypi-release` targets added for uploading to [PyPI](https://pypi.org/) and [TestPyPI](https://test.pypi.org/).
+- All scripts use [Python logging](https://docs.python.org/3/library/logging.html) to write logs in `data/logs` with rotating file handlers for each script.
+- [Sphinx documentation released on GitHub Pages](https://compolis.github.io/GABM/).
 
 
 ## [0.1.0] - 2026-02-06
-- Initial private release.
-- Project Documentation initialised
+- Documentation added:
   - [README](README.md)
   - [Road Map](RoadMap.md)
   - [User Guide](USER_GUIDE.md)
   - [Developer Guide](DEV_GUIDE.md)
-- LLM setup tested for (OpenAI, Google Generative AI and DeepSeek).
-- Persistent response/model caching implemented.
-- Makefile targets.
-- Contributor workflow and documentation.
+- LLM setup tested and working.
+- Persistent caching implemented.

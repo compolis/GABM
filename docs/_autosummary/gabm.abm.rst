@@ -8,6 +8,7 @@ Submodules
    :maxdepth: 4
 
    gabm.abm.agent
+   gabm.abm.attribute
    gabm.abm.environment
    gabm.abm.group
    gabm.abm.opinion
