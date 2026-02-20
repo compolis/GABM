@@ -6,25 +6,40 @@ Group module for GABM.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
+
 
 from typing import TYPE_CHECKING, Set
 if TYPE_CHECKING:
     # Agent is imported under TYPE_CHECKING to avoid circular imports, as Group and Agent reference each other.
     from gabm.abm.agent import Agent
+from gabm.abm.opinion import OpinionID, OpinionValue, OpinionValues
+
+
+class GroupID:
+    """
+    A unique identifier for a Group instance.
+    Attributes:
+        group_id (int): The unique identifier for the group.
+    """
+    def __init__(self, group_id: int):
+        self.id = group_id
 
 class Group:
     """
     A Group is a collection of Agents that can interact with each other and the environment.
     Attributes:
-        id (int): Unique identifier for the group.
+        id (GroupID): Unique identifier for the group.
         name (str): Optional name for the group.
         members (Set[Agent]): A set of Agent instances that are members of the group.
     """
-    def __init__(self, group_id: int, name: str = None):
+    def __init__(self, group_id: GroupID, name: str = None):
         """
         Initialize
+        Args:
+            group_id: Unique identifier for the Group instance.
+            name: Optional name for the group.
         """
         self.id = group_id
         self.name = name or str(group_id)
@@ -73,27 +88,50 @@ class OpinionatedGroup(Group):
     """
     A Group that has opinions.
     Attributes:
-        opinions: A dictionary of opinions. The key is a short name, and the value is an int opinion value. The opinion value may map onto something else.
-        (e.g., {"positive": 5}, {"neutral": 0}, {"negative": -3}).
+        opinions: A dictionary of Opinions.
+         The keys are OpinionIDs, and the values are Opinion objects.
+         This allows the group to have its own opinions, which can be influenced by its members and can also influence its members.
     """
-    def __init__(self, group_id: int, name: str = None, opinions: dict = None):
+    def __init__(self, group_id: GroupID, name: str = None, opinions: dict = None):
+        """
+        Initialize
+        Args:
+            group_id: Unique identifier for the Group instance.
+            name: Optional name for the group.
+            opinions: A dictionary of opinions, where keys are OpinionIDs and values are Opinion objects.
+        """
         super().__init__(group_id=group_id, name=name)
         self.opinions = opinions or {}
 
-    def get_AverageOpinion(self, topic: str) -> float:
+    def __str__(self):
+        """
+        Return:
+            String representation.
+        """
+        super_str = super().__str__()
+        return f"{super_str} with opinions: {self.opinions}"
+
+    def __repr__(self):
+        """
+        Return:
+            Official String representation.
+        """
+        return self.__str__()    
+
+    def get_AverageOpinion(self, opinion_topic_id: OpinionTopicID) -> float:
         """
         Get the average opinion value of the group members on a specific topic.
         Args:
-            topic: The topic to get the average opinion on.
+            opinion_topic_id: The opinion topic ID to get the average opinion on.
         Return:
             The average opinion value for the topic, or None if no members have an opinion on it.
         """
         total_opinion = 0.0
         count = 0
         for member in self.members:
-            member_opinion = member.get_Opinion(topic)
-            if member_opinion is not None:
-                total_opinion += member_opinion
+            opinion_obj = member.get_opinion(topic)
+            if opinion_obj is not None and hasattr(opinion_obj, 'value'):
+                total_opinion += opinion_obj.value
                 count += 1
         if count == 0:
             return None

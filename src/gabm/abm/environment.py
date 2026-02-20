@@ -3,7 +3,7 @@ Environment module for GABM.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 
@@ -12,6 +12,7 @@ from typing import Dict
 # Local imports
 from gabm.abm.agent import Agent
 from gabm.abm.group import Group
+from gabm.abm.opinion import OpinionID, OpinionValue, OpinionValues, Opinion
 
 class Environment:
     """
@@ -44,13 +45,31 @@ class OpinionatedEnvironment(Environment):
     """
     An Environment with opinions.
     Attributes:
-        opinions (Dict[str, str]): A dictionary to hold opinions.
-        The key is a short name, the value is a description.
+        opinions (Dict[OpinionID, Opinion]): A dictionary of opinions.
+        The key is an OpinionID, the value is an Opinion object.
     """
+
     def __init__(self, year: int = 2026, place: str = "Earth",
-    opinions: Dict[str, str] = None):
+        opinions: Dict[OpinionID, Opinion] = None):
+        """
+        Initialize an OpinionatedEnvironment.
+        Args:
+            year: The current year in the simulation.
+            place: The name of the place or environment.
+            opinions: A dictionary of opinions, where the key is an OpinionID and the value is an Opinion object.
+             This allows the environment to have an overview of opinions of Persons and OpinionatedGroups.
+        """
         super().__init__(year=year, place=place)
         self.opinions = opinions if opinions is not None else {}
+
+    def get_AverageOpinion(self, opinion_topic_id: OpinionTopicID) -> float:
+        """
+        Get the average opinion value of the group members on a specific topic.
+        Args:
+            opinion_topic_id: The opinion topic ID to get the average opinion on.
+        Return:
+            The average opinion value for the topic, or None if no members have an opinion on it.
+        """
 
 class Nation(OpinionatedEnvironment):
     """
@@ -59,15 +78,16 @@ class Nation(OpinionatedEnvironment):
     Attributes:
         nation (str): The name of the nation (e.g., "United Kingdom").
     """
+    
     def __init__(self, year: int = 2026, place: str = "Earth", 
-    opinions: Dict[str, str] = None, nation: str = "United Kingdom"):
+        opinions: Dict[OpinionID, Opinion] = None, nation: str = "United Kingdom"):
         """
         Initialize a Nation environment.
         Args:
             year: The current year in the simulation.
             place: The name of the place or environment.
-            opinions: A dictionary of opinions, where the key is a short 
-            name and the value is a description.
+            opinions: A dictionary of opinions, where the key is an OpinionID and the value is an Opinion object.
+             This allows the nation to have an overview of opinions of Persons and OpinionatedGroups.
             nation: The name of the nation (e.g., "United Kingdom").
         """
         super().__init__(year=year, place=place, opinions=opinions)
