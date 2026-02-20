@@ -12,7 +12,7 @@ from typing import Dict
 # Local imports
 from gabm.abm.agent import Agent
 from gabm.abm.group import Group
-from gabm.abm.opinion import OpinionID, OpinionValue, OpinionValues, Opinion
+from gabm.abm.opinion import OpinionTopicID, OpinionValue, OpinionValues, Opinion
 
 class Environment:
     """
@@ -41,26 +41,58 @@ class Environment:
         self.groups_active: Dict[int, Group] = {}
         self.groups_inactive: Dict[int, Group] = {}
 
+    def __str__(self):
+        """
+        Return:
+            A string representation.
+        """
+        return f"Environment(year={self.year}, place='{self.place}', " \
+               f"agents_active={len(self.agents_active)}, agents_inactive={len(self.agents_inactive)}, " \
+               f"groups_active={len(self.groups_active)}, groups_inactive={len(self.groups_inactive)})"
+
+    def __repr__(self):
+        """
+        Return:
+            An official string representation.
+        """
+        return self.__str__()
+
 class OpinionatedEnvironment(Environment):
     """
     An Environment with opinions.
     Attributes:
-        opinions (Dict[OpinionID, Opinion]): A dictionary of opinions.
-        The key is an OpinionID, the value is an Opinion object.
+        opinions (Dict[OpinionTopicID, Opinion]): A dictionary of opinions.
+        The key is an OpinionTopicID, the value is an Opinion object.
     """
 
     def __init__(self, year: int = 2026, place: str = "Earth",
-        opinions: Dict[OpinionID, Opinion] = None):
+        opinions: Dict[OpinionTopicID, Opinion] = None):
         """
         Initialize an OpinionatedEnvironment.
         Args:
             year: The current year in the simulation.
             place: The name of the place or environment.
-            opinions: A dictionary of opinions, where the key is an OpinionID and the value is an Opinion object.
+            opinions: A dictionary of opinions, where the key is an OpinionTopicID and the value is an Opinion object.
              This allows the environment to have an overview of opinions of Persons and OpinionatedGroups.
         """
         super().__init__(year=year, place=place)
         self.opinions = opinions if opinions is not None else {}
+
+    def __str__(self):
+        """
+        Return:
+            A string representation.
+        """
+        return f"OpinionatedEnvironment(year={self.year}, place='{self.place}', " \
+               f"agents_active={len(self.agents_active)}, agents_inactive={len(self.agents_inactive)}, " \
+               f"groups_active={len(self.groups_active)}, groups_inactive={len(self.groups_inactive)}, opinions={len(self.opinions)})"
+
+    def __repr__(self):
+        """
+        Return:
+            An official string representation.
+        """
+        return self.__str__()
 
     def get_AverageOpinion(self, opinion_topic_id: OpinionTopicID) -> float:
         """
@@ -80,15 +112,31 @@ class Nation(OpinionatedEnvironment):
     """
     
     def __init__(self, year: int = 2026, place: str = "Earth", 
-        opinions: Dict[OpinionID, Opinion] = None, nation: str = "United Kingdom"):
+        opinions: Dict[OpinionTopicID, Opinion] = None, nation: str = "United Kingdom"):
         """
         Initialize a Nation environment.
         Args:
             year: The current year in the simulation.
             place: The name of the place or environment.
-            opinions: A dictionary of opinions, where the key is an OpinionID and the value is an Opinion object.
+            opinions: A dictionary of opinions, where the key is an OpinionTopicID and the value is an Opinion object.
              This allows the nation to have an overview of opinions of Persons and OpinionatedGroups.
             nation: The name of the nation (e.g., "United Kingdom").
         """
         super().__init__(year=year, place=place, opinions=opinions)
         self.nation = nation
+
+    def __str__(self):
+        """
+        Return:
+            A string representation.
+        """
+        return f"Nation(nation='{self.nation}', year={self.year}, place='{self.place}', " \
+               f"agents_active={len(self.agents_active)}, agents_inactive={len(self.agents_inactive)}, " \
+               f"groups_active={len(self.groups_active)}, groups_inactive={len(self.groups_inactive)}, opinions={len(self.opinions)})"
+
+    def __repr__(self):
+        """
+        Return:
+            An official string representation.
+        """
+        return self.__str__()

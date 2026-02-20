@@ -16,6 +16,20 @@ class GenderID:
     def __init__(self, gender_id: int):
         self.id = gender_id
 
+    def __str__(self):
+        """
+        Return:
+            A string representation.
+        """
+        return f"GenderID({self.id})"
+
+    def __repr__(self):
+        """
+        Return:
+            A string representation.
+        """
+        return self.__str__()
+
 class Gender:
     """
     A Gender.
@@ -35,6 +49,20 @@ class Gender:
         self.id = gender_id
         self.value = value
         self.description = description
+
+    def __str__(self):
+        """
+        Return:
+            A string representation.
+        """
+        return self.description
+
+    def __repr__(self):
+        """
+        Return:
+            A string representation.
+        """
+        return self.__str__()
 
 class Genders:
     """

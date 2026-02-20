@@ -14,7 +14,7 @@ from typing import TYPE_CHECKING, Set
 if TYPE_CHECKING:
     # Agent is imported under TYPE_CHECKING to avoid circular imports, as Group and Agent reference each other.
     from gabm.abm.agent import Agent
-from gabm.abm.opinion import OpinionID, OpinionValue, OpinionValues
+from gabm.abm.opinion import OpinionTopicID, OpinionValue, OpinionValues
 
 
 class GroupID:
@@ -24,7 +24,26 @@ class GroupID:
         group_id (int): The unique identifier for the group.
     """
     def __init__(self, group_id: int):
+        """
+        Initialize
+        Args:
+            group_id: The unique identifier for the group.
+        """
         self.id = group_id
+
+    def __str__(self):
+        """
+        Return:
+            A string representation.
+        """
+        return f"GroupID({self.id})"
+
+    def __repr__(self):
+        """
+        Return:
+            A string representation.
+        """
+        return self.__str__()
 
 class Group:
     """
@@ -45,6 +64,20 @@ class Group:
         self.name = name or str(group_id)
         self.members: Set[Agent] = set()
 
+    def __str__(self):
+        """
+        Return:
+            String representation.
+        """
+        return f"Group '{self.name}' (id={self.id}) with {len(self.members)} members"
+
+    def __repr__(self):
+        """
+        Return:
+            Official String representation.
+        """
+        return self.__str__()
+
     def add_member(self, agent: Agent):
         """
         Add agent to the group and update the agent's group membership.
@@ -63,20 +96,6 @@ class Group:
         self.members.discard(agent)
         agent.groups.discard(self)
 
-    def __str__(self):
-        """
-        Return:
-            String representation.
-        """
-        return f"Group '{self.name}' (id={self.id}) with {len(self.members)} members"
-
-    def __repr__(self):
-        """
-        Return:
-            Official String representation.
-        """
-        return self.__str__()
-
     def list_members(self):
         """
         Return:
@@ -89,7 +108,7 @@ class OpinionatedGroup(Group):
     A Group that has opinions.
     Attributes:
         opinions: A dictionary of Opinions.
-         The keys are OpinionIDs, and the values are Opinion objects.
+         The keys are OpinionTopicIDs, and the values are Opinion objects.
          This allows the group to have its own opinions, which can be influenced by its members and can also influence its members.
     """
     def __init__(self, group_id: GroupID, name: str = None, opinions: dict = None):
@@ -98,7 +117,7 @@ class OpinionatedGroup(Group):
         Args:
             group_id: Unique identifier for the Group instance.
             name: Optional name for the group.
-            opinions: A dictionary of opinions, where keys are OpinionIDs and values are Opinion objects.
+            opinions: A dictionary of opinions, where keys are OpinionTopicIDs and values are Opinion objects.
         """
         super().__init__(group_id=group_id, name=name)
         self.opinions = opinions or {}
