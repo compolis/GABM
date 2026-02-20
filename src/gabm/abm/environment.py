@@ -11,8 +11,8 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 from typing import Dict
 # Local imports
 from gabm.abm.agent import Agent
+from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap, Opinion
 from gabm.abm.group import Group
-from gabm.abm.opinion import OpinionTopicID, OpinionValue, OpinionValues, Opinion
 
 class Environment:
     """

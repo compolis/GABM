@@ -7,7 +7,12 @@ __version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 
-class GenderID:
+# Standard library imports
+import logging
+from typing import Dict
+
+
+class GenderID():
     """
     A unique identifier for an Gender instance.
     Attributes:
@@ -30,7 +35,15 @@ class GenderID:
         """
         return self.__str__()
 
-class Gender:
+    def __eq__(self, other):
+        if isinstance(other, GenderID):
+            return self.id == other.id
+        return False
+
+    def __hash__(self):
+        return hash(self.id)
+
+class Gender():
     """
     A Gender.
     Attributes:
@@ -64,7 +77,7 @@ class Gender:
         """
         return self.__str__()
 
-class Genders:
+class GenderMap():
     """
     A mapping of GenderIds to Genders.
     The mapping can be extended to include more genders as needed.
@@ -78,7 +91,7 @@ class Genders:
     """
     def __init__(self):
         """
-        Initialize the Genders object.
+        Initialize the GenderMap object.
         """
         g0 = GenderID(0)
         g1 = GenderID(1)
@@ -94,7 +107,7 @@ class Genders:
         Return:
             The string representation.
         """
-        return self.gender_map[self.id]
+        return f"GenderMap({self.gender_map})"
 
     def __repr__(self):
         """

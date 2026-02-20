@@ -24,7 +24,7 @@ from gabm.abm.environment import Environment, OpinionatedEnvironment, Nation
 from gabm.abm.agent import Agent, Person
 from gabm.abm.group import Group, OpinionatedGroup
 from gabm.abm.opinion import OpinionTopicID, OpinionValue, OpinionValues, OpinionTopic, Opinion
-from gabm.abm.attribute import GenderID, Gender
+from gabm.abm.attributes.gender import GenderID, Gender, GenderMap
 
 def main():
     logging.info("\n--- GABM ---\n")

@@ -17,13 +17,14 @@ import copy
 import logging
 # TYPE_CHECKING is used to avoid circular imports.
 if TYPE_CHECKING:
+    from gabm.abm.attributes.ethnicity import EthnicityID, 
+    from gabm.abm.attributes.gender import GenderID, Gender, GenderMap
+    from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValues, Opinion
     from gabm.abm.environment import Environment, OpinionatedEnvironment
     from gabm.abm.group import Group, OpinionatedGroup
-    from gabm.abm.attribute import GenderID, Gender
-    from gabm.abm.opinion import OpinionTopicID, OpinionValue, OpinionValues, Opinion
 
 
-class AgentID:
+class AgentID():
     """
     A unique identifier for an Agent instance.
     Attributes:
@@ -46,7 +47,7 @@ class AgentID:
         """
         return self.__str__()
 
-class Agent:
+class Agent():
     """
     For representing an entity within an Environment. 
     The type annotation for environment is quoted as it is imported 

@@ -3,7 +3,7 @@ Opinion module for GABM.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 
@@ -12,11 +12,11 @@ import logging
 from typing import Dict
 
 
-class OpinionTopicID:
+class OpinionTopicID():
     """
     A unique identifier for an opinion topic.
     Attributes:
-        opinion_topic_id (int): The unique identifier for the opinion topic.
+        id (int): The unique identifier for the opinion topic.
     """
     def __init__(self, opinion_topic_id: int):
         """
@@ -38,9 +38,18 @@ class OpinionTopicID:
         Return:
             A string representation.
         """
-        return self.__str__()   
+        return self.__str__()
 
-class OpinionTopic:
+    def __eq__(self, other):
+        if isinstance(other, OpinionTopicID):
+            return self.id == other.id
+        return False
+
+    def __hash__(self):
+        return hash(self.id)
+
+
+class OpinionTopic():
     """
     A topic for an opinion.
     Examples:
@@ -79,7 +88,7 @@ class OpinionTopic:
         """
         return self.__str__()
 
-class OpinionValue:
+class OpinionValue():
     """
     A value for an opinion.
     Attributes:
@@ -122,9 +131,9 @@ class OpinionValue:
         """
         return self.__str__()
 
-class OpinionValues:
+class OpinionValueMap():
     """
-    A dictionary of OpinionValues.
+    A dictionary of OpinionValue objects.
     Attributes:
         values (Dict[OpinionTopicID, OpinionValue]): A dictionary mapping OpinionTopicID objects to OpinionValue objects.
     """
@@ -141,7 +150,7 @@ class OpinionValues:
         Return:
             A string representation.
         """
-        return f"OpinionValues({self.values})"
+        return f"OpinionValueMap({self.values})"
 
     def __repr__(self):
         """
@@ -150,15 +159,15 @@ class OpinionValues:
         """
         return self.__str__()
 
-class Opinion:
+class Opinion():
     """
     An Opinion can belong to a Person, OpinionatedGroup, or OpinionatedEnvironment.
     Attributes:
         opinion_id (OpinionTopicID): The unique identifier for the opinion.
-        opinion_values (OpinionValues): The opinion values for the opinion.
+        opinion_values (OpinionValueMap): The opinion values for the opinion.
         value (int): The value of the opinion.
     """
-    def __init__(self, opinion_topic_id: OpinionTopicID, opinion_values: OpinionValues, value: int):
+    def __init__(self, opinion_topic_id: OpinionTopicID, opinion_values: OpinionValueMap, value: int):
         """
         Initialize
         Args:
@@ -199,8 +208,8 @@ class Opinion:
         Returns:
             str: The description of the opinion value, or None if not found.
         """
-        if self.opinion_values is not None and self.opinion_id in self.opinion_values.values:
-            opinion_value = self.opinion_values.values[self.opinion_id]
+        if self.opinion_values is not None and self.id in self.opinion_values.values:
+            opinion_value = self.opinion_values.values[self.id]
             if opinion_value.value == self.value:
                 return opinion_value.description
         return None
@@ -220,10 +229,10 @@ class Opinion:
             value: The new value of the opinion.
         """
         # Check the value is valid
-        if self.opinion_values is not None and self.opinion_id in self.opinion_values.values:
-            if value not in self.opinion_values.values[self.opinion_id].value:
-                message = (f"Value {value} is not a valid value for opinion {self.opinion_id}. "
-                           f"Valid values are: {self.opinion_values.values[self.opinion_id].value}")
+        if self.opinion_values is not None and self.id in self.opinion_values.values:
+            if value != self.opinion_values.values[self.id].value:
+                message = (f"Value {value} is not a valid value for opinion {self.id}. "
+                           f"Valid values are: {self.opinion_values.values[self.id].value}")
                 logging.warning(message)
                 raise ValueError(message)
         self.value = value
