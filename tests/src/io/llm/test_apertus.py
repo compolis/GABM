@@ -1,5 +1,5 @@
 """
-For testing local LLM integration (e.g., Apertus) without relying on external APIs.
+Tests for the apertus module.
 
 Note:
     The @pytest.mark.timeout decorator is used to limit test duration. However, for large deep learning models

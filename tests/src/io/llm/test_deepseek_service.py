@@ -1,5 +1,5 @@
 """
-For testing deepseek.
+Tests for the deepseek module.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]

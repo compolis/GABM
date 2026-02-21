@@ -12,14 +12,14 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
 from typing import TYPE_CHECKING, Set
-from gabm.abm.opinion import Opinion, OpinionTopicID, OpinionValue, OpinionValues
 import copy
 import logging
+# Local imports
+from gabm.abm.attributes.ethnicity import EthnicityID, Ethnicity, EthnicityMap
+from gabm.abm.attributes.gender import GenderID, Gender, GenderMap
+from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap, Opinion
 # TYPE_CHECKING is used to avoid circular imports.
 if TYPE_CHECKING:
-    from gabm.abm.attributes.ethnicity import EthnicityID, 
-    from gabm.abm.attributes.gender import GenderID, Gender, GenderMap
-    from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValues, Opinion
     from gabm.abm.environment import Environment, OpinionatedEnvironment
     from gabm.abm.group import Group, OpinionatedGroup
 

@@ -1,5 +1,5 @@
 """
-Unit tests for opinion module.
+Tests for opinion module.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]

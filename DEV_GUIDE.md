@@ -90,40 +90,43 @@ The root project directory contains documentation and files needed for building 
 
 ## Testing
 
-GABM uses pytest for all unit and integration tests. The test suite is located in the `tests/` directory and covers core functionality, LLM integration, and more.
+GABM uses [pytest](https://docs.pytest.org/) for unit and integration tests. The unit test suite is located in the `tests/` directory, mirroring the module structure.
 
 ### Running Tests
 
-- Run all tests with:
+Run most tests with:
   ```bash
   make test
   ```
-  or
+or:
   ```bash
   pytest
   ```
-- By default, tests marked as `@pytest.mark.slow` are excluded (see `pytest.ini`). To run slow tests:
+By default, tests marked as `@pytest.mark.slow` are excluded (see `pytest.ini`). Run slow tests with:
+
   ```bash
   pytest -m slow
   ```
 
 ### Adding Tests
 
-- Add new tests to the `tests/` directory, following pytest conventions.
-- Use descriptive function names and docstrings.
-- Mark slow or resource-intensive tests with `@pytest.mark.slow` and set a timeout if needed (e.g., `@pytest.mark.timeout(120)`).
+Please add or update tests when modifying or adding features. Aim for high test coverage to catch regressions and ensure code reliability.
+
+Mark slow or resource-intensive tests with `@pytest.mark.slow` and set a timeout if needed (e.g., `@pytest.mark.timeout()`).
 
 ### Local LLM Tests
 
-- Tests for local LLMs (e.g., Apertus) are marked as slow and excluded by default.
-- These tests require significant hardware resources (GPU recommended). On CPU-only machines, inference may be extremely slow or impractical.
-- If you wish to run local LLM tests, ensure your environment is suitable and use `pytest -m slow`.
+Tests for local LLMs (e.g., Apertus) are marked as slow and excluded by default as these tests require significant hardware resources (GPU recommended). On CPU-only machines, inference may be extremely slow or impractical.
+
+To run local LLM tests, ensure your environment is suitable and use:
+  ```bash
+  pytest -m slow
+  ```
 
 ### Test Workflow
 
-- All PRs must pass the test workflow before merging.
-- See `.github/workflows/test.yml` for CI details.
-
+- PRs should pass the test workflow before being merged.
+- See `.github/workflows/test.yml` for Continuous Integration (CI) details.
 
 ### Useful pytest markers
 - `@pytest.mark.slow`: Marks tests as slow; skipped by default.
@@ -131,9 +134,7 @@ GABM uses pytest for all unit and integration tests. The test suite is located i
 
 ### Note on DeprecationWarnings
 You may see DeprecationWarnings related to protobuf (e.g., `Type google._upb._message.MessageMapContainer uses PyType_Spec with a metaclass that has custom tp_new`).
-These warnings originate from upstream libraries (e.g., Google APIs) and do not affect GABM functionality. They are expected to be resolved in future library updates. You can safely ignore them unless they cause test failures or runtime errors.
-
-For more details, see the pytest documentation: https://docs.pytest.org/en/latest/
+These warnings originate from upstream libraries (e.g., Google APIs) and do not affect GABM functionality. They are expected to be resolved in future library updates. Please ignore them unless they cause test failures or runtime errors.
 
 
 ## Python Package Entry Point
@@ -412,3 +413,4 @@ class MyLLMService(LLMService):
 ## Additional Resources
 
 - [Apertus LLM Setup and Usage](Apertus.md) — for details on obtaining and using local Apertus LLM models
+
