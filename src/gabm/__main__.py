@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 from gabm.abm.environment import Environment, OpinionatedEnvironment, Nation
 from gabm.abm.agent import Agent, Person
 from gabm.abm.group import Group, OpinionatedGroup
-from gabm.abm.opinion import OpinionTopicID, OpinionValue, OpinionValues, OpinionTopic, Opinion
+from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap, OpinionTopic, Opinion
 from gabm.abm.attributes.gender import GenderID, Gender, GenderMap
 
 def main():
@@ -113,15 +113,15 @@ def main():
     negative_opinions = {
         negative_opinion_topic_id: Opinion(
             negative_opinion_topic_id,
-            OpinionValues({negative_opinion_topic_id: OpinionValue(negative_opinion_topic_id, 2, "Strongly positive")}),
+            OpinionValueMap({negative_opinion_topic_id: OpinionValue(negative_opinion_topic_id, 2, "Strongly positive")}),
             2),
         neutral_opinion_topic_id: Opinion(
             neutral_opinion_topic_id,
-            OpinionValues({neutral_opinion_topic_id: OpinionValue(neutral_opinion_topic_id, 0, "Neutral")}),
+            OpinionValueMap({neutral_opinion_topic_id: OpinionValue(neutral_opinion_topic_id, 0, "Neutral")}),
             0),
         positive_opinion_topic_id: Opinion(
             positive_opinion_topic_id,
-            OpinionValues({positive_opinion_topic_id: OpinionValue(positive_opinion_topic_id, -2, "Strongly negative")}),
+            OpinionValueMap({positive_opinion_topic_id: OpinionValue(positive_opinion_topic_id, -2, "Strongly negative")}),
             -2)
     }
     for agent_id in range(n_negative):
@@ -137,15 +137,15 @@ def main():
     positive_opinions = {
         negative_opinion_topic_id: Opinion(
             negative_opinion_topic_id,
-            OpinionValues({negative_opinion_topic_id: OpinionValue(negative_opinion_topic_id, -2, "Strongly negative")}),
+            OpinionValueMap({negative_opinion_topic_id: OpinionValue(negative_opinion_topic_id, -2, "Strongly negative")}),
             -2),
         neutral_opinion_topic_id: Opinion(
             neutral_opinion_topic_id,
-            OpinionValues({neutral_opinion_topic_id: OpinionValue(neutral_opinion_topic_id, 0, "Neutral")}),
+            OpinionValueMap({neutral_opinion_topic_id: OpinionValue(neutral_opinion_topic_id, 0, "Neutral")}),
             0),
         positive_opinion_topic_id: Opinion(
             positive_opinion_topic_id,
-            OpinionValues({positive_opinion_topic_id: OpinionValue(positive_opinion_topic_id, 2, "Strongly positive")}),
+            OpinionValueMap({positive_opinion_topic_id: OpinionValue(positive_opinion_topic_id, 2, "Strongly positive")}),
             2)
     }
     for agent_id in range(n_negative, n_negative + n_positive):
@@ -160,15 +160,15 @@ def main():
     neutral_opinions = {
         negative_opinion_topic_id: Opinion(
             negative_opinion_topic_id,
-            OpinionValues({negative_opinion_topic_id: OpinionValue(negative_opinion_topic_id, 0, "Neutral")}),
+            OpinionValueMap({negative_opinion_topic_id: OpinionValue(negative_opinion_topic_id, 0, "Neutral")}),
             0),
         neutral_opinion_topic_id: Opinion(
             neutral_opinion_topic_id,
-            OpinionValues({neutral_opinion_topic_id: OpinionValue(neutral_opinion_topic_id, 2, "Strongly positive")}),
+            OpinionValueMap({neutral_opinion_topic_id: OpinionValue(neutral_opinion_topic_id, 2, "Strongly positive")}),
             2),
         positive_opinion_topic_id: Opinion(
             positive_opinion_topic_id,
-            OpinionValues({positive_opinion_topic_id: OpinionValue(positive_opinion_topic_id, 0, "Neutral")}),
+            OpinionValueMap({positive_opinion_topic_id: OpinionValue(positive_opinion_topic_id, 0, "Neutral")}),
             0)
     }
     for agent_id in range(n_negative + n_positive, n_negative + n_positive + n_neutral):
