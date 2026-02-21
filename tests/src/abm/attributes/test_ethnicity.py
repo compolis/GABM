@@ -1,5 +1,5 @@
 """
-Unit tests for ethnicity module.
+Tests for ethnicity module.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]

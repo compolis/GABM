@@ -14,7 +14,7 @@ from typing import TYPE_CHECKING, Set
 if TYPE_CHECKING:
     # Agent is imported under TYPE_CHECKING to avoid circular imports, as Group and Agent reference each other.
     from gabm.abm.agent import Agent
-from gabm.abm.opinion import OpinionTopicID, OpinionValue, OpinionValues
+from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap
 
 
 class GroupID:
@@ -148,7 +148,7 @@ class OpinionatedGroup(Group):
         total_opinion = 0.0
         count = 0
         for member in self.members:
-            opinion_obj = member.get_opinion(topic)
+            opinion_obj = member.get_opinion(opinion_topic_id)
             if opinion_obj is not None and hasattr(opinion_obj, 'value'):
                 total_opinion += opinion_obj.value
                 count += 1
