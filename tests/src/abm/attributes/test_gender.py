@@ -1,5 +1,5 @@
 """
-Unit tests for gender module.
+Tests for gender module.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]

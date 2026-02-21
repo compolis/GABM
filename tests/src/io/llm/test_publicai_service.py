@@ -1,4 +1,15 @@
+"""
+Tests for the publicai module.
+"""
+# Metadata
+__author__ = ["Andy Turner <agdturner@gmail.com>"]
+__version__ = "0.1.0"
+__copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
+
+
+# Standard library imports
 import pytest
+# Local imports
 from gabm.io.read_data import read_api_keys
 
 SERVICE_CLASS = "PublicAIService"
