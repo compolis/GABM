@@ -11,39 +11,21 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 
 from typing import TYPE_CHECKING, Set
+# Local imports
+from gabm.core.id import GABMID
 if TYPE_CHECKING:
     # Agent is imported under TYPE_CHECKING to avoid circular imports, as Group and Agent reference each other.
     from gabm.abm.agent import Agent
 from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap
 
-
-class GroupID:
+class GroupID(GABMID):
     """
     A unique identifier for a Group instance.
     Attributes:
         group_id (int): The unique identifier for the group.
     """
     def __init__(self, group_id: int):
-        """
-        Initialize
-        Args:
-            group_id: The unique identifier for the group.
-        """
-        self.id = group_id
-
-    def __str__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return f"GroupID({self.id})"
-
-    def __repr__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return self.__str__()
+        super().__init__(group_id)
 
 class Group:
     """

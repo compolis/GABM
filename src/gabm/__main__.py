@@ -11,7 +11,7 @@ __version__ = "0.3.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
-import os
+import argparse
 import os
 import sys
 import logging
@@ -26,26 +26,25 @@ from gabm.abm.group import Group, OpinionatedGroup
 from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap, OpinionTopic, Opinion
 from gabm.abm.attributes.gender import GenderID, Gender, GenderMap
 
-def main():
-    logging.info("\n--- GABM ---\n")
 
+def run_example():
+    """
+    Run the original example simulation.
+    """
+    # ...existing code...
+    logging.info("\n--- GABM ---\n")
     # Set random seed for reproducibility
     random.seed(42)
-
     # Flexible group sizes
     n_negative = 2
     n_positive = 2
     n_neutral = 6
-
     # Number of communication rounds
     n_iterations = 5
-
     # For plotting: record opinions at each round (including initial)
     opinions_over_time = []
-
     # Initialize the environment
     env = OpinionatedEnvironment()
-
     # Create a gender map
     # Define gender IDs
     gender_id_0 = GenderID(0)
@@ -62,7 +61,6 @@ def main():
     }
     # Default gender
     gender = gender_0
-
     # Define opinion topics and values
     # Define opinion topic IDs
     negative_opinion_topic_id = OpinionTopicID(0)
@@ -107,7 +105,6 @@ def main():
     for topic_id, values in env.opinion_values.items():
         for value in values:
             env.opinion_value_map[value.opinion_topic_id] = value
-    
     # Create negative agents
     negative = env.groups_active[0] = Group(0, "Negative")
     negative_opinions = {
@@ -131,7 +128,6 @@ def main():
             gender_map=gender_map, gender=gender, 
             opinions=negative_opinions)
         negative.add_member(env.agents_active[agent_id])
-
     # Create positive agents
     positive = env.groups_active[1] = Group(1, "Positive")
     positive_opinions = {
@@ -154,7 +150,6 @@ def main():
             gender_map=gender_map, gender=gender, 
             opinions=positive_opinions)
         positive.add_member(env.agents_active[agent_id])
-
     # Create neutral agents
     neutral = env.groups_active[2] = Group(2, "Neutral")
     neutral_opinions = {
@@ -177,16 +172,13 @@ def main():
             gender_map=gender_map, gender=gender, 
             opinions=neutral_opinions)
         neutral.add_member(env.agents_active[agent_id])
-
     # Log the initial state of the environment
     n_agents = len(env.agents_active)
     logging.info(f"Initialized environment with {n_agents} agents.")
-
     # Record initial opinions
     opinions_over_time.append(
         [agent.opinions.copy() for agent in env.agents_active.values()]
     )
-
     # Calculate the average opinions of all agents in the environment and log it.
     topic_name_to_id = {
         "negative": negative_opinion_topic_id,
@@ -199,13 +191,11 @@ def main():
             for agent in env.agents_active.values()
         ) / n_agents
         logging.info(f"Average opinion on '{topic_name}' of all agents: {avg_opinion:.2f}")
-
     # List groups and their members
     for group in env.groups_active.values():
         logging.info(f"\n{group}")
         for member in group.list_members():
             logging.info(f"  - {member}")
-
     for iteration in range(n_iterations):
         logging.info(f"\n--- Communication round {iteration+1} ---")    
         # Each agent in the negative group communicates with a random neutral agent
@@ -228,7 +218,6 @@ def main():
             avg_opinions[topic_name] = avg_opinion
             logging.info(f"Average opinion on '{topic_name}' of all agents after communication: {avg_opinion:.2f}")
     logging.info("\nAgent communication demo complete.")
-
     # --- Plotting ---
     output_dir = Path("data/output")
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -250,6 +239,30 @@ def main():
         plt.savefig(filename)
         plt.close()
         logging.info(f"Boxplot of '{topic_name}' opinions saved to {filename}")
+
+def run_survey():
+    """
+    Run a survey to change agent opinions.
+    """
+    logging.info("Survey mode selected...")
+
+    # Initialise
+    year = 2026
+    env = OpinionatedEnvironment(year=year)
+    # Create a gender map
+    gender_map = GenderMap()
+    raise NotImplementedError("Survey mode is not yet implemented.")
+
+def main():
+    parser = argparse.ArgumentParser(description="Run GABM simulation.")
+    parser.add_argument('--mode', choices=['example', 'survey'], default='example',
+                        help="Select run mode: 'example' for the demo, 'survey' to change agent opinions.")
+    args = parser.parse_args()
+
+    if args.mode == 'example':
+        run_example()
+    elif args.mode == 'survey':
+        run_survey()
 
 if __name__ == "__main__":
     # Set up logging to file and console

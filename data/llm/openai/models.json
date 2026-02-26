@@ -18,32 +18,32 @@
     "owned_by": "openai"
   },
   {
-    "id": "gpt-5.2-codex",
-    "created": 1766164985,
+    "id": "gpt-4o-search-preview-2025-03-11",
+    "created": 1771905621,
     "object": "model",
     "owned_by": "system"
   },
   {
-    "id": "gpt-4o-mini-tts-2025-12-15",
-    "created": 1765610837,
+    "id": "gpt-5.3-codex",
+    "created": 1770537915,
     "object": "model",
     "owned_by": "system"
   },
   {
-    "id": "gpt-realtime-mini-2025-12-15",
-    "created": 1765612007,
+    "id": "gpt-realtime-1.5",
+    "created": 1771461469,
     "object": "model",
     "owned_by": "system"
   },
   {
-    "id": "gpt-audio-mini-2025-12-15",
-    "created": 1765760008,
+    "id": "gpt-audio-1.5",
+    "created": 1771550885,
     "object": "model",
     "owned_by": "system"
   },
   {
-    "id": "chatgpt-image-latest",
-    "created": 1765925279,
+    "id": "gpt-4o-search-preview",
+    "created": 1771905534,
     "object": "model",
     "owned_by": "system"
   },
@@ -272,18 +272,6 @@
   {
     "id": "gpt-4o-2024-11-20",
     "created": 1739331543,
-    "object": "model",
-    "owned_by": "system"
-  },
-  {
-    "id": "gpt-4o-search-preview-2025-03-11",
-    "created": 1741388170,
-    "object": "model",
-    "owned_by": "system"
-  },
-  {
-    "id": "gpt-4o-search-preview",
-    "created": 1741388720,
     "object": "model",
     "owned_by": "system"
   },
@@ -638,6 +626,36 @@
   {
     "id": "gpt-4o-mini-tts-2025-03-20",
     "created": 1765610731,
+    "object": "model",
+    "owned_by": "system"
+  },
+  {
+    "id": "gpt-4o-mini-tts-2025-12-15",
+    "created": 1765610837,
+    "object": "model",
+    "owned_by": "system"
+  },
+  {
+    "id": "gpt-realtime-mini-2025-12-15",
+    "created": 1765612007,
+    "object": "model",
+    "owned_by": "system"
+  },
+  {
+    "id": "gpt-audio-mini-2025-12-15",
+    "created": 1765760008,
+    "object": "model",
+    "owned_by": "system"
+  },
+  {
+    "id": "chatgpt-image-latest",
+    "created": 1765925279,
+    "object": "model",
+    "owned_by": "system"
+  },
+  {
+    "id": "gpt-5.2-codex",
+    "created": 1766164985,
     "object": "model",
     "owned_by": "system"
   },

@@ -15,6 +15,7 @@ from typing import TYPE_CHECKING, Set
 import copy
 import logging
 # Local imports
+from gabm.core.id import GABMID
 from gabm.abm.attributes.ethnicity import EthnicityID, Ethnicity, EthnicityMap
 from gabm.abm.attributes.gender import GenderID, Gender, GenderMap
 from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap, Opinion
@@ -23,29 +24,19 @@ if TYPE_CHECKING:
     from gabm.abm.environment import Environment, OpinionatedEnvironment
     from gabm.abm.group import Group, OpinionatedGroup
 
-
-class AgentID():
+class AgentID(GABMID):
     """
     A unique identifier for an Agent instance.
     Attributes:
-        agent_id (int): The unique identifier for the agent.
+        id (int): The unique identifier for the agent.
     """
     def __init__(self, agent_id: int):
-        self.id = agent_id
-
-    def __str__(self):
         """
-        Return:
-            A string representation.
+        Initialize
+        Args:
+            agent_id (int): The unique identifier for the agent.
         """
-        return f"AgentID({self.id})"
-
-    def __repr__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return self.__str__()
+        super().__init__(agent_id)
 
 class Agent():
     """

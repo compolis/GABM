@@ -206,8 +206,8 @@ bump-version:
 
 # Run gabm using local source (development mode)
 run-local:
-	PYTHONPATH=src python3 -m gabm
+	PYTHONPATH=src python3 -m gabm $(ARGS)
 
 # Run gabm using installed package (production mode)
 run-installed:
-	python3 -m gabm
+	python3 -m gabm $(ARGS)
