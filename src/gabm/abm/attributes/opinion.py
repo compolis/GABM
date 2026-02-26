@@ -10,9 +10,11 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 # Standard library imports
 import logging
 from typing import Dict
+# Local imports
+from gabm.core.id import GABMID
+from gabm.core.abm.attribute import GABMAttribute, GABMAttributeMap
 
-
-class OpinionTopicID():
+class OpinionTopicID(GABMID):
     """
     A unique identifier for an opinion topic.
     Attributes:
@@ -24,30 +26,16 @@ class OpinionTopicID():
         Args:
             opinion_topic_id: The unique identifier for the opinion topic.
         """
-        self.id = opinion_topic_id
+        super().__init__(opinion_topic_id)
 
-    def __str__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return f"OpinionTopicID({self.id})"
-
-    def __repr__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return self.__str__()
-
-    def __eq__(self, other):
-        if isinstance(other, OpinionTopicID):
-            return self.id == other.id
-        return False
-
-    def __hash__(self):
-        return hash(self.id)
-
+class OpinionTopicID(BaseID):
+    """
+    A unique identifier for an opinion topic.
+    Attributes:
+        id (int): The unique identifier for the opinion topic.
+    """
+    def __init__(self, opinion_topic_id: int):
+        super().__init__(opinion_topic_id)
 
 class OpinionTopic():
     """

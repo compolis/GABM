@@ -21,10 +21,10 @@ class Environment:
     Attributes:
         year (int): The current year in the simulation.
         place (str): The name of the place or environment.
-        agents_active (Dict[int, Agent]): A dictionary of active agents, keyed by their unique id.
-        agents_inactive (Dict[int, Agent]): A dictionary of inactive agents, keyed by their unique id.
-        groups_active (Dict[int, Group]): A dictionary of active groups, keyed by their unique id.
-        groups_inactive (Dict[int, Group]): A dictionary of inactive groups, keyed by their unique id.
+        agents_active (Dict[AgentID, Agent]): A dictionary of active agents, keyed by their unique id.
+        agents_inactive (Dict[AgentID, Agent]): A dictionary of inactive agents, keyed by their unique id.
+        groups_active (Dict[GroupID, Group]): A dictionary of active groups, keyed by their unique id.
+        groups_inactive (Dict[GroupID, Group]): A dictionary of inactive groups, keyed by their unique id.
     """
 
     def __init__(self, year: int = 2026, place: str = "Earth"):
@@ -36,10 +36,10 @@ class Environment:
         """
         self.year = year
         self.place = place
-        self.agents_active: Dict[int, Agent] = {}
-        self.agents_inactive: Dict[int, Agent] = {}
-        self.groups_active: Dict[int, Group] = {}
-        self.groups_inactive: Dict[int, Group] = {}
+        self.agents_active: Dict[AgentID, Agent] = {}
+        self.agents_inactive: Dict[AgentID, Agent] = {}
+        self.groups_active: Dict[GroupID, Group] = {}
+        self.groups_inactive: Dict[GroupID, Group] = {}
 
     def __str__(self):
         """

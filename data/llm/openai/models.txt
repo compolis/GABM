@@ -12,25 +12,25 @@ Model ID: gpt-3.5-turbo
   Owned by: openai
   Created: 1677610602
 
-Model ID: gpt-5.2-codex
+Model ID: gpt-4o-search-preview-2025-03-11
   Owned by: system
-  Created: 1766164985
+  Created: 1771905621
 
-Model ID: gpt-4o-mini-tts-2025-12-15
+Model ID: gpt-5.3-codex
   Owned by: system
-  Created: 1765610837
+  Created: 1770537915
 
-Model ID: gpt-realtime-mini-2025-12-15
+Model ID: gpt-realtime-1.5
   Owned by: system
-  Created: 1765612007
+  Created: 1771461469
 
-Model ID: gpt-audio-mini-2025-12-15
+Model ID: gpt-audio-1.5
   Owned by: system
-  Created: 1765760008
+  Created: 1771550885
 
-Model ID: chatgpt-image-latest
+Model ID: gpt-4o-search-preview
   Owned by: system
-  Created: 1765925279
+  Created: 1771905534
 
 Model ID: davinci-002
   Owned by: system
@@ -183,14 +183,6 @@ Model ID: o3-mini-2025-01-31
 Model ID: gpt-4o-2024-11-20
   Owned by: system
   Created: 1739331543
-
-Model ID: gpt-4o-search-preview-2025-03-11
-  Owned by: system
-  Created: 1741388170
-
-Model ID: gpt-4o-search-preview
-  Owned by: system
-  Created: 1741388720
 
 Model ID: gpt-4o-mini-search-preview-2025-03-11
   Owned by: system
@@ -427,6 +419,26 @@ Model ID: gpt-4o-mini-transcribe-2025-03-20
 Model ID: gpt-4o-mini-tts-2025-03-20
   Owned by: system
   Created: 1765610731
+
+Model ID: gpt-4o-mini-tts-2025-12-15
+  Owned by: system
+  Created: 1765610837
+
+Model ID: gpt-realtime-mini-2025-12-15
+  Owned by: system
+  Created: 1765612007
+
+Model ID: gpt-audio-mini-2025-12-15
+  Owned by: system
+  Created: 1765760008
+
+Model ID: chatgpt-image-latest
+  Owned by: system
+  Created: 1765925279
+
+Model ID: gpt-5.2-codex
+  Owned by: system
+  Created: 1766164985
 
 Model ID: gpt-3.5-turbo-16k
   Owned by: openai-internal
