@@ -21,24 +21,23 @@ def test_gender_id():
 
 def test_gender():
     gid = GenderID(0)
-    gender = Gender(gid, 0, "female")
+    description = "unknown"
+    gender = Gender(gid, description)
     assert gender.id == gid
-    assert gender.value == 0
-    assert gender.description == "female"
-    assert str(gender) == "female"
+    assert gender.description == description
+    assert str(gender) == description
 
 def test_gender_map_lookup():
     gmap = GenderMap()
-    gid_female = GenderID(0)
-    gid_male = GenderID(1)
-    assert gmap.gender_map[gid_female].description == "female"
-    assert gmap.gender_map[gid_male].description == "male"
+    assert gmap.items[GenderID(0)].description == "unknown"
+    assert gmap.items[GenderID(1)].description == "female"
+    assert gmap.items[GenderID(2)].description == "male"
 
 def test_gender_map_add():
     gmap = GenderMap()
     gid_other = GenderID(99)
-    gmap.gender_map[gid_other] = Gender(gid_other, 99, "other")
-    assert gmap.gender_map[gid_other].description == "other"
+    gmap.items[gid_other] = Gender(gid_other, "other")
+    assert gmap.items[gid_other].description == "other"
 
 if __name__ == "__main__":
     pytest.main([__file__])

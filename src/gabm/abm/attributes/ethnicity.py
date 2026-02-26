@@ -42,7 +42,7 @@ class Ethnicity(GABMAttribute):
             ethnicity_id (EthnicityID): The unique identifier for the ethnicity.
             description (str): The description of the ethnicity.
         """
-        super().__init__(employment_id, description)
+        super().__init__(ethnicity_id, description)
 
 class EthnicityMap(GABMAttributeMap):
     """

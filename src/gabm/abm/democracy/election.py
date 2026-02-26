@@ -10,30 +10,32 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 import logging
 from typing import Dict
 
-class ElectionID():
+class ElectionID(GABMID):
     """
     A unique identifier for an Election instance.
     Attributes:
         election_id (int): The unique identifier for the election.
     """
     def __init__(self, election_id: int):
-        self.id = election_id
-
+        super().__init__(election_id)
+    
 class Election():
     """
     For representing an election.
     Attributes:
         id (ElectionID): Unique identifier for the election.
+        year (int): The year of the election.
         description (str): The description of the election.
     """
-    def __init__(self, election_id: ElectionID, description: str):
+    def __init__(self, election_id: ElectionID, year: int, description: str):
         """
         Initialize
         Args:
             election_id (ElectionID): The unique identifier for the election.
-            description (str): The description of the election.
+            year (int): The year of the election.
         """
         self.id = election_id
+        self.year = year
         self.description = description
 
 

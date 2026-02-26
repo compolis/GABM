@@ -46,19 +46,7 @@ def run_example():
     # Initialize the environment
     env = OpinionatedEnvironment()
     # Create a gender map
-    # Define gender IDs
-    gender_id_0 = GenderID(0)
-    gender_id_1 = GenderID(1)
-    gender_id_2 = GenderID(2)
-    # Define genders
-    gender_0 = Gender(gender_id_0, "female", "A female gender.")
-    gender_1 = Gender(gender_id_1, "male", "A male gender.")
-    gender_2 = Gender(gender_id_2, "non-binary", "A non-binary gender.")
-    gender_map = {
-        gender_id_0: gender_0,
-        gender_id_1: gender_1,
-        gender_id_2: gender_2
-    }
+    gender_map = GenderMap()
     # Default gender
     gender = gender_0
     # Define opinion topics and values

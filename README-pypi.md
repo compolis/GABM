@@ -41,6 +41,39 @@ pip install gabm
 ```
 
 ## Run the Main Program
+### Running GABM: Example and Survey Modes
+
+You can run GABM in different modes using a command-line argument. The default mode is the original Agent-Based Model (ABM) simulation ("example" mode). A new "survey" mode is also available, which will run a survey to change agent opinions (see below).
+
+#### Run from the command line
+
+- To run the example simulation (default):
+    ```bash
+    python3 -m gabm
+    # or explicitly
+    python3 -m gabm --mode example
+    ```
+- To run the survey example:
+    ```bash
+    python3 -m gabm --mode survey
+    ```
+
+#### Run using the Makefile
+
+The Makefile provides a `run-local` target for convenience. You can pass arguments to the program using the `ARGS` variable:
+
+- To run the example simulation (default):
+    ```bash
+    make run-local
+    # or explicitly
+    make run-local ARGS="--mode example"
+    ```
+- To run the survey example:
+    ```bash
+    make run-local ARGS="--mode survey"
+    ```
+
+
 When you run GABM (e.g., with `python3 -m gabm`), the default behavior is to execute an Agent-Based Model (ABM) simulation. Here’s what happens:
 
 ### Agent Groups and Opinions

@@ -1,0 +1,5 @@
+Available Deepseek models:
+
+Model: deepseek-chat
+
+Model: deepseek-reasoner

@@ -1,0 +1,25 @@
+Available Genai models and supported methods (static list):
+
+Model ID: models/gemini-1.5-pro-latest
+  Description: Gemini 1.5 Pro (latest)
+  Supported methods: ['generateContent']
+
+Model ID: models/gemini-1.0-pro
+  Description: Gemini 1.0 Pro
+  Supported methods: ['generateContent']
+
+Model ID: models/gemini-1.0-pro-001
+  Description: Gemini 1.0 Pro (001)
+  Supported methods: ['generateContent']
+
+Model ID: models/gemini-1.0-pro-latest
+  Description: Gemini 1.0 Pro (latest)
+  Supported methods: ['generateContent']
+
+Model ID: models/gemini-1.0-pro-vision-latest
+  Description: Gemini 1.0 Pro Vision (latest)
+  Supported methods: ['generateContent']
+
+Model ID: models/gemini-1.5-flash-latest
+  Description: Gemini 1.5 Flash (latest)
+  Supported methods: ['generateContent']

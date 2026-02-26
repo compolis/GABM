@@ -25,30 +25,31 @@ def test_ethnicity_id_equality_and_hash():
 
 def test_ethnicity():
     eid = EthnicityID(0)
-    eth = Ethnicity(eid, 0, "white")
+    description = "unknown"
+    eth = Ethnicity(eid, description)
     assert eth.id == eid
-    assert eth.value == 0
-    assert eth.description == "white"
-    assert str(eth) == "white"
-    assert repr(eth) == "white"
+    assert eth.description == "unknown"
+    assert str(eth) == "unknown"
+    assert repr(eth) == "Ethnicity(unknown)"
 
 
 def test_ethnicity_map():
     emap = EthnicityMap()
-    assert isinstance(emap.ethnicity_map, dict)
+    assert isinstance(emap.items, dict[EthnicityID, Ethnicity])
     # Check default keys and values
     expected = {
-        0: "white",
-        1: "asian",
-        2: "black",
-        3: "mixed",
-        4: "other"
+        0: "unknown",
+        1: "white",
+        2: "asian",
+        3: "black",
+        4: "mixed",
+        5: "other"
     }
     for k, v in expected.items():
         eid = EthnicityID(k)
-        assert eid in emap.ethnicity_map
-        eth = emap.ethnicity_map[eid]
-        assert eth.value == k
+        assert eid in emap.items
+        eth = emap.items[eid]
+        assert eth.id == eid
         assert eth.description == v
     assert "Ethnicities" in str(emap)
     assert "Ethnicities" in repr(emap)

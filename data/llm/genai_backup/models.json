@@ -1,0 +1,44 @@
+[
+  {
+    "name": "models/gemini-1.5-pro-latest",
+    "description": "Gemini 1.5 Pro (latest)",
+    "supported_generation_methods": [
+      "generateContent"
+    ]
+  },
+  {
+    "name": "models/gemini-1.0-pro",
+    "description": "Gemini 1.0 Pro",
+    "supported_generation_methods": [
+      "generateContent"
+    ]
+  },
+  {
+    "name": "models/gemini-1.0-pro-001",
+    "description": "Gemini 1.0 Pro (001)",
+    "supported_generation_methods": [
+      "generateContent"
+    ]
+  },
+  {
+    "name": "models/gemini-1.0-pro-latest",
+    "description": "Gemini 1.0 Pro (latest)",
+    "supported_generation_methods": [
+      "generateContent"
+    ]
+  },
+  {
+    "name": "models/gemini-1.0-pro-vision-latest",
+    "description": "Gemini 1.0 Pro Vision (latest)",
+    "supported_generation_methods": [
+      "generateContent"
+    ]
+  },
+  {
+    "name": "models/gemini-1.5-flash-latest",
+    "description": "Gemini 1.5 Flash (latest)",
+    "supported_generation_methods": [
+      "generateContent"
+    ]
+  }
+]
