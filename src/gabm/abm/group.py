@@ -12,13 +12,21 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 from typing import TYPE_CHECKING, Set
 # Local imports
+<<<<<<< HEAD
 from gabm.core.id import BaseID
+=======
+from gabm.core.id import GABMID
+>>>>>>> upstream/main
 if TYPE_CHECKING:
     # Agent is imported under TYPE_CHECKING to avoid circular imports, as Group and Agent reference each other.
     from gabm.abm.agent import Agent
 from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap
 
+<<<<<<< HEAD
 class GroupID(BaseID):
+=======
+class GroupID(GABMID):
+>>>>>>> upstream/main
     """
     A unique identifier for a Group instance.
     Attributes:

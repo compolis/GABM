@@ -11,7 +11,11 @@ import logging
 from typing import Dict
 # Local imports
 from gabm.core.id import GABMID
+<<<<<<< HEAD
 from gabm.core.abm.attribute import GABMAttribute, GABMAttributeMap
+=======
+from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
+>>>>>>> upstream/main
 
 class EmploymentID(GABMID):
     """

@@ -251,6 +251,7 @@ def run_survey():
     env = OpinionatedEnvironment(year=year)
     # Create a gender map
     gender_map = GenderMap()
+<<<<<<< HEAD
     # Define opinion topics and values
     # Define opinion topic IDs
     opinion_topic_id_0 = OpinionTopicID(0)
@@ -273,6 +274,9 @@ def run_survey():
     # Create an opinion topic and values
     opinion_topic_id = OpinionTopicID(0)
     opinion_topic = OpinionTopic(opinion_topic_id, "climate change", "Opinions
+=======
+    raise NotImplementedError("Survey mode is not yet implemented.")
+>>>>>>> upstream/main
 
 def main():
     parser = argparse.ArgumentParser(description="Run GABM simulation.")

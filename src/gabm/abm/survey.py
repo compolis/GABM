@@ -10,9 +10,15 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 import logging
 from typing import List, Dict, Any
 # Local imports
+<<<<<<< HEAD
 from gabm.core.id import BaseID
 
 class QuestionID(BaseID):
+=======
+from gabm.core.id import GABMID
+
+class QuestionID(GABMID):
+>>>>>>> upstream/main
     """
     A unique identifier for a Question instance.
     Attributes:
@@ -64,7 +70,11 @@ class Question():
         """
         self.answers.append(answer)
 
+<<<<<<< HEAD
 class AnswerID(BaseID):
+=======
+class AnswerID(GABMID):
+>>>>>>> upstream/main
     """
     A unique identifier for a Answer instance.
     Attributes:
