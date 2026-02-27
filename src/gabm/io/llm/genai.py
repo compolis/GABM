@@ -15,12 +15,14 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 # Standard library imports
 import ast
 # Google Generative AI client library
+#import google.generativeai as genai
 import google.genai as genai
+# OpenAI-compatible client for dynamic model listing
+from openai import OpenAI
 # LLM service base class
 from .llm_service import LLMService
 # Shared utilities for caching and logging
 from .utils import pre_send_check_and_cache, call_and_cache_response, cache_and_log, write_models_json_and_txt
-
 
 class GenAIService(LLMService):
     """
@@ -29,7 +31,7 @@ class GenAIService(LLMService):
     """
     SERVICE_NAME = "genai"
 
-    def send(self, api_key, message, model="models/gemini-2.5-pro"):
+    def send(self, api_key, message, model="models/gemini-2.5-flash"):
         """
         Send a prompt to Google Generative AI and return the response object.
         Caches and logs the response for reproducibility.
@@ -44,12 +46,13 @@ class GenAIService(LLMService):
         if cached is not None:
             return cached
         cache_key = (message, model)
-        # Set API key for google-genai
-        import os
-        os.environ["GOOGLE_API_KEY"] = api_key
         def api_call():
-            model_obj = genai.GenerativeModel(model)
-            response = model_obj.generate_content(message)
+            client = genai.Client(api_key=api_key)
+            response = client.models.generate_content(
+                model=model,
+                contents={"text": message}
+            )
+            client.close()
             # Convert to dict if possible
             if hasattr(response, 'to_dict'):
                 return response.to_dict()
@@ -57,7 +60,8 @@ class GenAIService(LLMService):
                 return dict(response.__dict__)
             else:
                 return response
-        return call_and_cache_response(
+        return self._call_with_error_handling(
+            call_and_cache_response,
             api_call,
             cache_and_log,
             self.cache,
@@ -75,34 +79,37 @@ class GenAIService(LLMService):
 
     def list_available_models(self, api_key):
         """
-        Return a static list of supported Gemini model names for google-genai.
-        The google-genai package does not provide a list_models() method.
-        See: https://ai.google.dev/models/gemini
+        Dynamically fetches the list of available Gemini models using the OpenAI-compatible API.
+        Requires the openai package and a valid Gemini API key.
         """
-        models = [
-            {"name": "models/gemini-1.5-pro-latest", "description": "Gemini 1.5 Pro (latest)", "supported_generation_methods": ["generateContent"]},
-            {"name": "models/gemini-1.0-pro", "description": "Gemini 1.0 Pro", "supported_generation_methods": ["generateContent"]},
-            {"name": "models/gemini-1.0-pro-001", "description": "Gemini 1.0 Pro (001)", "supported_generation_methods": ["generateContent"]},
-            {"name": "models/gemini-1.0-pro-latest", "description": "Gemini 1.0 Pro (latest)", "supported_generation_methods": ["generateContent"]},
-            {"name": "models/gemini-1.0-pro-vision-latest", "description": "Gemini 1.0 Pro Vision (latest)", "supported_generation_methods": ["generateContent"]},
-            {"name": "models/gemini-1.5-flash-latest", "description": "Gemini 1.5 Flash (latest)", "supported_generation_methods": ["generateContent"]},
-        ]
-        def formatter(model):
-            name = model.get('name', 'N/A')
-            desc = model.get('description', 'N/A')
-            methods = model.get('supported_generation_methods', 'N/A')
-            return (f"Model ID: {name}\n"
-                    f"  Description: {desc}\n"
-                    f"  Supported methods: {methods}\n")
-        self.logger.info("Writing GenAI model list to JSON and TXT (static list, see https://ai.google.dev/models/gemini).")
-        write_models_json_and_txt(
-            models,
-            self.cache_path.parent / "models.json",
-            self.cache_path.parent / "models.txt",
-            formatter,
-            header=f"Available {self.SERVICE_NAME.capitalize()} models and supported methods (static list):\n"
-        )
-        return models
+        def api_call():
+            client = OpenAI(
+                api_key=api_key,
+                base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+            )
+            models = list(client.models.list())
+            model_dicts = []
+            for model in models:
+                model_dicts.append({
+                    "id": getattr(model, "id", None),
+                    "object": getattr(model, "object", None),
+                    "owned_by": getattr(model, "owned_by", None),
+                    "description": getattr(model, "description", ""),
+                })
+            def formatter(model):
+                return (f"Model ID: {model.get('id', 'N/A')}\n"
+                        f"  Description: {model.get('description', 'N/A')}\n"
+                        f"  Owned by: {model.get('owned_by', 'N/A')}\n")
+            self.logger.info("Writing GenAI model list to JSON and TXT (dynamic list from OpenAI-compatible endpoint).")
+            write_models_json_and_txt(
+                model_dicts,
+                self.cache_path.parent / "models.json",
+                self.cache_path.parent / "models.txt",
+                formatter,
+                header=f"Available {self.SERVICE_NAME.capitalize()} models (dynamic list):\n"
+            )
+            return model_dicts
+        return self._call_with_error_handling(api_call)
 
     def extract_text_from_response(self, response):
         """

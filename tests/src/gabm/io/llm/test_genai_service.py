@@ -51,4 +51,13 @@ def test_genai_communication():
     service = Service()
     model, prompt = DEFAULT_PROMPT
     resp = service.send(api_key, prompt, model=model)
+    # Handle error responses gracefully
+    if resp is None:
+        print("GenAIService.send() returned None. Check your API key, model name, and network connectivity.\n"
+              "If you see this message, check logs for more details.")
+        pytest.skip("GenAIService.send() returned None. Possibly quota exceeded or API unavailable.")
+    if isinstance(resp, dict) and resp.get("error") == "quota_exceeded":
+        pytest.skip("Quota exceeded for Gemini API, skipping test.")
+    if isinstance(resp, dict) and resp.get("error") == "api_error":
+        pytest.skip(f"API error: {resp.get('details')}")
     assert resp is not None and len(str(resp)) > 0

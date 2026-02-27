@@ -1,44 +1,266 @@
 [
   {
-    "name": "models/gemini-1.5-pro-latest",
-    "description": "Gemini 1.5 Pro (latest)",
-    "supported_generation_methods": [
-      "generateContent"
-    ]
+    "id": "models/gemini-2.5-flash",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
   },
   {
-    "name": "models/gemini-1.0-pro",
-    "description": "Gemini 1.0 Pro",
-    "supported_generation_methods": [
-      "generateContent"
-    ]
+    "id": "models/gemini-2.5-pro",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
   },
   {
-    "name": "models/gemini-1.0-pro-001",
-    "description": "Gemini 1.0 Pro (001)",
-    "supported_generation_methods": [
-      "generateContent"
-    ]
+    "id": "models/gemini-2.0-flash",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
   },
   {
-    "name": "models/gemini-1.0-pro-latest",
-    "description": "Gemini 1.0 Pro (latest)",
-    "supported_generation_methods": [
-      "generateContent"
-    ]
+    "id": "models/gemini-2.0-flash-001",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
   },
   {
-    "name": "models/gemini-1.0-pro-vision-latest",
-    "description": "Gemini 1.0 Pro Vision (latest)",
-    "supported_generation_methods": [
-      "generateContent"
-    ]
+    "id": "models/gemini-2.0-flash-lite-001",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
   },
   {
-    "name": "models/gemini-1.5-flash-latest",
-    "description": "Gemini 1.5 Flash (latest)",
-    "supported_generation_methods": [
-      "generateContent"
-    ]
+    "id": "models/gemini-2.0-flash-lite",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-2.5-flash-preview-tts",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-2.5-pro-preview-tts",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemma-3-1b-it",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemma-3-4b-it",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemma-3-12b-it",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemma-3-27b-it",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemma-3n-e4b-it",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemma-3n-e2b-it",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-flash-latest",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-flash-lite-latest",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-pro-latest",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-2.5-flash-lite",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-2.5-flash-image",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-2.5-flash-lite-preview-09-2025",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3-pro-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3-flash-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.1-pro-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.1-pro-preview-customtools",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3-pro-image-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/nano-banana-pro-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.1-flash-image-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-robotics-er-1.5-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-2.5-computer-use-preview-10-2025",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/deep-research-pro-preview-12-2025",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-embedding-001",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/aqa",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/imagen-4.0-generate-001",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/imagen-4.0-ultra-generate-001",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/imagen-4.0-fast-generate-001",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/veo-2.0-generate-001",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/veo-3.0-generate-001",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/veo-3.0-fast-generate-001",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/veo-3.1-generate-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/veo-3.1-fast-generate-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-2.5-flash-native-audio-latest",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-2.5-flash-native-audio-preview-09-2025",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-2.5-flash-native-audio-preview-12-2025",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/lyria-realtime-exp",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
   }
 ]

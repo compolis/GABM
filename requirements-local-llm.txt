@@ -1,3 +1,4 @@
 # Requirements for running local LLMs (downloaded from Hugging Face)
+# Install with: pip install -r requirements-local-llm.txt
 torch==2.10.0
 transformers==5.1.0

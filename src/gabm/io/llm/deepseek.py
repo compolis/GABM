@@ -9,9 +9,8 @@ Features:
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
-
 
 # DeepSeek client library
 from deepseek import DeepSeekAPI
@@ -52,7 +51,8 @@ class DeepSeekService(LLMService):
             if model:
                 kwargs["model"] = model
             return client.chat_completion(**kwargs)
-        return call_and_cache_response(
+        return self._call_with_error_handling(
+            call_and_cache_response,
             api_call,
             cache_and_log,
             self.cache,
@@ -65,7 +65,7 @@ class DeepSeekService(LLMService):
             self.logger,
             self.SERVICE_NAME,
             self.list_available_models,
-            extract_text_from_response=None
+            extract_text_from_response=self.simple_extract_text
         )
 
     def list_available_models(self, api_key):
@@ -76,25 +76,23 @@ class DeepSeekService(LLMService):
         Returns:
             list: List of model objects.
         """
-        try:
+        def api_call():
             client = DeepSeekAPI(api_key=api_key)
-        except Exception as e:
-            self.logger.error(f"[deepseek] Could not initialize DeepSeekAPI: {e}")
-            return None
-        models = client.get_models()
-        self.logger.info(f"Raw model list from DeepSeek: {models}")
-        def formatter(model):
-            if isinstance(model, dict):
-                return (f"Model ID: {model.get('id', model.get('model', 'N/A'))}\n"
-                        f"  Description: {model.get('description', 'N/A')}\n")
-            else:
-                return f"Model: {model}\n"
-        self.logger.info("Writing DeepSeek model list to JSON and TXT.")
-        write_models_json_and_txt(
-            models,
-            self.cache_path.parent / "models.json",
-            self.cache_path.parent / "models.txt",
-            formatter,
-            header=f"Available {self.SERVICE_NAME.capitalize()} models:\n"
-        )
-        return models
+            models = client.get_models()
+            self.logger.info(f"Raw model list from DeepSeek: {models}")
+            def formatter(model):
+                if isinstance(model, dict):
+                    return (f"Model ID: {model.get('id', model.get('model', 'N/A'))}\n"
+                            f"  Description: {model.get('description', 'N/A')}\n")
+                else:
+                    return f"Model: {model}\n"
+            self.logger.info("Writing DeepSeek model list to JSON and TXT.")
+            write_models_json_and_txt(
+                models,
+                self.cache_path.parent / "models.json",
+                self.cache_path.parent / "models.txt",
+                formatter,
+                header=f"Available {self.SERVICE_NAME.capitalize()} models:\n"
+            )
+            return models
+        return self._call_with_error_handling(api_call)

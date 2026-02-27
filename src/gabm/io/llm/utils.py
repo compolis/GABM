@@ -200,6 +200,8 @@ def cache_and_log(
     cache_path = Path(cache_path)
     jsonl_path = Path(jsonl_path)
     cache_path.parent.mkdir(parents=True, exist_ok=True)
+    if logger:
+        logger.debug(f"cache_and_log: cache_path={cache_path}, jsonl_path={jsonl_path}, prompt={prompt}, model={model}")
     try:
         with cache_path.open("wb") as f:
             pickle.dump(cache, f)
@@ -218,6 +220,8 @@ def cache_and_log(
     }
     if extra:
         log_entry.update(extra)
+    if logger:
+        logger.debug(f"cache_and_log: log_entry={log_entry}")
     try:
         with jsonl_path.open("a", encoding="utf-8") as f:
             f.write(json.dumps(log_entry, ensure_ascii=False) + "\n")
