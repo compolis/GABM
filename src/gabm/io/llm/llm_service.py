@@ -23,10 +23,6 @@ class LLMService(ABC):
     """
     SERVICE_NAME = None  # Should be overridden by subclasses
 
-    @staticmethod
-    def simple_extract_text(response):
-        return str(response)
-
     def __init__(self, logger=None):
         """
         Initialize the LLM service, setting up logger, cache paths, and loading cache.
