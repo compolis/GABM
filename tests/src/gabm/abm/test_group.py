@@ -11,12 +11,21 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 import pytest
 from gabm.abm.group import GroupID, Group, OpinionatedGroup
 from unittest.mock import Mock
+from gabm.abm.attributes.ethnicity import EthnicityID
+from gabm.core.id import GABMID
 
 # --- GroupID Tests ---
-def test_group_id_str_and_repr():
-    gid = GroupID(101)
-    assert str(gid) == "GroupID(101)"
-    assert repr(gid) == "GroupID(101)"
+def test_group_id():
+    gid0 = GroupID(0)
+    gid1 = GroupID(1)
+    gid00 = GroupID(0)
+    eid0 = EthnicityID(0)
+    gabmid0 = GABMID(0)
+    assert str(gid0) == "GroupID(0)"
+    assert gid0 == gid00
+    assert gid0 != gid1
+    assert gid0 != eid0
+    assert gid0 != gabmid0
 
 # --- Group Tests ---
 def test_group_creation_and_membership():

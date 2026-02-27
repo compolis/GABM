@@ -10,9 +10,10 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 import logging
 from typing import Dict
 # Local imports
-from gabm.core.id import BaseID
+from gabm.core.id import GABMID
+from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
 
-class WealthID(BaseID):
+class WealthID(GABMID):
     """
     A unique identifier for a Wealth instance.
     Attributes:
@@ -21,7 +22,7 @@ class WealthID(BaseID):
     def __init__(self, wealth_id: int):
         super().__init__(wealth_id)
 
-class Wealth():
+class Wealth(GABMAttribute):
     """
     For representing wealth.
     Attributes:
@@ -38,7 +39,7 @@ class Wealth():
         self.id = wealth_id
         self.description = description
 
-class WealthMap():
+class WealthMap(GABMAttributeMap):
     """
     A mapping of WealthIds to Wealth.
     By default, the map is initialized as follows:

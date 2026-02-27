@@ -28,7 +28,16 @@ class PublicAIService(LLMService):
 
     @staticmethod
     def simple_extract_text(response):
-        return str(response)
+        # If response is a string, parse it to a dict
+        if isinstance(response, str):
+            try:
+                response = ast.literal_eval(response)
+            except Exception:
+                return response
+        try:
+            return response['choices'][0]['message']['content']
+        except Exception:
+            return str(response)
         
     def send(self, api_key, message, model="swiss-ai/apertus-8b-instruct"):
         """

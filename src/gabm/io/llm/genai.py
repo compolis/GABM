@@ -31,6 +31,10 @@ class GenAIService(LLMService):
     """
     SERVICE_NAME = "genai"
 
+    @staticmethod
+    def simple_extract_text(response):
+        return str(response)
+
     def send(self, api_key, message, model="models/gemini-2.5-flash"):
         """
         Send a prompt to Google Generative AI and return the response object.
@@ -74,7 +78,7 @@ class GenAIService(LLMService):
             self.logger,
             self.SERVICE_NAME,
             self.list_available_models,
-            extract_text_from_response=self.extract_text_from_response
+            extract_text_from_response=self.simple_extract_text
         )
 
     def list_available_models(self, api_key):

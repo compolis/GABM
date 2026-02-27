@@ -26,6 +26,10 @@ class DeepSeekService(LLMService):
     """
     SERVICE_NAME = "deepseek"
 
+    @staticmethod
+    def simple_extract_text(response):
+        return str(response)
+
     def send(self, api_key, message, model="deepseek-model-1"):
         """
         Send a prompt to DeepSeek and return the response object.
