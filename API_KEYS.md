@@ -12,7 +12,7 @@ You must sign up with each LLM provider to obtain an API key:
 
 - **OpenAI:** Go to [platform.openai.com/signup](https://platform.openai.com/signup) and create an account. After logging in, visit [API Keys](https://platform.openai.com/api-keys) to generate a key. Use `openai` as the API name.
 - **DeepSeek:** Register at [deepseek.com](https://deepseek.com/) and follow their documentation to obtain an API key. Use `deepseek` as the API name.
-- **GenAI (Google):** Go to [makersuite.google.com](https://makersuite.google.com/) and sign in with your Google account. Follow instructions to get an API key. Use `genai` as the API name.
+- **Gemini (Google):** Go to [Google AI Studio](https://aistudio.google.com/) and sign in with your Google account. Create a new API key for the Gemini API. Use `genai` as the API name. This key is required for the new `google-genai` package.
 - **PublicAI (Apertus):** Sign up at [publicai.co](https://publicai.co/) to get your API key. Use `publicai` as the API name.
 
 You can also add your [Hugging Face](https://huggingface.co/) token for downloading private or gated models:

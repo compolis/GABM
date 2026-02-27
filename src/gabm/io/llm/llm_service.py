@@ -21,8 +21,11 @@ class LLMService(ABC):
     Abstract base class for LLM service modules. Provides shared cache management, logging, and model list utilities.
     Subclasses must implement the send() and list_available_models() methods.
     """
-
     SERVICE_NAME = None  # Should be overridden by subclasses
+
+    @staticmethod
+    def simple_extract_text(response):
+        return str(response)
 
     def __init__(self, logger=None):
         """
@@ -62,3 +65,23 @@ class LLMService(ABC):
             A list of available models.
         """
         pass
+    
+    def _call_with_error_handling(self, func, *args, **kwargs):
+        """
+        General error handling for API calls. Logs errors.
+        Args:
+            func: The function to call that interacts with the API.
+            *args, **kwargs: Arguments to pass to the function.
+        Returns:
+            Structured error dicts for quota and API errors.
+        """
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            error_str = str(e)
+            if '429' in error_str or 'RESOURCE_EXHAUSTED' in error_str:
+                self.logger.error(f"[{self.SERVICE_NAME}] Rate limit or quota exceeded: {error_str}")
+                return {"error": "quota_exceeded", "details": error_str}
+            self.logger.error(f"[{self.SERVICE_NAME}] API error: {error_str}")
+            return {"error": "api_error", "details": error_str}
+    

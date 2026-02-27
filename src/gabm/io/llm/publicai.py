@@ -9,7 +9,7 @@ Features:
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 
@@ -26,6 +26,10 @@ class PublicAIService(LLMService):
     """
     SERVICE_NAME = "publicai"
 
+    @staticmethod
+    def simple_extract_text(response):
+        return str(response)
+        
     def send(self, api_key, message, model="swiss-ai/apertus-8b-instruct"):
         """
         Send a prompt to PublicAI and return the response object.
@@ -57,7 +61,8 @@ class PublicAIService(LLMService):
             response = requests.post(url, headers=headers, json=data)
             response.raise_for_status()
             return response.json()
-        return call_and_cache_response(
+        return self._call_with_error_handling(
+            call_and_cache_response,
             api_call,
             cache_and_log,
             self.cache,
@@ -70,7 +75,7 @@ class PublicAIService(LLMService):
             self.logger,
             self.SERVICE_NAME,
             self.list_available_models,
-            extract_text_from_response=None
+            extract_text_from_response=self.simple_extract_text
         )
 
     def list_available_models(self, api_key):
@@ -81,28 +86,29 @@ class PublicAIService(LLMService):
         Returns:
             list: List of model objects.
         """
-        url = "https://api.publicai.co/v1/models"
-        headers = {
-            "Authorization": f"Bearer {api_key}",
-            "User-Agent": "GABM/1.0"
-        }
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        models_data = response.json()
-        # The API returns a dict with a 'data' key containing the list of models
-        models = models_data.get("data", [])
-        def formatter(model):
-            if isinstance(model, dict):
-                return (f"Model ID: {model.get('id', model.get('model', 'N/A'))}\n"
-                        f"  Description: {model.get('description', 'N/A')}\n")
-            else:
-                return f"Model: {model}\n"
-        self.logger.info("Writing PublicAI model list to JSON and TXT.")
-        write_models_json_and_txt(
-            models,
-            self.cache_path.parent / "models.json",
-            self.cache_path.parent / "models.txt",
-            formatter,
-            header="Available PublicAI models:\n"
-        )
-        return models
+        def api_call():
+            url = "https://api.publicai.co/v1/models"
+            headers = {
+                "Authorization": f"Bearer {api_key}",
+                "User-Agent": "GABM/1.0"
+            }
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()
+            models_data = response.json()
+            models = models_data.get("data", [])
+            def formatter(model):
+                if isinstance(model, dict):
+                    return (f"Model ID: {model.get('id', model.get('model', 'N/A'))}\n"
+                            f"  Description: {model.get('description', 'N/A')}\n")
+                else:
+                    return f"Model: {model}\n"
+            self.logger.info("Writing PublicAI model list to JSON and TXT.")
+            write_models_json_and_txt(
+                models,
+                self.cache_path.parent / "models.json",
+                self.cache_path.parent / "models.txt",
+                formatter,
+                header="Available PublicAI models:\n"
+            )
+            return models
+        return self._call_with_error_handling(api_call)

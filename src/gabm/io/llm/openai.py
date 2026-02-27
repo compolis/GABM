@@ -9,7 +9,7 @@ Features:
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # OpenAI client library
@@ -27,6 +27,10 @@ class OpenAIService(LLMService):
     """
     SERVICE_NAME = "openai"
 
+    @staticmethod
+    def simple_extract_text(response):
+        return response.choices[0].message.content if hasattr(response, 'choices') and len(response.choices) > 0 else str(response)
+
     def send(self, api_key, message, model="gpt-3.5-turbo"):
         """
         Send a prompt to OpenAI and return the response object.
@@ -42,13 +46,14 @@ class OpenAIService(LLMService):
         if cached is not None:
             return cached
         cache_key = (message, model)
-        client = OpenAI()
         def api_call():
+            client = OpenAI(api_key=api_key)
             return client.chat.completions.create(
                 model=model,
                 messages=[{"role": "user", "content": message}]
             )
-        return call_and_cache_response(
+        return self._call_with_error_handling(
+            call_and_cache_response,
             api_call,
             cache_and_log,
             self.cache,
@@ -61,7 +66,7 @@ class OpenAIService(LLMService):
             self.logger,
             self.SERVICE_NAME,
             self.list_available_models,
-            extract_text_from_response=None
+            extract_text_from_response=self.simple_extract_text
         )
 
     def list_available_models(self, api_key):
@@ -72,18 +77,20 @@ class OpenAIService(LLMService):
         Returns:
             list: List of model objects.
         """
-        client = OpenAI(api_key=api_key)
-        models = client.models.list()
-        def formatter(model):
-            return (f"Model ID: {model.id}\n"
-                    f"  Owned by: {getattr(model, 'owned_by', 'N/A')}\n"
-                    f"  Created: {getattr(model, 'created', 'N/A')}\n")
-        self.logger.info(f"Writing {self.SERVICE_NAME} model list to JSON and TXT.")
-        write_models_json_and_txt(
-            models,
-            self.cache_path.parent / "models.json",
-            self.cache_path.parent / "models.txt",
-            formatter,
-            header=f"Available {self.SERVICE_NAME} models:\n"
-        )
-        return models
+        def api_call():
+            client = OpenAI(api_key=api_key)
+            models = client.models.list()
+            def formatter(model):
+                return (f"Model ID: {model.id}\n"
+                        f"  Owned by: {getattr(model, 'owned_by', 'N/A')}\n"
+                        f"  Created: {getattr(model, 'created', 'N/A')}\n")
+            self.logger.info(f"Writing {self.SERVICE_NAME} model list to JSON and TXT.")
+            write_models_json_and_txt(
+                models,
+                self.cache_path.parent / "models.json",
+                self.cache_path.parent / "models.txt",
+                formatter,
+                header=f"Available {self.SERVICE_NAME} models:\n"
+            )
+            return models
+        return self._call_with_error_handling(api_call)

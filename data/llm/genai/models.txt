@@ -1,25 +1,177 @@
-Available Genai models and supported methods (static list):
+Available Genai models (dynamic list):
 
-Model ID: models/gemini-1.5-pro-latest
-  Description: Gemini 1.5 Pro (latest)
-  Supported methods: ['generateContent']
+Model ID: models/gemini-2.5-flash
+  Description: 
+  Owned by: google
 
-Model ID: models/gemini-1.0-pro
-  Description: Gemini 1.0 Pro
-  Supported methods: ['generateContent']
+Model ID: models/gemini-2.5-pro
+  Description: 
+  Owned by: google
 
-Model ID: models/gemini-1.0-pro-001
-  Description: Gemini 1.0 Pro (001)
-  Supported methods: ['generateContent']
+Model ID: models/gemini-2.0-flash
+  Description: 
+  Owned by: google
 
-Model ID: models/gemini-1.0-pro-latest
-  Description: Gemini 1.0 Pro (latest)
-  Supported methods: ['generateContent']
+Model ID: models/gemini-2.0-flash-001
+  Description: 
+  Owned by: google
 
-Model ID: models/gemini-1.0-pro-vision-latest
-  Description: Gemini 1.0 Pro Vision (latest)
-  Supported methods: ['generateContent']
+Model ID: models/gemini-2.0-flash-lite-001
+  Description: 
+  Owned by: google
 
-Model ID: models/gemini-1.5-flash-latest
-  Description: Gemini 1.5 Flash (latest)
-  Supported methods: ['generateContent']
+Model ID: models/gemini-2.0-flash-lite
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-2.5-flash-preview-tts
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-2.5-pro-preview-tts
+  Description: 
+  Owned by: google
+
+Model ID: models/gemma-3-1b-it
+  Description: 
+  Owned by: google
+
+Model ID: models/gemma-3-4b-it
+  Description: 
+  Owned by: google
+
+Model ID: models/gemma-3-12b-it
+  Description: 
+  Owned by: google
+
+Model ID: models/gemma-3-27b-it
+  Description: 
+  Owned by: google
+
+Model ID: models/gemma-3n-e4b-it
+  Description: 
+  Owned by: google
+
+Model ID: models/gemma-3n-e2b-it
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-flash-latest
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-flash-lite-latest
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-pro-latest
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-2.5-flash-lite
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-2.5-flash-image
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-2.5-flash-lite-preview-09-2025
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3-pro-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3-flash-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.1-pro-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.1-pro-preview-customtools
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3-pro-image-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/nano-banana-pro-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.1-flash-image-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-robotics-er-1.5-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-2.5-computer-use-preview-10-2025
+  Description: 
+  Owned by: google
+
+Model ID: models/deep-research-pro-preview-12-2025
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-embedding-001
+  Description: 
+  Owned by: google
+
+Model ID: models/aqa
+  Description: 
+  Owned by: google
+
+Model ID: models/imagen-4.0-generate-001
+  Description: 
+  Owned by: google
+
+Model ID: models/imagen-4.0-ultra-generate-001
+  Description: 
+  Owned by: google
+
+Model ID: models/imagen-4.0-fast-generate-001
+  Description: 
+  Owned by: google
+
+Model ID: models/veo-2.0-generate-001
+  Description: 
+  Owned by: google
+
+Model ID: models/veo-3.0-generate-001
+  Description: 
+  Owned by: google
+
+Model ID: models/veo-3.0-fast-generate-001
+  Description: 
+  Owned by: google
+
+Model ID: models/veo-3.1-generate-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/veo-3.1-fast-generate-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-2.5-flash-native-audio-latest
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-2.5-flash-native-audio-preview-09-2025
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-2.5-flash-native-audio-preview-12-2025
+  Description: 
+  Owned by: google
+
+Model ID: models/lyria-realtime-exp
+  Description: 
+  Owned by: google
