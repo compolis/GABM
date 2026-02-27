@@ -11,7 +11,7 @@ Submodules
    gabm.abm.attribute
    gabm.abm.environment
    gabm.abm.group
-   gabm.abm.opinion
+   gabm.abm.survey
 
 Module contents
 ---------------

@@ -5,17 +5,23 @@
 
 
 ````
-# Run requirements for GABM
+# User requirements for GABM
 # Install with: pip install -r requirements.txt
 
-# LLM API dependencies
+# LLM Service APIs
+# ----------------
+# For HTTP APIs (PublicAI)
+requests==2.18.0
+# OpenAI
 openai==2.21.0
-#anthropic==0.81.0
-google-genai==0.8.0
-httpx==0.28.1
+# Google
+google-genai==1.65.0
+# DeepSeek
 deepseek==1.0.0
 
-# For plotting
+# Additional
+# ----------
+# For plotting graphs
 matplotlib==3.10.8
 
 ````

@@ -69,6 +69,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#run-the-main-program">Run the Main Program</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-gabm-example-and-survey-modes">Running GABM: Example and Survey Modes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#run-from-the-command-line">Run from the command line</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-using-the-makefile">Run using the Makefile</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#agent-groups-and-opinions">Agent Groups and Opinions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#communication-rounds">Communication Rounds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#output-and-visualization">Output and Visualization</a></li>
@@ -156,7 +161,7 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>gabm
 conda<span class="w"> </span>activate<span class="w"> </span>gabm
 conda<span class="w"> </span>install<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.2.6
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.2.9
 </pre></div>
 </div>
 <p>You can then check all installed dependencies and create your own requirements file with:</p>
@@ -170,7 +175,7 @@ pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm<
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>gabm-venv
 <span class="nb">source</span><span class="w"> </span>gabm-venv/bin/activate<span class="w">  </span><span class="c1"># On Windows: gabm-venv\\Scripts\\activate</span>
 pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.2.6
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gabm</span><span class="o">==</span><span class="m">0</span>.2.9
 </pre></div>
 </div>
 <p>You can then check installed dependencies with:</p>
@@ -209,7 +214,46 @@ If you want to run LLMs locally (e.g., downloaded from Hugging Face), you need a
 </section>
 <section id="run-the-main-program">
 <h2>Run the Main Program<a class="headerlink" href="#run-the-main-program" title="Link to this heading"></a></h2>
+<section id="running-gabm-example-and-survey-modes">
+<h3>Running GABM: Example and Survey Modes<a class="headerlink" href="#running-gabm-example-and-survey-modes" title="Link to this heading"></a></h3>
+<p>You can run GABM in different modes using a command-line argument. The default mode is the original Agent-Based Model (ABM) simulation (“example” mode). A new “survey” mode is also available, which will run a survey to change agent opinions (see below).</p>
+<section id="run-from-the-command-line">
+<h4>Run from the command line<a class="headerlink" href="#run-from-the-command-line" title="Link to this heading"></a></h4>
+<ul>
+<li><p>To run the example simulation (default):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>gabm
+<span class="c1"># or explicitly</span>
+python3<span class="w"> </span>-m<span class="w"> </span>gabm<span class="w"> </span>--mode<span class="w"> </span>example
+</pre></div>
+</div>
+</li>
+<li><p>To run the survey example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>gabm<span class="w"> </span>--mode<span class="w"> </span>survey
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="run-using-the-makefile">
+<h4>Run using the Makefile<a class="headerlink" href="#run-using-the-makefile" title="Link to this heading"></a></h4>
+<p>The Makefile provides a <code class="docutils literal notranslate"><span class="pre">run-local</span></code> target for convenience. You can pass arguments to the program using the <code class="docutils literal notranslate"><span class="pre">ARGS</span></code> variable:</p>
+<ul>
+<li><p>To run the example simulation (default):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>run-local
+<span class="c1"># or explicitly</span>
+make<span class="w"> </span>run-local<span class="w"> </span><span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;--mode example&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>To run the survey example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>run-local<span class="w"> </span><span class="nv">ARGS</span><span class="o">=</span><span class="s2">&quot;--mode survey&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
 <p>When you run GABM (e.g., with <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">gabm</span></code>), the default behavior is to execute an Agent-Based Model (ABM) simulation. Here’s what happens:</p>
+</section>
+</section>
 <section id="agent-groups-and-opinions">
 <h3>Agent Groups and Opinions<a class="headerlink" href="#agent-groups-and-opinions" title="Link to this heading"></a></h3>
 <ul class="simple">

@@ -97,42 +97,51 @@
 <div><p><strong>Note:</strong> This file is for documentation only.
 Install dependencies from <a class="reference download internal" download="" href="_downloads/f4c265073ea4274a80eca85440875e56/requirements-dev.txt"><span class="xref download myst">requirements-dev.txt</span></a> in the project root.</p>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">matplotlib</span>
-<span class="c1"># Development requirements for GABM</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Development requirements for GABM</span>
 <span class="c1"># Install with: pip install -r requirements-dev.txt</span>
 
-<span class="c1"># Test dependencies</span>
-<span class="n">pytest</span><span class="o">&gt;=</span><span class="mf">9.0.2</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">10</span>
-
-<span class="c1"># LLM API dependencies</span>
+<span class="c1"># LLM Service APIs</span>
+<span class="c1"># ----------------</span>
+<span class="c1"># For HTTP APIs (PublicAI)</span>
+<span class="n">requests</span><span class="o">&gt;=</span><span class="mf">2.18.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">3</span>
+<span class="c1"># OpenAI</span>
 <span class="n">openai</span><span class="o">&gt;=</span><span class="mf">2.21.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">3</span>
+<span class="c1"># Anthropic/Claude</span>
 <span class="c1">#anthropic&gt;=0.81.0,&lt;2</span>
-<span class="n">google</span><span class="o">-</span><span class="n">genai</span><span class="o">&gt;=</span><span class="mf">0.8.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">2</span>
-<span class="n">httpx</span><span class="o">&gt;=</span><span class="mf">0.28.1</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">2</span>
+<span class="c1"># Google</span>
+<span class="n">google</span><span class="o">-</span><span class="n">genai</span><span class="o">&gt;=</span><span class="mf">1.65.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">2</span>
+<span class="c1">##google-ai-generativelanguage&gt;=0.10.0,&lt;2</span>
+<span class="c1"># DeepSeek</span>
 <span class="n">deepseek</span><span class="o">&gt;=</span><span class="mf">1.0.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">2</span>
 
-<span class="c1"># For plotting</span>
-<span class="n">matplotlib</span><span class="o">&gt;=</span><span class="mf">3.10.8</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">4</span>
-
-<span class="c1"># Dependencies for Apertus</span>
+<span class="c1"># Local LLM (Apertus)</span>
+<span class="c1"># -------------------</span>
 <span class="n">transformers</span><span class="o">&gt;=</span><span class="mf">5.1.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">6</span>
 <span class="n">torch</span><span class="o">&gt;=</span><span class="mf">2.10.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">3</span>
 
-<span class="c1"># Documentation dependencies</span>
+<span class="c1"># Additional</span>
+<span class="c1"># ----------</span>
+<span class="c1"># For plotting graphs</span>
+<span class="n">matplotlib</span><span class="o">&gt;=</span><span class="mf">3.10.8</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">4</span>
+
+<span class="c1"># Test</span>
+<span class="c1"># ----</span>
+<span class="n">pytest</span><span class="o">&gt;=</span><span class="mf">9.0.2</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">10</span>
+
+<span class="c1"># Build and deployment</span>
+<span class="c1"># --------------------</span>
+<span class="c1"># For compiling documentation</span>
 <span class="n">sphinx</span><span class="o">&gt;=</span><span class="mf">9.1.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">10</span>
 <span class="n">sphinx</span><span class="o">-</span><span class="n">rtd</span><span class="o">-</span><span class="n">theme</span><span class="o">&gt;=</span><span class="mf">3.1.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">4</span>
 <span class="n">myst</span><span class="o">-</span><span class="n">parser</span><span class="o">&gt;=</span><span class="mf">5.0.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">6</span>
-<span class="n">docutils</span><span class="o">&gt;=</span><span class="mf">0.22</span><span class="p">,</span><span class="o">&lt;</span><span class="mf">0.23</span>
-
-<span class="c1"># For building distributions</span>
+<span class="n">docutils</span><span class="o">&gt;=</span><span class="mf">0.22</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">2</span>
+<span class="c1"># For building</span>
 <span class="n">build</span><span class="o">&gt;=</span><span class="mf">1.4.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">2</span>
 <span class="n">setuptools</span><span class="o">&gt;=</span><span class="mf">82.0.0</span>
 <span class="n">wheel</span><span class="o">&gt;=</span><span class="mf">0.42.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">1</span>
 <span class="n">tomlkit</span><span class="o">&gt;=</span><span class="mf">0.14.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">2</span>
-
 <span class="c1"># For updating version references in files</span>
 <span class="n">bump2version</span><span class="o">&gt;=</span><span class="mf">1.0.1</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">2</span>
-
 <span class="c1"># For uploading to PyPI</span>
 <span class="n">twine</span><span class="o">&gt;=</span><span class="mf">6.2.0</span><span class="p">,</span><span class="o">&lt;</span><span class="mi">7</span>
 </pre></div>

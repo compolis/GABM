@@ -97,17 +97,23 @@
 <div><p><strong>Note:</strong> This file is for documentation only.
 Install dependencies from <a class="reference download internal" download="" href="_downloads/b4ef698db8ca845e5845c4618278f29a/requirements.txt"><span class="xref download myst">requirements.txt</span></a> and <a class="reference download internal" download="" href="_downloads/f4c265073ea4274a80eca85440875e56/requirements-dev.txt"><span class="xref download myst">requirements-dev.txt</span></a> in the project root.</p>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run requirements for GABM</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># User requirements for GABM</span>
 <span class="c1"># Install with: pip install -r requirements.txt</span>
 
-<span class="c1"># LLM API dependencies</span>
+<span class="c1"># LLM Service APIs</span>
+<span class="c1"># ----------------</span>
+<span class="c1"># For HTTP APIs (PublicAI)</span>
+<span class="n">requests</span><span class="o">==</span><span class="mf">2.18.0</span>
+<span class="c1"># OpenAI</span>
 <span class="n">openai</span><span class="o">==</span><span class="mf">2.21.0</span>
-<span class="c1">#anthropic==0.81.0</span>
-<span class="n">google</span><span class="o">-</span><span class="n">genai</span><span class="o">==</span><span class="mf">0.8.0</span>
-<span class="n">httpx</span><span class="o">==</span><span class="mf">0.28.1</span>
+<span class="c1"># Google</span>
+<span class="n">google</span><span class="o">-</span><span class="n">genai</span><span class="o">==</span><span class="mf">1.65.0</span>
+<span class="c1"># DeepSeek</span>
 <span class="n">deepseek</span><span class="o">==</span><span class="mf">1.0.0</span>
 
-<span class="c1"># For plotting</span>
+<span class="c1"># Additional</span>
+<span class="c1"># ----------</span>
+<span class="c1"># For plotting graphs</span>
 <span class="n">matplotlib</span><span class="o">==</span><span class="mf">3.10.8</span>
 
 </pre></div>
