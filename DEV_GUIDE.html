@@ -72,7 +72,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#developing-documentation">Developing Documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#sphinx-documentation">Sphinx Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sphinx-documentation">Sphinx Documentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sphinx-api-documentation-and-autosummary">Sphinx API Documentation and Autosummary</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#packaging-and-deployment">Packaging and Deployment</a></li>
@@ -389,7 +392,6 @@ These warnings originate from upstream libraries (e.g., Google APIs) and do not 
 <li><p><a class="reference internal" href="CHANGE_LOG.html"><span class="std std-doc">CHANGE_LOG.md</span></a>: Document to describe changes and updates.</p></li>
 <li><p>[DEVELOPMENT_HISTORY.md]: Document about development, milestones, and reflections.</p></li>
 <li><p>If you add a new Markdown file in the root directory, please update entries to <code class="docutils literal notranslate"><span class="pre">doc_assets.py</span></code> DOC_FILES and <code class="docutils literal notranslate"><span class="pre">docs/index.md</span></code> Project Documents to include them in Sphinx documentation.</p></li>
-<li><p>Add API docs via <code class="docutils literal notranslate"><span class="pre">docs/index.md</span></code></p></li>
 </ul>
 <section id="sphinx-documentation">
 <h3>Sphinx Documentation<a class="headerlink" href="#sphinx-documentation" title="Link to this heading"></a></h3>
@@ -411,6 +413,17 @@ These warnings originate from upstream libraries (e.g., Google APIs) and do not 
 </div>
 <p>This should deploy/update the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch on your origin Fork. If your Fork uses the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch for <a class="reference external" href="https://docs.github.com/en/pages">GitHub Pages</a>, then the documentation should update there.</p>
 <p>If it all looks good. Please submit a PR to incorporate documentation changes into main. A maintainer will subsequently update the upstream repository gh-pages branch.</p>
+<section id="sphinx-api-documentation-and-autosummary">
+<h4>Sphinx API Documentation and Autosummary<a class="headerlink" href="#sphinx-api-documentation-and-autosummary" title="Link to this heading"></a></h4>
+<p>GABM uses Sphinx with the autosummary extension to generate API documentation for all major modules. To document new modules:</p>
+<ul class="simple">
+<li><p>Add the module name to the autosummary directive in <code class="docutils literal notranslate"><span class="pre">docs/_autosummary/modules.rst</span></code>.</p></li>
+<li><p>You do not need to manually maintain individual <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files for each module; autosummary will generate them automatically during <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code>.</p></li>
+<li><p>If you remove or rename modules, update the autosummary list accordingly.</p></li>
+<li><p>You may delete stale <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files in <code class="docutils literal notranslate"><span class="pre">_autosummary</span></code> if they are no longer referenced.</p></li>
+</ul>
+<p>Preview the Sphinx documentation by opening <code class="docutils literal notranslate"><span class="pre">docs/_build/html/index.html</span></code> in a web browser.</p>
+</section>
 </section>
 </section>
 <section id="packaging-and-deployment">

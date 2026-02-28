@@ -102,6 +102,7 @@
  | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
@@ -114,9 +115,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/gabm.abm.attribute.html#gabm.abm.attribute.GABMAttributeMap.add">add() (gabm.abm.attribute.GABMAttributeMap method)</a>
 </li>
+      <li><a href="_autosummary/gabm.abm.survey.html#gabm.abm.survey.Question.add_answer">add_answer() (gabm.abm.survey.Question method)</a>
+</li>
       <li><a href="_autosummary/gabm.abm.group.html#gabm.abm.group.Group.add_member">add_member() (gabm.abm.group.Group method)</a>
 </li>
       <li><a href="_autosummary/gabm.abm.agent.html#gabm.abm.agent.Person.add_opinion">add_opinion() (gabm.abm.agent.Person method)</a>
+</li>
+      <li><a href="_autosummary/gabm.abm.survey.html#gabm.abm.survey.Survey.add_question">add_question() (gabm.abm.survey.Survey method)</a>
 </li>
       <li><a href="_autosummary/gabm.abm.agent.html#gabm.abm.agent.Agent">Agent (class in gabm.abm.agent)</a>
 </li>
@@ -127,6 +132,10 @@
       <li><a href="_autosummary/gabm.abm.agent.html#gabm.abm.agent.Alien">Alien (class in gabm.abm.agent)</a>
 </li>
       <li><a href="_autosummary/gabm.abm.agent.html#gabm.abm.agent.Animal">Animal (class in gabm.abm.agent)</a>
+</li>
+      <li><a href="_autosummary/gabm.abm.survey.html#gabm.abm.survey.Answer">Answer (class in gabm.abm.survey)</a>
+</li>
+      <li><a href="_autosummary/gabm.abm.survey.html#gabm.abm.survey.AnswerID">AnswerID (class in gabm.abm.survey)</a>
 </li>
       <li><a href="_autosummary/gabm.io.llm.llm_service.html#gabm.io.llm.llm_service.LLMService.API_KEY_ENV_VAR">API_KEY_ENV_VAR (gabm.io.llm.llm_service.LLMService property)</a>
 </li>
@@ -140,13 +149,15 @@
 </li>
       <li><a href="_autosummary/gabm.io.llm.utils.html#gabm.io.llm.utils.call_and_cache_response">call_and_cache_response() (in module gabm.io.llm.utils)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/gabm.abm.agent.html#gabm.abm.agent.Citizen">Citizen (class in gabm.abm.agent)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/gabm.abm.agent.html#gabm.abm.agent.Person.communicate">communicate() (gabm.abm.agent.Person method)</a>
 </li>
       <li><a href="_autosummary/gabm.abm.agent.html#gabm.abm.agent.Person.communicate_with_llm">communicate_with_llm() (gabm.abm.agent.Person method)</a>
+</li>
+      <li><a href="_autosummary/gabm.abm.survey.html#gabm.abm.survey.SurveyConversation.conduct">conduct() (gabm.abm.survey.SurveyConversation method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -222,6 +233,13 @@
 
       <ul>
         <li><a href="_autosummary/gabm.abm.group.html#module-gabm.abm.group">module</a>
+</li>
+      </ul></li>
+      <li>
+    gabm.abm.survey
+
+      <ul>
+        <li><a href="_autosummary/gabm.abm.survey.html#module-gabm.abm.survey">module</a>
 </li>
       </ul></li>
       <li>
@@ -334,6 +352,10 @@
 </li>
       <li><a href="_autosummary/gabm.abm.agent.html#gabm.abm.agent.Person.get_opinion_profile">get_opinion_profile() (gabm.abm.agent.Person method)</a>
 </li>
+      <li><a href="_autosummary/gabm.abm.survey.html#gabm.abm.survey.Question.get_prompt">get_prompt() (gabm.abm.survey.Question method)</a>
+</li>
+      <li><a href="_autosummary/gabm.abm.survey.html#gabm.abm.survey.Survey.get_question">get_question() (gabm.abm.survey.Survey method)</a>
+</li>
       <li><a href="_autosummary/gabm.abm.agent.html#gabm.abm.agent.Person.get_self_description">get_self_description() (gabm.abm.agent.Person method)</a>
 </li>
       <li><a href="_autosummary/gabm.abm.group.html#gabm.abm.group.Group">Group (class in gabm.abm.group)</a>
@@ -404,6 +426,8 @@
 </li>
         <li><a href="_autosummary/gabm.abm.group.html#module-gabm.abm.group">gabm.abm.group</a>
 </li>
+        <li><a href="_autosummary/gabm.abm.survey.html#module-gabm.abm.survey">gabm.abm.survey</a>
+</li>
         <li><a href="_autosummary/gabm.io.html#module-gabm.io">gabm.io</a>
 </li>
         <li><a href="_autosummary/gabm.io.llm.html#module-gabm.io.llm">gabm.io.llm</a>
@@ -468,6 +492,18 @@
   </ul></td>
 </tr></table>
 
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/gabm.abm.survey.html#gabm.abm.survey.Question">Question (class in gabm.abm.survey)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/gabm.abm.survey.html#gabm.abm.survey.QuestionID">QuestionID (class in gabm.abm.survey)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -525,6 +561,10 @@
         <li><a href="_autosummary/gabm.io.llm.publicai.html#gabm.io.llm.publicai.PublicAIService.simple_extract_text">(gabm.io.llm.publicai.PublicAIService static method)</a>
 </li>
       </ul></li>
+      <li><a href="_autosummary/gabm.abm.survey.html#gabm.abm.survey.Survey">Survey (class in gabm.abm.survey)</a>
+</li>
+      <li><a href="_autosummary/gabm.abm.survey.html#gabm.abm.survey.SurveyConversation">SurveyConversation (class in gabm.abm.survey)</a>
+</li>
   </ul></td>
 </tr></table>
 
