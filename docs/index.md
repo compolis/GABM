@@ -3,11 +3,14 @@
 
 ---
 
+
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 3
 :caption: API Reference
 
 _autosummary/modules
+_autosummary/gabm.abm.attributes
+_autosummary/gabm.abm.democracy
 ```
 
 ---

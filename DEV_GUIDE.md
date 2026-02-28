@@ -210,7 +210,6 @@ Markdown files in the root directory, each serving a specific purpose:
   - [DEVELOPMENT_HISTORY.md]: Document about development, milestones, and reflections.
 
 - If you add a new Markdown file in the root directory, please update entries to `doc_assets.py` DOC_FILES and `docs/index.md` Project Documents to include them in Sphinx documentation.
-- Add API docs via `docs/index.md`
 
 
 ### Sphinx Documentation
@@ -243,6 +242,17 @@ make gh-pages-deploy
 This should deploy/update the `gh-pages` branch on your origin Fork. If your Fork uses the `gh-pages` branch for [GitHub Pages](https://docs.github.com/en/pages), then the documentation should update there.
 
 If it all looks good. Please submit a PR to incorporate documentation changes into main. A maintainer will subsequently update the upstream repository gh-pages branch.
+
+#### Sphinx API Documentation and Autosummary
+
+GABM uses Sphinx with the autosummary extension to generate API documentation for all major modules. To document new modules:
+
+- Add the module name to the autosummary directive in `docs/_autosummary/modules.rst`.
+- You do not need to manually maintain individual `.rst` files for each module; autosummary will generate them automatically during `make docs`.
+- If you remove or rename modules, update the autosummary list accordingly.
+- You may delete stale `.rst` files in `_autosummary` if they are no longer referenced.
+
+Preview the Sphinx documentation by opening `docs/_build/html/index.html` in a web browser.
 
 
 ## Packaging and Deployment
