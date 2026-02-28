@@ -11,7 +11,7 @@
 # LLM Service APIs
 # ----------------
 # For HTTP APIs (PublicAI)
-requests==2.18.0
+requests==2.32.5
 # OpenAI
 openai==2.21.0
 # Google
