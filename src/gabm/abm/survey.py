@@ -10,11 +10,48 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 import logging
 from typing import List, Dict, Any
 # Local imports
+from gabm.abm.agent import Person
 from gabm.core.id import GABMID
+from gabm.io.llm.llm_service import LLMService
+
+class AnswerID(GABMID):
+    """
+    A unique identifier for a Answer instance.
+
+    Attributes:
+        id (int): The unique identifier for the answer.
+    """
+    def __init__(self, answer_id: int):
+        """
+        Initialize
+        Args:
+            answer_id: The unique identifier for the answer.
+        """
+        super().__init__(answer_id)
+
+class Answer():
+    """
+    Represents a single answer to a question.
+
+    Attributes:
+        id (AnswerID): The id of the Answer
+        text (str): The answer text.
+        answers (List[Answer]): List of available Answers.
+    """
+    def __init__(self, answer_id: AnswerID, text: str):
+        """
+        Initialize
+        Args:
+            answer_id The unique identifier for the answer.
+            text The text of the answer.
+        """
+        self.id = answer_id
+        self.text = text
 
 class QuestionID(GABMID):
     """
     A unique identifier for a Question instance.
+
     Attributes:
         id (int): The unique identifier for the question.
     """
@@ -29,12 +66,13 @@ class QuestionID(GABMID):
 class Question():
     """
     Represents a single survey question.
+
     Attributes:
         id (QuestionID): The question identifier.
         text (str): The question text.
         answers (List[Answer]): List of available Answers.
     """
-    def __init__(self, question_id: QuestionID, text: str, answers: List[Answer] = None:
+    def __init__(self, question_id: QuestionID, text: str, answers: List["Answer"] = None):
         self.id = question_id
         self.text = text
         self.answers = answers or []
@@ -64,48 +102,10 @@ class Question():
         """
         self.answers.append(answer)
 
-<<<<<<< HEAD
-class AnswerID(BaseID):
-=======
-class AnswerID(GABMID):
->>>>>>> upstream/main
-    """
-    A unique identifier for a Answer instance.
-    Attributes:
-        id (int): The unique identifier for the answer.
-    """
-    def __init__(self, answer_id: int):
-        """
-        Initialize
-        Args:
-            answer_id: The unique identifier for the answer.
-        """
-        super().__init__(answer_id)
-
-class Answer():
-    """
-    Represents a single answer to a question.
-    Attributes:
-        id (AnswerID): The id of the Answer
-        question_id (QuestionID): The question identifier.
-        text (str): The answer text.
-        answers (List[Answer]): List of available Answers.
-    """
-    def __init__(self, answer_id: AnswerID, question_id: QuestionID, text: str):
-        """
-        Initialize
-        Args:
-            answer_id The unique identifier for the answer.
-            question_id The unique identifier for the question this answer belongs to.
-            text The text of the answer.
-        """
-        self.id = answer_id
-        self.question_id = question_id
-        self.text = text
-
 class Survey:
     """
     Represents a survey comprising multiple questions.
+
     Attributes:
         questions (List[Question]): The list of questions in the survey.
         title (str): The title of the survey.
@@ -132,6 +132,7 @@ class Survey:
 class SurveyConversation:
     """
     Handles a conversation between a Person (with a Profile/Persona) and an LLM for survey response simulation.
+    
     Attributes:
         person (Person): The person instance.
         survey (Survey): The survey to be conducted.

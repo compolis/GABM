@@ -27,6 +27,7 @@ if TYPE_CHECKING:
 class AgentID(GABMID):
     """
     A unique identifier for an Agent instance.
+
     Attributes:
         id (int): The unique identifier for the agent.
     """
@@ -43,6 +44,7 @@ class Agent():
     For representing an entity within an Environment. 
     The type annotation for environment is quoted as it is imported 
     under TYPE_CHECKING to avoid circular imports.
+
     Attributes:
         agent_id (AgentID): Unique identifier for the Agent instance.
         environment (Environment): The Environment the Agent instance belongs to.
@@ -75,7 +77,10 @@ class Agent():
 
     def join_group(self, group: 'Group'):
         """
-        Join group. (This updates group membership.)
+        Join group.
+        
+        This updates group membership.
+
         Args:
             group: The Group instance to join.
         """
@@ -83,7 +88,10 @@ class Agent():
 
     def leave_group(self, group: 'Group'):
         """
-        Leave group. (This updates group membership.)
+        Leave group.
+        
+        This updates group membership.
+
         Args:
             group: The Group instance to leave.
         """
@@ -94,6 +102,7 @@ class Animal(Agent):
     An Agent with a year of birth and Gender.
     The type annotation for environment is quoted as it is imported 
     under TYPE_CHECKING to avoid circular imports.
+
     Attributes:
         year_of_birth (int): The year of birth attributed.
         gender_map (Dict[GenderID, Gender]): A mapping of GenderIDs to Genders, used to interpret the gender value.
@@ -168,6 +177,7 @@ class Animal(Agent):
     def get_age(self) -> int:
         """
         Get the age in years based on the current year in the environment.
+
         Return:
             Age in years, or None if year_of_birth is not set.
         """
@@ -178,6 +188,7 @@ class Animal(Agent):
     def get_gender(self) -> str:
         """
         Get the gender as a string.
+
         Return:
             Gender as a string.
         """
@@ -188,6 +199,7 @@ class Animal(Agent):
 class Person(Animal):
     """
     An Animal with opinions that is part of an OpinionatedEnvironment.
+
     Attributes:
         opinions: A dictionary of Opinions.
          The keys are OpinionTopicIDs, and the values are Opinion objects.
@@ -198,6 +210,7 @@ class Person(Animal):
         gender: Gender = None,  opinions: dict[OpinionTopicID, 'Opinion'] = None):
         """
         Initialize
+
         Args:
             agent_id: Unique identifier for the Agent instance.
             environment: The Environment the Agent instance belongs to.
@@ -242,6 +255,7 @@ class Person(Animal):
     def add_opinion(self, opinion: 'Opinion', value: OpinionValue):
         """
         Add opinion to opinions.
+
         Args:
             opinion: The Opinion to add.
             value: The OpinionValue to add for the opinion.
@@ -252,6 +266,7 @@ class Person(Animal):
     def set_opinion(self, opinion_id: OpinionTopicID, value: OpinionValue):
         """
         Set an opinion value.
+
         Args:
             opinion_id: The ID of the opinion to set.
             value: The value to set the opinion to.
@@ -269,6 +284,7 @@ class Person(Animal):
         """
         An opinion profile is a summary of opinions reflecting the similarity and difference 
         in opinions of the individual relative to their groups and others in the enviornment.
+        
         Return:
             A string summarizing the opinion profile.
         """
@@ -283,6 +299,7 @@ class Person(Animal):
     def get_self_description(self) -> str:
         """
         Get a self-description of the person.
+
         Return:
             A string describing the person.
         """
@@ -295,6 +312,7 @@ class Person(Animal):
     def communicate(self, i: int):
         """
         Communicate with another agent.
+
         Args:
             i: The index of the agent to communicate with.
         Note:
@@ -338,6 +356,7 @@ class Person(Animal):
     def communicate_with_llm(self, message: str, model: str = None) -> dict:
         """
         Communicate with an LLM to get a response based on the input message and model.
+        
         Args:
             message: The prompt to send to the LLM.
             model: The name of the LLM model to use (optional).
@@ -351,11 +370,16 @@ class Person(Animal):
 class Citizen(Person):
     """
     A Person who belongs to a Nation.
+
+    Attributes:
+        None additional to Person.
     """
     def __init__(self, agent_id: int, environment: "Nation",
         year_of_birth: int = None, gender_map: Dict[GenderID, Gender] = None,
         gender: Gender = None, opinions: dict = None):
         """
+        Initialize.
+
         Args:
             agent_id: Unique identifier for the agent.
             environment: The Nation the agent belongs to.
@@ -370,11 +394,16 @@ class Citizen(Person):
 class Alien(Person):
     """
     A Person who does not belong to a Nation.
+
+    Attributes:
+        None additional to Person.
     """
     def __init__(self, agent_id: int, environment: "Nation",
         year_of_birth: int = None, gender_map: Dict[GenderID, Gender] = None,
         gender: Gender = None, opinions: dict = None):
         """
+        Initialize.
+
         Args:
             agent_id: Unique identifier for the agent.
             environment: The Nation the agent belongs to.

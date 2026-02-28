@@ -17,6 +17,7 @@ class Environment:
     """
     Represents the shared context in which Agent instances interact.
     It can be extended to represent specific types of environment.
+
     Attributes:
         year (int): The current year in the simulation.
         place (str): The name of the place or environment.
@@ -59,6 +60,7 @@ class Environment:
 class OpinionatedEnvironment(Environment):
     """
     An Environment with opinions.
+
     Attributes:
         opinions (Dict[OpinionTopicID, Opinion]): A dictionary of opinions.
         The key is an OpinionTopicID, the value is an Opinion object.
@@ -106,6 +108,7 @@ class Nation(OpinionatedEnvironment):
     """
     An OpinionatedEnvironment representing a nation.
     Can be extended with nation-specific attributes and methods.
+    
     Attributes:
         nation (str): The name of the nation (e.g., "United Kingdom").
     """

@@ -21,6 +21,7 @@ from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionVal
 class GroupID(GABMID):
     """
     A unique identifier for a Group instance.
+
     Attributes:
         group_id (int): The unique identifier for the group.
     """
@@ -30,6 +31,7 @@ class GroupID(GABMID):
 class Group:
     """
     A Group is a collection of Agents that can interact with each other and the environment.
+    
     Attributes:
         id (GroupID): Unique identifier for the group.
         name (str): Optional name for the group.
@@ -88,6 +90,7 @@ class Group:
 class OpinionatedGroup(Group):
     """
     A Group that has opinions.
+    
     Attributes:
         opinions: A dictionary of Opinions.
          The keys are OpinionTopicIDs, and the values are Opinion objects.

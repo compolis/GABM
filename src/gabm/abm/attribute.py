@@ -3,7 +3,7 @@ Generic attribute base classes for GABM.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
@@ -15,6 +15,7 @@ from gabm.core.id import GABMID
 class GABMAttribute:
     """
     Generic base class for attributes (e.g., Gender, Health).
+
     Attributes:
         id: Unique identifier object (e.g., GenderID, HealthID).
         description (str): Description of the attribute.
@@ -33,23 +34,21 @@ class GABMAttribute:
     def __repr__(self):
         """
         Return:
-<<<<<<< HEAD
-            A string representation.
-=======
             Official string representation.
->>>>>>> upstream/main
         """
         return self.__str__()
 
 class GABMAttributeMap:
     """
     Generic base class for attribute maps (e.g., GenderMap, HealthMap).
+
     Attributes:
         _map (dict): Mapping from ID objects to attribute instances.
     """
     def __init__(self, items: dict[GABMID, GABMAttribute]):
         """
-        Initialize
+        Initialize.
+        
         Args:
             items (dict[GABMID, GABMAttribute]): A dictionary mapping GABMID objects to GABMAttribute instances.
         """
