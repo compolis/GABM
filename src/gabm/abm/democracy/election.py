@@ -3,12 +3,13 @@ Election module for GABM.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
 import logging
 from typing import Dict
+from datetime import date
 # Local imports
 from gabm.core.id import GABMID
 
@@ -26,20 +27,62 @@ class Election():
     For representing an election.
     Attributes:
         id (ElectionID): Unique identifier for the election.
-        year (int): The year of the election.
+        date (date): The date of the election.
         description (str): The description of the election.
     """
-    def __init__(self, election_id: ElectionID, year: int, description: str):
+    def __init__(self, election_id: ElectionID, date: date, description: str):
         """
         Initialize
         Args:
             election_id (ElectionID): The unique identifier for the election.
-            year (int): The year of the election.
+            date (date): The date of the election.
         """
         self.id = election_id
-        self.year = year
+        self.date = date
         self.description = description
 
+class GeneralElection(Election):
+    """
+    For representing a general election.
+    Attributes:
+        id (ElectionID): Unique identifier for the election.
+        date (date): The date of the election.
+        description (str): The description of the election.
+        candidates (Dict[str, str]): A dictionary mapping candidate names to their parties.
+    """
+    def __init__(self, election_id: ElectionID, date: date, description: str):
+        """
+        Initialize
+        Args:
+            election_id (ElectionID): The unique identifier for the election.
+            date (date): The date of the election.
+            description (str): The description of the election.
+        """
+        super().__init__(election_id, date, description)
+
+class Referendum(Election):
+    """
+    For representing a referendum.
+    Attributes:
+        id (ElectionID): Unique identifier for the referendum.
+        date (date): The date of the referendum.
+        description (str): The description of the referendum.
+        question (str): The question of the referendum.
+        choices (tuple[str, ...]): The choices for the referendum.
+    """
+    def __init__(self, election_id: ElectionID, date: date, description: str, question: str, choices: tuple[str, ...]):
+        """
+        Initialize
+        Args:
+            election_id (ElectionID): The unique identifier for the referendum.
+            date (date): The date of the referendum.
+            description (str): The description of the referendum.
+            question (str): The question of the referendum.
+            choices (tuple[str, ...]): The choices for the referendum.
+        """
+        super().__init__(election_id, date, description)
+        self.question = question
+        self.choices = choices
 
 class VoteID(GABMID):
     """
