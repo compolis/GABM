@@ -1,5 +1,5 @@
 """
-Election module for GABM.
+Candidate module for GABM.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
@@ -30,7 +30,7 @@ class Candidate(Citizen):
     """
     def __init__(self, candidate_id: CandidateID, description: str):
         """
-        Initialize
+        Initialize a Candidate instance.
         Args:
             candidate_id (CandidateID): The unique identifier for the candidate.
             description (str): The description of the candidate.
