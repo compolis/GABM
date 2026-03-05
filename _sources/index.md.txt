@@ -5,17 +5,6 @@
 
 
 ```{toctree}
-:maxdepth: 3
-:caption: API Reference
-
-_autosummary/modules
-_autosummary/gabm.abm.attributes
-_autosummary/gabm.abm.democracy
-```
-
----
-
-```{toctree}
 :maxdepth: 1
 :caption: Project Documents
 
@@ -40,8 +29,34 @@ CONTACT.md
 
 ---
 
-## Local LLM Requirements
 
-The file `requirements-local-llm.txt` lists dependencies needed for running LLMs locally (e.g., torch and transformers). This allows users to keep the core install lightweight and add local LLM support only if needed.
+```{toctree}
+:maxdepth: 3
+:caption: API Reference
+
+_autosummary/gabm.abm
+_autosummary/gabm.abm.agent
+_autosummary/gabm.abm.attribute
+_autosummary/gabm.abm.environment
+_autosummary/gabm.abm.group
+_autosummary/gabm.abm.survey
+_autosummary/gabm.abm.attributes
+_autosummary/gabm.abm.democracy
+_autosummary/gabm.core
+_autosummary/gabm.core.environment
+_autosummary/gabm.core.id
+_autosummary/gabm.io
+_autosummary/gabm.io.read_data
+_autosummary/gabm.io.llm
+_autosummary/gabm.io.llm.apertus
+_autosummary/gabm.io.llm.deepseek
+_autosummary/gabm.io.llm.genai
+_autosummary/gabm.io.llm.llm_service
+_autosummary/gabm.io.llm.openai
+_autosummary/gabm.io.llm.publicai
+_autosummary/gabm.io.llm.utils
+_autosummary/gabm.utils
+_autosummary/gabm.utils.logging
+```
 
 ---

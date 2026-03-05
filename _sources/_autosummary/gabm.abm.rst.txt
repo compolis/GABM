@@ -1,6 +1,15 @@
 gabm.abm package
 ================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gabm.abm.attributes
+   gabm.abm.democracy
+
 Submodules
 ----------
 

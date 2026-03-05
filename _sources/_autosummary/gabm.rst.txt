@@ -1,20 +1,6 @@
-gabm package
-============
-
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 4
-
-   gabm.abm
-   gabm.io
-   gabm.utils
-
-Module contents
----------------
+﻿gabm
+====
 
 .. automodule:: gabm
-   :members:
-   :show-inheritance:
-   :undoc-members:
+
+   
