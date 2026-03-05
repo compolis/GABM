@@ -10,30 +10,21 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 import logging
 from typing import Dict
 # Local imports
-from gabm.core.abm.agent import Citizen, CitizenID
-
-class CandidateID(CitizenID):
-    """
-    A unique identifier for a Candidate instance.
-    Attributes:
-        candidate_id (int): The unique identifier for the candidate.
-    """
-    def __init__(self, candidate_id: int):
-        super().__init__(candidate_id)
+from gabm.abm.agent import AgentID, Citizen
 
 class Candidate(Citizen):
     """
     For representing a candidate.
     Attributes:
-        id (CandidateID): Unique identifier for the candidate.
+        id (AgentID): Unique identifier for the candidate.
         description (str): The description of the candidate.
     """
-    def __init__(self, candidate_id: CandidateID, description: str):
+    def __init__(self, agent_id: AgentID, description: str):
         """
         Initialize a Candidate instance.
         Args:
-            candidate_id (CandidateID): The unique identifier for the candidate.
+            agent_id (AgentID): The unique identifier for the candidate.
             description (str): The description of the candidate.
         """
-        self.id = candidate_id
+        self.id = agent_id
         self.description = description

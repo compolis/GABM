@@ -9,7 +9,7 @@ meant to be run before building the documentation to ensure all assets are up to
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
@@ -215,11 +215,26 @@ def main():
     Main function to copy files and update links.
     """
     logger.info("Starting update_docs_assets.py script")
-    # Generate API documentation .rst files using sphinx-apidoc
+    # Clean out old .rst files in docs/_autosummary before generating new ones
     apidoc_output = os.path.join(DOCS, '_autosummary')
-    src_dir = os.path.join(ROOT, 'src', 'gabm')
     os.makedirs(apidoc_output, exist_ok=True)
+    for fname in os.listdir(apidoc_output):
+        # Never delete modules.rst
+        if fname.endswith('.rst') and fname != 'modules.rst':
+            fpath = os.path.join(apidoc_output, fname)
+            try:
+                os.remove(fpath)
+                logger.info(f"Deleted old autosummary file: {fpath}")
+            except Exception as e:
+                logger.warning(f"Could not delete {fpath}: {e}")
+    # Generate API documentation .rst files using sphinx-apidoc
+    src_dir = os.path.join(ROOT, 'src', 'gabm')
     logger.info(f"Running sphinx-apidoc for {src_dir} -> {apidoc_output}")
+    # Temporarily move modules.rst to protect it from being overwritten
+    modules_rst = os.path.join(apidoc_output, 'modules.rst')
+    modules_rst_tmp = os.path.join(apidoc_output, 'modules.rst.tmp')
+    if os.path.exists(modules_rst):
+        os.rename(modules_rst, modules_rst_tmp)
     try:
         import subprocess
         subprocess.run([
@@ -231,6 +246,75 @@ def main():
         logger.info("sphinx-apidoc completed successfully.")
     except Exception as e:
         logger.error(f"sphinx-apidoc failed: {e}")
+    # Restore modules.rst if it was moved
+    if os.path.exists(modules_rst_tmp):
+        os.replace(modules_rst_tmp, modules_rst)
+
+    # Post-process .rst files: Remove all ':recursive:' lines and unwanted autosummary blocks
+    for fname in os.listdir(apidoc_output):
+        if fname.endswith('.rst'):
+            fpath = os.path.join(apidoc_output, fname)
+            logger.info(f"Processing .rst file: {fpath}")
+            with open(fpath, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+            # Remove autosummary block from any file containing 'gabm.io.llm.genai' in its name
+            if 'gabm.io.llm.genai' in fname:
+                new_lines = []
+                in_autosummary = False
+                for line in lines:
+                    if not in_autosummary and line.strip().startswith('.. autosummary::'):
+                        in_autosummary = True
+                        continue
+                    if in_autosummary:
+                        # Remove all indented lines (including blank lines) after autosummary::
+                        if line.strip() == '' or (line.startswith('.. ') and not line.strip().startswith('.. autosummary::')):
+                            in_autosummary = False
+                            if line.startswith('.. '):
+                                new_lines.append(line)
+                            continue
+                        # Skip all indented or blank lines
+                        continue
+                    new_lines.append(line)
+                # Remove all ':recursive:' lines as well
+                new_lines = [line for line in new_lines if ':recursive:' not in line]
+                if new_lines != lines:
+                    with open(fpath, 'w', encoding='utf-8') as f:
+                        f.writelines(new_lines)
+                    logger.info(f"Removed autosummary block and ':recursive:' from {fpath}")
+            else:
+                # Remove all ':recursive:' lines from every .rst file
+                new_lines = [line for line in lines if ':recursive:' not in line]
+                if new_lines != lines:
+                    with open(fpath, 'w', encoding='utf-8') as f:
+                        f.writelines(new_lines)
+                    logger.info(f"Removed ':recursive:' from {fpath}")
+
+    # Now, after all .rst post-processing, insert '   :no-index:' after '.. automodule:: gabm' in gabm.rst if not already present
+    gabm_rst = os.path.join(apidoc_output, 'gabm.rst')
+    if os.path.exists(gabm_rst):
+        with open(gabm_rst, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+        new_lines = []
+        i = 0
+        while i < len(lines):
+            line = lines[i]
+            new_lines.append(line)
+            if line.strip().lower() == '.. automodule:: gabm':
+                # Skip any blank lines after the directive
+                j = i + 1
+                while j < len(lines) and lines[j].strip() == '':
+                    new_lines.append(lines[j])
+                    j += 1
+                # Only insert if not already present as the next non-blank, indented line
+                if j >= len(lines) or ':no-index:' not in lines[j]:
+                    new_lines.append('   :no-index:\n')
+                i = j - 1
+            i += 1
+        # Only write if changed
+        if new_lines != lines:
+            with open(gabm_rst, 'w', encoding='utf-8') as f:
+                f.writelines(new_lines)
+            logger.info(f"Ensured '   :no-index:' after '.. automodule:: gabm' in {gabm_rst}")
     # Copy files from project root
     for fname in DOC_FILES:
         src = os.path.join(ROOT, fname)

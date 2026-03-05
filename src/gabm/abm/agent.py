@@ -100,22 +100,14 @@ class Agent():
 class Animal(Agent):
     """
     An Agent with a year of birth and Gender.
-    The type annotation for environment is quoted as it is imported 
-    under TYPE_CHECKING to avoid circular imports.
 
-    Attributes:
-        year_of_birth (int): The year of birth attributed.
-        gender_map (Dict[GenderID, Gender]): A mapping of GenderIDs to Genders, used to interpret the gender value.
-         This allows the gender to be represented as an integer internally, but interpreted as a string when needed.
-         The default mapping includes:
-            0: "female",
-            1: "male",
-            2: "non-binary",
-            None: "none".
-         This mapping can be extended to include more genders as needed.
-         The gender value is stored as an integer (e.g., 0, 1, 2) for efficiency, but the gender_map allows for 
-         interpretation of the gender as a string (e.g., "female", "male", "non-binary").
-        gender (Gender): The gender attributed.
+    The type annotation for environment is quoted as it is imported under TYPE_CHECKING to avoid circular imports.
+
+    :ivar int year_of_birth: The year of birth attributed.
+
+    :ivar dict gender_map: A mapping of GenderIDs to Genders, used to interpret the gender value.
+
+    :ivar Gender gender: The gender attributed.
     """
     def __init__(self, agent_id: AgentID, environment: "Environment",
         year_of_birth: int = None, gender_map: Dict[GenderID, Gender] = None,

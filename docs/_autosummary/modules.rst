@@ -1,7 +1,12 @@
 gabm
 ====
 
-.. toctree::
-   :maxdepth: 4
+.. autosummary::
+   :toctree: .
 
    gabm
+
+.. automodule:: gabm
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -245,11 +245,13 @@ If it all looks good. Please submit a PR to incorporate documentation changes in
 
 #### Sphinx API Documentation and Autosummary
 
+
 GABM uses Sphinx with the autosummary extension to generate API documentation for all major modules. To document new modules:
 
-- Add the module name to the autosummary directive in `docs/_autosummary/modules.rst`.
+- Import the new module in the appropriate `__init__.py` file so Sphinx can discover it (e.g., add `from .my_module import *`).
+- Add the module to the API Reference toctree in `docs/index.md` (as an `_autosummary/` entry) to ensure it appears in the documentation navigation.
 - You do not need to manually maintain individual `.rst` files for each module; autosummary will generate them automatically during `make docs`.
-- If you remove or rename modules, update the autosummary list accordingly.
+- If you remove or rename modules, update both the `__init__.py` imports and the API Reference list in `docs/index.md`.
 - You may delete stale `.rst` files in `_autosummary` if they are no longer referenced.
 
 Preview the Sphinx documentation by opening `docs/_build/html/index.html` in a web browser.

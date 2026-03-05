@@ -10,6 +10,7 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 import logging
 # Local imports
 from gabm.core.id import GABMID
+from gabm.abm.group import OpinionatedGroup
 
 class PoliticalPartyID(GABMID):
     """

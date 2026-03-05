@@ -68,6 +68,7 @@ class GABMAttributeMap:
     def add(self, attr: GABMAttribute):
         """
         Add an attribute to the map.
+
         Args:
             attr: An instance of an attribute (e.g., Gender, Health).
         """

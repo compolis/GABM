@@ -10,7 +10,7 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 import logging
 from typing import Dict
 # Local imports
-from gabm.core.abm.agent.election import Election, ElectionID, Vote, VoteID
+from gabm.abm.democracy.election import Election, ElectionID, Vote, VoteID
 
 class UKReferendum(Election):
     """

@@ -59,9 +59,10 @@ test:
 	@echo "...done running tests with pytest."
 
 
+
+
 # Build documentation (requires Sphinx, in docs/)
-#
-# NOTE: This target uses Make's dependency chaining. Running `make docs` will first run `make docs-make` to build the documentation, and then `make docs-clean` to clean up any auto-copied files. This ensures that the documentation is always built before cleaning, without needing to call `$(MAKE)` or make within the target.
+# This runs scripts/docs.py (which generates and post-processes .rst files), then builds with Sphinx, then cleans up auto-copied files.
 docs: docs-make docs-clean
 
 # Build documentation with Sphinx (in docs/)

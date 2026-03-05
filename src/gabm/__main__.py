@@ -239,32 +239,7 @@ def run_survey():
     env = OpinionatedEnvironment(year=year)
     # Create a gender map
     gender_map = GenderMap()
-<<<<<<< HEAD
-    # Define opinion topics and values
-    # Define opinion topic IDs
-    opinion_topic_id_0 = OpinionTopicID(0)
-    opinion_topic_id_1 = OpinionTopicID(1)
-    # Define opinion topics
-    opinion_topic_0 = OpinionTopic(opinion_topic_id_0, "topic_0", "Description of topic 0.")
-    opinion_topic_1 = OpinionTopic(opinion_topic_id_1, "topic_1", "Description of topic 1.")
-    # Add topics to environment
-    env.opinions = {
-        opinion_topic_id_0: opinion_topic_0,
-        opinion_topic_id_1: opinion_topic_1
-    }
-    
-
-    # Create a Person agent
-    person_id = 0
-    year_of_birth = year - 18
-    person = Person(
-        person_id, environment=env, year_of_birth=year_of_birth, gender=gender_0, gender_map=gender_map, opinions={})
-    # Create an opinion topic and values
-    opinion_topic_id = OpinionTopicID(0)
-    opinion_topic = OpinionTopic(opinion_topic_id, "climate change", "Opinions
-=======
     raise NotImplementedError("Survey mode is not yet implemented.")
->>>>>>> upstream/main
 
 def main():
     parser = argparse.ArgumentParser(description="Run GABM simulation.")
