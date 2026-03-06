@@ -7,7 +7,7 @@ To run: python3 -m gabm
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports

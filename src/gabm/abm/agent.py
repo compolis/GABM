@@ -21,7 +21,7 @@ from gabm.abm.attributes.gender import GenderID, Gender, GenderMap
 from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap, Opinion
 # TYPE_CHECKING is used to avoid circular imports.
 if TYPE_CHECKING:
-    from gabm.abm.environment import Environment, OpinionatedEnvironment
+    from gabm.abm.environment import Environment
     from gabm.abm.group import Group, OpinionatedGroup
 
 class AgentID(GABMID):
@@ -97,45 +97,45 @@ class Agent():
         """
         group.remove_member(self)
 
-class Animal(Agent):
+class Person(Agent):
     """
     An Agent with a year of birth and Gender.
 
     The type annotation for environment is quoted as it is imported under TYPE_CHECKING to avoid circular imports.
 
-    :ivar int year_of_birth: The year of birth attributed.
-
-    :ivar dict gender_map: A mapping of GenderIDs to Genders, used to interpret the gender value.
-
-    :ivar Gender gender: The gender attributed.
+    Attributes:
+        year_of_birth (int):
+            The year of birth attributed.
+        gender (Gender):
+            The gender attributed.
+        opinions (Dict[OpinionTopicID, Opinion]):
+            A dictionary of Opinions.
+            The keys are OpinionTopicIDs, and the values are Opinion objects.
+            These are deep copied when the Person is initialised, so that the Person has their own opinions.
     """
     def __init__(self, agent_id: AgentID, environment: "Environment",
         year_of_birth: int = None, gender_map: Dict[GenderID, Gender] = None,
-        gender: Gender = None):
+        gender: Gender = None,  opinions: dict[OpinionTopicID, 'Opinion'] = None):
         """
-        Initialize. If year of birth is none, then the instance is 
-        initialised with a year of birth that would make them 18 years 
-        old in the current year of the environment. If year_of_birth 
-        is a value greater than environment.year, then self.year_of_birth
-        is set to the current year in the environment with a warning. 
-        This avoids having agents with negative ages when initialised.
+        Initialize
+
         Args:
             agent_id: Unique identifier for the Agent instance.
-            environment: The shared environment the Agent instance belongs to.   
+            environment: The Environment the Agent instance belongs to.
             year_of_birth: The year the animal was born.
-            gender_map: A mapping of GenderIDs to Genders, used to interpret the gender.
-            gender: The Gender of the animal.
+            gender_map: The map of gender IDs to Gender objects.
+            gender: The gender attributed.
+            opinions: A dictionary of opinions, where keys are OpinionTopicIDs and values are Opinion objects.
         """
         super().__init__(agent_id, environment)
         self.gender = gender
-        self.gender_map = gender_map
         # Raise a warning if gender is not in the gender map
-        if self.gender is not None and self.gender_map is None:
+        if self.gender is not None and environment.gender_map is None:
             message = f"Gender value {self.gender} is provided but no gender map is provided. Cannot interpret gender value."
             logging.warning(message)
             raise ValueError(message)
         # Raise a warning if gender is not in the gender map (if gender map is provided).
-        if self.gender is not None and self.gender_map is not None and self.gender not in self.gender_map:
+        if self.gender is not None and environment.gender_map is not None and self.gender not in self.gender_map:
             debug_info = (
                 f"DEBUG: gender={self.gender!r} (type={type(self.gender)}), "
                 f"gender_map keys={[ (k, type(k)) for k in self.gender_map.keys() ]}"
@@ -155,6 +155,13 @@ class Animal(Agent):
             if self.year_of_birth > self.environment.year:
                 logging.warning(f"year_of_birth ({self.year_of_birth}) cannot be greater than the current year ({self.environment.year}). Setting year_of_birth to {self.environment.year}.")
                 self.year_of_birth = self.environment.year
+        if self.get_age() > 200:
+            logging.warning(f"Age ({self.get_age()}) is unusually high.")
+        self.opinions = {}
+        # If opinions are provided, deep copy them to the person so that they have their own opinions.
+        if opinions is not None:
+            for opinion_topic_id, opinion in opinions.items():
+                self.opinions[opinion_topic_id] = copy.deepcopy(opinion)
 
     def __str__(self):
         """
@@ -162,7 +169,7 @@ class Animal(Agent):
             String representation.
         """
         super_str = super().__str__()
-        return f"{super_str}, year_of_birth={self.year_of_birth}, gender={self.get_gender()}"
+        return f"{super_str}, year_of_birth={self.year_of_birth}, gender={self.get_gender()}, opinions={self.opinions}"
 
     def __repr__(self):
         """
@@ -192,53 +199,6 @@ class Animal(Agent):
         if self.gender is None:
             return "none"
         return self.gender_map.get(self.gender)
-
-class Person(Animal):
-    """
-    An Animal with opinions that is part of an OpinionatedEnvironment.
-
-    Attributes:
-        opinions: A dictionary of Opinions.
-         The keys are OpinionTopicIDs, and the values are Opinion objects.
-         These are deep copied when the Person is initialised, so that the Person has their own opinions.
-    """
-    def __init__(self, agent_id: AgentID, environment: "OpinionatedEnvironment",
-        year_of_birth: int = None, gender_map: Dict[GenderID, Gender] = None,
-        gender: Gender = None,  opinions: dict[OpinionTopicID, 'Opinion'] = None):
-        """
-        Initialize
-
-        Args:
-            agent_id: Unique identifier for the Agent instance.
-            environment: The Environment the Agent instance belongs to.
-            year_of_birth: The year the animal was born.
-            gender_map: The map of gender IDs to Gender objects.
-            gender: The gender attributed.
-            opinions: A dictionary of opinions, where keys are OpinionTopicIDs and values are Opinion objects.
-        """
-        super().__init__(agent_id, environment, year_of_birth=year_of_birth, gender_map=gender_map,  gender=gender)
-        if self.get_age() > 200:
-            logging.warning(f"Age ({self.get_age()}) is unusually high.")
-        self.opinions = {}
-        # If opinions are provided, deep copy them to the person so that they have their own opinions.
-        if opinions is not None:
-            for opinion_topic_id, opinion in opinions.items():
-                self.opinions[opinion_topic_id] = copy.deepcopy(opinion)
-        
-    def __str__(self):
-        """
-        Return:
-            String representation.
-        """
-        super_str = super().__str__()
-        return f"{super_str}, opinions={self.opinions}"
-
-    def __repr__(self):
-        """
-        Return: 
-            Official string representation.
-        """
-        return self.__str__()
         
     def get_opinion(self, opinion_id: OpinionTopicID) -> 'Opinion':
         """
