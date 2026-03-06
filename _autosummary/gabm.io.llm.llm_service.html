@@ -148,12 +148,10 @@ Subclasses must implement the send() and list_available_models() methods.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gabm.io.llm.llm_service.LLMService.list_available_models">
 <span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">list_available_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.io.llm.llm_service.LLMService.list_available_models" title="Link to this definition"></a></dt>
-<dd><p>List available models for the LLM service.
-Args:</p>
-<blockquote>
-<div><p>api_key (str): The API key for the LLM service.</p>
-</div></blockquote>
+<dd><p>List available models for the LLM service.</p>
 <dl class="simple">
+<dt>Args:</dt><dd><p>api_key (str): The API key for the LLM service.</p>
+</dd>
 <dt>Returns:</dt><dd><p>A list of available models.</p>
 </dd>
 </dl>
@@ -162,14 +160,17 @@ Args:</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gabm.io.llm.llm_service.LLMService.send">
 <span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.io.llm.llm_service.LLMService.send" title="Link to this definition"></a></dt>
-<dd><p>Send a prompt to the LLM and return the response object.
-Args:</p>
-<blockquote>
-<div><p>api_key (str): The API key for the LLM service.
-message (str): The message to send.
-model (str, optional): The model to use for the request.</p>
-</div></blockquote>
+<dd><p>Send a prompt to the LLM and return the response object.</p>
 <dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>api_key (str):</dt><dd><p>The API key for the LLM service.</p>
+</dd>
+<dt>message (str):</dt><dd><p>The message to send.</p>
+</dd>
+<dt>model (str, optional):</dt><dd><p>The model to use for the request.</p>
+</dd>
+</dl>
+</dd>
 <dt>Returns:</dt><dd><p>The response object from the LLM.</p>
 </dd>
 </dl>

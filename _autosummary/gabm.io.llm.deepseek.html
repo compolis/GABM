@@ -146,12 +146,10 @@ Handles prompt sending, response caching, logging, and model listing.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="gabm.io.llm.deepseek.DeepSeekService.list_available_models">
 <span class="sig-name descname"><span class="pre">list_available_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.io.llm.deepseek.DeepSeekService.list_available_models" title="Link to this definition"></a></dt>
-<dd><p>List available DeepSeek models and write them to JSON and TXT files. Returns the list.
-Args:</p>
-<blockquote>
-<div><p>api_key (str): DeepSeek API key.</p>
-</div></blockquote>
+<dd><p>List available DeepSeek models and write them to JSON and TXT files. Returns the list.</p>
 <dl class="simple">
+<dt>Args:</dt><dd><p>api_key (str): DeepSeek API key.</p>
+</dd>
 <dt>Returns:</dt><dd><p>list: List of model objects.</p>
 </dd>
 </dl>
@@ -161,14 +159,12 @@ Args:</p>
 <dt class="sig sig-object py" id="gabm.io.llm.deepseek.DeepSeekService.send">
 <span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deepseek-model-1'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.io.llm.deepseek.DeepSeekService.send" title="Link to this definition"></a></dt>
 <dd><p>Send a prompt to DeepSeek and return the response object.
-Caches and logs the response for reproducibility.
-Args:</p>
-<blockquote>
-<div><p>api_key (str): DeepSeek API key.
+Caches and logs the response for reproducibility.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>api_key (str): DeepSeek API key.
 message (str): Prompt to send.
 model (str): Model name (default: “deepseek-model-1”).</p>
-</div></blockquote>
-<dl class="simple">
+</dd>
 <dt>Returns:</dt><dd><p>Response object (dict) or None on error.</p>
 </dd>
 </dl>

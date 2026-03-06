@@ -224,11 +224,17 @@ make docs
 
 **Note on Sphinx/MyST Documentation Warnings:**
 
+
+
 When building the documentation with [Sphinx](https://www.sphinx-doc.org/) and [MyST](https://mystmd.org/), you may see warnings like:
 
   Document headings start at H2, not H1 [myst.header]
+  document isn't included in any toctree [toc.not_included]
+  duplicate object description ... use :no-index: for one of them
+  WARNING: Field list ends without a blank line; unexpected unindent. [docutils]
+  'myst' cross-reference target not found: ... [myst.xref_missing]
 
-These warnings occur even though all Markdown files start with H2 (`##`). This is a known quirk with MyST/Sphinx and does not affect the rendered documentation. You can safely ignore these warnings unless the formatting in the HTML output is incorrect.
+These warnings are common with Sphinx/Autosummary/MyST and do not affect the rendered documentation if the HTML output looks correct. In particular, myst.xref_missing means that a Markdown/MyST cross-reference (e.g., {ref}`target`) could not be resolved. If the documentation renders correctly and the missing reference is not critical, these can be safely ignored. You can safely ignore all these warnings unless the formatting in the HTML output is incorrect or a critical feature is missing.
 
 
 Preview the Sphinx documentation by opening `docs/_build/html/index.html` in a [Web browser](https://en.wikipedia.org/wiki/Web_browser).

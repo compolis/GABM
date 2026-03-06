@@ -140,23 +140,23 @@
 <dt class="sig sig-object py" id="gabm.abm.attributes.gender.Gender">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.attributes.gender.</span></span><span class="sig-name descname"><span class="pre">Gender</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gender_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gabm.abm.attributes.gender.GenderID" title="gabm.abm.attributes.gender.GenderID"><span class="pre">GenderID</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.attributes.gender.Gender" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="gabm.abm.attribute.html#gabm.abm.attribute.GABMAttribute" title="gabm.abm.attribute.GABMAttribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">GABMAttribute</span></code></a></p>
-<p>A Gender.
-Attributes:</p>
-<blockquote>
-<div><p>id (GenderID): Unique identifier for the gender.
+<p>A Gender.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>id (GenderID): Unique identifier for the gender.
 description (str): The description of the gender.</p>
-</div></blockquote>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="gabm.abm.attributes.gender.GenderID">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.attributes.gender.</span></span><span class="sig-name descname"><span class="pre">GenderID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gender_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.attributes.gender.GenderID" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="gabm.core.id.html#gabm.core.id.GABMID" title="gabm.core.id.GABMID"><code class="xref py py-class docutils literal notranslate"><span class="pre">GABMID</span></code></a></p>
-<p>A unique identifier for a Gender instance.
-Attributes:</p>
-<blockquote>
-<div><p>id (int): The unique identifier for the gender.</p>
-</div></blockquote>
+<p>A unique identifier for a Gender instance.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>id (int): The unique identifier for the gender.</p>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="gabm.abm.attributes.gender.GenderID.FEMALE">
 <span class="sig-name descname"><span class="pre">FEMALE</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#gabm.abm.attributes.gender.GenderID" title="gabm.abm.attributes.gender.GenderID"><span class="pre">GenderID</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#gabm.abm.attributes.gender.GenderID.FEMALE" title="Link to this definition"></a></dt>
@@ -183,23 +183,21 @@ Attributes:</p>
 <dt class="sig sig-object py" id="gabm.abm.attributes.gender.GenderMap">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.attributes.gender.</span></span><span class="sig-name descname"><span class="pre">GenderMap</span></span><a class="headerlink" href="#gabm.abm.attributes.gender.GenderMap" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="gabm.abm.attribute.html#gabm.abm.attribute.GABMAttributeMap" title="gabm.abm.attribute.GABMAttributeMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">GABMAttributeMap</span></code></a></p>
-<p>A mapping of GenderIds to Genders.
-By default, the map is initialized as follows:</p>
-<blockquote>
-<div><p>g0 = GenderID(0)
-g1 = GenderID(1)
-g2 = GenderID(2)
-g3 = GenderID(3)
-items: Dict[GenderID, Gender] = {</p>
-<blockquote>
-<div><p>g0: Gender(g0, “unknown”),
-g1: Gender(g1, “female”),
-g2: Gender(g2, “male”),
-g3: Gender(g3, “non-binary”),</p>
-</div></blockquote>
-<p>}
-super().__init__(items)</p>
-</div></blockquote>
+<p>A mapping of GenderIds to Genders.</p>
+<p>By default, the map is initialized as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g0</span> <span class="o">=</span> <span class="n">GenderID</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">g1</span> <span class="o">=</span> <span class="n">GenderID</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">g2</span> <span class="o">=</span> <span class="n">GenderID</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">g3</span> <span class="o">=</span> <span class="n">GenderID</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">items</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">GenderID</span><span class="p">,</span> <span class="n">Gender</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">g0</span><span class="p">:</span> <span class="n">Gender</span><span class="p">(</span><span class="n">g0</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">),</span>
+    <span class="n">g1</span><span class="p">:</span> <span class="n">Gender</span><span class="p">(</span><span class="n">g1</span><span class="p">,</span> <span class="s2">&quot;female&quot;</span><span class="p">),</span>
+    <span class="n">g2</span><span class="p">:</span> <span class="n">Gender</span><span class="p">(</span><span class="n">g2</span><span class="p">,</span> <span class="s2">&quot;male&quot;</span><span class="p">),</span>
+    <span class="n">g3</span><span class="p">:</span> <span class="n">Gender</span><span class="p">(</span><span class="n">g3</span><span class="p">,</span> <span class="s2">&quot;non-binary&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
