@@ -56,6 +56,27 @@ class GABMAttributeMap:
 
     T = TypeVar('T', bound=GABMAttribute)
 
+    def keys(self):
+        """
+        Return:
+            An iterable of the ID objects in the map.
+        """
+        return self._map.keys()
+
+    def values(self):
+        """
+        Return:
+            An iterable of the attribute instances in the map.
+        """
+        return self._map.values()
+
+    def items(self):
+        """
+        Return:
+            An iterable of (ID object, attribute instance) pairs in the map.
+        """
+        return self._map.items()
+
     def get(self, id: GABMID):
         """
         Return:
