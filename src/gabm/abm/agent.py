@@ -46,9 +46,12 @@ class Agent():
     under TYPE_CHECKING to avoid circular imports.
 
     Attributes:
-        agent_id (AgentID): Unique identifier for the Agent instance.
-        environment (Environment): The Environment the Agent instance belongs to.
-        groups (Set[Group]): A Set of Groups that the Agent instance belongs to.
+        agent_id (AgentID):
+            Unique identifier for the Agent instance.
+        environment (Environment):
+            The Environment the Agent instance belongs to.
+        groups (Set[Group]):
+            A Set of Groups that the Agent instance belongs to.
     """
     def __init__(self, agent_id: AgentID, environment: "Environment"):
         """
@@ -102,6 +105,9 @@ class Person(Agent):
     An Agent with a year of birth and Gender.
 
     The type annotation for environment is quoted as it is imported under TYPE_CHECKING to avoid circular imports.
+
+    .. note::
+            Inherits all attributes from :class:`Agent`.
 
     Attributes:
         year_of_birth (int):
@@ -176,13 +182,6 @@ class Person(Agent):
         """
         super_str = super().__str__()
         return f"{super_str}, year_of_birth={self.year_of_birth}, gender={self.get_gender()}, opinions={self.opinions}"
-
-    def __repr__(self):
-        """
-        Return: 
-            Official string representation.
-        """
-        return self.__str__()
 
     def get_age(self) -> int:
         """
@@ -346,8 +345,8 @@ class Citizen(Person):
     """
     A Person who belongs to a Nation.
 
-    Attributes:
-        None additional to Person.
+    .. note::
+        Inherits all attributes from :class:`Person`.
     """
     def __init__(self, agent_id: int, environment: "Nation",
         year_of_birth: int = None, gender_id: GenderID = None,
@@ -369,8 +368,8 @@ class Alien(Person):
     """
     A Person who does not belong to a Nation.
 
-    Attributes:
-        None additional to Person.
+    .. note::
+        Inherits all attributes from :class:`Person`.
     """
     def __init__(self, agent_id: int, environment: "Nation",
         year_of_birth: int = None, gender_id: GenderID = None, opinions: dict = None):

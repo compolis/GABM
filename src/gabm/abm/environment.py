@@ -57,7 +57,6 @@ class Environment():
                 This allows the environment to have an overview of opinions of Persons and OpinionatedGroups.
             
         """
-        # No super().__init__ needed; Environment does not inherit from a custom base class
         self.year = year
         self.place = place
         self.agents_active: Dict = {}
@@ -72,10 +71,11 @@ class Environment():
         Return:
             A string representation.
         """
-        return f"Environment(year={self.year}, place='{self.place}', " \
+        class_name = self.__class__.__name__
+        return f"{class_name}: year={self.year}, place='{self.place}', " \
                f"agents_active={len(self.agents_active)}, agents_inactive={len(self.agents_inactive)}, " \
                f"groups_active={len(self.groups_active)}, groups_inactive={len(self.groups_inactive)}, " \
-               f"opinions={len(self.opinions)})"
+               f"opinions={len(self.opinions)}, gender_map={self.gender_map}"
 
     def __repr__(self):
         """
@@ -101,12 +101,12 @@ class Nation(Environment):
     def __init__(self, year: int = 2026, place: str = "Earth", 
         gender_map: GenderMap = None, opinions: Dict[OpinionTopicID, Opinion] = None, nation: str = "United Kingdom"):
         """
-        Initialize a Nation environment.
+        Initialize.
         Args:
             year (int):
                 The current year in the simulation.
             place (str):
-                The name of the place or environment.
+                The name of the nation.
             gender_map (GenderMap):
                 A GenderMap instance for gender attribute lookups.
             opinions (Dict[OpinionTopicID, Opinion]):
@@ -121,19 +121,3 @@ class Nation(Environment):
         self.groups_active[self.citizens.id] = self.citizens
         self.aliens = Group(GroupID(2), name="Aliens")
         self.groups_active[self.aliens.id] = self.aliens
-
-    def __str__(self):
-        """
-        Return:
-            A string representation.
-        """
-        return f"Nation(nation='{self.nation}', year={self.year}, place='{self.place}', " \
-               f"agents_active={len(self.agents_active)}, agents_inactive={len(self.agents_inactive)}, " \
-               f"groups_active={len(self.groups_active)}, groups_inactive={len(self.groups_inactive)}, opinions={len(self.opinions)})"
-
-    def __repr__(self):
-        """
-        Return:
-            An official string representation.
-        """
-        return self.__str__()
