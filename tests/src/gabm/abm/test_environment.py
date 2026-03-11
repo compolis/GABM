@@ -45,8 +45,7 @@ def test_nation_creation_and_str():
     values = OpinionValueMap({tid: val})
     opinion = Opinion(tid, values, 2)
     opinions = {tid: opinion}
-    nation = Nation(year=2023, place="Earth", opinions=opinions, nation="Testland")
-    assert nation.nation == "Testland"
+    nation = Nation(year=2023, place="UK", opinions=opinions)
     assert nation.opinions[tid] == opinion
     s = str(nation)
     r = repr(nation)

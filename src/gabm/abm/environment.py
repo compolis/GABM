@@ -14,7 +14,6 @@ from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionVal
 from gabm.abm.group import Group
 from gabm.abm.attributes.gender import GenderMap
 
-
 class Environment():
     """
     An Environment with opinions.
@@ -89,9 +88,10 @@ class Nation(Environment):
     An Environment representing a nation.
     Can be extended with nation-specific attributes and methods.
     
+    .. note::
+            Inherits all attributes from :class:`Environment`.
+
     Attributes:
-        nation (str):
-            The name of the nation (e.g., "United Kingdom").
         citizens (Group):
             A group of Person agents representing the citizens of the nation.
         aliens (Group):
@@ -115,7 +115,6 @@ class Nation(Environment):
         
         """
         super().__init__(year=year, place=place, gender_map=gender_map, opinions=opinions)
-        self.nation = nation
         from gabm.abm.group import Group, GroupID
         self.citizens = Group(GroupID(1), name="Citizens")
         self.groups_active[self.citizens.id] = self.citizens

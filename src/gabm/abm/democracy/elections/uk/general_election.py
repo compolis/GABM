@@ -31,7 +31,22 @@ class UKGE(Election):
         """
         super().__init__(election_id, date.year)
         logging.info(f"Initialized UKGE with ID {election_id} on {date} with candidates: {candidates}") 
-    
+
+class UKGEVoteID(VoteID):
+    """
+    UK General Election Vote ID class, inheriting from the base VoteID class.
+    A UK General Election Vote ID is a specific type of vote identifier that is used to uniquely identify a vote cast in a UK General Election.
+    Each vote in a UK General Election is associated with a specific voter, candidate, and election, and the UKGEVoteID serves as a unique identifier for that vote.
+    """
+    def __init__(self, vote_id: int):
+        """
+        Initialize.
+
+        Args:
+            vote_id: Unique identifier for the vote.
+        """
+        super().__init__(vote_id)
+        
 class UKGEVote(Vote):
     """
     UK General Election Vote.

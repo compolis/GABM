@@ -39,6 +39,21 @@ class UKReferendum(Election):
         self.choices = tuple(choices)
         logging.info(f"Initialized UK Referendum with ID {election_id} on {date} with question: {question}")
 
+class UKReferendumVoteID(VoteID):
+    """
+    UK Referendum Vote ID class, inheriting from the base VoteID class.
+    A UK Referendum Vote ID is a specific type of vote identifier that is used to uniquely identify a vote cast in a UK Referendum.
+    Each vote in a UK Referendum is associated with a specific voter and referendum, and the UKReferendumVoteID serves as a unique identifier for that vote.
+    """
+    def __init__(self, vote_id: int):
+        """
+        Initialize.
+
+        Args:
+            vote_id: Unique identifier for the vote.
+        """
+        super().__init__(vote_id)
+        
 class UKReferendumVote(Vote):
     """
     UK Referendum Vote class.

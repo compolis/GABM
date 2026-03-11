@@ -104,8 +104,6 @@ class Person(Agent):
     """
     An Agent with a year of birth and Gender.
 
-    The type annotation for environment is quoted as it is imported under TYPE_CHECKING to avoid circular imports.
-
     .. note::
             Inherits all attributes from :class:`Agent`.
 
