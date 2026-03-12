@@ -108,15 +108,21 @@ class Vote():
     For representing a vote.
 
     Attributes:
-        id (VoteID): Unique identifier for the vote.
-        description (str): The description of the vote.
+        id (VoteID):
+            Unique identifier for the vote.
+        election_id (ElectionID):
+            The identifier of the election this vote is associated with.
+        voter_id (CitizenID):
+            The identifier of the voter.
     """
-    def __init__(self, vote_id: VoteID, description: str):
+    def __init__(self, vote_id: VoteID, election_id: ElectionID, voter_id: str = None):
         """
         Initialize
         Args:
             vote_id (VoteID): The unique identifier for the vote.
-            description (str): The description of the vote.
+            election_id (ElectionID): The identifier of the election this vote is associated with.
+            voter_id (CitizenID): The identifier of the voter.
         """
         self.id = vote_id
-        self.description = description
+        self.election_id = election_id
+        self.voter_id = voter_id

@@ -11,6 +11,20 @@ import logging
 from typing import Dict
 # Local imports
 from gabm.abm.democracy.election import Election, ElectionID, Vote, VoteID
+from gabm.abm.agent import CitizenID
+
+# Move UKReferendumVoteID above UKReferendum so it is defined before use
+class UKReferendumVoteID(VoteID):
+    """
+    UK Referendum Vote ID
+    """
+    def __init__(self, vote_id: int):
+        """
+        Initialize.
+        Args:
+            vote_id: Unique identifier for the referendum vote.
+        """
+        super().__init__(vote_id)
 
 class UKReferendum(Election):
     """
@@ -23,36 +37,31 @@ class UKReferendum(Election):
     policy decisions. The outcome of a referendum is typically determined by a simple 
     majority vote, although the specific rules can vary depending on the context and the 
     question being asked.
+
+    .. note::
+        Inherits all attributes and methods from :class:`Election`.
+
+    Attributes:
+        question (str):
+            The question being posed in the referendum.
+        choices (tuple[UKReferendumVoteID, ...]):
+            The possible choices for the referendum.
     """
-    def __init__(self, election_id: ElectionID, date: str, question: str, choices: tuple[str, ...]):
+    def __init__(self, election_id: ElectionID, date: str, description: str, question: str, choices: tuple[UKReferendumVoteID, ...]):
         """
         Initialize.
 
         Args:
             election_id: Unique identifier for the referendum.
             date: Date of the referendum.
+            description: A brief description of the referendum.
             question: The question being posed in the referendum.
-            choices: The possible choices for the referendum (e.g., "Yes" or "No"). Must be a tuple of strings.
+            choices: The possible choices for the referendum.
         """
-        super().__init__(election_id, date)
+        super().__init__(election_id, date, description)
         self.question = question
         self.choices = tuple(choices)
-        logging.info(f"Initialized UK Referendum with ID {election_id} on {date} with question: {question}")
-
-class UKReferendumVoteID(VoteID):
-    """
-    UK Referendum Vote ID class, inheriting from the base VoteID class.
-    A UK Referendum Vote ID is a specific type of vote identifier that is used to uniquely identify a vote cast in a UK Referendum.
-    Each vote in a UK Referendum is associated with a specific voter and referendum, and the UKReferendumVoteID serves as a unique identifier for that vote.
-    """
-    def __init__(self, vote_id: int):
-        """
-        Initialize.
-
-        Args:
-            vote_id: Unique identifier for the vote.
-        """
-        super().__init__(vote_id)
+        #logging.info(f"Initialized UK Referendum on {date} with ID {election_id}")
         
 class UKReferendumVote(Vote):
     """
@@ -62,16 +71,21 @@ class UKReferendumVote(Vote):
     It is cast by a voter to express their choice on the specific question being posed in the 
     referendum. Each voter typically votes for one of the available choices (e.g., "Yes" or 
     "No"), and the choice with the most votes determines the outcome of the referendum.
+
+    .. note::
+        Inherits all attributes and methods from :class:`Vote`.
     """
-    def __init__(self, vote_id: VoteID, election_id: ElectionID, voter_id: str, choice: str):
+    def __init__(self, vote_id: UKReferendumVoteID, election_id: ElectionID, voter_id: CitizenID = None):
         """
         Initialize a UK Referendum Vote instance.
 
         Args:
-            vote_id: Unique identifier for the vote.
-            election_id: Identifier for the associated referendum.
-            voter_id: Identifier for the voter.
-            choice: The choice made by the voter (e.g., "Yes" or "No").
+            vote_id:
+                Unique identifier for the vote.
+            election_id:
+                Identifier for the associated referendum.
+            voter_id:
+                Identifier for the voter.
         """
-        super().__init__(vote_id, election_id, voter_id, choice)
-        logging.info(f"Recorded referendum vote {vote_id} for referendum {election_id} by voter {voter_id} with choice {choice}")
+        super().__init__(vote_id, election_id, voter_id)
+        #logging.info(f"Recorded referendum vote {vote_id} for referendum {election_id} by voter {voter_id}")

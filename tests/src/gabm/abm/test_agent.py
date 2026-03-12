@@ -12,7 +12,7 @@ import pytest
 from unittest.mock import Mock
 # Local imports
 from gabm.abm.environment import Environment
-from gabm.abm.agent import AgentID, Agent, Person, Citizen, Alien
+from gabm.abm.agent import AgentID, Agent, PersonID, Person, CitizenID, Citizen
 from gabm.abm.attributes.gender import GenderID, GenderMap
 
 # --- AgentID Tests ---
@@ -46,11 +46,11 @@ def test_agent_str_repr():
 # --- Person Tests ---
 def test_person_age_and_gender():
     environment = Environment(2026, place="Earth", gender_map=GenderMap())    
-    person = Person(AgentID(3), environment=environment, year_of_birth=2000, gender_id=GenderID.FEMALE)
+    person = Person(PersonID(3), environment=environment, year_of_birth=2000, gender_id=GenderID.FEMALE)
     assert person.get_age() == 26
     assert person.get_gender() == "female"
     # Test default year_of_birth
-    person2 = Person(AgentID(4), environment=environment, gender_id=GenderID.MALE)
+    person2 = Person(PersonID(4), environment=environment, gender_id=GenderID.MALE)
     assert person2.get_age() == 18
     assert person2.get_gender() == "male"
     # Minimal mock Opinion and OpinionTopicID
@@ -60,7 +60,7 @@ def test_person_age_and_gender():
             self.opinion_id = "topic1"
             self.opinion_values = None
     opinions = {"topic1": DummyOpinion(5)}
-    person = Person(AgentID(5), environment=environment, opinions=opinions)
+    person = Person(PersonID(5), environment=environment, opinions=opinions)
     # Deep copy check
     assert person.opinions["topic1"] is not opinions["topic1"]
     # get_opinion
@@ -73,24 +73,22 @@ def test_person_age_and_gender():
     with pytest.raises(ValueError):
         person.set_opinion("notopic", 1)
     # get_opinion_profile (no opinions)
-    person2 = Person(AgentID(6), environment=environment)
+    person2 = Person(PersonID(6), environment=environment)
     assert person2.get_opinion_profile() == "I have no opinions."
     # get_self_description
     desc = person.get_self_description()
     assert "years old" in desc
 
-# --- Citizen/Alien Tests ---
-def test_citizen_and_alien_creation():
+# --- Citizen Tests ---
+def test_citizen_creation():
     environment = Environment(2026, place="Earth", gender_map=GenderMap())
-    c = Citizen(AgentID(7), environment=environment)
-    a = Alien(AgentID(8), environment=environment)
+    c = Citizen(CitizenID(7), environment=environment)
     assert isinstance(c, Person)
-    assert isinstance(a, Person)
 
 # --- Communication Tests (basic) ---
 def test_person_communicate_with_llm():
     environment = Environment(2026, place="Earth", gender_map=GenderMap())
-    p = Person(AgentID(9), environment=environment)
+    p = Person(PersonID(9), environment=environment)
     resp = p.communicate_with_llm("Hello", model="test-model")
     assert resp["response"].startswith("Echo:")
     assert resp["model"] == "test-model"

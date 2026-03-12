@@ -100,6 +100,19 @@ class Agent():
         """
         group.remove_member(self)
 
+class PersonID(AgentID):
+    """
+    Person ID
+    """
+    def __init__(self, agent_id: int):
+        """
+        Initialize.
+
+        Args:
+            agent_id: Unique identifier for the Person instance.
+        """
+        super().__init__(agent_id)
+
 class Person(Agent):
     """
     An Agent with a year of birth and Gender.
@@ -339,6 +352,19 @@ class Person(Agent):
         # In the future, this method can be implemented to call an actual LLM API.
         return {"response": f"Echo: {message}", "model": model}
 
+class CitizenID(PersonID):
+    """
+    Citizen ID
+    """
+    def __init__(self, agent_id: int):
+        """
+        Initialize.
+
+        Args:
+            agent_id: Unique identifier for the Citizen instance.
+        """
+        super().__init__(agent_id)
+
 class Citizen(Person):
     """
     A Person who belongs to a Nation.
@@ -346,40 +372,18 @@ class Citizen(Person):
     .. note::
         Inherits all attributes from :class:`Person`.
     """
-    def __init__(self, agent_id: int, environment: "Nation",
+    def __init__(self, citizen_id: CitizenID, environment: "Nation",
         year_of_birth: int = None, gender_id: GenderID = None,
         opinions: dict = None):
         """
         Initialize.
 
         Args:
-            agent_id: Unique identifier for the agent.
-            environment: The Nation the agent belongs to.
+            citizen_id: Unique identifier for the citizen.
+            environment: The Nation the citizen belongs to.
             year_of_birth: Year of birth (int).
             gender_id: The ID of the gender attributed.
             opinions: A dictionary of opinions, where keys are OpinionTopicIDs and values are Opinion objects.
         """
-        super().__init__(agent_id, environment, year_of_birth=year_of_birth,
-            gender_id=gender_id, opinions=opinions)
-
-class Alien(Person):
-    """
-    A Person who does not belong to a Nation.
-
-    .. note::
-        Inherits all attributes from :class:`Person`.
-    """
-    def __init__(self, agent_id: int, environment: "Nation",
-        year_of_birth: int = None, gender_id: GenderID = None, opinions: dict = None):
-        """
-        Initialize.
-
-        Args:
-            agent_id: Unique identifier for the agent.
-            environment: The Nation the agent belongs to.
-            year_of_birth: Year of birth (int).
-            gender_id: The ID of the gender attributed.
-            opinions: A dictionary of opinions, where keys are OpinionTopicIDs and values are Opinion objects.
-        """
-        super().__init__(agent_id, environment, year_of_birth=year_of_birth,
+        super().__init__(citizen_id, environment, year_of_birth=year_of_birth,
             gender_id=gender_id, opinions=opinions)
