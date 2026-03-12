@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gabm.abm.attributes.wealth module &mdash; GABM  documentation</title>
+  <title>gabm.abm.attributes.politics module &mdash; GABM  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
 
@@ -19,8 +19,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="gabm.abm.democracy package" href="gabm.abm.democracy.html" />
-    <link rel="prev" title="gabm.abm.attributes.region module" href="gabm.abm.attributes.region.html" /> 
+    <link rel="next" title="gabm.abm.attributes.region module" href="gabm.abm.attributes.region.html" />
+    <link rel="prev" title="gabm.abm.attributes.opinion module" href="gabm.abm.attributes.opinion.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -80,14 +80,14 @@
 <li class="toctree-l3"><a class="reference internal" href="gabm.abm.attributes.health.html">gabm.abm.attributes.health module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gabm.abm.attributes.income.html">gabm.abm.attributes.income module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gabm.abm.attributes.opinion.html">gabm.abm.attributes.opinion module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="gabm.abm.attributes.politics.html">gabm.abm.attributes.politics module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="gabm.abm.attributes.region.html">gabm.abm.attributes.region module</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">gabm.abm.attributes.wealth module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gabm.abm.attributes.wealth.Wealth"><code class="docutils literal notranslate"><span class="pre">Wealth</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gabm.abm.attributes.wealth.WealthID"><code class="docutils literal notranslate"><span class="pre">WealthID</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gabm.abm.attributes.wealth.WealthMap"><code class="docutils literal notranslate"><span class="pre">WealthMap</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">gabm.abm.attributes.politics module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gabm.abm.attributes.politics.Politics"><code class="docutils literal notranslate"><span class="pre">Politics</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gabm.abm.attributes.politics.PoliticsID"><code class="docutils literal notranslate"><span class="pre">PoliticsID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gabm.abm.attributes.politics.PoliticsMap"><code class="docutils literal notranslate"><span class="pre">PoliticsMap</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="gabm.abm.attributes.region.html">gabm.abm.attributes.region module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gabm.abm.attributes.wealth.html">gabm.abm.attributes.wealth module</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="gabm.abm.attributes.html#module-gabm.abm.attributes">Module contents</a></li>
@@ -127,9 +127,9 @@
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="gabm.abm.html">gabm.abm package</a></li>
           <li class="breadcrumb-item"><a href="gabm.abm.attributes.html">gabm.abm.attributes package</a></li>
-      <li class="breadcrumb-item active">gabm.abm.attributes.wealth module</li>
+      <li class="breadcrumb-item active">gabm.abm.attributes.politics module</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/_autosummary/gabm.abm.attributes.wealth.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/_autosummary/gabm.abm.attributes.politics.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -137,62 +137,77 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-gabm.abm.attributes.wealth">
-<span id="gabm-abm-attributes-wealth-module"></span><h1>gabm.abm.attributes.wealth module<a class="headerlink" href="#module-gabm.abm.attributes.wealth" title="Link to this heading"></a></h1>
-<p>Wealth module for GABM.</p>
+  <section id="module-gabm.abm.attributes.politics">
+<span id="gabm-abm-attributes-politics-module"></span><h1>gabm.abm.attributes.politics module<a class="headerlink" href="#module-gabm.abm.attributes.politics" title="Link to this heading"></a></h1>
+<p>Politics module for GABM.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="gabm.abm.attributes.wealth.Wealth">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.attributes.wealth.</span></span><span class="sig-name descname"><span class="pre">Wealth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wealth_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gabm.abm.attributes.wealth.WealthID" title="gabm.abm.attributes.wealth.WealthID"><span class="pre">WealthID</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.attributes.wealth.Wealth" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="gabm.abm.attributes.politics.Politics">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.attributes.politics.</span></span><span class="sig-name descname"><span class="pre">Politics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">politics_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gabm.abm.attributes.politics.PoliticsID" title="gabm.abm.attributes.politics.PoliticsID"><span class="pre">PoliticsID</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.attributes.politics.Politics" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="gabm.abm.attribute.html#gabm.abm.attribute.GABMAttribute" title="gabm.abm.attribute.GABMAttribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">GABMAttribute</span></code></a></p>
-<p>For representing wealth.</p>
+<p>For representing politics.</p>
 <dl class="simple">
-<dt>Attributes:</dt><dd><p>id (WealthID): Unique identifier for the wealth.
-description (str): The description of the wealth.</p>
+<dt>Attributes:</dt><dd><p>id (PoliticsID): Unique identifier for the politics.
+description (str): The description of the politics.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="gabm.abm.attributes.wealth.WealthID">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.attributes.wealth.</span></span><span class="sig-name descname"><span class="pre">WealthID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wealth_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.attributes.wealth.WealthID" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="gabm.abm.attributes.politics.PoliticsID">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.attributes.politics.</span></span><span class="sig-name descname"><span class="pre">PoliticsID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">politics_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.attributes.politics.PoliticsID" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="gabm.core.id.html#gabm.core.id.GABMID" title="gabm.core.id.GABMID"><code class="xref py py-class docutils literal notranslate"><span class="pre">GABMID</span></code></a></p>
-<p>A unique identifier for a Wealth instance.</p>
+<p>A unique identifier for a Politics instance.</p>
 <dl class="simple">
-<dt>Attributes:</dt><dd><p>wealth_id (int): The unique identifier for the wealth.</p>
+<dt>Attributes:</dt><dd><p>id (int): The unique identifier for the politics.</p>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gabm.abm.attributes.politics.PoliticsID.CENTRE">
+<span class="sig-name descname"><span class="pre">CENTRE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">PoliticsID(3)</span></span><a class="headerlink" href="#gabm.abm.attributes.politics.PoliticsID.CENTRE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gabm.abm.attributes.politics.PoliticsID.FAR_LEFT">
+<span class="sig-name descname"><span class="pre">FAR_LEFT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">PoliticsID(1)</span></span><a class="headerlink" href="#gabm.abm.attributes.politics.PoliticsID.FAR_LEFT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gabm.abm.attributes.politics.PoliticsID.FAR_RIGHT">
+<span class="sig-name descname"><span class="pre">FAR_RIGHT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">PoliticsID(5)</span></span><a class="headerlink" href="#gabm.abm.attributes.politics.PoliticsID.FAR_RIGHT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gabm.abm.attributes.politics.PoliticsID.LEFT">
+<span class="sig-name descname"><span class="pre">LEFT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">PoliticsID(2)</span></span><a class="headerlink" href="#gabm.abm.attributes.politics.PoliticsID.LEFT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gabm.abm.attributes.politics.PoliticsID.RIGHT">
+<span class="sig-name descname"><span class="pre">RIGHT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">PoliticsID(4)</span></span><a class="headerlink" href="#gabm.abm.attributes.politics.PoliticsID.RIGHT" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gabm.abm.attributes.politics.PoliticsID.UNKNOWN">
+<span class="sig-name descname"><span class="pre">UNKNOWN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">PoliticsID(0)</span></span><a class="headerlink" href="#gabm.abm.attributes.politics.PoliticsID.UNKNOWN" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="gabm.abm.attributes.wealth.WealthMap">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.attributes.wealth.</span></span><span class="sig-name descname"><span class="pre">WealthMap</span></span><a class="headerlink" href="#gabm.abm.attributes.wealth.WealthMap" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="gabm.abm.attributes.politics.PoliticsMap">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.attributes.politics.</span></span><span class="sig-name descname"><span class="pre">PoliticsMap</span></span><a class="headerlink" href="#gabm.abm.attributes.politics.PoliticsMap" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="gabm.abm.attribute.html#gabm.abm.attribute.GABMAttributeMap" title="gabm.abm.attribute.GABMAttributeMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">GABMAttributeMap</span></code></a></p>
-<p>A mapping of WealthIds to Wealth.</p>
+<p>A mapping of PoliticsIds to Politics.</p>
 <p>By default, the map is initialized as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">w0</span> <span class="o">=</span> <span class="n">WealthID</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">w1</span> <span class="o">=</span> <span class="n">WealthID</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">w2</span> <span class="o">=</span> <span class="n">WealthID</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">w3</span> <span class="o">=</span> <span class="n">WealthID</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">w4</span> <span class="o">=</span> <span class="n">WealthID</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">w5</span> <span class="o">=</span> <span class="n">WealthID</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">w6</span> <span class="o">=</span> <span class="n">WealthID</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-<span class="n">w7</span> <span class="o">=</span> <span class="n">WealthID</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
-<span class="n">w8</span> <span class="o">=</span> <span class="n">WealthID</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-<span class="n">w9</span> <span class="o">=</span> <span class="n">WealthID</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
-<span class="n">w10</span> <span class="o">=</span> <span class="n">WealthID</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">wealth_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">WealthID</span><span class="p">,</span> <span class="n">Wealth</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">w0</span><span class="p">:</span> <span class="n">Wealth</span><span class="p">(</span><span class="n">w0</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">),</span>
-    <span class="n">w1</span><span class="p">:</span> <span class="n">Wealth</span><span class="p">(</span><span class="n">w1</span><span class="p">,</span> <span class="s2">&quot;negative&quot;</span><span class="p">),</span>
-    <span class="n">w2</span><span class="p">:</span> <span class="n">Wealth</span><span class="p">(</span><span class="n">w2</span><span class="p">,</span> <span class="s2">&quot;zero to q1&quot;</span><span class="p">),</span>
-    <span class="n">w3</span><span class="p">:</span> <span class="n">Wealth</span><span class="p">(</span><span class="n">w3</span><span class="p">,</span> <span class="s2">&quot;q1 to median&quot;</span><span class="p">),</span>
-    <span class="n">w4</span><span class="p">:</span> <span class="n">Wealth</span><span class="p">(</span><span class="n">w4</span><span class="p">,</span> <span class="s2">&quot;median to q3&quot;</span><span class="p">),</span>
-    <span class="n">w5</span><span class="p">:</span> <span class="n">Wealth</span><span class="p">(</span><span class="n">w5</span><span class="p">,</span> <span class="s2">&quot;q3 to top 10%&quot;</span><span class="p">),</span>
-    <span class="n">w6</span><span class="p">:</span> <span class="n">Wealth</span><span class="p">(</span><span class="n">w6</span><span class="p">,</span> <span class="s2">&quot;top 10% to top 1%&quot;</span><span class="p">),</span>
-    <span class="n">w7</span><span class="p">:</span> <span class="n">Wealth</span><span class="p">(</span><span class="n">w7</span><span class="p">,</span> <span class="s2">&quot;top 1% to top 0.1%&quot;</span><span class="p">),</span>
-    <span class="n">w8</span><span class="p">:</span> <span class="n">Wealth</span><span class="p">(</span><span class="n">w8</span><span class="p">,</span> <span class="s2">&quot;top 0.1% to top 0.01%&quot;</span><span class="p">),</span>
-    <span class="n">w9</span><span class="p">:</span> <span class="n">Wealth</span><span class="p">(</span><span class="n">w9</span><span class="p">,</span> <span class="s2">&quot;top 0.01% to top 0.001%&quot;</span><span class="p">),</span>
-    <span class="n">w10</span><span class="p">:</span> <span class="n">Wealth</span><span class="p">(</span><span class="n">w10</span><span class="p">,</span> <span class="s2">&quot;top 0.001%&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">items</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">PoliticsID</span><span class="p">,</span> <span class="n">Politics</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">PoliticsID</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">:</span> <span class="n">Politics</span><span class="p">(</span><span class="n">PoliticsID</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">),</span>
+    <span class="n">PoliticsID</span><span class="o">.</span><span class="n">FAR_LEFT</span><span class="p">:</span> <span class="n">Politics</span><span class="p">(</span><span class="n">PoliticsID</span><span class="o">.</span><span class="n">FAR_LEFT</span><span class="p">,</span> <span class="s2">&quot;far left&quot;</span><span class="p">),</span>
+    <span class="n">PoliticsID</span><span class="o">.</span><span class="n">LEFT</span><span class="p">:</span> <span class="n">Politics</span><span class="p">(</span><span class="n">PoliticsID</span><span class="o">.</span><span class="n">LEFT</span><span class="p">,</span> <span class="s2">&quot;left&quot;</span><span class="p">),</span>
+    <span class="n">PoliticsID</span><span class="o">.</span><span class="n">CENTRE</span><span class="p">:</span> <span class="n">Politics</span><span class="p">(</span><span class="n">PoliticsID</span><span class="o">.</span><span class="n">CENTRE</span><span class="p">,</span> <span class="s2">&quot;centre&quot;</span><span class="p">),</span>
+    <span class="n">PoliticsID</span><span class="o">.</span><span class="n">RIGHT</span><span class="p">:</span> <span class="n">Politics</span><span class="p">(</span><span class="n">PoliticsID</span><span class="o">.</span><span class="n">RIGHT</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">),</span>
+    <span class="n">PoliticsID</span><span class="o">.</span><span class="n">FAR_RIGHT</span><span class="p">:</span> <span class="n">Politics</span><span class="p">(</span><span class="n">PoliticsID</span><span class="o">.</span><span class="n">FAR_RIGHT</span><span class="p">,</span> <span class="s2">&quot;far right&quot;</span><span class="p">)</span>
 <span class="p">}</span>
+<span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -203,8 +218,8 @@ description (str): The description of the wealth.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="gabm.abm.attributes.region.html" class="btn btn-neutral float-left" title="gabm.abm.attributes.region module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="gabm.abm.democracy.html" class="btn btn-neutral float-right" title="gabm.abm.democracy package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="gabm.abm.attributes.opinion.html" class="btn btn-neutral float-left" title="gabm.abm.attributes.opinion module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gabm.abm.attributes.region.html" class="btn btn-neutral float-right" title="gabm.abm.attributes.region module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

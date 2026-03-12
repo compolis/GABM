@@ -72,24 +72,22 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#gabm.abm.agent.AgentID"><code class="docutils literal notranslate"><span class="pre">AgentID</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#gabm.abm.agent.Alien"><code class="docutils literal notranslate"><span class="pre">Alien</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#gabm.abm.agent.Animal"><code class="docutils literal notranslate"><span class="pre">Animal</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#gabm.abm.agent.Animal.get_age"><code class="docutils literal notranslate"><span class="pre">Animal.get_age()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gabm.abm.agent.Animal.get_gender"><code class="docutils literal notranslate"><span class="pre">Animal.get_gender()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gabm.abm.agent.Animal.year_of_birth"><code class="docutils literal notranslate"><span class="pre">Animal.year_of_birth</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="#gabm.abm.agent.Citizen"><code class="docutils literal notranslate"><span class="pre">Citizen</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gabm.abm.agent.CitizenID"><code class="docutils literal notranslate"><span class="pre">CitizenID</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#gabm.abm.agent.Person"><code class="docutils literal notranslate"><span class="pre">Person</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#gabm.abm.agent.Person.add_opinion"><code class="docutils literal notranslate"><span class="pre">Person.add_opinion()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gabm.abm.agent.Person.communicate"><code class="docutils literal notranslate"><span class="pre">Person.communicate()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gabm.abm.agent.Person.communicate_with_llm"><code class="docutils literal notranslate"><span class="pre">Person.communicate_with_llm()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gabm.abm.agent.Person.get_age"><code class="docutils literal notranslate"><span class="pre">Person.get_age()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gabm.abm.agent.Person.get_gender"><code class="docutils literal notranslate"><span class="pre">Person.get_gender()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gabm.abm.agent.Person.get_opinion"><code class="docutils literal notranslate"><span class="pre">Person.get_opinion()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gabm.abm.agent.Person.get_opinion_profile"><code class="docutils literal notranslate"><span class="pre">Person.get_opinion_profile()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gabm.abm.agent.Person.get_self_description"><code class="docutils literal notranslate"><span class="pre">Person.get_self_description()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gabm.abm.agent.Person.set_opinion"><code class="docutils literal notranslate"><span class="pre">Person.set_opinion()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gabm.abm.agent.Person.year_of_birth"><code class="docutils literal notranslate"><span class="pre">Person.year_of_birth</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#gabm.abm.agent.PersonID"><code class="docutils literal notranslate"><span class="pre">PersonID</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="gabm.abm.attribute.html">gabm.abm.attribute module</a></li>
@@ -150,9 +148,14 @@
 The type annotation for environment is quoted as it is imported 
 under TYPE_CHECKING to avoid circular imports.</p>
 <dl class="simple">
-<dt>Attributes:</dt><dd><p>agent_id (AgentID): Unique identifier for the Agent instance.
-environment (Environment): The Environment the Agent instance belongs to.
-groups (Set[Group]): A Set of Groups that the Agent instance belongs to.</p>
+<dt>Attributes:</dt><dd><dl class="simple">
+<dt>agent_id (AgentID):</dt><dd><p>Unique identifier for the Agent instance.</p>
+</dd>
+<dt>environment (Environment):</dt><dd><p>The Environment the Agent instance belongs to.</p>
+</dd>
+<dt>groups (Set[Group]):</dt><dd><p>A Set of Groups that the Agent instance belongs to.</p>
+</dd>
+</dl>
 </dd>
 </dl>
 <dl class="py method">
@@ -191,79 +194,40 @@ groups (Set[Group]): A Set of Groups that the Agent instance belongs to.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="gabm.abm.agent.Alien">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.agent.</span></span><span class="sig-name descname"><span class="pre">Alien</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gabm.abm.environment.html#gabm.abm.environment.Nation" title="gabm.abm.environment.Nation"><span class="pre">Nation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_birth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gender_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.GenderID" title="gabm.abm.attributes.gender.GenderID"><span class="pre">GenderID</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.Gender" title="gabm.abm.attributes.gender.Gender"><span class="pre">Gender</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.Gender" title="gabm.abm.attributes.gender.Gender"><span class="pre">Gender</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opinions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.agent.Alien" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#gabm.abm.agent.Person" title="gabm.abm.agent.Person"><code class="xref py py-class docutils literal notranslate"><span class="pre">Person</span></code></a></p>
-<p>A Person who does not belong to a Nation.</p>
-<dl class="simple">
-<dt>Attributes:</dt><dd><p>None additional to Person.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="gabm.abm.agent.Animal">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.agent.</span></span><span class="sig-name descname"><span class="pre">Animal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gabm.abm.agent.AgentID" title="gabm.abm.agent.AgentID"><span class="pre">AgentID</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gabm.abm.environment.html#gabm.abm.environment.Environment" title="gabm.abm.environment.Environment"><span class="pre">Environment</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_birth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gender_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.GenderID" title="gabm.abm.attributes.gender.GenderID"><span class="pre">GenderID</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.Gender" title="gabm.abm.attributes.gender.Gender"><span class="pre">Gender</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.Gender" title="gabm.abm.attributes.gender.Gender"><span class="pre">Gender</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.agent.Animal" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#gabm.abm.agent.Agent" title="gabm.abm.agent.Agent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Agent</span></code></a></p>
-<p>An Agent with a year of birth and Gender.</p>
-<p>The type annotation for environment is quoted as it is imported under TYPE_CHECKING to avoid circular imports.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>year_of_birth</strong> (<em>int</em>) – The year of birth attributed.</p></li>
-<li><p><strong>gender_map</strong> (<em>dict</em>) – A mapping of GenderIDs to Genders, used to interpret the gender value.</p></li>
-<li><p><strong>gender</strong> (<a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.Gender" title="gabm.abm.attributes.gender.Gender"><em>Gender</em></a>) – The gender attributed.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="gabm.abm.agent.Animal.get_age">
-<span class="sig-name descname"><span class="pre">get_age</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#gabm.abm.agent.Animal.get_age" title="Link to this definition"></a></dt>
-<dd><p>Get the age in years based on the current year in the environment.</p>
-<dl class="simple">
-<dt>Return:</dt><dd><p>Age in years, or None if year_of_birth is not set.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="gabm.abm.agent.Animal.get_gender">
-<span class="sig-name descname"><span class="pre">get_gender</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#gabm.abm.agent.Animal.get_gender" title="Link to this definition"></a></dt>
-<dd><p>Get the gender as a string.</p>
-<dl class="simple">
-<dt>Return:</dt><dd><p>Gender as a string.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="gabm.abm.agent.Animal.year_of_birth">
-<span class="sig-name descname"><span class="pre">year_of_birth</span></span><a class="headerlink" href="#gabm.abm.agent.Animal.year_of_birth" title="Link to this definition"></a></dt>
-<dd><p>If year_of_birth is greater than the current year set year 
-of birth to be the current year from the environment.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="gabm.abm.agent.Citizen">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.agent.</span></span><span class="sig-name descname"><span class="pre">Citizen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gabm.abm.environment.html#gabm.abm.environment.Nation" title="gabm.abm.environment.Nation"><span class="pre">Nation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_birth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gender_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.GenderID" title="gabm.abm.attributes.gender.GenderID"><span class="pre">GenderID</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.Gender" title="gabm.abm.attributes.gender.Gender"><span class="pre">Gender</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.Gender" title="gabm.abm.attributes.gender.Gender"><span class="pre">Gender</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opinions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.agent.Citizen" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.agent.</span></span><span class="sig-name descname"><span class="pre">Citizen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">citizen_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gabm.abm.agent.CitizenID" title="gabm.abm.agent.CitizenID"><span class="pre">CitizenID</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gabm.abm.environment.html#gabm.abm.environment.Nation" title="gabm.abm.environment.Nation"><span class="pre">Nation</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_birth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gender_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.GenderID" title="gabm.abm.attributes.gender.GenderID"><span class="pre">GenderID</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opinions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.agent.Citizen" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gabm.abm.agent.Person" title="gabm.abm.agent.Person"><code class="xref py py-class docutils literal notranslate"><span class="pre">Person</span></code></a></p>
 <p>A Person who belongs to a Nation.</p>
-<dl class="simple">
-<dt>Attributes:</dt><dd><p>None additional to Person.</p>
-</dd>
-</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Inherits all attributes from <a class="reference internal" href="#gabm.abm.agent.Person" title="gabm.abm.agent.Person"><code class="xref py py-class docutils literal notranslate"><span class="pre">Person</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gabm.abm.agent.CitizenID">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.agent.</span></span><span class="sig-name descname"><span class="pre">CitizenID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.agent.CitizenID" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gabm.abm.agent.PersonID" title="gabm.abm.agent.PersonID"><code class="xref py py-class docutils literal notranslate"><span class="pre">PersonID</span></code></a></p>
+<p>Citizen ID</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="gabm.abm.agent.Person">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.agent.</span></span><span class="sig-name descname"><span class="pre">Person</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gabm.abm.agent.AgentID" title="gabm.abm.agent.AgentID"><span class="pre">AgentID</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gabm.abm.environment.html#gabm.abm.environment.OpinionatedEnvironment" title="gabm.abm.environment.OpinionatedEnvironment"><span class="pre">OpinionatedEnvironment</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_birth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gender_map</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.GenderID" title="gabm.abm.attributes.gender.GenderID"><span class="pre">GenderID</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.Gender" title="gabm.abm.attributes.gender.Gender"><span class="pre">Gender</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.Gender" title="gabm.abm.attributes.gender.Gender"><span class="pre">Gender</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opinions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="gabm.abm.attributes.opinion.html#gabm.abm.attributes.opinion.OpinionTopicID" title="gabm.abm.attributes.opinion.OpinionTopicID"><span class="pre">OpinionTopicID</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Opinion'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.agent.Person" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#gabm.abm.agent.Animal" title="gabm.abm.agent.Animal"><code class="xref py py-class docutils literal notranslate"><span class="pre">Animal</span></code></a></p>
-<p>An Animal with opinions that is part of an OpinionatedEnvironment.</p>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.agent.</span></span><span class="sig-name descname"><span class="pre">Person</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gabm.abm.agent.AgentID" title="gabm.abm.agent.AgentID"><span class="pre">AgentID</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gabm.abm.environment.html#gabm.abm.environment.Environment" title="gabm.abm.environment.Environment"><span class="pre">Environment</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">year_of_birth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gender_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gabm.abm.attributes.gender.html#gabm.abm.attributes.gender.GenderID" title="gabm.abm.attributes.gender.GenderID"><span class="pre">GenderID</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opinions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="gabm.abm.attributes.opinion.html#gabm.abm.attributes.opinion.OpinionTopicID" title="gabm.abm.attributes.opinion.OpinionTopicID"><span class="pre">OpinionTopicID</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'Opinion'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.agent.Person" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gabm.abm.agent.Agent" title="gabm.abm.agent.Agent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Agent</span></code></a></p>
+<p>An Agent with a year of birth and Gender.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Inherits all attributes from <a class="reference internal" href="#gabm.abm.agent.Agent" title="gabm.abm.agent.Agent"><code class="xref py py-class docutils literal notranslate"><span class="pre">Agent</span></code></a>.</p>
+</div>
 <dl class="simple">
 <dt>Attributes:</dt><dd><dl class="simple">
-<dt>opinions: A dictionary of Opinions.</dt><dd><p>The keys are OpinionTopicIDs, and the values are Opinion objects.
+<dt>year_of_birth (int):</dt><dd><p>The year of birth attributed.</p>
+</dd>
+<dt>gender_id (GenderID):</dt><dd><p>The GenderID attributed.</p>
+</dd>
+<dt>opinions (Dict[OpinionTopicID, Opinion]):</dt><dd><p>A dictionary of Opinions.
+The keys are OpinionTopicIDs, and the values are Opinion objects.
 These are deep copied when the Person is initialised, so that the Person has their own opinions.</p>
 </dd>
 </dl>
@@ -302,6 +266,26 @@ value: The OpinionValue to add for the opinion.</p>
 model: The name of the LLM model to use (optional).</p>
 </dd>
 <dt>Return:</dt><dd><p>The response from the LLM as a dictionary, or None if an error occurs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gabm.abm.agent.Person.get_age">
+<span class="sig-name descname"><span class="pre">get_age</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#gabm.abm.agent.Person.get_age" title="Link to this definition"></a></dt>
+<dd><p>Get the age in years based on the current year in the environment.</p>
+<dl class="simple">
+<dt>Return:</dt><dd><p>Age in years, or None if year_of_birth is not set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gabm.abm.agent.Person.get_gender">
+<span class="sig-name descname"><span class="pre">get_gender</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#gabm.abm.agent.Person.get_gender" title="Link to this definition"></a></dt>
+<dd><p>Get the gender as a string.</p>
+<dl class="simple">
+<dt>Return:</dt><dd><p>Gender as a string.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -349,6 +333,20 @@ value: The value to set the opinion to.</p>
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gabm.abm.agent.Person.year_of_birth">
+<span class="sig-name descname"><span class="pre">year_of_birth</span></span><a class="headerlink" href="#gabm.abm.agent.Person.year_of_birth" title="Link to this definition"></a></dt>
+<dd><p>If year_of_birth is greater than the current year set year 
+of birth to be the current year from the environment.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gabm.abm.agent.PersonID">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">gabm.abm.agent.</span></span><span class="sig-name descname"><span class="pre">PersonID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gabm.abm.agent.PersonID" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gabm.abm.agent.AgentID" title="gabm.abm.agent.AgentID"><code class="xref py py-class docutils literal notranslate"><span class="pre">AgentID</span></code></a></p>
+<p>Person ID</p>
 </dd></dl>
 
 </section>
