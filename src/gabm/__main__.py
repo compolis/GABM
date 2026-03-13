@@ -20,11 +20,10 @@ import random
 # Visualization
 import matplotlib.pyplot as plt
 # Local imports
-from gabm.abm.environment import Environment, OpinionatedEnvironment, Nation
+from gabm.abm.environment import Environment, Nation
 from gabm.abm.agent import Agent, Person
 from gabm.abm.group import Group, OpinionatedGroup
 from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap, OpinionTopic, Opinion
-from gabm.abm.attributes.gender import GenderID, Gender, GenderMap
 
 
 def run_example():
@@ -44,11 +43,7 @@ def run_example():
     # For plotting: record opinions at each round (including initial)
     opinions_over_time = []
     # Initialize the environment
-    env = OpinionatedEnvironment()
-    # Create a gender map
-    gender_map = GenderMap()
-    # Default gender
-    gender = gender_0
+    env = Environment()
     # Define opinion topics and values
     # Define opinion topic IDs
     negative_opinion_topic_id = OpinionTopicID(0)
@@ -110,10 +105,8 @@ def run_example():
             -2)
     }
     for agent_id in range(n_negative):
-        gender = gender_map.get(random.choice([0, 1, 2]))
         env.agents_active[agent_id] = Person(
-            agent_id, environment=env, year_of_birth=2000, 
-            gender_map=gender_map, gender=gender, 
+            agent_id, environment=env, year_of_birth=2000,
             opinions=negative_opinions)
         negative.add_member(env.agents_active[agent_id])
     # Create positive agents
@@ -135,7 +128,6 @@ def run_example():
     for agent_id in range(n_negative, n_negative + n_positive):
         env.agents_active[agent_id] = Person(
             agent_id, environment=env, year_of_birth=2000, 
-            gender_map=gender_map, gender=gender, 
             opinions=positive_opinions)
         positive.add_member(env.agents_active[agent_id])
     # Create neutral agents
@@ -156,8 +148,7 @@ def run_example():
     }
     for agent_id in range(n_negative + n_positive, n_negative + n_positive + n_neutral):
         env.agents_active[agent_id] = Person(
-            agent_id, environment=env, year_of_birth=2000, 
-            gender_map=gender_map, gender=gender, 
+            agent_id, environment=env, year_of_birth=2000,
             opinions=neutral_opinions)
         neutral.add_member(env.agents_active[agent_id])
     # Log the initial state of the environment
@@ -237,8 +228,6 @@ def run_survey():
     # Initialise
     year = 2026
     env = OpinionatedEnvironment(year=year)
-    # Create a gender map
-    gender_map = GenderMap()
     raise NotImplementedError("Survey mode is not yet implemented.")
 
 def main():

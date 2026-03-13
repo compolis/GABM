@@ -11,23 +11,24 @@ import logging
 from typing import Dict
 # Local imports
 from gabm.core.id import GABMID
-from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
+from gabm.abm.attribute import GABMAttributeID, GABMAttribute, GABMAttributeMap
 
-class PoliticsID(GABMID):
+class PoliticsID(GABMAttributeID):
     """
-    A unique identifier for a Politics instance.
+    A unique identifier for a Politics attribute.
 
     Attributes:
-        id (int): The unique identifier for the politics.
+        id (int): The unique identifier for the politics attribute.
     """
     def __init__(self, politics_id: int):
         """
         Initialize
         Args:
-            politics_id (int): The unique identifier for the politics.
+            politics_id (int): The unique identifier for the politics attribute.
         """
         super().__init__(politics_id)
 
+# Standard PoliticsID constants for clarity and maintainability
 PoliticsID.UNKNOWN = PoliticsID(0)
 PoliticsID.FAR_LEFT = PoliticsID(1)
 PoliticsID.LEFT = PoliticsID(2)

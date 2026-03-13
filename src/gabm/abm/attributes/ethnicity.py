@@ -12,11 +12,11 @@ import logging
 from typing import Dict
 # Local imports
 from gabm.core.id import GABMID
-from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
+from gabm.abm.attribute import GABMAttributeID, GABMAttribute, GABMAttributeMap
 
-class EthnicityID(GABMID):
+class EthnicityID(GABMAttributeID):
     """
-    A unique identifier for an Ethnicity instance.
+    A unique identifier for an Ethnicity attribute.
 
     Attributes:
         id (int): The unique identifier for the ethnicity.
@@ -29,6 +29,7 @@ class EthnicityID(GABMID):
         """
         super().__init__(ethnicity_id)
 
+# Standard EthnicityID constants for clarity and maintainability
 EthnicityID.UNKNOWN = EthnicityID(0)
 EthnicityID.AFRICAN = EthnicityID(1)
 EthnicityID.AMERICAN = EthnicityID(2)

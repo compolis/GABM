@@ -12,11 +12,11 @@ import logging
 from typing import Dict
 # Local imports
 from gabm.core.id import GABMID
-from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
+from gabm.abm.attribute import GABMAttributeID, GABMAttribute, GABMAttributeMap
 
-class GenderID(GABMID):
+class GenderID(GABMAttributeID):
     """
-    A unique identifier for a Gender instance.
+    A unique identifier for a Gender attribute.
 
     Attributes:
         id (int): The unique identifier for the gender.
@@ -28,7 +28,6 @@ class GenderID(GABMID):
             gender_id (int): The unique identifier for the gender.
         """
         super().__init__(gender_id)
-
 
 # Standard GenderID constants for clarity and maintainability
 GenderID.UNKNOWN = GenderID(0)  # type: GenderID

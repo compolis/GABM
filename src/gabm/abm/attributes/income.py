@@ -11,11 +11,11 @@ import logging
 from typing import Dict
 # Local imports
 from gabm.core.id import GABMID
-from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
+from gabm.abm.attribute import GABMAttributeID, GABMAttribute, GABMAttributeMap
 
-class IncomeID(GABMID):
+class IncomeID(GABMAttributeID):
     """
-    A unique identifier for an Income instance.
+    A unique identifier for an Income attribute.
 
     Attributes:
         id (int): The unique identifier for the income.
@@ -28,6 +28,7 @@ class IncomeID(GABMID):
         """
         super().__init__(income_id)
 
+# Standard IncomeID constants for clarity and maintainability
 IncomeID.UNKNOWN = IncomeID(0)
 IncomeID.ZERO_TO_Q1 = IncomeID(1)
 IncomeID.Q1_TO_MEDIAN = IncomeID(2)

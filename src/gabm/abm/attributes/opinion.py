@@ -12,11 +12,11 @@ import logging
 from typing import Dict
 # Local imports
 from gabm.core.id import GABMID
-from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
+from gabm.abm.attribute import GABMAttributeID, GABMAttribute, GABMAttributeMap
 
-class OpinionTopicID(GABMID):
+class OpinionTopicID(GABMAttributeID):
     """
-    A unique identifier for an opinion topic.
+    A unique identifier for an opinion topic attribute.
 
     Attributes:
         id (int): The unique identifier for the opinion topic.
@@ -28,6 +28,12 @@ class OpinionTopicID(GABMID):
             opinion_topic_id: The unique identifier for the opinion topic.
         """
         super().__init__(opinion_topic_id)
+
+# Standard OpinionTopicID constants for clarity and maintainability
+OpinionTopicID.UNKNOWN = OpinionTopicID(0)
+OpinionTopicID.POSITIVE = OpinionTopicID(1)
+OpinionTopicID.NEUTRAL = OpinionTopicID(2)
+OpinionTopicID.NEGATIVE = OpinionTopicID(3)
 
 class OpinionTopic():
     """

@@ -11,17 +11,36 @@ import logging
 from typing import Dict
 # Local imports
 from gabm.core.id import GABMID
-from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
+from gabm.abm.attribute import GABMAttributeID, GABMAttribute, GABMAttributeMap
 
-class WealthID(GABMID):
+class WealthID(GABMAttributeID):
     """
-    A unique identifier for a Wealth instance.
+    A unique identifier for a Wealth attribute.
 
     Attributes:
-        wealth_id (int): The unique identifier for the wealth.
+        wealth_id (int): The unique identifier for the wealth attribute.
     """
     def __init__(self, wealth_id: int):
+        """
+        Initialize the WealthID object.
+
+        Args:
+            wealth_id (int): The unique identifier for the wealth attribute.
+        """
         super().__init__(wealth_id)
+
+# Standard WealthID constants for clarity and maintainability
+WealthID.UNKNOWN = WealthID(0)
+WealthID.NEGATIVE = WealthID(1)
+WealthID.ZERO_TO_Q1 = WealthID(2)
+WealthID.Q1_TO_MEDIAN = WealthID(3)
+WealthID.MEDIAN_TO_Q3 = WealthID(4)
+WealthID.Q3_TO_TOP_10 = WealthID(5)
+WealthID.TOP_10_TO_TOP_1 = WealthID(6)
+WealthID.TOP_1_TO_TOP_0_1 = WealthID(7)
+WealthID.TOP_0_1_TO_TOP_0_01 = WealthID(8)
+WealthID.TOP_0_01_TO_TOP_0_001 = WealthID(9)
+WealthID.TOP_0_001 = WealthID(10)
 
 class Wealth(GABMAttribute):
     """
@@ -47,56 +66,34 @@ class WealthMap(GABMAttributeMap):
 
     By default, the map is initialized as follows::
 
-        w0 = WealthID(0)
-        w1 = WealthID(1)
-        w2 = WealthID(2)
-        w3 = WealthID(3)
-        w4 = WealthID(4)
-        w5 = WealthID(5)
-        w6 = WealthID(6)
-        w7 = WealthID(7)
-        w8 = WealthID(8)
-        w9 = WealthID(9)
-        w10 = WealthID(10)
         self.wealth_map: Dict[WealthID, Wealth] = {
-            w0: Wealth(w0, "unknown"),
-            w1: Wealth(w1, "negative"),
-            w2: Wealth(w2, "zero to q1"),
-            w3: Wealth(w3, "q1 to median"),
-            w4: Wealth(w4, "median to q3"),
-            w5: Wealth(w5, "q3 to top 10%"),
-            w6: Wealth(w6, "top 10% to top 1%"),
-            w7: Wealth(w7, "top 1% to top 0.1%"),
-            w8: Wealth(w8, "top 0.1% to top 0.01%"),
-            w9: Wealth(w9, "top 0.01% to top 0.001%"),
-            w10: Wealth(w10, "top 0.001%")
+            WealthID.UNKNOWN: Wealth(WealthID.UNKNOWN, "unknown"),
+            WealthID.NEGATIVE: Wealth(WealthID.NEGATIVE, "negative"),
+            WealthID.ZERO_TO_Q1: Wealth(WealthID.ZERO_TO_Q1, "zero to q1"),
+            WealthID.Q1_TO_MEDIAN: Wealth(WealthID.Q1_TO_MEDIAN, "q1 to median"),
+            WealthID.MEDIAN_TO_Q3: Wealth(WealthID.MEDIAN_TO_Q3, "median to q3"),
+            WealthID.Q3_TO_TOP_10: Wealth(WealthID.Q3_TO_TOP_10, "q3 to top 10%"),
+            WealthID.TOP_10_TO_TOP_1: Wealth(WealthID.TOP_10_TO_TOP_1, "top 10% to top 1%"),
+            WealthID.TOP_1_TO_TOP_0_1: Wealth(WealthID.TOP_1_TO_TOP_0_1, "top 1% to top 0.1%"),
+            WealthID.TOP_0_1_TO_TOP_0_01: Wealth(WealthID.TOP_0_1_TO_TOP_0_01, "top 0.1% to top 0.01%"),
+            WealthID.TOP_0_01_TO_TOP_0_001: Wealth(WealthID.TOP_0_01_TO_TOP_0_001, "top 0.01% to top 0.001%"),
+            WealthID.TOP_0_001: Wealth(WealthID.TOP_0_001, "top 0.001%")
         }
     """
     def __init__(self):
         """
         Initialize the WealthMap object.
         """
-        w0 = WealthID(0)
-        w1 = WealthID(1)
-        w2 = WealthID(2)
-        w3 = WealthID(3)
-        w4 = WealthID(4)
-        w5 = WealthID(5)
-        w6 = WealthID(6)
-        w7 = WealthID(7)
-        w8 = WealthID(8)
-        w9 = WealthID(9)
-        w10 = WealthID(10)
         self.wealth_map: Dict[WealthID, Wealth] = {
-            w0: Wealth(w0, "unknown"),
-            w1: Wealth(w1, "negative"),
-            w2: Wealth(w2, "zero to q1"),
-            w3: Wealth(w3, "q1 to median"),
-            w4: Wealth(w4, "median to q3"),
-            w5: Wealth(w5, "q3 to top 10%"),
-            w6: Wealth(w6, "top 10% to top 1%"),
-            w7: Wealth(w7, "top 1% to top 0.1%"),
-            w8: Wealth(w8, "top 0.1% to top 0.01%"),
-            w9: Wealth(w9, "top 0.01% to top 0.001%"),
-            w10: Wealth(w10, "top 0.001%")
+            WealthID.UNKNOWN: Wealth(WealthID.UNKNOWN, "unknown"),
+            WealthID.NEGATIVE: Wealth(WealthID.NEGATIVE, "negative"),
+            WealthID.ZERO_TO_Q1: Wealth(WealthID.ZERO_TO_Q1, "zero to q1"),
+            WealthID.Q1_TO_MEDIAN: Wealth(WealthID.Q1_TO_MEDIAN, "q1 to median"),
+            WealthID.MEDIAN_TO_Q3: Wealth(WealthID.MEDIAN_TO_Q3, "median to q3"),
+            WealthID.Q3_TO_TOP_10: Wealth(WealthID.Q3_TO_TOP_10, "q3 to top 10%"),
+            WealthID.TOP_10_TO_TOP_1: Wealth(WealthID.TOP_10_TO_TOP_1, "top 10% to top 1%"),
+            WealthID.TOP_1_TO_TOP_0_1: Wealth(WealthID.TOP_1_TO_TOP_0_1, "top 1% to top 0.1%"),
+            WealthID.TOP_0_1_TO_TOP_0_01: Wealth(WealthID.TOP_0_1_TO_TOP_0_01, "top 0.1% to top 0.01%"),
+            WealthID.TOP_0_01_TO_TOP_0_001: Wealth(WealthID.TOP_0_01_TO_TOP_0_001, "top 0.01% to top 0.001%"),
+            WealthID.TOP_0_001: Wealth(WealthID.TOP_0_001, "top 0.001%")
         }

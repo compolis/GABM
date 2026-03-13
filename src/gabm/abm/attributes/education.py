@@ -11,37 +11,48 @@ import logging
 from typing import Dict
 # Local imports
 from gabm.core.id import GABMID
-from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
+from gabm.abm.attribute import GABMAttributeID, GABMAttribute, GABMAttributeMap
 
-class EducationID(GABMID):
+class EducationID(GABMAttributeID):
     """
-    A unique identifier for an Education instance.
+    Identifier for Education attributes.
 
     Attributes:
-        id (int): The unique identifier for the education.
+        id (int): The unique identifier.
     """
     def __init__(self, education_id: int):
         """
-        Initialize
+        Initialize.
+
         Args:
-            education_id (int): The unique identifier for the education.
+            education_id (int):
+                The unique identifier for the education.
+
         """
         super().__init__(education_id)
 
+# Standard EducationID constants for clarity and maintainability
+EducationID.UNKNOWN = EducationID(0)
+EducationID.PRIMARY = EducationID(1)
+EducationID.SECONDARY = EducationID(2)
+EducationID.COLLEGE = EducationID(3)
+EducationID.UNIVERSITY = EducationID(4)
+EducationID.DOCTORATE = EducationID(5)
+
 class Education(GABMAttribute):
     """
-    For representing education.
+    For representing education attributes.
 
     Attributes:
-        id (EducationID): Unique identifier for the education.
-        description (str): The description of the education.
+        id (EducationID): Unique identifier for the education attribute.
+        description (str): The description of the education attribute.
     """
     def __init__(self, education_id: EducationID, description: str):
         """
         Initialize
         Args:
-            education_id (EducationID): The unique identifier for the education.
-            description (str): The description of the education.
+            education_id (EducationID): The unique identifier for the education attribute.
+            description (str): The description of the education attribute.
         """
         super().__init__(education_id, description)
 
@@ -51,35 +62,23 @@ class EducationMap(GABMAttributeMap):
 
     By default, the map is initialized as follows::
 
-        e0 = EducationID(0)
-        e1 = EducationID(1)
-        e2 = EducationID(2)
-        e3 = EducationID(3)
-        e4 = EducationID(4)
-        e5 = EducationID(5)
         items: Dict[EducationID, Education] = {
-            e0: Education(e0, "unknown"),
-            e1: Education(e1, "no qualifications"),
-            e2: Education(e2, "GCSE or equivalent"),
-            e3: Education(e3, "A-level or equivalent"),
-            e4: Education(e4, "Bachelor's degree"),
-            e5: Education(e5, "Master's degree")
+            EducationID.UNKNOWN: Education(EducationID.UNKNOWN, "unknown"),
+            EducationID.PRIMARY: Education(EducationID.PRIMARY, "primary"),
+            EducationID.SECONDARY: Education(EducationID.SECONDARY, "secondary"),
+            EducationID.COLLEGE: Education(EducationID.COLLEGE, "college"),
+            EducationID.UNIVERSITY: Education(EducationID.UNIVERSITY, "university"),
+            EducationID.DOCTORATE: Education(EducationID.DOCTORATE, "doctorate")
         }
         super().__init__(items)
     """
     def __init__(self):
-        e0 = EducationID(0)
-        e1 = EducationID(1)
-        e2 = EducationID(2)
-        e3 = EducationID(3)
-        e4 = EducationID(4)
-        e5 = EducationID(5)
         items: Dict[EducationID, Education] = {
-            e0: Education(e0, "unknown"),
-            e1: Education(e1, "primary"),
-            e2: Education(e2, "secondary"),
-            e3: Education(e3, "college"),
-            e4: Education(e4, "university"),
-            e5: Education(e5, "doctorate")
+            EducationID.UNKNOWN: Education(EducationID.UNKNOWN, "unknown"),
+            EducationID.PRIMARY: Education(EducationID.PRIMARY, "primary"),
+            EducationID.SECONDARY: Education(EducationID.SECONDARY, "secondary"),
+            EducationID.COLLEGE: Education(EducationID.COLLEGE, "college"),
+            EducationID.UNIVERSITY: Education(EducationID.UNIVERSITY, "university"),
+            EducationID.DOCTORATE: Education(EducationID.DOCTORATE, "doctorate")
         }
         super().__init__(items)

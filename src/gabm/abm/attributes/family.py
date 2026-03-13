@@ -12,11 +12,11 @@ import logging
 from typing import Dict
 # Local imports
 from gabm.core.id import GABMID
-from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
+from gabm.abm.attribute import GABMAttributeID, GABMAttribute, GABMAttributeMap
 
-class FamilyID(GABMID):
+class FamilyID(GABMAttributeID):
     """
-    A unique identifier for a Family instance.
+    A unique identifier for a Family attribute.
 
     Attributes:
         id (int): The unique identifier for the family.

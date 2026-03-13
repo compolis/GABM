@@ -12,6 +12,23 @@ from typing import Dict, TypeVar, Generic
 # Local imports
 from gabm.core.id import GABMID
 
+class GABMAttributeID(GABMID):
+    """
+    Identifier for GABM attributes.
+
+    Attributes:
+        id (int): The unique identifier.
+    """
+    def __init__(self, attribute_id: int):
+        """
+        Initialize.
+
+        Args:
+            attribute_id:
+                Unique identifier value for the attribute.
+        """
+        super().__init__(attribute_id)
+
 class GABMAttribute:
     """
     Generic base class for attributes (e.g., Gender, Health).

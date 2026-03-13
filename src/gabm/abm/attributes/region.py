@@ -12,22 +12,34 @@ import logging
 from typing import Dict
 # Local imports
 from gabm.core.id import GABMID
-from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
+from gabm.abm.attribute import GABMAttributeID, GABMAttribute, GABMAttributeMap
 
-class RegionID(GABMID):
+class RegionID(GABMAttributeID):
     """
-    A unique identifier for a Region instance.
+    A unique identifier for a Region attribute.
 
     Attributes:
-        id (int): The unique identifier for the region.
+        id (int): The unique identifier for the region attribute.
     """
     def __init__(self, region_id: int):
         """
         Initialize
         Args:
-            region_id (int): The unique identifier for the region.
+            region_id (int): The unique identifier for the region attribute.
         """
         super().__init__(region_id)
+
+# Standard RegionID constants for clarity and maintainability
+RegionID.UNKNOWN = RegionID(0)
+RegionID.NORTH_WEST = RegionID(1)
+RegionID.NORTH = RegionID(2)
+RegionID.NORTH_EAST = RegionID(3)
+RegionID.WEST = RegionID(4)
+RegionID.CENTRAL = RegionID(5)
+RegionID.EAST = RegionID(6)
+RegionID.SOUTH_WEST = RegionID(7)
+RegionID.SOUTH = RegionID(8)
+RegionID.SOUTH_EAST = RegionID(9)
 
 class Region(GABMAttribute):
     """
@@ -45,17 +57,6 @@ class Region(GABMAttribute):
             description (str): The description of the region.
         """
         super().__init__(region_id, description)
-
-RegionID.UNKNOWN = RegionID(0)
-RegionID.NORTH_WEST = RegionID(1)
-RegionID.NORTH = RegionID(2)
-RegionID.NORTH_EAST = RegionID(3)
-RegionID.WEST = RegionID(4)
-RegionID.CENTRAL = RegionID(5)
-RegionID.EAST = RegionID(6)
-RegionID.SOUTH_WEST = RegionID(7)
-RegionID.SOUTH = RegionID(8)
-RegionID.SOUTH_EAST = RegionID(9)
 
 class RegionMap(GABMAttributeMap):
     """

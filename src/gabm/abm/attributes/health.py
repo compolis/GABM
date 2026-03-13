@@ -11,22 +11,30 @@ import logging
 from typing import Dict
 # Local imports
 from gabm.core.id import GABMID
-from gabm.abm.attribute import GABMAttribute, GABMAttributeMap
+from gabm.abm.attribute import GABMAttributeID, GABMAttribute, GABMAttributeMap
 
-class HealthID(GABMID):
+class HealthID(GABMAttributeID):
     """
-    A unique identifier for a Health instance.
+    A unique identifier for a Health attribute.
 
     Attributes:
-        id (int): The unique identifier for the health.
+        id (int): The unique identifier for the health attribute.
     """
     def __init__(self, health_id: int):
         """
         Initialize
         Args:
-            health_id (int): The unique identifier for the self reported health status.
+            health_id (int): The unique identifier for the health attribute.
         """
         super().__init__(health_id)
+
+# Standard HealthID constants for clarity and maintainability
+HealthID.UNKNOWN = HealthID(0)
+HealthID.VERY_GOOD = HealthID(1)
+HealthID.GOOD = HealthID(2)
+HealthID.FAIR = HealthID(3)
+HealthID.BAD = HealthID(4)
+HealthID.VERY_BAD = HealthID(5)
 
 class Health(GABMAttribute):
     """
