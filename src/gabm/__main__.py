@@ -227,7 +227,7 @@ def run_survey():
 
     # Initialise
     year = 2026
-    env = OpinionatedEnvironment(year=year)
+    env = Environment(year=year)
     raise NotImplementedError("Survey mode is not yet implemented.")
 
 def main():

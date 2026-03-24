@@ -99,8 +99,8 @@ class Nation(Environment):
     Attributes:
         citizens (Group):
             A group of Person agents representing the citizens of the nation.
-        aliens (Group):
-            A group of Person agents representing the aliens in the nation.
+        visitors (Group):
+            A group of Person agents representing the visitors in the nation.
         region_map (UKRegionMap):
             A UKRegionMap instance for region attribute lookups.
         education_map (SurveyEducationMap):
@@ -155,5 +155,5 @@ class Nation(Environment):
         from gabm.abm.group import Group, GroupID
         self.citizens = Group(GroupID(1), name="Citizens")
         self.groups_active[self.citizens.id] = self.citizens
-        self.aliens = Group(GroupID(2), name="Aliens")
-        self.groups_active[self.aliens.id] = self.aliens
+        self.visitors = Group(GroupID(2), name="Visitors")
+        self.groups_active[self.visitors.id] = self.visitors
