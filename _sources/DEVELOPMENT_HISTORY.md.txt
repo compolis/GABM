@@ -21,7 +21,18 @@ See [CONTRIBUTORS].
 
 
 ## Development Timeline
-- [2026-02-20] [GABM version 0.2.5 Released on PyPI](https://pypi.org/project/gabm/0.2.6)
+- [2026-03-24] [GABM version 0.2.18 Released on PyPI](https://pypi.org/project/gabm/0.2.18)
+- [2026-03-12] [GABM version 0.2.17 Released on PyPI](https://pypi.org/project/gabm/0.2.17)
+- [2026-03-06] [GABM version 0.2.16 Released on PyPI](https://pypi.org/project/gabm/0.2.16)
+- [2026-03-05] [GABM version 0.2.15 Released on PyPI](https://pypi.org/project/gabm/0.2.15)
+- [2026-03-04] [GABM version 0.2.14 Released on PyPI](https://pypi.org/project/gabm/0.2.14)
+- [2026-03-04] [GABM version 0.2.13 Released on PyPI](https://pypi.org/project/gabm/0.2.13)
+- [2026-02-28] [GABM version 0.2.12 Released on PyPI](https://pypi.org/project/gabm/0.2.12)
+- [2026-02-28] [GABM version 0.2.11 Released on PyPI](https://pypi.org/project/gabm/0.2.11)
+- [2026-02-27] [GABM version 0.2.10 Released on PyPI](https://pypi.org/project/gabm/0.2.10)
+- [2026-02-27] [GABM version 0.2.9 Released on PyPI](https://pypi.org/project/gabm/0.2.9)
+- [2026-02-26] [GABM version 0.2.8 Released on PyPI](https://pypi.org/project/gabm/0.2.8)
+- [2026-02-20] [GABM version 0.2.6 Released on PyPI](https://pypi.org/project/gabm/0.2.6)
 - [2026-02-19] [GABM version 0.2.5 Released on PyPI](https://pypi.org/project/gabm/0.2.5)
 - [2026-02-18] [GABM version 0.2.2 Released on PyPI](https://pypi.org/project/gabm/0.2.2)
 - [2026-02-17] [GABM version 0.2.1 Released on PyPI](https://pypi.org/project/gabm/0.2.1)

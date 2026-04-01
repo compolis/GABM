@@ -15,8 +15,6 @@
 ## Overview
 This guide helps developers get started with GABM quickly. Please refer to the [Developer Guide](DEV_GUIDE.md) for details of how to contribute.
 
-In the rest of the document "you" means you as a GABM developer.
-
 Your choice of development environment is your own, but we recommend [Visual Studio Code](https://code.visualstudio.com/).
 
 
