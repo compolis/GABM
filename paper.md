@@ -1,117 +1,125 @@
 ---
 title: "GABM: Generative Agent-Based Model Platform"
 authors:
-  - name: GitHub Copilot
-    affiliation: 1
   - name: Ajaykumar Manivannan
-    affiliation: 2
+    affiliation: 1
   - name: Charlie Pilgrim
-    affiliation: 2
+    affiliation: 1
   - name: Viktoria Spaiser
-    affiliation: 2
+    affiliation: 1
   - name: Andy Turner
-    affiliation: 2
+    affiliation: 1
 affiliations:
-  - name: AI Assistant
-    index: 1
   - name: University of Leeds
-    index: 2
+    index: 1
 ---
 
+
 # Introduction
-GABM is a [Python](https://www.python.org/) platform for agent-based modeling with integrated LLM support. It was developed and is available via [GABM GitHub Repository](https://github.com/compolis/GABM) which is managed within the [University of Leeds GitHub Enterprise](https://github.com/enterprises/the-university-of-leeds). GABM is also released and made available via [PyPI](https://pypi.org/) as [https://pypi.org/project/gabm/](https://pypi.org/project/gabm/) and can be installed with [PIP](https://pypi.org/project/pip/).
 
-Introduce the Brussels Workshop
+GABM is a [Python](https://www.python.org/) platform for agent-based modeling with integrated LLM support.
 
-The development of GABM began with Ajay and Charlie writing experimental Python scripts to communicate with Large Language Model (LLM) services. Ajay developed code to process some survey data into personas which could be provide with other context to LLM models to prompt responses that reflect the repsonse of a persona as provided by the LLM model. The personas were derived from a YouGov survey(reference required) and the context and responses for the use case are based on climate change mitigation.
+GABM is available via [The Compolis GABM GitHub Repository](https://github.com/compolis/GABM) which is managed within the [University of Leeds GitHub Enterprise](https://github.com/enterprises/the-university-of-leeds). GABM is also released and made available via [PyPI](https://pypi.org/) as [https://pypi.org/project/gabm/](https://pypi.org/project/gabm/).
 
-Python libraries for using LLM Application Programming Interfaces(APIs) have been maturing for years. Developing a bespoke Agent Based Model (ABM) in Python without depending on an existing framework was thought to be best. It was decided to base the development on Python 3.12 initially as this is in widespread use and is to remain in maintenance for several months after which upgrading to Python 3.14 should be considered.
+TODO: Introduce the Brussels Workshop
+
+Before there was GABM, there were experimental Python scripts that used Large Language Model (LLM) services to send prompts and recieve responses. This work was funded as part of a Future Leaders Fellowship Grant awarded to Viktoria and the initial exploratory work was undertaken by Ajay and Charlie. The idea of GABM was to abstract the general functionality required for developing an Agent Base Model (ABM) to study climate change politics using LLMs. GABM would be for supporting use cases where a combination of ABM and LLM were wanted, specifically where agents defined in a model would use a LLMs to communicated and modify their opinions, beliefs, desires and behaviour. Climate-Action-GABM was developed to use GABM as a dependency and is specifically geared to study climate change politics (see [The Compolis Climate-Action-GABM GitHub Repository](https://github.com/compolis/Climate-Action-GABM)).
 
 
 ## Software Licensing
+
 GABM is released under the 3-clause BSD license, which clearly defines user rights, redistribution, and liability limitations. This permissive license encourages broad adoption and collaboration while protecting developers.
 
+
 ## Documentation
-Significant effort has gone into organizing and producing documentation for GABM. GABM documentation is designed for both the [GitHub repository](https://github.com/compolis/GABM) and the [Sphinx documentation site served via GitHub Pages from the repository](https://compolis.github.io/GABM).
 
-Automation of [Sphinx](https://www.sphinx-doc.org/) documentation uses [GNU make](https://www.gnu.org/software/make/) and specific Makefile targets, which copy and preprocess Markdown files from the repository root into the `docs` directory ready to build the documentation. Sphinx, together with [MyST](https://mystmd.org/), generates rich, navigable documentation from Markdown and reStructuredText sources. This approach ensures consistency, reduces manual effort, and keeps user and developer documentation up to date.
+Maintaining high-quality documentation is an ongoing, collaborative effort. The aim is for Python source code comment Docstrings and inline comments to provide essential context for developers and maintainers. Comments in scripts, configuration, and data files aim to clarify intent and usage.
 
-GABM uses Python scripts alongside Makefiles to automate documentation workflows. For example, a dedicated script copies Markdown files from the root directory, modifies them for formatting, and temporarily adds them to the docs folder for Sphinx compilation. The main Sphinx index.html page is based on README.md, included via index.md in the docs directory, following DRY principles. This ensures that core project information is maintained in a single location and consistently presented across both the repository and the documentation site.
+GABM documentation is designed for the GitHub repository, the [Sphinx documentation site served via GitHub Pages from the repository](https://compolis.github.io/GABM), and a specific README is generated for the release on PyPI.
 
-Python source code comment Docstrings and inline comments provide essential context for developers and maintainers.
+[Sphinx](https://www.sphinx-doc.org/) together with [MyST](https://mystmd.org/), generates rich, navigable documentation from Markdown and reStructuredText sources.
 
-Comments in scripts, configuration, and data files clarify intent and usage.
+The Sphinx documentation and the PiPY README are automatically generated using [GNU make](https://www.gnu.org/software/make/) and specific Makefile targets as described below. The main Sphinx index.html page is based on the GitHub repository README.md. Following a Don't Repeat Yourself (DRY) philisophy helps to ensures that core project information is maintained in a single location.
 
-Maintaining high-quality documentation is an ongoing, collaborative effort that evolves with the project and its community.
+There are separate guides for users and developers.
+
+
+## Automation
+
+To make development and deployment easier, [GNU make](https://www.gnu.org/software/make/) and specific Makefile targets along with Python scripts are used to automate workflows in a platform agnostic manner. [GitHub Actions](https://github.com/features/actions) are also used for checking and testing [GitHub Pull Requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests).
+
+For example, a `docs` Makefile target calls a `docs.py` script to preprocess Markdown files from the repository root into the `docs` directory then builds the Sphinx documentation. This approach ensures consistency, reduces manual effort, and helps keep things up to date.
+
+Makefile targets are chained as necessary to make the release process straightforward.
 
 
 ## Naming, Commenting, and Alignment
+
 GABM follows good practice by using clear, simple naming for files and scripts, making the project easier to maintain and navigate. Scripts are named to match their corresponding Makefile targets, and the Makefile includes descriptive comments. All scripts and Python source code files are well commented and documented, supporting collaboration and onboarding. These conventions help ensure the project remains accessible and maintainable for both current and future contributors.
 
 
 ## DRY Approach
-A Don't Repeat Yourself (DRY) philosophy is adopted for both code and documentation, enhancing maintainability and ease of change. There are separate guides for users and developers.
+A Don't Repeat Yourself (DRY) philosophy is adopted for code as well as documentation, enhancing maintainability and ease of change.
 
 
 ## Build Requirements and Dependency Management
+
 GABM is currently based on Python >=3.12. There are different dependency requirements for users and developers.
 
 For reproducibile builds, requirements.txt and requirements-dev.txt clearly specify dependencies: user requirements are pinned, while developer dependencies are more flexible.
 
+For users wanting to locally use LLMs and download these from [Hugging Face](https://huggingface.co/), a separate requirements-local-llm.txt is provided.
+
 
 ## Reflections on AI Pair Programming
-Human expertise with AI assistance helped to rapidly develop GABM. GitHub Copilot was used to speed up development, improve documention, and adopt good practices.
 
-The addition of CODE_OF_CONDUCT.md is an example of the benefits of AI pair programming. After suggesting the project should have a code of conduct, the AI assistant quickly drafted the file, integrated it into the repository, updated the docs.py script, and ensured its inclusion in the Sphinx documentation.
+GitHub Copilot was used to speed up development, improve documention, and adopt good practices.
 
-There is a need to check carefully what AI assistance is doing. Delegating workflow changes, code changes and execution tasks to an AI pair programmer should be done carefully. Multiple times during development there were major issues with suggested patches to code and asking for multiple changes makes it hard to check and be sure that what is being done is not unravelling good work that you want to keep. Obviously things can be unpicked adn undone especially if small changes are committed with sensible commit messages, but it can be easy to get lost and go around in circles.
+The addition of CODE_OF_CONDUCT.md is an example of the benefits of AI pair programming. After suggesting the project should have a code of conduct, the AI assistant quickly drafted the file, integrated it into the repository, updated the docs.py script to include it in the Sphinx documentation.
 
-To try to avoid problems and losing work, human developers should check carefully what an AI pair programmer is doing and suggesting rather than blindly accepting it is doing the right thing.
+There is a need to check carefully what AI assistance is doing. Delegating workflow changes, code changes and execution tasks to an AI pair programmer should be done carefully. Multiple times during development there were major issues with suggested patches to code. Human developers should check carefully what an AI pair programmer is doing and suggesting rather than blindly accepting suggestions.
 
-Having a lots of tests that can be automatically run, and improving and extending test coverage (documentation) as workflows are put in place and modified and as code is developed is well worth the efffort and provides a way to help check. Producing clear consise documentation that an AI pair programmer reads for context at the start of AI Pair programming development sessions is a good idea. The current generation of AI Pair programming tools learn what to do, but then forget and their memory between sessions is otherwise poor, so it is up to the developer using these tools to try to provide this. On reflection, it was a good idea to provide concise and clear context to help the AI pair programmer be more useful.
+Having a broad test coverage helps with identifying issues and robustness.
 
-
-## PyPI Release and Reflections on Permanence
-GABM is both available via the GitHub repository and is also released on PyPI. The process of making releases was made much easier with guidance from GitHub Copilot. A developer familiar with Java/Maven and Maven Central, found the Python release process more accessible thanks to AI Pair programmer explanations of the similarities. A Makefile target was also added to delete tagged releases on GitHub. It is understood that PyPI allows for release deletion whereas Maven Central is designed for permanence. However there is a major benefits of releasing on PyPI in that users can use Pip to install it.
+TODO: Producing clear consise documentation for an AI pair programmer was a useful stop gap before AGENTS.md and SKILLS.md files were developed (see https://chrisreddington.com/blog/building-your-agent-toolbox/)
 
 
 ## Logs, Caches, and Data Management
-In addition to logging, the project implements caches to store prompts and responses for each LLM service. Both logs and caches can grow large and are not stored in the GitHub repository. Users and developers should be aware of their size and manage them appropriately. While some Makefile targets exist for general cleanup, dedicated tidy-up scripts for logs and caches are planned for version 0.2.0 (see ROADMAP). These tools will help users and developers maintain a clean working environment and manage storage efficiently.
+
+In addition to logging, the project implements caches to store prompts and responses for each LLM service. Both logs and caches can grow large and are not stored in the GitHub repository. Users and developers should be aware of their size and manage them appropriately.
+
+TODO: Add Makefile targets and Python scripts to manage logs and caches.
 
 
 ## Developer Experience
-Before starting to work on developing GABM, Andy had a foundation in using [Visual Studio Code](https://code.visualstudio.com/) with [GitHub Copilot](https://github.com/features/copilot) by leading development of other software in the last couple of years using these tools:
-- **MXG**: A web-based User Interface (UI) for MESMER software XML files ([repo](https://github.com/MESMER-kinetics/mxg), [live](https://mesmer-kinetics.github.io/mxg/)).
-- **RiboCode**: An tool for comparing ribosome datasets in 3D using [Mol*](https://github.com/molstar/molstar) ([repo](https://github.com/ribocode-slola/ribocode1/), [live](https://ribocode-slola.github.io/ribocode1/)).
 
-Experience of using an Integrated Development Environment (IDE) along with an integrated AI pair programmer helps developers know about their capabilities and what they are good for. Their capabiities are probably fast improving and developers are strongly encouraged to cautiously embrace working with AI assistance for developing software.
-
-
-## Relevance of Global Tipping Points
-
-The Global Tipping Points Report (2025) [@globaltipping2025] synthesizes the latest research on both positive and negative tipping points in the Earth system, with contributions from 160 authors across 23 countries and 87 institutions. Viktoria, a co-author of part of this report, has helped consolidate knowledge on the governance, risks, and opportunities associated with climate and biosphere tipping points. The report is highly relevant to the GABM project, as our application aims to model and understand the dynamics of global tipping points and their implications for climate, ecosystems, and society. Insights from the report inform the design and intended use cases of GABM, particularly in exploring interventions to avoid harmful tipping points and trigger positive ones.
+[Visual Studio Code](https://code.visualstudio.com/) with the GitHub Copilot Pair Programmer extension provided an excellent tool for developing GABM.
 
 
 # Statement of Need
-- Why could we not just use existing software?
-  - Concordia
-    - https://github.com/google-deepmind/concordia
-    - Concordia is introduced in Vezhnevets et al. (2023) [@vezhnevets2023concordia] as a library for generative agent-based modelling that leverages large language models to enable agents to act, reason, and interact in simulated physical, social, or digital environments. Concordia's architecture, which includes a Game Master agent to mediate between agent intentions and environment constraints, demonstrates the potential of LLM-driven ABMs to simulate complex, language-mediated behaviors and interactions. This work provides important context and inspiration for GABM, highlighting both the opportunities and challenges of integrating LLMs into agent-based modeling. GABM builds on these ideas, aiming for modularity, extensibility, and transparency, and is designed to support a wide range of research and application domains.
+
+TODO: Why not use existing software?
+
+## [Concordia](https://github.com/google-deepmind/concordia)
+
+Concordia is introduced in Vezhnevets et al. (2023) [@vezhnevets2023concordia] as a library for generative agent-based modelling that leverages LLMs to enable agents to act, reason, and interact in simulated physical, social, or digital environments. A Game Master agent mediates between agent intentions and environment constraints. Vezhnevets et al. (2023) [@vezhnevets2023concordia]  demonstrates the potential of LLM-driven ABMs to simulate complex, language-mediated behaviors and interactions.
+
+## [Mesa-LLM](https://github.com/mesa/mesa-llm)
 
 
-# Functionality
-- Multi-LLM support (OpenAI, DeepSeek, GenAI)
-- Modular onboarding and setup
-- Logging, documentation, and reproducibility
+# GABM Functionality
+
+LLM Services support for OpenAI, DeepSeek, GenAI and PublicAI.
 
 
 # Acknowledgements
-- GABM was developed with significant assistance from [GitHub Copilot](https://github.com/features/copilot) for code generation, refactoring, and documentation improvements.
+
+- GABM was developed with significant assistance from [GitHub Copilot](https://github.com/features/copilot) to help generate, refactor, document and test code.
 - We gratefully acknowledge support from the [University of Leeds](https://www.leeds.ac.uk/). Funding for this project comes from a UKRI Future Leaders Fellowship awarded to [Professor Viktoria Spaiser](https://essl.leeds.ac.uk/politics/staff/102/professor-viktoria-spaiser) (grant reference: [UKRI2043](https://gtr.ukri.org/projects?ref=UKRI2043)).
 
 
 # AI Usage Disclosure
-This project made extensive use of generative AI, specifically GitHub Copilot (GPT-4.1), for code generation, refactoring, documentation, and drafting of this paper. All AI-assisted outputs were reviewed, edited, and validated by the human authors, who made all core design decisions. GitHub Copilot is included as a co-author to reflect its substantial contribution to the development and documentation process, in line with the collaborative and transparent ethos of the project.
+This project used GitHub Copilot to help generate, refactor, document and test code. It was also used to draft and edit this paper.
 
 
 # References
