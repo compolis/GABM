@@ -9,8 +9,6 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
 import pytest
-# Local imports
-from gabm.io.read_data import read_api_keys
 
 SERVICE_CLASS = "OpenAIService"
 DEFAULT_PROMPT = ("gpt-3.5-turbo", "Hello OpenAI!")
@@ -31,8 +29,7 @@ def import_service():
     return getattr(mod, SERVICE_CLASS)
 
 
-def test_openai_model_list():
-    api_keys = read_api_keys('data/api_key.csv')
+def test_openai_model_list(api_keys):
     api_key = api_keys.get("openai")
     if not api_key or api_key.startswith("YOUR_"):
         pytest.skip("API key for openai not set.")
@@ -42,8 +39,7 @@ def test_openai_model_list():
     assert models is not None
 
 
-def test_openai_communication():
-    api_keys = read_api_keys('data/api_key.csv')
+def test_openai_communication(api_keys):
     api_key = api_keys.get("openai")
     if not api_key or api_key.startswith("YOUR_"):
         pytest.skip("API key for openai not set.")

@@ -9,8 +9,6 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
 import pytest
-# Local imports
-from gabm.io.read_data import read_api_keys
 
 SERVICE_CLASS = "PublicAIService"
 DEFAULT_PROMPT = ("swiss-ai/apertus-70b-instruct", "Give me a brief explanation of gravity in simple terms.")
@@ -31,8 +29,7 @@ def import_service():
     return getattr(mod, SERVICE_CLASS)
 
 
-def test_publicai_model_list():
-    api_keys = read_api_keys('data/api_key.csv')
+def test_publicai_model_list(api_keys):
     api_key = api_keys.get("publicai")
     if not api_key or api_key.startswith("YOUR_"):
         pytest.skip("API key for publicai not set.")
@@ -42,8 +39,7 @@ def test_publicai_model_list():
     assert models is not None
 
 
-def test_publicai_communication():
-    api_keys = read_api_keys('data/api_key.csv')
+def test_publicai_communication(api_keys):
     api_key = api_keys.get("publicai")
     if not api_key or api_key.startswith("YOUR_"):
         pytest.skip("API key for publicai not set.")
