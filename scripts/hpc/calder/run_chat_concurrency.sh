@@ -269,7 +269,7 @@ run_one() {
     cmd+=("${EXTRA_SIM_ARGS[@]}")
   fi
 
-  "${cmd[@]}" >"${run_log}" 2>&1
+  PYTHONPATH=src "${cmd[@]}" >"${run_log}" 2>&1
 }
 
 echo "=== Launch concurrent clients ===" | tee -a "$LAUNCHER_LOG"
