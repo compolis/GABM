@@ -13,6 +13,9 @@
 # Typical use (small sanity run):
 #   sbatch scripts/hpc/calder/run_chat_concurrency.sh --model Qwen3-14B --n-runs 8 --concurrency 4 --seed-mode increment --seed 42
 #
+# Chat+opinion determinism test (fixed rounds):
+#   sbatch scripts/hpc/calder/run_chat_concurrency.sh --example chat_opinion --rounds 8 --model Qwen3-14B --n-runs 8 --concurrency 4 --seed-mode fixed --seed 42 --llm-seed 42
+#
 # Determinism test against one server instance:
 #   sbatch scripts/hpc/calder/run_chat_concurrency.sh --model Qwen3-14B --n-runs 8 --concurrency 4 --seed-mode fixed --seed 42 --llm-seed 42
 #
@@ -38,7 +41,9 @@ SIF_FILE="vllm-openai_latest.sif"
 WORKING_DIR="/flash-calder/users/${USER}/gabm"
 CONDA_ENV="gabm"
 
+EXAMPLE_MODE="chat"
 YEAR="2026"
+ROUNDS="8"
 SEED="42"
 LLM_SEED=""
 N_RUNS="8"
@@ -73,6 +78,16 @@ while [[ $# -gt 0 ]]; do
     --year)
       [[ -z "${2:-}" ]] && { echo "Missing value for --year"; exit 1; }
       YEAR="$2"
+      shift 2
+      ;;
+    --example)
+      [[ -z "${2:-}" ]] && { echo "Missing value for --example"; exit 1; }
+      EXAMPLE_MODE="$2"
+      shift 2
+      ;;
+    --rounds)
+      [[ -z "${2:-}" ]] && { echo "Missing value for --rounds"; exit 1; }
+      ROUNDS="$2"
       shift 2
       ;;
     --seed)
@@ -123,6 +138,11 @@ if [[ "$SEED_MODE" != "fixed" && "$SEED_MODE" != "increment" ]]; then
   exit 1
 fi
 
+if [[ "$EXAMPLE_MODE" != "chat" && "$EXAMPLE_MODE" != "chat_opinion" ]]; then
+  echo "Unsupported --example '$EXAMPLE_MODE'. Use one of: chat, chat_opinion"
+  exit 1
+fi
+
 if ! [[ "$N_RUNS" =~ ^[0-9]+$ ]] || [[ "$N_RUNS" -lt 1 ]]; then
   echo "--n-runs must be a positive integer"
   exit 1
@@ -159,10 +179,12 @@ LAUNCHER_LOG="${OUTDIR}/launcher_summary.log"
 
 echo "=== Configuration ===" | tee -a "$LAUNCHER_LOG"
 echo "MODEL_NAME=${MODEL_NAME}" | tee -a "$LAUNCHER_LOG"
+echo "EXAMPLE_MODE=${EXAMPLE_MODE}" | tee -a "$LAUNCHER_LOG"
 echo "WORKING_DIR=${WORKING_DIR}" | tee -a "$LAUNCHER_LOG"
 echo "OUTDIR=${OUTDIR}" | tee -a "$LAUNCHER_LOG"
 echo "N_RUNS=${N_RUNS}" | tee -a "$LAUNCHER_LOG"
 echo "CONCURRENCY=${CONCURRENCY}" | tee -a "$LAUNCHER_LOG"
+echo "ROUNDS=${ROUNDS}" | tee -a "$LAUNCHER_LOG"
 echo "SEED_MODE=${SEED_MODE}" | tee -a "$LAUNCHER_LOG"
 echo "USE_CACHE=${USE_CACHE}" | tee -a "$LAUNCHER_LOG"
 echo "BASE_URL=${BASE_URL}" | tee -a "$LAUNCHER_LOG"
@@ -241,11 +263,16 @@ run_one() {
   local run_index="$1"
   local sim_seed="$2"
   local run_id
-  run_id=$(printf "chat_i%03d_seed%s" "$run_index" "$sim_seed")
+  run_id=$(printf "%s_i%03d_seed%s" "$EXAMPLE_MODE" "$run_index" "$sim_seed")
   local run_log="${CLIENT_OUT_ROOT}/${run_id}.log"
 
+  local sim_script="src/gabm/examples/chat/sim.py"
+  if [[ "$EXAMPLE_MODE" == "chat_opinion" ]]; then
+    sim_script="src/gabm/examples/chat_opinion/sim.py"
+  fi
+
   local cmd=(
-    python3 src/gabm/examples/chat/sim.py
+    python3 "$sim_script"
     --llm-service openai
     --model "${MODEL_NAME}"
     --api-key "${OPENAI_API_KEY}"
@@ -256,6 +283,10 @@ run_one() {
     --output-root "${CLIENT_OUT_ROOT}"
     --run-id "${run_id}"
   )
+
+  if [[ "$EXAMPLE_MODE" == "chat_opinion" ]]; then
+    cmd+=(--rounds "${ROUNDS}")
+  fi
 
   if [[ "$USE_CACHE" == "false" ]]; then
     cmd+=(--no-cache)
