@@ -39,14 +39,14 @@ If you are resuming Calder/HPC reproducibility and release-prep work after a bre
 - End-of-week snapshot/handover note: [HANDOVER_2026-10-30.md](HANDOVER_2026-10-30.md)
 - Qwen3-14B reproducibility protocol and results template: [REPRODUCIBILITY_QWEN3_14B.md](REPRODUCIBILITY_QWEN3_14B.md)
 - Calder concurrent launcher (single server, many clients): [scripts/hpc/calder/run_chat_concurrency.sh](scripts/hpc/calder/run_chat_concurrency.sh)
-- Run-to-run determinism comparator: [scripts/hpc/calder/compare_chat_runs.sh](scripts/hpc/calder/compare_chat_runs.sh)
-- Markdown row generator for stress-summary tables: [scripts/hpc/calder/generate_concurrency_rows.sh](scripts/hpc/calder/generate_concurrency_rows.sh)
+- Run-to-run determinism comparator: [scripts/analysis/compare_chat_runs.py](scripts/analysis/compare_chat_runs.py)
+- Markdown row generator for stress-summary tables: [scripts/analysis/generate_concurrency_rows.py](scripts/analysis/generate_concurrency_rows.py)
 
 Suggested quick restart steps:
 
 1. Confirm queued/completed Calder job IDs and run directories.
-2. For determinism checks, compare paired runs with `compare_chat_runs.sh`.
-3. For stress-summary updates, generate table rows with `generate_concurrency_rows.sh` and paste into [REPRODUCIBILITY_QWEN3_14B.md](REPRODUCIBILITY_QWEN3_14B.md).
+2. For determinism checks, compare paired runs with `compare_chat_runs.py`.
+3. For stress-summary updates, generate table rows with `generate_concurrency_rows.py` and paste into [REPRODUCIBILITY_QWEN3_14B.md](REPRODUCIBILITY_QWEN3_14B.md).
 4. Update release evidence notes in [RELEASE_PREP_0.3.0.md](RELEASE_PREP_0.3.0.md).
 
 

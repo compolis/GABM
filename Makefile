@@ -26,7 +26,7 @@
 # Caution: Some commands (like git-clean, release, and delete-release) can modify your git history or delete tags. Always review the scripts they call (in the scripts/ directory) to ensure they do what you expect before running these commands.
 
 # Phony targets (not actual files)
-.PHONY: help test docs docs-clean gh-pages-deploy gh-pages-deploy2 clean git-clean setup-llms clear-caches llm-drift-check sync sync-feature release delete-release build build-test pypi-release testpypi-release bump-version run-local run-installed run-example-chat run-example-chat-ensemble run-example-chat-opinion run-example-chat-opinion-ensemble compare-example-chat compare-ensemble-sweeps
+.PHONY: help test docs docs-clean gh-pages-deploy gh-pages-deploy2 clean git-clean setup-llms clear-caches llm-drift-check sync sync-feature release delete-release build build-test pypi-release testpypi-release bump-version run-local run-installed run-example-chat run-example-chat-ensemble run-example-chat-opinion run-example-chat-opinion-ensemble compare-example-chat compare-ensemble-sweeps compare-hpc-chat-runs summarize-hpc-concurrency
 
 # Show available Makefile commands
 help:
@@ -58,6 +58,8 @@ help:
 	@echo "  run-example-chat-opinion-ensemble - Run ensemble similarity sweep (usage: make run-example-chat-opinion-ensemble START_SEED=100 N_RUNS=25 ROUNDS=8 CONVERSATION_MODE=normal PAIRING_STRATEGY=random CANDIDATE_POOL_SIZE=8 OUTPUT_ROOT=... RUN_ID=... NO_CACHE=1 LLM_SEED=42)"
 	@echo "  compare-ensemble-sweeps - Compare two ensemble sweep directories (usage: make compare-ensemble-sweeps SWEEP_A=<dir> SWEEP_B=<dir> LABEL_A=hosted LABEL_B=hpc OUTPUT_ROOT=... RUN_ID=...)"
 	@echo "  compare-example-chat - Compare two chat run output directories (usage: make compare-example-chat RUN_A=<dir> RUN_B=<dir> [OUTPUT_ROOT=...])"
+	@echo "  compare-hpc-chat-runs - Compare two HPC chat run directories (usage: make compare-hpc-chat-runs RUN_A=<run|id|path> RUN_B=<run|id|path> [WORKING_DIR=/flash-calder/users/<user>/gabm])"
+	@echo "  summarize-hpc-concurrency - Generate markdown rows from launcher summaries (usage: make summarize-hpc-concurrency INPUTS='--header --job-id 511621 --job-id 511679' [WORKING_DIR=...])"
 	@echo "Use 'make <target>' to run a specific target. For targets that require additional variables (like release and sync-feature), include them as shown in the usage instructions."
 
 # Run all tests (requires pytest)
@@ -76,14 +78,14 @@ docs: docs-make docs-clean
 # Build documentation with Sphinx (in docs/)
 docs-make:
 	@echo "Building documentation with Sphinx..."
-	python3 scripts/docs.py
+	python3 scripts/dev/docs.py
 	PYTHONPATH=.. sphinx-build -b html docs docs/_build/html
 	@echo "..done building documentation with Sphinx. Output in docs/_build/html/"
 
 # Remove all auto-copied documentation files from docs/
 docs-clean:
 	@echo "Cleaning auto-copied documentation files from docs/..."
-	python3 scripts/docs-clean.py
+	python3 scripts/dev/docs-clean.py
 	@echo "..done cleaning auto-copied documentation files from docs/"
 
 # Build and deploy documentation to GitHub Pages
@@ -95,7 +97,7 @@ gh-pages-deploy: docs
 	# Deploys documentation to GitHub Pages.
 	# If you see a worktree error (gh-pages already used), the deployment script will attempt to clean up lingering worktrees automatically.
 	# Manual cleanup: git worktree remove /tmp/gh-pages-xxxx...
-	python3 scripts/gh-pages-deploy.py
+	python3 scripts/dev/gh-pages-deploy.py
 	@echo "...done deploying documentation to GitHub Pages."
 
 # Deploy documentation to GitHub Pages on upstream remote (force push)
@@ -108,13 +110,13 @@ gh-pages-deploy2: gh-pages-deploy
 # Remove build/test artifacts
 clean:
 	@echo "Cleaning build and test artifacts..."
-	python3 scripts/clean.py
+	python3 scripts/dev/clean.py
 	@echo "...done cleaning build and test artifacts."
 
 # Delete all LLM caches and model lists (for a clean slate)
 clear-caches:
 	@echo "Clearing all LLM caches and model lists..."
-	python3 scripts/clear-caches.py
+	python3 scripts/dev/clear-caches.py
 	@echo "...done clearing all LLM caches and model lists."
 
 # Clear caches and run live external LLM tests to check for API/model drift
@@ -150,14 +152,14 @@ sync:
 # Usage: make sync-feature BRANCH=release/0.2.0
 sync-feature:
 	@echo "Syncing and rebasing branch $(BRANCH) with main..."
-	python3 scripts/sync-feature.py --branch $(BRANCH)
+	python3 scripts/dev/sync-feature.py --branch $(BRANCH)
 	@echo "...done syncing and rebasing branch $(BRANCH) with main."
 
 
 # Run onboarding/setup for all LLMs (API key check, model lists, cache init)
 setup-llms:
 	@echo "Running setup for LLMs (API key check, model lists, cache init)..."
-	PYTHONPATH=src python3 scripts/setup-llms.py
+	PYTHONPATH=src python3 scripts/dev/setup-llms.py
 	@echo "...done running setup for LLMs."	
 
 
@@ -168,7 +170,7 @@ release: sync-feature
 		echo "Error: VERSION variable not set. Usage: make release VERSION=x.y.z BRANCH=release/x.y.z"; \
 		exit 1; \
 	fi
-	python3 scripts/release.py --version $(VERSION) --branch $(BRANCH)
+	python3 scripts/dev/release.py --version $(VERSION) --branch $(BRANCH)
 	@echo "...done making a tag release on GitHub for version $(VERSION) from branch $(BRANCH)."
 
 # Delete a release tag locally and on remotes (usage: make delete-release VERSION=x.y.z)
@@ -193,14 +195,14 @@ build: clean pypi-prep
 # Prepare PyPI packaging: sync requirements and generate README
 pypi-prep:
 	@echo "Syncing requirements and generating PyPI README..."
-	python3 scripts/sync_requirements_for_pypi.py
-	python3 scripts/generate_pypi_readme.py
+	python3 scripts/dev/sync_requirements_for_pypi.py
+	python3 scripts/dev/generate_pypi_readme.py
 	@echo "...done prepping for PyPI packaging."
 
 # Build and test install the package in a fresh venv
 build-test: build
 	@echo "Building and test installing the package in a fresh venv..."
-	python3 scripts/build-test.py
+	python3 scripts/dev/build-test.py
 	@echo "...done building and test installing the package in a fresh venv."
 
 # Upload the built package to PyPI
@@ -337,3 +339,27 @@ compare-example-chat:
 		echo "Differences detected. Re-run individual diff commands for details."; \
 	fi; \
 	exit $$STATUS
+
+# Compare two HPC chat run directories using scripts/analysis/compare_chat_runs.py
+# Usage: make compare-hpc-chat-runs RUN_A=run_511621 RUN_B=/path/to/run_511679 [WORKING_DIR=/flash-calder/users/<user>/gabm]
+compare-hpc-chat-runs:
+	@if [ -z "$(RUN_A)" ] || [ -z "$(RUN_B)" ]; then \
+		echo "Error: RUN_A and RUN_B must be set."; \
+		echo "Usage: make compare-hpc-chat-runs RUN_A=<run|id|path> RUN_B=<run|id|path> [WORKING_DIR=...]"; \
+		exit 1; \
+	fi; \
+	WORKING_DIR_ARG=""; \
+	if [ -n "$(WORKING_DIR)" ]; then WORKING_DIR_ARG=" --working-dir $(WORKING_DIR)"; fi; \
+	python3 scripts/analysis/compare_chat_runs.py --run-a "$(RUN_A)" --run-b "$(RUN_B)"$$WORKING_DIR_ARG
+
+# Generate markdown rows for concurrency/stress tables from launcher summaries.
+# Usage: make summarize-hpc-concurrency INPUTS='--header --job-id 511621 --job-id 511679' [WORKING_DIR=/flash-calder/users/<user>/gabm]
+summarize-hpc-concurrency:
+	@if [ -z "$(INPUTS)" ]; then \
+		echo "Error: INPUTS must be set."; \
+		echo "Usage: make summarize-hpc-concurrency INPUTS='--header --job-id 511621 --job-id 511679' [WORKING_DIR=...]"; \
+		exit 1; \
+	fi; \
+	WORKING_DIR_ARG=""; \
+	if [ -n "$(WORKING_DIR)" ]; then WORKING_DIR_ARG=" --working-dir $(WORKING_DIR)"; fi; \
+	python3 scripts/analysis/generate_concurrency_rows.py $$WORKING_DIR_ARG $(INPUTS)

@@ -28,7 +28,7 @@ For this reason, we distinguish:
 
 - Single-run launcher: `scripts/hpc/calder/run.sh`
 - Concurrent launcher (single server, many clients): `scripts/hpc/calder/run_chat_concurrency.sh`
-- Run comparison utility: `scripts/hpc/calder/compare_chat_runs.sh`
+- Run comparison utility: `scripts/analysis/compare_chat_runs.py`
 
 ## Experiment goals
 
@@ -70,7 +70,7 @@ Run:
 - Compare outputs using:
 
 ```bash
-scripts/hpc/calder/compare_chat_runs.sh --run-a <job_id_a> --run-b <job_id_b>
+python3 scripts/analysis/compare_chat_runs.py --run-a <job_id_a> --run-b <job_id_b>
 ```
 
 ### E3: Seed-window variety (ensemble diversity)
@@ -168,7 +168,7 @@ Use this template while jobs are running.
 For each pair, run:
 
 ```bash
-scripts/hpc/calder/compare_chat_runs.sh --run-a <job_id_a> --run-b <job_id_b>
+python3 scripts/analysis/compare_chat_runs.py --run-a <job_id_a> --run-b <job_id_b>
 ```
 
 | Comparison | Shared run IDs | Transcript exact matches | Metadata core matches | Cache-delta exact matches | Determinism signal |
@@ -183,7 +183,7 @@ Capture from `launcher_summary.log` and worker outputs.
 Helper to generate markdown rows from job IDs:
 
 ```bash
-scripts/hpc/calder/generate_concurrency_rows.sh --header --job-id <job_id_1> --job-id <job_id_2>
+python3 scripts/analysis/generate_concurrency_rows.py --header --job-id <job_id_1> --job-id <job_id_2>
 ```
 
 | Job ID | Concurrency | N runs | Successful runs | Failed runs | Mean runtime per run (if measured) | Error pattern |

@@ -387,6 +387,32 @@ Interpretation tip:
 - Treat exact transcript equality as non-goal across hosted vs local/HPC models.
 - Focus on aggregate deltas in shared metrics (for example means and variability) and similarity-bin behavior.
 
+### Compare Individual HPC Chat Runs
+
+When comparing two individual HPC chat run directories (for example same seed across different server initializations), use:
+
+```bash
+make compare-hpc-chat-runs RUN_A=run_511621 RUN_B=run_511679
+```
+
+You can also pass full paths:
+
+```bash
+make compare-hpc-chat-runs RUN_A=/path/to/run_511621 RUN_B=/path/to/run_511679
+```
+
+If needed, override working directory resolution used for job IDs and `run_<id>` values:
+
+```bash
+make compare-hpc-chat-runs RUN_A=511621 RUN_B=511679 WORKING_DIR=/flash-calder/users/<user>/gabm
+```
+
+To generate markdown rows for reproducibility stress/concurrency summaries:
+
+```bash
+make summarize-hpc-concurrency INPUTS='--header --job-id 511621 --job-id 511679'
+```
+
 In the chat example, participant names are now part of `Person` state:
 - If a name is explicitly provided when creating a person, that name is used.
 - If no name is provided, `Person` auto-assigns a name from the ONS files (using year of birth and gender).

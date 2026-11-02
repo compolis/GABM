@@ -23,7 +23,7 @@ Compare sweep outputs:
 Collect Qwen3-14B reproducibility evidence:
 
 - run E1 to E4 experiments from `REPRODUCIBILITY_QWEN3_14B.md`
-- archive transcript exact-match summaries from `scripts/hpc/calder/compare_chat_runs.sh`
+- archive transcript exact-match summaries from `scripts/analysis/compare_chat_runs.py`
 - archive concurrency summaries (`FAILED_RUNS`, completion rates)
 
 Archive for release notes:
