@@ -201,3 +201,30 @@ scripts/hpc/calder/generate_concurrency_rows.sh --header --job-id <job_id_1> --j
   - 
 - Recommended default concurrency for release runs:
   - 
+
+## Observed results (2026-11-02)
+
+Local copied Calder outputs currently available under `data/output/examples/chat/hpc/Calder/`:
+
+- `run_494869/chat_seed42`
+- `run_511621/run_511621/chat_seed42`
+- `run_511679/run_511679/chat_seed43`
+
+Pairwise transcript comparison matrix:
+
+| A job | B job | A run_id | B run_id | seed relation | transcript exact match | note |
+|---|---|---|---|---|---|---|
+| run_494869 | run_511621 | chat_seed42 | chat_seed42 | same | yes | - |
+| run_494869 | run_511679 | chat_seed42 | chat_seed43 | different | no | - |
+| run_511621 | run_511679 | chat_seed42 | chat_seed43 | different | no | - |
+
+Summary metrics:
+
+- Same-seed exact transcript match rate: `1/1`
+- Different-seed exact transcript match count: `0/2`
+
+Interpretation:
+
+- Current evidence supports same-seed reproducibility for the available Qwen3-14B pair.
+- Different seeds produce non-identical transcripts, consistent with expected diversity.
+- One copied run layout is nested (`run_<id>/run_<id>/...`), so comparisons should point to the inner run directory when needed.
