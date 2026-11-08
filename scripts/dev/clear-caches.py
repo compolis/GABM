@@ -14,7 +14,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 # Logging setup
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 LOG_DIR = os.path.join(ROOT, 'data', 'logs', 'docs')
 os.makedirs(LOG_DIR, exist_ok=True)
 LOG_FILE = os.path.join(LOG_DIR, 'clear_caches.log')

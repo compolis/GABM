@@ -15,7 +15,7 @@ import sys
 # Third-party imports
 import tomlkit
 
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).resolve().parents[2]
 REQ_TXT = ROOT / "requirements.txt"
 REQ_LLM_TXT = ROOT / "requirements-local-llm.txt"
 SETUP_CFG = ROOT / "setup.cfg"

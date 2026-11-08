@@ -11,7 +11,7 @@ import re
 from pathlib import Path
 
 # Paths
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).resolve().parents[2]
 README_SRC = ROOT / "README.md"
 USER_GUIDE = ROOT / "USER_GUIDE.md"
 PYPI_README = ROOT / "README-pypi.md"
