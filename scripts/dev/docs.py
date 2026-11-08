@@ -25,7 +25,7 @@ from docs_assets import DOC_FILES
 # Files to copy from .github/ to docs/ (if present)
 from docs_assets import GITHUB_DOC_FILES
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DOCS = os.path.join(ROOT, "docs")
 
 # Logging setup

@@ -20,7 +20,7 @@ from docs_assets import DOC_FILES
 from docs_assets import GITHUB_DOC_FILES
 
 # Paths
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DOCS = os.path.join(ROOT, "docs")
 
 # Logging setup

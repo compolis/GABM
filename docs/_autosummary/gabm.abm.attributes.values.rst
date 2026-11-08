@@ -1,7 +1,7 @@
-gabm.abm.attributes.family module
+gabm.abm.attributes.values module
 =================================
 
-.. automodule:: gabm.abm.attributes.family
+.. automodule:: gabm.abm.attributes.values
    :members:
    :show-inheritance:
    :undoc-members:

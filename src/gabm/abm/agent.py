@@ -126,10 +126,11 @@ class TraitBeliefState:
     """
     Typed container for trait beliefs.
 
-    Attributes:
-        self_trait_opinions: Person's perceived values of own base traits.
-        other_trait_opinions: Nested structure keyed as
-            other_agent_id -> order -> trait_topic_id -> value.
+    ``self_trait_opinions`` stores a person's perceived values of their own
+    base traits.
+
+    ``other_trait_opinions`` stores nested values keyed as:
+    ``other_agent_id -> order -> trait_topic_id -> value``.
     """
     self_trait_opinions: dict[TraitTopicID, float] = field(default_factory=dict)
     other_trait_opinions: dict[AgentID, dict[int, dict[TraitTopicID, float]]] = field(default_factory=dict)
@@ -744,12 +745,12 @@ class Person(Agent):
         """
         Set this person's opinion about another person's trait value.
 
-        Args:
-            other_agent_id: Other agent's ID.
-            trait_id: Trait topic ID.
-            value: Opinion value.
-            order: 1 for opinion of other's base trait, 2+ for higher-order
-                opinions (e.g., other's opinion of traits).
+        :param other_agent_id: Other agent's ID.
+        :param trait_id: Trait topic ID.
+        :param value: Opinion value.
+        :param order:
+            1 for opinion of other's base trait, 2+ for higher-order opinions
+            (for example, other's opinion of traits).
         """
         self.trait_beliefs.set_other_opinion(other_agent_id, trait_id, value, order)
 
@@ -850,17 +851,19 @@ class Person(Agent):
         The openness-to-experience trait (TraitTopicID(0)) influences how many
         interests are generated: higher openness leads to more interests.
 
-        Args:
-            seed: Optional seed for deterministic generation. If None, the global
-                random module state is used.
-            total_interest_topics: Number of available interest topics to sample from.
-            overwrite: If True, replace existing interests. If False and interests
-                already exist, leave them unchanged.
-            interest_topics: Optional topic catalog to sample from. If provided,
-                topic IDs in this dictionary are used instead of synthesizing IDs
-                from total_interest_topics.
-
-        Return:
+        :param seed:
+            Optional seed for deterministic generation. If ``None``, the global
+            random module state is used.
+        :param total_interest_topics:
+            Number of available interest topics to sample from.
+        :param overwrite:
+            If ``True``, replace existing interests. If ``False`` and interests
+            already exist, leave them unchanged.
+        :param interest_topics:
+            Optional topic catalog to sample from. If provided, topic IDs in this
+            dictionary are used instead of synthesizing IDs from
+            ``total_interest_topics``.
+        :return:
             The person's interest dictionary.
         """
         if len(self.interests) > 0 and not overwrite:

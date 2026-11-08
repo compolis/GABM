@@ -231,4 +231,6 @@ data/output/examples/**
 *:Zone.Identifier
 *:sec.endpointdlp
 
+# ExcludeVisual Studio Code workspace files
+*.code-workspace
 

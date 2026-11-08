@@ -19,6 +19,7 @@ DOC_FILES = [
     "requirements-local-llm.txt",
     "API_KEYS.md",
     "HUGGING_FACE.md",
+    "Running_On_HPC_Systems.md",
     "ROADMAP.md",
     "CHANGE_LOG.md",
     "DEVELOPMENT_HISTORY.md",

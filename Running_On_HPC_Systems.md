@@ -15,10 +15,10 @@ Keep HPC scripts under:
 - `scripts/hpc/`
 
 Current Calder examples:
-- [run.sh](scripts/hpc/calder/run.sh)
-- [run_server.sh](scripts/hpc/calder/run_server.sh)
-- [run_client.sh](scripts/hpc/calder/run_client.sh)
-- [run_chat_concurrency.sh](scripts/hpc/calder/run_chat_concurrency.sh)
+- `scripts/hpc/calder/run.sh`
+- `scripts/hpc/calder/run_server.sh`
+- `scripts/hpc/calder/run_client.sh`
+- `scripts/hpc/calder/run_chat_concurrency.sh`
 
 Compatibility note:
 - Prefer using scripts directly from `scripts/hpc/` for new workflows.

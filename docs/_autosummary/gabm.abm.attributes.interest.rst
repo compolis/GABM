@@ -1,7 +1,7 @@
-gabm.abm.attributes.politics module
+gabm.abm.attributes.interest module
 ===================================
 
-.. automodule:: gabm.abm.attributes.politics
+.. automodule:: gabm.abm.attributes.interest
    :members:
    :show-inheritance:
    :undoc-members:
