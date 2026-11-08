@@ -93,6 +93,10 @@ git push origin my_feature
 ```
 
 - Open a PR on GitHub to merge your `my_feature` branch into the the `main` branch of the upstream GABM Repository.
+  - Use the PR template in [.github/pull_request_template.md](.github/pull_request_template.md) to record:
+    - release-note-ready bullets grouped as Added / Changed / Fixed / Docs / Infra
+    - validation commands and outcomes
+    - whether [CHANGE_LOG.md](CHANGE_LOG.md) was updated
   - Please refer to any related issues in the PR comments.
 - The PR will be reviewed and once the review is complete, changes will be merged.
 
