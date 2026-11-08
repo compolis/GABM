@@ -1,24 +1,9 @@
 # Change Log
 
-
-## Table of Contents
-- [Overview](#overview)
-- [Unreleased](#unreleased)
-- [0.3.0 - 2026-10-23](#030---2026-10-23)
-- [0.2.6 - 2026-02-20](#026---2026-02-20)
-- [0.2.5 - 2026-02-19](#025---2026-02-19)
-- [0.2.2 - 2026-02-18](#022---2026-02-18)
-- [0.2.0 - 2026-02-17](#020---2026-02-17)
-- [0.1.1 - 2026-02-11](#011---2026-02-11)
-- [0.1.0 - 2026-02-06](#010---2026-02-06)
-
-
-## Overview
 A summary of changes are documented in this file.
 
 
 ## [Unreleased]
-- Prepare and validate hosted-vs-HPC ensemble comparisons for release readiness.
 - Coordinate downstream adaptation work in ClimateAction-GABM (CAG) to use the latest GABM example and reproducibility patterns.
 
 

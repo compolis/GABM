@@ -141,6 +141,16 @@ def _safe_slug(text: str) -> str:
     return cleaned.strip("_") or "sweep"
 
 
+def _looks_like_hpc_chat_run(path: Path) -> bool:
+    probe_names = {
+        "clients",
+        "launcher_summary.log",
+        "gpu_memory.log",
+        "vllm_server.log",
+    }
+    return any((path / name).exists() for name in probe_names)
+
+
 def compare_sweeps(
     sweep_a: Path,
     sweep_b: Path,
@@ -157,7 +167,13 @@ def compare_sweeps(
     missing = [path for path in [csv_a, csv_b, summary_a, summary_b] if not path.exists()]
     if missing:
         missing_text = ", ".join(str(path) for path in missing)
-        raise FileNotFoundError(f"Missing required sweep artifact(s): {missing_text}")
+        extra_hint = ""
+        if _looks_like_hpc_chat_run(Path(sweep_a)) or _looks_like_hpc_chat_run(Path(sweep_b)):
+            extra_hint = (
+                " Detected HPC chat-run style directories. "
+                "For those outputs use: make compare-hpc-chat-runs RUN_A=<run|id|path> RUN_B=<run|id|path>."
+            )
+        raise FileNotFoundError(f"Missing required sweep artifact(s): {missing_text}.{extra_hint}")
 
     rows_a = _load_csv_rows(csv_a)
     rows_b = _load_csv_rows(csv_b)

@@ -413,6 +413,14 @@ To generate markdown rows for reproducibility stress/concurrency summaries:
 make summarize-hpc-concurrency INPUTS='--header --job-id 511621 --job-id 511679'
 ```
 
+To generate a single markdown report that includes run manifest details, pairwise comparison summaries, and concurrency rows:
+
+```bash
+make report-hpc-chat-runs \
+  INPUTS='--run /path/to/run_835891 --run /path/to/run_836062 --run /path/to/run_836067 --run /path/to/run_839326 --run /path/to/run_839328 --run /path/to/run_839329 --title Calder_HPC_reproducibility_report_Qwen3-14B' \
+  OUTPUT=data/output/examples/chat/hpc/Calder/repro_report.md
+```
+
 In the chat example, participant names are now part of `Person` state:
 - If a name is explicitly provided when creating a person, that name is used.
 - If no name is provided, `Person` auto-assigns a name from the ONS files (using year of birth and gender).

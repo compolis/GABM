@@ -3,7 +3,9 @@
 import csv
 import json
 
-from gabm.examples.ensembles.compare_sweeps import compare_sweeps, parse_cli_args
+import pytest
+
+from analysis.chat.compare_sweeps import compare_sweeps, parse_cli_args
 
 
 def _write_csv(path, rows):
@@ -103,3 +105,19 @@ def test_compare_sweeps_writes_report_and_summary(tmp_path):
 
     delta = report["column_deltas"]["transcript_char_count"]["delta_mean_b_minus_a"]
     assert delta == 10.0
+
+
+def test_compare_sweeps_hpc_dir_hint_when_sweep_artifacts_missing(tmp_path):
+    sweep_a = tmp_path / "run_1"
+    sweep_b = tmp_path / "run_2"
+    sweep_a.mkdir(parents=True, exist_ok=True)
+    sweep_b.mkdir(parents=True, exist_ok=True)
+
+    # Mimic HPC run folder structure that users often pass by mistake.
+    (sweep_a / "clients").mkdir()
+    (sweep_b / "clients").mkdir()
+    (sweep_a / "launcher_summary.log").write_text("job summary", encoding="utf-8")
+    (sweep_b / "launcher_summary.log").write_text("job summary", encoding="utf-8")
+
+    with pytest.raises(FileNotFoundError, match="compare-hpc-chat-runs"):
+        compare_sweeps(sweep_a=sweep_a, sweep_b=sweep_b)

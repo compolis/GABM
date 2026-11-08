@@ -35,19 +35,20 @@ In the rest of the document "you" means you as a GABM developer.
 
 If you are resuming Calder/HPC reproducibility and release-prep work after a break, start here:
 
-- Release checklist and evidence gates: [RELEASE_PREP_0.3.0.md](RELEASE_PREP_0.3.0.md)
-- End-of-week snapshot/handover note: [HANDOVER_2026-10-30.md](HANDOVER_2026-10-30.md)
-- Qwen3-14B reproducibility protocol and results template: [REPRODUCIBILITY_QWEN3_14B.md](REPRODUCIBILITY_QWEN3_14B.md)
+- Qwen3-14B reproducibility protocol + results template (primary source): [REPRODUCIBILITY_QWEN3_14B.md](REPRODUCIBILITY_QWEN3_14B.md)
+- Release checklist and evidence gates (decision layer): [RELEASE_PREP_0.3.0.md](RELEASE_PREP_0.3.0.md)
+- Historical handover snapshot (context only): [HANDOVER_2026-10-30.md](HANDOVER_2026-10-30.md)
 - Calder concurrent launcher (single server, many clients): [scripts/hpc/calder/run_chat_concurrency.sh](scripts/hpc/calder/run_chat_concurrency.sh)
-- Run-to-run determinism comparator: [scripts/analysis/compare_chat_runs.py](scripts/analysis/compare_chat_runs.py)
-- Markdown row generator for stress-summary tables: [scripts/analysis/generate_concurrency_rows.py](scripts/analysis/generate_concurrency_rows.py)
+- Run-to-run determinism comparator: [scripts/analysis/chat/compare_chat_runs.py](scripts/analysis/chat/compare_chat_runs.py)
+- Markdown row generator for stress-summary tables: [scripts/analysis/chat/generate_concurrency_rows.py](scripts/analysis/chat/generate_concurrency_rows.py)
 
 Suggested quick restart steps:
 
 1. Confirm queued/completed Calder job IDs and run directories.
-2. For determinism checks, compare paired runs with `compare_chat_runs.py`.
-3. For stress-summary updates, generate table rows with `generate_concurrency_rows.py` and paste into [REPRODUCIBILITY_QWEN3_14B.md](REPRODUCIBILITY_QWEN3_14B.md).
-4. Update release evidence notes in [RELEASE_PREP_0.3.0.md](RELEASE_PREP_0.3.0.md).
+2. Update experiment outcomes in [REPRODUCIBILITY_QWEN3_14B.md](REPRODUCIBILITY_QWEN3_14B.md):
+   - run determinism comparisons with `compare_chat_runs.py`
+   - add stress-summary rows from `generate_concurrency_rows.py`
+3. Use [RELEASE_PREP_0.3.0.md](RELEASE_PREP_0.3.0.md) to evaluate release readiness.
 
 
 ## Contributing and Communicating
@@ -104,10 +105,13 @@ The root project directory contains documentation and files needed for building 
 - `dist/`: Output directory for built distributions.
 - `docs/`: Documentation
 - `scripts/`: Utility scripts
+- `scripts/analysis/`: Post-processing and analysis utilities, organized by example domain
+- `scripts/analysis/chat/`: Analysis helpers for chat/chat_opinion runs and ensemble comparisons
 - `src/`: Python source code
 - `src/gabm/examples/`: Runnable example simulation modules (source logic lives here)
 - `tests/`: Test suite for src
 - `tests/src/gabm/examples/`: Tests for example simulation modules
+- `tests/scripts/analysis/`: Tests for analysis/post-processing script utilities
 - `venv-build-test/`: For temporary virtual environments created for testing.
 
 
@@ -299,6 +303,9 @@ For maintainability, all Makefile targets that depend on other build steps shoul
 | `make run-local` | Run gabm using local source (PYTHONPATH=src) |
 | `make run-installed` | Run gabm using installed package |
 | `make run-example-chat` | Run the chat example simulation with ONS-backed names from `data/input/abm/` |
+| `make compare-hpc-chat-runs RUN_A=... RUN_B=...` | Compare two HPC chat run directories via transcript/metadata/cache hashes |
+| `make summarize-hpc-concurrency INPUTS='...'` | Generate markdown rows from `launcher_summary.log` files |
+| `make report-hpc-chat-runs INPUTS='...' [OUTPUT=...]` | Generate a single markdown reproducibility report for multiple HPC runs |
 
 
 All Python scripts used by Makefile targets are in the `scripts/` directory and are named consistently with their Makefile targets (e.g., `make docs-clean` runs `scripts/docs-clean.py`).
@@ -471,6 +478,16 @@ git worktree remove /tmp/gh-pages-xxxx...
 
 For more details, see the comments in the Makefile and the deployment script.
 
+## Archiving Historical Notes
+
+To keep root-level documentation focused on active guidance:
+
+- Keep current/active operational and developer guidance in root markdown files.
+- Move time-bound snapshots (for example handover notes, dated experiment summaries, or superseded one-off runbooks) into [archive/](archive/).
+- Mirror archived markdown files in [docs/archive/](docs/archive/) when they should appear in built Sphinx documentation navigation.
+- If preserving old links is useful, keep a short root-level stub page that points to:
+  - the active guide, and
+  - the archived snapshot.
 
 ## GitHub Copilot
 
@@ -541,4 +558,3 @@ class MyLLMService(LLMService):
 ## Additional Resources
 
 - [HUGGING_FACE.md](HUGGING_FACE.md) — for details on obtaining and using local Apertus and other Hugging Face models
-

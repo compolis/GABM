@@ -26,7 +26,7 @@
 # Caution: Some commands (like git-clean, release, and delete-release) can modify your git history or delete tags. Always review the scripts they call (in the scripts/ directory) to ensure they do what you expect before running these commands.
 
 # Phony targets (not actual files)
-.PHONY: help test docs docs-clean gh-pages-deploy gh-pages-deploy2 clean git-clean setup-llms clear-caches llm-drift-check sync sync-feature release delete-release build build-test pypi-release testpypi-release bump-version run-local run-installed run-example-chat run-example-chat-ensemble run-example-chat-opinion run-example-chat-opinion-ensemble compare-example-chat compare-ensemble-sweeps compare-hpc-chat-runs summarize-hpc-concurrency
+.PHONY: help test docs docs-clean gh-pages-deploy gh-pages-deploy2 clean git-clean setup-llms clear-caches llm-drift-check sync sync-feature release delete-release build build-test pypi-release testpypi-release bump-version run-local run-installed run-example-chat run-example-chat-ensemble run-example-chat-opinion run-example-chat-opinion-ensemble compare-example-chat compare-ensemble-sweeps compare-hpc-chat-runs summarize-hpc-concurrency report-hpc-chat-runs
 
 # Show available Makefile commands
 help:
@@ -60,6 +60,7 @@ help:
 	@echo "  compare-example-chat - Compare two chat run output directories (usage: make compare-example-chat RUN_A=<dir> RUN_B=<dir> [OUTPUT_ROOT=...])"
 	@echo "  compare-hpc-chat-runs - Compare two HPC chat run directories (usage: make compare-hpc-chat-runs RUN_A=<run|id|path> RUN_B=<run|id|path> [WORKING_DIR=/flash-calder/users/<user>/gabm])"
 	@echo "  summarize-hpc-concurrency - Generate markdown rows from launcher summaries (usage: make summarize-hpc-concurrency INPUTS='--header --job-id 511621 --job-id 511679' [WORKING_DIR=...])"
+	@echo "  report-hpc-chat-runs - Generate a full markdown comparison/concurrency report (usage: make report-hpc-chat-runs INPUTS='--run /path/to/run_1 --run /path/to/run_2 [--title ...]' [OUTPUT=path] [WORKING_DIR=...])"
 	@echo "Use 'make <target>' to run a specific target. For targets that require additional variables (like release and sync-feature), include them as shown in the usage instructions."
 
 # Run all tests (requires pytest)
@@ -293,7 +294,7 @@ compare-ensemble-sweeps:
 	if [ -n "$$RUN_ID" ]; then RUN_ID_ARG=" --run-id $$RUN_ID"; fi; \
 	OUTPUT_ROOT_ARG=""; \
 	if [ -n "$$OUTPUT_ROOT" ]; then OUTPUT_ROOT_ARG=" --output-root $$OUTPUT_ROOT"; fi; \
-	PYTHONPATH=src python3 src/gabm/examples/ensembles/compare_sweeps.py --sweep-a "$(SWEEP_A)" --sweep-b "$(SWEEP_B)" --label-a "$${LABEL_A:-sweep_a}" --label-b "$${LABEL_B:-sweep_b}"$$OUTPUT_ROOT_ARG$$RUN_ID_ARG
+	python3 scripts/analysis/chat/compare_sweeps.py --sweep-a "$(SWEEP_A)" --sweep-b "$(SWEEP_B)" --label-a "$${LABEL_A:-sweep_a}" --label-b "$${LABEL_B:-sweep_b}"$$OUTPUT_ROOT_ARG$$RUN_ID_ARG
 
 # Compare two chat example runs by diffing their captured artifacts.
 # Usage: make compare-example-chat RUN_A=seed42_run1 RUN_B=seed42_run2 [OUTPUT_ROOT=data/output/examples/chat]
@@ -340,7 +341,7 @@ compare-example-chat:
 	fi; \
 	exit $$STATUS
 
-# Compare two HPC chat run directories using scripts/analysis/compare_chat_runs.py
+# Compare two HPC chat run directories using scripts/analysis/chat/compare_chat_runs.py
 # Usage: make compare-hpc-chat-runs RUN_A=run_511621 RUN_B=/path/to/run_511679 [WORKING_DIR=/flash-calder/users/<user>/gabm]
 compare-hpc-chat-runs:
 	@if [ -z "$(RUN_A)" ] || [ -z "$(RUN_B)" ]; then \
@@ -350,7 +351,7 @@ compare-hpc-chat-runs:
 	fi; \
 	WORKING_DIR_ARG=""; \
 	if [ -n "$(WORKING_DIR)" ]; then WORKING_DIR_ARG=" --working-dir $(WORKING_DIR)"; fi; \
-	python3 scripts/analysis/compare_chat_runs.py --run-a "$(RUN_A)" --run-b "$(RUN_B)"$$WORKING_DIR_ARG
+	python3 scripts/analysis/chat/compare_chat_runs.py --run-a "$(RUN_A)" --run-b "$(RUN_B)"$$WORKING_DIR_ARG
 
 # Generate markdown rows for concurrency/stress tables from launcher summaries.
 # Usage: make summarize-hpc-concurrency INPUTS='--header --job-id 511621 --job-id 511679' [WORKING_DIR=/flash-calder/users/<user>/gabm]
@@ -362,4 +363,18 @@ summarize-hpc-concurrency:
 	fi; \
 	WORKING_DIR_ARG=""; \
 	if [ -n "$(WORKING_DIR)" ]; then WORKING_DIR_ARG=" --working-dir $(WORKING_DIR)"; fi; \
-	python3 scripts/analysis/generate_concurrency_rows.py $$WORKING_DIR_ARG $(INPUTS)
+	python3 scripts/analysis/chat/generate_concurrency_rows.py $$WORKING_DIR_ARG $(INPUTS)
+
+# Generate a markdown reproducibility report for multiple HPC chat runs.
+# Usage: make report-hpc-chat-runs INPUTS='--run /path/to/run_1 --run /path/to/run_2 [--pair /path/to/run_1,/path/to/run_2] [--title ...]' [OUTPUT=report.md] [WORKING_DIR=/flash-calder/users/<user>/gabm]
+report-hpc-chat-runs:
+	@if [ -z "$(INPUTS)" ]; then \
+		echo "Error: INPUTS must be set."; \
+		echo "Usage: make report-hpc-chat-runs INPUTS='--run /path/to/run_1 --run /path/to/run_2 [--pair /path/to/run_1,/path/to/run_2] [--title ...]' [OUTPUT=report.md] [WORKING_DIR=...]"; \
+		exit 1; \
+	fi; \
+	WORKING_DIR_ARG=""; \
+	if [ -n "$(WORKING_DIR)" ]; then WORKING_DIR_ARG=" --working-dir $(WORKING_DIR)"; fi; \
+	OUTPUT_ARG=""; \
+	if [ -n "$(OUTPUT)" ]; then OUTPUT_ARG=" --output $(OUTPUT)"; fi; \
+	python3 scripts/analysis/chat/generate_hpc_chat_report.py $$WORKING_DIR_ARG $(INPUTS)$$OUTPUT_ARG

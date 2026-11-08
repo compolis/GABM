@@ -29,6 +29,16 @@ CONTACT.md
 
 ---
 
+```{toctree}
+:maxdepth: 1
+:caption: Archived Notes
+
+archive/HANDOVER_2026-10-30.md
+archive/RunningApertusOnCalder.md
+```
+
+---
+
 
 ```{toctree}
 :maxdepth: 3
