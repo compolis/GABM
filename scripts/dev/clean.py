@@ -4,7 +4,7 @@ This includes removing the Sphinx build directory (docs/_build), all __pycache__
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
@@ -26,45 +26,43 @@ handler.setFormatter(formatter)
 if not logger.hasHandlers():
     logger.addHandler(handler)
 
+
+def _rmtree_onexc(func, path, exc_info):
+    """Handle rmtree exceptions, ignoring transient missing-file races."""
+    err = exc_info[1] if isinstance(exc_info, tuple) else exc_info
+    if isinstance(err, FileNotFoundError):
+        logger.warning(f"Skipped missing path while deleting {path}: {err}")
+        return
+    raise err
+
+
+def _remove_tree(path):
+    """Remove a directory tree if present with robust error handling."""
+    if os.path.exists(path):
+        shutil.rmtree(path, onexc=_rmtree_onexc)
+        logger.info(f"Removed: {path}")
+    else:
+        logger.info(f"Directory not found: {path}")
+
 # Remove docs/_build
 docs_build_dir = os.path.join("docs", "_build")
-if os.path.exists(docs_build_dir):
-    shutil.rmtree(docs_build_dir)
-    logger.info(f"Removed: {docs_build_dir}")
-else:
-    logger.warning(f"Build directory not found: {docs_build_dir}")
+_remove_tree(docs_build_dir)
 
 # Remove dist/ directory
 dist_dir = os.path.join(ROOT, "dist")
-if os.path.exists(dist_dir):
-    shutil.rmtree(dist_dir)
-    logger.info(f"Removed: {dist_dir}")
-else:
-    logger.info(f"dist directory not found: {dist_dir}")
+_remove_tree(dist_dir)
 
 # Remove build/ directory
 build_dir = os.path.join(ROOT, "build")
-if os.path.exists(build_dir):
-    shutil.rmtree(build_dir)
-    logger.info(f"Removed: {build_dir}")
-else:
-    logger.info(f"build directory not found: {build_dir}")
+_remove_tree(build_dir)
 
 # Remove src/gabm.egg-info
 egg_info_dir = os.path.join("src", "gabm.egg-info")
-if os.path.exists(egg_info_dir):
-    shutil.rmtree(egg_info_dir)
-    logger.info(f"Removed: {egg_info_dir}")
-else:
-    logger.info(f"egg-info directory not found: {egg_info_dir}")
+_remove_tree(egg_info_dir)
 
 # Remove venv-build-test
 venv_dir = os.path.join("venv-build-test")
-if os.path.exists(venv_dir):
-    shutil.rmtree(venv_dir)
-    logger.info(f"Removed: {venv_dir}")
-else:
-    logger.info(f"Test venv not found: {venv_dir}")
+_remove_tree(venv_dir)
 
 # Remove all __pycache__ directories
 for root, dirs, files in os.walk("."):
@@ -72,7 +70,7 @@ for root, dirs, files in os.walk("."):
         if d == "__pycache__":
             pyc_dir = os.path.join(root, d)
             try:
-                shutil.rmtree(pyc_dir)
+                shutil.rmtree(pyc_dir, onexc=_rmtree_onexc)
                 logger.info(f"Removed: {pyc_dir}")
             except Exception as e:
                 logger.error(f"Could not remove {pyc_dir}: {e}")
