@@ -21,7 +21,9 @@ dependencies = [
     "openai==2.21.0",
     "google-generativeai==0.4.1",
     "httpx==0.28.1",
-    "deepseek==1.0.0"
+    "deepseek==1.0.0",
+    "numpy==2.4.2",
+    "networkx==3.6.1"
 ]
 
 [project.optional-dependencies]
@@ -33,5 +35,4 @@ llm-local = [
 [tool.setuptools]
 package-dir = {"" = "src"}
 packages = ["gabm"]
-
 
