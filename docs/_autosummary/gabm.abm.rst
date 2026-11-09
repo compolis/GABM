@@ -21,6 +21,7 @@ Submodules
    gabm.abm.attribute
    gabm.abm.environment
    gabm.abm.group
+   gabm.abm.networks
    gabm.abm.survey
 
 Module contents

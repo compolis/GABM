@@ -7,6 +7,7 @@
 - [Contributing and Communicating](#contributing-and-communicating)
 - [Project Directories](#project-directories)
 - [Testing](#testing)
+- [Network Utilities](#network-utilities)
 - [Example Simulations and Reproducibility](#example-simulations-and-reproducibility)
 - [Python Package Entry Point](#python-package-entry-point)
 - [Makefile Targets](#makefile-targets)
@@ -250,6 +251,16 @@ In environments without outbound network access (for example HPC compute nodes),
 You may see DeprecationWarnings related to protobuf (e.g., `Type google._upb._message.MessageMapContainer uses PyType_Spec with a metaclass that has custom tp_new`).
 These warnings originate from upstream libraries (e.g., Google APIs) and do not affect GABM functionality. They are expected to be resolved in future library updates. Please ignore them unless they cause test failures or runtime errors.
 
+
+## Network Utilities
+
+`gabm.abm.networks` provides seeded graph builders for stochastic-block,
+Erdős–Rényi, Watts–Strogatz, Barabási–Albert, and similarity-weighted
+networks, along with structural diagnostics and deterministic component
+repair. Builders accept caller-owned node IDs; the stochastic-block and
+similarity-weighted variants also accept caller-supplied block labels or
+feature rows. Domain-specific attribute selection and research defaults
+belong in the application using these utilities.
 
 ## Python Package Entry Point
 

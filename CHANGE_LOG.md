@@ -4,7 +4,10 @@ A summary of changes are documented in this file.
 
 
 ## [Unreleased]
-- Coordinate downstream adaptation work in ClimateAction-GABM (CAG) to use the latest GABM example and reproducibility patterns.
+- Added generic seeded network builders, structural diagnostics, and
+  connectivity repair in `gabm.abm.networks`. Declared their runtime
+  dependencies and documented the API; downstream CAG wiring remains pending
+  publication of a new GABM release.
 
 
 ## [0.3.0] - 2026-10-23

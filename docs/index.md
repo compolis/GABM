@@ -50,6 +50,7 @@ _autosummary/gabm.abm.agent
 _autosummary/gabm.abm.attribute
 _autosummary/gabm.abm.environment
 _autosummary/gabm.abm.group
+_autosummary/gabm.abm.networks
 _autosummary/gabm.abm.survey
 _autosummary/gabm.abm.attributes
 _autosummary/gabm.abm.democracy
