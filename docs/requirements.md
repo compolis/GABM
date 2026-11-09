@@ -21,6 +21,9 @@ deepseek==1.0.0
 
 # Additional
 # ----------
+# Core seeded network builders and diagnostics
+numpy==2.4.2
+networkx==3.6.1
 # For plotting graphs
 matplotlib==3.10.8
 
