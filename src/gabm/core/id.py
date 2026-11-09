@@ -11,13 +11,13 @@ import logging
 
 # Generic base class for all ID types
 class GABMID:
-    def __init__(self, id_value: int):
+    def __init__(self, id: int):
         """
         Initialize
         Args:
-            id_value (int): The unique identifier value.
+            id (int): The unique identifier value.
         """
-        self.id = id_value
+        self.id = id
 
     def __str__(self):
         """

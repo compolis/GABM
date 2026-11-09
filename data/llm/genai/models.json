@@ -12,30 +12,6 @@
     "description": ""
   },
   {
-    "id": "models/gemini-2.0-flash",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/gemini-2.0-flash-001",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/gemini-2.0-flash-lite-001",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/gemini-2.0-flash-lite",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
     "id": "models/gemini-2.5-flash-preview-tts",
     "object": "model",
     "owned_by": "google",
@@ -48,37 +24,13 @@
     "description": ""
   },
   {
-    "id": "models/gemma-3-1b-it",
+    "id": "models/gemma-4-26b-a4b-it",
     "object": "model",
     "owned_by": "google",
     "description": ""
   },
   {
-    "id": "models/gemma-3-4b-it",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/gemma-3-12b-it",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/gemma-3-27b-it",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/gemma-3n-e4b-it",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/gemma-3n-e2b-it",
+    "id": "models/gemma-4-31b-it",
     "object": "model",
     "owned_by": "google",
     "description": ""
@@ -114,18 +66,6 @@
     "description": ""
   },
   {
-    "id": "models/gemini-2.5-flash-lite-preview-09-2025",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/gemini-3-pro-preview",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
     "id": "models/gemini-3-flash-preview",
     "object": "model",
     "owned_by": "google",
@@ -150,7 +90,19 @@
     "description": ""
   },
   {
+    "id": "models/gemini-3.1-flash-lite",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
     "id": "models/gemini-3-pro-image-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3-pro-image",
     "object": "model",
     "owned_by": "google",
     "description": ""
@@ -168,13 +120,145 @@
     "description": ""
   },
   {
-    "id": "models/gemini-robotics-er-1.5-preview",
+    "id": "models/gemini-3.1-flash-image",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.1-flash-lite-image",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-nano-banana-2.1",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.5-flash",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.5-flash-lite",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-omni-flash-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-omni-1.1-flash",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.5-transcribe",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.6-flash",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.7-flash",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.8-flash",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/lyria-3-clip-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/lyria-3-pro-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/lyria-3.5",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.1-flash-tts-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.8-flash-tts",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.8-flash-lite-tts",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-robotics-er-2-preview",
     "object": "model",
     "owned_by": "google",
     "description": ""
   },
   {
     "id": "models/gemini-2.5-computer-use-preview-10-2025",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/antigravity-preview-05-2026",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/antigravity-preview-09-2026",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/antigravity-preview-latest",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/deep-research-max-preview-04-2026",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/deep-research-preview-04-2026",
     "object": "model",
     "owned_by": "google",
     "description": ""
@@ -198,43 +282,13 @@
     "description": ""
   },
   {
+    "id": "models/gemini-embedding-2",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
     "id": "models/aqa",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/imagen-4.0-generate-001",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/imagen-4.0-ultra-generate-001",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/imagen-4.0-fast-generate-001",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/veo-2.0-generate-001",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/veo-3.0-generate-001",
-    "object": "model",
-    "owned_by": "google",
-    "description": ""
-  },
-  {
-    "id": "models/veo-3.0-fast-generate-001",
     "object": "model",
     "owned_by": "google",
     "description": ""
@@ -247,6 +301,18 @@
   },
   {
     "id": "models/veo-3.1-fast-generate-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/veo-3.1-lite-generate-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.5-transcribe-live",
     "object": "model",
     "owned_by": "google",
     "description": ""
@@ -265,6 +331,36 @@
   },
   {
     "id": "models/gemini-2.5-flash-native-audio-preview-12-2025",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.1-flash-live-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.8-live",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.8-live-extended-thinking",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-robotics-er-2-streaming-preview",
+    "object": "model",
+    "owned_by": "google",
+    "description": ""
+  },
+  {
+    "id": "models/gemini-3.5-live-translate-preview",
     "object": "model",
     "owned_by": "google",
     "description": ""

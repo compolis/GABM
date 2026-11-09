@@ -3,7 +3,7 @@ Tests for health module.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
-__version__ = "0.1.0"
+__version__ = "0.3.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Third-party imports
@@ -13,6 +13,9 @@ from gabm.abm.attributes.health import HealthID, Health, HealthMap
 from gabm.core.id import GABMID
 
 def test_health_id():
+    """
+    Test the HealthID class.
+    """
     hid0 = HealthID(0)
     hid1 = HealthID(1)
     hid00 = HealthID(0)
@@ -24,6 +27,9 @@ def test_health_id():
     assert hid0 != gabmid0
 
 def test_health():
+    """
+    Test the Health class.
+    """
     hid = HealthID(0)
     description = "unknown"
     health = Health(hid, description)
@@ -33,6 +39,9 @@ def test_health():
     assert repr(health) == f"Health(id={hid}, description='{description}')"
 
 def test_health_map_lookup():
+    """
+    Test the HealthMap lookup.
+    """
     hmap = HealthMap()
     assert isinstance(hmap._map, dict)
     assert len(hmap._map) == 6

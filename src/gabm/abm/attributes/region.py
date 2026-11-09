@@ -1,5 +1,7 @@
 """
-Ethnicity module for GABM.
+Region module for GABM.
+
+For attributing regions to agents, which can influence their behavior and interactions within the simulation.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]

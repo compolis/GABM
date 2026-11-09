@@ -9,26 +9,32 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
 import pytest
-from gabm.abm.group import GroupID, Group, OpinionatedGroup
+from gabm.abm.group import GroupID, Group, OpinionGroup
 from unittest.mock import Mock
-from gabm.abm.attributes.ethnicity import EthnicityID
+from gabm.abm.attributes.gender import GenderID
 from gabm.core.id import GABMID
 
 # --- GroupID Tests ---
 def test_group_id():
+    """
+    Test the GroupID class.
+    """
     gid0 = GroupID(0)
     gid1 = GroupID(1)
     gid00 = GroupID(0)
-    eid0 = EthnicityID(0)
+    gender0 = GenderID(0)
     gabmid0 = GABMID(0)
     assert str(gid0) == "GroupID(0)"
     assert gid0 == gid00
     assert gid0 != gid1
-    assert gid0 != eid0
+    assert gid0 != gender0
     assert gid0 != gabmid0
 
 # --- Group Tests ---
 def test_group_creation_and_membership():
+    """
+    Test the creation of a Group and its membership management.
+    """
     gid = GroupID(1)
     group = Group(gid, name="TestGroup")
     assert group.id == gid
@@ -46,6 +52,9 @@ def test_group_creation_and_membership():
     assert group not in agent.groups
 
 def test_group_str_repr_and_list_members():
+    """
+    Test the string representation, repr, and list_members method of Group.
+    """
     group = Group(GroupID(2), name="Alpha")
     s = str(group)
     r = repr(group)
@@ -53,19 +62,25 @@ def test_group_str_repr_and_list_members():
     assert s == r
     assert isinstance(group.list_members(), tuple)
 
-# --- OpinionatedGroup Tests ---
-def test_opinionated_group_creation_and_opinions():
+# --- OpinionGroup Tests ---
+def test_opinion_group_creation_and_opinions():
+    """
+    Test the creation of an OpinionGroup and its opinions.
+    """
     gid = GroupID(3)
     opinions = {"topic1": Mock(value=5), "topic2": Mock(value=10)}
-    ogroup = OpinionatedGroup(gid, name="OpinionGroup", opinions=opinions)
+    ogroup = OpinionGroup(gid, name="OpinionGroup", opinions=opinions)
     assert ogroup.opinions == opinions
     assert "opinions" in str(ogroup)
     assert "opinions" in repr(ogroup)
 
 # --- get_AverageOpinion Test ---
-def test_opinionated_group_get_average_opinion():
+def test_opinion_group_get_average_opinion():
+    """
+    Test the get_AverageOpinion method of OpinionGroup.
+    """
     gid = GroupID(4)
-    ogroup = OpinionatedGroup(gid, name="OpinionGroup")
+    ogroup = OpinionGroup(gid, name="OpinionGroup")
     # Mock members with get_opinion
     member1 = Mock()
     member1.get_opinion = Mock(return_value=Mock(value=2))

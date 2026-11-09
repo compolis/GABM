@@ -223,4 +223,14 @@ data-bac/
 # Exclude JSONL cache files
 *.jsonl
 
+# Exclude generated example outputs (optionally keep directory placeholders)
+data/output/examples/**
+!data/output/examples/**/.gitkeep
+
+# Exclude platform/security sidecar files
+*:Zone.Identifier
+*:sec.endpointdlp
+
+# ExcludeVisual Studio Code workspace files
+*.code-workspace
 

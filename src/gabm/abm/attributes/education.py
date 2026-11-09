@@ -1,5 +1,7 @@
 """
 Education module for GABM.
+
+For attributing education levels to people, which can influence their behavior and interactions within the simulation.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]

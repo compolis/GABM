@@ -38,7 +38,7 @@ To check your PIP version run:
 pip --version
 ```
 
-To check you GNU Make version run:
+To check your GNU Make version run:
 
 ```bash
 make --version
@@ -71,17 +71,15 @@ Change into the GABM directory. From the project root, install all runtime, deve
 pip install -r requirements-dev.txt
 ```
 
-**Important:** The `torch` package (PyTorch) is required for Apertus LLM model inference and can take several minutes to install. The download size is typically hundreds of megabytes, and the installed package may require over 1 GB of disk space. Please ensure you have sufficient storage and bandwidth before installing. For GPU support, follow the instructions at [pytorch.org](https://pytorch.org/get-started/locally/) to match your environment. Using local installs of Apertus models is optional.
+**Important:** The `torch` package (PyTorch) is required for local LLM model inference and can take several minutes to install. The download size is typically hundreds of megabytes, and the installed package may require over 1 GB of disk space. Please ensure you have sufficient storage and bandwidth before installing. For GPU support, follow the instructions at [pytorch.org](https://pytorch.org/get-started/locally/) to match your environment. Using locally installed LLMs is optional.
 
 **Warning about LLM model downloads:**
 
-If you want to use a local LLM (such as Apertus), see [HUGGING_FACE.md](HUGGING_FACE.md) for full instructions, including authentication and troubleshooting. Downloading the model weights from Hugging Face can require a very large amount of disk space (10–20 GB or more per model) and a fast, stable internet connection. The download and setup of these models is **optional** for most users. If you only want to use API-based LLMs (OpenAI, GenAI, DeepSeek, etc.), you do not need to download any local models.
-
-If you do want to use a local LLM, ensure you have at least 20 GB of free disk space and be prepared for a long download time.
+To use a local LLM, see [HUGGING_FACE.md](HUGGING_FACE.md) for full instructions, including authentication and troubleshooting. Downloading the model weights from Hugging Face can require a significant amount of disk space (10–20 GB or more per model) and a fast, stable internet connection. To use Web-based LLM Services, you do not need to download LLMs.
 
 
 ## 3. Set Up LLM API Keys
-Create `data/api_key.csv` with your API keys for LLM providers. For all supported providers (including PublicAI/Apertus), see [API_KEYS.md](API_KEYS.md) for format and details.
+Create `data/api_key.csv` with your API keys for LLM providers, see [API_KEYS.md](API_KEYS.md) for format and details.
 
 To initialize your environment, test your API keys, and generate model lists and caches for all supported LLMs, run:
 
@@ -89,16 +87,16 @@ To initialize your environment, test your API keys, and generate model lists and
 make setup-llms
 ```
 
-This will:
-- Check for all required API keys (OpenAI, GenAI, DeepSeek, PublicAI)
-- Test each key with a default prompt and model
-- Populate `data/llm/` directories with:
+This:
+- Checks API keys exist for supported services
+- Tests these keys with a default prompt and model
+- Populates `data/llm/` directories with:
   - `models.json` and `models.txt` files for each LLM, detailing available models
   - Response caches: `prompt_response_cache.pkl` and `prompt_response_cache.jsonl` for test prompts sent to the default model of each service
-- Create log files in `data/logs/llm` and `data/logs/setup_llms.log` for diagnostics
-- Report any issues, such as missing or malformed `api_key.csv`, or problems with API keys/services
+- Creates log files in `data/logs/llm` and `data/logs/setup_llms.log` for diagnostics
+- Reports any issues, such as missing or malformed `api_key.csv`, or problems with API keys/services
 
-If you need to clear all caches and model lists (for a fresh start or troubleshooting), use:
+To clear all caches and model lists for a fresh start or troubleshooting, use:
 ```bash
 make clear-caches
 ```
@@ -125,7 +123,7 @@ make docs
 
 
 ## Troubleshooting
-If you encounter errors, double-check your setup steps above. If you want help, [open an issue on GitHub](https://github.com/compolis/GABM/issues/new/choose).
+If you encounter errors, double-check your setup steps above then [open an issue on GitHub](https://github.com/compolis/GABM/issues/new/choose).
 
 
 ## Additional Resources

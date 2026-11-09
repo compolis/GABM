@@ -13,6 +13,7 @@ __version__ = "0.3.0"
 __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # OpenAI client library
+import json
 from openai import OpenAI
 # LLM service base class
 from .llm_service import LLMService
@@ -31,7 +32,7 @@ class OpenAIService(LLMService):
     def simple_extract_text(response):
         return response.choices[0].message.content if hasattr(response, 'choices') and len(response.choices) > 0 else str(response)
 
-    def send(self, api_key, message, model="gpt-3.5-turbo"):
+    def send(self, api_key, message, model="gpt-3.5-turbo", request_options=None):
         """
         Send a prompt to OpenAI and return the response object.
         Caches and logs the response for reproducibility.
@@ -40,21 +41,39 @@ class OpenAIService(LLMService):
             api_key (str): OpenAI API key.
             message (str): Prompt to send.
             model (str): Model name (default: "gpt-3.5-turbo").
+            request_options (dict, optional): OpenAI chat completion options such as seed.
         
         Returns:
             Response object or None on error.
         
         """
-        cached = pre_send_check_and_cache(api_key, message, model, self.cache, self.logger, self.SERVICE_NAME, self.API_KEY_ENV_VAR)
+        options = dict(request_options or {})
+        options = {k: v for k, v in options.items() if v is not None}
+        options_key = json.dumps(options, sort_keys=True, separators=(",", ":")) if options else "{}"
+        cache_key = (message, model, options_key)
+
+        cached = pre_send_check_and_cache(
+            api_key,
+            message,
+            model,
+            self.cache,
+            self.logger,
+            self.SERVICE_NAME,
+            self.API_KEY_ENV_VAR,
+            use_cache=self.use_cache,
+            cache_key=cache_key,
+        )
         if cached is not None:
             return cached
-        cache_key = (message, model)
+
         def api_call():
             client = OpenAI(api_key=api_key)
-            return client.chat.completions.create(
-                model=model,
-                messages=[{"role": "user", "content": message}]
-            )
+            payload = dict(options)
+            payload.update({
+                "model": model,
+                "messages": [{"role": "user", "content": message}],
+            })
+            return client.chat.completions.create(**payload)
         return self._call_with_error_handling(
             call_and_cache_response,
             api_call,

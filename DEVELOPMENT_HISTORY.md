@@ -13,7 +13,7 @@ This document summarises the development of GABM, including key decisions, miles
 
 
 ## GitHub Copilot
-[GitHub Copilot](https://github.com/features/copilot) has been used to help automate release and cleanup tasks, develop document, test and formulate code.
+[GitHub Copilot](https://github.com/features/copilot) has been used to help automate release and cleanup tasks, develop, document, test and formulate code.
 
 
 ## Contributors

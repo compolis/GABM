@@ -3,9 +3,11 @@
 
 ## Table of Contents
 - [Overview](#overview)
+- [Resume This Workstream](#resume-this-workstream)
 - [Contributing and Communicating](#contributing-and-communicating)
 - [Project Directories](#project-directories)
 - [Testing](#testing)
+- [Example Simulations and Reproducibility](#example-simulations-and-reproducibility)
 - [Python Package Entry Point](#python-package-entry-point)
 - [Makefile Targets](#makefile-targets)
 - [Developing Documentation](#developing-documentation)
@@ -25,6 +27,26 @@
 The GABM developer guide provides guidance for developers and maintainers.
 
 Please follow the [Developer Quick Start Guide](DEV_QUICKSTART.md) to get set up to contribute as a developer.
+
+
+## Resume This Workstream
+
+If you are resuming Calder/HPC reproducibility and release-prep work after a break, start here:
+
+- Qwen3-14B reproducibility protocol + results template (primary source): [REPRODUCIBILITY_QWEN3_14B.md](REPRODUCIBILITY_QWEN3_14B.md)
+- Release checklist and evidence gates (decision layer): [RELEASE_PREP_0.3.0.md](RELEASE_PREP_0.3.0.md)
+- Historical handover snapshot (context only): [HANDOVER_2026-10-30.md](HANDOVER_2026-10-30.md)
+- Calder concurrent launcher (single server, many clients): [scripts/hpc/calder/run_chat_concurrency.sh](scripts/hpc/calder/run_chat_concurrency.sh)
+- Run-to-run determinism comparator: [scripts/analysis/chat/compare_chat_runs.py](scripts/analysis/chat/compare_chat_runs.py)
+- Markdown row generator for stress-summary tables: [scripts/analysis/chat/generate_concurrency_rows.py](scripts/analysis/chat/generate_concurrency_rows.py)
+
+Suggested quick restart steps:
+
+1. Confirm queued/completed Calder job IDs and run directories.
+2. Update experiment outcomes in [REPRODUCIBILITY_QWEN3_14B.md](REPRODUCIBILITY_QWEN3_14B.md):
+   - run determinism comparisons with `compare_chat_runs.py`
+   - add stress-summary rows from `generate_concurrency_rows.py`
+3. Use [RELEASE_PREP_0.3.0.md](RELEASE_PREP_0.3.0.md) to evaluate release readiness.
 
 
 ## Contributing and Communicating
@@ -67,6 +89,10 @@ git push origin my_feature
 ```
 
 - Open a PR on GitHub to merge your `my_feature` branch into the the `main` branch of the upstream GABM Repository.
+  - Use the PR template in [.github/pull_request_template.md](.github/pull_request_template.md) to record:
+    - release-note-ready bullets grouped as Added / Changed / Fixed / Docs / Infra
+    - validation commands and outcomes
+    - whether [CHANGE_LOG.md](CHANGE_LOG.md) was updated
   - Please refer to any related issues in the PR comments.
 - The PR is to be reviewed by maintainers and accepted changes merged in due course.
 
@@ -79,8 +105,13 @@ The root project directory contains documentation and files needed for building 
 - `dist/`: Output directory for built distributions.
 - `docs/`: Documentation
 - `scripts/`: Utility scripts
+- `scripts/analysis/`: Post-processing and analysis utilities, organized by example domain
+- `scripts/analysis/chat/`: Analysis helpers for chat/chat_opinion runs and ensemble comparisons
 - `src/`: Python source code
+- `src/gabm/examples/`: Runnable example simulation modules (source logic lives here)
 - `tests/`: Test suite for src
+- `tests/src/gabm/examples/`: Tests for example simulation modules
+- `tests/scripts/analysis/`: Tests for analysis/post-processing script utilities
 - `venv-build-test/`: For temporary virtual environments created for testing.
 
 
@@ -104,11 +135,31 @@ By default, tests marked as `@pytest.mark.slow` are excluded (see `pytest.ini`).
   pytest -m slow
   ```
 
+By default, tests marked as `@pytest.mark.live_llm` are also excluded. These tests require external LLM service access and are not suitable for offline/HPC compute-node default test runs.
+
+Run live external LLM tests with:
+
+  ```bash
+  pytest -m live_llm
+  ```
+
 ### Adding Tests
 
 Please add or update tests when modifying or adding features. Aim for high test coverage to catch regressions and ensure code reliability.
 
+For sustainability and maintainability, functional source code modules are expected to have corresponding tests. In practice, each non-trivial module under `src/gabm/` should have at least one test module under `tests/src/gabm/`.
+
 Mark slow or resource-intensive tests with `@pytest.mark.slow` and set a timeout if needed (e.g., `@pytest.mark.timeout()`).
+
+### Test Data and Fixtures
+
+Store test-only fixture files under `tests/data/` (for example, `tests/data/input/`).
+
+Do not place test fixtures in `data/`, as that directory is intended for runtime/demo inputs and generated logs.
+
+When tests need file-based inputs, prefer paths under `tests/data/` so tests are self-contained and do not depend on mutable runtime data.
+
+For simulation example tests, output artifacts should be written under the corresponding test example directory (for example, `tests/src/gabm/examples/chat/output/`) so output location is explicit and colocated with the tests.
 
 ### Local LLM Tests
 
@@ -119,13 +170,80 @@ To run local LLM tests, ensure your environment is suitable and use:
   pytest -m slow
   ```
 
+To run all optional LLM-related tests (local and live external) when your environment supports it, use:
+  ```bash
+  pytest -m "slow or live_llm"
+  ```
+
+## Example Simulations and Reproducibility
+
+Example simulation logic should live in `src/gabm/examples/...` and be importable. Tests should live in `tests/src/gabm/examples/...` and validate reproducibility.
+
+Recommended pattern:
+- Put executable simulation logic in `src/gabm/examples/<example_name>/sim.py`.
+- Keep tests in `tests/src/gabm/examples/<example_name>/test_sim.py`.
+- Expose a callable (for example `run(...)`) from the source simulation module so tests can execute it directly.
+
+### Person Naming in Examples
+
+`Person` has name state and assignment logic:
+- You can pass `name` directly when constructing a `Person`.
+- If `name` is omitted, `Person` auto-assigns a name from ONS male/female CSV tables using age (year of birth) and gender.
+- Getter/setter methods are available via `get_name()` and `set_name()`.
+
+For chat examples and similar simulations, prefer wiring naming through model creation rather than assigning names in the example script:
+- Pass ONS file overrides into environment-level person creation (`create_random_people(..., ons_male_file=..., ons_female_file=...)`).
+- Read names from person instances (`person.get_name()`) in prompts/transcripts.
+
+Default ONS input paths are expected under `data/input/abm/`.
+
+Reproducibility requirements for simulation tests:
+- Prefer deterministic behavior by explicitly setting random seeds.
+- Avoid hidden randomness from global state; use local RNG objects where practical.
+- When generating multiple stochastic dimensions (for example traits and interests), derive separate deterministic seeds to avoid unintended cross-coupling while preserving reproducibility.
+- Validate output reproducibility by running the same simulation twice with the same seed and asserting identical outputs.
+- Where useful, also assert that changing the seed changes the output.
+
+LLM-specific reproducibility guidance:
+- External LLM responses may drift over time, so strict reproducibility should not depend on live external API calls.
+- Use prompt/response caches when tests should replay known interactions.
+- Local LLM reproducibility tests (for example on HPC) should be marked slow and optional.
+- In HPC environments where compute nodes have no external access, avoid requiring external LLM calls in default test runs.
+- Some code changes do not require clearing LLM caches; cache clearing should be periodic or intentional (for example, after LLM integration changes).
+- Periodically run a cache-cleared LLM verification pass (for example using `make clear-caches` followed by targeted LLM tests) to detect service/API drift.
+
+### Reproducibility Checklist
+
+When adding or updating a simulation example, check the following:
+- Simulation logic is in `src/gabm/examples/<example_name>/sim.py` and is importable.
+- Test logic is in `tests/src/gabm/examples/<example_name>/test_sim.py`.
+- A fixed seed is used for deterministic test runs.
+- Independent random streams are used where separate stochastic processes are modeled (for example traits vs interests).
+- Running the same simulation twice with the same seed gives identical outputs.
+- Changing the seed is tested and expected to change outputs (where randomness is intended).
+- Output paths for tests are explicit and under `tests/src/gabm/examples/.../output/` or `tmp_path`.
+- Tests do not require external network calls in the default `make test` path.
+- LLM-related tests are correctly marked as `slow` and/or `live_llm`.
+
 ### Test Workflow
 
 - PRs should pass the test workflow before being merged.
 - See `.github/workflows/test.yml` for Continuous Integration (CI) details.
 
+### CI and LLM Drift Checks
+
+The default CI workflow should continue to run `make test` only, excluding `slow` and `live_llm` tests for reliability and portability.
+
+Maintainers should run `make llm-drift-check` periodically and especially in these cases:
+- Before cutting a release.
+- After changes to LLM service implementations, prompts, model names, or request/response handling.
+- After dependency updates that can affect LLM client behavior.
+
+In environments without outbound network access (for example HPC compute nodes), skip drift checks and run them in a suitable connected environment instead.
+
 ### Useful pytest markers
 - `@pytest.mark.slow`: Marks tests as slow; skipped by default.
+- `@pytest.mark.live_llm`: Marks tests that require live external LLM APIs; skipped by default.
 - `@pytest.mark.timeout(seconds)`: Fails test if it exceeds the given duration.
 
 ### Note on DeprecationWarnings
@@ -170,6 +288,7 @@ For maintainability, all Makefile targets that depend on other build steps shoul
 | `make gh-pages-deploy` | Build and deploy documentation to GitHub Pages (runs scripts/gh-pages-deploy.py) |
 | `make clean`   | Remove build/test artifacts and Python caches                                     |
 | `make clear-caches` | Delete all LLM caches and model lists (for a clean slate)                    |
+| `make llm-drift-check` | Clear caches and run live LLM integration tests (for periodic drift checks) |
 | `make git-clean` | Clean up merged local branches and prune deleted remotes                        |
 | `make sync`    | Sync main branch with upstream                                                    |
 | `make sync-feature BRANCH=release/0.2.0` | Sync and rebase a feature/release branch onto main     |
@@ -183,6 +302,10 @@ For maintainability, all Makefile targets that depend on other build steps shoul
 | `make bump-version` | Bump the project version everywhere (patch by default; use `make bump-version part=minor` or `part=major` for other bumps). Uses bump2version and updates all relevant files. |
 | `make run-local` | Run gabm using local source (PYTHONPATH=src) |
 | `make run-installed` | Run gabm using installed package |
+| `make run-example-chat` | Run the chat example simulation with ONS-backed names from `data/input/abm/` |
+| `make compare-hpc-chat-runs RUN_A=... RUN_B=...` | Compare two HPC chat run directories via transcript/metadata/cache hashes |
+| `make summarize-hpc-concurrency INPUTS='...'` | Generate markdown rows from `launcher_summary.log` files |
+| `make report-hpc-chat-runs INPUTS='...' [OUTPUT=...]` | Generate a single markdown reproducibility report for multiple HPC runs |
 
 
 All Python scripts used by Makefile targets are in the `scripts/` directory and are named consistently with their Makefile targets (e.g., `make docs-clean` runs `scripts/docs-clean.py`).
@@ -197,7 +320,7 @@ Please refer to the Makefile for full details.
 Markdown files in the root directory, each serving a specific purpose:
   - [README.md](README.md): A general [README](https://en.wikipedia.org/wiki/README) that links to much of the documentation outlined below including the developer and user guides. It is included in the Sphinx documentation and forms the basis for the main Sphinx documentation page.
   - [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): Provides details on expected behavior of developers and reporting procedures.
-  - [USER_GUIDE.md](USER_GUIDE.md): Provides step-by-step instructions for users to get set, and should provide guidance for using GABM.
+  - [USER_GUIDE.md](USER_GUIDE.md): Provides step-by-step instructions for users to get set up, and should provide guidance for using GABM.
   - [DEV_QUICKSTART.md](DEV_QUICKSTART.md) Provides step-by-step instructions for developers to get set up for contributing to GABM development.
   - [DEV_GUIDE.md](DEV_GUIDE.md): Explains how to contribute to GABM as a developer. It provides details about project structure, and workflow guidance.
   - [API_KEYS.md](API_KEYS.md): Explains how to create a file containing API keys for communicating with LLMs.
@@ -281,7 +404,7 @@ The following files and directories are essential for building, testing, and dis
 - `.github/workflows/test.yml` automatically runs `make test` on PRs to the main branch.
 - `.github/workflows/gh-pages-deploy.yml` builds documentation for the gh-pages branch and is for automated docs deployment.
 
-PRs to the [GAB Repository main branch](https://github.com/compolis/GABM/tree/main) must pass the test workflow before merging.
+PRs to the [GABM Repository main branch](https://github.com/compolis/GABM/tree/main) must pass the test workflow before merging.
 
 The gh-pages branch is protected from deletion.
 
@@ -355,10 +478,20 @@ git worktree remove /tmp/gh-pages-xxxx...
 
 For more details, see the comments in the Makefile and the deployment script.
 
+## Archiving Historical Notes
+
+To keep root-level documentation focused on active guidance:
+
+- Keep current/active operational and developer guidance in root markdown files.
+- Move time-bound snapshots (for example handover notes, dated experiment summaries, or superseded one-off runbooks) into [archive/](archive/).
+- Mirror archived markdown files in [docs/archive/](docs/archive/) when they should appear in built Sphinx documentation navigation.
+- If preserving old links is useful, keep a short root-level stub page that points to:
+  - the active guide, and
+  - the archived snapshot.
 
 ## GitHub Copilot
 
-Using [GitHub Copilot](https://github.com/features/copilot)) for [vibe coding](https://en.wikipedia.org/wiki/Vibe_coding), can help with understanding workflows and developing documentation, code and tests.
+Using [GitHub Copilot](https://github.com/features/copilot) for [vibe coding](https://en.wikipedia.org/wiki/Vibe_coding), can help with understanding workflows and developing documentation, code and tests.
 
 GitHub Copilot uses limited context and the chat context does not currently persist between sessions. As a result, it is good to develop/update documentation along with changes. GitHub Copilot can be asked to read the [README](README.md) and [Developer Guide](DEV_GUIDE.md) at the start of a session so as to be more context aware and provide better support.
 
@@ -386,7 +519,7 @@ If you encounter problems, please check relevant log files for details.
 Certain files and directories are intentionally excluded from the repository via `.gitignore` to keep the project clean and secure:
 
 - `data/logs/` — All log files generated by scripts and modules (can be large and environment-specific)
-- `data/io/llm/*/prompt_response_cache.pkl` — LLM response cache files
+- `data/llm/*/prompt_response_cache.pkl` — LLM response cache files
 - `data/api_key.csv` — API keys (never commit secrets)
 
 
@@ -424,5 +557,4 @@ class MyLLMService(LLMService):
 
 ## Additional Resources
 
-- [Apertus LLM Setup and Usage](Apertus.md) — for details on obtaining and using local Apertus LLM models
-
+- [HUGGING_FACE.md](HUGGING_FACE.md) — for details on obtaining and using local Apertus and other Hugging Face models

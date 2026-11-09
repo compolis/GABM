@@ -22,8 +22,9 @@ import matplotlib.pyplot as plt
 # Local imports
 from gabm.abm.environment import Environment, Nation
 from gabm.abm.agent import Agent, Person
-from gabm.abm.group import Group, OpinionatedGroup
+from gabm.abm.group import Group, OpinionGroup
 from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap, OpinionTopic, Opinion
+from gabm.io.read_data import read_api_keys
 
 
 def run_example():
@@ -230,15 +231,67 @@ def run_survey():
     env = Environment(year=year)
     raise NotImplementedError("Survey mode is not yet implemented.")
 
+
+def _has_configured_llm_credentials(api_key_file: Path | None = None) -> bool:
+    """Return True when at least one supported LLM API key is configured."""
+    supported_env_vars = [
+        "OPENAI_API_KEY",
+        "GENAI_API_KEY",
+        "DEEPSEEK_API_KEY",
+        "PUBLICAI_API_KEY",
+    ]
+    for env_var in supported_env_vars:
+        if os.getenv(env_var, "").strip():
+            return True
+
+    csv_path = api_key_file or Path("data/api_key.csv")
+    try:
+        keys = read_api_keys(csv_path)
+    except (FileNotFoundError, ValueError, StopIteration):
+        return False
+
+    for service_name in ("openai", "genai", "deepseek", "publicai"):
+        value = keys.get(service_name)
+        if isinstance(value, str) and value.strip() and not value.startswith("YOUR_"):
+            return True
+    return False
+
+
+def run_chat_example_default():
+    """Run the simple 2-person, 4-round chat example with default OpenAI settings."""
+    from gabm.examples.chat.sim import run
+
+    run(seed=42)
+
+
+def resolve_effective_mode(mode: str) -> str:
+    """Resolve requested mode into an executable mode."""
+    if mode != "auto":
+        return mode
+    if _has_configured_llm_credentials():
+        return "chat"
+    return "example"
+
 def main():
     parser = argparse.ArgumentParser(description="Run GABM simulation.")
-    parser.add_argument('--mode', choices=['example', 'survey'], default='example',
-                        help="Select run mode: 'example' for the demo, 'survey' to change agent opinions.")
+    parser.add_argument(
+        '--mode',
+        choices=['auto', 'chat', 'example', 'survey'],
+        default='auto',
+        help=(
+            "Select run mode: 'auto' prefers the chat example when LLM credentials are configured, "
+            "otherwise falls back to 'example'; 'chat' runs the simple 2-person LLM chat; "
+            "'example' runs the classic ABM demo; 'survey' is placeholder."
+        ),
+    )
     args = parser.parse_args()
+    mode = resolve_effective_mode(args.mode)
 
-    if args.mode == 'example':
+    if mode == 'example':
         run_example()
-    elif args.mode == 'survey':
+    elif mode == 'chat':
+        run_chat_example_default()
+    elif mode == 'survey':
         run_survey()
 
 if __name__ == "__main__":

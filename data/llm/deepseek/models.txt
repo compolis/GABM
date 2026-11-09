@@ -1,5 +1,5 @@
 Available Deepseek models:
 
-Model: deepseek-chat
+Model: deepseek-flash
 
-Model: deepseek-reasoner
+Model: deepseek-v4-pro

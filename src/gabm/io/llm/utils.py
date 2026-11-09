@@ -14,7 +14,7 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 
 # Standard library imports
-from datetime import datetime
+from datetime import datetime, timezone
 import functools
 import json
 import logging
@@ -222,7 +222,7 @@ def cache_and_log(
     # Write JSONL log
     jsonl_path.parent.mkdir(parents=True, exist_ok=True)
     log_entry = {
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "model": model,
         "prompt": prompt,
         "response": extract_text_from_response(response),
@@ -272,7 +272,9 @@ def pre_send_check_and_cache(
     cache: Dict[Any, Any],
     logger: Any,
     service_name: str,
-    api_key_env_var: str
+    api_key_env_var: str,
+    use_cache: bool = True,
+    cache_key: Any = None,
 ) -> Optional[Any]:
     """
     Generic pre-send checks: API key presence, cache hit, and env var setup.
@@ -293,10 +295,10 @@ def pre_send_check_and_cache(
     if not api_key:
         logger.error(f"{service_name} API key must be provided.")
         raise RuntimeError(f"{service_name} API key must be provided.")
-    cache_key = (message, model)
-    if cache_key in cache:
+    lookup_key = cache_key if cache_key is not None else (message, model)
+    if use_cache and lookup_key in cache:
         logger.info(f"Cache hit for model={model}, message={message}")
-        return cache[cache_key]
+        return cache[lookup_key]
     os.environ[api_key_env_var] = api_key
     return None
 

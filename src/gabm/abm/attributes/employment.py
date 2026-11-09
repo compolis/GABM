@@ -1,5 +1,7 @@
 """
 Employment module for GABM.
+
+For attributing employment status to people, which can influence their behavior and interactions within the simulation.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]

@@ -19,12 +19,23 @@ requirements.md
 requirements-local-llm.md
 API_KEYS.md
 HUGGING_FACE.md
+Running_On_HPC_Systems.md
 ROADMAP.md
 CHANGE_LOG.md
 DEVELOPMENT_HISTORY.md
 JOSS_SUBMISSION.md
 SECURITY.md
 CONTACT.md
+```
+
+---
+
+```{toctree}
+:maxdepth: 1
+:caption: Archived Notes
+
+archive/HANDOVER_2026-10-30.md
+archive/RunningApertusOnCalder.md
 ```
 
 ---

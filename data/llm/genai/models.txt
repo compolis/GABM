@@ -8,22 +8,6 @@ Model ID: models/gemini-2.5-pro
   Description: 
   Owned by: google
 
-Model ID: models/gemini-2.0-flash
-  Description: 
-  Owned by: google
-
-Model ID: models/gemini-2.0-flash-001
-  Description: 
-  Owned by: google
-
-Model ID: models/gemini-2.0-flash-lite-001
-  Description: 
-  Owned by: google
-
-Model ID: models/gemini-2.0-flash-lite
-  Description: 
-  Owned by: google
-
 Model ID: models/gemini-2.5-flash-preview-tts
   Description: 
   Owned by: google
@@ -32,27 +16,11 @@ Model ID: models/gemini-2.5-pro-preview-tts
   Description: 
   Owned by: google
 
-Model ID: models/gemma-3-1b-it
+Model ID: models/gemma-4-26b-a4b-it
   Description: 
   Owned by: google
 
-Model ID: models/gemma-3-4b-it
-  Description: 
-  Owned by: google
-
-Model ID: models/gemma-3-12b-it
-  Description: 
-  Owned by: google
-
-Model ID: models/gemma-3-27b-it
-  Description: 
-  Owned by: google
-
-Model ID: models/gemma-3n-e4b-it
-  Description: 
-  Owned by: google
-
-Model ID: models/gemma-3n-e2b-it
+Model ID: models/gemma-4-31b-it
   Description: 
   Owned by: google
 
@@ -76,14 +44,6 @@ Model ID: models/gemini-2.5-flash-image
   Description: 
   Owned by: google
 
-Model ID: models/gemini-2.5-flash-lite-preview-09-2025
-  Description: 
-  Owned by: google
-
-Model ID: models/gemini-3-pro-preview
-  Description: 
-  Owned by: google
-
 Model ID: models/gemini-3-flash-preview
   Description: 
   Owned by: google
@@ -100,7 +60,15 @@ Model ID: models/gemini-3.1-flash-lite-preview
   Description: 
   Owned by: google
 
+Model ID: models/gemini-3.1-flash-lite
+  Description: 
+  Owned by: google
+
 Model ID: models/gemini-3-pro-image-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3-pro-image
   Description: 
   Owned by: google
 
@@ -112,11 +80,99 @@ Model ID: models/gemini-3.1-flash-image-preview
   Description: 
   Owned by: google
 
-Model ID: models/gemini-robotics-er-1.5-preview
+Model ID: models/gemini-3.1-flash-image
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.1-flash-lite-image
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-nano-banana-2.1
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.5-flash
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.5-flash-lite
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-omni-flash-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-omni-1.1-flash
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.5-transcribe
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.6-flash
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.7-flash
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.8-flash
+  Description: 
+  Owned by: google
+
+Model ID: models/lyria-3-clip-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/lyria-3-pro-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/lyria-3.5
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.1-flash-tts-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.8-flash-tts
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.8-flash-lite-tts
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-robotics-er-2-preview
   Description: 
   Owned by: google
 
 Model ID: models/gemini-2.5-computer-use-preview-10-2025
+  Description: 
+  Owned by: google
+
+Model ID: models/antigravity-preview-05-2026
+  Description: 
+  Owned by: google
+
+Model ID: models/antigravity-preview-09-2026
+  Description: 
+  Owned by: google
+
+Model ID: models/antigravity-preview-latest
+  Description: 
+  Owned by: google
+
+Model ID: models/deep-research-max-preview-04-2026
+  Description: 
+  Owned by: google
+
+Model ID: models/deep-research-preview-04-2026
   Description: 
   Owned by: google
 
@@ -132,31 +188,11 @@ Model ID: models/gemini-embedding-2-preview
   Description: 
   Owned by: google
 
+Model ID: models/gemini-embedding-2
+  Description: 
+  Owned by: google
+
 Model ID: models/aqa
-  Description: 
-  Owned by: google
-
-Model ID: models/imagen-4.0-generate-001
-  Description: 
-  Owned by: google
-
-Model ID: models/imagen-4.0-ultra-generate-001
-  Description: 
-  Owned by: google
-
-Model ID: models/imagen-4.0-fast-generate-001
-  Description: 
-  Owned by: google
-
-Model ID: models/veo-2.0-generate-001
-  Description: 
-  Owned by: google
-
-Model ID: models/veo-3.0-generate-001
-  Description: 
-  Owned by: google
-
-Model ID: models/veo-3.0-fast-generate-001
   Description: 
   Owned by: google
 
@@ -165,6 +201,14 @@ Model ID: models/veo-3.1-generate-preview
   Owned by: google
 
 Model ID: models/veo-3.1-fast-generate-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/veo-3.1-lite-generate-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.5-transcribe-live
   Description: 
   Owned by: google
 
@@ -177,6 +221,26 @@ Model ID: models/gemini-2.5-flash-native-audio-preview-09-2025
   Owned by: google
 
 Model ID: models/gemini-2.5-flash-native-audio-preview-12-2025
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.1-flash-live-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.8-live
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.8-live-extended-thinking
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-robotics-er-2-streaming-preview
+  Description: 
+  Owned by: google
+
+Model ID: models/gemini-3.5-live-translate-preview
   Description: 
   Owned by: google
 

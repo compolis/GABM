@@ -30,7 +30,7 @@ class DeepSeekService(LLMService):
     def simple_extract_text(response):
         return str(response)
 
-    def send(self, api_key, message, model="deepseek-model-1"):
+    def send(self, api_key, message, model="deepseek-model-1", request_options=None):
         """
         Send a prompt to DeepSeek and return the response object.
         Caches and logs the response for reproducibility.
@@ -44,7 +44,16 @@ class DeepSeekService(LLMService):
             Response object (dict) or None on error.
         
         """
-        cached = pre_send_check_and_cache(api_key, message, model, self.cache, self.logger, self.SERVICE_NAME, self.API_KEY_ENV_VAR)
+        cached = pre_send_check_and_cache(
+            api_key,
+            message,
+            model,
+            self.cache,
+            self.logger,
+            self.SERVICE_NAME,
+            self.API_KEY_ENV_VAR,
+            use_cache=self.use_cache,
+        )
         if cached is not None:
             return cached
         cache_key = (message, model)

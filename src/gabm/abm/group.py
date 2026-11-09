@@ -3,6 +3,8 @@
 from __future__ import annotations
 """
 Group module for GABM.
+
+For representing a collection of Agents that can interact with each other and the environment. The Group class is a base class for more specific group types, such as OpinionGroup.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
@@ -17,6 +19,8 @@ if TYPE_CHECKING:
     # Agent is imported under TYPE_CHECKING to avoid circular imports, as Group and Agent reference each other.
     from gabm.abm.agent import Agent
 from gabm.abm.attributes.opinion import OpinionTopicID, OpinionValue, OpinionValueMap
+from gabm.abm.attributes.interest import InterestTopicID, InterestValue, InterestValueMap, Interest
+from gabm.abm.attributes.trait import TraitTopicID, TraitValue, TraitValueMap, Trait
 
 class GroupID(GABMID):
     """
@@ -91,9 +95,66 @@ class Group:
         """
         return tuple(self.members)
 
-class OpinionatedGroup(Group):
+class InterestGroup(Group):
     """
-    A Group that has opinions.
+    A Group that has shared interests.
+    
+    Attributes:
+        interests: A dictionary of Interests.
+         The keys are InterestTopicIDs, and the values are Interest objects.
+         This allows the group to have its own interests, which can be influenced by its members and can also influence its members.
+    """
+    def __init__(self, group_id: GroupID, name: str = None, interests: dict = None):
+        """
+        Initialize
+        Args:
+            group_id: Unique identifier for the Group instance.
+            name: Optional name for the group.
+            interests: A dictionary of interests, where keys are InterestTopicIDs and values are Interest objects.
+        """
+        super().__init__(group_id=group_id, name=name)
+        self.interests = interests or {}
+
+    def __str__(self):
+        """
+        Return:
+            String representation.
+        """
+        super_str = super().__str__()
+        return f"{super_str} with interests: {self.interests}"
+
+    def __repr__(self):
+        """
+        Return:
+            Official String representation.
+        """
+        return self.__str__()
+
+    def get_AverageInterest(self, interest_topic_id: InterestTopicID) -> float:
+        """
+        Get the average interest value of the group members on a specific topic.
+
+        Args:
+            interest_topic_id: The interest topic ID to get the average interest on.
+
+        Returns:
+            The average interest value for the topic, or None if no members have an interest on it.
+
+        """
+        total_interest = 0.0
+        count = 0
+        for member in self.members:
+            interest_obj = member.get_interest(interest_topic_id)
+            if interest_obj is not None and hasattr(interest_obj, 'value'):
+                total_interest += interest_obj.value
+                count += 1
+        if count == 0:
+            return None
+        return total_interest / count
+
+class OpinionGroup(Group):
+    """
+    A Group that has shared opinion.
     
     Attributes:
         opinions: A dictionary of Opinions.
@@ -147,3 +208,60 @@ class OpinionatedGroup(Group):
         if count == 0:
             return None
         return total_opinion / count
+
+class TraitGroup(Group):
+    """
+    A Group that has shared traits.
+    
+    Attributes:
+        traits: A dictionary of Traits.
+         The keys are TraitTopicIDs, and the values are Trait objects.
+         This allows the group to have its own traits, which can be influenced by its members and can also influence its members.
+    """
+    def __init__(self, group_id: GroupID, name: str = None, traits: dict = None):
+        """
+        Initialize
+        Args:
+            group_id: Unique identifier for the Group instance.
+            name: Optional name for the group.
+            traits: A dictionary of traits, where keys are TraitTopicIDs and values are Trait objects.
+        """
+        super().__init__(group_id=group_id, name=name)
+        self.traits = traits or {}
+
+    def __str__(self):
+        """
+        Return:
+            String representation.
+        """
+        super_str = super().__str__()
+        return f"{super_str} with traits: {self.traits}"
+
+    def __repr__(self):
+        """
+        Return:
+            Official String representation.
+        """
+        return self.__str__()
+    
+    def get_AverageTrait(self, trait_topic_id: TraitTopicID) -> float:
+        """
+        Get the average trait value of the group members on a specific topic.
+
+        Args:
+            trait_topic_id: The trait topic ID to get the average trait on.
+
+        Returns:
+            The average trait value for the topic, or None if no members have a trait on it.
+
+        """
+        total_trait = 0.0
+        count = 0
+        for member in self.members:
+            trait_obj = member.get_trait(trait_topic_id)
+            if trait_obj is not None and hasattr(trait_obj, 'value'):
+                total_trait += trait_obj.value
+                count += 1
+        if count == 0:
+            return None
+        return total_trait / count

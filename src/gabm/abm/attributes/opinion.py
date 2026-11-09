@@ -1,5 +1,7 @@
 """
 Opinion module for GABM.
+
+For attributing opinions to agents, which can influence their behavior and interactions within the simulation.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
@@ -29,20 +31,14 @@ class OpinionTopicID(GABMAttributeID):
         """
         super().__init__(opinion_topic_id)
 
-# Standard OpinionTopicID constants for clarity and maintainability
-OpinionTopicID.UNKNOWN = OpinionTopicID(0)
-OpinionTopicID.POSITIVE = OpinionTopicID(1)
-OpinionTopicID.NEUTRAL = OpinionTopicID(2)
-OpinionTopicID.NEGATIVE = OpinionTopicID(3)
-
 class OpinionTopic():
     """
     A topic for an opinion.
 
     Examples:
-        id = 0, topic = "positive", description = "A positive opinion."
-        id = 1, topic = "neutral", description = "A neutral opinion."
-        id = 2, topic = "negative", description = "A negative opinion."
+        id = 0, topic = "assisted dying", description = "An opinion on assisted dying."
+        id = 1, topic = "abortion", description = "An opinion on abortion."
+        id = 2, topic = "immigration", description = "An opinion on immigration."
     
     Attributes:
         opinion_topic_id (OpinionTopicID): The unique identifier for the opinion topic.
@@ -96,7 +92,7 @@ class OpinionValue():
 
         -2, "Strongly disagree"
         -1, "Disagree"
-         0, "Neither agree nor disagree"
+         0, "Neutral"
          1, "Agree"
          2, "Strongly agree"
 
@@ -126,6 +122,7 @@ class OpinionValue():
              A string representation.
         """
         return self.__str__()
+
 
 class OpinionValueMap():
     """

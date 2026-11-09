@@ -10,7 +10,7 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 import logging
 # Local imports
 from gabm.core.id import GABMID
-from gabm.abm.group import OpinionatedGroup
+from gabm.abm.group import OpinionGroup
 
 class PoliticalPartyID(GABMID):
     """
@@ -23,7 +23,7 @@ class PoliticalPartyID(GABMID):
         super().__init__(party_id)
 
 
-class PoliticalParty(OpinionatedGroup):
+class PoliticalParty(OpinionGroup):
     """
     For representing a political party.
     

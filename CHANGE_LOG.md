@@ -1,18 +1,36 @@
 # Change Log
 
-
-## Table of Contents
-- [Overview](#overview)
-- [0.2.6 - 2026-02-20](#026---2026-02-20)
-- [0.2.5 - 2026-02-19](#025---2026-02-19)
-- [0.2.2 - 2026-02-18](#022---2026-02-18)
-- [0.2.0 - 2026-02-17](#020---2026-02-17)
-- [0.1.1 - 2026-02-11](#011---2026-02-11)
-- [0.1.0 - 2026-02-06](#010---2026-02-06)
-
-
-## Overview
 A summary of changes are documented in this file.
+
+
+## [Unreleased]
+- Coordinate downstream adaptation work in ClimateAction-GABM (CAG) to use the latest GABM example and reproducibility patterns.
+
+
+## [0.3.0] - 2026-10-23
+- Added layered trait state in `Person`:
+  - immutable canonical `initial_trait_values` (Big Five defaults);
+  - mutable `base_traits` for simulation evolution;
+  - typed `TraitBeliefState` for self, other, and higher-order trait beliefs.
+- Added `export_trait_state()` and `import_trait_state()` for reproducible trait-state checkpointing.
+- Added `reflect_on_traits()` to update mutable base traits toward self-trait opinions.
+- Extended tests for reproducible trait generation, trait immutability/mutability layers, trait belief hierarchy, reflection behavior, and state roundtrips.
+- Updated `README.md` and `USER_GUIDE.md` with trait-state modeling guidance.
+- Added/expanded chat example operation:
+  - standardized chat command (`run-example-chat`) and metadata-rich output artifacts;
+  - OpenAI request seed (`llm_seed`) handling and `system_fingerprint` capture;
+  - cache bypass mode (`--no-cache`) to force live prompting.
+- Added richer `chat_opinion` example with opinion trajectories and plot artifacts.
+- Added ensemble workflows for `chat` and `chat_opinion` examples:
+  - per-example `ensembles` source/test/output structure;
+  - seed-window sweep runners with CSV/JSON/plot outputs;
+  - aggregate sweep comparison utility for hosted-vs-HPC analysis.
+- Added awkward-conversation controls and dissimilar-pair selection options for stress-testing interaction dynamics in `chat` and `chat_opinion`.
+- Improved temporal realism APIs:
+  - `Person` support for exact DOB, year-of-birth, exact age, and age ranges;
+  - sub-year environment date stepping and birthday-event helpers.
+- Updated application entry behavior in `__main__.py` with `auto` mode defaulting to chat when LLM credentials are configured.
+- Reorganized HPC operational scripts under `scripts/hpc/` with compatibility wrapper retained at repository root for existing workflows.
 
 
 ## [0.2.6] - 2026-02-20

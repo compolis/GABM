@@ -32,6 +32,8 @@ class LLMService(ABC):
         self.logger = logger or setup_module_logger(__name__, f"{self.SERVICE_NAME}.log")
         self.cache_path, self.jsonl_path = get_llm_cache_paths(self.SERVICE_NAME)
         self.cache = load_llm_cache(self.cache_path, self.logger)
+        # When False, cached responses are ignored and live API calls are always attempted.
+        self.use_cache = True
 
     @property
     def API_KEY_ENV_VAR(self):
@@ -39,7 +41,7 @@ class LLMService(ABC):
         return self.SERVICE_NAME.upper() + "_API_KEY"
 
     @abstractmethod
-    def send(self, api_key, message, model=None):
+    def send(self, api_key, message, model=None, request_options=None):
         """
         Send a prompt to the LLM and return the response object.
 
@@ -50,6 +52,8 @@ class LLMService(ABC):
                 The message to send.
             model (str, optional):
                 The model to use for the request.
+            request_options (dict, optional):
+                Provider-specific request options (e.g., seed, temperature).
 
         Returns:
             The response object from the LLM.

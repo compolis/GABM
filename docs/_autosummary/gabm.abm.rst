@@ -8,6 +8,7 @@ Subpackages
    :maxdepth: 4
 
    gabm.abm.attributes
+   gabm.abm.data
    gabm.abm.democracy
 
 Submodules
