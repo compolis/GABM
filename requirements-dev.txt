@@ -22,6 +22,9 @@ torch>=2.10.0,<3
 
 # Additional
 # ----------
+# Core seeded network builders and diagnostics
+numpy>=2.4.2,<3
+networkx>=3.6.1,<4
 # For plotting graphs
 matplotlib>=3.10.8,<4
 
