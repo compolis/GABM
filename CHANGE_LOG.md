@@ -3,6 +3,11 @@
 A summary of changes are documented in this file.
 
 
+## [Unreleased]
+- Expanded generic network regression tests for feature similarity and missing
+  values, diagnostics metrics, timeout handling and size caps, and exact seeded
+  component bridges.
+
 ## [0.4.0] 2026-11-09
 - Added generic seeded network builders, structural diagnostics, and
   connectivity repair in `gabm.abm.networks`. Declared their runtime

@@ -1,8 +1,12 @@
 """Tests for generic seeded network utilities."""
 
+import signal
+import threading
+
 import networkx as nx
 import pytest
 
+import gabm.abm.networks as networks
 from gabm.abm.networks import (
     NETWORK_TYPES,
     build_network,
@@ -168,3 +172,135 @@ def test_connect_components_supports_mixed_node_id_types():
 
     assert connect_components(graph, seed=23) == 1
     assert nx.is_connected(graph)
+
+
+def test_homophily_favours_matching_feature_groups():
+    graph = build_network(
+        "homophily_weighted",
+        list(range(20)),
+        params={"scale": 20.0, "threshold": 10.0},
+        seed=0,
+        similarity_inputs=[["left", 0]] * 10 + [["right", 1]] * 10,
+    )
+
+    assert set(graph.edges) == (
+        set(nx.complete_graph(range(10)).edges)
+        | set(nx.complete_graph(range(10, 20)).edges)
+    )
+
+
+def test_homophily_default_weights_equal_explicit_uniform_weights():
+    features = [["left", 0], ["right", 1], [None, 2], ["left", None]]
+    default = build_network(
+        "homophily_weighted", list(range(4)), seed=17,
+        similarity_inputs=features,
+    )
+    explicit = build_network(
+        "homophily_weighted", list(range(4)),
+        params={"weights": [1.0, 1.0]}, seed=17,
+        similarity_inputs=features,
+    )
+
+    assert set(default.edges) == set(explicit.edges)
+
+
+def test_homophily_missing_values_do_not_count_as_matches():
+    graph = build_network(
+        "homophily_weighted", list(range(10)),
+        params={"scale": 20.0, "threshold": 10.0}, seed=0,
+        similarity_inputs=[[None, None]] * 10,
+    )
+
+    assert list(graph.nodes) == list(range(10))
+    assert graph.number_of_edges() == 0
+
+
+@pytest.mark.parametrize("disconnected", [False, True])
+def test_diagnostics_metric_values_and_largest_component(disconnected):
+    graph = nx.path_graph(4)
+    if disconnected:
+        graph.add_node("isolated")
+
+    diagnostics = compute_diagnostics(graph, timeout_s=None)
+
+    assert diagnostics["n_nodes"] == (5 if disconnected else 4)
+    assert diagnostics["n_edges"] == 3
+    assert diagnostics["density"] == pytest.approx(0.3 if disconnected else 0.5)
+    assert diagnostics["mean_degree"] == pytest.approx(1.2 if disconnected else 1.5)
+    assert diagnostics["median_degree"] == (1 if disconnected else 1.5)
+    assert diagnostics["max_degree"] == 2
+    assert sum(diagnostics["degree_histogram"]["counts"]) == len(graph)
+    assert diagnostics["n_connected_components"] == (2 if disconnected else 1)
+    assert diagnostics["largest_component_size"] == 4
+    assert diagnostics["average_clustering"] == 0
+    assert diagnostics["diameter"] == 3
+    assert diagnostics["average_shortest_path_length"] == pytest.approx(5 / 3)
+    assert not diagnostics["timed_out"]
+    if disconnected:
+        assert "4/5 nodes" in diagnostics["diameter_note"]
+        assert "4/5 nodes" in diagnostics["average_shortest_path_length_note"]
+
+
+@pytest.mark.parametrize("timeout_s", [None, 0, -1])
+def test_diagnostics_disabled_timeout_does_not_arm_timer(monkeypatch, timeout_s):
+    def unexpected_timer(*args):
+        pytest.fail("A disabled timeout must not arm a timer")
+
+    monkeypatch.setattr(signal, "setitimer", unexpected_timer, raising=False)
+
+    assert not compute_diagnostics(nx.path_graph(4), timeout_s=timeout_s)["timed_out"]
+
+
+@pytest.mark.skipif(
+    not hasattr(signal, "setitimer")
+    or not hasattr(signal, "SIGALRM")
+    or threading.current_thread() is not threading.main_thread(),
+    reason="POSIX diagnostics timeout requires the main thread",
+)
+def test_diagnostics_timeout_returns_partial_results_and_restores_handler(
+    monkeypatch, caplog,
+):
+    original_handler = signal.getsignal(signal.SIGALRM)
+
+    def interrupt_clustering(graph):
+        signal.raise_signal(signal.SIGALRM)
+        pytest.fail("The installed alarm handler must interrupt diagnostics")
+
+    monkeypatch.setattr(nx, "average_clustering", interrupt_clustering)
+    diagnostics = compute_diagnostics(nx.path_graph(4), timeout_s=30)
+
+    assert diagnostics["timed_out"]
+    assert diagnostics["timeout_s"] == 30
+    assert diagnostics["n_nodes"] == 4
+    assert "average_clustering" not in diagnostics
+    assert "diameter" not in diagnostics
+    assert "elapsed_s" in diagnostics
+    assert "partial results saved" in caplog.text
+    assert signal.getsignal(signal.SIGALRM) == original_handler
+    assert signal.getitimer(signal.ITIMER_REAL)[0] == 0
+
+
+@pytest.mark.parametrize("n_nodes", [3, 4])
+def test_diagnostics_size_caps_include_boundary(monkeypatch, n_nodes):
+    monkeypatch.setattr(networks, "_CLUSTERING_NODE_CAP", 3)
+    monkeypatch.setattr(networks, "_PATHLEN_NODE_CAP", 3)
+    monkeypatch.setattr(networks, "_DIAMETER_NODE_CAP", 3)
+
+    diagnostics = compute_diagnostics(nx.path_graph(n_nodes), timeout_s=None)
+
+    for metric in ("average_clustering", "average_shortest_path_length", "diameter"):
+        if n_nodes == 3:
+            assert metric in diagnostics
+            assert f"{metric}_skipped_reason" not in diagnostics
+        else:
+            assert metric not in diagnostics
+            assert diagnostics[f"{metric}_skipped_reason"] == "n=4 exceeds cap 3"
+
+
+def test_connect_components_preserves_exact_seeded_bridges():
+    graph = nx.Graph([(0, 1), (2, 3), (4, 5), (6, 7)])
+
+    assert connect_components(graph, seed=123) == 3
+    assert {tuple(sorted(edge)) for edge in graph.edges} == {
+        (0, 1), (0, 3), (1, 4), (1, 6), (2, 3), (4, 5), (6, 7),
+    }
