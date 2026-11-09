@@ -8,11 +8,44 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
 import logging
-from typing import List, Dict, Any
+from dataclasses import dataclass
+from typing import List, Dict, Any, Callable, Literal
 # Local imports
 from gabm.abm.agent import Person
 from gabm.core.id import GABMID
 from gabm.io.llm.llm_service import LLMService
+
+
+@dataclass(frozen=True)
+class TwoStageSurveyResult:
+    """Raw responses from an optional reasoning-then-answer survey protocol."""
+
+    reasoning: str
+    answer: str
+
+
+def execute_two_stage_question(
+    *,
+    system_prompt: str,
+    reasoning_prompt: str,
+    answer_prompt: str,
+    send: Callable[[str, str, Literal["reasoning", "answer"]], str],
+    build_answer_system: Callable[[str, str], str],
+    on_reasoning: Callable[[str], None],
+) -> TwoStageSurveyResult:
+    """Execute two calls without owning prompts, transport, scoring, or history.
+
+    ``send(system, user, stage)`` returns raw text. ``on_reasoning`` runs
+    after the first response and before constructing the answer context.
+    All exceptions propagate immediately; completed recording is not rolled back.
+    No retries, caching, or parsing are added by this executor.
+    """
+    reasoning = send(system_prompt, reasoning_prompt, "reasoning")
+    on_reasoning(reasoning)
+    answer_system = build_answer_system(system_prompt, reasoning)
+    answer = send(answer_system, answer_prompt, "answer")
+    return TwoStageSurveyResult(reasoning=reasoning, answer=answer)
+
 
 class AnswerID(GABMID):
     """

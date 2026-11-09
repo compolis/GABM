@@ -8,6 +8,7 @@
 - [Project Directories](#project-directories)
 - [Testing](#testing)
 - [Network Utilities](#network-utilities)
+- [Two-stage Survey Execution](#two-stage-survey-execution)
 - [Example Simulations and Reproducibility](#example-simulations-and-reproducibility)
 - [Python Package Entry Point](#python-package-entry-point)
 - [Makefile Targets](#makefile-targets)
@@ -261,6 +262,44 @@ repair. Builders accept caller-owned node IDs; the stochastic-block and
 similarity-weighted variants also accept caller-supplied block labels or
 feature rows. Domain-specific attribute selection and research defaults
 belong in the application using these utilities.
+
+## Two-stage Survey Execution
+
+`gabm.abm.survey.execute_two_stage_question` is an optional reasoning-then-answer
+executor. It accepts exact prompts and an injected
+`send(system_prompt, user_prompt, stage)` callable (`stage` is `"reasoning"` or
+`"answer"`). It records no agent state and adds no parsing, provider selection,
+retries, or caching. Existing `SurveyConversation` behaviour is unchanged.
+
+The required `on_reasoning` callback runs before the answer context is built or
+sent, allowing applications to record intermediate state in event order.
+`build_answer_system(system_prompt, reasoning)` controls the exact second-call
+context; no domain-specific wording is added. Exceptions propagate immediately,
+and completed application recording is not rolled back.
+
+For example, this needs no credentials or real respondent data:
+
+```python
+from gabm.abm.survey import execute_two_stage_question
+
+recorded = []
+result = execute_two_stage_question(
+    system_prompt="You are a library visitor.",
+    reasoning_prompt="What matters when choosing a reading room?",
+    answer_prompt="Choose A: lively or B: quiet.",
+    send=lambda system, user, stage: (
+        "I prefer quiet spaces." if stage == "reasoning" else "B"
+    ),
+    build_answer_system=lambda system, reasoning: f"{system}\nNotes: {reasoning}",
+    on_reasoning=recorded.append,
+)
+assert recorded == [result.reasoning]
+assert result.answer == "B"
+```
+
+Questions, prompt protocols, response validation/scoring, histories, and audit
+metadata remain application-owned. This API does not require `Person`
+inheritance and is not the mandatory protocol for all surveys.
 
 ## Python Package Entry Point
 

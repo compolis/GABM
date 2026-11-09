@@ -4,6 +4,10 @@ A summary of changes are documented in this file.
 
 
 ## [Unreleased]
+- Added optional `execute_two_stage_question` and immutable
+  `TwoStageSurveyResult` in `gabm.abm.survey`, with injected chat, exact prompt
+  preservation, and an intermediate reasoning-recording callback. Existing
+  survey APIs and transport behaviour are unchanged.
 - Expanded generic network regression tests for feature similarity and missing
   values, diagnostics metrics, timeout handling and size caps, and exact seeded
   component bridges.
