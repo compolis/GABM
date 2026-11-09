@@ -24,11 +24,9 @@
 
 ## Overview
 
-The GABM developer guide provides guidance for developers some of which are also maintainers.
+The GABM developer guide provides guidance for developers and maintainers.
 
 Please follow the [Developer Quick Start Guide](DEV_QUICKSTART.md) to get set up to contribute as a developer.
-
-In the rest of the document "you" means you as a GABM developer.
 
 
 ## Resume This Workstream
@@ -55,12 +53,10 @@ Suggested quick restart steps:
 
 Please follow the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
-For the time being, please communicate by commenting on or raising new [GABM Repository Issues](https://github.com/compolis/GABM/issues).
+Please communicate by commenting on or raising new issue: [GABM Repository Issues](https://github.com/compolis/GABM/issues).
 
-You should have forked the [GABM Repository](https://github.com/compolis/GABM) to your own GitHub account.
-
-The general workflow for contributing is to:
-- Create and check out new local branch:
+After forking the [GABM Repository](https://github.com/compolis/GABM) to your own GitHub account. The general workflow for contributing is to:
+- Create a new local branch (or checkout a branch created upstream):
 
 ```bash
 git branch my_feature
@@ -79,7 +75,7 @@ git add .
 git commit -m "Clear message that explains changes." 
 ```
 
-- Ensure tests pass and documentation builds before submitting a PR:
+- Ensure tests pass and documentation builds before submitting a Pull Request (PR):
 
 ```bash
 make test
@@ -98,7 +94,7 @@ git push origin my_feature
     - validation commands and outcomes
     - whether [CHANGE_LOG.md](CHANGE_LOG.md) was updated
   - Please refer to any related issues in the PR comments.
-- The PR will be reviewed and once the review is complete, changes will be merged.
+- The PR is to be reviewed by maintainers and accepted changes merged in due course.
 
 
 

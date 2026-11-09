@@ -34,9 +34,9 @@ Some models require authentication to download from Hugging Face.
    ```python
    from transformers import AutoModelForCausalLM, AutoTokenizer
 
-   model_name = "swiss-ai/apertus-llm-7b"  # Example
-   tokenizer = AutoTokenizer.from_pretrained(model_name)
-   model = AutoModelForCausalLM.from_pretrained(model_name)
+   llm = "swiss-ai/apertus-llm-8b"  # Example
+   tokenizer = AutoTokenizer.from_pretrained(llm)
+   model = AutoModelForCausalLM.from_pretrained(llm)
 
    prompt = "Give me a brief explanation of gravity in simple terms."
    inputs = tokenizer(prompt, return_tensors="pt")
@@ -56,9 +56,9 @@ Example (all platforms, adjust path as needed):
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import os
 
-local_model_path = os.path.expanduser("~/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-2509")
-tokenizer = AutoTokenizer.from_pretrained(local_model_path)
-model = AutoModelForCausalLM.from_pretrained(local_model_path)
+llm_path = os.path.expanduser("~/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-2509")
+tokenizer = AutoTokenizer.from_pretrained(llm_path)
+model = AutoModelForCausalLM.from_pretrained(llm_path)
 ```
 Replace the path with your actual cache location if different. On Windows, the cache is typically in `%USERPROFILE%\.cache\huggingface\hub`.
 
@@ -76,9 +76,9 @@ import os
 prompt = "Give me a brief explanation of gravity in simple terms."
 
 # Local inference
-local_model_path = os.path.expanduser("~/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-2509")
-tokenizer = AutoTokenizer.from_pretrained(local_model_path)
-model = AutoModelForCausalLM.from_pretrained(local_model_path)
+llm_path = os.path.expanduser("~/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-2509")
+tokenizer = AutoTokenizer.from_pretrained(llm_path)
+model = AutoModelForCausalLM.from_pretrained(llm_path)
 inputs = tokenizer(prompt, return_tensors="pt")
 outputs = model.generate(**inputs, max_new_tokens=256)
 local_result = tokenizer.decode(outputs[0], skip_special_tokens=True)
@@ -100,7 +100,7 @@ response = requests.post(url, headers=headers, json=data)
 remote_result = response.json()
 print("Remote output:", remote_result)
 ```
-This lets you verify that your local and remote model outputs are similar or spot differences.
+This can show that the local and remote model outputs are similar or different.
 
 
 ## Troubleshooting

@@ -9,8 +9,6 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # Standard library imports
 import pytest
-# Local imports
-from gabm.io.read_data import read_api_keys
 
 pytestmark = pytest.mark.live_llm
 
@@ -33,11 +31,7 @@ def import_service():
     return getattr(mod, SERVICE_CLASS)
 
 
-def test_deepseek_model_list():
-    """
-    Test that the DeepSeekService can list available models using a valid API key.
-    """
-    api_keys = read_api_keys('data/api_key.csv')
+def test_deepseek_model_list(api_keys):
     api_key = api_keys.get("deepseek")
     if not api_key or api_key.startswith("YOUR_"):
         pytest.skip("API key for deepseek not set.")
@@ -47,11 +41,7 @@ def test_deepseek_model_list():
     assert models is not None
 
 
-def test_deepseek_communication():
-    """
-    Test that the DeepSeekService can communicate with the API using a valid API key and prompt.
-    """
-    api_keys = read_api_keys('data/api_key.csv')
+def test_deepseek_communication(api_keys):
     api_key = api_keys.get("deepseek")
     if not api_key or api_key.startswith("YOUR_"):
         pytest.skip("API key for deepseek not set.")

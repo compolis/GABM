@@ -40,7 +40,7 @@ conda list -e > requirements.txt
 ```
 
 
-#### Using Python >=3.12
+#### Using Python >=3.14
 
 Install from [PyPI](https://pypi.org/) using [Pip](https://pypi.org/project/pip/) as follows:
 
