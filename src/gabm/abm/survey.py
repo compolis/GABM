@@ -1,5 +1,7 @@
 """
 Survey module for GABM.
+
+This module provides classes and logic for defining and conducting surveys within the GABM framework.
 """
 # Metadata
 __author__ = ["Andy Turner <agdturner@gmail.com>"]
@@ -14,38 +16,6 @@ from typing import List, Dict, Any, Callable, Literal
 from gabm.abm.agent import Person
 from gabm.core.id import GABMID
 from gabm.io.llm.llm_service import LLMService
-
-
-@dataclass(frozen=True)
-class TwoStageSurveyResult:
-    """Raw responses from an optional reasoning-then-answer survey protocol."""
-
-    reasoning: str
-    answer: str
-
-
-def execute_two_stage_question(
-    *,
-    system_prompt: str,
-    reasoning_prompt: str,
-    answer_prompt: str,
-    send: Callable[[str, str, Literal["reasoning", "answer"]], str],
-    build_answer_system: Callable[[str, str], str],
-    on_reasoning: Callable[[str], None],
-) -> TwoStageSurveyResult:
-    """Execute two calls without owning prompts, transport, scoring, or history.
-
-    ``send(system, user, stage)`` returns raw text. ``on_reasoning`` runs
-    after the first response and before constructing the answer context.
-    All exceptions propagate immediately; completed recording is not rolled back.
-    No retries, caching, or parsing are added by this executor.
-    """
-    reasoning = send(system_prompt, reasoning_prompt, "reasoning")
-    on_reasoning(reasoning)
-    answer_system = build_answer_system(system_prompt, reasoning)
-    answer = send(answer_system, answer_prompt, "answer")
-    return TwoStageSurveyResult(reasoning=reasoning, answer=answer)
-
 
 class AnswerID(GABMID):
     """
@@ -217,3 +187,71 @@ class SurveyConversation:
             "options": question.options,
             "metadata": question.metadata
         }
+
+# Type aliases for survey protocol components
+SurveyStage = Literal["reasoning", "answer"]
+SystemPromptText = str
+UserPromptText = str
+ReasoningText = str
+AnswerText = str
+SendTwoStage = Callable[[SystemPromptText, UserPromptText, SurveyStage], str]
+BuildAnswerSystem = Callable[[SystemPromptText, ReasoningText], str]
+OnReasoning = Callable[[ReasoningText], None]
+
+@dataclass(frozen=True)
+class TwoStageSurveyResult:
+    """
+    Raw responses from an optional reasoning-then-answer survey protocol.
+
+    Notes:
+        ``reasoning`` and ``answer`` are returned exactly as produced by the
+        injected transport (no trimming, parsing, content validation, or
+        normalization).
+    """
+    reasoning: ReasoningText
+    answer: AnswerText
+
+def execute_two_stage_question(
+    *,
+    system_prompt: SystemPromptText,
+    reasoning_prompt: UserPromptText,
+    answer_prompt: UserPromptText,
+    send: SendTwoStage,
+    build_answer_system: BuildAnswerSystem,
+    on_reasoning: OnReasoning,
+) -> TwoStageSurveyResult:
+    """
+    Execute a reasoning-then-answer exchange via injected callables.
+
+    Call order:
+        1. ``reasoning = send(system_prompt, reasoning_prompt, "reasoning")``
+        2. ``on_reasoning(reasoning)``
+        3. ``answer_system = build_answer_system(system_prompt, reasoning)``
+        4. ``answer = send(answer_system, answer_prompt, "answer")``
+
+    Contract:
+        - ``send`` and ``build_answer_system`` must return ``str``.
+        - Returned text is passed through unchanged.
+        - Exceptions from injected callables propagate immediately.
+        - No retries, caching, parsing, scoring, or history ownership are added.
+    """
+    reasoning = send(system_prompt, reasoning_prompt, "reasoning")
+    if not isinstance(reasoning, str):
+        raise TypeError(
+            "execute_two_stage_question expected send(..., 'reasoning') "
+            f"to return str, got {type(reasoning).__name__}."
+        )
+    on_reasoning(reasoning)
+    answer_system = build_answer_system(system_prompt, reasoning)
+    if not isinstance(answer_system, str):
+        raise TypeError(
+            "execute_two_stage_question expected build_answer_system(...) "
+            f"to return str, got {type(answer_system).__name__}."
+        )
+    answer = send(answer_system, answer_prompt, "answer")
+    if not isinstance(answer, str):
+        raise TypeError(
+            "execute_two_stage_question expected send(..., 'answer') "
+            f"to return str, got {type(answer).__name__}."
+        )
+    return TwoStageSurveyResult(reasoning=reasoning, answer=answer)

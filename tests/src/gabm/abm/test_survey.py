@@ -1,14 +1,24 @@
-"""Independent tests for the optional two-stage survey executor."""
+"""
+Tests for the optional two-stage survey executor.
+"""
+# Metadata
+__author__ = ["Andy Turner <agdturner@gmail.com>"]
+__version__ = "0.1.0"
+__copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
+# Standard library imports
 from dataclasses import FrozenInstanceError
+import re
 from unittest.mock import Mock, call
-
 import pytest
 
+# Local imports
 from gabm.abm.survey import TwoStageSurveyResult, execute_two_stage_question
 
-
 def test_neutral_question_preserves_prompts_and_intermediate_recording_order():
+    """
+    Test that a neutral question preserves prompts and records intermediate steps in order.
+    """
     events = []
 
     def send(system, user, stage):
@@ -46,6 +56,9 @@ def test_neutral_question_preserves_prompts_and_intermediate_recording_order():
 
 @pytest.mark.parametrize("failure_stage", ["reasoning", "record", "build", "answer"])
 def test_errors_propagate_without_subsequent_work(failure_stage):
+    """
+    Test that errors propagate immediately without executing subsequent steps.
+    """
     error = RuntimeError(f"failure at {failure_stage}")
     events = Mock()
     events.send.side_effect = (
@@ -76,6 +89,10 @@ def test_errors_propagate_without_subsequent_work(failure_stage):
 
 
 def test_raw_responses_are_not_parsed_trimmed_or_replaced():
+    """
+    Test that raw responses from the two-stage survey are returned exactly as produced,
+    without trimming, parsing, or replacement.
+    """
     send = Mock(side_effect=["  notes\n", "not a valid choice\n"])
 
     result = execute_two_stage_question(
@@ -89,3 +106,28 @@ def test_raw_responses_are_not_parsed_trimmed_or_replaced():
         call("", "", "reasoning"),
         call("  notes\n", "", "answer"),
     ]
+
+
+@pytest.mark.parametrize(
+    ("send_side_effect", "builder_return", "message_snippet"),
+    [
+        ([123, "ok"], "", "send(..., 'reasoning')"),
+        (["notes", 456], "context", "send(..., 'answer')"),
+        (["notes", "ok"], None, "build_answer_system"),
+    ],
+)
+def test_two_stage_executor_rejects_non_string_contract_values(
+    send_side_effect, builder_return, message_snippet
+):
+    send = Mock(side_effect=send_side_effect)
+    build = Mock(return_value=builder_return)
+
+    with pytest.raises(TypeError, match=re.escape(message_snippet)):
+        execute_two_stage_question(
+            system_prompt="sys",
+            reasoning_prompt="reason",
+            answer_prompt="answer",
+            send=send,
+            build_answer_system=build,
+            on_reasoning=lambda _: None,
+        )
