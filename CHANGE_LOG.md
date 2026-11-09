@@ -3,7 +3,7 @@
 A summary of changes are documented in this file.
 
 
-## [Unreleased]
+## [0.4.0] 2026-11-09
 - Added generic seeded network builders, structural diagnostics, and
   connectivity repair in `gabm.abm.networks`. Declared their runtime
   dependencies and documented the API; downstream CAG wiring remains pending
