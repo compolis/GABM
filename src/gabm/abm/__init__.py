@@ -1,5 +1,5 @@
 """GABM: Generative Agent-Based Model framework abm package."""
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 from .agent import *
 from .attribute import *
