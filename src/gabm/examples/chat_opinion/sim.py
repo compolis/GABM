@@ -16,6 +16,7 @@ import argparse
 import itertools
 import json
 import random
+from dataclasses import asdict, dataclass
 from datetime import datetime
 from pathlib import Path
 
@@ -46,6 +47,16 @@ _DEFAULT_OUTPUT_ROOT = Path("data/output/examples/chat_opinion")
 _DEFAULT_API_KEY_FILE = Path("data/api_key.csv")
 
 
+@dataclass(frozen=True)
+class OpinionDriftConfig:
+    """Weights controlling per-turn opinion updates."""
+
+    question_bonus: float = 0.2
+    positive_token_bonus: float = 0.2
+    negative_token_penalty: float = 0.3
+    shared_interest_cap: float = 0.3
+
+
 def parse_cli_args(argv: list[str] | None = None) -> argparse.Namespace:
     """Parse command-line options for the chat-opinion simulation script."""
     parser = argparse.ArgumentParser(description="Run chat-opinion simulation example.")
@@ -65,6 +76,10 @@ def parse_cli_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--conversation-mode", type=str, choices=["normal", "awkward"], default="normal")
     parser.add_argument("--pairing-strategy", type=str, choices=["random", "max_dissimilarity"], default="random")
     parser.add_argument("--candidate-pool-size", type=int, default=8)
+    parser.add_argument("--question-bonus", type=float, default=0.2)
+    parser.add_argument("--positive-token-bonus", type=float, default=0.2)
+    parser.add_argument("--negative-token-penalty", type=float, default=0.3)
+    parser.add_argument("--shared-interest-cap", type=float, default=0.3)
     return parser.parse_args(argv)
 
 
@@ -92,21 +107,25 @@ def _extract_topic_tokens(summary: str) -> set[str]:
     return {token for token in cleaned.split() if len(token) > 2 and token not in stop_words}
 
 
-def _compute_opinion_delta(utterance: str, shared_interest_score: float) -> float:
+def _compute_opinion_delta(
+    utterance: str,
+    shared_interest_score: float,
+    drift_config: OpinionDriftConfig,
+) -> float:
     text = utterance.lower()
     positive_tokens = ["great", "thanks", "love", "nice", "interesting", "awesome", "agree", "happy"]
     negative_tokens = ["boring", "hate", "bad", "annoying", "disagree", "awful"]
 
     delta = 0.0
     if "?" in utterance:
-        delta += 0.2
+        delta += drift_config.question_bonus
     if any(token in text for token in positive_tokens):
-        delta += 0.2
+        delta += drift_config.positive_token_bonus
     if any(token in text for token in negative_tokens):
-        delta -= 0.3
+        delta -= drift_config.negative_token_penalty
 
     # Shared interests provide a persistent positive drift, capped to avoid runaway.
-    delta += min(0.3, max(0.0, shared_interest_score))
+    delta += min(drift_config.shared_interest_cap, max(0.0, shared_interest_score))
     return delta
 
 
@@ -217,12 +236,31 @@ def run(
     conversation_mode: str = "normal",
     pairing_strategy: str = "random",
     candidate_pool_size: int = 8,
+    question_bonus: float = 0.2,
+    positive_token_bonus: float = 0.2,
+    negative_token_penalty: float = 0.3,
+    shared_interest_cap: float = 0.3,
 ):
     """Run a two-agent conversation with evolving opinions and visualization."""
     if rounds < 1:
         raise ValueError("rounds must be >= 1")
     if candidate_pool_size < 2:
         raise ValueError("candidate_pool_size must be >= 2")
+    if question_bonus < 0.0:
+        raise ValueError("question_bonus must be >= 0")
+    if positive_token_bonus < 0.0:
+        raise ValueError("positive_token_bonus must be >= 0")
+    if negative_token_penalty < 0.0:
+        raise ValueError("negative_token_penalty must be >= 0")
+    if shared_interest_cap < 0.0:
+        raise ValueError("shared_interest_cap must be >= 0")
+
+    drift_config = OpinionDriftConfig(
+        question_bonus=question_bonus,
+        positive_token_bonus=positive_token_bonus,
+        negative_token_penalty=negative_token_penalty,
+        shared_interest_cap=shared_interest_cap,
+    )
 
     rng = random.Random(seed)
     console_lines: list[str] = []
@@ -374,7 +412,7 @@ def run(
         emit(line)
         history_lines.append(line)
 
-        delta = _compute_opinion_delta(utterance, shared_interest_score)
+        delta = _compute_opinion_delta(utterance, shared_interest_score, drift_config)
         if round_num % 2 == 1:
             updated = _clamp_opinion(_get_person_opinion_about(person_b, person_a) + delta)
             _set_person_opinion_about(person_b, person_a, updated)
@@ -392,6 +430,22 @@ def run(
             f"{name_a}-> {name_b}={opinion_a_about_b:.2f}, {name_b}-> {name_a}={opinion_b_about_a:.2f}"
         )
 
+    initial_a_about_b = series_a_about_b[0]
+    initial_b_about_a = series_b_about_a[0]
+    final_a_about_b = series_a_about_b[-1]
+    final_b_about_a = series_b_about_a[-1]
+    initial_mean_opinion = (initial_a_about_b + initial_b_about_a) / 2.0
+    final_mean_opinion = (final_a_about_b + final_b_about_a) / 2.0
+    delta_mean_opinion = final_mean_opinion - initial_mean_opinion
+    final_opinion_gap = abs(final_a_about_b - final_b_about_a)
+    emit(
+        "Final opinion summary: "
+        f"initial_mean={initial_mean_opinion:.2f}, "
+        f"final_mean={final_mean_opinion:.2f}, "
+        f"delta_mean={delta_mean_opinion:.2f}, "
+        f"final_gap={final_opinion_gap:.2f}"
+    )
+
     _write_opinion_plot(run_dir, round_axis, series_a_about_b, series_b_about_a)
 
     transcript_path = run_dir / "conversation_transcript.txt"
@@ -407,6 +461,16 @@ def run(
                 "round": round_axis,
                 "opinion_a_about_b": series_a_about_b,
                 "opinion_b_about_a": series_b_about_a,
+                "summary": {
+                    "initial_a_about_b": round(initial_a_about_b, 4),
+                    "initial_b_about_a": round(initial_b_about_a, 4),
+                    "final_a_about_b": round(final_a_about_b, 4),
+                    "final_b_about_a": round(final_b_about_a, 4),
+                    "initial_mean_opinion": round(initial_mean_opinion, 4),
+                    "final_mean_opinion": round(final_mean_opinion, 4),
+                    "delta_mean_opinion": round(delta_mean_opinion, 4),
+                    "final_opinion_gap": round(final_opinion_gap, 4),
+                },
             },
             indent=2,
         ),
@@ -431,6 +495,7 @@ def run(
                 "conversation_mode": conversation_mode,
                 "pairing_strategy": pairing_strategy,
                 "candidate_pool_size": candidate_count,
+                "opinion_drift_config": asdict(drift_config),
                 "participants": [name_a, name_b],
                 "shared_interest_score": round(shared_interest_score, 4),
                 "pair_similarity_score": pair_similarity["score"],
@@ -443,6 +508,10 @@ def run(
                 "first_shared_interest_round": first_shared_interest_round,
                 "awkward_marker_count": awkward_marker_count,
                 "disagreement_marker_count": disagreement_marker_count,
+                "initial_mean_opinion": round(initial_mean_opinion, 4),
+                "final_mean_opinion": round(final_mean_opinion, 4),
+                "delta_mean_opinion": round(delta_mean_opinion, 4),
+                "final_opinion_gap": round(final_opinion_gap, 4),
                 "opinion_topic_id_a_about_b": _opinion_topic_id_for_target(person_b).id,
                 "opinion_topic_id_b_about_a": _opinion_topic_id_for_target(person_a).id,
                 "run_dir": str(run_dir),
@@ -482,4 +551,8 @@ if __name__ == "__main__":
         conversation_mode=args.conversation_mode,
         pairing_strategy=args.pairing_strategy,
         candidate_pool_size=args.candidate_pool_size,
+        question_bonus=args.question_bonus,
+        positive_token_bonus=args.positive_token_bonus,
+        negative_token_penalty=args.negative_token_penalty,
+        shared_interest_cap=args.shared_interest_cap,
     )
