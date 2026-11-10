@@ -32,7 +32,7 @@ For this reason, we distinguish:
 ## Current scripts used
 
 - Single-run launcher: `scripts/hpc/calder/run.sh`
-- Concurrent launcher (single server, many clients): `scripts/hpc/calder/run_chat_concurrency.sh`
+- Concurrent launcher (single server, many clients): `scripts/hpc/calder/chat/run_chat_concurrency.sh`
 - Run comparison utility: `scripts/analysis/chat/compare_chat_runs.py`
 - Concurrency table-row utility: `scripts/analysis/chat/generate_concurrency_rows.py`
 - One-command markdown report utility: `scripts/analysis/chat/generate_hpc_chat_report.py`
@@ -70,7 +70,7 @@ Purpose:
 Run:
 
 ```bash
-sbatch scripts/hpc/calder/run_chat_concurrency.sh \
+sbatch scripts/hpc/calder/chat/run_chat_concurrency.sh \
   --example chat \
   --model Qwen3-14B \
   --sif vllm-openai_latest.sif \
@@ -88,7 +88,7 @@ Note:
 Optional chat+opinion determinism variant:
 
 ```bash
-sbatch scripts/hpc/calder/run_chat_concurrency.sh \
+sbatch scripts/hpc/calder/chat/run_chat_concurrency.sh \
   --example chat_opinion \
   --rounds 8 \
   --model Qwen3-14B \
@@ -121,7 +121,7 @@ Purpose:
 Run:
 
 ```bash
-sbatch scripts/hpc/calder/run_chat_concurrency.sh \
+sbatch scripts/hpc/calder/chat/run_chat_concurrency.sh \
   --example chat \
   --model Qwen3-14B \
   --sif vllm-openai_latest.sif \

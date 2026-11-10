@@ -11,16 +11,16 @@
 #   4. Writes per-run output and per-worker logs for analysis.
 #
 # Typical use (small sanity run):
-#   sbatch scripts/hpc/calder/run_chat_concurrency.sh --model Qwen3-14B --n-runs 8 --concurrency 4 --seed-mode increment --seed 42
+#   sbatch scripts/hpc/calder/chat/run_chat_concurrency.sh --model Qwen3-14B --n-runs 8 --concurrency 4 --seed-mode increment --seed 42
 #
 # Chat+opinion determinism test (fixed rounds):
-#   sbatch scripts/hpc/calder/run_chat_concurrency.sh --example chat_opinion --rounds 8 --model Qwen3-14B --n-runs 8 --concurrency 4 --seed-mode fixed --seed 42 --llm-seed 42
+#   sbatch scripts/hpc/calder/chat_opinion/run_chat_opinion_concurrency.sh --rounds 8 --model Qwen3-14B --n-runs 8 --concurrency 4 --seed-mode fixed --seed 42 --llm-seed 42
 #
 # Determinism test against one server instance:
-#   sbatch scripts/hpc/calder/run_chat_concurrency.sh --model Qwen3-14B --n-runs 8 --concurrency 4 --seed-mode fixed --seed 42 --llm-seed 42
+#   sbatch scripts/hpc/calder/chat/run_chat_concurrency.sh --model Qwen3-14B --n-runs 8 --concurrency 4 --seed-mode fixed --seed 42 --llm-seed 42
 #
 # Stress test:
-#   sbatch scripts/hpc/calder/run_chat_concurrency.sh --model Qwen3-14B --n-runs 40 --concurrency 12 --seed-mode increment --seed 42
+#   sbatch scripts/hpc/calder/chat/run_chat_concurrency.sh --model Qwen3-14B --n-runs 40 --concurrency 12 --seed-mode increment --seed 42
 
 #SBATCH --job-name=LLM-gabm-chat-conc
 #SBATCH --partition=calder-gpu-hopper

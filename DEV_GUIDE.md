@@ -39,7 +39,7 @@ If you are resuming Calder/HPC reproducibility and release-prep work after a bre
 - Release checklist and evidence gates (decision layer): [documentation/release/RELEASE_PREP_0.3.0.md](documentation/release/RELEASE_PREP_0.3.0.md)
 - Current handover snapshot for chat_opinion calibration and next HPC steps: [documentation/handovers/HANDOVER_2026-11-10.md](documentation/handovers/HANDOVER_2026-11-10.md)
 - Historical handover snapshot (context only): [documentation/handovers/HANDOVER_2026-10-30.md](documentation/handovers/HANDOVER_2026-10-30.md)
-- Calder concurrent launcher (single server, many clients): [scripts/hpc/calder/run_chat_concurrency.sh](scripts/hpc/calder/run_chat_concurrency.sh)
+- Calder concurrent launcher (single server, many clients): [scripts/hpc/calder/chat/run_chat_concurrency.sh](scripts/hpc/calder/chat/run_chat_concurrency.sh)
 - Run-to-run determinism comparator: [scripts/analysis/chat/compare_chat_runs.py](scripts/analysis/chat/compare_chat_runs.py)
 - Markdown row generator for stress-summary tables: [scripts/analysis/chat/generate_concurrency_rows.py](scripts/analysis/chat/generate_concurrency_rows.py)
 
