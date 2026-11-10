@@ -3,7 +3,6 @@
 
 ## Table of Contents
 - [Overview](#overview)
-- [GitHub Copilot](#github-copilot)
 - [Contributors](#contributors)
 - [Development Timeline](#development-timeline)
 
@@ -12,15 +11,14 @@
 This document summarises the development of GABM, including key decisions, milestones, and collaborative experiences. A summary of changes is provided in the [Change Log](CHANGE_LOG.md).
 
 
-## GitHub Copilot
-[GitHub Copilot](https://github.com/features/copilot) has been used to help automate release and cleanup tasks, develop, document, test and formulate code.
-
-
 ## Contributors
 See [CONTRIBUTORS].
 
 
 ## Development Timeline
+- [2026-11-09] [GABM version 0.5.0 Released on PyPI](https://pypi.org/project/gabm/0.5.0)
+- [2026-11-09] [GABM version 0.4.0 Released on PyPI](https://pypi.org/project/gabm/0.4.0)
+- [2026-11-08] [GABM version 0.3.0 Released on PyPI](https://pypi.org/project/gabm/0.3.0)
 - [2026-03-24] [GABM version 0.2.18 Released on PyPI](https://pypi.org/project/gabm/0.2.18)
 - [2026-03-12] [GABM version 0.2.17 Released on PyPI](https://pypi.org/project/gabm/0.2.17)
 - [2026-03-06] [GABM version 0.2.16 Released on PyPI](https://pypi.org/project/gabm/0.2.16)
@@ -54,16 +52,15 @@ See [CONTRIBUTORS].
   - Climate-Action-GABM Repository code explanation and review
 - [2026-02-06] GABM Onboarding Session
   - Ajay and Andy
-  - [Submitted first issue](https://github.com/compolis/GABM/issues/33)
   - Andy presented the environment setup, workflow automation, and project structure.
-  - Ajay added his details to [CONTRIBUTORS](CONTRIBUTORS), and quickly learned the command line commit-push process and about creating GitHub Pull Requests to merge changes from a feature branch to the upstream repository main branch.
-  - Makefile targets for syncing and clearing up branches were introduced and Ajay practised using these.
+  - Ajay added details to [CONTRIBUTORS](CONTRIBUTORS), and quickly learned the command line commit-push process and about creating GitHub Pull Requests to merge changes from a feature branch to the upstream repository main branch.
+  - Makefile targets for syncing and clearing up branches were introduced.
 - [2026-02-03] GABM Repository created in [compolis](https://github.com/compolis/)
   - The idea is to develop GABM in part by abstracting general things from the Climate-Action-GABM Repository. Specific parts to do with Climate Action will remain in the Climate-Action-GABM Repository.
 - [2026-02-02] GABM Project meeting
   - Viktoria, Ajay, Andy
   - Climate-Action-GABM Repository transered to [compolis](https://github.com/compolis/)
-- [2026-01-25] Name of GitHub organisation agreed, [compolis](https://github.com/compolis/) was set up in the [University of Leeds GitHub Enterprise](https://github.com/enterprises/the-university-of-leeds) and ownership transferred to Andy. Viktoria was also added as an owner and Ajay was added as a member.
+- [2026-01-25] Name of GitHub organisation agreed, [compolis](https://github.com/compolis/) was set up in the [University of Leeds GitHub Enterprise](https://github.com/enterprises/the-university-of-leeds) and ownership transferred to Andy and Viktoria with Ajay added as a member.
 - [2026-01-21] GABM Project Meeting
   - Viktoria, Ajay, Andy
   - Key decision reached to get an organisation set up in the [University of Leeds GitHub Enterprise](https://github.com/enterprises/the-university-of-leeds) for the project.

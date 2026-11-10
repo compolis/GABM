@@ -25,10 +25,10 @@ requirements.md
 requirements-local-llm.md
 API_KEYS.md
 HUGGING_FACE.md
-ROADMAP.md
+documentation/planning/ROADMAP.md
 CHANGE_LOG.md
-DEVELOPMENT_HISTORY.md
-JOSS_SUBMISSION.md
+documentation/history/DEVELOPMENT_HISTORY.md
+documentation/publication/JOSS_SUBMISSION.md
 SECURITY.md
 CONTACT.md
 ```

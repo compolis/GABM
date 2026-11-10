@@ -60,7 +60,7 @@ Quick command reminders for contributors:
 
 
 ## Roadmap
-See [ROADMAP.md](ROADMAP.md) for planned next steps and future goals.
+See [ROADMAP.md](documentation/planning/ROADMAP.md) for planned next steps and future goals.
 
 
 ## Change Log
@@ -68,7 +68,7 @@ See [CHANGE_LOG.md](CHANGE_LOG.md) for details of each release.
 
 
 ## Development History
-The collaborative development of GABM is captured in the [DEVELOPMENT_HISTORY.md](DEVELOPMENT_HISTORY.md).
+The collaborative development of GABM is captured in the [DEVELOPMENT_HISTORY.md](documentation/history/DEVELOPMENT_HISTORY.md).
 
 
 ## Acknowledgements

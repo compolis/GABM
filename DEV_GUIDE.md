@@ -404,16 +404,17 @@ Where to place new documentation:
 - Keep Sphinx structure/navigation and generated content in `docs/`.
 - Only add new root-level Markdown docs when needed for compatibility or high-visibility entry points.
 
-Markdown files in the root directory, each serving a specific purpose:
+Key markdown files and documentation entry points:
   - [README.md](README.md): A general [README](https://en.wikipedia.org/wiki/README) that links to much of the documentation outlined below including the developer and user guides. It is included in the Sphinx documentation and forms the basis for the main Sphinx documentation page.
   - [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): Provides details on expected behavior of developers and reporting procedures.
   - [USER_GUIDE.md](USER_GUIDE.md): Provides step-by-step instructions for users to get set up, and should provide guidance for using GABM.
   - [DEV_QUICKSTART.md](DEV_QUICKSTART.md) Provides step-by-step instructions for developers to get set up for contributing to GABM development.
   - [DEV_GUIDE.md](DEV_GUIDE.md): Explains how to contribute to GABM as a developer. It provides details about project structure, and workflow guidance.
   - [API_KEYS.md](API_KEYS.md): Explains how to create a file containing API keys for communicating with LLMs.
-  - [ROADMAP.md](ROADMAP.md): Document to outline planned features and future development goals.
   - [CHANGE_LOG.md](CHANGE_LOG.md): Document to describe changes and updates.
-  - [DEVELOPMENT_HISTORY.md]: Document about development, milestones, and reflections.
+  - [documentation/planning/ROADMAP.md](documentation/planning/ROADMAP.md): Document to outline planned features and future development goals.
+  - [documentation/history/DEVELOPMENT_HISTORY.md](documentation/history/DEVELOPMENT_HISTORY.md): Document about development, milestones, and reflections.
+  - [documentation/publication/JOSS_SUBMISSION.md](documentation/publication/JOSS_SUBMISSION.md): JOSS submission planning notes.
 
 - If you add a new Markdown file in the root directory, please update entries in `scripts/dev/docs_assets.py` (`DOC_FILES`) and `docs/index.md` Project Documents so Sphinx includes them.
 

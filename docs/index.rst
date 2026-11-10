@@ -10,7 +10,7 @@
    :maxdepth: 1
    :caption: Project Documents
 
-   ROADMAP.md
+   documentation/planning/ROADMAP.md
    CHANGE_LOG.md
    CODE_OF_CONDUCT.md
    SETUP_GUIDE.md

@@ -21,15 +21,15 @@ DOC_FILES = [
     "documentation/release/RELEASE_PREP_0.3.0.md",
     "documentation/hpc/Running_On_HPC_Systems.md",
     "documentation/hpc/RunningApertusOnCalder.md",
+    "documentation/planning/ROADMAP.md",
+    "documentation/history/DEVELOPMENT_HISTORY.md",
+    "documentation/publication/JOSS_SUBMISSION.md",
     "requirements.txt",
     "requirements-dev.txt",
     "requirements-local-llm.txt",
     "API_KEYS.md",
     "HUGGING_FACE.md",
-    "ROADMAP.md",
     "CHANGE_LOG.md",
-    "DEVELOPMENT_HISTORY.md",
-    "JOSS_SUBMISSION.md",
 ]
 
 GITHUB_DOC_FILES = [
