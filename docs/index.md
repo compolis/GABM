@@ -14,6 +14,8 @@ CONTRIBUTORS.md
 USER_GUIDE.md
 DEV_GUIDE.md
 DEV_QUICKSTART.md
+DOCUMENTATION.md
+HANDOVER_2026-11-10.md
 requirements-dev.md
 requirements.md
 requirements-local-llm.md
@@ -34,7 +36,7 @@ CONTACT.md
 :maxdepth: 1
 :caption: Archived Notes
 
-archive/HANDOVER_2026-10-30.md
+HANDOVER_2026-10-30.md
 archive/RunningApertusOnCalder.md
 ```
 
