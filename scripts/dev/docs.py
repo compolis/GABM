@@ -293,6 +293,7 @@ def main():
     for fname in DOC_FILES:
         src = os.path.join(ROOT, fname)
         dst = os.path.join(DOCS, fname)
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
         logger.info(f"[DEBUG] Processing {fname}: src={src}, dst={dst}")
         if not os.path.exists(src):
             logger.warning(f"{src} does not exist, skipping.")

@@ -630,4 +630,4 @@ If you encounter errors, check your Python version and that all dependencies are
 
 - [README.md](README.md)
 - [Reported Issues](https://github.com/compolis/GABM/issues)
-- [Running on HPC systems](Running_On_HPC_Systems.md)
+- [Running on HPC systems](documentation/hpc/Running_On_HPC_Systems.md)

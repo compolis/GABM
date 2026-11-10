@@ -5,8 +5,8 @@ It is intended for release preparation and for ongoing model-behavior monitoring
 
 Related documents:
 
-- `RELEASE_PREP_0.3.0.md`: release gates/checklist that consume evidence captured here.
-- `HANDOVER_2026-10-30.md`: historical snapshot of this workstream state at handover time.
+- `../release/RELEASE_PREP_0.3.0.md`: release gates/checklist that consume evidence captured here.
+- `../handovers/HANDOVER_2026-10-30.md`: historical snapshot of this workstream state at handover time.
 
 ## Why this document exists
 

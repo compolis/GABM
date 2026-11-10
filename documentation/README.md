@@ -16,4 +16,13 @@ available during migration for compatibility and discoverability.
 ## Structure
 
 - [handovers/](./handovers/): dated handover notes
+- [reproducibility/](./reproducibility/): reproducibility protocols and experiment logs
+- [release/](./release/): release checklists and evidence gates
+- [hpc/](./hpc/): HPC operational guides and notes
 
+## Current key documents
+
+- [reproducibility/REPRODUCIBILITY_QWEN3_14B.md](./reproducibility/REPRODUCIBILITY_QWEN3_14B.md)
+- [release/RELEASE_PREP_0.3.0.md](./release/RELEASE_PREP_0.3.0.md)
+- [hpc/Running_On_HPC_Systems.md](./hpc/Running_On_HPC_Systems.md)
+- [hpc/RunningApertusOnCalder.md](./hpc/RunningApertusOnCalder.md)

@@ -35,10 +35,10 @@ Please follow the [Developer Quick Start Guide](DEV_QUICKSTART.md) to get set up
 
 If you are resuming Calder/HPC reproducibility and release-prep work after a break, start here:
 
-- Qwen3-14B reproducibility protocol + results template (primary source): [REPRODUCIBILITY_QWEN3_14B.md](REPRODUCIBILITY_QWEN3_14B.md)
-- Release checklist and evidence gates (decision layer): [RELEASE_PREP_0.3.0.md](RELEASE_PREP_0.3.0.md)
-- Current handover snapshot for chat_opinion calibration and next HPC steps: [HANDOVER_2026-11-10.md](HANDOVER_2026-11-10.md)
-- Historical handover snapshot (context only): [HANDOVER_2026-10-30.md](HANDOVER_2026-10-30.md)
+- Qwen3-14B reproducibility protocol + results template (primary source): [documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md](documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md)
+- Release checklist and evidence gates (decision layer): [documentation/release/RELEASE_PREP_0.3.0.md](documentation/release/RELEASE_PREP_0.3.0.md)
+- Current handover snapshot for chat_opinion calibration and next HPC steps: [documentation/handovers/HANDOVER_2026-11-10.md](documentation/handovers/HANDOVER_2026-11-10.md)
+- Historical handover snapshot (context only): [documentation/handovers/HANDOVER_2026-10-30.md](documentation/handovers/HANDOVER_2026-10-30.md)
 - Calder concurrent launcher (single server, many clients): [scripts/hpc/calder/run_chat_concurrency.sh](scripts/hpc/calder/run_chat_concurrency.sh)
 - Run-to-run determinism comparator: [scripts/analysis/chat/compare_chat_runs.py](scripts/analysis/chat/compare_chat_runs.py)
 - Markdown row generator for stress-summary tables: [scripts/analysis/chat/generate_concurrency_rows.py](scripts/analysis/chat/generate_concurrency_rows.py)
@@ -46,10 +46,10 @@ If you are resuming Calder/HPC reproducibility and release-prep work after a bre
 Suggested quick restart steps:
 
 1. Confirm queued/completed Calder job IDs and run directories.
-2. Update experiment outcomes in [REPRODUCIBILITY_QWEN3_14B.md](REPRODUCIBILITY_QWEN3_14B.md):
+2. Update experiment outcomes in [documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md](documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md):
    - run determinism comparisons with `compare_chat_runs.py`
    - add stress-summary rows from `generate_concurrency_rows.py`
-3. Use [RELEASE_PREP_0.3.0.md](RELEASE_PREP_0.3.0.md) to evaluate release readiness.
+3. Use [documentation/release/RELEASE_PREP_0.3.0.md](documentation/release/RELEASE_PREP_0.3.0.md) to evaluate release readiness.
 
 
 ## Contributing and Communicating
