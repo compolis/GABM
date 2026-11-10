@@ -19,6 +19,14 @@ def test_parse_cli_args_reads_n_runs():
             "max_dissimilarity",
             "--candidate-pool-size",
             "9",
+            "--question-bonus",
+            "0.1",
+            "--positive-token-bonus",
+            "0.15",
+            "--negative-token-penalty",
+            "0.5",
+            "--shared-interest-cap",
+            "0.2",
         ]
     )
     assert args.n_runs == 7
@@ -26,6 +34,10 @@ def test_parse_cli_args_reads_n_runs():
     assert args.conversation_mode == "awkward"
     assert args.pairing_strategy == "max_dissimilarity"
     assert args.candidate_pool_size == 9
+    assert args.question_bonus == 0.1
+    assert args.positive_token_bonus == 0.15
+    assert args.negative_token_penalty == 0.5
+    assert args.shared_interest_cap == 0.2
 
 
 def test_similarity_sweep_writes_expected_artifacts(tmp_path):
@@ -55,6 +67,13 @@ def test_similarity_sweep_writes_expected_artifacts(tmp_path):
 
     summary = json.loads((sweep_dir / "similarity_bin_summary.json").read_text(encoding="utf-8"))
     assert len(summary) == 5
+    sweep_meta = json.loads((sweep_dir / "sweep_metadata.json").read_text(encoding="utf-8"))
+    assert sweep_meta["opinion_drift_config"] == {
+        "question_bonus": 0.2,
+        "positive_token_bonus": 0.2,
+        "negative_token_penalty": 0.3,
+        "shared_interest_cap": 0.3,
+    }
 
 
 def test_similarity_sweep_is_reproducible_for_same_seed_window(tmp_path):

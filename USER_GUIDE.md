@@ -30,7 +30,7 @@ If you use [Conda](https://conda.org/) which is distributed with [Anaconda](http
 conda create -n gabm
 conda activate gabm
 conda install python=3.12
-pip install gabm==0.4.0
+pip install gabm==0.5.0
 ```
 
 You can then check all installed dependencies and create your own requirements file with:
@@ -48,7 +48,7 @@ Install from [PyPI](https://pypi.org/) using [Pip](https://pypi.org/project/pip/
 python3 -m venv gabm-venv
 source gabm-venv/bin/activate  # On Windows: gabm-venv\\Scripts\\activate
 pip install --upgrade pip
-pip install gabm==0.4.0
+pip install gabm==0.5.0
 ```
 
 Once installed you can check installed dependencies and create a requirements file:
@@ -280,6 +280,20 @@ Run a deliberately awkward, high-dissimilarity variant:
 make run-example-chat-opinion ROUNDS=12 CONVERSATION_MODE=awkward PAIRING_STRATEGY=max_dissimilarity CANDIDATE_POOL_SIZE=12
 ```
 
+Run with custom opinion-drift calibration coefficients:
+
+```bash
+make run-example-chat-opinion \
+  ROUNDS=8 \
+  RUN_ID=calib_mid_normal \
+  CONVERSATION_MODE=normal \
+  PAIRING_STRATEGY=random \
+  QUESTION_BONUS=0.12 \
+  POSITIVE_TOKEN_BONUS=0.14 \
+  NEGATIVE_TOKEN_PENALTY=0.38 \
+  SHARED_INTEREST_CAP=0.18
+```
+
 Outputs are written under `data/output/examples/chat_opinion/<run-directory>/` by default:
 
 - `conversation_transcript.txt`
@@ -293,6 +307,7 @@ What to expect:
 - Two agents alternate turns for the configured number of rounds.
 - A per-round opinion update is computed from conversation signals (for example engagement/affect cues and shared interests).
 - Opinion trajectories for `A -> B` and `B -> A` are saved and plotted in `opinion_change.png`.
+- `run_metadata.json` includes summary metrics (`initial_mean_opinion`, `final_mean_opinion`, `delta_mean_opinion`, `final_opinion_gap`) and the exact drift config used.
 
 You can override the seed, year, and ONS file paths if needed:
 
@@ -322,6 +337,23 @@ Run an awkward, dissimilar pairing sweep:
 make run-example-chat-opinion-ensemble START_SEED=100 N_RUNS=20 ROUNDS=10 RUN_ID=sim_sweep_awkward CONVERSATION_MODE=awkward PAIRING_STRATEGY=max_dissimilarity CANDIDATE_POOL_SIZE=12
 ```
 
+Run a sweep with custom drift calibration:
+
+```bash
+make run-example-chat-opinion-ensemble \
+  START_SEED=200 \
+  N_RUNS=6 \
+  ROUNDS=6 \
+  RUN_ID=sweep_mid_normal \
+  CONVERSATION_MODE=normal \
+  PAIRING_STRATEGY=random \
+  NO_CACHE=1 \
+  QUESTION_BONUS=0.12 \
+  POSITIVE_TOKEN_BONUS=0.14 \
+  NEGATIVE_TOKEN_PENALTY=0.38 \
+  SHARED_INTEREST_CAP=0.18
+```
+
 Default outputs are written under `data/output/examples/chat_opinion/ensembles/<sweep-directory>/`:
 
 - `similarity_sweep_results.csv` (one row per run)
@@ -337,6 +369,13 @@ Notes:
 - Use `NO_CACHE=1` when you specifically want to observe live-provider variability.
 - `CONVERSATION_MODE=awkward` and `PAIRING_STRATEGY=max_dissimilarity` can produce slower rapport formation and more uneven dialogue.
 - Additional per-run columns include `pair_dissimilarity_score`, `first_shared_interest_round`, `awkward_marker_count`, and `disagreement_marker_count`.
+- `sweep_metadata.json` records the drift config used for the full sweep (`opinion_drift_config`).
+
+To summarize selected run outputs quickly:
+
+```bash
+make summarize-chat-opinion-runs INPUTS='--run-id calib_base_normal --run-id calib_mid_normal --run-id calib_base_awkward --run-id calib_mid_awkward'
+```
 
 ### Cost and HPC Guidance for Ensembles
 
@@ -591,4 +630,4 @@ If you encounter errors, check your Python version and that all dependencies are
 
 - [README.md](README.md)
 - [Reported Issues](https://github.com/compolis/GABM/issues)
-- [Running on HPC systems](Running_On_HPC_Systems.md)
+- [Running on HPC systems](documentation/hpc/Running_On_HPC_Systems.md)

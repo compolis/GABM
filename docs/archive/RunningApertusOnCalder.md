@@ -3,7 +3,7 @@
 This archived note preserves an earlier Calder/Apertus setup snapshot.
 
 For active guidance, use:
-- [Running_On_HPC_Systems.md](../../Running_On_HPC_Systems.md)
+- [Running_On_HPC_Systems.md](../documentation/hpc/Running_On_HPC_Systems.md)
 
 Some LLMs require more computational resources than are generally available in normal laptop or desktop machines. This guide explains how to run [Apertus](https://www.apertus-ai.org/) models on the [University of Leeds Calder](https://arc.leeds.ac.uk/knowledge-centre/resources/calder/) High Perfomance Computing (HPC) system using [Apptainer](https://apptainer.org/).
 

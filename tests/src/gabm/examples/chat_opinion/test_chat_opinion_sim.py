@@ -53,11 +53,23 @@ def test_parse_cli_args_reads_awkward_pairing_flags():
             "max_dissimilarity",
             "--candidate-pool-size",
             "10",
+            "--question-bonus",
+            "0.1",
+            "--positive-token-bonus",
+            "0.15",
+            "--negative-token-penalty",
+            "0.5",
+            "--shared-interest-cap",
+            "0.2",
         ]
     )
     assert args.conversation_mode == "awkward"
     assert args.pairing_strategy == "max_dissimilarity"
     assert args.candidate_pool_size == 10
+    assert args.question_bonus == 0.1
+    assert args.positive_token_bonus == 0.15
+    assert args.negative_token_penalty == 0.5
+    assert args.shared_interest_cap == 0.2
 
 
 def test_chat_opinion_run_writes_expected_artifacts(tmp_path):
@@ -123,6 +135,38 @@ def test_chat_opinion_metadata_records_opinion_topic_ids(tmp_path):
 
     assert "opinion_topic_id_a_about_b" in metadata
     assert "opinion_topic_id_b_about_a" in metadata
+    assert metadata["opinion_drift_config"] == {
+        "question_bonus": 0.2,
+        "positive_token_bonus": 0.2,
+        "negative_token_penalty": 0.3,
+        "shared_interest_cap": 0.3,
+    }
+
+
+def test_chat_opinion_records_opinion_formation_summary_metrics(tmp_path):
+    run_dir = run(seed=42, rounds=8, output_root=tmp_path, run_id="opinion-summary-metrics")
+
+    metadata = json.loads((run_dir / "run_metadata.json").read_text(encoding="utf-8"))
+    history = json.loads((run_dir / "opinion_history.json").read_text(encoding="utf-8"))
+
+    for key in (
+        "initial_mean_opinion",
+        "final_mean_opinion",
+        "delta_mean_opinion",
+        "final_opinion_gap",
+    ):
+        assert key in metadata
+
+    assert "summary" in history
+    for key in (
+        "initial_mean_opinion",
+        "final_mean_opinion",
+        "delta_mean_opinion",
+        "final_opinion_gap",
+    ):
+        assert key in history["summary"]
+
+    assert history["summary"]["final_mean_opinion"] != history["summary"]["initial_mean_opinion"]
 
 
 def test_chat_opinion_awkward_mode_records_metadata(tmp_path):

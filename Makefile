@@ -26,7 +26,7 @@
 # Caution: Some commands (like git-clean, release, and delete-release) can modify your git history or delete tags. Always review the scripts they call (in the scripts/ directory) to ensure they do what you expect before running these commands.
 
 # Phony targets (not actual files)
-.PHONY: help test docs docs-clean gh-pages-deploy gh-pages-deploy2 clean git-clean setup-llms clear-caches llm-drift-check sync sync-feature release delete-release build build-test pypi-release testpypi-release bump-version run-local run-installed run-example-chat run-example-chat-ensemble run-example-chat-opinion run-example-chat-opinion-ensemble compare-example-chat compare-ensemble-sweeps compare-hpc-chat-runs summarize-hpc-concurrency report-hpc-chat-runs
+.PHONY: help test docs docs-clean gh-pages-deploy gh-pages-deploy2 clean git-clean setup-llms clear-caches llm-drift-check sync sync-feature release delete-release build build-test pypi-release testpypi-release bump-version run-local run-installed run-example-chat run-example-chat-ensemble run-example-chat-opinion run-example-chat-opinion-ensemble compare-example-chat compare-ensemble-sweeps compare-hpc-chat-runs summarize-hpc-concurrency report-hpc-chat-runs summarize-chat-opinion-runs
 
 # Show available Makefile commands
 help:
@@ -56,6 +56,7 @@ help:
 	@echo "  run-example-chat-ensemble - Run chat ensemble sweep (usage: make run-example-chat-ensemble START_SEED=100 N_RUNS=25 OUTPUT_ROOT=... RUN_ID=... NO_CACHE=1 LLM_SEED=42)"
 	@echo "  run-example-chat-opinion - Run chat+opinion example (usage: make run-example-chat-opinion SEED=42 YEAR=2026 ROUNDS=8 CONVERSATION_MODE=normal PAIRING_STRATEGY=random CANDIDATE_POOL_SIZE=8 OUTPUT_ROOT=... RUN_ID=... NO_CACHE=1 LLM_SEED=42)"
 	@echo "  run-example-chat-opinion-ensemble - Run ensemble similarity sweep (usage: make run-example-chat-opinion-ensemble START_SEED=100 N_RUNS=25 ROUNDS=8 CONVERSATION_MODE=normal PAIRING_STRATEGY=random CANDIDATE_POOL_SIZE=8 OUTPUT_ROOT=... RUN_ID=... NO_CACHE=1 LLM_SEED=42)"
+	@echo "  summarize-chat-opinion-runs - Summarize chat_opinion run metadata (usage: make summarize-chat-opinion-runs INPUTS='--run-id review_a --run-id review_b' [OUTPUT_ROOT=data/output/examples/chat_opinion])"
 	@echo "  compare-ensemble-sweeps - Compare two ensemble sweep directories (usage: make compare-ensemble-sweeps SWEEP_A=<dir> SWEEP_B=<dir> LABEL_A=hosted LABEL_B=hpc OUTPUT_ROOT=... RUN_ID=...)"
 	@echo "  compare-example-chat - Compare two chat run output directories (usage: make compare-example-chat RUN_A=<dir> RUN_B=<dir> [OUTPUT_ROOT=...])"
 	@echo "  compare-hpc-chat-runs - Compare two HPC chat run directories (usage: make compare-hpc-chat-runs RUN_A=<run|id|path> RUN_B=<run|id|path> [WORKING_DIR=/flash-calder/users/<user>/gabm])"
@@ -257,7 +258,7 @@ run-example-chat-ensemble:
 	PYTHONPATH=src python3 src/gabm/examples/chat/ensembles/similarity_sweep.py --llm-service openai --model gpt-4o-mini --start-seed $${START_SEED:-100} --n-runs $${N_RUNS:-25} --year $${YEAR:-2026} --conversation-mode $${CONVERSATION_MODE:-normal} --pairing-strategy $${PAIRING_STRATEGY:-random} --candidate-pool-size $${CANDIDATE_POOL_SIZE:-8} --ons-male-file $${ONS_MALE:-data/input/abm/names_england_wales_ons_male.csv} --ons-female-file $${ONS_FEMALE:-data/input/abm/names_england_wales_ons_female.csv}$$OUTPUT_ROOT_ARG$$RUN_ID_ARG$$NO_CACHE_ARG$$LLM_SEED_ARG
 
 # Run chat+opinion example with optional overrides
-# Usage: make run-example-chat-opinion SEED=42 YEAR=2026 ROUNDS=8 CONVERSATION_MODE=normal PAIRING_STRATEGY=random CANDIDATE_POOL_SIZE=8 ONS_MALE=data/input/abm/names_england_wales_ons_male.csv ONS_FEMALE=data/input/abm/names_england_wales_ons_female.csv OUTPUT_ROOT=data/output/examples/chat_opinion RUN_ID=my_run_id NO_CACHE=1 LLM_SEED=42
+# Usage: make run-example-chat-opinion SEED=42 YEAR=2026 ROUNDS=8 CONVERSATION_MODE=normal PAIRING_STRATEGY=random CANDIDATE_POOL_SIZE=8 QUESTION_BONUS=0.2 POSITIVE_TOKEN_BONUS=0.2 NEGATIVE_TOKEN_PENALTY=0.3 SHARED_INTEREST_CAP=0.3 ONS_MALE=data/input/abm/names_england_wales_ons_male.csv ONS_FEMALE=data/input/abm/names_england_wales_ons_female.csv OUTPUT_ROOT=data/output/examples/chat_opinion RUN_ID=my_run_id NO_CACHE=1 LLM_SEED=42
 run-example-chat-opinion:
 	@RUN_ID_ARG=""; \
 	if [ -n "$$RUN_ID" ]; then RUN_ID_ARG=" --run-id $$RUN_ID"; fi; \
@@ -267,10 +268,10 @@ run-example-chat-opinion:
 	if [ -n "$$LLM_SEED" ]; then LLM_SEED_ARG=" --llm-seed $$LLM_SEED"; fi; \
 	NO_CACHE_ARG=""; \
 	if [ -n "$$NO_CACHE" ]; then NO_CACHE_ARG=" --no-cache"; fi; \
-	PYTHONPATH=src python3 src/gabm/examples/chat_opinion/sim.py --llm-service openai --model gpt-4o-mini --seed $${SEED:-42} --year $${YEAR:-2026} --rounds $${ROUNDS:-8} --conversation-mode $${CONVERSATION_MODE:-normal} --pairing-strategy $${PAIRING_STRATEGY:-random} --candidate-pool-size $${CANDIDATE_POOL_SIZE:-8} --ons-male-file $${ONS_MALE:-data/input/abm/names_england_wales_ons_male.csv} --ons-female-file $${ONS_FEMALE:-data/input/abm/names_england_wales_ons_female.csv}$$OUTPUT_ROOT_ARG$$RUN_ID_ARG$$NO_CACHE_ARG$$LLM_SEED_ARG
+	PYTHONPATH=src python3 src/gabm/examples/chat_opinion/sim.py --llm-service openai --model gpt-4o-mini --seed $${SEED:-42} --year $${YEAR:-2026} --rounds $${ROUNDS:-8} --conversation-mode $${CONVERSATION_MODE:-normal} --pairing-strategy $${PAIRING_STRATEGY:-random} --candidate-pool-size $${CANDIDATE_POOL_SIZE:-8} --question-bonus $${QUESTION_BONUS:-0.2} --positive-token-bonus $${POSITIVE_TOKEN_BONUS:-0.2} --negative-token-penalty $${NEGATIVE_TOKEN_PENALTY:-0.3} --shared-interest-cap $${SHARED_INTEREST_CAP:-0.3} --ons-male-file $${ONS_MALE:-data/input/abm/names_england_wales_ons_male.csv} --ons-female-file $${ONS_FEMALE:-data/input/abm/names_england_wales_ons_female.csv}$$OUTPUT_ROOT_ARG$$RUN_ID_ARG$$NO_CACHE_ARG$$LLM_SEED_ARG
 
 # Run chat+opinion ensemble similarity sweep with optional overrides
-# Usage: make run-example-chat-opinion-ensemble START_SEED=100 N_RUNS=25 YEAR=2026 ROUNDS=8 CONVERSATION_MODE=normal PAIRING_STRATEGY=random CANDIDATE_POOL_SIZE=8 ONS_MALE=data/input/abm/names_england_wales_ons_male.csv ONS_FEMALE=data/input/abm/names_england_wales_ons_female.csv OUTPUT_ROOT=data/output/examples/chat_opinion/ensembles RUN_ID=my_sweep NO_CACHE=1 LLM_SEED=42
+# Usage: make run-example-chat-opinion-ensemble START_SEED=100 N_RUNS=25 YEAR=2026 ROUNDS=8 CONVERSATION_MODE=normal PAIRING_STRATEGY=random CANDIDATE_POOL_SIZE=8 QUESTION_BONUS=0.2 POSITIVE_TOKEN_BONUS=0.2 NEGATIVE_TOKEN_PENALTY=0.3 SHARED_INTEREST_CAP=0.3 ONS_MALE=data/input/abm/names_england_wales_ons_male.csv ONS_FEMALE=data/input/abm/names_england_wales_ons_female.csv OUTPUT_ROOT=data/output/examples/chat_opinion/ensembles RUN_ID=my_sweep NO_CACHE=1 LLM_SEED=42
 run-example-chat-opinion-ensemble:
 	@RUN_ID_ARG=""; \
 	if [ -n "$$RUN_ID" ]; then RUN_ID_ARG=" --run-id $$RUN_ID"; fi; \
@@ -280,7 +281,12 @@ run-example-chat-opinion-ensemble:
 	if [ -n "$$LLM_SEED" ]; then LLM_SEED_ARG=" --llm-seed $$LLM_SEED"; fi; \
 	NO_CACHE_ARG=""; \
 	if [ -n "$$NO_CACHE" ]; then NO_CACHE_ARG=" --no-cache"; fi; \
-	PYTHONPATH=src python3 src/gabm/examples/chat_opinion/ensembles/similarity_sweep.py --llm-service openai --model gpt-4o-mini --start-seed $${START_SEED:-100} --n-runs $${N_RUNS:-25} --year $${YEAR:-2026} --rounds $${ROUNDS:-8} --conversation-mode $${CONVERSATION_MODE:-normal} --pairing-strategy $${PAIRING_STRATEGY:-random} --candidate-pool-size $${CANDIDATE_POOL_SIZE:-8} --ons-male-file $${ONS_MALE:-data/input/abm/names_england_wales_ons_male.csv} --ons-female-file $${ONS_FEMALE:-data/input/abm/names_england_wales_ons_female.csv}$$OUTPUT_ROOT_ARG$$RUN_ID_ARG$$NO_CACHE_ARG$$LLM_SEED_ARG
+	PYTHONPATH=src python3 src/gabm/examples/chat_opinion/ensembles/similarity_sweep.py --llm-service openai --model gpt-4o-mini --start-seed $${START_SEED:-100} --n-runs $${N_RUNS:-25} --year $${YEAR:-2026} --rounds $${ROUNDS:-8} --conversation-mode $${CONVERSATION_MODE:-normal} --pairing-strategy $${PAIRING_STRATEGY:-random} --candidate-pool-size $${CANDIDATE_POOL_SIZE:-8} --question-bonus $${QUESTION_BONUS:-0.2} --positive-token-bonus $${POSITIVE_TOKEN_BONUS:-0.2} --negative-token-penalty $${NEGATIVE_TOKEN_PENALTY:-0.3} --shared-interest-cap $${SHARED_INTEREST_CAP:-0.3} --ons-male-file $${ONS_MALE:-data/input/abm/names_england_wales_ons_male.csv} --ons-female-file $${ONS_FEMALE:-data/input/abm/names_england_wales_ons_female.csv}$$OUTPUT_ROOT_ARG$$RUN_ID_ARG$$NO_CACHE_ARG$$LLM_SEED_ARG
+
+# Summarize chat_opinion run metadata ranges for calibration checks.
+# Usage: make summarize-chat-opinion-runs INPUTS='--run-id review_a --run-id review_b' [OUTPUT_ROOT=data/output/examples/chat_opinion]
+summarize-chat-opinion-runs:
+	@python3 scripts/analysis/chat_opinion/summarize_runs.py --root $${OUTPUT_ROOT:-data/output/examples/chat_opinion} $${INPUTS}
 
 # Compare two ensemble sweep directories and write aggregate difference report
 # Usage: make compare-ensemble-sweeps SWEEP_A=data/output/examples/chat/ensembles/chat_small_01 SWEEP_B=data/output/examples/chat/ensembles/chat_hpc_01 LABEL_A=hosted LABEL_B=hpc OUTPUT_ROOT=data/output/examples/ensembles/compare RUN_ID=chat_compare_01

@@ -14,16 +14,21 @@ CONTRIBUTORS.md
 USER_GUIDE.md
 DEV_GUIDE.md
 DEV_QUICKSTART.md
+documentation/README.md
+documentation/handovers/HANDOVER_2026-11-10.md
+documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md
+documentation/release/RELEASE_PREP_0.3.0.md
+documentation/hpc/Running_On_HPC_Systems.md
+documentation/hpc/RunningApertusOnCalder.md
 requirements-dev.md
 requirements.md
 requirements-local-llm.md
 API_KEYS.md
 HUGGING_FACE.md
-Running_On_HPC_Systems.md
-ROADMAP.md
+documentation/planning/ROADMAP.md
 CHANGE_LOG.md
-DEVELOPMENT_HISTORY.md
-JOSS_SUBMISSION.md
+documentation/history/DEVELOPMENT_HISTORY.md
+documentation/publication/JOSS_SUBMISSION.md
 SECURITY.md
 CONTACT.md
 ```
@@ -34,7 +39,7 @@ CONTACT.md
 :maxdepth: 1
 :caption: Archived Notes
 
-archive/HANDOVER_2026-10-30.md
+documentation/handovers/HANDOVER_2026-10-30.md
 archive/RunningApertusOnCalder.md
 ```
 

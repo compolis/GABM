@@ -11,6 +11,16 @@ A summary of changes are documented in this file.
 - Expanded generic network regression tests for feature similarity and missing
   values, diagnostics metrics, timeout handling and size caps, and exact seeded
   component bridges.
+- Reorganized authored documentation under `documentation/` with topic-specific
+  subdirectories (`handovers`, `reproducibility`, `release`, `hpc`,
+  `planning`, `history`, `publication`) and updated cross-links/Sphinx
+  navigation to match.
+- Moved Calder chat concurrency launcher to
+  `scripts/hpc/calder/chat/run_chat_concurrency.sh` and added
+  `scripts/hpc/calder/chat_opinion/run_chat_opinion_concurrency.sh` wrapper for
+  `chat_opinion` runs.
+- Expanded roadmap 0.6 scope with release-target detail for calibrated
+  `chat_opinion` workflows and associated evidence expectations.
 
 ## [0.4.0] 2026-11-09
 - Added generic seeded network builders, structural diagnostics, and

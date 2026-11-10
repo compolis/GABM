@@ -2,7 +2,7 @@
 """Generate markdown rows for concurrency/stress summaries.
 
 Reads Calder launcher_summary.log outputs and prints markdown rows suitable for
-REPRODUCIBILITY_QWEN3_14B.md.
+documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md.
 """
 
 from __future__ import annotations

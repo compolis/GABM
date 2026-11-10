@@ -25,7 +25,7 @@ This document is dedicated to the planning, drafting, and tracking of the Journa
 ## Links and References
 - [JOSS Submission Guidelines](https://joss.readthedocs.io/en/latest/submitting.html)
 - [JOSS Review Criteria](https://joss.readthedocs.io/en/latest/review_criteria.html)
-- [DEVELOPMENT_HISTORY.md](DEVELOPMENT_HISTORY.md) for project history and context
+- [DEVELOPMENT_HISTORY.md](../history/DEVELOPMENT_HISTORY.md) for project history and context
 
 ## Drafts and Notes
 - GABM is designed to enable "conversations" between agents using LLMs, enriching prompt responses with context without retraining. This mirrors the collaborative process of working with a LLM pair-programmer (e.g. GitHub Copilot), where context and history inform responses and decisions.

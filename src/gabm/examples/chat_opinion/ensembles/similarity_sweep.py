@@ -39,6 +39,10 @@ def parse_cli_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--conversation-mode", type=str, choices=["normal", "awkward"], default="normal")
     parser.add_argument("--pairing-strategy", type=str, choices=["random", "max_dissimilarity"], default="random")
     parser.add_argument("--candidate-pool-size", type=int, default=8)
+    parser.add_argument("--question-bonus", type=float, default=0.2)
+    parser.add_argument("--positive-token-bonus", type=float, default=0.2)
+    parser.add_argument("--negative-token-penalty", type=float, default=0.3)
+    parser.add_argument("--shared-interest-cap", type=float, default=0.3)
     parser.add_argument("--no-cache", action="store_true")
     return parser.parse_args(argv)
 
@@ -85,6 +89,10 @@ def run_sweep(
     conversation_mode: str = "normal",
     pairing_strategy: str = "random",
     candidate_pool_size: int = 8,
+    question_bonus: float = 0.2,
+    positive_token_bonus: float = 0.2,
+    negative_token_penalty: float = 0.3,
+    shared_interest_cap: float = 0.3,
 ):
     if n_runs < 1:
         raise ValueError("n_runs must be >= 1")
@@ -114,6 +122,10 @@ def run_sweep(
             conversation_mode=conversation_mode,
             pairing_strategy=pairing_strategy,
             candidate_pool_size=candidate_pool_size,
+            question_bonus=question_bonus,
+            positive_token_bonus=positive_token_bonus,
+            negative_token_penalty=negative_token_penalty,
+            shared_interest_cap=shared_interest_cap,
         )
 
         metadata = json.loads((run_dir / "run_metadata.json").read_text(encoding="utf-8"))
@@ -189,6 +201,12 @@ def run_sweep(
         "conversation_mode": conversation_mode,
         "pairing_strategy": pairing_strategy,
         "candidate_pool_size": candidate_pool_size,
+        "opinion_drift_config": {
+            "question_bonus": question_bonus,
+            "positive_token_bonus": positive_token_bonus,
+            "negative_token_penalty": negative_token_penalty,
+            "shared_interest_cap": shared_interest_cap,
+        },
         "sweep_dir": str(sweep_dir),
     }
     (sweep_dir / "sweep_metadata.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
@@ -224,4 +242,8 @@ if __name__ == "__main__":
         conversation_mode=args.conversation_mode,
         pairing_strategy=args.pairing_strategy,
         candidate_pool_size=args.candidate_pool_size,
+        question_bonus=args.question_bonus,
+        positive_token_bonus=args.positive_token_bonus,
+        negative_token_penalty=args.negative_token_penalty,
+        shared_interest_cap=args.shared_interest_cap,
     )

@@ -18,7 +18,8 @@ Current Calder examples:
 - `scripts/hpc/calder/run.sh`
 - `scripts/hpc/calder/run_server.sh`
 - `scripts/hpc/calder/run_client.sh`
-- `scripts/hpc/calder/run_chat_concurrency.sh`
+- `scripts/hpc/calder/chat/run_chat_concurrency.sh`
+- `scripts/hpc/calder/chat_opinion/run_chat_opinion_concurrency.sh`
 
 Compatibility note:
 - Prefer using scripts directly from `scripts/hpc/` for new workflows.

@@ -35,20 +35,21 @@ Please follow the [Developer Quick Start Guide](DEV_QUICKSTART.md) to get set up
 
 If you are resuming Calder/HPC reproducibility and release-prep work after a break, start here:
 
-- Qwen3-14B reproducibility protocol + results template (primary source): [REPRODUCIBILITY_QWEN3_14B.md](REPRODUCIBILITY_QWEN3_14B.md)
-- Release checklist and evidence gates (decision layer): [RELEASE_PREP_0.3.0.md](RELEASE_PREP_0.3.0.md)
-- Historical handover snapshot (context only): [HANDOVER_2026-10-30.md](HANDOVER_2026-10-30.md)
-- Calder concurrent launcher (single server, many clients): [scripts/hpc/calder/run_chat_concurrency.sh](scripts/hpc/calder/run_chat_concurrency.sh)
+- Qwen3-14B reproducibility protocol + results template (primary source): [documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md](documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md)
+- Release checklist and evidence gates (decision layer): [documentation/release/RELEASE_PREP_0.3.0.md](documentation/release/RELEASE_PREP_0.3.0.md)
+- Current handover snapshot for chat_opinion calibration and next HPC steps: [documentation/handovers/HANDOVER_2026-11-10.md](documentation/handovers/HANDOVER_2026-11-10.md)
+- Historical handover snapshot (context only): [documentation/handovers/HANDOVER_2026-10-30.md](documentation/handovers/HANDOVER_2026-10-30.md)
+- Calder concurrent launcher (single server, many clients): [scripts/hpc/calder/chat/run_chat_concurrency.sh](scripts/hpc/calder/chat/run_chat_concurrency.sh)
 - Run-to-run determinism comparator: [scripts/analysis/chat/compare_chat_runs.py](scripts/analysis/chat/compare_chat_runs.py)
 - Markdown row generator for stress-summary tables: [scripts/analysis/chat/generate_concurrency_rows.py](scripts/analysis/chat/generate_concurrency_rows.py)
 
 Suggested quick restart steps:
 
 1. Confirm queued/completed Calder job IDs and run directories.
-2. Update experiment outcomes in [REPRODUCIBILITY_QWEN3_14B.md](REPRODUCIBILITY_QWEN3_14B.md):
+2. Update experiment outcomes in [documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md](documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md):
    - run determinism comparisons with `compare_chat_runs.py`
    - add stress-summary rows from `generate_concurrency_rows.py`
-3. Use [RELEASE_PREP_0.3.0.md](RELEASE_PREP_0.3.0.md) to evaluate release readiness.
+3. Use [documentation/release/RELEASE_PREP_0.3.0.md](documentation/release/RELEASE_PREP_0.3.0.md) to evaluate release readiness.
 
 
 ## Contributing and Communicating
@@ -105,10 +106,12 @@ git push origin my_feature
 The root project directory contains documentation and files needed for building and deploying. The sub-directories include:
 - `data/`: For data including log files
 - `dist/`: Output directory for built distributions.
-- `docs/`: Documentation
+- `documentation/`: Authoritative long-form documentation and operational records (for example handovers)
+- `docs/`: Sphinx configuration/navigation plus generated build artifacts
 - `scripts/`: Utility scripts
 - `scripts/analysis/`: Post-processing and analysis utilities, organized by example domain
 - `scripts/analysis/chat/`: Analysis helpers for chat/chat_opinion runs and ensemble comparisons
+- `scripts/analysis/chat_opinion/`: Calibration and run-summary helpers for chat_opinion
 - `src/`: Python source code
 - `src/gabm/examples/`: Runnable example simulation modules (source logic lives here)
 - `tests/`: Test suite for src
@@ -185,6 +188,28 @@ Recommended pattern:
 - Put executable simulation logic in `src/gabm/examples/<example_name>/sim.py`.
 - Keep tests in `tests/src/gabm/examples/<example_name>/test_sim.py`.
 - Expose a callable (for example `run(...)`) from the source simulation module so tests can execute it directly.
+
+### chat_opinion Calibration Workflow (2026-11)
+
+To calibrate opinion-formation dynamics without changing code constants each time:
+
+1. Run local no-cache pilots for baseline and candidate drift profiles.
+2. Run small local no-cache sweeps (`N_RUNS=6` to `10`) for normal and awkward modes.
+3. Compare `final_mean_opinion`, `delta_mean_opinion`, and `final_opinion_gap` ranges and stats.
+4. Promote one profile to a small Calder pilot with matching seed windows and rounds.
+
+New drift parameters exposed by Makefile wrappers and CLI:
+
+- `QUESTION_BONUS`
+- `POSITIVE_TOKEN_BONUS`
+- `NEGATIVE_TOKEN_PENALTY`
+- `SHARED_INTEREST_CAP`
+
+Helpful summary command:
+
+```bash
+make summarize-chat-opinion-runs INPUTS='--run-id <run_a> --run-id <run_b>'
+```
 
 ### Person Naming in Examples
 
@@ -367,18 +392,38 @@ Please refer to the Makefile for full details.
 
 ## Developing Documentation
 
-Markdown files in the root directory, each serving a specific purpose:
+Documentation now follows a split model:
+
+- `documentation/` contains maintained long-form project documentation.
+- `docs/` is the Sphinx build/navigation surface.
+- Root Markdown files remain as compatibility entry points during migration.
+
+Where to place new documentation:
+
+- Put authored/maintained narrative content in `documentation/` (for example handovers, process notes, research notes).
+- Keep Sphinx structure/navigation and generated content in `docs/`.
+- Only add new root-level Markdown docs when needed for compatibility or high-visibility entry points.
+
+Key markdown files and documentation entry points:
   - [README.md](README.md): A general [README](https://en.wikipedia.org/wiki/README) that links to much of the documentation outlined below including the developer and user guides. It is included in the Sphinx documentation and forms the basis for the main Sphinx documentation page.
   - [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): Provides details on expected behavior of developers and reporting procedures.
   - [USER_GUIDE.md](USER_GUIDE.md): Provides step-by-step instructions for users to get set up, and should provide guidance for using GABM.
   - [DEV_QUICKSTART.md](DEV_QUICKSTART.md) Provides step-by-step instructions for developers to get set up for contributing to GABM development.
   - [DEV_GUIDE.md](DEV_GUIDE.md): Explains how to contribute to GABM as a developer. It provides details about project structure, and workflow guidance.
   - [API_KEYS.md](API_KEYS.md): Explains how to create a file containing API keys for communicating with LLMs.
-  - [ROADMAP.md](ROADMAP.md): Document to outline planned features and future development goals.
   - [CHANGE_LOG.md](CHANGE_LOG.md): Document to describe changes and updates.
-  - [DEVELOPMENT_HISTORY.md]: Document about development, milestones, and reflections.
+  - [documentation/planning/ROADMAP.md](documentation/planning/ROADMAP.md): Document to outline planned features and future development goals.
+  - [documentation/history/DEVELOPMENT_HISTORY.md](documentation/history/DEVELOPMENT_HISTORY.md): Document about development, milestones, and reflections.
+  - [documentation/publication/JOSS_SUBMISSION.md](documentation/publication/JOSS_SUBMISSION.md): JOSS submission planning notes.
 
-- If you add a new Markdown file in the root directory, please update entries to `doc_assets.py` DOC_FILES and `docs/index.md` Project Documents to include them in Sphinx documentation.
+- If you add a new Markdown file in the root directory, please update entries in `scripts/dev/docs_assets.py` (`DOC_FILES`) and `docs/index.md` Project Documents so Sphinx includes them.
+
+Documentation-organization approach (aligned with ClimateAction-GABM direction):
+- Prefer [documentation/](documentation/) as the primary authored-docs home.
+- Use [docs/](docs/) as the Sphinx build/navigation surface.
+- Keep root-level canonical files during transition to avoid breaking existing links/workflows.
+- Add new operational snapshots as dated files (for example handovers), and include them in `docs/index.md`.
+- Migrate in stages by topic rather than doing a one-shot file move.
 
 
 ### Sphinx Documentation
@@ -389,7 +434,7 @@ To build run:
 make docs
 ```
 
-- This effectively runs `scripts/docs.py` to copy key documentation files from the project root to the `docs/` directory, pre-processes them for building the Sphinx documentation, then delete those copied files once the build completes.
+- This effectively runs `scripts/dev/docs.py` to copy key documentation files from the project root to the `docs/` directory and pre-process them for Sphinx builds.
 
 **Note on Sphinx/MyST Documentation Warnings:**
 
