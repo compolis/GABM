@@ -307,6 +307,17 @@ echo "=== Launch concurrent clients ===" | tee -a "$LAUNCHER_LOG"
 declare -a worker_pids=()
 declare -a worker_desc=()
 
+active_worker_count() {
+  local count=0
+  local pid
+  for pid in "${worker_pids[@]}"; do
+    if kill -0 "$pid" 2>/dev/null; then
+      count=$((count + 1))
+    fi
+  done
+  echo "$count"
+}
+
 for ((i=0; i<N_RUNS; i++)); do
   if [[ "$SEED_MODE" == "fixed" ]]; then
     sim_seed="$SEED"
@@ -319,8 +330,10 @@ for ((i=0; i<N_RUNS; i++)); do
   worker_pids+=("$pid")
   worker_desc+=("i=$i,seed=$sim_seed,pid=$pid")
 
-  while [[ "$(jobs -pr | wc -l)" -ge "$CONCURRENCY" ]]; do
-    wait -n
+  while [[ "$(active_worker_count)" -ge "$CONCURRENCY" ]]; do
+    if ! wait -n; then
+      :
+    fi
   done
 done
 
