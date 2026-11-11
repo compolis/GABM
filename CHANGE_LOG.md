@@ -21,6 +21,9 @@ A summary of changes are documented in this file.
   `chat_opinion` runs.
 - Expanded roadmap 0.6 scope with release-target detail for calibrated
   `chat_opinion` workflows and associated evidence expectations.
+- Fixed Calder concurrent launcher worker throttling so client concurrency counts
+  only simulation workers (not background server/monitor processes), preventing
+  fixed-seed runs from stalling after the first worker.
 
 ## [0.4.0] 2026-11-09
 - Added generic seeded network builders, structural diagnostics, and
