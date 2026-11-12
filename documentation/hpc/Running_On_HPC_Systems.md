@@ -31,6 +31,11 @@ Compatibility note:
 - Prefer `run_concurrency.sh` under each HPC system directory for new workflows.
 - Existing `chat/` and `chat_opinion/` launchers remain available as compatibility entrypoints.
 
+Usage note:
+- `run_concurrency.sh` is the preferred generic entrypoint.
+- Select workload explicitly with `--example chat` or `--example chat_opinion`.
+- Existing `chat/` and `chat_opinion/` script paths remain available as compatibility wrappers.
+
 ## Typical Workflow
 
 1. Prepare environment and model assets

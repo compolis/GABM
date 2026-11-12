@@ -44,6 +44,72 @@ If you are resuming Calder/HPC reproducibility and release-prep work after a bre
 - Run-to-run determinism comparator: [scripts/analysis/chat/compare_chat_runs.py](scripts/analysis/chat/compare_chat_runs.py)
 - Markdown row generator for stress-summary tables: [scripts/analysis/chat/generate_concurrency_rows.py](scripts/analysis/chat/generate_concurrency_rows.py)
 
+Quick HPC launcher examples (preferred canonical entrypoints):
+
+```bash
+# Calder generic chat concurrency
+sbatch scripts/hpc/calder/run_concurrency.sh \
+  --example chat \
+  --model Qwen3-14B \
+  --n-runs 8 \
+  --concurrency 2 \
+  --seed-mode increment \
+  --seed 42
+
+# Calder chat_opinion fixed-seed determinism
+sbatch scripts/hpc/calder/run_concurrency.sh \
+  --example chat_opinion \
+  --model Qwen3-14B \
+  --rounds 8 \
+  --n-runs 8 \
+  --concurrency 2 \
+  --seed-mode fixed \
+  --seed 42 \
+  --llm-seed 42
+```
+
+Aire equivalents (same canonical pattern, with explicit shared paths):
+
+```bash
+# Aire generic chat concurrency
+sbatch --partition=gpu --time=00:30:00 --gpus-per-task=1 --cpus-per-task=8 --mem=64G \
+  --export=ALL,SHARED_WORKING_DIR=/mnt/scratch/$USER/gabm,MODEL_DIR=/mnt/scratch/$USER/gabm/huggingface/hub/Qwen3-14B,SIF_IMAGE=/mnt/scratch/$USER/gabm/<compatible-sif>.sif \
+  scripts/hpc/aire/run_concurrency.sh \
+  --example chat \
+  --model Qwen3-14B \
+  --conda-env gabm-aire \
+  --n-runs 8 \
+  --concurrency 1 \
+  --seed-mode increment \
+  --seed 42
+
+# Aire chat_opinion fixed-seed determinism (reproducibility-critical default: concurrency=1)
+sbatch --partition=gpu --time=00:30:00 --gpus-per-task=1 --cpus-per-task=8 --mem=64G \
+  --export=ALL,SHARED_WORKING_DIR=/mnt/scratch/$USER/gabm,MODEL_DIR=/mnt/scratch/$USER/gabm/huggingface/hub/Qwen3-14B,SIF_IMAGE=/mnt/scratch/$USER/gabm/<compatible-sif>.sif \
+  scripts/hpc/aire/run_concurrency.sh \
+  --example chat_opinion \
+  --model Qwen3-14B \
+  --conda-env gabm-aire \
+  --rounds 8 \
+  --n-runs 8 \
+  --concurrency 1 \
+  --seed-mode fixed \
+  --seed 42 \
+  --llm-seed 42
+```
+
+Important Aire note:
+- On the current Aire-compatible runtime stack, fixed-seed replay at `--concurrency 2` may be non-deterministic.
+- Use `--concurrency 1` for reproducibility-critical Aire evidence runs.
+
+Compatibility note:
+- `scripts/hpc/calder/chat/run_chat_concurrency.sh` and
+  `scripts/hpc/calder/chat_opinion/run_chat_opinion_concurrency.sh`
+  remain valid compatibility entrypoints.
+- `scripts/hpc/aire/chat/run_chat_concurrency.sh` and
+  `scripts/hpc/aire/chat_opinion/run_chat_opinion_concurrency.sh`
+  remain valid compatibility entrypoints.
+
 Suggested quick restart steps:
 
 1. Confirm queued/completed Calder job IDs and run directories.
