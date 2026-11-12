@@ -1,11 +1,11 @@
-# Reproducibility Experiments for Qwen3-14B (Calder HPC)
+# Reproducibility Experiments for Qwen3-14B (Calder and Aire HPC)
 
-This document defines reproducibility experiments for `Qwen3-14B` in GABM using the University of Leeds Calder HPC.
+This document defines reproducibility experiments for `Qwen3-14B` in GABM using University of Leeds HPC environments (Calder and Aire).
 It is intended for release preparation and for ongoing model-behavior monitoring.
 
 Related documents:
 
-- `../release/RELEASE_PREP_0.3.0.md`: release gates/checklist that consume evidence captured here.
+- `../release/RELEASE_PREP.md`: release gates/checklist that consume evidence captured here.
 - `../handovers/HANDOVER_2026-10-30.md`: historical snapshot of this workstream state at handover time.
 
 ## Why this document exists
@@ -26,7 +26,7 @@ For this reason, we distinguish:
 ## Scope
 
 - Model: `Qwen3-14B`
-- Environment: Calder H200, local vLLM serving via Apptainer
+- Environment: Calder H200 and Aire L40S, local vLLM serving via Apptainer
 - Workload: `src/gabm/examples/chat/sim.py` and small concurrent ensembles
 
 ## Current scripts used
@@ -307,3 +307,29 @@ Interpretation:
 - For this newer sweep batch, all compared run pairs showed `0/8` exact transcript matches (except metadata `1/8` in one increment/increment pair).
 - Operational stability was strong at tested concurrency (`FAILED_RUNS=0` for all listed jobs).
 - Current evidence suggests practical stability in completion behavior under these settings, but weak exact replay across independent run initializations.
+
+## Observed results (2026-11-12, Aire compatibility + determinism classification)
+
+Initial Aire bring-up findings:
+
+- Using `vllm-openai_latest.sif` failed during engine initialization with a driver/runtime mismatch on Aire (`RuntimeError: The NVIDIA driver on your system is too old (found version 12060)`).
+- Switching to an older Aire-compatible SIF resolved startup failures.
+
+Smoke validation:
+
+- `run_9431441` (`chat_opinion`, `n-runs=2`, `concurrency=1`, fixed seed + `llm-seed=42`) completed with `SUCCESSFUL_RUNS=2`, `FAILED_RUNS=0`.
+
+Paired fixed-seed determinism checks (`chat_opinion`, `n-runs=8`, `seed=42`, `llm-seed=42`):
+
+| A job | B job | Concurrency | Shared run IDs | Transcript exact matches | Metadata core matches | Cache-delta exact matches | Determinism signal |
+|---|---|---:|---:|---:|---:|---:|---|
+| run_9431809 | run_9431810 | 2 | 8 | 0/8 | 6/8 | 0/8 | differ |
+| run_9432287 | run_9432288 | 1 | 8 | 8/8 | 8/8 | 0/8 | exact replay |
+
+Interpretation:
+
+- Aire operational completion is stable at both tested concurrency levels (`FAILED_RUNS=0`).
+- On the current Aire-compatible runtime stack, exact replay is concurrency-sensitive:
+  - `concurrency=1`: exact transcript replay observed (`8/8`)
+  - `concurrency=2`: exact transcript replay not observed (`0/8`)
+- For reproducibility-critical Aire evidence runs, use `--concurrency 1`.

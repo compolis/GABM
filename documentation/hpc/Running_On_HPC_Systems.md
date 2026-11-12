@@ -21,6 +21,10 @@ Current Calder examples:
 - `scripts/hpc/calder/chat/run_chat_concurrency.sh`
 - `scripts/hpc/calder/chat_opinion/run_chat_opinion_concurrency.sh`
 
+Current Aire examples:
+- `scripts/hpc/aire/chat/run_chat_concurrency.sh`
+- `scripts/hpc/aire/chat_opinion/run_chat_opinion_concurrency.sh`
+
 Compatibility note:
 - Prefer using scripts directly from `scripts/hpc/` for new workflows.
 
@@ -82,6 +86,9 @@ When moving between HPC systems, review these items:
 - Scheduler directives (`#SBATCH` lines)
 - Available GPU types and counts
 - Network and firewall constraints for service ports
+- Stage-in/stage-out conventions for node-local storage (for Aire, the
+  concurrency launcher stages `src/` and `data/input/` to `${TMPDIR}` and
+  syncs run outputs back to shared storage at job exit)
 
 ## Operational Guidance
 

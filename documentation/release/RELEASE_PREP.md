@@ -1,4 +1,4 @@
-# Release Preparation for 0.3.0
+# Release Preparation (0.6 track)
 
 This checklist supports a release decision after hosted-vs-HPC comparison runs are complete.
 
@@ -9,7 +9,7 @@ Canonical reproducibility protocol and results log:
 Role separation for this release:
 
 - `../reproducibility/REPRODUCIBILITY_QWEN3_14B.md`: experiment design, command matrix, raw/derived reproducibility outcomes.
-- `RELEASE_PREP_0.3.0.md` (this file): release decision gates, packaging/publish steps, and release-note evidence checklist.
+- `RELEASE_PREP.md` (this file): release decision gates, packaging/publish steps, and release-note evidence checklist.
 
 ## 1) Evidence Collection (Hosted vs HPC)
 
@@ -57,6 +57,24 @@ Interpretation for release discussion:
 - operational completion stability is strong at tested settings (concurrency 4, 8 runs/job)
 - exact replay across independent run initializations is weak in this batch
 
+### Aire evidence snapshot (2026-11-12)
+
+Aire (`chat_opinion`, Qwen3-14B) evidence now includes a compatibility qualification and determinism classification:
+
+- Compatibility note:
+  - `vllm-openai_latest.sif` failed on Aire due to GPU driver/runtime mismatch.
+  - Aire runs succeeded with an older compatible SIF image.
+- Operational outcome:
+  - paired runs completed with `SUCCESSFUL_RUNS=8`, `FAILED_RUNS=0` at both tested concurrency settings.
+- Determinism outcome (fixed seed + `llm-seed=42`, `n-runs=8`):
+  - `concurrency=2`: transcript exact matches `0/8` (non-deterministic replay)
+  - `concurrency=1`: transcript exact matches `8/8` (deterministic replay)
+
+Release-use implication:
+
+- For reproducibility-critical Aire evidence in this release cycle, default to `--concurrency 1`.
+- Treat `--concurrency 2` as throughput/stress mode, not an exact-replay mode, on the current Aire-compatible runtime stack.
+
 ### Re-run commands for reproducibility evidence
 
 Use Makefile wrappers so others can reproduce comparisons consistently:
@@ -95,6 +113,15 @@ make summarize-hpc-concurrency \
 - LLM drift checks (network-connected environment):
   - `make llm-drift-check`
 
+### Outstanding before final 0.6 release decision
+
+- Confirm intended scope and status for `test_survey.py` (include with tests, defer, or move to follow-up).
+- Decide which run artifacts are release evidence versus local/HPC working data, and ensure only intended evidence is tracked in docs.
+- Finalize HPC script naming tidy for concurrency launchers (including compatibility wrappers and updated docs) if included in 0.6 scope.
+- Reconfirm platform-specific reproducibility defaults from current evidence:
+  - Calder reproducibility-critical default: `--concurrency 2`
+  - Aire reproducibility-critical default: `--concurrency 1` (with compatible SIF)
+
 ## 3) Packaging and Publish
 
 - Confirm versions are aligned (`pyproject.toml`, `setup.cfg`).
@@ -107,7 +134,7 @@ make summarize-hpc-concurrency \
 
 ## 4) Changelog and Announcement Inputs
 
-Ensure `CHANGE_LOG.md` entry for `0.3.0` includes:
+Ensure `CHANGE_LOG.md` entry for the target release includes:
 
 - ensemble workflow additions
 - awkward/dissimilarity controls
@@ -135,3 +162,27 @@ Recommended sequence:
 3. Compare with `compare-ensemble-sweeps`.
 4. Consolidate outputs in the reproducibility document.
 5. Decide release go/no-go based on evidence gates above.
+
+### Combined Calder + Aire reproducibility conclusion (2026-11-12)
+
+Current Qwen3-14B evidence indicates platform-specific deterministic operating points:
+
+- **Calder (H200, current Calder stack):**
+  - `chat_opinion`, fixed seed (`seed=42`, `llm-seed=42`), `n-runs=8`, `concurrency=2`
+  - paired runs (`run_856942` vs `run_856943`) achieved:
+    - transcript exact matches `8/8`
+    - metadata core matches `8/8`
+    - `SUCCESSFUL_RUNS=8`, `FAILED_RUNS=0` for both jobs
+  - interpretation: deterministic replay is supported at `concurrency=2` under this configuration.
+
+- **Aire (L40S, older compatible SIF):**
+  - fixed-seed paired runs (`n-runs=8`, `seed=42`, `llm-seed=42`) show:
+    - `concurrency=2`: transcript exact matches `0/8` (non-deterministic replay)
+    - `concurrency=1`: transcript exact matches `8/8` (deterministic replay)
+  - operational completion remained stable (`SUCCESSFUL_RUNS=8`, `FAILED_RUNS=0`) at both tested levels.
+  - interpretation: exact replay on Aire is currently concurrency-sensitive on the compatible runtime stack.
+
+**Release-use guidance:**  
+Adopt platform-specific reproducibility defaults for release evidence:
+- Calder: `--concurrency 2` acceptable for deterministic fixed-seed replay.
+- Aire: use `--concurrency 1` for reproducibility-critical runs; treat `--concurrency 2` as throughput/stress mode.
