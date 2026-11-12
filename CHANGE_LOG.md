@@ -28,6 +28,10 @@ A summary of changes are documented in this file.
   `scripts/hpc/aire/chat/run_chat_concurrency.sh` and
   `scripts/hpc/aire/chat_opinion/run_chat_opinion_concurrency.sh`, including
   node-local scratch stage-in/out for run data.
+- Added canonical generic HPC concurrency entrypoints
+  (`scripts/hpc/calder/run_concurrency.sh`,
+  `scripts/hpc/aire/run_concurrency.sh`) while retaining existing `chat/` and
+  `chat_opinion/` launcher paths as compatibility wrappers.
 
 ## [0.4.0] 2026-11-09
 - Added generic seeded network builders, structural diagnostics, and
