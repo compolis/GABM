@@ -1,4 +1,10 @@
-"""Tests for ONS-backed name loading and selection helpers in ABM data."""
+"""
+Tests for ONS-backed name loading and selection helpers in ABM data.
+"""
+# Metadata
+__author__ = ["Andy Turner <agdturner@gmail.com>"]
+__version__ = "0.1.0"
+__copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 from pathlib import Path
 import random
