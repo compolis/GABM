@@ -15,6 +15,7 @@ Keep HPC scripts under:
 - `scripts/hpc/`
 
 Current Calder examples:
+- `scripts/hpc/calder/run_concurrency.sh` (preferred generic entrypoint)
 - `scripts/hpc/calder/run.sh`
 - `scripts/hpc/calder/run_server.sh`
 - `scripts/hpc/calder/run_client.sh`
@@ -22,11 +23,18 @@ Current Calder examples:
 - `scripts/hpc/calder/chat_opinion/run_chat_opinion_concurrency.sh`
 
 Current Aire examples:
+- `scripts/hpc/aire/run_concurrency.sh` (preferred generic entrypoint)
 - `scripts/hpc/aire/chat/run_chat_concurrency.sh`
 - `scripts/hpc/aire/chat_opinion/run_chat_opinion_concurrency.sh`
 
 Compatibility note:
-- Prefer using scripts directly from `scripts/hpc/` for new workflows.
+- Prefer `run_concurrency.sh` under each HPC system directory for new workflows.
+- Existing `chat/` and `chat_opinion/` launchers remain available as compatibility entrypoints.
+
+Usage note:
+- `run_concurrency.sh` is the preferred generic entrypoint.
+- Select workload explicitly with `--example chat` or `--example chat_opinion`.
+- Existing `chat/` and `chat_opinion/` script paths remain available as compatibility wrappers.
 
 ## Typical Workflow
 
