@@ -1,4 +1,10 @@
-"""Tests for mode resolution logic in gabm.__main__."""
+"""
+Tests for mode resolution logic in gabm.__main__.
+"""
+# Metadata
+__author__ = ["Andy Turner <agdturner@gmail.com>"]
+__version__ = "0.1.0"
+__copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 from gabm import __main__ as main_mod
 
