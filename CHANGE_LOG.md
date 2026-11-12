@@ -24,6 +24,10 @@ A summary of changes are documented in this file.
 - Fixed Calder concurrent launcher worker throttling so client concurrency counts
   only simulation workers (not background server/monitor processes), preventing
   fixed-seed runs from stalling after the first worker.
+- Added Aire concurrent chat launchers at
+  `scripts/hpc/aire/chat/run_chat_concurrency.sh` and
+  `scripts/hpc/aire/chat_opinion/run_chat_opinion_concurrency.sh`, including
+  node-local scratch stage-in/out for run data.
 
 ## [0.4.0] 2026-11-09
 - Added generic seeded network builders, structural diagnostics, and

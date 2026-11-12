@@ -57,6 +57,24 @@ Interpretation for release discussion:
 - operational completion stability is strong at tested settings (concurrency 4, 8 runs/job)
 - exact replay across independent run initializations is weak in this batch
 
+### Aire evidence snapshot (2026-11-12)
+
+Aire (`chat_opinion`, Qwen3-14B) evidence now includes a compatibility qualification and determinism classification:
+
+- Compatibility note:
+  - `vllm-openai_latest.sif` failed on Aire due to GPU driver/runtime mismatch.
+  - Aire runs succeeded with an older compatible SIF image.
+- Operational outcome:
+  - paired runs completed with `SUCCESSFUL_RUNS=8`, `FAILED_RUNS=0` at both tested concurrency settings.
+- Determinism outcome (fixed seed + `llm-seed=42`, `n-runs=8`):
+  - `concurrency=2`: transcript exact matches `0/8` (non-deterministic replay)
+  - `concurrency=1`: transcript exact matches `8/8` (deterministic replay)
+
+Release-use implication:
+
+- For reproducibility-critical Aire evidence in this release cycle, default to `--concurrency 1`.
+- Treat `--concurrency 2` as throughput/stress mode, not an exact-replay mode, on the current Aire-compatible runtime stack.
+
 ### Re-run commands for reproducibility evidence
 
 Use Makefile wrappers so others can reproduce comparisons consistently:
