@@ -37,6 +37,22 @@ Archive for release notes:
 - sweep metadata JSON files
 - key CSV summaries from both sides
 
+### Evidence retention policy for 0.6.0
+
+Keep in repository (curated, small, reviewable):
+
+- reproducibility and release summaries in `documentation/`
+- compact derived comparison/concurrency tables (markdown or CSV) suitable for review
+- command lines and environment metadata needed to reproduce evidence runs
+
+Keep outside repository (large/raw operational artifacts):
+
+- full HPC run directories (for example `run_<job_id>/clients`, `vllm_server.log`, `gpu_memory.log`)
+- large generated transcript or debug logs
+- bulk intermediate outputs under local/HPC scratch areas unless explicitly curated
+
+Documentation should reference external/raw evidence by stable identifiers (job IDs, run directory paths, and execution dates) so reviewers can trace provenance without committing large artifacts.
+
 ### Current evidence snapshot (2026-11-08)
 
 Recent local Calder runs under `data/output/examples/chat/hpc/Calder/`:
