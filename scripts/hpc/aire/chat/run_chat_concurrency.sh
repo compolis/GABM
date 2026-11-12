@@ -177,6 +177,7 @@ LAUNCHER_LOG="${OUTDIR}/launcher_summary.log"
 
 echo "=== Stage in to local scratch ===" | tee -a "$LAUNCHER_LOG"
 rsync -a --delete "${REPO_DIR}/src/" "${LOCAL_REPO}/src/"
+mkdir -p "${LOCAL_REPO}/data"
 rsync -a --delete "${REPO_DIR}/data/input/" "${LOCAL_REPO}/data/input/"
 
 echo "=== Configuration ===" | tee -a "$LAUNCHER_LOG"
