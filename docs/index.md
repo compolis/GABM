@@ -17,7 +17,7 @@ DEV_QUICKSTART.md
 documentation/README.md
 documentation/handovers/HANDOVER_2026-11-10.md
 documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md
-documentation/release/RELEASE_PREP_0.3.0.md
+documentation/release/RELEASE_PREP.md
 documentation/hpc/Running_On_HPC_Systems.md
 documentation/hpc/RunningApertusOnCalder.md
 requirements-dev.md

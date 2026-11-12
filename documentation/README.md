@@ -26,7 +26,7 @@ available during migration for compatibility and discoverability.
 ## Current key documents
 
 - [reproducibility/REPRODUCIBILITY_QWEN3_14B.md](./reproducibility/REPRODUCIBILITY_QWEN3_14B.md)
-- [release/RELEASE_PREP_0.3.0.md](./release/RELEASE_PREP_0.3.0.md)
+- [release/RELEASE_PREP.md](./release/RELEASE_PREP.md)
 - [hpc/Running_On_HPC_Systems.md](./hpc/Running_On_HPC_Systems.md)
 - [hpc/RunningApertusOnCalder.md](./hpc/RunningApertusOnCalder.md)
 - [planning/ROADMAP.md](./planning/ROADMAP.md)

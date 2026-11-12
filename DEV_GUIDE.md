@@ -36,7 +36,7 @@ Please follow the [Developer Quick Start Guide](DEV_QUICKSTART.md) to get set up
 If you are resuming Calder/HPC reproducibility and release-prep work after a break, start here:
 
 - Qwen3-14B reproducibility protocol + results template (primary source): [documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md](documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md)
-- Release checklist and evidence gates (decision layer): [documentation/release/RELEASE_PREP_0.3.0.md](documentation/release/RELEASE_PREP_0.3.0.md)
+- Release checklist and evidence gates (decision layer): [documentation/release/RELEASE_PREP.md](documentation/release/RELEASE_PREP.md)
 - Current handover snapshot for chat_opinion calibration and next HPC steps: [documentation/handovers/HANDOVER_2026-11-10.md](documentation/handovers/HANDOVER_2026-11-10.md)
 - Historical handover snapshot (context only): [documentation/handovers/HANDOVER_2026-10-30.md](documentation/handovers/HANDOVER_2026-10-30.md)
 - Calder concurrent launcher (single server, many clients): [scripts/hpc/calder/chat/run_chat_concurrency.sh](scripts/hpc/calder/chat/run_chat_concurrency.sh)
@@ -50,7 +50,7 @@ Suggested quick restart steps:
 2. Update experiment outcomes in [documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md](documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md):
    - run determinism comparisons with `compare_chat_runs.py`
    - add stress-summary rows from `generate_concurrency_rows.py`
-3. Use [documentation/release/RELEASE_PREP_0.3.0.md](documentation/release/RELEASE_PREP_0.3.0.md) to evaluate release readiness.
+3. Use [documentation/release/RELEASE_PREP.md](documentation/release/RELEASE_PREP.md) to evaluate release readiness.
 
 
 ## Contributing and Communicating
