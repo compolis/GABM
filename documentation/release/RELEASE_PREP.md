@@ -115,7 +115,7 @@ make summarize-hpc-concurrency \
 
 ### Outstanding before final 0.6 release decision
 
-- Confirm intended scope and status for `test_survey.py` (include with tests, defer, or move to follow-up).
+- `test_survey.py`: include in 0.6; targeted test passes (`PYTHONPATH=src pytest -q tests/src/gabm/abm/test_survey.py`).
 - Decide which run artifacts are release evidence versus local/HPC working data, and ensure only intended evidence is tracked in docs.
 - Finalize HPC script naming tidy for concurrency launchers (including compatibility wrappers and updated docs) if included in 0.6 scope.
 - Reconfirm platform-specific reproducibility defaults from current evidence:
