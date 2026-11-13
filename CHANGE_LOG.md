@@ -32,6 +32,12 @@ A summary of changes are documented in this file.
   (`scripts/hpc/calder/run_concurrency.sh`,
   `scripts/hpc/aire/run_concurrency.sh`) while retaining existing `chat/` and
   `chat_opinion/` launcher paths as compatibility wrappers.
+- Consolidated Calder/Aire one-time HPC setup guidance into
+  `documentation/hpc/Running_On_HPC_Systems.md` and removed the redundant
+  `RunningApertusOnCalder.md` docs.
+- Added `scripts/hpc/aire/run_concurrency_flash.sh` to stage heavy Aire assets
+  (SIF/model) to `/flash` for NVMe-local execution and sync outputs back to
+  persistent scratch before job completion.
 
 ## [0.4.0] 2026-11-09
 - Added generic seeded network builders, structural diagnostics, and

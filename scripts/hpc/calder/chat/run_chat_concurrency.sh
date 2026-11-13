@@ -37,7 +37,7 @@ set -euo pipefail
 set -x
 
 MODEL_NAME="Qwen3-14B"
-SIF_FILE="vllm-openai_latest.sif"
+SIF_FILE="vllm-openai_v0.33.0.sif"
 WORKING_DIR="/flash-calder/users/${USER}/gabm"
 CONDA_ENV="gabm"
 

@@ -19,7 +19,6 @@ documentation/handovers/HANDOVER_2026-11-10.md
 documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md
 documentation/release/RELEASE_PREP.md
 documentation/hpc/Running_On_HPC_Systems.md
-documentation/hpc/RunningApertusOnCalder.md
 requirements-dev.md
 requirements.md
 requirements-local-llm.md
@@ -40,7 +39,6 @@ CONTACT.md
 :caption: Archived Notes
 
 documentation/handovers/HANDOVER_2026-10-30.md
-archive/RunningApertusOnCalder.md
 ```
 
 ---

@@ -28,7 +28,6 @@ available during migration for compatibility and discoverability.
 - [reproducibility/REPRODUCIBILITY_QWEN3_14B.md](./reproducibility/REPRODUCIBILITY_QWEN3_14B.md)
 - [release/RELEASE_PREP.md](./release/RELEASE_PREP.md)
 - [hpc/Running_On_HPC_Systems.md](./hpc/Running_On_HPC_Systems.md)
-- [hpc/RunningApertusOnCalder.md](./hpc/RunningApertusOnCalder.md)
 - [planning/ROADMAP.md](./planning/ROADMAP.md)
 - [history/DEVELOPMENT_HISTORY.md](./history/DEVELOPMENT_HISTORY.md)
 - [publication/JOSS_SUBMISSION.md](./publication/JOSS_SUBMISSION.md)
