@@ -333,3 +333,34 @@ Interpretation:
   - `concurrency=1`: exact transcript replay observed (`8/8`)
   - `concurrency=2`: exact transcript replay not observed (`0/8`)
 - For reproducibility-critical Aire evidence runs, use `--concurrency 1`.
+
+## Observed results (2026-11-13, Aire flash staging timing A/B snapshot)
+
+Objective:
+- assess practical runtime impact of staging heavy assets to flash for Aire runs.
+
+Compared runs (`chat_opinion`, `Qwen3-14B`, `rounds=8`, `n-runs=8`,
+`concurrency=1`, fixed seed + `llm-seed=42`):
+
+- Flash-staged run: `run_9452050`
+  - Slurm elapsed: `00:19:26` (`1166s`)
+  - wrapper timing (`flash_stage_timing.log`):
+    - `STAGE_IN_MODEL_SEC=69`
+    - `STAGE_IN_SIF_SEC=24`
+    - `CORE_RUN_SEC=1066`
+    - `STAGE_OUT_SEC=0` (second-level rounding; effectively negligible in this run)
+    - `TOTAL_SEC=1159`
+- Non-flash run: `run_9452360`
+  - Slurm elapsed: `00:16:01` (`961s`)
+
+Observed delta for this pair:
+- End-to-end (Slurm elapsed): flash was slower by `205s` (~`21.3%`).
+- Ignoring flash copy-in/out (core-only): flash `CORE_RUN_SEC=1066` vs non-flash
+  `961s`, i.e. `105s` slower (~`10.9%`).
+
+Caveat:
+- This is an operational A/B snapshot, not a controlled micro-benchmark.
+- Node allocation, exact GPU/CPU characteristics, and cluster load are not
+  fully controlled between runs and may materially affect timing outcomes.
+- Treat this as current evidence for release notes, not a universal performance
+  claim that flash staging is always slower/faster on Aire.

@@ -91,6 +91,28 @@ Release-use implication:
 - For reproducibility-critical Aire evidence in this release cycle, default to `--concurrency 1`.
 - Treat `--concurrency 2` as throughput/stress mode, not an exact-replay mode, on the current Aire-compatible runtime stack.
 
+### Aire flash staging timing snapshot (2026-11-13)
+
+Single-pair A/B snapshot (`chat_opinion`, `Qwen3-14B`, `rounds=8`, `n-runs=8`,
+`concurrency=1`, fixed seed + `llm-seed=42`):
+
+- Flash-staged run `run_9452050`:
+  - Slurm elapsed `00:19:26` (`1166s`)
+  - `flash_stage_timing.log`: model stage-in `69s`, SIF stage-in `24s`,
+    core run `1066s`, stage-out `0s` (rounded), total `1159s`
+- Non-flash run `run_9452360`:
+  - Slurm elapsed `00:16:01` (`961s`)
+
+Observed in this pair:
+- End-to-end flash run was slower by `205s` (~`21.3%`).
+- Even excluding copy-in/out overhead, flash core run was slower by `105s`
+  (~`10.9%`) against this non-flash comparator.
+
+Release interpretation:
+- Record as current operational evidence with explicit caveat.
+- Do not treat this single pair as a generalized benchmark result; node/GPU/CPU
+  assignment and cluster load can change outcomes.
+
 ### Re-run commands for reproducibility evidence
 
 Use Makefile wrappers so others can reproduce comparisons consistently:
