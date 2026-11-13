@@ -35,7 +35,7 @@ set -euo pipefail
 set -x
 
 MODEL_NAME="Qwen3-14B"
-SIF_FILE="vllm-openai_latest.sif"
+SIF_FILE="vllm-openai_v0.11.0.sif"
 SHARED_WORKING_DIR="${SHARED_WORKING_DIR:-${SCRATCH:-$HOME}/gabm}"
 CONDA_ENV="gabm"
 

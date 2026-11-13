@@ -51,7 +51,7 @@ MODEL_NAME="Apertus-v1.5-70B"
 # apptainer pull apertus15.sif docker://ghcr.io/swiss-ai/vllm_apertus_1.5_release:latest-amd64
 # apptainer pull docker://vllm/vllm-openai
 SIF_FILE="apertus15.sif"
-#SIF_FILE="vllm-openai_latest.sif"
+#SIF_FILE="vllm-openai_v0.33.0.sif"
 #WORKING_DIR="/scratch-calder/calder-uat/${USER}/gabm"
 #WORKING_DIR="/users/${USER}/gabm"
 WORKING_DIR="/flash-calder/users/${USER}/gabm"

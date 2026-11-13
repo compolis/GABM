@@ -24,6 +24,7 @@ Current Calder examples:
 
 Current Aire examples:
 - `scripts/hpc/aire/run_concurrency.sh` (preferred generic entrypoint)
+- `scripts/hpc/aire/run_concurrency_flash.sh` (preferred for heavier runs using `/flash` staging)
 - `scripts/hpc/aire/chat/run_chat_concurrency.sh`
 - `scripts/hpc/aire/chat_opinion/run_chat_opinion_concurrency.sh`
 
@@ -35,6 +36,86 @@ Usage note:
 - `run_concurrency.sh` is the preferred generic entrypoint.
 - Select workload explicitly with `--example chat` or `--example chat_opinion`.
 - Existing `chat/` and `chat_opinion/` script paths remain available as compatibility wrappers.
+
+## One-time setup on a login node
+
+The following setup snippets are intended as practical starting points and can
+be adapted to site policy changes.
+
+### Calder
+
+Calder data can be stored more persistently under `/flash-calder`.
+
+```bash
+HPC="calder"
+DIR_S="/scratch-calder/users/$USER"
+DIR_F="/flash-calder/users/$USER"
+VLLM_V=0.11.0
+HF_HUB="$DIR_F/gabm/huggingface/hub"
+
+cd "$DIR_F"
+module load calder/hopper
+module load miniforge3
+
+# Optional prebuilt Apertus image
+apptainer pull apertus15.sif docker://ghcr.io/swiss-ai/vllm_apertus_1.5_release:latest-amd64
+```
+
+### Aire
+
+On Aire, `/flash` is job-local/ephemeral and not suitable as durable storage.
+Use `/mnt/scratch/$USER` for persistent assets and outputs.
+
+For heavier or longer-running jobs, performance is often better if model and
+container assets are staged to `/flash` at job start (NVMe-local I/O), then run
+from `/flash`, and finally copy outputs back to `/mnt/scratch/$USER` before job
+completion.
+
+For lighter runs, using `/mnt/scratch/$USER` directly is simpler.
+
+When you want this behavior automatically, use
+`scripts/hpc/aire/run_concurrency_flash.sh`, which stages SIF/model assets to
+`/flash`, runs via the standard Aire launcher, then copies run outputs back to
+persistent scratch before job exit.
+
+```bash
+HPC="aire"
+DIR_S="/mnt/scratch/$USER"
+DIR_F="/flash"
+VLLM_V=0.33.0
+HF_HUB="$DIR_S/gabm/huggingface/hub"
+
+cd "$DIR_S"
+module load apptainer
+module load miniforge
+```
+
+### Shared setup steps (both systems)
+
+```bash
+# Pull vLLM OpenAI image
+apptainer pull docker://vllm/vllm-openai:v$VLLM_V
+
+# Prepare model cache directory
+mkdir -p "$HF_HUB"
+
+# Install Hugging Face CLI (one-time per user environment)
+curl -LsSf https://hf.co/cli/install.sh | bash
+
+# Download model snapshots
+hf download swiss-ai/Apertus-8B-2509 --local-dir "$HF_HUB/Apertus-8B-2509"
+hf download swiss-ai/Apertus-70B-2509 --local-dir "$HF_HUB/Apertus-70B-2509"
+hf download swiss-ai/Apertus-v1.5-8B --local-dir "$HF_HUB/Apertus-v1.5-8B"
+hf download swiss-ai/Apertus-v1.5-70B --local-dir "$HF_HUB/Apertus-v1.5-70B"
+hf download Qwen/Qwen3-14B --local-dir "$HF_HUB/Qwen3-14B"
+
+# Clone and prepare environment
+git clone https://github.com/compolis/GABM.git
+cd GABM
+conda create -n "gabm-$HPC" -y python=3.14
+conda activate "gabm-$HPC"
+pip install --upgrade pip setuptools wheel
+```
 
 ## Typical Workflow
 
@@ -97,6 +178,9 @@ When moving between HPC systems, review these items:
 - Stage-in/stage-out conventions for node-local storage (for Aire, the
   concurrency launcher stages `src/` and `data/input/` to `${TMPDIR}` and
   syncs run outputs back to shared storage at job exit)
+- Whether high-performance local NVMe storage is available (for Aire, `/flash`
+  can improve heavy-run performance but should be treated as ephemeral and
+  staged back to persistent scratch before job completion)
 
 ## Operational Guidance
 
