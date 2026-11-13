@@ -99,6 +99,7 @@ sbatch --partition=gpu --time=00:30:00 --gpus-per-task=1 --cpus-per-task=8 --mem
 
 # Aire heavy-run variant (stages SIF/model to job flash, then syncs outputs back)
 # The wrapper auto-detects a writable flash base, preferring $TMP_SHARED.
+# Timing breakdown is written to gabm_runs/run_<JOB_ID>/flash_stage_timing.log.
 sbatch --partition=gpu --time=00:30:00 --gpus-per-task=1 --cpus-per-task=8 --mem=64G \
   scripts/hpc/aire/run_concurrency_flash.sh \
   --example chat_opinion \
