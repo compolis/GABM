@@ -101,6 +101,12 @@ PERSIST_MODEL_DIR="${MODEL_DIR_SRC:-${PERSIST_WORKING_DIR}/huggingface/hub/${MOD
 PERSIST_SIF_IMAGE="${SIF_IMAGE_SRC:-${PERSIST_WORKING_DIR}/${SIF_FILE}}"
 PERSIST_OUT_ROOT="${PERSIST_WORKING_DIR}/gabm_runs"
 FLASH_RUN_DIR="${FLASH_WORKING_DIR}/gabm_runs/run_${JOB_ID}"
+FLASH_TIMING_LOG="${FLASH_RUN_DIR}/flash_stage_timing.log"
+OVERALL_START_TS="$(date +%s)"
+STAGE_IN_MODEL_SEC=0
+STAGE_IN_SIF_SEC=0
+CORE_RUN_SEC=0
+STAGE_OUT_SEC=0
 
 if [[ ! -d "$PERSIST_MODEL_DIR" ]]; then
   echo "Model directory not found on persistent scratch: $PERSIST_MODEL_DIR" >&2
@@ -116,16 +122,42 @@ mkdir -p "$FLASH_HUB" "$PERSIST_OUT_ROOT"
 
 echo "[flash-stage] Using FLASH_BASE: $FLASH_BASE"
 echo "[flash-stage] Staging model from persistent scratch to flash..."
+stage_start_ts="$(date +%s)"
 rsync -a --delete "$PERSIST_MODEL_DIR/" "${FLASH_MODEL_DIR}/"
+STAGE_IN_MODEL_SEC="$(( $(date +%s) - stage_start_ts ))"
 
 echo "[flash-stage] Staging SIF from persistent scratch to flash..."
+stage_start_ts="$(date +%s)"
 rsync -a "$PERSIST_SIF_IMAGE" "$FLASH_SIF_IMAGE"
+STAGE_IN_SIF_SEC="$(( $(date +%s) - stage_start_ts ))"
 
 stage_out() {
-  if [[ -d "$FLASH_RUN_DIR" ]]; then
-    mkdir -p "$PERSIST_OUT_ROOT/run_${JOB_ID}"
-    rsync -a "${FLASH_RUN_DIR}/" "${PERSIST_OUT_ROOT}/run_${JOB_ID}/"
-  fi
+  local stage_start_ts
+  stage_start_ts="$(date +%s)"
+  mkdir -p "$PERSIST_OUT_ROOT/run_${JOB_ID}"
+  mkdir -p "$FLASH_RUN_DIR"
+  {
+    echo "JOB_ID=${JOB_ID}"
+    echo "FLASH_BASE=${FLASH_BASE}"
+    echo "PERSIST_WORKING_DIR=${PERSIST_WORKING_DIR}"
+    echo "STAGE_IN_MODEL_SEC=${STAGE_IN_MODEL_SEC}"
+    echo "STAGE_IN_SIF_SEC=${STAGE_IN_SIF_SEC}"
+    echo "CORE_RUN_SEC=${CORE_RUN_SEC}"
+    echo "STAGE_OUT_SEC=PENDING"
+    echo "TOTAL_SEC_SO_FAR=$(( $(date +%s) - OVERALL_START_TS ))"
+  } > "$FLASH_TIMING_LOG"
+  rsync -a "${FLASH_RUN_DIR}/" "${PERSIST_OUT_ROOT}/run_${JOB_ID}/"
+  STAGE_OUT_SEC="$(( $(date +%s) - stage_start_ts ))"
+  {
+    echo "JOB_ID=${JOB_ID}"
+    echo "FLASH_BASE=${FLASH_BASE}"
+    echo "PERSIST_WORKING_DIR=${PERSIST_WORKING_DIR}"
+    echo "STAGE_IN_MODEL_SEC=${STAGE_IN_MODEL_SEC}"
+    echo "STAGE_IN_SIF_SEC=${STAGE_IN_SIF_SEC}"
+    echo "CORE_RUN_SEC=${CORE_RUN_SEC}"
+    echo "STAGE_OUT_SEC=${STAGE_OUT_SEC}"
+    echo "TOTAL_SEC=$(( $(date +%s) - OVERALL_START_TS ))"
+  } > "${PERSIST_OUT_ROOT}/run_${JOB_ID}/flash_stage_timing.log"
 }
 
 cleanup() {
@@ -141,7 +173,9 @@ trap cleanup EXIT
 echo "[flash-stage] Running from flash working dir: $FLASH_WORKING_DIR"
 echo "[flash-stage] Persistent output root: $PERSIST_OUT_ROOT"
 
+stage_start_ts="$(date +%s)"
 SHARED_WORKING_DIR="$FLASH_WORKING_DIR" \
 MODEL_DIR="$FLASH_MODEL_DIR" \
 SIF_IMAGE="$FLASH_SIF_IMAGE" \
 "$BASE_SCRIPT" "${FORWARD_ARGS[@]}"
+CORE_RUN_SEC="$(( $(date +%s) - stage_start_ts ))"

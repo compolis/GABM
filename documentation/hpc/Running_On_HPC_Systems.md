@@ -81,6 +81,9 @@ When you want this behavior automatically, use
 `scripts/hpc/aire/run_concurrency_flash.sh`, which stages SIF/model assets to a
 writable flash path (preferring `$TMP_SHARED`), runs via the standard Aire
 launcher, then copies run outputs back to persistent scratch before job exit.
+Per-run flash timing breakdown is written to
+`gabm_runs/run_<JOB_ID>/flash_stage_timing.log` to support A/B performance
+comparison against non-flash runs.
 
 ```bash
 HPC="aire"

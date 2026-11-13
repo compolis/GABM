@@ -42,6 +42,10 @@ A summary of changes are documented in this file.
   `/flash/$USER` assumptions by preferring writable job flash paths
   (e.g. `$TMP_SHARED`/`/mnt/flash/tmp/job.<JOB-ID>`) and emitting clearer
   configuration guidance when no writable flash path is available.
+- Added per-job flash timing metrics in the Aire flash launcher
+  (`flash_stage_timing.log`) capturing stage-in model/SIF durations, core run
+  duration, stage-out duration, and total elapsed time for performance
+  comparisons against non-flash runs.
 
 ## [0.4.0] 2026-11-09
 - Added generic seeded network builders, structural diagnostics, and
