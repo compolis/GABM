@@ -63,25 +63,28 @@ apptainer pull apertus15.sif docker://ghcr.io/swiss-ai/vllm_apertus_1.5_release:
 
 ### Aire
 
-On Aire, `/flash` is job-local/ephemeral and not suitable as durable storage.
+On Aire, flash scratch is job-local/ephemeral and not suitable as durable
+storage.
 Use `/mnt/scratch/$USER` for persistent assets and outputs.
 
 For heavier or longer-running jobs, performance is often better if model and
-container assets are staged to `/flash` at job start (NVMe-local I/O), then run
-from `/flash`, and finally copy outputs back to `/mnt/scratch/$USER` before job
-completion.
+container assets are staged to job flash at job start (NVMe-local I/O), then
+run from flash, and finally copy outputs back to `/mnt/scratch/$USER` before
+job completion.
+
+Per Aire storage docs, use `$TMP_SHARED` when available (typically
+`/mnt/flash/tmp/job.<JOB-ID>`), not `/flash/$USER`.
 
 For lighter runs, using `/mnt/scratch/$USER` directly is simpler.
 
 When you want this behavior automatically, use
-`scripts/hpc/aire/run_concurrency_flash.sh`, which stages SIF/model assets to
-`/flash`, runs via the standard Aire launcher, then copies run outputs back to
-persistent scratch before job exit.
+`scripts/hpc/aire/run_concurrency_flash.sh`, which stages SIF/model assets to a
+writable flash path (preferring `$TMP_SHARED`), runs via the standard Aire
+launcher, then copies run outputs back to persistent scratch before job exit.
 
 ```bash
 HPC="aire"
 DIR_S="/mnt/scratch/$USER"
-DIR_F="/flash"
 VLLM_V=0.33.0
 HF_HUB="$DIR_S/gabm/huggingface/hub"
 
@@ -178,9 +181,9 @@ When moving between HPC systems, review these items:
 - Stage-in/stage-out conventions for node-local storage (for Aire, the
   concurrency launcher stages `src/` and `data/input/` to `${TMPDIR}` and
   syncs run outputs back to shared storage at job exit)
-- Whether high-performance local NVMe storage is available (for Aire, `/flash`
-  can improve heavy-run performance but should be treated as ephemeral and
-  staged back to persistent scratch before job completion)
+- Whether high-performance local NVMe storage is available (for Aire, prefer
+  `$TMP_SHARED` / `/mnt/flash/tmp/job.<JOB-ID>` for heavy runs; treat it as
+  ephemeral and stage outputs back to persistent scratch before job completion)
 
 ## Operational Guidance
 

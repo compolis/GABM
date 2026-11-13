@@ -2,8 +2,9 @@
 #
 # Aire high-performance concurrency entrypoint.
 # Stages selected heavy assets (SIF + model) from persistent scratch to
-# node-local /flash, runs the standard Aire concurrency launcher from /flash,
-# then stages run outputs back to persistent scratch.
+# node-local flash scratch (preferably $TMP_SHARED on Aire), runs the standard
+# Aire concurrency launcher from flash, then stages run outputs back to
+# persistent scratch.
 
 #SBATCH --job-name=LLM-gabm-air-flash
 #SBATCH --partition=gpu
@@ -35,7 +36,6 @@ fi
 MODEL_NAME="Qwen3-14B"
 SIF_FILE="vllm-openai_v0.11.0.sif"
 PERSIST_WORKING_DIR="${PERSIST_WORKING_DIR:-/mnt/scratch/$USER/gabm}"
-FLASH_BASE="${FLASH_BASE:-/flash/$USER}"
 KEEP_FLASH_WORKDIR="${KEEP_FLASH_WORKDIR:-false}"
 
 FORWARD_ARGS=()
@@ -67,6 +67,31 @@ while [[ $# -gt 0 ]]; do
 done
 
 JOB_ID="${SLURM_JOB_ID:-manual}"
+if [[ -n "${FLASH_BASE:-}" ]]; then
+  RESOLVED_FLASH_BASE="$FLASH_BASE"
+else
+  CANDIDATE_FLASH_BASES=()
+  if [[ -n "${TMP_SHARED:-}" ]]; then
+    CANDIDATE_FLASH_BASES+=("$TMP_SHARED")
+  fi
+  CANDIDATE_FLASH_BASES+=("/mnt/flash/tmp/job.${JOB_ID}" "/flash")
+
+  RESOLVED_FLASH_BASE=""
+  for candidate in "${CANDIDATE_FLASH_BASES[@]}"; do
+    if mkdir -p "$candidate" 2>/dev/null; then
+      RESOLVED_FLASH_BASE="$candidate"
+      break
+    fi
+  done
+
+  if [[ -z "$RESOLVED_FLASH_BASE" ]]; then
+    echo "Could not find writable FLASH_BASE. Tried: ${CANDIDATE_FLASH_BASES[*]}" >&2
+    echo "Set FLASH_BASE explicitly, e.g. --export=ALL,FLASH_BASE=/mnt/flash/tmp/job.\$SLURM_JOB_ID" >&2
+    exit 1
+  fi
+fi
+
+FLASH_BASE="$RESOLVED_FLASH_BASE"
 FLASH_WORKING_DIR="${FLASH_BASE}/gabm_flash_${JOB_ID}"
 FLASH_HUB="${FLASH_WORKING_DIR}/huggingface/hub"
 FLASH_MODEL_DIR="${FLASH_HUB}/${MODEL_NAME}"
@@ -89,10 +114,11 @@ fi
 
 mkdir -p "$FLASH_HUB" "$PERSIST_OUT_ROOT"
 
-echo "[flash-stage] Staging model from persistent scratch to /flash..."
+echo "[flash-stage] Using FLASH_BASE: $FLASH_BASE"
+echo "[flash-stage] Staging model from persistent scratch to flash..."
 rsync -a --delete "$PERSIST_MODEL_DIR/" "${FLASH_MODEL_DIR}/"
 
-echo "[flash-stage] Staging SIF from persistent scratch to /flash..."
+echo "[flash-stage] Staging SIF from persistent scratch to flash..."
 rsync -a "$PERSIST_SIF_IMAGE" "$FLASH_SIF_IMAGE"
 
 stage_out() {
@@ -112,7 +138,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-echo "[flash-stage] Running from /flash working dir: $FLASH_WORKING_DIR"
+echo "[flash-stage] Running from flash working dir: $FLASH_WORKING_DIR"
 echo "[flash-stage] Persistent output root: $PERSIST_OUT_ROOT"
 
 SHARED_WORKING_DIR="$FLASH_WORKING_DIR" \
