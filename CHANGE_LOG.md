@@ -38,6 +38,10 @@ A summary of changes are documented in this file.
 - Added `scripts/hpc/aire/run_concurrency_flash.sh` to stage heavy Aire assets
   (SIF/model) to `/flash` for NVMe-local execution and sync outputs back to
   persistent scratch before job completion.
+- Fixed Aire flash launcher base-path defaults to avoid unwritable
+  `/flash/$USER` assumptions by preferring writable job flash paths
+  (e.g. `$TMP_SHARED`/`/mnt/flash/tmp/job.<JOB-ID>`) and emitting clearer
+  configuration guidance when no writable flash path is available.
 
 ## [0.4.0] 2026-11-09
 - Added generic seeded network builders, structural diagnostics, and
