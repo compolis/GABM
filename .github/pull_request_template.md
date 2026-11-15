@@ -35,16 +35,16 @@ Keep them user-facing and release-note ready.
 
 ## Validation
 
-<!-- Tick what you ran. If not run, explain why. -->
+<!-- Tick each command that completed successfully (clean run). If any command failed or was not run, explain why below. -->
 
-- [ ] `make test`
-- [ ] `make docs`
-- [ ] `make build-test`
+- [ ] `make test` — clean run
+- [ ] `make docs` — clean run
+- [ ] `make build-test` — clean run
 - [ ] Other targeted checks (describe below)
 
 ### Targeted checks details
 
-<!-- Commands run and key outcomes -->
+<!-- Commands run and key outcomes; explain any failed or skipped checks. -->
 
 -
 
@@ -54,4 +54,3 @@ Keep them user-facing and release-note ready.
 - [ ] I added/updated tests for code changes (or explained why not needed).
 - [ ] I updated docs for user/developer-facing behavior changes.
 - [ ] I kept changes scoped and avoided unrelated refactors.
-
