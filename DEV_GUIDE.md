@@ -572,7 +572,7 @@ The following files and directories are essential for building, testing, and dis
 - **requirements-dev.txt**: Lists development dependencies (testing, linting, docs) with version ranges for contributors.
 - **dist/**: Output directory for built distributions (.tar.gz and .whl files) after running the build process.
 - **src/gabm.egg-info/**: Metadata directory created by setuptools during build. Contains information about the package (version, dependencies, etc.). Safe to delete; will be recreated as needed.
-- **venv-build-test/**: Temporary virtual environment created by `make build-test` for testing the built package in isolation. This can be safely deleted after testing.
+- **venv-build-test/**: Temporary, Git-ignored virtual environment created by `make build-test` for testing the built package in isolation. This can be safely deleted after testing.
 
 
 ## Branch Protection
