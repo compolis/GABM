@@ -3,27 +3,12 @@
 
 ## Table of Contents
 1. [Overview](#overview)
-2. [1.0](#10)
-3. [0.6](#06)
 4. [0.7 (proposed)](#07-proposed)
+2. [1.0](#10)
 
 
 ## Overview
 This file outlines planned next steps and future goals.
-
-
-## 1.0
-- Criteria and features to be determined...
-
-
-## 0.6
-Delivered and tagged as `v0.6.0` on 2026-11-15.
-
-Release record:
-- see `CHANGE_LOG.md` (`[0.6.0]`) for shipped scope and details.
-
-Notes:
-- keep this roadmap focused on forward-looking plans (`0.7`, `1.0`).
 
 
 ## 0.7 (proposed)
@@ -51,3 +36,6 @@ Out of scope for 0.7 (unless explicitly reprioritized):
 - bespoke adapters for every external survey format;
 - broad redesign of core agent cognition APIs not required for survey generalization;
 - hard dependencies on external collaborators for baseline 0.7 completion.
+
+## 1.0
+- Criteria and features to be determined...
