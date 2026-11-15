@@ -2,19 +2,54 @@
 
 Some LLM workloads need more compute than a typical laptop or desktop can provide. This guide outlines a general approach for running GABM-related model serving and experiments on High Performance Computing (HPC) systems.
 
-The examples in this repository currently use:
-- Slurm for job scheduling
-- Apptainer for container runtime
-- vLLM for model serving
+Whilst Graphics Processing Units (GPUs) are not necessarily needed to use smaller Large Language Models (LLMs) like Apertus 1.5 8B with around 8 billion parameters, they are effectively needed for the larger models like Apertus 1.5 70B with 70 billion parameters.
 
-You can adapt the same pattern to your institution's HPC environment.
+HPC systems typically have a scheduler that manages jobs submitted by multiple users. The examples here currently use:
+- [Slurm](https://slurm.schedmd.com/) for job scheduling
+- [Apptainer](https://apptainer.org/) for container runtime
+- [vLLM](https://vllm.ai/) as the LLM serving inference engine
+
 
 ## Recommended Script Location
 
 Keep HPC scripts under:
 - `scripts/hpc/`
 
-Current Calder examples:
+## University of Leeds HPC Systems
+
+### Aire
+
+[Aire documentation](https://arcdocs.leeds.ac.uk/aire/)
+
+Aire has 28 GPU nodes each with 3 [NVIDIA L40S GPU](https://www.nvidia.com/en-gb/data-center/l40s/)s for use with 8 CPU cores each and a share of around 1.2 TB of Memory (https://arcdocs.leeds.ac.uk/aire/system/compute_node_types.html#gpu-node).
+
+[Data Center Driver for Linux aarch64 560.35.03 | Linux aarch64](https://www.nvidia.com/en-us/drivers/details/231403/) is available for [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit-archive) 12.6. [CUDA Toolkit 12.6.2](https://docs.nvidia.com/cuda/archive/12.6.2/) is available via the module system.
+
+On Aire, NVMe flash storage is only available for running jobs as `$TMP_SHARED` or (`/mnt/flash/tmp/job.<JOB-ID>`). `/mnt/scratch/$USER` is to be used for persistent assets and outputs.
+
+Performance may be better if model and container assets are staged to flash at the start, and outputs copied back to `/mnt/scratch/$USER` before job completion.
+If writable shared flash is unavailable on a node, the Aire flash wrapper can fall back to a writable local path (for example in `/tmp`).
+
+### Calder
+
+[Calder documentation](https://arcdocs.leeds.ac.uk/calder)
+
+Calder has 7 GPU nodes each with 8 [NVIDIA H200 NVL GPU](https://www.nvidia.com/en-gb/data-center/h200/)s for use with 16 CPU cores each and a share of 1.5 TB of Memory (https://arcdocs.leeds.ac.uk/calder/system/node_types.html#gpu-node).
+
+[Data Center Driver for Linux aarch64 595.112.07 | Linux aarch64 RHEL 9](https://www.nvidia.com/en-us/drivers/details/283243) is available for [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit-archive) 13.2. [CUDA Toolkit 13.3.0](https://docs.nvidia.com/cuda/archive/13.3.0/) is available via the module system.
+
+Calder data can be stored more persistently on NVMe storage under `/flash-calder`.
+
+
+## Example scripts for running on Leeds HPC
+
+### Aire Examples
+- `scripts/hpc/aire/run_concurrency.sh` (preferred generic entrypoint)
+- `scripts/hpc/aire/run_concurrency_flash.sh` (preferred for heavier runs using `/flash` staging)
+- `scripts/hpc/aire/chat/run_chat_concurrency.sh`
+- `scripts/hpc/aire/chat_opinion/run_chat_opinion_concurrency.sh`
+
+### Calder Examples
 - `scripts/hpc/calder/run_concurrency.sh` (preferred generic entrypoint)
 - `scripts/hpc/calder/run.sh`
 - `scripts/hpc/calder/run_server.sh`
@@ -22,35 +57,29 @@ Current Calder examples:
 - `scripts/hpc/calder/chat/run_chat_concurrency.sh`
 - `scripts/hpc/calder/chat_opinion/run_chat_opinion_concurrency.sh`
 
-Current Aire examples:
-- `scripts/hpc/aire/run_concurrency.sh` (preferred generic entrypoint)
-- `scripts/hpc/aire/run_concurrency_flash.sh` (preferred for heavier runs using `/flash` staging)
-- `scripts/hpc/aire/chat/run_chat_concurrency.sh`
-- `scripts/hpc/aire/chat_opinion/run_chat_opinion_concurrency.sh`
-
-Compatibility note:
-- Prefer `run_concurrency.sh` under each HPC system directory for new workflows.
-- Existing `chat/` and `chat_opinion/` launchers remain available as compatibility entrypoints.
-
-Usage note:
-- `run_concurrency.sh` is the preferred generic entrypoint.
-- Select workload explicitly with `--example chat` or `--example chat_opinion`.
-- Existing `chat/` and `chat_opinion/` script paths remain available as compatibility wrappers.
 
 ## One-time setup on a login node
 
-The following setup snippets are intended as practical starting points and can
-be adapted to site policy changes.
+### Aire
+
+```bash
+HPC="aire"
+DIR_S="/mnt/scratch/$USER"
+VLLM_V=0.11.0
+HF_HUB="$DIR_S/gabm/huggingface/hub"
+
+cd "$DIR_S"
+module load apptainer
+module load miniforge
+```
 
 ### Calder
-
-Calder data can be stored more persistently under `/flash-calder`.
 
 ```bash
 HPC="calder"
 DIR_S="/scratch-calder/users/$USER"
 DIR_F="/flash-calder/users/$USER"
-VLLM_V=0.11.0
+VLLM_V=0.33.0
 HF_HUB="$DIR_F/gabm/huggingface/hub"
 
 cd "$DIR_F"
@@ -59,41 +88,6 @@ module load miniforge3
 
 # Optional prebuilt Apertus image
 apptainer pull apertus15.sif docker://ghcr.io/swiss-ai/vllm_apertus_1.5_release:latest-amd64
-```
-
-### Aire
-
-On Aire, flash scratch is job-local/ephemeral and not suitable as durable
-storage.
-Use `/mnt/scratch/$USER` for persistent assets and outputs.
-
-For heavier or longer-running jobs, performance is often better if model and
-container assets are staged to job flash at job start (NVMe-local I/O), then
-run from flash, and finally copy outputs back to `/mnt/scratch/$USER` before
-job completion.
-
-Per Aire storage docs, use `$TMP_SHARED` when available (typically
-`/mnt/flash/tmp/job.<JOB-ID>`), not `/flash/$USER`.
-
-For lighter runs, using `/mnt/scratch/$USER` directly is simpler.
-
-When you want this behavior automatically, use
-`scripts/hpc/aire/run_concurrency_flash.sh`, which stages SIF/model assets to a
-writable flash path (preferring `$TMP_SHARED`), runs via the standard Aire
-launcher, then copies run outputs back to persistent scratch before job exit.
-Per-run flash timing breakdown is written to
-`gabm_runs/run_<JOB_ID>/flash_stage_timing.log` to support A/B performance
-comparison against non-flash runs.
-
-```bash
-HPC="aire"
-DIR_S="/mnt/scratch/$USER"
-VLLM_V=0.33.0
-HF_HUB="$DIR_S/gabm/huggingface/hub"
-
-cd "$DIR_S"
-module load apptainer
-module load miniforge
 ```
 
 ### Shared setup steps (both systems)
@@ -116,11 +110,14 @@ hf download swiss-ai/Apertus-v1.5-70B --local-dir "$HF_HUB/Apertus-v1.5-70B"
 hf download Qwen/Qwen3-14B --local-dir "$HF_HUB/Qwen3-14B"
 
 # Clone and prepare environment
+# Replace with your fork URL if needed.
 git clone https://github.com/compolis/GABM.git
 cd GABM
-conda create -n "gabm-$HPC" -y python=3.14
+conda create -n "gabm-$HPC" -y python=3.12
 conda activate "gabm-$HPC"
 pip install --upgrade pip setuptools wheel
+pip install -r requirements-dev.txt
+pip install -e .
 ```
 
 ## Typical Workflow
@@ -145,17 +142,12 @@ pip install --upgrade pip setuptools wheel
 - Capture run metadata and output artifacts for reproducibility.
 - Compare hosted vs local/HPC behavior using ensemble comparison tools.
 
-## Calder + Apertus Known-Working Notes (historical reference)
 
-The previous dedicated Calder/Apertus note has been consolidated here. Use this section as a practical baseline rather than a strict requirement.
+## Calder + Apertus 1.5 70B Known-Working Notes
 
-Tested stack snapshots:
-- Calder H200 (Grace Hopper) nodes
-- Apptainer
-- vLLM (0.23.1 and 0.23.1rc1 observed in prior runs)
-- Apertus-v1.5-70B
+- Requirements: 4 H200 GPUs, 64 CPU cores
 
-Observed serving settings from successful runs:
+Serving settings from successful runs:
 - `tensor_parallel_size=4`
 - `gpu_memory_utilization=0.8`
 - `max_model_len=262144`
@@ -163,40 +155,31 @@ Observed serving settings from successful runs:
 
 Observed operational characteristics:
 - Startup time around 148 seconds (environment-dependent)
-- Reported KV cache around 983,456 tokens in one prior setup
-- Reported max concurrency at full context around 3.75 requests in one prior setup
+- Reported KV cache around 983,456 tokens
+- Reported max concurrency at full context around 3.75 requests
 
-Resource profiles recorded in prior notes:
-- Profile A: 1 node, 4 H200 GPUs, 64 CPU cores
-- Profile B: 1 node, 4 H200 GPUs, 112 CPUs
-
-These values are useful as starting points. Re-tune for your partition limits, model revisions, and scheduler policy.
 
 ## Portability Checklist
 
 When moving between HPC systems, review these items:
-- Module names and versions (CUDA, NCCL, etc.)
+- The NVIDIA driver version and available GPU types and counts on nodes
+- Module names and versions (CUDA, NCCL)
 - Container runtime options (`apptainer` flags)
 - Filesystem paths for models and logs
 - Scheduler directives (`#SBATCH` lines)
-- Available GPU types and counts
 - Network and firewall constraints for service ports
-- Stage-in/stage-out conventions for node-local storage (for Aire, the
-  concurrency launcher stages `src/` and `data/input/` to `${TMPDIR}` and
-  syncs run outputs back to shared storage at job exit)
-- Whether high-performance local NVMe storage is available (for Aire, prefer
-  `$TMP_SHARED` / `/mnt/flash/tmp/job.<JOB-ID>` for heavy runs; treat it as
-  ephemeral and stage outputs back to persistent scratch before job completion)
+- Stage-in/stage-out conventions for node-local storage
+- Whether high-performance local storage is available
+
 
 ## Operational Guidance
 
 - Start with conservative resource settings, then scale.
-- Prefer explicit environment variables for tunables.
-- Keep memory and GPU monitoring enabled for long runs.
+- Monitor memory and GPU utilisation.
 - Record exact model, runtime, and scheduler settings with experiment outputs.
+
 
 ## Security and Cost Notes
 
 - Treat API keys and credentials as secrets; do not hardcode them in scripts.
-- For large ensemble runs, local/HPC inference can be more cost-effective than repeated hosted API calls.
-- Pilot with small `N_RUNS` before scaling to larger sweeps.
+- For large ensemble runs, local/HPC inference is expected to be more cost-effective than using LLM Service APIs.

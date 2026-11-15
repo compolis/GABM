@@ -18,7 +18,7 @@ Even with fixed seeds and fixed prompts, exact-token replay may depend on:
 - distributed scheduling behavior under load
 - model serving stack/version changes
 
-For this reason, we distinguish:
+For this reason, it can be helpful to distinguish:
 
 1. exact reproducibility (bit-for-bit or exact-text equality)
 2. practical reproducibility (stable aggregate behavior and stable key metrics)
@@ -33,9 +33,16 @@ For this reason, we distinguish:
 
 - Single-run launcher: `scripts/hpc/calder/run.sh`
 - Concurrent launcher (single server, many clients): `scripts/hpc/calder/run_concurrency.sh` (preferred) or `scripts/hpc/calder/chat/run_chat_concurrency.sh` (compatibility path)
+- Aire concurrent launcher (single server, many clients): `scripts/hpc/aire/run_concurrency.sh` (preferred) or `scripts/hpc/aire/chat/run_chat_concurrency.sh` (compatibility path)
+- Aire flash-staging wrapper for heavy runs: `scripts/hpc/aire/run_concurrency_flash.sh`
 - Run comparison utility: `scripts/analysis/chat/compare_chat_runs.py`
 - Concurrency table-row utility: `scripts/analysis/chat/generate_concurrency_rows.py`
 - One-command markdown report utility: `scripts/analysis/chat/generate_hpc_chat_report.py`
+
+Current vLLM image guidance for this workstream:
+
+- Calder: `vllm-openai_v0.33.0.sif`
+- Aire: `vllm-openai_v0.11.0.sif`
 
 ## Repro report workflow (recommended)
 
@@ -73,7 +80,7 @@ Run:
 sbatch scripts/hpc/calder/run_concurrency.sh \
   --example chat \
   --model Qwen3-14B \
-  --sif vllm-openai_latest.sif \
+  --sif vllm-openai_v0.33.0.sif \
   --n-runs 8 \
   --concurrency 4 \
   --seed-mode fixed \
@@ -92,7 +99,7 @@ sbatch scripts/hpc/calder/run_concurrency.sh \
   --example chat_opinion \
   --rounds 8 \
   --model Qwen3-14B \
-  --sif vllm-openai_latest.sif \
+  --sif vllm-openai_v0.33.0.sif \
   --n-runs 8 \
   --concurrency 4 \
   --seed-mode fixed \
@@ -124,7 +131,7 @@ Run:
 sbatch scripts/hpc/calder/run_concurrency.sh \
   --example chat \
   --model Qwen3-14B \
-  --sif vllm-openai_latest.sif \
+  --sif vllm-openai_v0.33.0.sif \
   --n-runs 12 \
   --concurrency 4 \
   --seed-mode increment \
@@ -178,7 +185,7 @@ For E3 and E4:
   - backend fingerprints
   - runtime warnings/errors in vLLM logs
 
-## Release 0.3.0 use
+## Release 0.6.0 use
 
 Use this document as the reproducibility evidence protocol for local/HPC model checks.
 Include key outcomes in release notes:
@@ -313,7 +320,7 @@ Interpretation:
 Initial Aire bring-up findings:
 
 - Using `vllm-openai_latest.sif` failed during engine initialization with a driver/runtime mismatch on Aire (`RuntimeError: The NVIDIA driver on your system is too old (found version 12060)`).
-- Switching to an older Aire-compatible SIF resolved startup failures.
+- Switching to `vllm-openai_v0.11.0.sif` resolved startup failures.
 
 Smoke validation:
 

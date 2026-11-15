@@ -196,14 +196,16 @@ free -h | tee -a "$LAUNCHER_LOG"
 
 echo "=== Start memory logging ===" | tee -a "$LAUNCHER_LOG"
 MEMORY_LOG="${OUTDIR}/gpu_memory.log"
+echo "# driver_version,gpu_name" > "$MEMORY_LOG"
+nvidia-smi --query-gpu=driver_version,name --format=csv,noheader >> "$MEMORY_LOG"
+echo "# timestamp,index,memory.used,utilization.gpu" >> "$MEMORY_LOG"
 (
-while true
-do
-  date
-  nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv,noheader
-  sleep 30
-done
-) > "$MEMORY_LOG" &
+  while true; do
+    date --iso-8601=seconds
+    nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv,noheader
+    sleep 30
+  done
+) >> "$MEMORY_LOG" &
 MONITOR_PID=$!
 
 echo "=== Start vLLM server ===" | tee -a "$LAUNCHER_LOG"
