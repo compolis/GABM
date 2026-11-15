@@ -6,6 +6,7 @@ A summary of changes are documented in this file.
 ## [Unreleased]
 No entries yet.
 
+
 ## [0.6.0] - 2026-11-15
 - Added optional `execute_two_stage_question` and immutable
   `TwoStageSurveyResult` in `gabm.abm.survey`, with injected chat, exact prompt
@@ -50,13 +51,16 @@ No entries yet.
   duration, stage-out duration, and total elapsed time for performance
   comparisons against non-flash runs.
 
+
 ## [0.5.0] - 2026-11-09
 - Version bump release (`0.4.1` → `0.5.0`) with no additional functional
   changes recorded in the changelog.
 
+
 ## [0.4.1] - 2026-11-09
 - Version bump release (`0.4.0` → `0.4.1`) with no additional functional
   changes recorded in the changelog.
+
 
 ## [0.4.0] 2026-11-09
 - Added generic seeded network builders, structural diagnostics, and
