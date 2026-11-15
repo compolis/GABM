@@ -5,6 +5,7 @@
 1. [Overview](#overview)
 2. [1.0](#10)
 3. [0.6](#06)
+4. [0.7 (proposed)](#07-proposed)
 
 
 ## Overview
@@ -16,19 +17,37 @@ This file outlines planned next steps and future goals.
 
 
 ## 0.6
-Target: strengthen and package the calibrated `chat_opinion` workflow as the primary 0.6 release outcome.
+Delivered and tagged as `v0.6.0` on 2026-11-15.
 
-Planned scope:
-- include documented drift-calibration controls for `chat_opinion` (`QUESTION_BONUS`, `POSITIVE_TOKEN_BONUS`, `NEGATIVE_TOKEN_PENALTY`, `SHARED_INTEREST_CAP`)
-- include reproducibility-oriented run outputs and metadata summaries for single runs and ensemble sweeps
-- include analysis helpers for comparing run outcomes and summarizing calibration experiments
-- include updated user/developer guidance for local and HPC execution paths
+Release record:
+- see `CHANGE_LOG.md` (`[0.6.0]`) for shipped scope and details.
 
-Evidence expected before final 0.6 release decision:
-- local no-cache calibration evidence for normal and awkward pairings
-- at least one Calder/HPC pilot using the selected mid-profile drift settings
-- documentation build and relevant targeted tests passing
+Notes:
+- keep this roadmap focused on forward-looking plans (`0.7`, `1.0`).
 
-Out of scope for 0.6:
-- broad API redesign of the ABM core
-- major transport-layer or provider-interface refactors unrelated to chat_opinion calibration/reproducibility
+
+## 0.7 (proposed)
+Target: consolidate reusable opinion-dynamics functionality in GABM so work is not tied to a single downstream domain project.
+
+Context:
+- We are actively lifting generic functionality from `../Climate-Action-GABM`.
+- A second concrete application is desirable, but direct co-development with external survey teams may not be immediately available.
+
+Proposed scope:
+- extract and stabilize generic survey/opinion-dynamics building blocks from CAG-derived workflows into GABM core utilities;
+- define a dataset-agnostic survey input contract (schema + validation) so new survey sources can be added without core code changes;
+- provide at least one non-CAG demonstration path, for example:
+  - a public/open survey-derived example, or
+  - a synthetic-but-realistic survey fixture that exercises the same interfaces;
+- add CLI and documentation patterns for plugging in alternative survey datasets;
+- add reproducibility checks for the new survey-input path (seeded runs + summary comparisons).
+
+Evidence expected before a final 0.7 release decision:
+- one end-to-end run using the generalized survey-input pathway outside the original CAG-specific dataset;
+- focused tests covering schema validation, loader behavior, and opinion-output summaries for the generalized path;
+- updated documentation showing how to map a new survey into GABM without editing core model logic.
+
+Out of scope for 0.7 (unless explicitly reprioritized):
+- bespoke adapters for every external survey format;
+- broad redesign of core agent cognition APIs not required for survey generalization;
+- hard dependencies on external collaborators for baseline 0.7 completion.
