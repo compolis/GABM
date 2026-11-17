@@ -18,7 +18,7 @@ available during migration for compatibility and discoverability.
 - [handovers/](./handovers/): dated handover notes
 - [reproducibility/](./reproducibility/): reproducibility protocols and experiment logs
 - [release/](./release/): release checklists and evidence gates
-- [hpc/](./hpc/): HPC operational guides and notes
+- [guides/hpc/](./guides/hpc/): HPC operational guides and notes
 - [planning/](./planning/): roadmap and forward planning documents
 - [history/](./history/): project development history
 - [publication/](./publication/): publication planning/support documents (for example JOSS planning notes)
@@ -27,7 +27,7 @@ available during migration for compatibility and discoverability.
 
 - [reproducibility/REPRODUCIBILITY_QWEN3_14B.md](./reproducibility/REPRODUCIBILITY_QWEN3_14B.md)
 - [release/RELEASE_PREP.md](./release/RELEASE_PREP.md)
-- [hpc/Running_On_HPC_Systems.md](./hpc/Running_On_HPC_Systems.md)
+- [guides/hpc/Running_On_HPC_Systems.md](./guides/hpc/Running_On_HPC_Systems.md)
 - [planning/ROADMAP.md](./planning/ROADMAP.md)
 - [history/DEVELOPMENT_HISTORY.md](./history/DEVELOPMENT_HISTORY.md)
 - [publication/JOSS_SUBMISSION.md](./publication/JOSS_SUBMISSION.md)
