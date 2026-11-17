@@ -19,6 +19,7 @@ DOC_FILES = [
     "documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md",
     "documentation/release/RELEASE_PREP.md",
     "documentation/guides/hpc/Running_On_HPC_Systems.md",
+    "documentation/guides/experiments/Running_Chat_Ensembles.md",
     "documentation/planning/ROADMAP.md",
     "documentation/history/DEVELOPMENT_HISTORY.md",
     "documentation/publication/JOSS_SUBMISSION.md",
