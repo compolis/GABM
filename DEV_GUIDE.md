@@ -80,6 +80,18 @@ make test
 make docs
 ```
 
+- Before opening or updating a PR to upstream `main`, update your feature
+  branch with the latest `upstream/main` and rerun checks so PR validation
+  reflects the current baseline:
+
+```bash
+git fetch upstream
+git checkout my_feature
+git merge upstream/main
+make test
+make docs
+```
+
 - Push to your Fork, For example:
 
 ```bash
