@@ -9,6 +9,8 @@
 #   make clear-caches    - Delete all LLM caches and model lists (for a clean slate)
 #   make llm-drift-check - Clear caches and run live LLM integration tests
 #   make git-clean       - Clean up merged local branches and prune deleted remotes
+#   make git-prune-local - Delete local branches merged into main (except main/gh-pages)
+#   make git-prune-origin - Delete origin branches merged into origin/main (except main/gh-pages)
 #   make sync            - Sync main branch with upstream
 #   make sync-feature    - Sync and rebase a feature/release branch onto main (usage: make sync-feature BRANCH=release/0.2.0)
 #   make setup-llms      - Run onboarding/setup for all LLMs (API key check, model lists, cache init)
@@ -23,10 +25,10 @@
 #
 # If you add a new target, please also add it to the help target and the DEV_GUIDE.md for consistency and ease of use for other developers.
 #
-# Caution: Some commands (like git-clean, release, and delete-release) can modify your git history or delete tags. Always review the scripts they call (in the scripts/ directory) to ensure they do what you expect before running these commands.
+# Caution: Some commands (like git-prune-origin, release, and delete-release) can delete remote branches/tags or modify shared history. Always review the scripts they call (in the scripts/ directory) to ensure they do what you expect before running these commands.
 
 # Phony targets (not actual files)
-.PHONY: help test docs docs-clean gh-pages-deploy gh-pages-deploy2 clean git-clean setup-llms clear-caches llm-drift-check sync sync-feature release delete-release build build-test pypi-release testpypi-release bump-version run-local run-installed run-example-chat run-example-chat-ensemble run-example-chat-opinion run-example-chat-opinion-ensemble compare-example-chat compare-ensemble-sweeps compare-hpc-chat-runs summarize-hpc-concurrency report-hpc-chat-runs summarize-chat-opinion-runs
+.PHONY: help test docs docs-clean gh-pages-deploy gh-pages-deploy2 clean git-clean git-prune-local git-prune-origin setup-llms clear-caches llm-drift-check sync sync-feature release delete-release build build-test pypi-release testpypi-release bump-version run-local run-installed run-example-chat run-example-chat-ensemble run-example-chat-opinion run-example-chat-opinion-ensemble compare-example-chat compare-ensemble-sweeps compare-hpc-chat-runs summarize-hpc-concurrency report-hpc-chat-runs summarize-chat-opinion-runs
 
 # Show available Makefile commands
 help:
@@ -40,6 +42,8 @@ help:
 	@echo "  clear-caches     - Delete all LLM caches and model lists (for a clean slate)"
 	@echo "  llm-drift-check  - Clear caches and run live LLM integration tests"
 	@echo "  git-clean        - Clean up merged local branches and prune deleted remotes"
+	@echo "  git-prune-local  - Delete local branches merged into main (except main/gh-pages)"
+	@echo "  git-prune-origin - Delete origin branches merged into origin/main (except main/gh-pages)"
 	@echo "  sync             - Sync main branch with upstream"
 	@echo "  sync-feature     - Sync and rebase a feature/release branch onto main (usage: make sync-feature BRANCH=release/0.2.0)"
 	@echo "  setup-llms       - Run onboarding/setup for all LLMs (API key check, model lists, cache init)"
@@ -133,10 +137,51 @@ git-clean:
 	@echo "Switching to main branch for safe cleanup..."
 	@git checkout main
 	@echo "Deleting local branches already merged to main..."
-	@git branch --merged main | grep -vE '(^\*|main|gh-pages)' | xargs -r git branch -d
+	@BRANCHES="$$(git branch --merged main | sed 's/^[ *]*//' | grep -vE '^(main|gh-pages)$$' || true)"; \
+	if [ -n "$$BRANCHES" ]; then \
+		for branch in $$BRANCHES; do \
+			git branch -d "$$branch"; \
+		done; \
+	else \
+		echo "No merged local branches to delete."; \
+	fi
 	@echo "Pruning deleted remote branches..."
 	@git fetch --prune
 	@echo "Git cleanup complete. Merged branches deleted and remotes pruned."
+
+# Delete local branches merged into main while preserving main and gh-pages
+git-prune-local:
+	@echo "Pruning local branches merged into main (excluding main and gh-pages)..."
+	@echo "Switching to main branch for safe cleanup..."
+	@git checkout main
+	@echo "Branches to delete:"
+	@BRANCHES="$$(git branch --merged main | sed 's/^[ *]*//' | grep -vE '^(main|gh-pages)$$' || true)"; \
+	if [ -n "$$BRANCHES" ]; then \
+		printf "%s\n" $$BRANCHES; \
+		for branch in $$BRANCHES; do \
+			git branch -d "$$branch"; \
+		done; \
+	else \
+		echo "No merged local branches to delete."; \
+	fi
+	@echo "...done pruning merged local branches."
+
+# Delete remote origin branches merged into origin/main while preserving main and gh-pages
+git-prune-origin:
+	@echo "Pruning origin branches merged into origin/main (excluding main and gh-pages)..."
+	@echo "Fetching/pruning origin refs..."
+	@git fetch --prune origin
+	@echo "Origin branches to delete:"
+	@BRANCHES="$$(git branch -r --merged origin/main | sed 's/^[ *]*//' | grep '^origin/' | grep -vE '^origin/(HEAD|main|gh-pages)$$' | sed 's#^origin/##' || true)"; \
+	if [ -n "$$BRANCHES" ]; then \
+		printf "%s\n" $$BRANCHES; \
+		for branch in $$BRANCHES; do \
+			git push origin --delete "$$branch"; \
+		done; \
+	else \
+		echo "No merged origin branches to delete."; \
+	fi
+	@echo "...done pruning merged origin branches."
 
 
 # Sync your main branch with upstream
