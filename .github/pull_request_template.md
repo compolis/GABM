@@ -50,6 +50,7 @@ Keep them user-facing and release-note ready.
 
 ## Checklist
 
+- [ ] I updated metadata in edited source files, particularly version and authors, following the existing file conventions.
 - [ ] I updated `CHANGE_LOG.md` (or confirmed no changelog entry is needed).
 - [ ] I added/updated tests for code changes (or explained why not needed).
 - [ ] I updated docs for user/developer-facing behavior changes.
