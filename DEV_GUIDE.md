@@ -357,6 +357,8 @@ For maintainability, all Makefile targets that depend on other build steps shoul
 | `make clear-caches` | Delete all LLM caches and model lists (for a clean slate)                    |
 | `make llm-drift-check` | Clear caches and run live LLM integration tests (for periodic drift checks) |
 | `make git-clean` | Clean up merged local branches and prune deleted remotes                        |
+| `make git-prune-local` | Delete local branches merged into `main` (keeps `main` and `gh-pages`) |
+| `make git-prune-origin` | Delete `origin/*` branches merged into `origin/main` (keeps `origin/main` and `origin/gh-pages`) |
 | `make sync`    | Sync main branch with upstream                                                    |
 | `make sync-feature BRANCH=release/0.2.0` | Sync and rebase a feature/release branch onto main     |
 | `make setup-llms` | Run onboarding/setup for all LLMs (API key check, model lists, cache init)     |
