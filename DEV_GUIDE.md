@@ -3,7 +3,7 @@
 
 ## Table of Contents
 - [Overview](#overview)
-- [Resume This Workstream](#resume-this-workstream)
+- [Planning and Active Workstreams](#planning-and-active-workstreams)
 - [Contributing and Communicating](#contributing-and-communicating)
 - [Project Directories](#project-directories)
 - [Testing](#testing)
@@ -31,107 +31,20 @@ The GABM developer guide provides guidance for developers and maintainers.
 Please follow the [Developer Quick Start Guide](DEV_QUICKSTART.md) to get set up to contribute as a developer.
 
 
-## Resume This Workstream
+## Planning and Active Workstreams
 
-If you are resuming Calder/HPC reproducibility and release-prep work after a break, start here:
+Keep time-bound planning and operational workstream notes out of this guide.
+Use these documents instead:
 
-- Qwen3-14B reproducibility protocol + results template (primary source): [documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md](documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md)
-- Release checklist and evidence gates (decision layer): [documentation/release/RELEASE_PREP.md](documentation/release/RELEASE_PREP.md)
-- Current handover snapshot for chat_opinion calibration and next HPC steps: [documentation/handovers/HANDOVER_2026-11-10.md](documentation/handovers/HANDOVER_2026-11-10.md)
-- Historical handover snapshot (context only): [documentation/handovers/HANDOVER_2026-10-30.md](documentation/handovers/HANDOVER_2026-10-30.md)
-- Calder concurrent launcher (preferred generic entrypoint): [scripts/hpc/calder/run_concurrency.sh](scripts/hpc/calder/run_concurrency.sh)
-- Aire concurrent launcher (preferred generic entrypoint, local scratch stage-in/out): [scripts/hpc/aire/run_concurrency.sh](scripts/hpc/aire/run_concurrency.sh)
-- Run-to-run determinism comparator: [scripts/analysis/chat/compare_chat_runs.py](scripts/analysis/chat/compare_chat_runs.py)
-- Markdown row generator for stress-summary tables: [scripts/analysis/chat/generate_concurrency_rows.py](scripts/analysis/chat/generate_concurrency_rows.py)
-
-Quick HPC launcher examples (preferred canonical entrypoints):
-
-```bash
-# Calder generic chat concurrency
-sbatch scripts/hpc/calder/run_concurrency.sh \
-  --example chat \
-  --model Qwen3-14B \
-  --n-runs 8 \
-  --concurrency 2 \
-  --seed-mode increment \
-  --seed 42
-
-# Calder chat_opinion fixed-seed determinism
-sbatch scripts/hpc/calder/run_concurrency.sh \
-  --example chat_opinion \
-  --model Qwen3-14B \
-  --rounds 8 \
-  --n-runs 8 \
-  --concurrency 2 \
-  --seed-mode fixed \
-  --seed 42 \
-  --llm-seed 42
-```
-
-Aire equivalents (same canonical pattern, with explicit shared paths):
-
-```bash
-# Aire generic chat concurrency
-sbatch --partition=gpu --time=00:30:00 --gpus-per-task=1 --cpus-per-task=8 --mem=64G \
-  --export=ALL,SHARED_WORKING_DIR=/mnt/scratch/$USER/gabm,MODEL_DIR=/mnt/scratch/$USER/gabm/huggingface/hub/Qwen3-14B,SIF_IMAGE=/mnt/scratch/$USER/gabm/<compatible-sif>.sif \
-  scripts/hpc/aire/run_concurrency.sh \
-  --example chat \
-  --model Qwen3-14B \
-  --conda-env gabm-aire \
-  --n-runs 8 \
-  --concurrency 1 \
-  --seed-mode increment \
-  --seed 42
-
-# Aire chat_opinion fixed-seed determinism (reproducibility-critical default: concurrency=1)
-sbatch --partition=gpu --time=00:30:00 --gpus-per-task=1 --cpus-per-task=8 --mem=64G \
-  --export=ALL,SHARED_WORKING_DIR=/mnt/scratch/$USER/gabm,MODEL_DIR=/mnt/scratch/$USER/gabm/huggingface/hub/Qwen3-14B,SIF_IMAGE=/mnt/scratch/$USER/gabm/<compatible-sif>.sif \
-  scripts/hpc/aire/run_concurrency.sh \
-  --example chat_opinion \
-  --model Qwen3-14B \
-  --conda-env gabm-aire \
-  --rounds 8 \
-  --n-runs 8 \
-  --concurrency 1 \
-  --seed-mode fixed \
-  --seed 42 \
-  --llm-seed 42
-
-# Aire heavy-run variant (stages SIF/model to job flash, then syncs outputs back)
-# The wrapper auto-detects a writable flash base, preferring $TMP_SHARED.
-# Timing breakdown is written to gabm_runs/run_<JOB_ID>/flash_stage_timing.log.
-sbatch --partition=gpu --time=00:30:00 --gpus-per-task=1 --cpus-per-task=8 --mem=64G \
-  scripts/hpc/aire/run_concurrency_flash.sh \
-  --example chat_opinion \
-  --model Qwen3-14B \
-  --conda-env gabm-aire \
-  --rounds 8 \
-  --n-runs 8 \
-  --concurrency 1 \
-  --seed-mode fixed \
-  --seed 42 \
-  --llm-seed 42
-```
-
-Important Aire note:
-- On the current Aire-compatible runtime stack, fixed-seed replay at `--concurrency 2` may be non-deterministic.
-- Use `--concurrency 1` for reproducibility-critical Aire evidence runs.
-
-Compatibility note:
-- `scripts/hpc/calder/chat/run_chat_concurrency.sh` and
-  `scripts/hpc/calder/chat_opinion/run_chat_opinion_concurrency.sh`
-  remain valid compatibility entrypoints.
-- `scripts/hpc/aire/chat/run_chat_concurrency.sh` and
-  `scripts/hpc/aire/chat_opinion/run_chat_opinion_concurrency.sh`
-  remain valid compatibility entrypoints.
-
-Suggested quick restart steps:
-
-1. Confirm queued/completed Calder job IDs and run directories.
-2. Update experiment outcomes in [documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md](documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md):
-   - run determinism comparisons with `compare_chat_runs.py`
-   - add stress-summary rows from `generate_concurrency_rows.py`
-3. Use [documentation/release/RELEASE_PREP.md](documentation/release/RELEASE_PREP.md) to evaluate release readiness.
+- Planning and proposed scope: [documentation/planning/ROADMAP.md](documentation/planning/ROADMAP.md)
+- Reproducibility protocols and run evidence:
+  [documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md](documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md)
+- Release decision gates:
+  [documentation/release/RELEASE_PREP.md](documentation/release/RELEASE_PREP.md)
+- Dated handover snapshots:
+  [documentation/handovers/](documentation/handovers/)
+- HPC setup and launcher selection:
+  [documentation/guides/hpc/Running_On_HPC_Systems.md](documentation/guides/hpc/Running_On_HPC_Systems.md)
 
 
 ## Contributing and Communicating
@@ -271,27 +184,12 @@ Recommended pattern:
 - Keep tests in `tests/src/gabm/examples/<example_name>/test_sim.py`.
 - Expose a callable (for example `run(...)`) from the source simulation module so tests can execute it directly.
 
-### chat_opinion Calibration Workflow (2026-11)
+### Calibration Workflow Notes
 
-To calibrate opinion-formation dynamics without changing code constants each time:
-
-1. Run local no-cache pilots for baseline and candidate drift profiles.
-2. Run small local no-cache sweeps (`N_RUNS=6` to `10`) for normal and awkward modes.
-3. Compare `final_mean_opinion`, `delta_mean_opinion`, and `final_opinion_gap` ranges and stats.
-4. Promote one profile to a small Calder pilot with matching seed windows and rounds.
-
-New drift parameters exposed by Makefile wrappers and CLI:
-
-- `QUESTION_BONUS`
-- `POSITIVE_TOKEN_BONUS`
-- `NEGATIVE_TOKEN_PENALTY`
-- `SHARED_INTEREST_CAP`
-
-Helpful summary command:
-
-```bash
-make summarize-chat-opinion-runs INPUTS='--run-id <run_a> --run-id <run_b>'
-```
+Calibration plans and run-by-run experiment guidance should be documented in
+[documentation/planning/ROADMAP.md](documentation/planning/ROADMAP.md) and the
+current reproducibility protocol under
+[documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md](documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md).
 
 ### Person Naming in Examples
 

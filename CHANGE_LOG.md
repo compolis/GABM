@@ -11,7 +11,7 @@ A summary of changes are documented in this file.
   files and use explicit version-pinned vLLM OpenAI SIF defaults rather than
   latest/unversioned image guidance.
 - Clarified HPC operational docs with a script selection guide in
-  `documentation/hpc/Running_On_HPC_Systems.md`, including wrapper/entrypoint
+  `documentation/guides/hpc/Running_On_HPC_Systems.md`, including wrapper/entrypoint
   roles and guidance for adding variables files for new HPC systems.
 - Updated reproducibility/release notes to align with version-specific vLLM SIF
   usage on Aire and Calder.
@@ -47,7 +47,7 @@ A summary of changes are documented in this file.
   `scripts/hpc/aire/run_concurrency.sh`) while retaining existing `chat/` and
   `chat_opinion/` launcher paths as compatibility wrappers.
 - Consolidated Calder/Aire one-time HPC setup guidance into
-  `documentation/hpc/Running_On_HPC_Systems.md` and removed the redundant
+  `documentation/guides/hpc/Running_On_HPC_Systems.md` and removed the redundant
   `RunningApertusOnCalder.md` docs.
 - Added `scripts/hpc/aire/run_concurrency_flash.sh` to stage heavy Aire assets
   (SIF/model) to `/flash` for NVMe-local execution and sync outputs back to

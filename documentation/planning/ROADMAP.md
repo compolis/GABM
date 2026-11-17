@@ -10,6 +10,17 @@
 ## Overview
 This file outlines planned next steps and future goals.
 
+For active operational workstreams, use the corresponding execution documents:
+
+- Reproducibility protocols and run evidence:
+  [documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md](../reproducibility/REPRODUCIBILITY_QWEN3_14B.md)
+- Release decision gates:
+  [documentation/release/RELEASE_PREP.md](../release/RELEASE_PREP.md)
+- Dated handover snapshots:
+  [documentation/handovers/](../handovers/)
+- HPC setup and launcher selection:
+  [documentation/guides/hpc/Running_On_HPC_Systems.md](../guides/hpc/Running_On_HPC_Systems.md)
+
 
 ## 0.7 (proposed)
 Target: consolidate reusable opinion-dynamics functionality in GABM so work is not tied to a single downstream domain project.
