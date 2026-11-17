@@ -4,7 +4,17 @@ A summary of changes are documented in this file.
 
 
 ## [Unreleased]
-No entries yet.
+- Added per-HPC defaults files at `scripts/hpc/aire/variables.sh` and
+  `scripts/hpc/calder/variables.sh` with shared variable names
+  (`VLLM_VERSION`, `VLLM_SIF`, `DEFAULT_WORKING_DIR`, `DEFAULT_CONDA_ENV`).
+- Updated Aire/Calder HPC launch scripts to source per-system `variables.sh`
+  files and use explicit version-pinned vLLM OpenAI SIF defaults rather than
+  latest/unversioned image guidance.
+- Clarified HPC operational docs with a script selection guide in
+  `documentation/hpc/Running_On_HPC_Systems.md`, including wrapper/entrypoint
+  roles and guidance for adding variables files for new HPC systems.
+- Updated reproducibility/release notes to align with version-specific vLLM SIF
+  usage on Aire and Calder.
 
 
 ## [0.6.0] - 2026-11-15

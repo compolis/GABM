@@ -78,7 +78,7 @@ Interpretation for release discussion:
 Aire (`chat_opinion`, Qwen3-14B) evidence now includes a compatibility qualification and determinism classification:
 
 - Compatibility note:
-  - `vllm-openai_latest.sif` failed on Aire due to GPU driver/runtime mismatch.
+  - Unversioned/latest-tag vLLM OpenAI SIF failed on Aire due to GPU driver/runtime mismatch.
   - Aire runs succeeded with an older compatible SIF image.
 - Operational outcome:
   - paired runs completed with `SUCCESSFUL_RUNS=8`, `FAILED_RUNS=0` at both tested concurrency settings.

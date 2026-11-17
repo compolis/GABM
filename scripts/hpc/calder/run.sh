@@ -20,7 +20,7 @@
 #   3. Download GABM and set up a virtual environment as per the User Guide
 # 
 # Here is an example command:
-# sbatch scripts/hpc/calder/run.sh --model Qwen3-14B --working-dir /scratch-calder/calder-uat/geoagdt/gabm --sif vllm-openai_latest.sif --conda-env gabm --example chat --year 2026 --seed 42
+# sbatch scripts/hpc/calder/run.sh --model Qwen3-14B --working-dir /scratch-calder/calder-uat/geoagdt/gabm --sif "${VLLM_SIF}" --conda-env gabm --example chat --year 2026 --seed 42
 #
 # --model if not specified is the Qwen3-14B model
 # --working-dir is a directory location where the sif file is located and where results will be written in a gabm_runs folder
@@ -30,7 +30,7 @@
 # Other parameters are passed in the selected example command.
 #
 # To restart a run, pass a previous --outdir value, for example:
-# sbatch scripts/hpc/calder/run.sh --model Qwen3-14B --working-dir /scratch-calder/calder-uat/geoagdt/gabm --sif vllm-openai_latest.sif --conda-env gabm --example chat --year 2026 --seed 42 --outdir /scratch-calder/calder-uat/geoagdt/gabm/gabm_runs/run_4751
+# sbatch scripts/hpc/calder/run.sh --model Qwen3-14B --working-dir /scratch-calder/calder-uat/geoagdt/gabm --sif "${VLLM_SIF}" --conda-env gabm --example chat --year 2026 --seed 42 --outdir /scratch-calder/calder-uat/geoagdt/gabm/gabm_runs/run_4751
 #
 # The following are Slurm parameters to request resources and direct output
 # "LLM-" job-name prefix is wanted for LLM jobs (Research Computing policy).
@@ -50,6 +50,10 @@ set -euo pipefail
 # set -x causes every command to be echoed into the Slurm output file as it's executed.
 set -x
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=/dev/null
+source "${SCRIPT_DIR}/variables.sh"
+
 # Default MODEL_NAME, SIF_FILE, WORKING_DIR, SEED
 MODEL_NAME="Apertus-v1.5-70B"
 #MODEL_NAME="Apertus-v1.5-8B"
@@ -62,14 +66,14 @@ MODEL_NAME="Apertus-v1.5-70B"
 
 # Obtain sif file:
 # apptainer pull apertus15.sif docker://ghcr.io/swiss-ai/vllm_apertus_1.5_release:latest-amd64
-# apptainer pull docker://vllm/vllm-openai
+# apptainer pull "${VLLM_SIF}" "docker://vllm/vllm-openai:v${VLLM_VERSION}"
 SIF_FILE="apertus15.sif"
-#SIF_FILE="vllm-openai_latest.sif"
-WORKING_DIR="/flash-calder/users/geoagdt/gabm"
+#SIF_FILE="${VLLM_SIF}"
+WORKING_DIR="${DEFAULT_WORKING_DIR}"
 #WORKING_DIR="/users/geoagdt/gabm"
 SEED="42"
 #CONDA_ENV="test-cag"
-CONDA_ENV="gabm"
+CONDA_ENV="${DEFAULT_CONDA_ENV}"
 EXAMPLE_MODE="chat"
 YEAR="2026"
 ROUNDS="8"
@@ -361,4 +365,3 @@ case "${EXAMPLE_MODE}" in
     exit 1
     ;;
 esac
-

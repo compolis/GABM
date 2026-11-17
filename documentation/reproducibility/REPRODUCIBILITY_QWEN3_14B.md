@@ -41,8 +41,8 @@ For this reason, it can be helpful to distinguish:
 
 Current vLLM image guidance for this workstream:
 
-- Calder: `vllm-openai_v0.33.0.sif`
-- Aire: `vllm-openai_v0.11.0.sif`
+- Calder (`scripts/hpc/calder/variables.sh`: `VLLM_VERSION=0.33.0`): `vllm-openai_v0.33.0.sif`
+- Aire (`scripts/hpc/aire/variables.sh`: `VLLM_VERSION=0.11.0`): `vllm-openai_v0.11.0.sif`
 
 ## Repro report workflow (recommended)
 
@@ -319,8 +319,8 @@ Interpretation:
 
 Initial Aire bring-up findings:
 
-- Using `vllm-openai_latest.sif` failed during engine initialization with a driver/runtime mismatch on Aire (`RuntimeError: The NVIDIA driver on your system is too old (found version 12060)`).
-- Switching to `vllm-openai_v0.11.0.sif` resolved startup failures.
+- Using an unversioned/latest-tag vLLM OpenAI SIF failed during engine initialization with a driver/runtime mismatch on Aire (`RuntimeError: The NVIDIA driver on your system is too old (found version 12060)`).
+- Switching to `vllm-openai_v0.11.0.sif` (`scripts/hpc/aire/variables.sh`, `VLLM_VERSION=0.11.0`) resolved startup failures.
 
 Smoke validation:
 
