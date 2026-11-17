@@ -23,6 +23,25 @@ available during migration for compatibility and discoverability.
 - [history/](./history/): project development history
 - [publication/](./publication/): publication planning/support documents (for example JOSS planning notes)
 
+## Handover retention guidance
+
+Handover notes are optional operational snapshots, not long-term canonical
+documentation.
+
+To keep this repository streamlined for new collaborators:
+
+- Keep at most the **current handover** plus **one previous handover** for short
+  transition history.
+- Move durable guidance into canonical docs instead:
+  - planning decisions: [planning/ROADMAP.md](./planning/ROADMAP.md)
+  - reproducibility protocol/evidence:
+    [reproducibility/REPRODUCIBILITY_QWEN3_14B.md](./reproducibility/REPRODUCIBILITY_QWEN3_14B.md)
+  - release criteria: [release/RELEASE_PREP.md](./release/RELEASE_PREP.md)
+  - HPC operational guidance:
+    [guides/hpc/Running_On_HPC_Systems.md](./guides/hpc/Running_On_HPC_Systems.md)
+- Review `handovers/` at each release cut; archive or remove superseded notes
+  once key actions have been migrated into the canonical docs above.
+
 ## Current key documents
 
 - [reproducibility/REPRODUCIBILITY_QWEN3_14B.md](./reproducibility/REPRODUCIBILITY_QWEN3_14B.md)

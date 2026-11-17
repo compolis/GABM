@@ -16,7 +16,6 @@ DOC_FILES = [
     "DEV_QUICKSTART.md",
     "documentation/README.md",
     "documentation/handovers/HANDOVER_2026-11-10.md",
-    "documentation/handovers/HANDOVER_2026-10-30.md",
     "documentation/reproducibility/REPRODUCIBILITY_QWEN3_14B.md",
     "documentation/release/RELEASE_PREP.md",
     "documentation/guides/hpc/Running_On_HPC_Systems.md",
