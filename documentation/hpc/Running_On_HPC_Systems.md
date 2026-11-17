@@ -57,15 +57,48 @@ Calder data can be stored more persistently on NVMe storage under `/flash-calder
 - `scripts/hpc/calder/chat/run_chat_concurrency.sh`
 - `scripts/hpc/calder/chat_opinion/run_chat_opinion_concurrency.sh`
 
+### Script selection guide
+
+| System | Script | Use when | Type |
+|---|---|---|---|
+| Aire | `scripts/hpc/aire/run_concurrency.sh` | You want the standard Aire entrypoint for concurrent simulation runs | Primary entrypoint (delegates to `chat/run_chat_concurrency.sh`) |
+| Aire | `scripts/hpc/aire/run_concurrency_flash.sh` | You want to stage model + SIF to node-local flash for heavier runs | Primary entrypoint (flash-staging wrapper) |
+| Aire | `scripts/hpc/aire/chat/run_chat_concurrency.sh` | You want direct control of chat concurrency launcher options | Base launcher used by wrappers |
+| Aire | `scripts/hpc/aire/chat_opinion/run_chat_opinion_concurrency.sh` | You want chat_opinion mode using the same concurrency framework | Mode wrapper around chat concurrency launcher |
+| Calder | `scripts/hpc/calder/run_concurrency.sh` | You want the standard Calder entrypoint for concurrent simulation runs | Primary entrypoint (delegates to `chat/run_chat_concurrency.sh`) |
+| Calder | `scripts/hpc/calder/chat/run_chat_concurrency.sh` | You want direct control of chat concurrency launcher options | Base launcher used by wrappers |
+| Calder | `scripts/hpc/calder/chat_opinion/run_chat_opinion_concurrency.sh` | You want chat_opinion mode using the same concurrency framework | Mode wrapper around chat concurrency launcher |
+| Calder | `scripts/hpc/calder/run.sh` | You want one script that starts serving and runs a selected simulation mode | Combined server + simulation launcher |
+| Calder | `scripts/hpc/calder/run_server.sh` | You want to start only the vLLM server job | Server-only launcher |
+| Calder | `scripts/hpc/calder/run_client.sh` | You already have a running server and want to send reproducibility/client requests | Client-only launcher |
+
+## Per-HPC vLLM variables file
+
+Each HPC directory keeps its own variables file so scripts can use the same
+variable names regardless of system:
+
+- `scripts/hpc/aire/variables.sh`
+- `scripts/hpc/calder/variables.sh`
+
+Each file defines:
+
+- `VLLM_VERSION` (for example `0.11.0` or `0.33.0`)
+- `VLLM_SIF` (derived as `vllm-openai_v${VLLM_VERSION}.sif`)
+- `DEFAULT_WORKING_DIR` (HPC-local default working directory)
+- `DEFAULT_CONDA_ENV` (default conda environment name for launchers)
+
+If you add support for another HPC system, create
+`scripts/hpc/<new-hpc>/variables.sh` with the same two variables and source it
+from that HPC's launcher scripts.
 
 ## One-time setup on a login node
 
 ### Aire
 
 ```bash
+source scripts/hpc/aire/variables.sh
 HPC="aire"
 DIR_S="/mnt/scratch/$USER"
-VLLM_V=0.11.0
 HF_HUB="$DIR_S/gabm/huggingface/hub"
 
 cd "$DIR_S"
@@ -76,10 +109,10 @@ module load miniforge
 ### Calder
 
 ```bash
+source scripts/hpc/calder/variables.sh
 HPC="calder"
 DIR_S="/scratch-calder/users/$USER"
 DIR_F="/flash-calder/users/$USER"
-VLLM_V=0.33.0
 HF_HUB="$DIR_F/gabm/huggingface/hub"
 
 cd "$DIR_F"
@@ -94,7 +127,7 @@ apptainer pull apertus15.sif docker://ghcr.io/swiss-ai/vllm_apertus_1.5_release:
 
 ```bash
 # Pull vLLM OpenAI image
-apptainer pull docker://vllm/vllm-openai:v$VLLM_V
+apptainer pull "vllm-openai_v${VLLM_VERSION}.sif" "docker://vllm/vllm-openai:v${VLLM_VERSION}"
 
 # Prepare model cache directory
 mkdir -p "$HF_HUB"

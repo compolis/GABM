@@ -20,6 +20,9 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=/dev/null
+source "${SCRIPT_DIR}/variables.sh"
+
 BASE_SCRIPT="${SCRIPT_DIR}/run_concurrency.sh"
 if [[ -n "${SLURM_SUBMIT_DIR:-}" ]]; then
   SUBMIT_BASE_SCRIPT="${SLURM_SUBMIT_DIR}/scripts/hpc/aire/run_concurrency.sh"
@@ -34,8 +37,8 @@ if [[ ! -f "$BASE_SCRIPT" ]]; then
 fi
 
 MODEL_NAME="Qwen3-14B"
-SIF_FILE="vllm-openai_v0.11.0.sif"
-PERSIST_WORKING_DIR="${PERSIST_WORKING_DIR:-/mnt/scratch/$USER/gabm}"
+SIF_FILE="${VLLM_SIF}"
+PERSIST_WORKING_DIR="${PERSIST_WORKING_DIR:-${DEFAULT_WORKING_DIR}}"
 KEEP_FLASH_WORKDIR="${KEEP_FLASH_WORKDIR:-false}"
 
 FORWARD_ARGS=()

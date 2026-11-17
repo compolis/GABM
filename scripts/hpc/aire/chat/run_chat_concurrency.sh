@@ -34,10 +34,14 @@
 set -euo pipefail
 set -x
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=/dev/null
+source "${SCRIPT_DIR}/../variables.sh"
+
 MODEL_NAME="Qwen3-14B"
-SIF_FILE="vllm-openai_v0.11.0.sif"
-SHARED_WORKING_DIR="${SHARED_WORKING_DIR:-${SCRATCH:-$HOME}/gabm}"
-CONDA_ENV="gabm"
+SIF_FILE="${VLLM_SIF}"
+SHARED_WORKING_DIR="${SHARED_WORKING_DIR:-${DEFAULT_WORKING_DIR}}"
+CONDA_ENV="${DEFAULT_CONDA_ENV}"
 
 EXAMPLE_MODE="chat"
 YEAR="2026"

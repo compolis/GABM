@@ -69,12 +69,18 @@ jq --version
 module load calder/cpu
 module load miniforge3
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=/dev/null
+source "${SCRIPT_DIR}/variables.sh"
+
 # Defaults
 NODE="calder-h200-05"
 #PORT="8000"
 PORT="15882"
 #MODEL="Apertus-v1.5-70B"
 MODEL="Qwen3-14B"
+WORKING_DIR="${DEFAULT_WORKING_DIR}"
+CONDA_ENV="${DEFAULT_CONDA_ENV}"
 
 # Check Arguments
 CLI_ARGS=()
@@ -191,4 +197,3 @@ pprint.pp(resp["choices"][0].get("logprobs"))
 ' > "$outfile"
 
 done
-
