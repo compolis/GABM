@@ -75,7 +75,7 @@ Or, manually install from requirements-local-llm.txt:
 pip install -r requirements-local-llm.txt
 ```
 
-For local endpoint setup (including Ollama), see [documentation/guides/Local_LLM_Setup_Guide.md](documentation/guides/Local_LLM_Setup_Guide.md). For runtime planning, benchmarking, and guidance on when to use local vs HPC/cloud execution, see [documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md](documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md). For Hugging Face model download/authentication workflows, see [HUGGING_FACE.md](HUGGING_FACE.md).
+For local endpoint setup (including Ollama), see [documentation/guides/Local_LLM_Setup_Guide.md](documentation/guides/Local_LLM_Setup_Guide.md) (includes a quick smoke-test command sequence). For runtime planning, benchmarking, and guidance on when to use local vs HPC/cloud execution, see [documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md](documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md). For Hugging Face model download/authentication workflows, see [HUGGING_FACE.md](HUGGING_FACE.md).
 
 
 ### Set Up API Keys

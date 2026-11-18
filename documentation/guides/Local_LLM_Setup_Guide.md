@@ -2,6 +2,9 @@
 
 This guide describes how to run GABM locally using the  OpenAI-compatible inference engine [Ollama](https://ollama.com/).
 
+It includes a minimal smoke-test command sequence for verifying local endpoint
+integration quickly.
+
 ## 1) Install local LLM dependencies
 
 ```bash
@@ -52,6 +55,17 @@ The same `OPENAI_BASE_URL` pattern also applies to:
 - `src/gabm/examples/chat/ensembles/similarity_sweep.py`
 - `src/gabm/examples/chat_opinion/sim.py`
 - `src/gabm/examples/chat_opinion/ensembles/similarity_sweep.py`
+
+### What to expect from a successful run
+
+- Console output includes agent summaries and per-round lines (for example
+  `Round 1: ...` through `Round 4: ...` in the default chat example).
+- Chat example artifacts are written under
+  `data/output/examples/chat/<run-id-or-generated-id>/`.
+- Chat-opinion artifacts are written under
+  `data/output/examples/chat_opinion/<run-id-or-generated-id>/`.
+- Request/response cache entries are appended to
+  `data/llm/openai/prompt_response_cache.jsonl` unless `--no-cache` is used.
 
 ## 4) Optional: keep local settings in environment variables
 
