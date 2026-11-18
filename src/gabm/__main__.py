@@ -222,18 +222,22 @@ def run_example():
 
 def run_survey():
     """
-    Run a survey to change agent opinions.
+    Backward-compatible alias for chat_opinion mode.
     """
-    logging.info("Survey mode selected...")
+    logging.warning("Mode 'survey' is deprecated; running chat_opinion example instead.")
+    run_chat_opinion_default()
 
-    # Initialise
-    year = 2026
-    env = Environment(year=year)
-    raise NotImplementedError("Survey mode is not yet implemented.")
+
+def _has_local_openai_endpoint() -> bool:
+    """Return True when a local OpenAI-compatible endpoint is configured."""
+    return bool(os.getenv("OPENAI_BASE_URL", "").strip())
 
 
 def _has_configured_llm_credentials(api_key_file: Path | None = None) -> bool:
-    """Return True when at least one supported LLM API key is configured."""
+    """Return True when hosted keys or a local OpenAI-compatible endpoint is configured."""
+    if _has_local_openai_endpoint():
+        return True
+
     supported_env_vars = [
         "OPENAI_API_KEY",
         "GENAI_API_KEY",
@@ -258,30 +262,95 @@ def _has_configured_llm_credentials(api_key_file: Path | None = None) -> bool:
 
 
 def run_chat_example_default():
-    """Run the simple 2-person, 4-round chat example with default OpenAI settings."""
-    from gabm.examples.chat.sim import run
+    """Run the simple 2-person, 4-round chat example with default LLM settings."""
+    from gabm.examples.chat.sim import (
+        run,
+        build_llm_service,
+        resolve_llm_api_key,
+        resolve_llm_model,
+        resolve_llm_seed,
+        resolve_llm_service_name,
+    )
 
-    run(seed=42)
+    service_name = resolve_llm_service_name(None)
+    if not service_name and _has_local_openai_endpoint():
+        service_name = "openai"
+    llm_service = build_llm_service(service_name)
+    api_key = resolve_llm_api_key(None, service_name, Path("data/api_key.csv"))
+    if llm_service is not None and not api_key and service_name == "openai" and _has_local_openai_endpoint():
+        api_key = "ollama"
+    if llm_service is not None and not api_key:
+        logging.warning(
+            "No API key/token found for LLM service '%s'. Falling back to non-LLM chat output.",
+            service_name,
+        )
+        llm_service = None
+
+    run(
+        seed=42,
+        llm_service=llm_service,
+        api_key=api_key,
+        model=resolve_llm_model(None),
+        llm_seed=resolve_llm_seed(None),
+    )
+
+
+def run_chat_opinion_default():
+    """Run the 2-person chat_opinion example with default LLM settings."""
+    from gabm.examples.chat.sim import (
+        build_llm_service,
+        resolve_llm_api_key,
+        resolve_llm_model,
+        resolve_llm_seed,
+        resolve_llm_service_name,
+    )
+    from gabm.examples.chat_opinion.sim import run
+
+    service_name = resolve_llm_service_name(None)
+    if not service_name and _has_local_openai_endpoint():
+        service_name = "openai"
+    llm_service = build_llm_service(service_name)
+    api_key = resolve_llm_api_key(None, service_name, Path("data/api_key.csv"))
+    if llm_service is not None and not api_key and service_name == "openai" and _has_local_openai_endpoint():
+        api_key = "ollama"
+    if llm_service is not None and not api_key:
+        logging.warning(
+            "No API key/token found for LLM service '%s'. Falling back to non-LLM chat_opinion output.",
+            service_name,
+        )
+        llm_service = None
+
+    run(
+        seed=42,
+        rounds=4,
+        llm_service=llm_service,
+        api_key=api_key,
+        model=resolve_llm_model(None),
+        llm_seed=resolve_llm_seed(None),
+    )
 
 
 def resolve_effective_mode(mode: str) -> str:
     """Resolve requested mode into an executable mode."""
+    if mode == "survey":
+        return "chat_opinion"
     if mode != "auto":
         return mode
     if _has_configured_llm_credentials():
-        return "chat"
+        return "chat_opinion"
     return "example"
 
 def main():
     parser = argparse.ArgumentParser(description="Run GABM simulation.")
     parser.add_argument(
         '--mode',
-        choices=['auto', 'chat', 'example', 'survey'],
+        choices=['auto', 'chat', 'chat_opinion', 'example', 'survey'],
         default='auto',
         help=(
-            "Select run mode: 'auto' prefers the chat example when LLM credentials are configured, "
+            "Select run mode: 'auto' prefers chat_opinion when LLM credentials or OPENAI_BASE_URL are configured, "
             "otherwise falls back to 'example'; 'chat' runs the simple 2-person LLM chat; "
-            "'example' runs the classic ABM demo; 'survey' is placeholder."
+            "'chat_opinion' runs the opinion-drift chat example; 'example' runs the classic ABM demo; "
+            "'survey' is retained as a deprecated alias for 'chat_opinion'."
         ),
     )
     args = parser.parse_args()
@@ -291,6 +360,8 @@ def main():
         run_example()
     elif mode == 'chat':
         run_chat_example_default()
+    elif mode == 'chat_opinion':
+        run_chat_opinion_default()
     elif mode == 'survey':
         run_survey()
 
