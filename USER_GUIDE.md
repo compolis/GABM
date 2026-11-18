@@ -112,6 +112,10 @@ You can run GABM in different modes using a command-line argument. The default m
     # deprecated alias:
     python3 -m gabm --mode survey
     ```
+  This main-entry `chat_opinion` mode is intended as a quick default run.
+  For configurable chat_opinion runs (for example custom `ROUNDS`,
+  conversation mode, or pairing strategy), use
+  `make run-example-chat-opinion` as shown below.
 
 #### Run using the Makefile
 
