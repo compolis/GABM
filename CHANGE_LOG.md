@@ -23,6 +23,9 @@ A summary of changes are documented in this file.
   `documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md`,
   and kept `documentation/guides/Local_LLM_Setup_Guide.md` focused on local
   setup/execution steps.
+- Updated `gabm.__main__` mode behavior so `auto` prefers `chat_opinion` when
+  LLM credentials or `OPENAI_BASE_URL` are configured, and made `survey` a
+  backward-compatible alias for `chat_opinion` instead of a placeholder error.
 
 
 ## [0.6.0] - 2026-11-15

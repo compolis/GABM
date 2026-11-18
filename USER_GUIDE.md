@@ -86,9 +86,9 @@ Create `data/api_key.csv` with your API keys. For all supported LLM providers (i
 ## Run the Main Program
 
 
-### Running GABM: Example and Survey Modes
+### Running GABM: Example and LLM Chat Modes
 
-You can run GABM in different modes using a command-line argument. The default mode is now `auto`, which runs the chat example when LLM credentials are configured and otherwise falls back to the original Agent-Based Model (ABM) simulation (`example` mode). A `survey` mode is also available as a placeholder.
+You can run GABM in different modes using a command-line argument. The default mode is `auto`, which runs `chat_opinion` when LLM credentials or `OPENAI_BASE_URL` are configured and otherwise falls back to the original Agent-Based Model (ABM) simulation (`example` mode). The `survey` mode name is retained as a deprecated alias for `chat_opinion`.
 
 #### Run from the command line
 
@@ -106,10 +106,16 @@ You can run GABM in different modes using a command-line argument. The default m
     ```bash
     python3 -m gabm --mode chat
     ```
-- To run the survey example:
+- To run the chat_opinion example:
     ```bash
+    python3 -m gabm --mode chat_opinion
+    # deprecated alias:
     python3 -m gabm --mode survey
     ```
+  This main-entry `chat_opinion` mode is intended as a quick default run.
+  For configurable chat_opinion runs (for example custom `ROUNDS`,
+  conversation mode, or pairing strategy), use
+  `make run-example-chat-opinion` as shown below.
 
 #### Run using the Makefile
 
@@ -129,8 +135,10 @@ The Makefile provides a `run-local` target for convenience. You can pass argumen
     ```bash
     make run-local ARGS="--mode chat"
     ```
-- To run the survey example:
+- To run the chat_opinion example:
     ```bash
+    make run-local ARGS="--mode chat_opinion"
+    # deprecated alias:
     make run-local ARGS="--mode survey"
     ```
 
