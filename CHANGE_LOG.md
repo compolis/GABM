@@ -15,6 +15,14 @@ A summary of changes are documented in this file.
   roles and guidance for adding variables files for new HPC systems.
 - Updated reproducibility/release notes to align with version-specific vLLM SIF
   usage on Aire and Calder.
+- Added `documentation/guides/Local_LLM_Setup_Guide.md` with an Ollama/local
+  OpenAI-compatible workflow and added `OPENAI_BASE_URL` support in
+  `gabm.io.llm.openai.OpenAIService` so local endpoints can be targeted without
+  code edits.
+- Split cross-platform runtime planning and benchmark guidance into
+  `documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md`,
+  and kept `documentation/guides/Local_LLM_Setup_Guide.md` focused on local
+  setup/execution steps.
 
 
 ## [0.6.0] - 2026-11-15

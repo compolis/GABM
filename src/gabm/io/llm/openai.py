@@ -14,6 +14,7 @@ __copyright__ = "Copyright (c) 2026 GABM contributors, University of Leeds"
 
 # OpenAI client library
 import json
+import os
 from openai import OpenAI
 # LLM service base class
 from .llm_service import LLMService
@@ -27,6 +28,33 @@ class OpenAIService(LLMService):
     Handles prompt sending, response caching, logging, and model listing.
     """
     SERVICE_NAME = "openai"
+
+    @staticmethod
+    def _resolve_base_url() -> str | None:
+        """
+        Resolve optional OpenAI-compatible base URL from environment.
+
+        Returns:
+            str | None: Normalized base URL when configured, otherwise None.
+        """
+        base_url = os.getenv("OPENAI_BASE_URL", "").strip()
+        return base_url or None
+
+    @staticmethod
+    def _make_client(api_key: str, base_url: str | None = None):
+        """
+        Build an OpenAI client, optionally targeting an OpenAI-compatible endpoint.
+
+        Args:
+            api_key (str): API key or placeholder token accepted by the target endpoint.
+            base_url (str | None): Optional OpenAI-compatible base URL.
+
+        Returns:
+            OpenAI: Configured OpenAI client instance.
+        """
+        if base_url:
+            return OpenAI(api_key=api_key, base_url=base_url)
+        return OpenAI(api_key=api_key)
 
     @staticmethod
     def simple_extract_text(response):
@@ -67,7 +95,7 @@ class OpenAIService(LLMService):
             return cached
 
         def api_call():
-            client = OpenAI(api_key=api_key)
+            client = self._make_client(api_key=api_key, base_url=self._resolve_base_url())
             payload = dict(options)
             payload.update({
                 "model": model,
@@ -103,7 +131,7 @@ class OpenAIService(LLMService):
         
         """
         def api_call():
-            client = OpenAI(api_key=api_key)
+            client = self._make_client(api_key=api_key, base_url=self._resolve_base_url())
             models = client.models.list()
             def formatter(model):
                 return (f"Model ID: {model.id}\n"
