@@ -16,7 +16,7 @@
 
 ### Prerequisites
 
- You will either need a local installation of [Conda](https://conda.org/), or [Python](https://www.python.org/) at or above version 3.12. To check your default Python version run:
+You will either need a local installation of [Conda](https://conda.org/), or [Python](https://www.python.org/) at or above version 3.12. To check your default Python version run:
 
 ```bash
 python3 --version
@@ -28,9 +28,9 @@ python3 --version
 If you use [Conda](https://conda.org/) which is distributed with [Anaconda](https://www.anaconda.com/), [Miniconda](https://docs.conda.io/en/latest/miniconda.html), or [Miniforge](https://github.com/conda-forge/miniforge), you can set up GABM in a new environment as follows:
 
 ```bash
-conda create -n gabm
+conda create -n gabm -y
 conda activate gabm
-conda install python=3.12
+conda install python=3.12 -y
 pip install gabm==0.6.0
 ```
 
@@ -61,15 +61,9 @@ pip freeze > requirements.txt
 
 #### Optional: Local LLM Support
 
-By default, GABM installs only the dependencies needed for hosted LLM providers (OpenAI, Google, DeepSeek, etc.).
-If you want to run LLMs locally (e.g., downloaded from Hugging Face), you need additional dependencies:
+By default, only the dependencies needed for hosted LLM providers are included. To run LLMs locally (e.g., downloaded from Hugging Face), additional dependencies need including as listed in requirements-local-llm.txt in the project root.
 
-- torch
-- transformers
-
-These are listed in requirements-local-llm.txt in the project root.
-
-To install with local LLM support, use:
+To include local LLM support, use:
 
 ```bash
 pip install gabm[llm-local]
@@ -81,18 +75,12 @@ Or, manually install from requirements-local-llm.txt:
 pip install -r requirements-local-llm.txt
 ```
 
-This keeps the core installation lightweight for users who only use hosted LLMs.
+For local endpoint setup (including Ollama), see [documentation/guides/Local_LLM_Setup_Guide.md](documentation/guides/Local_LLM_Setup_Guide.md) (includes a quick smoke-test command sequence). For runtime planning, benchmarking, and guidance on when to use local vs HPC/cloud execution, see [documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md](documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md). For Hugging Face model download/authentication workflows, see [HUGGING_FACE.md](HUGGING_FACE.md).
 
 
 ### Set Up API Keys
 
 Create `data/api_key.csv` with your API keys. For all supported LLM providers (including PublicAI/Apertus), see [API_KEYS.md](API_KEYS.md) for up-to-date details and instructions.
-
-
-
-#### Using Local Apertus LLM Models
-
-For instructions on downloading, authenticating, and using local Apertus LLM models (and other Hugging Face models), see [HUGGING_FACE.md](HUGGING_FACE.md).
 
 
 ## Run the Main Program

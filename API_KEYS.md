@@ -31,3 +31,16 @@ If you add a `huggingface` entry, the setup scripts will automatically set the `
 The syntax requirements for the `data/api_key.csv` file is strict. Each entry should be on a new line, the API names `openai`, `deepseek`, `genai`, `publicai` and `huggingface` must be exactly as shown and there should be nothing but a comma character `,` separating the API name and the API key. Everything is case sensitive. 
 
 The `api_key.csv` file must be stored in the `data/` directory.
+
+## Local OpenAI-compatible endpoints (for example Ollama)
+
+When using a local OpenAI-compatible endpoint, you can:
+
+- Set `OPENAI_BASE_URL` to the local endpoint URL (for example
+  `http://127.0.0.1:11434/v1`).
+- Pass a non-empty placeholder API key/token value (for example `ollama`) via
+  CLI/API-key configuration if the local server does not require a real hosted
+  provider key.
+
+See [documentation/guides/Local_LLM_Setup_Guide.md](documentation/guides/Local_LLM_Setup_Guide.md)
+for the full local smoke-test command sequence.

@@ -216,3 +216,4 @@ When moving between HPC systems, review these items:
 
 - Treat API keys and credentials as secrets; do not hardcode them in scripts.
 - For large ensemble runs, local/HPC inference is expected to be more cost-effective than using LLM Service APIs.
+- For runtime estimation and benchmark logging that compare local, hosted, HPC, and cloud options, see [../experiments/Runtime_Planning_and_Benchmarking.md](../experiments/Runtime_Planning_and_Benchmarking.md).
