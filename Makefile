@@ -172,10 +172,11 @@ git-prune-origin:
 	@echo "Fetching/pruning origin refs..."
 	@git fetch --prune origin
 	@echo "Origin branches to delete:"
-	@BRANCHES="$$(git branch -r --merged origin/main | sed 's/^[ *]*//' | grep '^origin/' | grep -vE '^origin/(HEAD|main|gh-pages)$$' | sed 's#^origin/##' || true)"; \
+	@BRANCHES="$$(git branch -r --merged origin/main | sed 's/^[ *]*//' | grep '^origin/' | grep -v -- ' -> ' | grep -vE '^origin/(HEAD|main|gh-pages)$$' | sed 's#^origin/##' || true)"; \
 	if [ -n "$$BRANCHES" ]; then \
-		printf "%s\n" $$BRANCHES; \
-		for branch in $$BRANCHES; do \
+		printf "%s\n" "$$BRANCHES"; \
+		printf "%s\n" "$$BRANCHES" | while IFS= read -r branch; do \
+			[ -n "$$branch" ] || continue; \
 			git push origin --delete "$$branch"; \
 		done; \
 	else \
