@@ -59,23 +59,22 @@ pip freeze > requirements.txt
 ```
 
 
-#### Optional: Local LLM Support
+#### Optional: LLM Server Setup
 
-By default, only the dependencies needed for hosted LLM providers are included. To run LLMs locally (e.g., downloaded from Hugging Face), additional dependencies need including as listed in requirements-local-llm.txt in the project root.
+To run simulations locally, start an OpenAI-compatible local LLM
+server. To set one up, see
+[Local_LLM_Setup_Guide.md](documentation/guides/Local_LLM_Setup_Guide.md).
 
-To include local LLM support, use:
+Recommended default by environment:
+- **Local laptop/workstation (single user):** **Ollama**
+  (<https://github.com/ollama/ollama>)
+- **HPC/shared GPU (multi-user throughput):** **vLLM**
+  (<https://github.com/vllm-project/vllm>)
 
-```bash
-pip install gabm[llm-local]
-```
+Local: --provider local --model qwen3:8b --base-url http://localhost:11434/v1
+HPC: --provider local --base-url http://localhost:8000/v1 (or the endpoint your launcher exposes)
 
-Or, manually install from requirements-local-llm.txt:
-
-```bash
-pip install -r requirements-local-llm.txt
-```
-
-For local endpoint setup (including Ollama), see [documentation/guides/Local_LLM_Setup_Guide.md](documentation/guides/Local_LLM_Setup_Guide.md) (includes a quick smoke-test command sequence). For runtime planning, benchmarking, and guidance on when to use local vs HPC/cloud execution, see [documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md](documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md). For Hugging Face model download/authentication workflows, see [HUGGING_FACE.md](HUGGING_FACE.md).
+For runtime planning, benchmarking, and guidance on when to use local vs HPC/cloud execution, see [documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md](documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md). For Hugging Face model download/authentication workflows, see [HUGGING_FACE.md](HUGGING_FACE.md).
 
 
 ### Set Up API Keys
