@@ -24,8 +24,10 @@ python3 --version
 
 ### Initial set up
 
+There are two main ways: Using Conda, and using Python (venv + pip):
+
 #### Using Conda
-If you use [Conda](https://conda.org/) which is distributed with [Anaconda](https://www.anaconda.com/), [Miniconda](https://docs.conda.io/en/latest/miniconda.html), or [Miniforge](https://github.com/conda-forge/miniforge), you can set up GABM in a new environment as follows:
+[Conda](https://conda.org/) is distributed with [Anaconda](https://www.anaconda.com/), [Miniconda](https://docs.conda.io/en/latest/miniconda.html), or [Miniforge](https://github.com/conda-forge/miniforge). Once Conda is installed, you can set up GABM in a new environment called gabm as follows:
 
 ```bash
 conda create -n gabm -y
@@ -43,7 +45,7 @@ conda list -e > requirements.txt
 
 #### Using Python (venv + pip)
 
-Install from [PyPI](https://pypi.org/) using [Pip](https://pypi.org/project/pip/) as follows:
+As an alternative to using Conda, you can create a new Python environment called gabm-venv and install gabm from [PyPI](https://pypi.org/) using [Pip](https://pypi.org/project/pip/) as follows:
 
 ```bash
 python3 -m venv gabm-venv
@@ -108,8 +110,6 @@ You can run GABM in different modes using a command-line argument. The default m
 - To run the chat_opinion example:
     ```bash
     python3 -m gabm --mode chat_opinion
-    # deprecated alias:
-    python3 -m gabm --mode survey
     ```
   This main-entry `chat_opinion` mode is intended as a quick default run.
   For configurable chat_opinion runs (for example custom `ROUNDS`,
