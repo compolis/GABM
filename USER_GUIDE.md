@@ -24,8 +24,10 @@ python3 --version
 
 ### Initial set up
 
+There are two main ways: Using Conda, and using Python (venv + pip):
+
 #### Using Conda
-If you use [Conda](https://conda.org/) which is distributed with [Anaconda](https://www.anaconda.com/), [Miniconda](https://docs.conda.io/en/latest/miniconda.html), or [Miniforge](https://github.com/conda-forge/miniforge), you can set up GABM in a new environment as follows:
+[Conda](https://conda.org/) is distributed with [Anaconda](https://www.anaconda.com/), [Miniconda](https://docs.conda.io/en/latest/miniconda.html), or [Miniforge](https://github.com/conda-forge/miniforge). Once Conda is installed, you can set up GABM in a new environment called gabm as follows:
 
 ```bash
 conda create -n gabm -y
@@ -43,7 +45,7 @@ conda list -e > requirements.txt
 
 #### Using Python (venv + pip)
 
-Install from [PyPI](https://pypi.org/) using [Pip](https://pypi.org/project/pip/) as follows:
+As an alternative to using Conda, you can create a new Python environment called gabm-venv and install gabm from [PyPI](https://pypi.org/) using [Pip](https://pypi.org/project/pip/) as follows:
 
 ```bash
 python3 -m venv gabm-venv
@@ -59,23 +61,22 @@ pip freeze > requirements.txt
 ```
 
 
-#### Optional: Local LLM Support
+#### Optional: LLM Server Setup
 
-By default, only the dependencies needed for hosted LLM providers are included. To run LLMs locally (e.g., downloaded from Hugging Face), additional dependencies need including as listed in requirements-local-llm.txt in the project root.
+To run simulations locally, start an OpenAI-compatible local LLM
+server. To set one up, see
+[Local_LLM_Setup_Guide.md](documentation/guides/Local_LLM_Setup_Guide.md).
 
-To include local LLM support, use:
+Recommended default by environment:
+- **Local laptop/workstation (single user):** **Ollama**
+  (<https://github.com/ollama/ollama>)
+- **HPC/shared GPU (multi-user throughput):** **vLLM**
+  (<https://github.com/vllm-project/vllm>)
 
-```bash
-pip install gabm[llm-local]
-```
+Local: --provider local --model qwen3:8b --base-url http://localhost:11434/v1
+HPC: --provider local --base-url http://localhost:8000/v1 (or the endpoint your launcher exposes)
 
-Or, manually install from requirements-local-llm.txt:
-
-```bash
-pip install -r requirements-local-llm.txt
-```
-
-For local endpoint setup (including Ollama), see [documentation/guides/Local_LLM_Setup_Guide.md](documentation/guides/Local_LLM_Setup_Guide.md) (includes a quick smoke-test command sequence). For runtime planning, benchmarking, and guidance on when to use local vs HPC/cloud execution, see [documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md](documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md). For Hugging Face model download/authentication workflows, see [HUGGING_FACE.md](HUGGING_FACE.md).
+For runtime planning, benchmarking, and guidance on when to use local vs HPC/cloud execution, see [documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md](documentation/guides/experiments/Runtime_Planning_and_Benchmarking.md). For Hugging Face model download/authentication workflows, see [HUGGING_FACE.md](HUGGING_FACE.md).
 
 
 ### Set Up API Keys
@@ -109,8 +110,6 @@ You can run GABM in different modes using a command-line argument. The default m
 - To run the chat_opinion example:
     ```bash
     python3 -m gabm --mode chat_opinion
-    # deprecated alias:
-    python3 -m gabm --mode survey
     ```
   This main-entry `chat_opinion` mode is intended as a quick default run.
   For configurable chat_opinion runs (for example custom `ROUNDS`,

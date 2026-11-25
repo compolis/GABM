@@ -1,6 +1,6 @@
 # Local LLM Setup Guide
 
-This guide describes how to run GABM locally using the  OpenAI-compatible inference engine [Ollama](https://ollama.com/).
+This guide describes how to run GABM locally using the OpenAI-compatible inference engine [Ollama](https://ollama.com/).
 
 It includes a minimal smoke-test command sequence for verifying local endpoint
 integration quickly.
@@ -26,7 +26,7 @@ ollama pull qwen3:8b
 ollama serve
 ```
 
-Sanity check from another terminal:
+Check from another terminal:
 
 ```bash
 curl http://127.0.0.1:11434/v1/models
